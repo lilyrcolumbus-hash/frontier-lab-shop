@@ -12,11 +12,11 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const variants = {
   primary:
-    'bg-accent hover:bg-accent-hover text-bg font-semibold shadow-glow-cyan-sm hover:shadow-glow-cyan active:scale-95',
+    'bg-amber text-bg font-semibold shadow-glow-amber-sm hover:bg-amber-bright hover:shadow-glow-amber active:scale-95',
   secondary:
-    'bg-violet hover:bg-violet-hover text-cream shadow-glow-violet active:scale-95',
+    'bg-accent/20 text-accent border border-accent/30 hover:bg-accent/30 active:scale-95',
   outline:
-    'border border-accent/30 hover:border-accent/70 text-accent hover:bg-accent/8 active:scale-95',
+    'border border-accent/30 hover:border-accent/60 text-accent hover:bg-accent/8 active:scale-95',
   ghost:
     'text-cream-muted hover:text-cream hover:bg-elevated active:scale-95',
   danger:
@@ -37,7 +37,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         disabled={disabled ?? isLoading}
         className={cn(
           'inline-flex items-center justify-center gap-2 rounded-full font-body font-medium transition-all duration-200',
-          'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg',
+          'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber focus-visible:ring-offset-2 focus-visible:ring-offset-bg',
           'disabled:opacity-50 disabled:cursor-not-allowed',
           variants[variant],
           sizes[size],
@@ -51,9 +51,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
             <span className="inline-block w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
             <span>{children}</span>
           </>
-        ) : (
-          children
-        )}
+        ) : children}
       </button>
     )
   }

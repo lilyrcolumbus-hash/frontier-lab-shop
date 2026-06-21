@@ -9,9 +9,9 @@ interface LogoProps {
 }
 
 const sizes = {
-  sm: { dirty: 'text-2xl', shrooms: '1.3rem' },
-  md: { dirty: 'text-4xl', shrooms: '1.7rem' },
-  lg: { dirty: 'text-6xl', shrooms: '2.5rem' },
+  sm: { dirty: 'text-2xl', shrooms: '1.25rem' },
+  md: { dirty: 'text-4xl', shrooms: '1.65rem' },
+  lg: { dirty: 'text-6xl', shrooms: '2.4rem' },
 }
 
 export function Logo({ size = 'md', href = '/', showTagline, className }: LogoProps) {
@@ -22,19 +22,22 @@ export function Logo({ size = 'md', href = '/', showTagline, className }: LogoPr
       <div className="flex items-baseline gap-0">
         <span
           className={cn('font-display uppercase leading-none tracking-[0.05em]', s.dirty)}
-          style={{ color: '#00FFB8', textShadow: '0 0 20px rgba(0,255,184,0.5), 0 0 40px rgba(0,255,184,0.2)' }}
+          style={{
+            color: '#D4913A',
+            textShadow: '0 0 18px rgba(212,145,58,0.4), 0 0 40px rgba(212,145,58,0.15)',
+          }}
         >
           DIRTY
         </span>
         <span
-          className="font-accent italic lowercase leading-none text-cream/90"
-          style={{ fontSize: s.shrooms }}
+          className="font-accent italic lowercase leading-none"
+          style={{ fontSize: s.shrooms, color: '#B8C9B0' }}
         >
           shrooms
         </span>
       </div>
       {showTagline && (
-        <span className="font-mono font-light uppercase tracking-[0.2em] text-[10px] mt-0.5 text-cream-muted/70">
+        <span className="font-mono font-light uppercase tracking-[0.22em] text-[10px] mt-0.5 text-cream-muted/60">
           Grow Something Filthy
         </span>
       )}
@@ -43,7 +46,7 @@ export function Logo({ size = 'md', href = '/', showTagline, className }: LogoPr
 
   if (href) {
     return (
-      <Link href={href} className="inline-block hover:opacity-85 transition-opacity">
+      <Link href={href} className="inline-block hover:opacity-80 transition-opacity">
         {content}
       </Link>
     )
