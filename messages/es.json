@@ -1,0 +1,398 @@
+{
+  "common": {
+    "loading": "Cargando...",
+    "error": "Algo salió mal",
+    "retry": "Intentar de nuevo",
+    "viewAll": "Ver todo",
+    "learnMore": "Saber más",
+    "backTo": "Volver a",
+    "search": "Buscar",
+    "searchPlaceholder": "Buscar especies, productos, guías...",
+    "close": "Cerrar",
+    "cancel": "Cancelar",
+    "save": "Guardar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "share": "Compartir",
+    "copy": "Copiar",
+    "copied": "¡Copiado!",
+    "required": "Requerido",
+    "optional": "Opcional",
+    "min": "mín",
+    "max": "máx",
+    "indoor": "Interior",
+    "outdoor": "Exterior",
+    "both": "Interior y Exterior",
+    "beginner": "Principiante",
+    "intermediate": "Intermedio",
+    "advanced": "Avanzado",
+    "edible": "Comestible",
+    "medicinal": "Medicinal",
+    "toxic": "Tóxico",
+    "psychoactive": "Psicoactivo",
+    "wildOnly": "Solo Silvestre",
+    "organic": "Orgánico",
+    "inStock": "En Stock",
+    "outOfStock": "Agotado",
+    "readTime": "min de lectura",
+    "new": "Nuevo",
+    "sale": "Oferta",
+    "popular": "Popular",
+    "featured": "Destacado"
+  },
+  "nav": {
+    "shop": "Tienda",
+    "learn": "Aprender",
+    "encyclopedia": "Enciclopedia",
+    "tools": "Herramientas",
+    "community": "Comunidad",
+    "account": "Cuenta",
+    "cart": "Carrito",
+    "search": "Buscar",
+    "language": "Idioma",
+    "openMenu": "Abrir menú",
+    "closeMenu": "Cerrar menú",
+    "shopDropdown": {
+      "title": "Tienda",
+      "kits": "Kits de Cultivo",
+      "kitsDesc": "Kits para principiantes, bloques fructificantes, kits exteriores",
+      "spawn": "Spawn y Micelio",
+      "spawnDesc": "Spawn en grano, serrín y tacos",
+      "substrates": "Sustratos",
+      "substratesDesc": "Bolsas esterilizadas, paja, mezclas personalizadas",
+      "equipment": "Equipo de Laboratorio",
+      "equipmentDesc": "Monotubs, tiendas Martha, herramientas",
+      "wellness": "Bienestar",
+      "wellnessDesc": "Tinturas, cápsulas, café, deshidratados",
+      "bundles": "Packs y Ofertas",
+      "bySpecies": "Comprar por Especie →"
+    },
+    "learnDropdown": {
+      "title": "Aprender",
+      "beginners": "Para Principiantes",
+      "indoor": "Cultivo Interior",
+      "outdoor": "Cultivo Exterior",
+      "lab": "Técnicas de Laboratorio",
+      "science": "Ciencia de los Hongos",
+      "recipes": "Recetas y Cocina"
+    },
+    "toolsDropdown": {
+      "title": "Herramientas",
+      "calculator": "Calculadora de Cultivo",
+      "journal": "Diario de Cultivo",
+      "finder": "Buscador de Especies",
+      "mixer": "Mezclador de Sustratos"
+    }
+  },
+  "home": {
+    "hero": {
+      "eyebrow": "La Plataforma de Hongos Más Completa del Mundo",
+      "headline1": "Cultiva Algo",
+      "headline2": "Sucio.",
+      "subtext": "Cultiva. Aprende. Conecta. Todo sobre los hongos.",
+      "ctaPrimary": "Encuentra Tu Hongo",
+      "ctaSecondary": "Ir a la Tienda"
+    },
+    "trust": {
+      "growers": "350k+ Cultivadores en el Mundo",
+      "organic": "Certificado Orgánico USDA",
+      "guarantee": "Garantía de Cultivo 30 Días"
+    },
+    "spotlight": {
+      "title": "Conoce Los Hongos",
+      "viewEncyclopedia": "Ver Enciclopedia Completa →"
+    },
+    "quiz": {
+      "title": "¿Cuál Es Tu Hongo?",
+      "subtitle": "3 preguntas. Tu pareja fúngica perfecta.",
+      "cta": "Hacer el Quiz"
+    },
+    "academy": {
+      "title": "Aprende Algo Sucio",
+      "subtitle": "Guías expertas escritas por cultivadores, para cultivadores.",
+      "viewAll": "Ver Todas las Guías →"
+    },
+    "community": {
+      "title": "La Comunidad Sucia",
+      "subtitle": "Cultivos reales de cultivadores reales de todo el mundo.",
+      "cta": "Comparte Tu Cultivo"
+    },
+    "newsletter": {
+      "title": "Únete Al Club Sucio",
+      "subtitle": "Obtén la Guía del Principiante gratis + noticias de micología semanal.",
+      "placeholder": "Tu correo electrónico",
+      "cta": "Suscribirme Gratis",
+      "success": "¡Ya eres parte! Revisa tu bandeja.",
+      "privacy": "Sin spam. Date de baja cuando quieras."
+    }
+  },
+  "shop": {
+    "title": "Tienda",
+    "subtitle": "Todo lo que necesitas para cultivar algo sucio.",
+    "filters": {
+      "all": "Todos los Productos",
+      "kit": "Kits de Cultivo",
+      "spawn": "Spawn",
+      "substrate": "Sustratos",
+      "equipment": "Equipo",
+      "wellness": "Bienestar",
+      "bundle": "Packs",
+      "sortBy": "Ordenar por",
+      "sortFeatured": "Destacados",
+      "sortPriceLow": "Precio: Menor a Mayor",
+      "sortPriceHigh": "Precio: Mayor a Menor",
+      "sortNewest": "Más Recientes"
+    },
+    "product": {
+      "addToCart": "Agregar al Carrito",
+      "addToWishlist": "Agregar a Favoritos",
+      "quantity": "Cantidad",
+      "variant": "Tamaño",
+      "reviews": "reseñas",
+      "trustOrganic": "Orgánico",
+      "trustShipping": "Envío en 24h",
+      "trustGuarantee": "Garantía 30 días",
+      "specs": {
+        "title": "Especificaciones de Cultivo",
+        "difficulty": "Dificultad",
+        "colonization": "Tiempo de Colonización",
+        "fruitingTemp": "Temperatura de Fructificación",
+        "substrate": "Sustrato Ideal",
+        "yield": "Cosecha Esperada",
+        "method": "Método de Cultivo"
+      },
+      "tabs": {
+        "description": "Descripción",
+        "howToUse": "Cómo Usar",
+        "science": "Ciencia",
+        "reviews": "Reseñas"
+      },
+      "related": "También Necesitarás",
+      "breadcrumb": {
+        "shop": "Tienda"
+      }
+    },
+    "cart": {
+      "title": "Tu Carrito",
+      "empty": "Tu carrito está vacío",
+      "emptySubtext": "Es hora de cultivar algo sucio.",
+      "shopNow": "Ir a la Tienda",
+      "subtotal": "Subtotal",
+      "checkout": "Pagar",
+      "continueShopping": "Seguir Comprando",
+      "remove": "Eliminar",
+      "quantity": "Cant"
+    }
+  },
+  "encyclopedia": {
+    "title": "Enciclopedia de Hongos",
+    "subtitle": "Tu guía completa del reino fúngico.",
+    "searchPlaceholder": "Buscar especies...",
+    "filters": {
+      "all": "Todos los Tipos",
+      "type": "Tipo",
+      "difficulty": "Dificultad",
+      "substrate": "Sustrato",
+      "alphabetical": "A–Z",
+      "clearFilters": "Limpiar filtros"
+    },
+    "species": {
+      "tabs": {
+        "overview": "Descripción General",
+        "cultivation": "Guía de Cultivo",
+        "nutrition": "Nutrición y Medicina",
+        "identification": "Identificación",
+        "kitchen": "En La Cocina",
+        "shop": "Tienda"
+      },
+      "quickStats": {
+        "difficulty": "Dificultad",
+        "edibility": "Comestibilidad",
+        "classification": "Clasificación"
+      },
+      "cultivation": {
+        "timeline": "Línea de Tiempo del Cultivo",
+        "inoculation": "Inoculación",
+        "colonization": "Colonización",
+        "fruiting": "Fructificación",
+        "harvest": "Cosecha"
+      },
+      "lookalikes": "Especies Confundibles Tóxicas",
+      "lookalikeWarning": "⚠️ Verifica siempre la identificación antes de consumir hongos silvestres.",
+      "addToJournal": "Agregar a Mi Diario de Cultivo",
+      "relatedSpecies": "Especies Relacionadas",
+      "taxonomy": "Taxonomía",
+      "naturalHabitat": "Hábitat Natural",
+      "history": "Historia y Cultura"
+    }
+  },
+  "tools": {
+    "title": "Herramientas de Cultivo",
+    "subtitle": "Calcula, planifica y rastrea tus cultivos.",
+    "calculator": {
+      "title": "Calculadora de Cultivo",
+      "subtitle": "Estima el tiempo de colonización, ventana de fructificación y cosecha.",
+      "species": "Seleccionar especie",
+      "substrate": "Tipo de sustrato",
+      "weight": "Peso del sustrato",
+      "weightUnit": "kg / lbs",
+      "temperature": "Temperatura actual",
+      "tempUnit": "°F / °C",
+      "humidity": "Humedad (%)",
+      "calculate": "Calcular",
+      "results": {
+        "title": "Estimación de Tu Cultivo",
+        "colonizationTime": "Tiempo de Colonización",
+        "fruitingWindow": "Ventana de Fructificación",
+        "expectedYield": "Cosecha Esperada",
+        "tips": "Consejos Pro"
+      }
+    },
+    "journal": {
+      "title": "Diario de Cultivo",
+      "subtitle": "Registra cada cultivo desde la inoculación hasta la cosecha.",
+      "newEntry": "Nueva Entrada",
+      "noEntries": "Sin entradas aún. ¡Empieza tu primer cultivo!",
+      "fields": {
+        "species": "Especie",
+        "method": "Método de cultivo",
+        "startDate": "Fecha de inicio",
+        "substrate": "Sustrato",
+        "notes": "Notas",
+        "photos": "Fotos",
+        "status": "Estado"
+      },
+      "status": {
+        "inoculated": "Inoculado",
+        "colonizing": "Colonizando",
+        "pinning": "Pinning",
+        "fruiting": "Fructificando",
+        "harvested": "Cosechado"
+      },
+      "loginRequired": "Inicia sesión para guardar tu diario de cultivo",
+      "signIn": "Iniciar Sesión"
+    },
+    "finder": {
+      "title": "Buscador de Especies",
+      "subtitle": "Responde 4 preguntas rápidas para encontrar tu hongo perfecto.",
+      "step1": {
+        "question": "¿Dónde quieres cultivar?",
+        "indoor": "Interior",
+        "outdoor": "Exterior",
+        "both": "Ambos"
+      },
+      "step2": {
+        "question": "¿Cuál es tu nivel de experiencia?",
+        "beginner": "Principiante completo",
+        "some": "Algo de experiencia",
+        "advanced": "Cultivador avanzado"
+      },
+      "step3": {
+        "question": "¿Cuál es tu objetivo?",
+        "eat": "Comerlo",
+        "health": "Beneficios para la salud",
+        "learn": "Aprender cultivo",
+        "all": "Todo lo anterior"
+      },
+      "step4": {
+        "question": "¿Cuál es tu zona climática?",
+        "cold": "Frío (menos de 15°C / 60°F)",
+        "temperate": "Templado (15–24°C / 60–75°F)",
+        "warm": "Cálido (más de 24°C / 75°F)"
+      },
+      "results": {
+        "title": "Tus Mejores Opciones",
+        "subtitle": "Basado en tus respuestas, aquí están tus mejores coincidencias.",
+        "viewSpecies": "Ver Especie",
+        "shopProducts": "Ver Productos",
+        "startOver": "Empezar de Nuevo"
+      }
+    }
+  },
+  "quiz": {
+    "title": "Encuentra Tu Hongo",
+    "subtitle": "Tres preguntas. Una coincidencia perfecta.",
+    "next": "Siguiente",
+    "back": "Atrás",
+    "seeResults": "Ver Mi Coincidencia",
+    "startOver": "Empezar de Nuevo",
+    "yourMatch": "Tu Coincidencia Perfecta"
+  },
+  "community": {
+    "title": "La Comunidad Sucia",
+    "subtitle": "350,000+ cultivadores compartiendo cultivos, consejos y cosechas.",
+    "gallery": {
+      "title": "Galería de Cultivos",
+      "subtitle": "Fotos reales de cultivadores reales.",
+      "share": "Comparte Tu Cultivo",
+      "uploadPhoto": "Subir Foto",
+      "caption": "Agregar descripción",
+      "species": "¿Qué especie?"
+    },
+    "forum": {
+      "title": "Foro",
+      "subtitle": "Haz preguntas, comparte conocimiento.",
+      "newPost": "Nueva Publicación",
+      "categories": {
+        "beginners": "Ayuda para Principiantes",
+        "cultivation": "Cultivo",
+        "identification": "Identificación",
+        "science": "Ciencia e Investigación",
+        "recipes": "Recetas"
+      }
+    }
+  },
+  "account": {
+    "title": "Mi Cuenta",
+    "orders": "Pedidos",
+    "journal": "Diario de Cultivo",
+    "wishlist": "Favoritos",
+    "settings": "Configuración",
+    "signOut": "Cerrar Sesión",
+    "signIn": "Iniciar Sesión",
+    "signUp": "Crear Cuenta",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "name": "Nombre completo",
+    "forgotPassword": "¿Olvidaste tu contraseña?"
+  },
+  "footer": {
+    "tagline": "Cultiva Algo Sucio",
+    "shop": {
+      "title": "Tienda",
+      "kits": "Kits de Cultivo",
+      "spawn": "Spawn",
+      "substrates": "Sustratos",
+      "equipment": "Equipo",
+      "wellness": "Bienestar",
+      "bundles": "Packs"
+    },
+    "learn": {
+      "title": "Aprender",
+      "beginners": "Para Principiantes",
+      "indoor": "Interior",
+      "outdoor": "Exterior",
+      "lab": "Lab",
+      "science": "Ciencia"
+    },
+    "company": {
+      "title": "Empresa",
+      "about": "Acerca de",
+      "sustainability": "Sostenibilidad",
+      "careers": "Empleos",
+      "press": "Prensa",
+      "affiliates": "Afiliados"
+    },
+    "support": {
+      "title": "Soporte",
+      "faq": "FAQ",
+      "shipping": "Envíos",
+      "returns": "Devoluciones",
+      "track": "Rastrear Pedido",
+      "contact": "Contacto"
+    },
+    "copyright": "© 2025 DirtyShrooms. Todos los derechos reservados.",
+    "privacy": "Política de Privacidad",
+    "terms": "Términos de Servicio"
+  }
+}

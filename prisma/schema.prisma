@@ -1,0 +1,232 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  image         String?
+  role          String    @default("user")
+  locale        String    @default("en")
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  accounts       Account[]
+  sessions       Session[]
+  orders         Order[]
+  journalEntries GrowJournalEntry[]
+  wishlistItems  WishlistItem[]
+
+  @@map("users")
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@map("accounts")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+model Species {
+  id                   String   @id @default(cuid())
+  slug                 String   @unique
+  commonName           String
+  scientificName       String
+  family               String
+  order                String
+  type                 String
+  difficulty           String
+  substrate            String[]
+  colonizationWeeksMin Int
+  colonizationWeeksMax Int
+  fruitingTempFMin     Int
+  fruitingTempFMax     Int
+  fruitingTempCMin     Int
+  fruitingTempCMax     Int
+  expectedFlushes      Int
+  biologicalEfficiency String
+  betaGlucanContent    String
+  indoorOutdoor        String
+  descriptionEn        String   @db.Text
+  descriptionEs        String   @db.Text
+  cultivationNotesEn   String   @db.Text
+  cultivationNotesEs   String   @db.Text
+  medicalNotesEn       String   @db.Text
+  medicalNotesEs       String   @db.Text
+  cookingNotesEn       String   @db.Text
+  cookingNotesEs       String   @db.Text
+  lookalikes           String[]
+  imageUrl             String
+  thumbnailUrl         String
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+
+  products Product[]
+
+  @@map("species")
+}
+
+model Product {
+  id             String   @id @default(cuid())
+  slug           String   @unique
+  nameEn         String
+  nameEs         String
+  descriptionEn  String   @db.Text
+  descriptionEs  String   @db.Text
+  category       String
+  subcategory    String
+  speciesId      String?
+  price          Int
+  compareAtPrice Int?
+  images         String[]
+  isOrganic      Boolean  @default(false)
+  inStock        Boolean  @default(true)
+  tags           String[]
+
+  specsDifficulty      String?
+  specsColonizationTime String?
+  specsFruitingTempF   String?
+  specsFruitingTempC   String?
+  specsIdealSubstrate  String?
+  specsExpectedYield   String?
+  specsIndoorOutdoor   String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  species        Species?       @relation(fields: [speciesId], references: [id])
+  variants       ProductVariant[]
+  orderItems     OrderItem[]
+  wishlistItems  WishlistItem[]
+
+  @@map("products")
+}
+
+model ProductVariant {
+  id        String @id @default(cuid())
+  productId String
+  name      String
+  price     Int
+  stock     Int    @default(0)
+  sku       String @unique
+
+  product    Product     @relation(fields: [productId], references: [id], onDelete: Cascade)
+  orderItems OrderItem[]
+
+  @@map("product_variants")
+}
+
+model Order {
+  id                    String   @id @default(cuid())
+  userId                String?
+  email                 String
+  status                String   @default("pending")
+  subtotal              Int
+  shipping              Int      @default(0)
+  tax                   Int      @default(0)
+  total                 Int
+  stripePaymentIntentId String?
+  trackingNumber        String?
+  shippingName          String
+  shippingLine1         String
+  shippingLine2         String?
+  shippingCity          String
+  shippingState         String
+  shippingPostalCode    String
+  shippingCountry       String
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+
+  user  User?       @relation(fields: [userId], references: [id])
+  items OrderItem[]
+
+  @@map("orders")
+}
+
+model OrderItem {
+  id        String @id @default(cuid())
+  orderId   String
+  productId String
+  variantId String
+  name      String
+  price     Int
+  quantity  Int
+  image     String
+
+  order   Order          @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product Product        @relation(fields: [productId], references: [id])
+  variant ProductVariant @relation(fields: [variantId], references: [id])
+
+  @@map("order_items")
+}
+
+model GrowJournalEntry {
+  id          String   @id @default(cuid())
+  userId      String
+  species     String
+  speciesSlug String
+  method      String
+  substrate   String
+  startDate   DateTime
+  notes       String   @db.Text
+  status      String   @default("inoculated")
+  photos      String[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("grow_journal_entries")
+}
+
+model WishlistItem {
+  id        String   @id @default(cuid())
+  userId    String
+  productId String
+  createdAt DateTime @default(now())
+
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, productId])
+  @@map("wishlist_items")
+}
+
+model NewsletterSubscriber {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  locale    String   @default("en")
+  createdAt DateTime @default(now())
+
+  @@map("newsletter_subscribers")
+}

@@ -1,0 +1,398 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "retry": "Try again",
+    "viewAll": "View all",
+    "learnMore": "Learn more",
+    "backTo": "Back to",
+    "search": "Search",
+    "searchPlaceholder": "Search species, products, guides...",
+    "close": "Close",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "share": "Share",
+    "copy": "Copy",
+    "copied": "Copied!",
+    "required": "Required",
+    "optional": "Optional",
+    "min": "min",
+    "max": "max",
+    "indoor": "Indoor",
+    "outdoor": "Outdoor",
+    "both": "Indoor & Outdoor",
+    "beginner": "Beginner",
+    "intermediate": "Intermediate",
+    "advanced": "Advanced",
+    "edible": "Edible",
+    "medicinal": "Medicinal",
+    "toxic": "Toxic",
+    "psychoactive": "Psychoactive",
+    "wildOnly": "Wild Only",
+    "organic": "Organic",
+    "inStock": "In Stock",
+    "outOfStock": "Out of Stock",
+    "readTime": "min read",
+    "new": "New",
+    "sale": "Sale",
+    "popular": "Popular",
+    "featured": "Featured"
+  },
+  "nav": {
+    "shop": "Shop",
+    "learn": "Learn",
+    "encyclopedia": "Encyclopedia",
+    "tools": "Tools",
+    "community": "Community",
+    "account": "Account",
+    "cart": "Cart",
+    "search": "Search",
+    "language": "Language",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "shopDropdown": {
+      "title": "Shop",
+      "kits": "Grow Kits",
+      "kitsDesc": "Beginner kits, fruiting blocks, outdoor setups",
+      "spawn": "Spawn & Mycelium",
+      "spawnDesc": "Grain, sawdust, and plug spawn",
+      "substrates": "Substrates",
+      "substratesDesc": "Sterilized bags, straw, custom mixes",
+      "equipment": "Lab Equipment",
+      "equipmentDesc": "Monotubs, Martha tents, tools",
+      "wellness": "Wellness",
+      "wellnessDesc": "Tinctures, capsules, coffee, dried",
+      "bundles": "Bundles & Deals",
+      "bySpecies": "Shop by Species →"
+    },
+    "learnDropdown": {
+      "title": "Learn",
+      "beginners": "For Beginners",
+      "indoor": "Indoor Cultivation",
+      "outdoor": "Outdoor Cultivation",
+      "lab": "Lab Skills",
+      "science": "Mushroom Science",
+      "recipes": "Recipes & Cooking"
+    },
+    "toolsDropdown": {
+      "title": "Tools",
+      "calculator": "Grow Calculator",
+      "journal": "Grow Journal",
+      "finder": "Species Finder",
+      "mixer": "Substrate Mixer"
+    }
+  },
+  "home": {
+    "hero": {
+      "eyebrow": "The World's Most Complete Mushroom Platform",
+      "headline1": "Grow Something",
+      "headline2": "Filthy.",
+      "subtext": "Cultivate. Learn. Connect. Everything fungi.",
+      "ctaPrimary": "Find Your Mushroom",
+      "ctaSecondary": "Shop Now"
+    },
+    "trust": {
+      "growers": "350k+ Growers Worldwide",
+      "organic": "USDA Organic Certified",
+      "guarantee": "30-Day Grow Guarantee"
+    },
+    "spotlight": {
+      "title": "Meet The Shrooms",
+      "viewEncyclopedia": "View Full Encyclopedia →"
+    },
+    "quiz": {
+      "title": "Which Shroom Is Yours?",
+      "subtitle": "3 questions. Your perfect mushroom match.",
+      "cta": "Take The Quiz"
+    },
+    "academy": {
+      "title": "Get Filthy Smart",
+      "subtitle": "Expert guides written by cultivators, for cultivators.",
+      "viewAll": "View All Guides →"
+    },
+    "community": {
+      "title": "The Filthy Community",
+      "subtitle": "Real grows from real growers around the world.",
+      "cta": "Share Your Grow"
+    },
+    "newsletter": {
+      "title": "Join The Dirty Club",
+      "subtitle": "Get the free Beginner's Grow Guide + weekly mycology drops.",
+      "placeholder": "Enter your email",
+      "cta": "Subscribe Free",
+      "success": "You're in! Check your inbox.",
+      "privacy": "No spam. Unsubscribe anytime."
+    }
+  },
+  "shop": {
+    "title": "Shop",
+    "subtitle": "Everything you need to grow something filthy.",
+    "filters": {
+      "all": "All Products",
+      "kit": "Grow Kits",
+      "spawn": "Spawn",
+      "substrate": "Substrates",
+      "equipment": "Equipment",
+      "wellness": "Wellness",
+      "bundle": "Bundles",
+      "sortBy": "Sort by",
+      "sortFeatured": "Featured",
+      "sortPriceLow": "Price: Low to High",
+      "sortPriceHigh": "Price: High to Low",
+      "sortNewest": "Newest"
+    },
+    "product": {
+      "addToCart": "Add to Cart",
+      "addToWishlist": "Add to Wishlist",
+      "quantity": "Quantity",
+      "variant": "Size",
+      "reviews": "reviews",
+      "trustOrganic": "Organic",
+      "trustShipping": "Ships in 24h",
+      "trustGuarantee": "30-day guarantee",
+      "specs": {
+        "title": "Cultivation Specs",
+        "difficulty": "Difficulty",
+        "colonization": "Colonization Time",
+        "fruitingTemp": "Fruiting Temp",
+        "substrate": "Ideal Substrate",
+        "yield": "Expected Yield",
+        "method": "Growing Method"
+      },
+      "tabs": {
+        "description": "Description",
+        "howToUse": "How To Use",
+        "science": "Science",
+        "reviews": "Reviews"
+      },
+      "related": "You'll Also Need",
+      "breadcrumb": {
+        "shop": "Shop"
+      }
+    },
+    "cart": {
+      "title": "Your Cart",
+      "empty": "Your cart is empty",
+      "emptySubtext": "Time to grow something filthy.",
+      "shopNow": "Shop Now",
+      "subtotal": "Subtotal",
+      "checkout": "Checkout",
+      "continueShopping": "Continue Shopping",
+      "remove": "Remove",
+      "quantity": "Qty"
+    }
+  },
+  "encyclopedia": {
+    "title": "Mushroom Encyclopedia",
+    "subtitle": "Your complete guide to the fungal kingdom.",
+    "searchPlaceholder": "Search species...",
+    "filters": {
+      "all": "All Types",
+      "type": "Type",
+      "difficulty": "Difficulty",
+      "substrate": "Substrate",
+      "alphabetical": "A–Z",
+      "clearFilters": "Clear filters"
+    },
+    "species": {
+      "tabs": {
+        "overview": "Overview",
+        "cultivation": "Cultivation Guide",
+        "nutrition": "Nutrition & Medicine",
+        "identification": "Identification",
+        "kitchen": "In The Kitchen",
+        "shop": "Shop"
+      },
+      "quickStats": {
+        "difficulty": "Difficulty",
+        "edibility": "Edibility",
+        "classification": "Classification"
+      },
+      "cultivation": {
+        "timeline": "Cultivation Timeline",
+        "inoculation": "Inoculation",
+        "colonization": "Colonization",
+        "fruiting": "Fruiting",
+        "harvest": "Harvest"
+      },
+      "lookalikes": "Toxic Lookalikes",
+      "lookalikeWarning": "⚠️ Always verify identification before consuming wild mushrooms.",
+      "addToJournal": "Add to My Grow Journal",
+      "relatedSpecies": "Related Species",
+      "taxonomy": "Taxonomy",
+      "naturalHabitat": "Natural Habitat",
+      "history": "History & Culture"
+    }
+  },
+  "tools": {
+    "title": "Grow Tools",
+    "subtitle": "Calculate, plan, and track your grows.",
+    "calculator": {
+      "title": "Grow Calculator",
+      "subtitle": "Estimate colonization time, fruiting window, and yield.",
+      "species": "Select species",
+      "substrate": "Substrate type",
+      "weight": "Substrate weight",
+      "weightUnit": "kg / lbs",
+      "temperature": "Current temperature",
+      "tempUnit": "°F / °C",
+      "humidity": "Humidity (%)",
+      "calculate": "Calculate",
+      "results": {
+        "title": "Your Grow Estimate",
+        "colonizationTime": "Colonization Time",
+        "fruitingWindow": "Fruiting Window",
+        "expectedYield": "Expected Yield",
+        "tips": "Pro Tips"
+      }
+    },
+    "journal": {
+      "title": "Grow Journal",
+      "subtitle": "Track every grow from inoculation to harvest.",
+      "newEntry": "New Grow Entry",
+      "noEntries": "No entries yet. Start your first grow!",
+      "fields": {
+        "species": "Species",
+        "method": "Growing method",
+        "startDate": "Start date",
+        "substrate": "Substrate",
+        "notes": "Notes",
+        "photos": "Photos",
+        "status": "Status"
+      },
+      "status": {
+        "inoculated": "Inoculated",
+        "colonizing": "Colonizing",
+        "pinning": "Pinning",
+        "fruiting": "Fruiting",
+        "harvested": "Harvested"
+      },
+      "loginRequired": "Sign in to save your grow journal",
+      "signIn": "Sign In"
+    },
+    "finder": {
+      "title": "Species Finder",
+      "subtitle": "Answer 4 quick questions to find your perfect mushroom.",
+      "step1": {
+        "question": "Where do you want to grow?",
+        "indoor": "Indoor",
+        "outdoor": "Outdoor",
+        "both": "Both"
+      },
+      "step2": {
+        "question": "What's your experience level?",
+        "beginner": "Complete beginner",
+        "some": "Some experience",
+        "advanced": "Advanced grower"
+      },
+      "step3": {
+        "question": "What's your goal?",
+        "eat": "Eat it",
+        "health": "Health benefits",
+        "learn": "Learn cultivation",
+        "all": "All of the above"
+      },
+      "step4": {
+        "question": "What's your climate zone?",
+        "cold": "Cold (below 60°F / 15°C)",
+        "temperate": "Temperate (60–75°F / 15–24°C)",
+        "warm": "Warm (above 75°F / 24°C)"
+      },
+      "results": {
+        "title": "Your Top Picks",
+        "subtitle": "Based on your answers, here are your best matches.",
+        "viewSpecies": "View Species",
+        "shopProducts": "Shop Products",
+        "startOver": "Start Over"
+      }
+    }
+  },
+  "quiz": {
+    "title": "Find Your Mushroom",
+    "subtitle": "Three questions. One perfect match.",
+    "next": "Next",
+    "back": "Back",
+    "seeResults": "See My Match",
+    "startOver": "Start Over",
+    "yourMatch": "Your Perfect Match"
+  },
+  "community": {
+    "title": "The Filthy Community",
+    "subtitle": "350,000+ growers sharing grows, tips, and harvests.",
+    "gallery": {
+      "title": "Grow Gallery",
+      "subtitle": "Real photos from real growers.",
+      "share": "Share Your Grow",
+      "uploadPhoto": "Upload Photo",
+      "caption": "Add a caption",
+      "species": "Which species?"
+    },
+    "forum": {
+      "title": "Forum",
+      "subtitle": "Ask questions, share knowledge.",
+      "newPost": "New Post",
+      "categories": {
+        "beginners": "Beginner Help",
+        "cultivation": "Cultivation",
+        "identification": "Identification",
+        "science": "Science & Research",
+        "recipes": "Recipes"
+      }
+    }
+  },
+  "account": {
+    "title": "My Account",
+    "orders": "Orders",
+    "journal": "Grow Journal",
+    "wishlist": "Wishlist",
+    "settings": "Settings",
+    "signOut": "Sign Out",
+    "signIn": "Sign In",
+    "signUp": "Create Account",
+    "email": "Email",
+    "password": "Password",
+    "name": "Full name",
+    "forgotPassword": "Forgot password?"
+  },
+  "footer": {
+    "tagline": "Grow Something Filthy",
+    "shop": {
+      "title": "Shop",
+      "kits": "Grow Kits",
+      "spawn": "Spawn",
+      "substrates": "Substrates",
+      "equipment": "Equipment",
+      "wellness": "Wellness",
+      "bundles": "Bundles"
+    },
+    "learn": {
+      "title": "Learn",
+      "beginners": "For Beginners",
+      "indoor": "Indoor",
+      "outdoor": "Outdoor",
+      "lab": "Lab Skills",
+      "science": "Science"
+    },
+    "company": {
+      "title": "Company",
+      "about": "About",
+      "sustainability": "Sustainability",
+      "careers": "Careers",
+      "press": "Press",
+      "affiliates": "Affiliates"
+    },
+    "support": {
+      "title": "Support",
+      "faq": "FAQ",
+      "shipping": "Shipping",
+      "returns": "Returns",
+      "track": "Track Order",
+      "contact": "Contact"
+    },
+    "copyright": "© 2025 DirtyShrooms. All rights reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service"
+  }
+}

@@ -1,0 +1,28 @@
+import type { Metadata } from 'next'
+import { Hero } from '@/components/home/Hero'
+import { TrustBar } from '@/components/home/TrustBar'
+import { SpeciesSpotlight } from '@/components/home/SpeciesSpotlight'
+import { QuizTeaser } from '@/components/home/QuizTeaser'
+import { AcademyPreview } from '@/components/home/AcademyPreview'
+import { CommunityGallery } from '@/components/home/CommunityGallery'
+import { Newsletter } from '@/components/home/Newsletter'
+
+export const metadata: Metadata = {
+  title: 'DirtyShrooms — Grow Something Filthy',
+  description:
+    "The world's most complete mushroom platform. Premium grow kits, spawn, and the deepest mushroom encyclopedia. Cultivate. Learn. Connect.",
+}
+
+export default function HomePage() {
+  return (
+    <>
+      <Hero />
+      <TrustBar />
+      <SpeciesSpotlight />
+      <QuizTeaser />
+      <AcademyPreview />
+      <CommunityGallery />
+      <Newsletter />
+    </>
+  )
+}
