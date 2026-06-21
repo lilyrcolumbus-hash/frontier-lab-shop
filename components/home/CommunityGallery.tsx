@@ -7,12 +7,18 @@ import { useTranslations } from 'next-intl'
 import { ScrollReveal } from '@/components/ui/ScrollReveal'
 
 const GALLERY_ITEMS = [
-  { id: 1, src: 'https://images.unsplash.com/photo-1504545102780-26774c1bb073?w=500', alt: 'Blue Oyster harvest', species: 'Blue Oyster', user: '@mushroom_mike', tall: true },
-  { id: 2, src: 'https://images.unsplash.com/photo-1607305387299-a3d9611cd469?w=500', alt: "Lion's Mane grow", species: "Lion's Mane", user: '@growwild_jen', tall: false },
-  { id: 3, src: 'https://images.unsplash.com/photo-1585155784229-aff921ccfa12?w=500', alt: 'Shiitake flush', species: 'Shiitake', user: '@fungi_forager', tall: false },
-  { id: 4, src: 'https://images.unsplash.com/photo-1472396961693-142e6e269027?w=500', alt: 'Forest find', species: 'Wild', user: '@dirtyhands_ann', tall: true },
-  { id: 5, src: 'https://images.unsplash.com/photo-1504470695779-75300268aa0e?w=500', alt: 'Reishi antler', species: 'Reishi', user: '@myco_lab_co', tall: false },
-  { id: 6, src: 'https://images.unsplash.com/photo-1541904031027-00d5c22f7cf2?w=500', alt: 'Wine Cap patch', species: 'Wine Cap', user: '@garden_shrooms', tall: false },
+  { id: 1,  src: 'https://images.unsplash.com/photo-1504545102780-26774c1bb073?w=600&h=800&q=85&auto=format&fit=crop', alt: 'Blue Oyster first flush',  species: 'Blue Oyster',  user: '@mushroom_mike',    tall: true  },
+  { id: 2,  src: 'https://images.unsplash.com/photo-1607305387299-a3d9611cd469?w=600&h=440&q=85&auto=format&fit=crop', alt: "Lion's Mane up close",    species: "Lion's Mane",  user: '@growwild_jen',    tall: false },
+  { id: 3,  src: 'https://images.unsplash.com/photo-1541904031027-00d5c22f7cf2?w=600&h=440&q=85&auto=format&fit=crop', alt: 'Wine Cap patch in garden',species: 'Wine Cap',     user: '@garden_shrooms',  tall: false },
+  { id: 4,  src: 'https://images.unsplash.com/photo-1472396961693-142e6e269027?w=600&h=760&q=85&auto=format&fit=crop', alt: 'Wild forage in the woods', species: 'Wild Forest',  user: '@dirtyhands_ann',  tall: true  },
+  { id: 5,  src: 'https://images.unsplash.com/photo-1585155784229-aff921ccfa12?w=600&h=440&q=85&auto=format&fit=crop', alt: 'Shiitake cluster flush',   species: 'Shiitake',     user: '@fungi_forager',   tall: false },
+  { id: 6,  src: 'https://images.unsplash.com/photo-1504470695779-75300268aa0e?w=600&h=440&q=85&auto=format&fit=crop', alt: 'Reishi antler stage',      species: 'Reishi',       user: '@myco_lab_co',     tall: false },
+  { id: 7,  src: 'https://images.unsplash.com/photo-1448375240586-882707db888b?w=600&h=800&q=85&auto=format&fit=crop', alt: 'Morning light in the forest', species: 'Wild Find', user: '@forestwalker',    tall: true  },
+  { id: 8,  src: 'https://images.unsplash.com/photo-1504545102780-26774c1bb073?w=600&h=440&q=85&auto=format&fit=crop&crop=bottom', alt: 'Oyster pinning stage', species: 'Blue Oyster', user: '@ohio_grows',  tall: false },
+  { id: 9,  src: 'https://images.unsplash.com/photo-1607305387299-a3d9611cd469?w=600&h=440&q=85&auto=format&fit=crop&crop=top',   alt: 'Lion texture macro',  species: "Lion's Mane",  user: '@macro_myco',    tall: false },
+  { id: 10, src: 'https://images.unsplash.com/photo-1585155784229-aff921ccfa12?w=600&h=680&q=85&auto=format&fit=crop', alt: 'Dark wood block shiitake', species: 'Shiitake',    user: '@log_grower',     tall: true  },
+  { id: 11, src: 'https://images.unsplash.com/photo-1472396961693-142e6e269027?w=600&h=440&q=85&auto=format&fit=crop&crop=right', alt: 'Forest floor life',  species: 'Wild',         user: '@spore_prints',   tall: false },
+  { id: 12, src: 'https://images.unsplash.com/photo-1541904031027-00d5c22f7cf2?w=600&h=440&q=85&auto=format&fit=crop&crop=top',  alt: 'Wine Cap full cap',  species: 'Wine Cap',     user: '@dirtygarden_co', tall: false },
 ]
 
 export function CommunityGallery() {

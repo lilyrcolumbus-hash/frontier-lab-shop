@@ -165,130 +165,57 @@ export function Hero() {
             </motion.div>
           </div>
 
-          {/* Right column — enchanted mushroom */}
+          {/* Right column — real mushroom photography */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.92 }}
+            initial={{ opacity: 0, scale: 0.94 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.2, delay: 0.35, ease: EASE }}
             className="hidden lg:flex items-center justify-center relative"
           >
-            <div className="relative w-full max-w-lg aspect-square">
-              {/* Ambient ground glow */}
-              <div className="absolute bottom-10 left-1/2 -translate-x-1/2 w-64 h-24 bg-amber/15 rounded-full blur-3xl animate-breathe" />
+            <div className="relative w-full max-w-md">
+              {/* Ambient glow behind */}
+              <div className="absolute -inset-6 bg-amber/[0.07] rounded-[2.5rem] blur-3xl pointer-events-none" />
 
-              {/* Outer rings — like a fairy circle */}
-              <div className="absolute inset-0 rounded-full border border-accent/6 animate-pulse" style={{ animationDelay: '0s', animationDuration: '4s' }} />
-              <div className="absolute inset-8 rounded-full border border-amber/5 animate-pulse" style={{ animationDelay: '1s', animationDuration: '5s' }} />
-              <div className="absolute inset-16 rounded-full border border-lavender/5 animate-pulse" style={{ animationDelay: '2s', animationDuration: '6s' }} />
-
-              {/* Central mushroom — enchanted forest style */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <svg
-                  viewBox="0 0 300 340"
-                  className="w-72 h-80"
-                  style={{ filter: 'drop-shadow(0 0 25px rgba(212,145,58,0.2)) drop-shadow(0 0 60px rgba(212,145,58,0.08))' }}
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  {/* Stem */}
-                  <path
-                    d="M122 202 Q140 258 150 302 Q160 258 178 202"
-                    fill="#0A1408"
-                    stroke="#162414"
-                    strokeWidth="1.5"
-                  />
-                  {/* Veil / skirt */}
-                  <path
-                    d="M108 210 Q120 218 150 220 Q180 218 192 210"
-                    fill="none"
-                    stroke="rgba(212,145,58,0.3)"
-                    strokeWidth="1"
-                  />
-                  {/* Cap base */}
-                  <path
-                    d="M80 208 Q95 200 122 200 L178 200 Q205 200 220 208"
-                    fill="#0D1A0C"
-                    stroke="rgba(212,145,58,0.4)"
-                    strokeWidth="1.5"
-                  />
-                  {/* Main cap */}
-                  <path
-                    d="M60 200 Q64 98 150 58 Q236 98 240 200 Z"
-                    fill="#08100A"
-                    stroke="rgba(212,145,58,0.35)"
-                    strokeWidth="1.5"
-                  />
-                  {/* Inner cap highlight */}
-                  <path
-                    d="M95 165 Q122 104 150 92 Q178 104 205 165"
-                    stroke="rgba(212,145,58,0.12)"
-                    strokeWidth="1"
-                    fill="none"
-                  />
-                  {/* Bioluminescent inner glow */}
-                  <ellipse cx="150" cy="145" rx="52" ry="62" fill="url(#forestGlow)" opacity="0.18" />
-                  {/* Spots on cap */}
-                  {[
-                    { cx: 120, cy: 135, r: 7 },
-                    { cx: 160, cy: 108, r: 9 },
-                    { cx: 185, cy: 148, r: 6 },
-                    { cx: 108, cy: 165, r: 5 },
-                    { cx: 145, cy: 88, r: 8 },
-                    { cx: 175, cy: 128, r: 5 },
-                  ].map((spot, i) => (
-                    <circle
-                      key={i}
-                      cx={spot.cx}
-                      cy={spot.cy}
-                      r={spot.r}
-                      fill="rgba(212,145,58,0.12)"
-                      stroke="rgba(212,145,58,0.25)"
-                      strokeWidth="0.8"
-                    />
-                  ))}
-                  {/* Gills */}
-                  {[88, 106, 122, 138, 154, 170, 186, 204].map((x, i) => (
-                    <path
-                      key={i}
-                      d={`M${x} 200 Q${x + 7} ${187 - i} ${x + 14} 200`}
-                      stroke="rgba(107,191,106,0.2)"
-                      strokeWidth="0.8"
-                    />
-                  ))}
-                  {/* Small mushrooms at base */}
-                  <path d="M70 260 Q78 235 86 260" fill="#08100A" stroke="rgba(107,191,106,0.2)" strokeWidth="1" />
-                  <path d="M60 245 Q70 228 80 245 Z" fill="rgba(107,191,106,0.06)" stroke="rgba(107,191,106,0.15)" strokeWidth="1" />
-                  <path d="M210 268 Q218 248 226 268" fill="#08100A" stroke="rgba(107,191,106,0.2)" strokeWidth="1" />
-                  <path d="M202 255 Q212 235 222 255 Z" fill="rgba(107,191,106,0.06)" stroke="rgba(107,191,106,0.15)" strokeWidth="1" />
-                  {/* Floating spore dots */}
-                  {[
-                    { cx: 45, cy: 110, r: 2, c: 'rgba(212,145,58,0.3)' },
-                    { cx: 262, cy: 125, r: 1.5, c: 'rgba(107,191,106,0.4)' },
-                    { cx: 35, cy: 165, r: 2.5, c: 'rgba(139,107,181,0.35)' },
-                    { cx: 272, cy: 85, r: 2, c: 'rgba(212,145,58,0.25)' },
-                    { cx: 50, cy: 200, r: 1.5, c: 'rgba(107,191,106,0.3)' },
-                    { cx: 258, cy: 185, r: 1, c: 'rgba(139,107,181,0.3)' },
-                  ].map((d, i) => (
-                    <circle key={i} cx={d.cx} cy={d.cy} r={d.r} fill={d.c} />
-                  ))}
-                  {/* Mycelium threads at base */}
-                  <path d="M100 285 Q120 270 150 280 Q180 270 200 285" stroke="rgba(107,191,106,0.12)" strokeWidth="0.8" fill="none" />
-                  <path d="M80 300 Q115 282 150 295 Q185 282 220 300" stroke="rgba(107,191,106,0.08)" strokeWidth="0.6" fill="none" />
-                  <defs>
-                    <radialGradient id="forestGlow" cx="50%" cy="50%" r="50%">
-                      <stop offset="0%" stopColor="#D4913A" />
-                      <stop offset="100%" stopColor="#D4913A" stopOpacity="0" />
-                    </radialGradient>
-                  </defs>
-                </svg>
+              {/* Main hero photo */}
+              <div className="relative rounded-3xl overflow-hidden border border-amber/20 shadow-[0_0_80px_rgba(212,145,58,0.15)]">
+                <img
+                  src="https://images.unsplash.com/photo-1607305387299-a3d9611cd469?w=600&h=680&q=85&auto=format&fit=crop"
+                  alt="Lion's Mane mushroom — Hericium erinaceus"
+                  className="w-full h-[520px] object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-bg/80 via-bg/10 to-transparent" />
+                {/* Species label at bottom */}
+                <div className="absolute bottom-6 left-6 right-6">
+                  <p className="font-mono text-[10px] text-amber/60 uppercase tracking-[0.2em] mb-1">Featured species</p>
+                  <p className="font-heading text-cream text-xl font-semibold leading-tight">Lion's Mane</p>
+                  <p className="font-mono text-cream-muted/50 text-xs italic">Hericium erinaceus</p>
+                </div>
               </div>
 
-              {/* Floating stat cards */}
+              {/* Secondary photo — bottom left overlap */}
               <motion.div
-                initial={{ opacity: 0, x: -20 }}
+                initial={{ opacity: 0, x: -16, y: 8 }}
+                animate={{ opacity: 1, x: 0, y: 0 }}
+                transition={{ duration: 0.7, delay: 1.0 }}
+                className="absolute -left-14 bottom-24 w-36 h-36 rounded-2xl overflow-hidden border-2 border-bg/80 shadow-xl"
+              >
+                <img
+                  src="https://images.unsplash.com/photo-1504545102780-26774c1bb073?w=300&h=300&q=85&auto=format&fit=crop"
+                  alt="Blue Oyster mushroom cluster"
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-bg/70 to-transparent" />
+                <div className="absolute bottom-2 left-2.5">
+                  <p className="text-[10px] font-mono text-cream/80">Blue Oyster</p>
+                </div>
+              </motion.div>
+
+              {/* Floating card — colonization */}
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.7, delay: 1 }}
-                className="absolute -left-8 top-12 glass-warm rounded-2xl p-4 shadow-card"
+                transition={{ duration: 0.7, delay: 1.1 }}
+                className="absolute -right-10 top-14 glass-warm rounded-2xl p-4 shadow-card"
               >
                 <p className="text-xs text-cream-muted/70 font-mono">Colonization</p>
                 <p className="text-xl font-heading font-semibold text-cream mt-0.5">2–3 weeks</p>
@@ -300,22 +227,24 @@ export function Hero() {
                 </div>
               </motion.div>
 
+              {/* Floating card — beta-glucans */}
               <motion.div
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.7, delay: 1.2 }}
-                className="absolute -right-8 bottom-20 glass-warm rounded-2xl p-4 shadow-card"
+                transition={{ duration: 0.7, delay: 1.3 }}
+                className="absolute -right-10 bottom-32 glass-warm rounded-2xl p-4 shadow-card"
               >
                 <p className="text-xs text-cream-muted/70 font-mono">Beta-glucans</p>
                 <p className="text-xl font-heading font-semibold text-amber glow-amber-text mt-0.5">High</p>
                 <p className="text-xs text-cream-muted/60 mt-1">Immune support ✦</p>
               </motion.div>
 
+              {/* Rating pill */}
               <motion.div
-                initial={{ opacity: 0, y: -12 }}
+                initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 1.4 }}
-                className="absolute right-2 top-6 glass-warm rounded-xl px-3 py-2"
+                transition={{ duration: 0.6, delay: 1.5 }}
+                className="absolute right-4 top-4 glass-warm rounded-xl px-3 py-2"
               >
                 <p className="text-xs text-amber/90 font-mono glow-amber-text">★ 4.9 / 5.0</p>
               </motion.div>

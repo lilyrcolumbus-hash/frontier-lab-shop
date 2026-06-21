@@ -1,7 +1,9 @@
 import type { Metadata } from 'next'
 import { Hero } from '@/components/home/Hero'
 import { TrustBar } from '@/components/home/TrustBar'
+import { GrowJourney } from '@/components/home/GrowJourney'
 import { SpeciesSpotlight } from '@/components/home/SpeciesSpotlight'
+import { WildSection } from '@/components/home/WildSection'
 import { QuizTeaser } from '@/components/home/QuizTeaser'
 import { AcademyPreview } from '@/components/home/AcademyPreview'
 import { CommunityGallery } from '@/components/home/CommunityGallery'
@@ -18,6 +20,8 @@ export default function HomePage() {
     <>
       <Hero />
       <TrustBar />
+      <GrowJourney />
+      <WildSection />
       <SpeciesSpotlight />
       <QuizTeaser />
       <AcademyPreview />
