@@ -8,36 +8,110 @@ interface LogoProps {
   className?: string
 }
 
-const sizes = {
-  sm: { dirty: 'text-2xl', shrooms: '1.25rem' },
-  md: { dirty: 'text-4xl', shrooms: '1.65rem' },
-  lg: { dirty: 'text-6xl', shrooms: '2.4rem' },
+// Mushroom-shaped "i" — stem + dome cap replace the normal letter
+function MushroomI({ scale = 1 }: { scale?: number }) {
+  const w = 10 * scale
+  const h = 26 * scale
+  const capH = 11 * scale
+  const stemW = 3.2 * scale
+  const stemX = (w - stemW) / 2
+
+  return (
+    <svg
+      viewBox={`0 0 ${w} ${h}`}
+      width={w}
+      height={h}
+      style={{ display: 'inline-block', verticalAlign: 'bottom', marginBottom: 1 * scale }}
+      aria-hidden="true"
+    >
+      {/* Mushroom cap dome */}
+      <path
+        d={`
+          M ${w * 0.06} ${capH}
+          Q ${w * 0.0} ${capH * 0.35} ${w * 0.5} ${1 * scale}
+          Q ${w * 1.0} ${capH * 0.35} ${w * 0.94} ${capH}
+          Z
+        `}
+        fill="rgba(212,145,58,0.9)"
+        style={{ filter: `drop-shadow(0 0 ${3 * scale}px rgba(212,145,58,0.5))` }}
+      />
+      {/* Skirt / veil hint */}
+      <path
+        d={`M ${w * 0.08} ${capH * 1.02} Q ${w * 0.5} ${capH * 1.18} ${w * 0.92} ${capH * 1.02}`}
+        stroke="rgba(212,145,58,0.35)"
+        strokeWidth={0.8 * scale}
+        fill="none"
+      />
+      {/* Stem */}
+      <rect
+        x={stemX}
+        y={capH * 1.06}
+        width={stemW}
+        height={h - capH * 1.1}
+        rx={stemW * 0.4}
+        fill="rgba(212,145,58,0.8)"
+      />
+      {/* Glow orb at cap tip */}
+      <circle
+        cx={w * 0.5}
+        cy={2 * scale}
+        r={1.5 * scale}
+        fill="rgba(232,200,122,0.6)"
+      />
+    </svg>
+  )
+}
+
+const configs = {
+  sm: { shroomsSize: 26, dirtySize: 11, scale: 0.72, gap: -1 },
+  md: { shroomsSize: 38, dirtySize: 14, scale: 1.0,  gap: -2 },
+  lg: { shroomsSize: 58, dirtySize: 20, scale: 1.5,  gap: -4 },
 }
 
 export function Logo({ size = 'md', href = '/', showTagline, className }: LogoProps) {
-  const s = sizes[size]
+  const cfg = configs[size]
 
   const content = (
-    <div className={cn('flex flex-col items-start', className)}>
-      <div className="flex items-baseline gap-0">
+    <div className={cn('flex flex-col items-start select-none', className)}>
+
+      {/* ── "dirty" — small, italic, secondary ── */}
+      <div
+        className="flex items-end leading-none"
+        style={{ gap: 0, marginBottom: cfg.gap }}
+      >
+        {/* "d" */}
         <span
-          className={cn('font-display uppercase leading-none tracking-[0.05em]', s.dirty)}
-          style={{
-            color: '#D4913A',
-            textShadow: '0 0 18px rgba(212,145,58,0.4), 0 0 40px rgba(212,145,58,0.15)',
-          }}
+          className="font-accent italic text-amber/60"
+          style={{ fontSize: cfg.dirtySize, lineHeight: 1 }}
         >
-          DIRTY
+          d
         </span>
+
+        {/* Mushroom "i" */}
+        <MushroomI scale={cfg.scale} />
+
+        {/* "rty" */}
         <span
-          className="font-accent italic lowercase leading-none"
-          style={{ fontSize: s.shrooms, color: '#B8C9B0' }}
+          className="font-accent italic text-amber/60"
+          style={{ fontSize: cfg.dirtySize, lineHeight: 1 }}
         >
-          shrooms
+          rty
         </span>
       </div>
+
+      {/* ── "shrooms" — the protagonist ── */}
+      <span
+        className="font-heading font-bold text-cream tracking-tight leading-none"
+        style={{
+          fontSize: cfg.shroomsSize,
+          textShadow: '0 0 30px rgba(212,145,58,0.08)',
+        }}
+      >
+        shrooms
+      </span>
+
       {showTagline && (
-        <span className="font-mono font-light uppercase tracking-[0.22em] text-[10px] mt-0.5 text-cream-muted/60">
+        <span className="font-mono font-light uppercase tracking-[0.22em] text-[9px] mt-1.5 text-cream-muted/50">
           Grow Something Filthy
         </span>
       )}
