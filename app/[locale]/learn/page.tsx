@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { useTranslations } from 'next-intl'
+import { setRequestLocale } from 'next-intl/server'
 import { Badge } from '@/components/ui/Badge'
 import { Card } from '@/components/ui/Card'
 

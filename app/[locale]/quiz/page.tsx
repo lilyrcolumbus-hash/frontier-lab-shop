@@ -1,4 +1,5 @@
 import { useTranslations } from 'next-intl'
+import { setRequestLocale } from 'next-intl/server'
 import { SpeciesFinder } from '@/components/tools/SpeciesFinder'
 
 export default function QuizPage() {

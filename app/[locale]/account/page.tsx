@@ -1,3 +1,5 @@
+'use client'
+
 import { useTranslations } from 'next-intl'
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
@@ -46,7 +48,7 @@ export default function AccountPage() {
           </Button>
 
           <p className="text-center text-sm text-cream-muted">
-            Don't have an account?{' '}
+            Don&apos;t have an account?{' '}
             <Link href="/signup" className="text-accent hover:text-accent-hover transition-colors font-medium">
               {t('signUp')}
             </Link>

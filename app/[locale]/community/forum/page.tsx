@@ -1,4 +1,5 @@
 import { useTranslations } from 'next-intl'
+import { setRequestLocale } from 'next-intl/server'
 import { Button } from '@/components/ui/Button'
 import { Badge } from '@/components/ui/Badge'
 

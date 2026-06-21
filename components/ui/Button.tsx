@@ -12,15 +12,15 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const variants = {
   primary:
-    'bg-accent hover:bg-accent-hover text-cream shadow-glow-accent hover:shadow-none',
+    'bg-accent hover:bg-accent-hover text-bg font-semibold shadow-glow-cyan-sm hover:shadow-glow-cyan active:scale-95',
   secondary:
-    'bg-moss hover:bg-moss/80 text-cream',
+    'bg-violet hover:bg-violet-hover text-cream shadow-glow-violet active:scale-95',
   outline:
-    'border border-cream/40 hover:border-cream text-cream hover:bg-cream/5',
+    'border border-accent/30 hover:border-accent/70 text-accent hover:bg-accent/8 active:scale-95',
   ghost:
-    'text-cream-muted hover:text-cream hover:bg-elevated',
+    'text-cream-muted hover:text-cream hover:bg-elevated active:scale-95',
   danger:
-    'bg-error hover:bg-error/80 text-cream',
+    'bg-error hover:bg-error/80 text-cream active:scale-95',
 }
 
 const sizes = {
@@ -30,25 +30,15 @@ const sizes = {
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  (
-    {
-      variant = 'primary',
-      size = 'md',
-      isLoading,
-      fullWidth,
-      className,
-      children,
-      disabled,
-      ...props
-    },
-    ref
-  ) => {
+  ({ variant = 'primary', size = 'md', isLoading, fullWidth, className, children, disabled, ...props }, ref) => {
     return (
       <button
         ref={ref}
         disabled={disabled ?? isLoading}
         className={cn(
-          'inline-flex items-center justify-center gap-2 rounded-full font-body font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg disabled:opacity-50 disabled:cursor-not-allowed',
+          'inline-flex items-center justify-center gap-2 rounded-full font-body font-medium transition-all duration-200',
+          'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg',
+          'disabled:opacity-50 disabled:cursor-not-allowed',
           variants[variant],
           sizes[size],
           fullWidth && 'w-full',

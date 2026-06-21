@@ -1,4 +1,5 @@
 import { useTranslations } from 'next-intl'
+import { setRequestLocale } from 'next-intl/server'
 import { GrowCalculator } from '@/components/tools/GrowCalculator'
 
 export default function GrowCalculatorPage() {
