@@ -25,15 +25,12 @@ export function Newsletter() {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-amber/[0.04] rounded-full blur-[120px] pointer-events-none" />
 
       <ScrollReveal className="relative max-w-2xl mx-auto px-4 sm:px-6 text-center">
-        {/* Glowing mushroom icon */}
-        <div className="inline-flex items-center justify-center w-20 h-20 rounded-full border border-amber/20 bg-amber/[0.06] mb-8 animate-pulse-soft">
-          <span className="text-4xl">🍄</span>
-        </div>
+        <div className="w-12 h-px bg-amber/30 mx-auto mb-8" />
 
-        <h2 className="font-heading text-4xl sm:text-5xl text-cream font-bold mb-4">
+        <h2 className="font-body font-bold text-3xl sm:text-4xl text-cream tracking-tight mb-4">
           {t('title')}
         </h2>
-        <p className="font-accent italic text-cream-muted text-xl mb-10 leading-relaxed">
+        <p className="italic text-cream-muted text-lg mb-10 leading-relaxed">
           {t('subtitle')}
         </p>
 
@@ -46,7 +43,7 @@ export function Newsletter() {
               transition={{ duration: 0.5, ease: 'backOut' }}
               className="bg-amber/10 border border-amber/25 rounded-2xl py-8 px-10 glow-amber"
             >
-              <p className="text-amber font-heading text-2xl glow-amber-text">✓ {t('success')}</p>
+              <p className="text-amber font-body font-bold text-xl">✓ {t('success')}</p>
               <p className="text-cream-muted text-sm mt-2 font-mono">Welcome to the forest network.</p>
             </motion.div>
           ) : (

@@ -97,7 +97,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
           <div className="space-y-3">
             <NavLink href="/encyclopedia" onClick={onClose} large>{t('nav.encyclopedia')}</NavLink>
             <NavLink href="/community" onClick={onClose} large>{t('nav.community')}</NavLink>
-            <NavLink href="/quiz" onClick={onClose} large>🍄 Find Your Mushroom</NavLink>
+            <NavLink href="/quiz" onClick={onClose} large>Find Your Mushroom</NavLink>
           </div>
         </nav>
 

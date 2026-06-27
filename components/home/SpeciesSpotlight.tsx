@@ -8,12 +8,12 @@ import { Badge } from '@/components/ui/Badge'
 import { ScrollReveal } from '@/components/ui/ScrollReveal'
 
 const SEED_SPECIES = [
-  { slug: 'blue-oyster', commonName: 'Blue Oyster', scientificName: 'Pleurotus ostreatus', difficulty: 'beginner', type: 'edible', thumbnailUrl: 'https://images.unsplash.com/photo-1504545102780-26774c1bb073?w=500', emoji: '🌊' },
-  { slug: 'lions-mane', commonName: "Lion's Mane", scientificName: 'Hericium erinaceus', difficulty: 'intermediate', type: 'medicinal', thumbnailUrl: 'https://images.unsplash.com/photo-1607305387299-a3d9611cd469?w=500', emoji: '🦁' },
-  { slug: 'shiitake', commonName: 'Shiitake', scientificName: 'Lentinula edodes', difficulty: 'intermediate', type: 'edible', thumbnailUrl: 'https://images.unsplash.com/photo-1585155784229-aff921ccfa12?w=500', emoji: '🍄' },
-  { slug: 'reishi', commonName: 'Reishi', scientificName: 'Ganoderma lucidum', difficulty: 'advanced', type: 'medicinal', thumbnailUrl: 'https://images.unsplash.com/photo-1504470695779-75300268aa0e?w=500', emoji: '🔴' },
-  { slug: 'wine-cap', commonName: 'Wine Cap', scientificName: 'Stropharia rugosoannulata', difficulty: 'beginner', type: 'edible', thumbnailUrl: 'https://images.unsplash.com/photo-1541904031027-00d5c22f7cf2?w=500', emoji: '🍷' },
-  { slug: 'chaga', commonName: 'Chaga', scientificName: 'Inonotus obliquus', difficulty: 'advanced', type: 'medicinal', thumbnailUrl: 'https://images.unsplash.com/photo-1472396961693-142e6e269027?w=500', emoji: '⬛' },
+  { slug: 'blue-oyster', commonName: 'Blue Oyster', scientificName: 'Pleurotus ostreatus', difficulty: 'beginner', type: 'edible', thumbnailUrl: 'https://images.unsplash.com/photo-1504545102780-26774c1bb073?w=500' },
+  { slug: 'lions-mane', commonName: "Lion's Mane", scientificName: 'Hericium erinaceus', difficulty: 'intermediate', type: 'medicinal', thumbnailUrl: 'https://images.unsplash.com/photo-1607305387299-a3d9611cd469?w=500' },
+  { slug: 'shiitake', commonName: 'Shiitake', scientificName: 'Lentinula edodes', difficulty: 'intermediate', type: 'edible', thumbnailUrl: 'https://images.unsplash.com/photo-1585155784229-aff921ccfa12?w=500' },
+  { slug: 'reishi', commonName: 'Reishi', scientificName: 'Ganoderma lucidum', difficulty: 'advanced', type: 'medicinal', thumbnailUrl: 'https://images.unsplash.com/photo-1504470695779-75300268aa0e?w=500' },
+  { slug: 'pink-oyster', commonName: 'Pink Oyster', scientificName: 'Pleurotus djamor', difficulty: 'beginner', type: 'edible', thumbnailUrl: 'https://images.unsplash.com/photo-1773600149997-2b6af77031d7?w=500' },
+  { slug: 'yellow-oyster', commonName: 'Yellow Oyster', scientificName: 'Pleurotus citrinopileatus', difficulty: 'beginner', type: 'edible', thumbnailUrl: 'https://images.unsplash.com/photo-1748118869505-e75f25812a70?w=500' },
 ]
 
 const difficultyMap: Record<string, 'success' | 'warning' | 'error'> = {
@@ -38,11 +38,11 @@ export function SpeciesSpotlight() {
         <ScrollReveal className="flex items-end justify-between mb-16">
           <div>
             <div className="section-divider mb-4" />
-            <h2 className="font-display text-5xl sm:text-6xl text-cream tracking-wide">
+            <h2 className="font-body font-bold text-3xl sm:text-4xl text-cream tracking-tight">
               {t('title')}
             </h2>
             <p className="text-cream-muted mt-3 text-lg max-w-lg">
-              From beginner-friendly to expert-level cultivation — explore the filthy spectrum.
+              From beginner-friendly to expert-level cultivation — explore the full spectrum.
             </p>
           </div>
           <Link
@@ -77,17 +77,13 @@ export function SpeciesSpotlight() {
                     {/* Hover glow overlay */}
                     <div className="absolute inset-0 bg-accent/0 group-hover:bg-accent/5 transition-colors duration-500" />
 
-                    {/* Emoji badge */}
-                    <div className="absolute top-3 right-3 w-10 h-10 rounded-xl glass flex items-center justify-center text-xl">
-                      {species.emoji}
-                    </div>
                   </div>
 
                   {/* Content */}
                   <div className="p-5">
                     <div className="flex items-start justify-between gap-2">
                       <div>
-                        <h3 className="font-heading text-lg font-semibold text-cream group-hover:text-accent transition-colors duration-300">
+                        <h3 className="font-body text-base font-semibold text-cream group-hover:text-accent transition-colors duration-300">
                           {species.commonName}
                         </h3>
                         <p className="font-mono-lab text-xs text-cream-muted/70 italic mt-0.5">

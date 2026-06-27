@@ -21,7 +21,7 @@ const PREVIEW_ARTICLES = [
     badgeVariant: 'accent' as const,
     title: 'Understanding Mycelium: The Underground Network',
     readTime: 8,
-    image: 'https://images.unsplash.com/photo-1472396961693-142e6e269027?w=600',
+    image: 'https://images.unsplash.com/photo-1585155784229-aff921ccfa12?w=600',
     accent: '#7C3AED',
   },
   {
@@ -50,9 +50,9 @@ export function AcademyPreview() {
           <div>
             <span className="inline-flex items-center gap-2 font-mono text-violet text-xs uppercase tracking-[0.2em] mb-4">
               <span className="w-4 h-px bg-violet" />
-              DirtyShrooms Academy
+              Shrooms Academy
             </span>
-            <h2 className="font-display text-5xl sm:text-6xl text-cream tracking-wide">
+            <h2 className="font-body font-bold text-3xl sm:text-4xl text-cream tracking-tight">
               {t('title')}
             </h2>
           </div>
@@ -92,7 +92,7 @@ export function AcademyPreview() {
                     <Badge variant={article.badgeVariant} size="sm">{article.category}</Badge>
                     <span className="text-xs text-cream-muted font-mono">{article.readTime} {tc('readTime')}</span>
                   </div>
-                  <h3 className="font-heading text-lg font-semibold text-cream leading-snug group-hover:text-accent transition-colors duration-300">
+                  <h3 className="font-body text-base font-semibold text-cream leading-snug group-hover:text-accent transition-colors duration-300">
                     {article.title}
                   </h3>
                   <div className="flex items-center gap-1 text-sm text-accent font-mono mt-auto pt-2 border-t border-ds-border">

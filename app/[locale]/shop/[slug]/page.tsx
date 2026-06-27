@@ -25,7 +25,7 @@ const PRODUCTS: Record<string, Product> = {
     ],
     images: [
       'https://images.unsplash.com/photo-1504545102780-26774c1bb073?w=800',
-      'https://images.unsplash.com/photo-1472396961693-142e6e269027?w=800',
+      'https://images.unsplash.com/photo-1541904031027-00d5c22f7cf2?w=800',
     ],
     cultivationSpecs: { difficulty: 'beginner', colonizationTime: '2–3 weeks', fruitingTempF: '55–65°F', fruitingTempC: '13–18°C', idealSubstrate: 'Hardwood sawdust, straw, coffee grounds', expectedYield: '1–3 flushes, 25% biological efficiency', indoorOutdoor: 'both' },
     isOrganic: true, inStock: true, tags: ['beginner', 'oyster', 'organic'], relatedProducts: ['beginners-grow-kit-bundle'],

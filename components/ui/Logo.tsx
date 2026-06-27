@@ -74,31 +74,6 @@ export function Logo({ size = 'md', href = '/', showTagline, className }: LogoPr
   const content = (
     <div className={cn('flex flex-col items-start select-none', className)}>
 
-      {/* ── "dirty" — small, italic, secondary ── */}
-      <div
-        className="flex items-end leading-none"
-        style={{ gap: 0, marginBottom: cfg.gap }}
-      >
-        {/* "d" */}
-        <span
-          className="font-accent italic text-amber/60"
-          style={{ fontSize: cfg.dirtySize, lineHeight: 1 }}
-        >
-          d
-        </span>
-
-        {/* Mushroom "i" */}
-        <MushroomI scale={cfg.scale} />
-
-        {/* "rty" */}
-        <span
-          className="font-accent italic text-amber/60"
-          style={{ fontSize: cfg.dirtySize, lineHeight: 1 }}
-        >
-          rty
-        </span>
-      </div>
-
       {/* ── "shrooms" — the protagonist ── */}
       <span
         className="font-heading font-bold text-cream tracking-tight leading-none"
@@ -112,7 +87,7 @@ export function Logo({ size = 'md', href = '/', showTagline, className }: LogoPr
 
       {showTagline && (
         <span className="font-mono font-light uppercase tracking-[0.22em] text-[9px] mt-1.5 text-cream-muted/50">
-          Grow Something Filthy
+          From Spore to Ritual
         </span>
       )}
     </div>

@@ -4,23 +4,23 @@
 
 @layer base {
   :root {
-    color-scheme: dark;
-    --color-bg:       #040908;
-    --color-surface:  #08100A;
-    --color-elevated: #0D1A0C;
-    --color-accent:   #6BBF6A;
-    --color-amber:    #D4913A;
-    --color-lavender: #8B6BB5;
-    --color-cream:    #E4EDDA;
-    --color-muted:    #6B8A65;
-    --color-border:   #162414;
+    color-scheme: light;
+    --color-bg:       #F0F2F0;
+    --color-surface:  #F8F9F8;
+    --color-elevated: #E8ECEA;
+    --color-accent:   #3D6E45;
+    --color-amber:    #9E6820;
+    --color-silver:   #8A9FAE;
+    --color-lavender: #6350A0;
+    --color-cream:    #1C2018;
+    --color-muted:    #566458;
+    --color-border:   #D2D8D2;
   }
 
   * {
     box-sizing: border-box;
     padding: 0;
     margin: 0;
-    cursor: none !important;
   }
 
   html { scroll-behavior: smooth; }
@@ -35,14 +35,14 @@
   }
 
   ::selection {
-    background-color: rgba(212, 145, 58, 0.3);
+    background-color: rgba(58, 112, 71, 0.15);
     color: var(--color-cream);
   }
 
   ::-webkit-scrollbar { width: 4px; }
-  ::-webkit-scrollbar-track { background: var(--color-bg); }
+  ::-webkit-scrollbar-track { background: var(--color-elevated); }
   ::-webkit-scrollbar-thumb {
-    background: rgba(107,191,106,0.3);
+    background: rgba(122,149,168,0.35);
     border-radius: 2px;
   }
 }
@@ -70,30 +70,30 @@
 .cursor-dot {
   width: 7px;
   height: 7px;
-  background: var(--color-amber);
-  box-shadow: 0 0 10px var(--color-amber), 0 0 24px rgba(212,145,58,0.4);
-  mix-blend-mode: screen;
+  background: var(--color-accent);
+  box-shadow: 0 0 8px var(--color-accent), 0 0 16px rgba(58,112,71,0.25);
+  mix-blend-mode: multiply;
 }
 
 .cursor-ring {
   width: 36px;
   height: 36px;
-  border: 1.5px solid rgba(212,145,58,0.35);
+  border: 1.5px solid rgba(58,112,71,0.30);
   transition: width 0.2s, height 0.2s, border-color 0.2s, transform 0.14s ease-out, opacity 0.3s;
-  mix-blend-mode: screen;
+  mix-blend-mode: multiply;
 }
 
 .cursor-ring.hovered {
   width: 56px;
   height: 56px;
-  border-color: rgba(212,145,58,0.7);
-  box-shadow: 0 0 12px rgba(212,145,58,0.25);
+  border-color: rgba(58,112,71,0.55);
+  box-shadow: 0 0 10px rgba(58,112,71,0.15);
 }
 
 .cursor-glow {
   width: 160px;
   height: 160px;
-  background: radial-gradient(circle, rgba(212,145,58,0.04) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(58,112,71,0.04) 0%, transparent 70%);
   transition: transform 0.4s ease-out;
 }
 
@@ -147,58 +147,67 @@
 
 /* ─── GLASS ─── */
 .glass {
-  background: rgba(8, 16, 10, 0.55);
+  background: rgba(255, 255, 255, 0.72);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(107,191,106,0.08);
+  border: 1px solid rgba(58,112,71,0.10);
 }
 
 .glass-warm {
-  background: rgba(13, 10, 6, 0.65);
+  background: rgba(255, 252, 248, 0.76);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(212,145,58,0.1);
+  border: 1px solid rgba(158,104,32,0.10);
 }
 
 .glass-strong {
-  background: rgba(8, 16, 10, 0.85);
+  background: rgba(255, 255, 255, 0.90);
   backdrop-filter: blur(40px);
   -webkit-backdrop-filter: blur(40px);
-  border: 1px solid rgba(107,191,106,0.1);
+  border: 1px solid rgba(122,149,168,0.12);
 }
 
 /* ─── GLOW HELPERS ─── */
-.glow-moss      { box-shadow: 0 0 20px rgba(107,191,106,0.3), 0 0 60px rgba(107,191,106,0.08); }
-.glow-moss-sm   { box-shadow: 0 0 10px rgba(107,191,106,0.25); }
-.glow-moss-text { text-shadow: 0 0 18px rgba(107,191,106,0.5); }
-.glow-amber     { box-shadow: 0 0 20px rgba(212,145,58,0.4), 0 0 50px rgba(212,145,58,0.1); }
-.glow-amber-sm  { box-shadow: 0 0 12px rgba(212,145,58,0.35); }
-.glow-amber-text{ text-shadow: 0 0 20px rgba(212,145,58,0.6), 0 0 40px rgba(212,145,58,0.25); }
+.glow-moss      { box-shadow: 0 0 16px rgba(58,112,71,0.18), 0 0 40px rgba(58,112,71,0.06); }
+.glow-moss-sm   { box-shadow: 0 0 8px rgba(58,112,71,0.14); }
+.glow-moss-text { text-shadow: 0 0 12px rgba(58,112,71,0.3); }
+.glow-amber     { box-shadow: 0 0 16px rgba(158,104,32,0.22), 0 0 36px rgba(158,104,32,0.07); }
+.glow-amber-sm  { box-shadow: 0 0 10px rgba(158,104,32,0.18); }
+.glow-amber-text{ text-shadow: 0 0 14px rgba(158,104,32,0.35); }
+.glow-silver    { box-shadow: 0 0 16px rgba(122,149,168,0.20), 0 0 40px rgba(122,149,168,0.06); }
+.glow-silver-sm { box-shadow: 0 0 8px rgba(122,149,168,0.16); }
 
 /* ─── GRADIENT TEXT ─── */
 .text-gradient-forest {
-  background: linear-gradient(135deg, #6BBF6A 0%, #D4913A 55%, #8B6BB5 100%);
+  background: linear-gradient(135deg, #3A7047 0%, #9E6820 55%, #6350A0 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .text-gradient-moss {
-  background: linear-gradient(90deg, #A0D49E 0%, #6BBF6A 50%, #4A9A48 100%);
+  background: linear-gradient(90deg, #3A7047 0%, #2A5535 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .text-gradient-amber {
-  background: linear-gradient(90deg, #E8C47A 0%, #D4913A 100%);
+  background: linear-gradient(90deg, #B87828 0%, #9E6820 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-silver {
+  background: linear-gradient(90deg, #9AB8CC 0%, #7A95A8 50%, #5A7A90 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .text-shimmer-warm {
-  background: linear-gradient(105deg, #E4EDDA 30%, #D4913A 50%, #E4EDDA 70%);
+  background: linear-gradient(105deg, #1A1F1C 30%, #9E6820 50%, #1A1F1C 70%);
   background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -214,12 +223,12 @@
   border-radius: 1px;
 }
 
-/* ─── FOREST AMBIENT BACKGROUND ─── */
+/* ─── STUDIO AMBIENT BACKGROUND ─── */
 .forest-bg {
   background-image:
-    radial-gradient(ellipse at 20% 70%, rgba(58,107,58,0.08) 0%, transparent 55%),
-    radial-gradient(ellipse at 80% 30%, rgba(139,107,181,0.05) 0%, transparent 50%),
-    radial-gradient(ellipse at 55% 90%, rgba(212,145,58,0.06) 0%, transparent 45%);
+    radial-gradient(ellipse at 20% 70%, rgba(58,112,71,0.06) 0%, transparent 55%),
+    radial-gradient(ellipse at 80% 30%, rgba(122,149,168,0.05) 0%, transparent 50%),
+    radial-gradient(ellipse at 55% 90%, rgba(158,104,32,0.04) 0%, transparent 45%);
 }
 
 /* ─── TREE/VINE SILHOUETTE BORDERS ─── */

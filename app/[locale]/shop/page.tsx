@@ -36,7 +36,7 @@ const PRODUCTS: Product[] = [
     category: 'bundle', subcategory: 'Beginner Bundles', species: 'blue-oyster',
     price: 4999, compareAtPrice: 6999,
     variants: [{ id: 'v3', name: 'Standard', price: 4999, stock: 30, sku: 'BKT-STD' }],
-    images: ['https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800'],
+    images: ['https://images.unsplash.com/photo-1504545102780-26774c1bb073?w=800'],
     cultivationSpecs: { difficulty: 'beginner', colonizationTime: '2–3 weeks', fruitingTempF: '55–65°F', fruitingTempC: '13–18°C', idealSubstrate: 'Included', expectedYield: '150–300g per flush', indoorOutdoor: 'indoor' },
     isOrganic: true, inStock: true, tags: ['beginner', 'bundle', 'best-seller'], relatedProducts: [],
   },

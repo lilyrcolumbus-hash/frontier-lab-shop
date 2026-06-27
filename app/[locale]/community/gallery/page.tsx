@@ -6,9 +6,9 @@ const PHOTOS = [
   { id: 1, src: 'https://images.unsplash.com/photo-1504545102780-26774c1bb073?w=600', alt: 'Blue Oyster flush', user: '@mushroom_mike', species: 'Blue Oyster', tall: true },
   { id: 2, src: 'https://images.unsplash.com/photo-1607305387299-a3d9611cd469?w=600', alt: "Lion's Mane", user: '@growwild_jen', species: "Lion's Mane", tall: false },
   { id: 3, src: 'https://images.unsplash.com/photo-1585155784229-aff921ccfa12?w=600', alt: 'Shiitake harvest', user: '@fungi_forager', species: 'Shiitake', tall: false },
-  { id: 4, src: 'https://images.unsplash.com/photo-1472396961693-142e6e269027?w=600', alt: 'Forest walk', user: '@dirtyhands_ann', species: 'Wild', tall: true },
+  { id: 4, src: 'https://images.unsplash.com/photo-1773600149997-2b6af77031d7?w=600', alt: 'Pink Oyster cluster', user: '@spore.ann', species: 'Pink Oyster', tall: true },
   { id: 5, src: 'https://images.unsplash.com/photo-1504470695779-75300268aa0e?w=600', alt: 'Reishi antler form', user: '@myco_lab_co', species: 'Reishi', tall: false },
-  { id: 6, src: 'https://images.unsplash.com/photo-1541904031027-00d5c22f7cf2?w=600', alt: 'Wine Cap garden patch', user: '@garden_shrooms', species: 'Wine Cap', tall: false },
+  { id: 6, src: 'https://images.unsplash.com/photo-1748118869505-e75f25812a70?w=600', alt: 'Yellow Oyster cluster', user: '@spore.garden', species: 'Yellow Oyster', tall: false },
 ]
 
 export default function GalleryPage() {

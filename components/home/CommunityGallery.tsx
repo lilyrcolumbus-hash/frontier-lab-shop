@@ -9,16 +9,16 @@ import { ScrollReveal } from '@/components/ui/ScrollReveal'
 const GALLERY_ITEMS = [
   { id: 1,  src: 'https://images.unsplash.com/photo-1504545102780-26774c1bb073?w=600&h=800&q=85&auto=format&fit=crop', alt: 'Blue Oyster first flush',  species: 'Blue Oyster',  user: '@mushroom_mike',    tall: true  },
   { id: 2,  src: 'https://images.unsplash.com/photo-1607305387299-a3d9611cd469?w=600&h=440&q=85&auto=format&fit=crop', alt: "Lion's Mane up close",    species: "Lion's Mane",  user: '@growwild_jen',    tall: false },
-  { id: 3,  src: 'https://images.unsplash.com/photo-1541904031027-00d5c22f7cf2?w=600&h=440&q=85&auto=format&fit=crop', alt: 'Wine Cap patch in garden',species: 'Wine Cap',     user: '@garden_shrooms',  tall: false },
-  { id: 4,  src: 'https://images.unsplash.com/photo-1472396961693-142e6e269027?w=600&h=760&q=85&auto=format&fit=crop', alt: 'Wild forage in the woods', species: 'Wild Forest',  user: '@dirtyhands_ann',  tall: true  },
+  { id: 3,  src: 'https://images.unsplash.com/photo-1773600149997-2b6af77031d7?w=600&h=440&q=85&auto=format&fit=crop', alt: 'Pink Oyster cluster flush',  species: 'Pink Oyster',  user: '@spore.garden',    tall: false },
+  { id: 4,  src: 'https://images.unsplash.com/photo-1748118869505-e75f25812a70?w=600&h=760&q=85&auto=format&fit=crop', alt: 'Yellow Oyster golden cluster', species: 'Yellow Oyster', user: '@spore.ann',    tall: true  },
   { id: 5,  src: 'https://images.unsplash.com/photo-1585155784229-aff921ccfa12?w=600&h=440&q=85&auto=format&fit=crop', alt: 'Shiitake cluster flush',   species: 'Shiitake',     user: '@fungi_forager',   tall: false },
   { id: 6,  src: 'https://images.unsplash.com/photo-1504470695779-75300268aa0e?w=600&h=440&q=85&auto=format&fit=crop', alt: 'Reishi antler stage',      species: 'Reishi',       user: '@myco_lab_co',     tall: false },
-  { id: 7,  src: 'https://images.unsplash.com/photo-1448375240586-882707db888b?w=600&h=800&q=85&auto=format&fit=crop', alt: 'Morning light in the forest', species: 'Wild Find', user: '@forestwalker',    tall: true  },
+  { id: 7,  src: 'https://images.unsplash.com/photo-1448375240586-882707db888b?w=600&h=800&q=85&auto=format&fit=crop', alt: 'Enchanted forest light rays', species: 'Wild Find', user: '@forestwalker',   tall: true  },
   { id: 8,  src: 'https://images.unsplash.com/photo-1504545102780-26774c1bb073?w=600&h=440&q=85&auto=format&fit=crop&crop=bottom', alt: 'Oyster pinning stage', species: 'Blue Oyster', user: '@ohio_grows',  tall: false },
   { id: 9,  src: 'https://images.unsplash.com/photo-1607305387299-a3d9611cd469?w=600&h=440&q=85&auto=format&fit=crop&crop=top',   alt: 'Lion texture macro',  species: "Lion's Mane",  user: '@macro_myco',    tall: false },
   { id: 10, src: 'https://images.unsplash.com/photo-1585155784229-aff921ccfa12?w=600&h=680&q=85&auto=format&fit=crop', alt: 'Dark wood block shiitake', species: 'Shiitake',    user: '@log_grower',     tall: true  },
-  { id: 11, src: 'https://images.unsplash.com/photo-1472396961693-142e6e269027?w=600&h=440&q=85&auto=format&fit=crop&crop=right', alt: 'Forest floor life',  species: 'Wild',         user: '@spore_prints',   tall: false },
-  { id: 12, src: 'https://images.unsplash.com/photo-1541904031027-00d5c22f7cf2?w=600&h=440&q=85&auto=format&fit=crop&crop=top',  alt: 'Wine Cap full cap',  species: 'Wine Cap',     user: '@dirtygarden_co', tall: false },
+  { id: 11, src: 'https://images.unsplash.com/photo-1504470695779-75300268aa0e?w=600&h=440&q=85&auto=format&fit=crop', alt: 'Reishi antler form', species: 'Reishi',       user: '@spore_prints',   tall: false },
+  { id: 12, src: 'https://images.unsplash.com/photo-1607305387299-a3d9611cd469?w=600&h=440&q=85&auto=format&fit=crop&crop=top',  alt: "Lion's Mane full cap",  species: "Lion's Mane",  user: '@spore.co',       tall: false },
 ]
 
 export function CommunityGallery() {
@@ -33,7 +33,7 @@ export function CommunityGallery() {
         <ScrollReveal className="flex items-end justify-between mb-16">
           <div>
             <div className="section-divider mb-4" />
-            <h2 className="font-display text-5xl sm:text-6xl text-cream tracking-wide">
+            <h2 className="font-body font-bold text-3xl sm:text-4xl text-cream tracking-tight">
               {t('title')}
             </h2>
             <p className="text-cream-muted mt-3 text-lg max-w-md">{t('subtitle')}</p>

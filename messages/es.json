@@ -45,6 +45,7 @@
     "learn": "Aprender",
     "encyclopedia": "Enciclopedia",
     "tools": "Herramientas",
+    "garden": "Tour del Jardín",
     "community": "Comunidad",
     "account": "Cuenta",
     "cart": "Carrito",
@@ -88,7 +89,7 @@
     "hero": {
       "eyebrow": "La Plataforma de Hongos Más Completa del Mundo",
       "headline1": "Cultiva Algo",
-      "headline2": "Sucio.",
+      "headline2": "Puro.",
       "subtext": "Cultiva. Aprende. Conecta. Todo sobre los hongos.",
       "ctaPrimary": "Encuentra Tu Hongo",
       "ctaSecondary": "Ir a la Tienda"
@@ -108,17 +109,17 @@
       "cta": "Hacer el Quiz"
     },
     "academy": {
-      "title": "Aprende Algo Sucio",
+      "title": "Crece Con Conocimiento",
       "subtitle": "Guías expertas escritas por cultivadores, para cultivadores.",
       "viewAll": "Ver Todas las Guías →"
     },
     "community": {
-      "title": "La Comunidad Sucia",
+      "title": "La Comunidad de Cultivadores",
       "subtitle": "Cultivos reales de cultivadores reales de todo el mundo.",
       "cta": "Comparte Tu Cultivo"
     },
     "newsletter": {
-      "title": "Únete Al Club Sucio",
+      "title": "Únete A La Comunidad",
       "subtitle": "Obtén la Guía del Principiante gratis + noticias de micología semanal.",
       "placeholder": "Tu correo electrónico",
       "cta": "Suscribirme Gratis",
@@ -128,7 +129,7 @@
   },
   "shop": {
     "title": "Tienda",
-    "subtitle": "Todo lo que necesitas para cultivar algo sucio.",
+    "subtitle": "Todo lo que necesitas para cultivar con precisión.",
     "filters": {
       "all": "Todos los Productos",
       "kit": "Kits de Cultivo",
@@ -175,7 +176,7 @@
     "cart": {
       "title": "Tu Carrito",
       "empty": "Tu carrito está vacío",
-      "emptySubtext": "Es hora de cultivar algo sucio.",
+      "emptySubtext": "Es hora de empezar a cultivar.",
       "shopNow": "Ir a la Tienda",
       "subtotal": "Subtotal",
       "checkout": "Pagar",
@@ -357,7 +358,7 @@
     "forgotPassword": "¿Olvidaste tu contraseña?"
   },
   "footer": {
-    "tagline": "Cultiva Algo Sucio",
+    "tagline": "De la Espora al Ritual",
     "shop": {
       "title": "Tienda",
       "kits": "Kits de Cultivo",
@@ -391,7 +392,7 @@
       "track": "Rastrear Pedido",
       "contact": "Contacto"
     },
-    "copyright": "© 2025 DirtyShrooms. Todos los derechos reservados.",
+    "copyright": "© 2025 Shrooms. Todos los derechos reservados.",
     "privacy": "Política de Privacidad",
     "terms": "Términos de Servicio"
   }

@@ -5,15 +5,15 @@ import { motion, useInView, useScroll, useTransform } from 'framer-motion'
 
 const PHOTOS = [
   {
-    src: 'https://images.unsplash.com/photo-1541904031027-00d5c22f7cf2?w=700&h=900&q=88&auto=format&fit=crop',
-    alt: 'Wine Cap mushrooms in the wild',
-    label: 'Wine Cap',
+    src: 'https://images.unsplash.com/photo-1607305387299-a3d9611cd469?w=700&h=900&q=88&auto=format&fit=crop',
+    alt: "Lion's Mane in the wild",
+    label: "Lion's Mane",
     span: 'row-span-2',
   },
   {
-    src: 'https://images.unsplash.com/photo-1472396961693-142e6e269027?w=600&h=400&q=88&auto=format&fit=crop',
-    alt: 'Wild mushrooms in a forest',
-    label: 'Wild Forest',
+    src: 'https://images.unsplash.com/photo-1504545102780-26774c1bb073?w=600&h=400&q=88&auto=format&fit=crop',
+    alt: 'Blue Oyster mushroom cluster',
+    label: 'Blue Oyster',
     span: '',
   },
   {
@@ -67,7 +67,7 @@ export function WildSection() {
           >
             <div className="glass-warm rounded-2xl px-5 py-4 border border-amber/20 max-w-[220px]">
               <p className="font-mono text-[10px] text-amber/60 uppercase tracking-widest mb-1">In the wild</p>
-              <p className="font-heading text-cream text-sm font-medium leading-snug">
+              <p className="font-body text-cream text-sm font-medium leading-snug">
                 Found in Ohio forests, October — Hen of the Woods
               </p>
             </div>
@@ -87,10 +87,10 @@ export function WildSection() {
                 <div className="w-8 h-px bg-amber/40" />
                 Born Wild
               </div>
-              <h2 className="font-display text-5xl sm:text-6xl text-cream tracking-wide leading-none">
+              <h2 className="font-body font-bold text-3xl sm:text-4xl text-cream tracking-tight leading-tight">
                 Grown in the Dark,
                 <br />
-                <span className="text-gradient-amber">Born in the Wild</span>
+                <span style={{ color: '#C4883A' }}>Born in the Wild</span>
               </h2>
               <p className="font-body text-cream-muted text-lg leading-relaxed max-w-md">
                 From Ohio forest floors to substrate jars — we grow what nature grows, the way nature grows it.

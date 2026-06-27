@@ -45,6 +45,7 @@
     "learn": "Learn",
     "encyclopedia": "Encyclopedia",
     "tools": "Tools",
+    "garden": "Garden Tour",
     "community": "Community",
     "account": "Account",
     "cart": "Cart",
@@ -88,7 +89,7 @@
     "hero": {
       "eyebrow": "The World's Most Complete Mushroom Platform",
       "headline1": "Grow Something",
-      "headline2": "Filthy.",
+      "headline2": "Pure.",
       "subtext": "Cultivate. Learn. Connect. Everything fungi.",
       "ctaPrimary": "Find Your Mushroom",
       "ctaSecondary": "Shop Now"
@@ -108,17 +109,17 @@
       "cta": "Take The Quiz"
     },
     "academy": {
-      "title": "Get Filthy Smart",
+      "title": "Grow Your Knowledge",
       "subtitle": "Expert guides written by cultivators, for cultivators.",
       "viewAll": "View All Guides →"
     },
     "community": {
-      "title": "The Filthy Community",
+      "title": "The Growers Community",
       "subtitle": "Real grows from real growers around the world.",
       "cta": "Share Your Grow"
     },
     "newsletter": {
-      "title": "Join The Dirty Club",
+      "title": "Join The Community",
       "subtitle": "Get the free Beginner's Grow Guide + weekly mycology drops.",
       "placeholder": "Enter your email",
       "cta": "Subscribe Free",
@@ -128,7 +129,7 @@
   },
   "shop": {
     "title": "Shop",
-    "subtitle": "Everything you need to grow something filthy.",
+    "subtitle": "Everything you need to cultivate with precision.",
     "filters": {
       "all": "All Products",
       "kit": "Grow Kits",
@@ -175,7 +176,7 @@
     "cart": {
       "title": "Your Cart",
       "empty": "Your cart is empty",
-      "emptySubtext": "Time to grow something filthy.",
+      "emptySubtext": "Time to start cultivating.",
       "shopNow": "Shop Now",
       "subtotal": "Subtotal",
       "checkout": "Checkout",
@@ -357,7 +358,7 @@
     "forgotPassword": "Forgot password?"
   },
   "footer": {
-    "tagline": "Grow Something Filthy",
+    "tagline": "From Spore to Ritual",
     "shop": {
       "title": "Shop",
       "kits": "Grow Kits",
@@ -391,7 +392,7 @@
       "track": "Track Order",
       "contact": "Contact"
     },
-    "copyright": "© 2025 DirtyShrooms. All rights reserved.",
+    "copyright": "© 2025 Shrooms. All rights reserved.",
     "privacy": "Privacy Policy",
     "terms": "Terms of Service"
   }

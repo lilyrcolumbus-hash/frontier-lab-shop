@@ -1,270 +1,162 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
 import Link from 'next/link'
-import dynamic from 'next/dynamic'
 import { motion } from 'framer-motion'
 import { useTranslations } from 'next-intl'
-import { Button } from '@/components/ui/Button'
-
-const MyceliumScene = dynamic(
-  () => import('@/components/three/MyceliumScene').then((m) => m.MyceliumScene),
-  { ssr: false }
-)
 
 const EASE = [0.16, 1, 0.3, 1] as [number, number, number, number]
 const fadeUp = (delay = 0) => ({
-  initial: { opacity: 0, y: 28 },
+  initial: { opacity: 0, y: 24 },
   animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.9, delay, ease: EASE },
+  transition: { duration: 0.8, delay, ease: EASE },
 })
-
-const FIREFLY_COUNT = 18
 
 export function Hero() {
   const t = useTranslations('home.hero')
-  const containerRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    const container = containerRef.current
-    if (!container) return
-
-    const flies = Array.from({ length: FIREFLY_COUNT }, (_, i) => {
-      const el = document.createElement('div')
-      const size = Math.random() * 4 + 2
-      const duration = Math.random() * 10 + 8
-      const delay = Math.random() * 14
-      const type = i % 5 === 0 ? 'spore-moss' : i % 7 === 0 ? 'spore-lavender' : ''
-
-      el.className = `spore ${type}`
-      el.style.cssText = `
-        width:${size}px;
-        height:${size}px;
-        left:${Math.random() * 100}%;
-        --duration:${duration}s;
-        --delay:${delay}s;
-        --drift:${(Math.random() - 0.5) * 180}px;
-        animation-delay:${delay}s;
-      `
-      container.appendChild(el)
-      return el
-    })
-    return () => flies.forEach((f) => f.remove())
-  }, [])
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden bg-bg">
-      {/* ── Forest depth layers ── */}
+    <section className="relative min-h-screen flex items-center overflow-hidden">
+      {/* Background video */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-        {/* Base forest gradient */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#020504] via-bg to-[#060C05]" />
-        {/* Ground glow — warm amber from below */}
-        <div className="absolute bottom-0 inset-x-0 h-[45%] bg-gradient-to-t from-[#1A0D04]/40 via-transparent to-transparent" />
-        {/* Canopy — very subtle green tint at top */}
-        <div className="absolute top-0 inset-x-0 h-[30%] bg-gradient-to-b from-[#030A04]/60 via-transparent to-transparent" />
-        {/* Left ambient — moss green */}
-        <div className="absolute left-0 top-1/4 w-[500px] h-[500px] bg-accent/[0.04] rounded-full blur-[120px]" />
-        {/* Right ambient — lavender twilight */}
-        <div className="absolute right-0 bottom-1/3 w-[400px] h-[400px] bg-lavender/[0.04] rounded-full blur-[100px]" />
-        {/* Center warm — amber mushroom glow */}
-        <div className="absolute left-1/2 bottom-1/4 -translate-x-1/2 w-[600px] h-[300px] bg-amber/[0.05] rounded-full blur-[120px]" />
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+          aria-hidden="true"
+        >
+          <source src="/video/hero-bg.mp4" type="video/mp4" />
+        </video>
+        {/* Dark overlay — lets video show through beautifully */}
+        <div
+          className="absolute inset-0"
+          style={{ background: 'linear-gradient(110deg, rgba(4,9,4,0.91) 0%, rgba(4,9,4,0.84) 45%, rgba(4,9,4,0.66) 100%)' }}
+        />
+        {/* Bottom fade into next section */}
+        <div className="absolute bottom-0 inset-x-0 h-48 bg-gradient-to-t from-[#050A04] to-transparent" />
       </div>
 
-      {/* ── Video background (swap src with your mushroom timelapse) ── */}
-      {/* <video className="absolute inset-0 w-full h-full object-cover opacity-20 z-0" autoPlay muted loop playsInline src="/video/mushroom-timelapse.mp4" /> */}
-
-      {/* ── Firefly / spore Three.js scene ── */}
-      <div className="absolute inset-0 z-[1] pointer-events-none">
-        <MyceliumScene className="absolute inset-0" />
-      </div>
-
-      {/* ── CSS spore particles ── */}
-      <div
-        ref={containerRef}
-        className="absolute inset-0 z-[2] pointer-events-none overflow-hidden"
-        aria-hidden="true"
-      />
-
-      {/* ── Decorative tree silhouettes (pure CSS) ── */}
-      <div className="absolute inset-0 z-[2] pointer-events-none overflow-hidden" aria-hidden="true">
-        {/* Left tree trunk */}
-        <div className="absolute left-[-30px] bottom-0 w-16 h-[70%] bg-[#04080400] border-r border-[#1A2A15]/40 rounded-tr-[60%]" />
-        {/* Right tree trunk */}
-        <div className="absolute right-[-30px] bottom-0 w-16 h-[60%] bg-[#04080400] border-l border-[#1A2A15]/40 rounded-tl-[60%]" />
-        {/* Ground fog */}
-        <div className="absolute bottom-0 inset-x-0 h-32 bg-gradient-to-t from-bg/80 to-transparent" />
-      </div>
-
-      {/* ── Content ── */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-20">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+      {/* Content */}
+      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 pt-28 pb-20 w-full">
+        <div className="grid lg:grid-cols-[1fr_400px] gap-16 xl:gap-24 items-center">
 
           {/* Left column */}
           <div className="space-y-8">
             <motion.p
-              {...fadeUp(0.15)}
-              className="font-accent italic text-amber/80 text-lg tracking-wide"
+              {...fadeUp(0.1)}
+              className="text-[11px] font-mono font-medium text-white/40 uppercase tracking-[0.28em]"
             >
-              Deep in the mycelium, magic grows.
+              From Spore to Ritual
             </motion.p>
 
-            <div className="space-y-1 overflow-hidden">
-              <motion.h1 {...fadeUp(0.25)}>
-                <span className="block font-heading text-cream text-5xl sm:text-6xl lg:text-7xl font-bold leading-[1.05]">
-                  {t('headline1')}
-                </span>
-              </motion.h1>
-              <motion.div {...fadeUp(0.4)}>
-                <span className="block font-display text-[4.5rem] sm:text-[6rem] lg:text-[7.5rem] leading-none tracking-[0.02em] text-gradient-forest">
-                  {t('headline2')}
-                </span>
-              </motion.div>
-            </div>
+            <motion.div {...fadeUp(0.22)}>
+              <h1 className="font-body text-5xl sm:text-6xl lg:text-[4.25rem] xl:text-[4.75rem] font-bold text-white leading-[1.0] tracking-[-0.025em]">
+                {t('headline1')}
+              </h1>
+              <h1
+                className="font-body text-5xl sm:text-6xl lg:text-[4.25rem] xl:text-[4.75rem] font-bold leading-[1.05] tracking-[-0.025em]"
+                style={{ color: '#82C97E' }}
+              >
+                {t('headline2')}
+              </h1>
+            </motion.div>
 
-            <motion.p {...fadeUp(0.55)} className="font-body text-cream-muted text-lg max-w-md leading-relaxed">
+            <motion.p {...fadeUp(0.38)} className="text-white/52 text-lg leading-relaxed max-w-[400px]">
               {t('subtext')}
             </motion.p>
 
-            <motion.div {...fadeUp(0.65)} className="flex flex-col sm:flex-row gap-4">
+            <motion.div {...fadeUp(0.50)} className="flex flex-wrap gap-3">
               <Link href="/quiz">
-                <Button
-                  size="lg"
-                  className="w-full sm:w-auto bg-amber text-bg font-semibold border-0 glow-amber transition-all duration-300 hover:scale-[1.03] hover:bg-amber-bright"
-                >
-                  🍄 {t('ctaPrimary')}
-                </Button>
+                <button className="inline-flex items-center gap-2 rounded-full bg-white text-[#0D1209] px-8 py-3.5 text-sm font-semibold hover:bg-white/90 transition-colors duration-200">
+                  {t('ctaPrimary')}
+                </button>
               </Link>
               <Link href="/shop">
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="w-full sm:w-auto border-accent/30 text-accent hover:border-accent/60 hover:bg-accent/8 transition-all duration-300"
-                >
+                <button className="inline-flex items-center gap-2 rounded-full bg-transparent text-white/85 px-8 py-3.5 text-sm font-medium border border-white/18 hover:bg-white/[0.07] hover:border-white/32 transition-all duration-200">
                   {t('ctaSecondary')} →
-                </Button>
+                </button>
               </Link>
             </motion.div>
 
             {/* Social proof */}
-            <motion.div {...fadeUp(0.78)} className="flex items-center gap-5 pt-1">
-              <div className="flex -space-x-2">
-                {['#1A0D04', '#0A1A08', '#100520', '#04120A', '#180E02'].map((bg, i) => (
-                  <div
-                    key={i}
-                    className="w-9 h-9 rounded-full border-2 border-bg flex items-center justify-center text-sm"
-                    style={{ backgroundColor: bg }}
-                  >
-                    🍄
-                  </div>
+            <motion.div {...fadeUp(0.62)} className="flex items-center gap-5 pt-1">
+              <div className="flex items-center gap-0.5">
+                {[1,2,3,4,5].map((i) => (
+                  <svg key={i} width="14" height="14" viewBox="0 0 24 24" fill="currentColor" className="text-white/55">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                  </svg>
                 ))}
               </div>
-              <p className="text-sm text-cream-muted">
-                <span className="text-amber font-semibold glow-amber-text">350,000+</span>{' '}
+              <p className="text-sm text-white/38">
+                <span className="text-white/75 font-medium">350,000+</span>{' '}
                 growers worldwide
               </p>
             </motion.div>
           </div>
 
-          {/* Right column — real mushroom photography */}
+          {/* Right column — clean product photo */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.94 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1.2, delay: 0.35, ease: EASE }}
-            className="hidden lg:flex items-center justify-center relative"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.0, delay: 0.28, ease: EASE }}
+            className="hidden lg:block"
           >
-            <div className="relative w-full max-w-md">
-              {/* Ambient glow behind */}
-              <div className="absolute -inset-6 bg-amber/[0.07] rounded-[2.5rem] blur-3xl pointer-events-none" />
-
-              {/* Main hero photo */}
-              <div className="relative rounded-3xl overflow-hidden border border-amber/20 shadow-[0_0_80px_rgba(212,145,58,0.15)]">
-                <img
-                  src="https://images.unsplash.com/photo-1607305387299-a3d9611cd469?w=600&h=680&q=85&auto=format&fit=crop"
-                  alt="Lion's Mane mushroom — Hericium erinaceus"
-                  className="w-full h-[520px] object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-bg/80 via-bg/10 to-transparent" />
-                {/* Species label at bottom */}
-                <div className="absolute bottom-6 left-6 right-6">
-                  <p className="font-mono text-[10px] text-amber/60 uppercase tracking-[0.2em] mb-1">Featured species</p>
-                  <p className="font-heading text-cream text-xl font-semibold leading-tight">Lion's Mane</p>
-                  <p className="font-mono text-cream-muted/50 text-xs italic">Hericium erinaceus</p>
-                </div>
+            {/* Main photo */}
+            <div className="relative rounded-2xl overflow-hidden" style={{ height: 520 }}>
+              <img
+                src="https://images.unsplash.com/photo-1607305387299-a3d9611cd469?w=680&h=840&q=90&auto=format&fit=crop"
+                alt="Lion's Mane mushroom"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#040904]/88 via-[#040904]/18 to-transparent" />
+              <div className="absolute bottom-7 left-7 right-7">
+                <p className="text-white/32 text-[10px] font-mono uppercase tracking-[0.22em] mb-1.5">
+                  Featured species
+                </p>
+                <p className="text-white text-xl font-semibold tracking-tight">Lion's Mane</p>
+                <p className="text-white/32 text-sm italic mt-0.5">Hericium erinaceus</p>
               </div>
-
-              {/* Secondary photo — bottom left overlap */}
-              <motion.div
-                initial={{ opacity: 0, x: -16, y: 8 }}
-                animate={{ opacity: 1, x: 0, y: 0 }}
-                transition={{ duration: 0.7, delay: 1.0 }}
-                className="absolute -left-14 bottom-24 w-36 h-36 rounded-2xl overflow-hidden border-2 border-bg/80 shadow-xl"
+              {/* Rating badge */}
+              <div
+                className="absolute top-5 right-5 rounded-xl px-4 py-2.5 border border-white/8"
+                style={{ background: 'rgba(255,255,255,0.06)', backdropFilter: 'blur(12px)' }}
               >
-                <img
-                  src="https://images.unsplash.com/photo-1504545102780-26774c1bb073?w=300&h=300&q=85&auto=format&fit=crop"
-                  alt="Blue Oyster mushroom cluster"
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-bg/70 to-transparent" />
-                <div className="absolute bottom-2 left-2.5">
-                  <p className="text-[10px] font-mono text-cream/80">Blue Oyster</p>
+                <p className="text-white/35 text-[10px] font-mono uppercase tracking-wider">Rated</p>
+                <p className="text-white text-lg font-bold leading-tight mt-0.5">4.9 ★</p>
+              </div>
+            </div>
+
+            {/* Two mini stat chips below photo */}
+            <div className="grid grid-cols-2 gap-3 mt-3">
+              {[
+                { label: 'Time to harvest', value: '3–4 wks' },
+                { label: 'Beta-glucans', value: 'High' },
+              ].map((stat) => (
+                <div
+                  key={stat.label}
+                  className="rounded-xl px-4 py-3 border border-white/7"
+                  style={{ background: 'rgba(255,255,255,0.04)', backdropFilter: 'blur(8px)' }}
+                >
+                  <p className="text-white/32 text-[10px] font-mono uppercase tracking-wider">{stat.label}</p>
+                  <p className="text-white text-sm font-semibold mt-0.5">{stat.value}</p>
                 </div>
-              </motion.div>
-
-              {/* Floating card — colonization */}
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.7, delay: 1.1 }}
-                className="absolute -right-10 top-14 glass-warm rounded-2xl p-4 shadow-card"
-              >
-                <p className="text-xs text-cream-muted/70 font-mono">Colonization</p>
-                <p className="text-xl font-heading font-semibold text-cream mt-0.5">2–3 weeks</p>
-                <div className="flex gap-1 mt-2">
-                  {[1, 2, 3].map((i) => (
-                    <div key={i} className="h-1 flex-1 rounded bg-amber/50" />
-                  ))}
-                  <div className="h-1 flex-1 rounded bg-ds-border" />
-                </div>
-              </motion.div>
-
-              {/* Floating card — beta-glucans */}
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.7, delay: 1.3 }}
-                className="absolute -right-10 bottom-32 glass-warm rounded-2xl p-4 shadow-card"
-              >
-                <p className="text-xs text-cream-muted/70 font-mono">Beta-glucans</p>
-                <p className="text-xl font-heading font-semibold text-amber glow-amber-text mt-0.5">High</p>
-                <p className="text-xs text-cream-muted/60 mt-1">Immune support ✦</p>
-              </motion.div>
-
-              {/* Rating pill */}
-              <motion.div
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 1.5 }}
-                className="absolute right-4 top-4 glass-warm rounded-xl px-3 py-2"
-              >
-                <p className="text-xs text-amber/90 font-mono glow-amber-text">★ 4.9 / 5.0</p>
-              </motion.div>
+              ))}
             </div>
           </motion.div>
+
         </div>
       </div>
 
-      {/* Bottom fade */}
-      <div className="absolute bottom-0 inset-x-0 h-40 bg-gradient-to-t from-bg to-transparent pointer-events-none z-10" />
-
-      {/* Scroll indicator */}
+      {/* Scroll hint */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2.2 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2"
       >
-        <span className="text-cream-muted/40 text-xs font-mono tracking-[0.2em] uppercase">explore</span>
-        <div className="w-px h-12 bg-gradient-to-b from-amber/40 to-transparent animate-pulse" />
+        <span className="text-white/22 text-[10px] font-mono tracking-[0.28em] uppercase">scroll</span>
+        <div className="w-px h-10 bg-gradient-to-b from-white/22 to-transparent" />
       </motion.div>
     </section>
   )

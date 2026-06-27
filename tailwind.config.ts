@@ -8,33 +8,38 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        bg: '#040908',
-        surface: '#08100A',
-        elevated: '#0D1A0C',
-        'forest-deep': '#060C05',
+        bg: '#F0F2F0',
+        surface: '#F8F9F8',
+        elevated: '#E8ECEA',
+        'forest-deep': '#DFE3DF',
         accent: {
-          DEFAULT: '#6BBF6A',   // musgo iluminado
-          hover: '#5CAF5B',
-          dim: 'rgba(107,191,106,0.12)',
+          DEFAULT: '#3D6E45',
+          hover: '#306038',
+          dim: 'rgba(61,110,69,0.10)',
         },
         amber: {
-          DEFAULT: '#D4913A',   // hongo dorado / luciérnaga
-          bright: '#E8A84A',
-          dim: 'rgba(212,145,58,0.15)',
+          DEFAULT: '#9E6820',
+          bright: '#B47828',
+          dim: 'rgba(158,104,32,0.10)',
+        },
+        silver: {
+          DEFAULT: '#8A9FAE',
+          bright: '#A0B4C4',
+          dim: 'rgba(138,159,174,0.14)',
         },
         lavender: {
-          DEFAULT: '#8B6BB5',   // crepúsculo
-          dim: 'rgba(139,107,181,0.12)',
+          DEFAULT: '#6350A0',
+          dim: 'rgba(99,80,160,0.10)',
         },
         cream: {
-          DEFAULT: '#E4EDDA',   // luz lunar
-          muted: '#6B8A65',     // gris-verde bosque
+          DEFAULT: '#1C2018',
+          muted: '#566458',
         },
-        'ds-border': '#162414',
-        moss: '#3A6B3A',
-        success: '#6BBF6A',
-        warning: '#D4913A',
-        error: '#C45E3A',
+        'ds-border': '#D2D8D2',
+        moss: '#3D6443',
+        success: '#3D6E45',
+        warning: '#9E6820',
+        error: '#B83A28',
       },
       fontFamily: {
         display:  ['var(--font-bebas)', 'sans-serif'],
@@ -44,13 +49,14 @@ const config: Config = {
         mono:     ['var(--font-space-mono)', 'monospace'],
       },
       boxShadow: {
-        card:           '0 4px 40px rgba(0,0,0,0.6)',
-        'glow-moss':    '0 0 20px rgba(107,191,106,0.3), 0 0 60px rgba(107,191,106,0.1)',
-        'glow-moss-sm': '0 0 10px rgba(107,191,106,0.25)',
-        'glow-amber':   '0 0 20px rgba(212,145,58,0.4), 0 0 50px rgba(212,145,58,0.12)',
-        'glow-amber-sm':'0 0 12px rgba(212,145,58,0.35)',
-        'glow-lavender':'0 0 20px rgba(139,107,181,0.3)',
-        'glow-inset':   'inset 0 0 40px rgba(107,191,106,0.04)',
+        card:           '0 2px 24px rgba(0,0,0,0.08), 0 1px 4px rgba(0,0,0,0.04)',
+        'glow-moss':    '0 0 20px rgba(58,112,71,0.15), 0 0 50px rgba(58,112,71,0.05)',
+        'glow-moss-sm': '0 0 10px rgba(58,112,71,0.12)',
+        'glow-amber':   '0 0 20px rgba(158,104,32,0.20), 0 0 40px rgba(158,104,32,0.06)',
+        'glow-amber-sm':'0 0 12px rgba(158,104,32,0.15)',
+        'glow-silver':  '0 0 20px rgba(122,149,168,0.20), 0 0 50px rgba(122,149,168,0.06)',
+        'glow-lavender':'0 0 20px rgba(99,80,160,0.15)',
+        'glow-inset':   'inset 0 0 40px rgba(58,112,71,0.03)',
       },
       animation: {
         'firefly':       'fireflyFloat var(--duration,12s) var(--delay,0s) infinite ease-in-out',
@@ -121,10 +127,11 @@ const config: Config = {
         },
       },
       backgroundImage: {
-        'forest-radial': 'radial-gradient(ellipse at 50% 80%, rgba(58,107,58,0.12) 0%, transparent 65%)',
-        'amber-radial':  'radial-gradient(ellipse at center, rgba(212,145,58,0.1) 0%, transparent 65%)',
-        'gradient-forest': 'linear-gradient(180deg, #040908 0%, #06110A 50%, #040908 100%)',
-        'shimmer-warm':  'linear-gradient(105deg, transparent 35%, rgba(212,145,58,0.4) 50%, transparent 65%)',
+        'forest-radial': 'radial-gradient(ellipse at 50% 80%, rgba(58,112,71,0.06) 0%, transparent 65%)',
+        'amber-radial':  'radial-gradient(ellipse at center, rgba(158,104,32,0.06) 0%, transparent 65%)',
+        'silver-radial': 'radial-gradient(ellipse at center, rgba(122,149,168,0.08) 0%, transparent 65%)',
+        'gradient-studio': 'linear-gradient(180deg, #F7F8F5 0%, #F2F4EF 50%, #F7F8F5 100%)',
+        'shimmer-warm':  'linear-gradient(105deg, transparent 35%, rgba(158,104,32,0.25) 50%, transparent 65%)',
       },
     },
   },

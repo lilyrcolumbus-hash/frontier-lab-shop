@@ -54,18 +54,18 @@ function getMatches(state: FinderState): SpeciesMatch[] {
       score: 0,
     },
     {
-      slug: 'wine-cap', name: 'Wine Cap', scientificName: 'Stropharia rugosoannulata',
-      image: 'https://images.unsplash.com/photo-1541904031027-00d5c22f7cf2?w=400',
+      slug: 'pink-oyster', name: 'Pink Oyster', scientificName: 'Pleurotus djamor',
+      image: 'https://images.unsplash.com/photo-1773600149997-2b6af77031d7?w=400',
       difficulty: 'beginner',
-      reason: 'Sprinkle in garden beds and harvest abundantly for years. Zero effort.',
+      reason: 'Fastest-fruiting mushroom available. Vivid pink color and mild flavor.',
       score: 0,
     },
   ]
 
   all.forEach((s) => {
     // Location scoring
-    if (state.location === 'indoor' && s.slug !== 'wine-cap') s.score += 2
-    if (state.location === 'outdoor' && (s.slug === 'wine-cap' || s.slug === 'shiitake')) s.score += 2
+    if (state.location === 'indoor' && s.slug !== 'pink-oyster') s.score += 2
+    if (state.location === 'outdoor' && (s.slug === 'pink-oyster' || s.slug === 'shiitake')) s.score += 2
     if (state.location === 'both') s.score += 1
 
     // Level scoring
@@ -74,7 +74,7 @@ function getMatches(state: FinderState): SpeciesMatch[] {
     if (state.level === 'advanced') s.score += 1
 
     // Goal scoring
-    if (state.goal === 'eat' && (s.slug === 'blue-oyster' || s.slug === 'shiitake' || s.slug === 'wine-cap')) s.score += 2
+    if (state.goal === 'eat' && (s.slug === 'blue-oyster' || s.slug === 'shiitake' || s.slug === 'pink-oyster')) s.score += 2
     if (state.goal === 'health' && (s.slug === 'lions-mane' || s.slug === 'reishi')) s.score += 3
     if (state.goal === 'learn' && s.difficulty === 'beginner') s.score += 1
     if (state.goal === 'all') s.score += 1
@@ -125,38 +125,45 @@ export function SpeciesFinder() {
     setResults(null)
   }
 
+  const Icon = ({ d, d2 }: { d: string; d2?: string }) => (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d={d} />
+      {d2 && <path d={d2} />}
+    </svg>
+  )
+
   const stepConfigs = [
     {
       question: t('step1.question'),
       options: [
-        { value: 'indoor', label: t('step1.indoor'), icon: '🏠' },
-        { value: 'outdoor', label: t('step1.outdoor'), icon: '🌿' },
-        { value: 'both', label: t('step1.both'), icon: '🌍' },
+        { value: 'indoor', label: t('step1.indoor'), icon: <Icon d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" d2="M9 22V12h6v10" /> },
+        { value: 'outdoor', label: t('step1.outdoor'), icon: <Icon d="M17 8C8 10 5.9 16.17 3.82 19.16a2 2 0 0 0 1.57 3.11c.88.06 1.62-.49 2.04-1.22" d2="M12 3C8.13 3 5 6.13 5 10c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" /> },
+        { value: 'both', label: t('step1.both'), icon: <Icon d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z" d2="M12 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" /> },
       ],
     },
     {
       question: t('step2.question'),
       options: [
-        { value: 'beginner', label: t('step2.beginner'), icon: '🌱' },
-        { value: 'some', label: t('step2.some'), icon: '🍄' },
-        { value: 'advanced', label: t('step2.advanced'), icon: '🔬' },
+        { value: 'beginner', label: t('step2.beginner'), icon: <Icon d="M12 22V12M12 12C12 12 7 10 7 5a5 5 0 0 1 10 0c0 5-5 7-5 7z" /> },
+        { value: 'some', label: t('step2.some'), icon: <Icon d="M18 20V10M12 20V4M6 20v-6" /> },
+        { value: 'advanced', label: t('step2.advanced'), icon: <Icon d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2v-4M9 21H5a2 2 0 0 1-2-2v-4m0 0h18" /> },
       ],
     },
     {
       question: t('step3.question'),
       options: [
-        { value: 'eat', label: t('step3.eat'), icon: '🍽️' },
-        { value: 'health', label: t('step3.health'), icon: '💪' },
-        { value: 'learn', label: t('step3.learn'), icon: '📚' },
-        { value: 'all', label: t('step3.all'), icon: '✨' },
+        { value: 'eat', label: t('step3.eat'), icon: <Icon d="M18 8h1a4 4 0 0 1 0 8h-1" d2="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8zM6 1v3M10 1v3M14 1v3" /> },
+        { value: 'health', label: t('step3.health'), icon: <Icon d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" /> },
+        { value: 'learn', label: t('step3.learn'), icon: <Icon d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" d2="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" /> },
+        { value: 'all', label: t('step3.all'), icon: <Icon d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /> },
       ],
     },
     {
       question: t('step4.question'),
       options: [
-        { value: 'cold', label: t('step4.cold'), icon: '❄️' },
-        { value: 'temperate', label: t('step4.temperate'), icon: '🌤️' },
-        { value: 'warm', label: t('step4.warm'), icon: '☀️' },
+        { value: 'cold', label: t('step4.cold'), icon: <Icon d="M2 12h20M12 2v20M4.93 4.93l14.14 14.14M19.07 4.93L4.93 19.07" /> },
+        { value: 'temperate', label: t('step4.temperate'), icon: <Icon d="M18.36 6.64a9 9 0 1 1-12.73 0" d2="M12 2v10" /> },
+        { value: 'warm', label: t('step4.warm'), icon: <Icon d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" d2="M12 17a5 5 0 1 0 0-10 5 5 0 0 0 0 10z" /> },
       ],
     },
   ]
@@ -165,7 +172,7 @@ export function SpeciesFinder() {
     return (
       <div className="max-w-3xl mx-auto animate-fade-in">
         <div className="text-center mb-10">
-          <h2 className="font-heading text-3xl font-bold text-cream">{t('results.title')}</h2>
+          <h2 className="font-body font-bold text-3xl text-cream tracking-tight">{t('results.title')}</h2>
           <p className="text-cream-muted mt-2">{t('results.subtitle')}</p>
         </div>
 
@@ -183,7 +190,7 @@ export function SpeciesFinder() {
               <div className="flex-1">
                 <div className="flex items-start justify-between gap-2">
                   <div>
-                    <h3 className="font-heading text-xl font-semibold text-cream">{match.name}</h3>
+                    <h3 className="font-body font-semibold text-xl text-cream">{match.name}</h3>
                     <p className="font-mono-lab text-xs text-cream-muted italic">{match.scientificName}</p>
                   </div>
                   <Badge variant={match.difficulty === 'beginner' ? 'success' : match.difficulty === 'intermediate' ? 'warning' : 'error'} size="sm">
@@ -232,7 +239,7 @@ export function SpeciesFinder() {
 
       <div className="text-center mb-8">
         <p className="text-xs uppercase tracking-widest text-moss mb-3">Step {step + 1} of 4</p>
-        <h2 className="font-heading text-3xl font-bold text-cream">{currentStep.question}</h2>
+        <h2 className="font-body font-bold text-3xl text-cream tracking-tight">{currentStep.question}</h2>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -242,7 +249,7 @@ export function SpeciesFinder() {
             onClick={() => choose(opt.value)}
             className="flex items-center gap-4 p-5 bg-elevated hover:bg-surface border border-ds-border hover:border-accent/50 rounded-2xl transition-all group text-left"
           >
-            <span className="text-3xl flex-shrink-0">{opt.icon}</span>
+            <span className="flex-shrink-0 text-cream-muted/55 group-hover:text-accent transition-colors">{opt.icon}</span>
             <span className="font-body font-medium text-cream group-hover:text-accent transition-colors">
               {opt.label}
             </span>

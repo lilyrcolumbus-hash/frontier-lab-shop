@@ -10,7 +10,7 @@ const STEPS = [
     phase: 'Prepare',
     title: 'Substrate & Spawn',
     description:
-      'Mix sterilized substrate with grain spawn under sterile conditions. Rye berries, straw, or sawdust — every species prefers its own filth.',
+      'Mix sterilized substrate with grain spawn under sterile conditions. Rye berries, straw, or sawdust — every species has its ideal medium.',
     timing: 'Day 1',
     src: 'https://images.unsplash.com/photo-1585155784229-aff921ccfa12?w=520&h=620&q=85&auto=format&fit=crop',
     alt: 'Dark shiitake mushrooms on substrate',
@@ -38,12 +38,12 @@ const STEPS = [
   {
     step: '04',
     phase: 'Harvest',
-    title: 'The Dirty Reward',
+    title: 'The Pure Harvest',
     description:
-      "Twist and pull just before the veil breaks. First flush — the filthiest moment of pride you'll ever feel. Plate it. Eat it. Grow again.",
+      "Twist and pull just before the veil breaks. First flush — pure reward for your precision and patience. Plate it. Extract it. Grow again.",
     timing: 'Week 4–5',
-    src: 'https://images.unsplash.com/photo-1472396961693-142e6e269027?w=520&h=620&q=85&auto=format&fit=crop',
-    alt: 'Wild mushroom harvest in forest',
+    src: 'https://images.unsplash.com/photo-1607305387299-a3d9611cd469?w=520&h=620&q=85&auto=format&fit=crop',
+    alt: "Lion's Mane ready to harvest",
   },
 ]
 
@@ -65,11 +65,11 @@ export function GrowJourney() {
             The Journey
             <div className="w-10 h-px bg-amber/30" />
           </div>
-          <h2 className="font-display text-5xl sm:text-6xl text-cream tracking-wide leading-none">
+          <h2 className="font-body font-bold text-3xl sm:text-4xl text-cream tracking-tight leading-tight">
             Spore to Table
           </h2>
           <p className="text-cream-muted mt-4 text-lg max-w-lg mx-auto leading-relaxed">
-            Every harvest begins in the dark. Follow the filthy path from inoculation to your plate.
+            Every harvest begins with precision. Follow the journey from inoculation to your plate.
           </p>
         </ScrollReveal>
 
@@ -113,8 +113,8 @@ export function GrowJourney() {
 
                 {/* Content */}
                 <div className="p-5 space-y-2">
-                  <p className="font-accent italic text-amber/65 text-xs">{step.phase}</p>
-                  <h3 className="font-heading text-base font-semibold text-cream leading-snug">
+                  <p className="text-[10px] font-mono text-amber/55 uppercase tracking-wider">{step.phase}</p>
+                  <h3 className="font-body text-base font-semibold text-cream leading-snug">
                     {step.title}
                   </h3>
                   <p className="font-body text-cream-muted/65 text-sm leading-relaxed">
