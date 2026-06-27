@@ -6,6 +6,8 @@ import { useTranslations } from 'next-intl'
 import { Logo } from '@/components/ui/Logo'
 import { LanguageSwitcher } from './LanguageSwitcher'
 import { MobileMenu } from './MobileMenu'
+import { CartDrawer } from '@/components/shop/CartDrawer'
+import { useCartStore } from '@/lib/cart-store'
 import { cn } from '@/lib/utils'
 
 interface DropdownItem {
@@ -89,7 +91,8 @@ export function Header() {
   const t = useTranslations()
   const [mobileOpen, setMobileOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
-  const [cartCount] = useState(0)
+  const { count, items, removeItem, updateQty, isOpen, openCart, closeCart } = useCartStore()
+  const cartCount = count()
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20)
@@ -201,8 +204,8 @@ export function Header() {
               </Link>
 
               {/* Cart */}
-              <Link
-                href="/cart"
+              <button
+                onClick={openCart}
                 className={cn('flex items-center justify-center relative w-9 h-9 transition-colors', iconBtn)}
                 aria-label={`${t('nav.cart')} (${cartCount})`}
               >
@@ -216,7 +219,7 @@ export function Header() {
                     {cartCount}
                   </span>
                 )}
-              </Link>
+              </button>
 
               {/* Mobile hamburger */}
               <button
@@ -236,6 +239,13 @@ export function Header() {
       </header>
 
       <MobileMenu isOpen={mobileOpen} onClose={() => setMobileOpen(false)} />
+      <CartDrawer
+        isOpen={isOpen}
+        onClose={closeCart}
+        items={items}
+        onRemove={removeItem}
+        onUpdateQty={updateQty}
+      />
     </>
   )
 }

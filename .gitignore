@@ -8,3 +8,5 @@ out/
 .DS_Store
 *.log
 prisma/*.db
+.vercel
+.env*
