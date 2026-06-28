@@ -220,13 +220,20 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
             </div>
 
             {/* Price */}
-            <div className="flex items-baseline gap-3">
-              <span className="font-heading text-4xl font-bold text-cream">{formatPrice(selectedVariant.price)}</span>
+            <div className="space-y-1.5">
+              <div className="flex items-baseline gap-3">
+                <span className="font-body text-4xl font-bold tracking-tight text-cream">{formatPrice(selectedVariant.price)}</span>
+                {hasDiscount && (
+                  <span className="text-xl text-cream-muted/50 line-through font-normal">{formatPrice(product.compareAtPrice!)}</span>
+                )}
+              </div>
               {hasDiscount && (
-                <>
-                  <span className="text-xl text-cream-muted line-through">{formatPrice(product.compareAtPrice!)}</span>
-                  <Badge variant="accent">Save {Math.round((1 - selectedVariant.price / product.compareAtPrice!) * 100)}%</Badge>
-                </>
+                <div className="flex items-center gap-2">
+                  <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-accent/10 border border-accent/20 text-accent text-xs font-mono uppercase tracking-wider">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    Save {Math.round((1 - selectedVariant.price / product.compareAtPrice!) * 100)}% — Launch price
+                  </span>
+                </div>
               )}
             </div>
 
@@ -281,15 +288,58 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
               </Button>
             </div>
 
+            {/* LC packet contents */}
+            {product.subcategory === 'Liquid Culture' && (
+              <div className="rounded-2xl border border-ds-border overflow-hidden">
+                <div className="px-4 py-2.5 bg-elevated border-b border-ds-border">
+                  <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-cream-muted">What&apos;s in the packet</p>
+                </div>
+                <div className="grid grid-cols-4 divide-x divide-ds-border bg-surface">
+                  {[
+                    {
+                      label: '10cc\nSyringe',
+                      icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round"><path d="M14.5 4l5.5 5.5-9 9-3 .5.5-3 6-6z"/><path d="M12 6.5l5 5"/></svg>,
+                    },
+                    {
+                      label: '16G\nNeedle',
+                      icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="19" x2="19" y2="5"/><path d="M15 5h4v4"/></svg>,
+                    },
+                    {
+                      label: 'Alcohol\nSwab',
+                      icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="7"/><path d="M9 12h6m-3-3v6"/></svg>,
+                    },
+                    {
+                      label: 'Instruction\nCard',
+                      icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="7" y1="9" x2="17" y2="9"/><line x1="7" y1="13" x2="13" y2="13"/></svg>,
+                    },
+                  ].map((item) => (
+                    <div key={item.label} className="flex flex-col items-center gap-2 py-4 px-1">
+                      <div className="text-accent/50">{item.icon}</div>
+                      <p className="font-mono text-[8px] uppercase tracking-wider text-cream-muted/60 text-center whitespace-pre-line leading-relaxed">{item.label}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
             {/* Trust badges */}
-            <div className="flex flex-wrap items-center gap-4 py-4 border-t border-ds-border">
+            <div className="flex flex-wrap items-center gap-5 py-4 border-t border-ds-border">
               {[
-                { icon: '🌿', label: t('trustOrganic') },
-                { icon: '⚡', label: t('trustShipping') },
-                { icon: '🛡️', label: t('trustGuarantee') },
+                {
+                  label: t('trustOrganic'),
+                  icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>,
+                },
+                {
+                  label: t('trustShipping'),
+                  icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>,
+                },
+                {
+                  label: t('trustGuarantee'),
+                  icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>,
+                },
               ].map((b) => (
                 <div key={b.label} className="flex items-center gap-2 text-sm text-cream-muted">
-                  <span>{b.icon}</span>
+                  <span className="text-accent/60">{b.icon}</span>
                   <span>{b.label}</span>
                 </div>
               ))}

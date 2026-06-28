@@ -1,47 +1,81 @@
 import { useTranslations } from 'next-intl'
 import { Badge } from '@/components/ui/Badge'
+import { cn } from '@/lib/utils'
 import type { CultivationSpecs as CultivationSpecsType } from '@/types/product'
 
 interface CultivationSpecsProps {
   specs: CultivationSpecsType
 }
 
+const icons = {
+  clock: (
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+    </svg>
+  ),
+  thermo: (
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M14 14.76V3.5a2.5 2.5 0 00-5 0v11.26a4.5 4.5 0 105 0z"/>
+    </svg>
+  ),
+  layers: (
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/>
+    </svg>
+  ),
+  harvest: (
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/>
+      <polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/>
+    </svg>
+  ),
+  location: (
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
+    </svg>
+  ),
+}
+
 export function CultivationSpecs({ specs }: CultivationSpecsProps) {
   const t = useTranslations('shop.product.specs')
 
   const rows = [
-    { label: t('colonization'), value: specs.colonizationTime, icon: '🕐' },
-    { label: t('fruitingTemp'), value: `${specs.fruitingTempF} / ${specs.fruitingTempC}`, icon: '🌡️' },
-    { label: t('substrate'), value: specs.idealSubstrate, icon: '🪵' },
-    { label: t('yield'), value: specs.expectedYield, icon: '📦' },
-    { label: t('method'), value: specs.indoorOutdoor === 'indoor' ? 'Indoor' : specs.indoorOutdoor === 'outdoor' ? 'Outdoor' : 'Indoor & Outdoor', icon: '🏠' },
+    { label: t('colonization'), value: specs.colonizationTime, icon: icons.clock },
+    { label: t('fruitingTemp'), value: `${specs.fruitingTempF} / ${specs.fruitingTempC}`, icon: icons.thermo },
+    { label: t('substrate'), value: specs.idealSubstrate, icon: icons.layers },
+    { label: t('yield'), value: specs.expectedYield, icon: icons.harvest },
+    {
+      label: t('method'),
+      value: specs.indoorOutdoor === 'indoor' ? 'Indoor' : specs.indoorOutdoor === 'outdoor' ? 'Outdoor' : 'Indoor & Outdoor',
+      icon: icons.location,
+    },
   ]
 
+  const difficultyVariant =
+    specs.difficulty === 'beginner' ? 'success' :
+    specs.difficulty === 'intermediate' ? 'warning' : 'error'
+
   return (
-    <div className="bg-elevated rounded-2xl border border-ds-border p-6">
-      <div className="flex items-center justify-between mb-5">
-        <h3 className="font-heading text-lg font-semibold text-cream">{t('title')}</h3>
-        <Badge
-          variant={
-            specs.difficulty === 'beginner' ? 'success' :
-            specs.difficulty === 'intermediate' ? 'warning' : 'error'
-          }
-        >
+    <div className="rounded-2xl border border-ds-border overflow-hidden">
+      <div className="flex items-center justify-between px-4 py-3 bg-elevated border-b border-ds-border">
+        <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-cream-muted">{t('title')}</p>
+        <Badge variant={difficultyVariant}>
           {specs.difficulty.charAt(0).toUpperCase() + specs.difficulty.slice(1)}
         </Badge>
       </div>
 
-      <div className="grid grid-cols-1 gap-3">
-        {rows.map((row) => (
+      <div className="grid grid-cols-2 divide-x divide-y divide-ds-border">
+        {rows.map((row, i) => (
           <div
             key={row.label}
-            className="flex items-start gap-3 py-3 border-b border-ds-border last:border-b-0"
+            className={cn(
+              'flex flex-col gap-1.5 p-4 bg-surface',
+              i === rows.length - 1 && rows.length % 2 !== 0 && 'col-span-2'
+            )}
           >
-            <span className="text-lg flex-shrink-0 mt-0.5">{row.icon}</span>
-            <div className="flex-1 min-w-0">
-              <p className="text-xs text-cream-muted uppercase tracking-wide">{row.label}</p>
-              <p className="text-sm text-cream font-medium mt-0.5">{row.value}</p>
-            </div>
+            <div className="flex items-center gap-1.5 text-accent/60">{row.icon}</div>
+            <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-cream-muted/50 mt-0.5">{row.label}</p>
+            <p className="text-sm text-cream font-medium leading-snug">{row.value}</p>
           </div>
         ))}
       </div>
