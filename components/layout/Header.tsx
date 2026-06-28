@@ -101,10 +101,8 @@ export function Header() {
   }, [])
 
   const shopItems: DropdownItem[] = [
+    { label: 'Culture Bank', href: '/shop', description: 'Live liquid cultures — 8 species, lab isolated' },
     { label: t('nav.shopDropdown.kits'), href: '/shop?category=kit', description: t('nav.shopDropdown.kitsDesc') },
-    { label: t('nav.shopDropdown.spawn'), href: '/shop?category=spawn', description: t('nav.shopDropdown.spawnDesc') },
-    { label: t('nav.shopDropdown.substrates'), href: '/shop?category=substrate', description: t('nav.shopDropdown.substratesDesc') },
-    { label: t('nav.shopDropdown.equipment'), href: '/shop?category=equipment', description: t('nav.shopDropdown.equipmentDesc') },
     { label: t('nav.shopDropdown.wellness'), href: '/shop?category=wellness', description: t('nav.shopDropdown.wellnessDesc') },
     { label: t('nav.shopDropdown.bundles'), href: '/shop?category=bundle' },
   ]

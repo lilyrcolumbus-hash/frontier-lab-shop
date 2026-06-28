@@ -152,15 +152,25 @@ const PRODUCTS: Product[] = [
   },
 ]
 
-const CATEGORIES = ['all', 'kit', 'spawn', 'substrate', 'equipment', 'wellness', 'bundle'] as const
+const CATEGORIES = [
+  { key: 'culture-bank', label: 'Culture Bank' },
+  { key: 'kit',          label: 'Grow Kits' },
+  { key: 'wellness',     label: 'Wellness' },
+  { key: 'all',          label: 'All Products' },
+] as const
+
+type CategoryKey = typeof CATEGORIES[number]['key']
 
 export default function ShopPage() {
   const t = useTranslations('shop')
-  const [activeCategory, setActiveCategory] = useState<string>('all')
+  const [activeCategory, setActiveCategory] = useState<CategoryKey>('culture-bank')
   const [sortBy, setSortBy] = useState('featured')
 
   const filtered = useMemo(() => {
-    let items = activeCategory === 'all' ? PRODUCTS : PRODUCTS.filter((p) => p.category === activeCategory)
+    let items: typeof PRODUCTS
+    if (activeCategory === 'all') items = PRODUCTS
+    else if (activeCategory === 'culture-bank') items = PRODUCTS.filter((p) => p.subcategory === 'Liquid Culture')
+    else items = PRODUCTS.filter((p) => p.category === activeCategory)
     if (sortBy === 'price-low') items = [...items].sort((a, b) => a.price - b.price)
     if (sortBy === 'price-high') items = [...items].sort((a, b) => b.price - a.price)
     return items
@@ -168,30 +178,53 @@ export default function ShopPage() {
 
   return (
     <div className="pt-20 min-h-screen">
-      {/* Header */}
-      <div className="bg-surface border-b border-ds-border py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="font-heading text-5xl sm:text-6xl font-bold text-cream mb-3">{t('title')}</h1>
-          <p className="text-cream-muted text-lg">{t('subtitle')}</p>
+      {/* Culture Bank hero banner */}
+      {activeCategory === 'culture-bank' && (
+        <div className="bg-elevated border-b border-ds-border">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+            <div>
+              <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-accent mb-2">shrooms Culture Bank</p>
+              <h1 className="font-body font-bold text-3xl sm:text-4xl text-cream tracking-tight mb-2">Live Mycelium — Lab Isolated</h1>
+              <p className="text-cream-muted max-w-md">8 species. 10cc syringes. Colonizes grain in 5–10 days — up to 3× faster than spores. Each packet includes 16G needle + alcohol swab + instruction card.</p>
+            </div>
+            <div className="flex gap-6 flex-shrink-0">
+              {[['8', 'Species'], ['10cc', 'Syringe'], ['3×', 'Faster than spores']].map(([val, label]) => (
+                <div key={label} className="text-center">
+                  <p className="font-body font-bold text-2xl text-accent">{val}</p>
+                  <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-cream-muted mt-0.5">{label}</p>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
-      </div>
+      )}
+
+      {/* Default header for other categories */}
+      {activeCategory !== 'culture-bank' && (
+        <div className="bg-surface border-b border-ds-border py-12">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 className="font-body font-bold text-4xl text-cream tracking-tight mb-2">{t('title')}</h1>
+            <p className="text-cream-muted">{t('subtitle')}</p>
+          </div>
+        </div>
+      )}
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         {/* Filter bar */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
           <div className="flex gap-2 overflow-x-auto pb-1">
-            {CATEGORIES.map((cat) => (
+            {CATEGORIES.map(({ key, label }) => (
               <button
-                key={cat}
-                onClick={() => setActiveCategory(cat)}
+                key={key}
+                onClick={() => setActiveCategory(key)}
                 className={cn(
                   'px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors',
-                  activeCategory === cat
+                  activeCategory === key
                     ? 'bg-accent text-cream'
                     : 'bg-elevated text-cream-muted hover:text-cream border border-ds-border'
                 )}
               >
-                {t(`filters.${cat === 'all' ? 'all' : cat === 'kit' ? 'kit' : cat === 'spawn' ? 'spawn' : cat === 'substrate' ? 'substrate' : cat === 'equipment' ? 'equipment' : cat === 'wellness' ? 'wellness' : 'bundle'}`)}
+                {label}
               </button>
             ))}
           </div>
