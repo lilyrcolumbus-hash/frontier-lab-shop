@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { useTranslations } from 'next-intl'
+import { MyeliumCanvas } from '@/components/home/MyeliumCanvas'
 
 const EASE = [0.16, 1, 0.3, 1] as [number, number, number, number]
 const fadeUp = (delay = 0) => ({
@@ -35,6 +36,8 @@ export function Hero() {
         />
         {/* Bottom fade into next section */}
         <div className="absolute bottom-0 inset-x-0 h-48 bg-gradient-to-t from-[#050A04] to-transparent" />
+        {/* Mycelium canvas — generative lines + spores */}
+        <MyeliumCanvas />
       </div>
 
       {/* Content */}

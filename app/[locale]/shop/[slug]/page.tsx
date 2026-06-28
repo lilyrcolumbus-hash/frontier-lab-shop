@@ -177,9 +177,19 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
   const [quantity, setQuantity] = useState(1)
   const [activeTab, setActiveTab] = useState<typeof TABS[number]>('description')
   const [showSticky, setShowSticky] = useState(false)
+  const [magnetPos, setMagnetPos] = useState({ x: 0, y: 0 })
   const ctaRef = useRef<HTMLDivElement>(null)
   const packetRef = useRef<HTMLDivElement>(null)
   const isPacketInView = useInView(packetRef, { once: true, margin: '-5% 0px' })
+
+  const handleMagnetMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect()
+    setMagnetPos({
+      x: (e.clientX - rect.left - rect.width / 2) * 0.3,
+      y: (e.clientY - rect.top - rect.height / 2) * 0.3,
+    })
+  }
+  const handleMagnetLeave = () => setMagnetPos({ x: 0, y: 0 })
 
   useEffect(() => {
     const el = ctaRef.current
@@ -297,9 +307,17 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
 
             {/* CTAs */}
             <div ref={ctaRef} className="flex flex-col sm:flex-row gap-3">
-              <Button fullWidth size="lg" disabled={!product.inStock}>
-                {product.inStock ? `${t('addToCart')} — ${formatPrice(selectedVariant.price * quantity)}` : tc('outOfStock')}
-              </Button>
+              <motion.div
+                className="flex-1"
+                onMouseMove={handleMagnetMove}
+                onMouseLeave={handleMagnetLeave}
+                animate={{ x: magnetPos.x, y: magnetPos.y }}
+                transition={{ type: 'spring', stiffness: 350, damping: 22 }}
+              >
+                <Button fullWidth size="lg" disabled={!product.inStock}>
+                  {product.inStock ? `${t('addToCart')} — ${formatPrice(selectedVariant.price * quantity)}` : tc('outOfStock')}
+                </Button>
+              </motion.div>
               <Button variant="outline" size="lg" className="sm:w-auto">
                 ♡ {t('addToWishlist')}
               </Button>

@@ -77,8 +77,8 @@ export default function EncyclopediaPage() {
               </div>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
-                {filtered.map((species) => (
-                  <SpeciesCard key={species.id} species={species} />
+                {filtered.map((species, i) => (
+                  <SpeciesCard key={species.id} species={species} index={i} />
                 ))}
               </div>
             )}

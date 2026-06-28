@@ -81,12 +81,15 @@ export function CultivationSpecs({ specs }: CultivationSpecsProps) {
                   level <= diff.dots ? diff.color : 'bg-ds-border'
                 )}
                 initial={{ scale: 0, opacity: 0 }}
-                animate={isInView ? { scale: 1, opacity: 1 } : {}}
-                transition={{
-                  delay: 0.2 + (level - 1) * 0.12,
-                  type: 'spring',
-                  stiffness: 400,
-                  damping: 20,
+                animate={isInView ? {
+                  scale: level <= diff.dots ? [1, 1.4, 1] : 1,
+                  opacity: 1,
+                } : {}}
+                transition={level <= diff.dots ? {
+                  scale: { duration: 2.2, repeat: Infinity, delay: (level - 1) * 0.35, ease: 'easeInOut' },
+                  opacity: { duration: 0.4, delay: 0.15 + (level - 1) * 0.1 },
+                } : {
+                  opacity: { duration: 0.4, delay: 0.15 + (level - 1) * 0.1 },
                 }}
               />
             ))}
