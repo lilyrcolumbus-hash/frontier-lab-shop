@@ -25,13 +25,22 @@ export function ProductCard({ product }: ProductCardProps) {
     <Card hover className="overflow-hidden group flex flex-col">
       <Link href={`/shop/${product.slug}`} className="flex flex-col flex-1">
         {/* Image */}
-        <div className="relative h-52 bg-surface overflow-hidden flex-shrink-0">
-          {product.images[0] && (
+        <div className="relative h-52 bg-elevated overflow-hidden flex-shrink-0">
+          {product.images[0] ? (
             <img
               src={product.images[0]}
               alt={name}
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
             />
+          ) : (
+            <div className="w-full h-full flex flex-col items-center justify-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-8 h-8 text-cream-muted/25">
+                <rect x="3" y="3" width="18" height="18" rx="2" />
+                <circle cx="8.5" cy="8.5" r="1.5" />
+                <path d="M21 15l-5-5L5 21" />
+              </svg>
+              <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-cream-muted/40">Photo coming soon</span>
+            </div>
           )}
           <div className="absolute top-3 left-3 flex gap-2">
             {product.isOrganic && (
