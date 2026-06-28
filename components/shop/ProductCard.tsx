@@ -47,11 +47,11 @@ export function ProductCard({ product }: ProductCardProps) {
       transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="flex flex-col h-full rounded-2xl overflow-hidden border border-ds-border bg-surface shadow-sm hover:shadow-[0_24px_64px_-8px_rgba(61,110,69,0.35)] hover:border-accent/30 transition-shadow transition-border duration-500"
+      className="flex flex-col h-full rounded-2xl border border-ds-border bg-surface shadow-sm hover:shadow-[0_24px_64px_-8px_rgba(61,110,69,0.35)] hover:border-accent/30 transition-all duration-500"
     >
       <Link href={`/shop/${product.slug}`} className="flex flex-col flex-1">
         {/* Image */}
-        <div className="relative h-56 bg-elevated overflow-hidden flex-shrink-0">
+        <div className="relative h-56 bg-elevated overflow-hidden flex-shrink-0 rounded-t-2xl">
           {product.images[0] ? (
             <motion.img
               src={product.images[0]}
@@ -80,8 +80,8 @@ export function ProductCard({ product }: ProductCardProps) {
           <div className="absolute top-3 left-3 flex gap-2">
             {product.isOrganic && (
               <motion.div
-                animate={{ scale: [1, 1.1, 1], opacity: [0.9, 1, 0.9] }}
-                transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
+                animate={{ scale: [1, 1.14, 1] }}
+                transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut', repeatDelay: 0.4 }}
               >
                 <Badge variant="success" size="sm">{tc('organic')}</Badge>
               </motion.div>

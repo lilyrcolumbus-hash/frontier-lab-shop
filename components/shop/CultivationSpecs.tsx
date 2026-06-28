@@ -107,9 +107,9 @@ export function CultivationSpecs({ specs }: CultivationSpecsProps) {
               'flex flex-col gap-1.5 p-4 bg-surface',
               i === rows.length - 1 && rows.length % 2 !== 0 && 'col-span-2'
             )}
-            initial={{ opacity: 0, x: i % 2 === 0 ? -12 : 12 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.45, delay: 0.15 + i * 0.07, ease: [0.16, 1, 0.3, 1] }}
+            initial={{ opacity: 0, clipPath: 'inset(0 100% 0 0)' }}
+            animate={isInView ? { opacity: 1, clipPath: 'inset(0 0% 0 0)' } : { opacity: 0, clipPath: 'inset(0 100% 0 0)' }}
+            transition={{ duration: 0.5, delay: 0.12 + i * 0.09, ease: [0.16, 1, 0.3, 1] }}
           >
             <div className="text-accent/55">{row.icon}</div>
             <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-cream-muted/50">{row.label}</p>

@@ -53,17 +53,25 @@ export function Hero() {
               From Spore to Ritual
             </motion.p>
 
-            <motion.div {...fadeUp(0.22)}>
-              <h1 className="font-body text-5xl sm:text-6xl lg:text-[4.25rem] xl:text-[4.75rem] font-bold text-white leading-[1.0] tracking-[-0.025em]">
+            <div>
+              <motion.h1
+                className="font-body text-5xl sm:text-6xl lg:text-[4.25rem] xl:text-[4.75rem] font-bold text-white leading-[1.0] tracking-[-0.025em]"
+                initial={{ opacity: 0, y: 48 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ type: 'spring', stiffness: 75, damping: 16, delay: 0.16 }}
+              >
                 {t('headline1')}
-              </h1>
-              <h1
+              </motion.h1>
+              <motion.h1
                 className="font-body text-5xl sm:text-6xl lg:text-[4.25rem] xl:text-[4.75rem] font-bold leading-[1.05] tracking-[-0.025em]"
                 style={{ color: '#82C97E' }}
+                initial={{ opacity: 0, y: 48 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ type: 'spring', stiffness: 75, damping: 16, delay: 0.3 }}
               >
                 {t('headline2')}
-              </h1>
-            </motion.div>
+              </motion.h1>
+            </div>
 
             <motion.p {...fadeUp(0.38)} className="text-white/52 text-lg leading-relaxed max-w-[400px]">
               {t('subtext')}

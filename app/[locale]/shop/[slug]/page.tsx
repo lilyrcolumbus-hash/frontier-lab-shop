@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react'
 import Link from 'next/link'
-import { motion, AnimatePresence, useInView } from 'framer-motion'
+import { motion, AnimatePresence, useMotionValue, useSpring } from 'framer-motion'
 import { useLocale, useTranslations } from 'next-intl'
 import { notFound } from 'next/navigation'
 import { ProductGallery } from '@/components/shop/ProductGallery'
@@ -177,19 +177,28 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
   const [quantity, setQuantity] = useState(1)
   const [activeTab, setActiveTab] = useState<typeof TABS[number]>('description')
   const [showSticky, setShowSticky] = useState(false)
-  const [magnetPos, setMagnetPos] = useState({ x: 0, y: 0 })
+  const [ripples, setRipples] = useState<{ id: number; x: number; y: number }[]>([])
   const ctaRef = useRef<HTMLDivElement>(null)
-  const packetRef = useRef<HTMLDivElement>(null)
-  const isPacketInView = useInView(packetRef, { once: true, margin: '-5% 0px' })
+  const magnetBtnRef = useRef<HTMLDivElement>(null)
+
+  const mx = useMotionValue(0)
+  const my = useMotionValue(0)
+  const springX = useSpring(mx, { stiffness: 350, damping: 22 })
+  const springY = useSpring(my, { stiffness: 350, damping: 22 })
 
   const handleMagnetMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect()
-    setMagnetPos({
-      x: (e.clientX - rect.left - rect.width / 2) * 0.3,
-      y: (e.clientY - rect.top - rect.height / 2) * 0.3,
-    })
+    mx.set((e.clientX - rect.left - rect.width / 2) * 0.3)
+    my.set((e.clientY - rect.top - rect.height / 2) * 0.3)
   }
-  const handleMagnetLeave = () => setMagnetPos({ x: 0, y: 0 })
+  const handleMagnetLeave = () => { mx.set(0); my.set(0) }
+
+  const handleRipple = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect()
+    const id = Date.now()
+    setRipples(prev => [...prev, { id, x: e.clientX - rect.left, y: e.clientY - rect.top }])
+    setTimeout(() => setRipples(prev => prev.filter(r => r.id !== id)), 700)
+  }
 
   useEffect(() => {
     const el = ctaRef.current
@@ -308,15 +317,26 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
             {/* CTAs */}
             <div ref={ctaRef} className="flex flex-col sm:flex-row gap-3">
               <motion.div
-                className="flex-1"
+                ref={magnetBtnRef}
+                className="flex-1 relative overflow-hidden rounded-full"
+                style={{ x: springX, y: springY }}
                 onMouseMove={handleMagnetMove}
                 onMouseLeave={handleMagnetLeave}
-                animate={{ x: magnetPos.x, y: magnetPos.y }}
-                transition={{ type: 'spring', stiffness: 350, damping: 22 }}
+                onClick={handleRipple}
               >
                 <Button fullWidth size="lg" disabled={!product.inStock}>
                   {product.inStock ? `${t('addToCart')} — ${formatPrice(selectedVariant.price * quantity)}` : tc('outOfStock')}
                 </Button>
+                {ripples.map(r => (
+                  <motion.span
+                    key={r.id}
+                    className="absolute rounded-full bg-white/25 pointer-events-none"
+                    style={{ left: r.x, top: r.y, translateX: '-50%', translateY: '-50%' }}
+                    initial={{ width: 0, height: 0, opacity: 0.7 }}
+                    animate={{ width: 320, height: 320, opacity: 0 }}
+                    transition={{ duration: 0.65, ease: 'easeOut' }}
+                  />
+                ))}
               </motion.div>
               <Button variant="outline" size="lg" className="sm:w-auto">
                 ♡ {t('addToWishlist')}
@@ -329,7 +349,7 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
                 <div className="px-4 py-2.5 bg-elevated border-b border-ds-border">
                   <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-cream-muted">What&apos;s in the packet</p>
                 </div>
-                <div ref={packetRef} className="grid grid-cols-4 divide-x divide-ds-border bg-surface">
+                <div className="grid grid-cols-4 divide-x divide-ds-border bg-surface">
                   {[
                     {
                       label: '10cc\nSyringe',
@@ -350,9 +370,10 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
                   ].map((item, i) => (
                     <motion.div
                       key={item.label}
-                      initial={{ opacity: 0, y: 28, scale: 0.9 }}
-                      animate={isPacketInView ? { opacity: 1, y: 0, scale: 1 } : {}}
-                      transition={{ delay: 0.1 + i * 0.18, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                      initial={{ opacity: 0, y: 28, scale: 0.88 }}
+                      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                      viewport={{ once: true, margin: '-5% 0px' }}
+                      transition={{ delay: i * 0.14, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                       className="flex flex-col items-center gap-2 py-4 px-1"
                     >
                       <div className="text-accent/50">{item.icon}</div>

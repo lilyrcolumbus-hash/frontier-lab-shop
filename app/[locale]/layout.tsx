@@ -6,6 +6,7 @@ import { locales, type Locale } from '@/i18n'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { GlowCursor } from '@/components/ui/GlowCursor'
+import { PageTransition } from '@/components/ui/PageTransition'
 import { SmoothScroll } from '@/components/ui/SmoothScroll'
 
 export function generateStaticParams() {
@@ -43,6 +44,7 @@ export default async function LocaleLayout({
     <NextIntlClientProvider locale={locale} messages={messages}>
       <SmoothScroll>
         <GlowCursor />
+        <PageTransition />
         <div className="flex flex-col min-h-screen">
           <Header />
           <main className="flex-1">{children}</main>
