@@ -27,7 +27,7 @@ export function ProductCard({ product }: ProductCardProps) {
     <motion.div
       whileHover={{ y: -6 }}
       transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-      className="flex flex-col h-full rounded-2xl overflow-hidden border border-ds-border bg-surface shadow-sm hover:shadow-[0_16px_48px_-12px_rgba(61,110,69,0.18)] transition-shadow duration-400"
+      className="flex flex-col h-full rounded-2xl overflow-hidden border border-ds-border bg-surface shadow-sm hover:shadow-[0_20px_60px_-8px_rgba(61,110,69,0.32)] hover:border-accent/30 transition-all duration-500"
     >
       <Link href={`/shop/${product.slug}`} className="flex flex-col flex-1">
         {/* Image */}

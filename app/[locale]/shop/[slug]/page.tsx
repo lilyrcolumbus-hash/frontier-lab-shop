@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react'
 import Link from 'next/link'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, useInView } from 'framer-motion'
 import { useLocale, useTranslations } from 'next-intl'
 import { notFound } from 'next/navigation'
 import { ProductGallery } from '@/components/shop/ProductGallery'
@@ -178,6 +178,8 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
   const [activeTab, setActiveTab] = useState<typeof TABS[number]>('description')
   const [showSticky, setShowSticky] = useState(false)
   const ctaRef = useRef<HTMLDivElement>(null)
+  const packetRef = useRef<HTMLDivElement>(null)
+  const isPacketInView = useInView(packetRef, { once: true, margin: '-5% 0px' })
 
   useEffect(() => {
     const el = ctaRef.current
@@ -309,7 +311,7 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
                 <div className="px-4 py-2.5 bg-elevated border-b border-ds-border">
                   <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-cream-muted">What&apos;s in the packet</p>
                 </div>
-                <div className="grid grid-cols-4 divide-x divide-ds-border bg-surface">
+                <div ref={packetRef} className="grid grid-cols-4 divide-x divide-ds-border bg-surface">
                   {[
                     {
                       label: '10cc\nSyringe',
@@ -330,9 +332,9 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
                   ].map((item, i) => (
                     <motion.div
                       key={item.label}
-                      initial={{ opacity: 0, y: 14 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: i * 0.09, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                      initial={{ opacity: 0, y: 28, scale: 0.9 }}
+                      animate={isPacketInView ? { opacity: 1, y: 0, scale: 1 } : {}}
+                      transition={{ delay: 0.1 + i * 0.18, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                       className="flex flex-col items-center gap-2 py-4 px-1"
                     >
                       <div className="text-accent/50">{item.icon}</div>
@@ -397,10 +399,10 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeTab}
-                initial={{ opacity: 0, y: 10 }}
+                initial={{ opacity: 0, y: 18 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -6 }}
-                transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+                exit={{ opacity: 0, y: -12 }}
+                transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
               >
                 {activeTab === 'description' && (
                   <div className="space-y-4">
