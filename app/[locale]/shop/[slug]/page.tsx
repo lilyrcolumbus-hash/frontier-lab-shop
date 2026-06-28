@@ -25,10 +25,112 @@ const PRODUCTS: Record<string, Product> = {
     ],
     images: [
       'https://images.unsplash.com/photo-1504545102780-26774c1bb073?w=800',
-      'https://images.unsplash.com/photo-1541904031027-00d5c22f7cf2?w=800',
     ],
     cultivationSpecs: { difficulty: 'beginner', colonizationTime: '2–3 weeks', fruitingTempF: '55–65°F', fruitingTempC: '13–18°C', idealSubstrate: 'Hardwood sawdust, straw, coffee grounds', expectedYield: '1–3 flushes, 25% biological efficiency', indoorOutdoor: 'both' },
     isOrganic: true, inStock: true, tags: ['beginner', 'oyster', 'organic'], relatedProducts: ['beginners-grow-kit-bundle'],
+  },
+}
+
+const LC_HOW_TO_USE_STEPS = [
+  'Remove syringe from refrigerator 1–2 hours before use to warm to room temperature.',
+  'Shake gently to suspend the mycelium uniformly throughout the nutrient broth.',
+  'Sterilize the injection port of your grain bag or jar lid with the included alcohol swab. Let dry.',
+  'Insert the 16G needle and inject 1–2cc per pound of grain substrate.',
+  'Recap the needle. Refrigerate remaining culture — shelf life up to 2 months refrigerated.',
+  'Incubate at 70–75°F away from direct light. Agitate the bag gently after 3–5 days to redistribute mycelium.',
+  'Expect full colonization in 5–10 days. Transfer to bulk substrate once grain is fully colonized.',
+]
+
+const LC_PRODUCTS: Record<string, Product> = {
+  'lions-mane-liquid-culture': {
+    id: 'lc1', slug: 'lions-mane-liquid-culture',
+    name: { en: "Lion's Mane Liquid Culture Syringe", es: 'Jeringa de Cultivo Líquido Melena de León' },
+    description: {
+      en: "shrooms Culture Bank — 10cc of live Hericium erinaceus mycelium suspended in nutrient broth. Lab-isolated for purity and vigor, this culture colonizes grain spawn in 5–10 days — up to 3× faster than spores.\n\nEach packet includes: 10cc syringe · 16G sterile needle · alcohol prep swab · shrooms instruction card. Refrigerate upon arrival. Best used within 2 months.",
+      es: "shrooms Culture Bank — 10cc de micelio vivo de Hericium erinaceus suspendido en caldo nutritivo. Aislado en laboratorio para pureza y vigor, coloniza spawn de grano en 5–10 días — hasta 3× más rápido que esporas.\n\nCada paquete incluye: jeringa 10cc · aguja estéril 16G · swab de alcohol · tarjeta de instrucciones shrooms. Refrigerar al recibir. Usar en un máximo de 2 meses.",
+    },
+    category: 'spawn', subcategory: 'Liquid Culture', species: 'lions-mane',
+    price: 1799, compareAtPrice: undefined,
+    variants: [{ id: 'lc1v', name: '10cc', price: 1799, stock: 40, sku: 'LML-10CC' }],
+    images: ['https://images.unsplash.com/photo-1607305387299-a3d9611cd469?w=800'],
+    cultivationSpecs: { difficulty: 'intermediate', colonizationTime: '5–10 days', fruitingTempF: '65–75°F', fruitingTempC: '18–24°C', idealSubstrate: 'Supplemented hardwood sawdust', expectedYield: '200–400g per flush', indoorOutdoor: 'indoor' },
+    isOrganic: true, inStock: true, tags: ['medicinal', 'liquid-culture', 'lions-mane'], relatedProducts: ['lions-mane-fruiting-block'],
+    howToUseSteps: LC_HOW_TO_USE_STEPS,
+  },
+  'blue-oyster-liquid-culture': {
+    id: 'lc2', slug: 'blue-oyster-liquid-culture',
+    name: { en: 'Blue Oyster Liquid Culture Syringe', es: 'Jeringa de Cultivo Líquido Ostra Azul' },
+    description: {
+      en: "shrooms Culture Bank — 10cc of live Pleurotus ostreatus mycelium suspended in nutrient broth. Lab-isolated for purity and vigor, this culture colonizes grain spawn in 5–10 days — up to 3× faster than spores.\n\nEach packet includes: 10cc syringe · 16G sterile needle · alcohol prep swab · shrooms instruction card. Refrigerate upon arrival. Best used within 2 months.",
+      es: "shrooms Culture Bank — 10cc de micelio vivo de Pleurotus ostreatus suspendido en caldo nutritivo. Coloniza en 5–10 días.\n\nCada paquete incluye: jeringa 10cc · aguja estéril 16G · swab de alcohol · tarjeta de instrucciones shrooms.",
+    },
+    category: 'spawn', subcategory: 'Liquid Culture', species: 'blue-oyster',
+    price: 1799, compareAtPrice: undefined,
+    variants: [{ id: 'lc2v', name: '10cc', price: 1799, stock: 50, sku: 'BOL-10CC' }],
+    images: ['https://images.unsplash.com/photo-1504545102780-26774c1bb073?w=800'],
+    cultivationSpecs: { difficulty: 'beginner', colonizationTime: '5–10 days', fruitingTempF: '55–65°F', fruitingTempC: '13–18°C', idealSubstrate: 'Hardwood sawdust, straw', expectedYield: '1–3 flushes, 25% BE', indoorOutdoor: 'both' },
+    isOrganic: true, inStock: true, tags: ['beginner', 'liquid-culture', 'oyster'], relatedProducts: ['blue-oyster-grain-spawn'],
+    howToUseSteps: LC_HOW_TO_USE_STEPS,
+  },
+  'pink-oyster-liquid-culture': {
+    id: 'lc3', slug: 'pink-oyster-liquid-culture',
+    name: { en: 'Pink Oyster Liquid Culture Syringe', es: 'Jeringa de Cultivo Líquido Ostra Rosa' },
+    description: {
+      en: "shrooms Culture Bank — 10cc of live Pleurotus djamor mycelium suspended in nutrient broth. Lab-isolated for purity and vigor, this culture colonizes grain spawn in 5–10 days — up to 3× faster than spores.\n\nEach packet includes: 10cc syringe · 16G sterile needle · alcohol prep swab · shrooms instruction card. Refrigerate upon arrival. Best used within 2 months.",
+      es: "shrooms Culture Bank — 10cc de micelio vivo de Pleurotus djamor suspendido en caldo nutritivo. Coloniza en 5–10 días.\n\nCada paquete incluye: jeringa 10cc · aguja estéril 16G · swab de alcohol · tarjeta de instrucciones shrooms.",
+    },
+    category: 'spawn', subcategory: 'Liquid Culture', species: 'pink-oyster',
+    price: 1799, compareAtPrice: undefined,
+    variants: [{ id: 'lc3v', name: '10cc', price: 1799, stock: 40, sku: 'POL-10CC' }],
+    images: ['https://images.unsplash.com/photo-1773600149997-2b6af77031d7?w=800'],
+    cultivationSpecs: { difficulty: 'beginner', colonizationTime: '5–10 days', fruitingTempF: '65–85°F', fruitingTempC: '18–29°C', idealSubstrate: 'Straw, hardwood sawdust', expectedYield: '1–3 flushes', indoorOutdoor: 'indoor' },
+    isOrganic: true, inStock: true, tags: ['beginner', 'liquid-culture', 'oyster'], relatedProducts: [],
+    howToUseSteps: LC_HOW_TO_USE_STEPS,
+  },
+  'yellow-oyster-liquid-culture': {
+    id: 'lc4', slug: 'yellow-oyster-liquid-culture',
+    name: { en: 'Yellow Oyster Liquid Culture Syringe', es: 'Jeringa de Cultivo Líquido Ostra Amarilla' },
+    description: {
+      en: "shrooms Culture Bank — 10cc of live Pleurotus citrinopileatus mycelium suspended in nutrient broth. Lab-isolated for purity and vigor, this culture colonizes grain spawn in 5–10 days — up to 3× faster than spores.\n\nEach packet includes: 10cc syringe · 16G sterile needle · alcohol prep swab · shrooms instruction card. Refrigerate upon arrival. Best used within 2 months.",
+      es: "shrooms Culture Bank — 10cc de micelio vivo de Pleurotus citrinopileatus suspendido en caldo nutritivo. Coloniza en 5–10 días.\n\nCada paquete incluye: jeringa 10cc · aguja estéril 16G · swab de alcohol · tarjeta de instrucciones shrooms.",
+    },
+    category: 'spawn', subcategory: 'Liquid Culture', species: 'yellow-oyster',
+    price: 1799, compareAtPrice: undefined,
+    variants: [{ id: 'lc4v', name: '10cc', price: 1799, stock: 35, sku: 'YOL-10CC' }],
+    images: ['https://images.unsplash.com/photo-1748118869505-e75f25812a70?w=800'],
+    cultivationSpecs: { difficulty: 'beginner', colonizationTime: '5–10 days', fruitingTempF: '65–80°F', fruitingTempC: '18–27°C', idealSubstrate: 'Straw, hardwood sawdust', expectedYield: '1–3 flushes', indoorOutdoor: 'indoor' },
+    isOrganic: true, inStock: true, tags: ['beginner', 'liquid-culture', 'oyster'], relatedProducts: [],
+    howToUseSteps: LC_HOW_TO_USE_STEPS,
+  },
+  'reishi-liquid-culture': {
+    id: 'lc5', slug: 'reishi-liquid-culture',
+    name: { en: 'Reishi Liquid Culture Syringe', es: 'Jeringa de Cultivo Líquido Reishi' },
+    description: {
+      en: "shrooms Culture Bank — 10cc of live Ganoderma lucidum mycelium suspended in nutrient broth. Lab-isolated for purity and vigor, this culture colonizes grain spawn in 5–10 days — up to 3× faster than spores.\n\nEach packet includes: 10cc syringe · 16G sterile needle · alcohol prep swab · shrooms instruction card. Refrigerate upon arrival. Best used within 2 months.",
+      es: "shrooms Culture Bank — 10cc de micelio vivo de Ganoderma lucidum suspendido en caldo nutritivo. Coloniza en 5–10 días.\n\nCada paquete incluye: jeringa 10cc · aguja estéril 16G · swab de alcohol · tarjeta de instrucciones shrooms.",
+    },
+    category: 'spawn', subcategory: 'Liquid Culture', species: 'reishi',
+    price: 1799, compareAtPrice: undefined,
+    variants: [{ id: 'lc5v', name: '10cc', price: 1799, stock: 30, sku: 'REL-10CC' }],
+    images: ['https://images.unsplash.com/photo-1504470695779-75300268aa0e?w=800'],
+    cultivationSpecs: { difficulty: 'advanced', colonizationTime: '5–10 days (on grain)', fruitingTempF: '70–80°F', fruitingTempC: '21–27°C', idealSubstrate: 'Hardwood logs or sawdust', expectedYield: '1 flush (medicinal)', indoorOutdoor: 'both' },
+    isOrganic: true, inStock: true, tags: ['medicinal', 'liquid-culture', 'reishi'], relatedProducts: ['reishi-dual-extract-tincture'],
+    howToUseSteps: LC_HOW_TO_USE_STEPS,
+  },
+  'shiitake-liquid-culture': {
+    id: 'lc6', slug: 'shiitake-liquid-culture',
+    name: { en: 'Shiitake Liquid Culture Syringe', es: 'Jeringa de Cultivo Líquido Shiitake' },
+    description: {
+      en: "shrooms Culture Bank — 10cc of live Lentinula edodes mycelium suspended in nutrient broth. Lab-isolated for purity and vigor, this culture colonizes grain spawn in 5–10 days — up to 3× faster than spores.\n\nEach packet includes: 10cc syringe · 16G sterile needle · alcohol prep swab · shrooms instruction card. Refrigerate upon arrival. Best used within 2 months.",
+      es: "shrooms Culture Bank — 10cc de micelio vivo de Lentinula edodes suspendido en caldo nutritivo. Coloniza en 5–10 días.\n\nCada paquete incluye: jeringa 10cc · aguja estéril 16G · swab de alcohol · tarjeta de instrucciones shrooms.",
+    },
+    category: 'spawn', subcategory: 'Liquid Culture', species: 'shiitake',
+    price: 1799, compareAtPrice: undefined,
+    variants: [{ id: 'lc6v', name: '10cc', price: 1799, stock: 45, sku: 'SHL-10CC' }],
+    images: ['https://images.unsplash.com/photo-1585155784229-aff921ccfa12?w=800'],
+    cultivationSpecs: { difficulty: 'intermediate', colonizationTime: '5–10 days (on grain)', fruitingTempF: '55–75°F', fruitingTempC: '13–24°C', idealSubstrate: 'Hardwood sawdust or oak logs', expectedYield: 'Multiple flushes', indoorOutdoor: 'both' },
+    isOrganic: true, inStock: true, tags: ['edible', 'liquid-culture', 'shiitake'], relatedProducts: ['shiitake-log-kit'],
+    howToUseSteps: LC_HOW_TO_USE_STEPS,
   },
 }
 
@@ -39,7 +141,7 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
   const t = useTranslations('shop.product')
   const tc = useTranslations('common')
 
-  const product = PRODUCTS[params.slug]
+  const product = PRODUCTS[params.slug] ?? LC_PRODUCTS[params.slug]
   if (!product) notFound()
 
   const [selectedVariant, setSelectedVariant] = useState(product.variants[0])
@@ -202,12 +304,20 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
             )}
             {activeTab === 'howToUse' && (
               <div className="space-y-4 text-cream-muted">
-                <p>1. Sterilize your substrate (hardwood sawdust bags work best).</p>
-                <p>2. Allow substrate to cool to room temperature before inoculating.</p>
-                <p>3. In a sterile environment, mix grain spawn into substrate at 10–20% rate.</p>
-                <p>4. Seal bag and colonize at 70–75°F for 2–3 weeks until fully white.</p>
-                <p>5. Introduce fruiting conditions: fresh air exchange + 85–95% humidity.</p>
-                <p>6. Harvest mushrooms just as the veil begins to separate from the cap edges.</p>
+                {product.howToUseSteps ? (
+                  product.howToUseSteps.map((step, i) => (
+                    <p key={i}>{i + 1}. {step}</p>
+                  ))
+                ) : (
+                  <>
+                    <p>1. Sterilize your substrate (hardwood sawdust bags work best).</p>
+                    <p>2. Allow substrate to cool to room temperature before inoculating.</p>
+                    <p>3. In a sterile environment, mix grain spawn into substrate at 10–20% rate.</p>
+                    <p>4. Seal bag and colonize at 70–75°F for 2–3 weeks until fully white.</p>
+                    <p>5. Introduce fruiting conditions: fresh air exchange + 85–95% humidity.</p>
+                    <p>6. Harvest mushrooms just as the veil begins to separate from the cap edges.</p>
+                  </>
+                )}
               </div>
             )}
             {activeTab === 'science' && (

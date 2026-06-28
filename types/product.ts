@@ -33,6 +33,7 @@ export interface Product {
   inStock: boolean
   tags: string[]
   relatedProducts: string[]
+  howToUseSteps?: string[]
 }
 
 export interface CartItem {

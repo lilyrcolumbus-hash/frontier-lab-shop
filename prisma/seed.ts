@@ -208,6 +208,7 @@ async function main() {
   const blueOysterSpecies = await prisma.species.findUnique({ where: { slug: 'blue-oyster' } })
   const lionsMaineSpecies = await prisma.species.findUnique({ where: { slug: 'lions-mane' } })
   const shiitakeSpecies = await prisma.species.findUnique({ where: { slug: 'shiitake' } })
+  const reishiSpecies = await prisma.species.findUnique({ where: { slug: 'reishi' } })
 
   const productsData = [
     {
@@ -324,6 +325,75 @@ async function main() {
       specsIdealSubstrate: null,
       specsExpectedYield: null,
       specsIndoorOutdoor: null,
+    },
+    // ── Liquid Culture Syringes ────────────────────────────────────────────
+    {
+      slug: 'lions-mane-liquid-culture',
+      nameEn: "Lion's Mane Liquid Culture Syringe",
+      nameEs: 'Jeringa de Cultivo Líquido Melena de León',
+      descriptionEn: 'shrooms Culture Bank — 10cc live Hericium erinaceus mycelium. Lab-isolated, colonizes grain in 5–10 days. Includes 16G needle and alcohol swab.',
+      descriptionEs: 'shrooms Culture Bank — 10cc de micelio vivo de Hericium erinaceus. Coloniza en 5–10 días. Incluye aguja 16G y swab de alcohol.',
+      category: 'spawn', subcategory: 'liquid-culture',
+      speciesId: lionsMaineSpecies?.id,
+      price: 1799, compareAtPrice: null,
+      images: ['https://images.unsplash.com/photo-1607305387299-a3d9611cd469?w=800'],
+      isOrganic: true, inStock: true,
+      tags: ['medicinal', 'liquid-culture', 'lions-mane'],
+      specsDifficulty: 'intermediate', specsColonizationTime: '5–10 days',
+      specsFruitingTempF: '65–75°F', specsFruitingTempC: '18–24°C',
+      specsIdealSubstrate: 'Supplemented hardwood sawdust',
+      specsExpectedYield: '200–400g per flush', specsIndoorOutdoor: 'indoor',
+    },
+    {
+      slug: 'blue-oyster-liquid-culture',
+      nameEn: 'Blue Oyster Liquid Culture Syringe',
+      nameEs: 'Jeringa de Cultivo Líquido Ostra Azul',
+      descriptionEn: 'shrooms Culture Bank — 10cc live Pleurotus ostreatus mycelium. Lab-isolated, colonizes grain in 5–10 days. Includes 16G needle and alcohol swab.',
+      descriptionEs: 'shrooms Culture Bank — 10cc de micelio vivo de Pleurotus ostreatus. Coloniza en 5–10 días. Incluye aguja 16G y swab de alcohol.',
+      category: 'spawn', subcategory: 'liquid-culture',
+      speciesId: blueOysterSpecies?.id,
+      price: 1799, compareAtPrice: null,
+      images: ['https://images.unsplash.com/photo-1504545102780-26774c1bb073?w=800'],
+      isOrganic: true, inStock: true,
+      tags: ['beginner', 'liquid-culture', 'oyster'],
+      specsDifficulty: 'beginner', specsColonizationTime: '5–10 days',
+      specsFruitingTempF: '55–65°F', specsFruitingTempC: '13–18°C',
+      specsIdealSubstrate: 'Hardwood sawdust, straw',
+      specsExpectedYield: '1–3 flushes, 25% BE', specsIndoorOutdoor: 'both',
+    },
+    {
+      slug: 'reishi-liquid-culture',
+      nameEn: 'Reishi Liquid Culture Syringe',
+      nameEs: 'Jeringa de Cultivo Líquido Reishi',
+      descriptionEn: 'shrooms Culture Bank — 10cc live Ganoderma lucidum mycelium. Lab-isolated, colonizes grain in 5–10 days. Includes 16G needle and alcohol swab.',
+      descriptionEs: 'shrooms Culture Bank — 10cc de micelio vivo de Ganoderma lucidum. Coloniza en 5–10 días. Incluye aguja 16G y swab de alcohol.',
+      category: 'spawn', subcategory: 'liquid-culture',
+      speciesId: reishiSpecies?.id,
+      price: 1799, compareAtPrice: null,
+      images: ['https://images.unsplash.com/photo-1504470695779-75300268aa0e?w=800'],
+      isOrganic: true, inStock: true,
+      tags: ['medicinal', 'liquid-culture', 'reishi'],
+      specsDifficulty: 'advanced', specsColonizationTime: '5–10 days (on grain)',
+      specsFruitingTempF: '70–80°F', specsFruitingTempC: '21–27°C',
+      specsIdealSubstrate: 'Hardwood logs or sawdust',
+      specsExpectedYield: '1 flush (medicinal)', specsIndoorOutdoor: 'both',
+    },
+    {
+      slug: 'shiitake-liquid-culture',
+      nameEn: 'Shiitake Liquid Culture Syringe',
+      nameEs: 'Jeringa de Cultivo Líquido Shiitake',
+      descriptionEn: 'shrooms Culture Bank — 10cc live Lentinula edodes mycelium. Lab-isolated, colonizes grain in 5–10 days. Includes 16G needle and alcohol swab.',
+      descriptionEs: 'shrooms Culture Bank — 10cc de micelio vivo de Lentinula edodes. Coloniza en 5–10 días. Incluye aguja 16G y swab de alcohol.',
+      category: 'spawn', subcategory: 'liquid-culture',
+      speciesId: shiitakeSpecies?.id,
+      price: 1799, compareAtPrice: null,
+      images: ['https://images.unsplash.com/photo-1585155784229-aff921ccfa12?w=800'],
+      isOrganic: true, inStock: true,
+      tags: ['edible', 'liquid-culture', 'shiitake'],
+      specsDifficulty: 'intermediate', specsColonizationTime: '5–10 days (on grain)',
+      specsFruitingTempF: '55–75°F', specsFruitingTempC: '13–24°C',
+      specsIdealSubstrate: 'Hardwood sawdust or oak logs',
+      specsExpectedYield: 'Multiple flushes', specsIndoorOutdoor: 'both',
     },
   ]
 
