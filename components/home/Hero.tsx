@@ -105,8 +105,8 @@ export function Hero() {
             {/* Main photo */}
             <div className="relative rounded-2xl overflow-hidden" style={{ height: 520 }}>
               <img
-                src="https://images.unsplash.com/photo-1607305387299-a3d9611cd469?w=680&h=840&q=90&auto=format&fit=crop"
-                alt="Lion's Mane mushroom"
+                src="https://images.unsplash.com/photo-1504545102780-26774c1bb073?w=680&h=840&q=90&auto=format&fit=crop"
+                alt="Blue Oyster mushroom cluster"
                 className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#040904]/88 via-[#040904]/18 to-transparent" />

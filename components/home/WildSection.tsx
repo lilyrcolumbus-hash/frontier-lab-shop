@@ -5,9 +5,9 @@ import { motion, useInView, useScroll, useTransform } from 'framer-motion'
 
 const PHOTOS = [
   {
-    src: 'https://images.unsplash.com/photo-1607305387299-a3d9611cd469?w=700&h=900&q=88&auto=format&fit=crop',
-    alt: "Lion's Mane in the wild",
-    label: "Lion's Mane",
+    src: 'https://images.unsplash.com/photo-1773600149997-2b6af77031d7?w=700&h=900&q=88&auto=format&fit=crop',
+    alt: 'Pink Oyster cluster',
+    label: 'Pink Oyster',
     span: 'row-span-2',
   },
   {
@@ -17,9 +17,9 @@ const PHOTOS = [
     span: '',
   },
   {
-    src: 'https://images.unsplash.com/photo-1585155784229-aff921ccfa12?w=600&h=400&q=88&auto=format&fit=crop',
-    alt: 'Shiitake cluster on wood',
-    label: 'Shiitake',
+    src: 'https://images.unsplash.com/photo-1748118869505-e75f25812a70?w=600&h=400&q=88&auto=format&fit=crop',
+    alt: 'Yellow Oyster golden cluster',
+    label: 'Yellow Oyster',
     span: '',
   },
 ]

@@ -21,7 +21,7 @@ const PREVIEW_ARTICLES = [
     badgeVariant: 'accent' as const,
     title: 'Understanding Mycelium: The Underground Network',
     readTime: 8,
-    image: 'https://images.unsplash.com/photo-1585155784229-aff921ccfa12?w=600',
+    image: 'https://images.unsplash.com/photo-1504545102780-26774c1bb073?w=600',
     accent: '#7C3AED',
   },
   {
@@ -30,7 +30,7 @@ const PREVIEW_ARTICLES = [
     badgeVariant: 'warning' as const,
     title: "Lion's Mane & Brain Health: What the Science Actually Says",
     readTime: 15,
-    image: 'https://images.unsplash.com/photo-1607305387299-a3d9611cd469?w=600',
+    image: 'https://images.unsplash.com/photo-1504545102780-26774c1bb073?w=600',
     accent: '#FFAE00',
   },
 ]

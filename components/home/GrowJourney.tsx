@@ -12,8 +12,8 @@ const STEPS = [
     description:
       'Mix sterilized substrate with grain spawn under sterile conditions. Rye berries, straw, or sawdust — every species has its ideal medium.',
     timing: 'Day 1',
-    src: 'https://images.unsplash.com/photo-1585155784229-aff921ccfa12?w=520&h=620&q=85&auto=format&fit=crop',
-    alt: 'Dark shiitake mushrooms on substrate',
+    src: 'https://images.unsplash.com/photo-1504545102780-26774c1bb073?w=520&h=620&q=85&auto=format&fit=crop',
+    alt: 'Blue oyster mushroom cluster on substrate',
   },
   {
     step: '02',
@@ -32,8 +32,8 @@ const STEPS = [
     description:
       'Lower CO₂, raise humidity. Tiny pins push through the surface. The moment life emerges from nothing — always magical.',
     timing: 'Week 3–4',
-    src: 'https://images.unsplash.com/photo-1504470695779-75300268aa0e?w=520&h=620&q=85&auto=format&fit=crop',
-    alt: 'Reishi mushroom emerging',
+    src: 'https://images.unsplash.com/photo-1773600149997-2b6af77031d7?w=520&h=620&q=85&auto=format&fit=crop',
+    alt: 'Pink Oyster pins emerging',
   },
   {
     step: '04',
@@ -42,8 +42,8 @@ const STEPS = [
     description:
       "Twist and pull just before the veil breaks. First flush — pure reward for your precision and patience. Plate it. Extract it. Grow again.",
     timing: 'Week 4–5',
-    src: 'https://images.unsplash.com/photo-1607305387299-a3d9611cd469?w=520&h=620&q=85&auto=format&fit=crop',
-    alt: "Lion's Mane ready to harvest",
+    src: 'https://images.unsplash.com/photo-1748118869505-e75f25812a70?w=520&h=620&q=85&auto=format&fit=crop',
+    alt: 'Yellow Oyster ready to harvest',
   },
 ]
 

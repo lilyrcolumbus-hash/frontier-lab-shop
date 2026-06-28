@@ -8,17 +8,17 @@ import { ScrollReveal } from '@/components/ui/ScrollReveal'
 
 const GALLERY_ITEMS = [
   { id: 1,  src: 'https://images.unsplash.com/photo-1504545102780-26774c1bb073?w=600&h=800&q=85&auto=format&fit=crop', alt: 'Blue Oyster first flush',  species: 'Blue Oyster',  user: '@mushroom_mike',    tall: true  },
-  { id: 2,  src: 'https://images.unsplash.com/photo-1607305387299-a3d9611cd469?w=600&h=440&q=85&auto=format&fit=crop', alt: "Lion's Mane up close",    species: "Lion's Mane",  user: '@growwild_jen',    tall: false },
-  { id: 3,  src: 'https://images.unsplash.com/photo-1773600149997-2b6af77031d7?w=600&h=440&q=85&auto=format&fit=crop', alt: 'Pink Oyster cluster flush',  species: 'Pink Oyster',  user: '@spore.garden',    tall: false },
-  { id: 4,  src: 'https://images.unsplash.com/photo-1748118869505-e75f25812a70?w=600&h=760&q=85&auto=format&fit=crop', alt: 'Yellow Oyster golden cluster', species: 'Yellow Oyster', user: '@spore.ann',    tall: true  },
-  { id: 5,  src: 'https://images.unsplash.com/photo-1585155784229-aff921ccfa12?w=600&h=440&q=85&auto=format&fit=crop', alt: 'Shiitake cluster flush',   species: 'Shiitake',     user: '@fungi_forager',   tall: false },
-  { id: 6,  src: 'https://images.unsplash.com/photo-1504470695779-75300268aa0e?w=600&h=440&q=85&auto=format&fit=crop', alt: 'Reishi antler stage',      species: 'Reishi',       user: '@myco_lab_co',     tall: false },
-  { id: 7,  src: 'https://images.unsplash.com/photo-1448375240586-882707db888b?w=600&h=800&q=85&auto=format&fit=crop', alt: 'Enchanted forest light rays', species: 'Wild Find', user: '@forestwalker',   tall: true  },
+  { id: 2,  src: 'https://images.unsplash.com/photo-1504545102780-26774c1bb073?w=600&h=440&q=85&auto=format&fit=crop', alt: 'Blue Oyster cluster close-up', species: 'Blue Oyster',  user: '@growwild_jen',    tall: false },
+  { id: 3,  src: 'https://images.unsplash.com/photo-1773600149997-2b6af77031d7?w=600&h=440&q=85&auto=format&fit=crop', alt: 'Pink Oyster cluster flush',     species: 'Pink Oyster',  user: '@spore.garden',    tall: false },
+  { id: 4,  src: 'https://images.unsplash.com/photo-1748118869505-e75f25812a70?w=600&h=760&q=85&auto=format&fit=crop', alt: 'Yellow Oyster golden cluster',  species: 'Yellow Oyster', user: '@spore.ann',    tall: true  },
+  { id: 5,  src: 'https://images.unsplash.com/photo-1773600149997-2b6af77031d7?w=600&h=440&q=85&auto=format&fit=crop', alt: 'Pink Oyster first flush',       species: 'Pink Oyster',  user: '@fungi_forager',   tall: false },
+  { id: 6,  src: 'https://images.unsplash.com/photo-1748118869505-e75f25812a70?w=600&h=440&q=85&auto=format&fit=crop', alt: 'Yellow Oyster golden fan',      species: 'Yellow Oyster', user: '@myco_lab_co',    tall: false },
+  { id: 7,  src: 'https://images.unsplash.com/photo-1448375240586-882707db888b?w=600&h=800&q=85&auto=format&fit=crop', alt: 'Enchanted forest light rays',   species: 'Wild Find',    user: '@forestwalker',   tall: true  },
   { id: 8,  src: 'https://images.unsplash.com/photo-1504545102780-26774c1bb073?w=600&h=440&q=85&auto=format&fit=crop&crop=bottom', alt: 'Oyster pinning stage', species: 'Blue Oyster', user: '@ohio_grows',  tall: false },
-  { id: 9,  src: 'https://images.unsplash.com/photo-1607305387299-a3d9611cd469?w=600&h=440&q=85&auto=format&fit=crop&crop=top',   alt: 'Lion texture macro',  species: "Lion's Mane",  user: '@macro_myco',    tall: false },
-  { id: 10, src: 'https://images.unsplash.com/photo-1585155784229-aff921ccfa12?w=600&h=680&q=85&auto=format&fit=crop', alt: 'Dark wood block shiitake', species: 'Shiitake',    user: '@log_grower',     tall: true  },
-  { id: 11, src: 'https://images.unsplash.com/photo-1504470695779-75300268aa0e?w=600&h=440&q=85&auto=format&fit=crop', alt: 'Reishi antler form', species: 'Reishi',       user: '@spore_prints',   tall: false },
-  { id: 12, src: 'https://images.unsplash.com/photo-1607305387299-a3d9611cd469?w=600&h=440&q=85&auto=format&fit=crop&crop=top',  alt: "Lion's Mane full cap",  species: "Lion's Mane",  user: '@spore.co',       tall: false },
+  { id: 9,  src: 'https://images.unsplash.com/photo-1504545102780-26774c1bb073?w=600&h=440&q=85&auto=format&fit=crop', alt: 'Blue Oyster fan detail',        species: 'Blue Oyster',  user: '@macro_myco',    tall: false },
+  { id: 10, src: 'https://images.unsplash.com/photo-1773600149997-2b6af77031d7?w=600&h=680&q=85&auto=format&fit=crop', alt: 'Pink Oyster dense cluster',    species: 'Pink Oyster',  user: '@log_grower',     tall: true  },
+  { id: 11, src: 'https://images.unsplash.com/photo-1748118869505-e75f25812a70?w=600&h=440&q=85&auto=format&fit=crop', alt: 'Yellow Oyster fan form',       species: 'Yellow Oyster', user: '@spore_prints',  tall: false },
+  { id: 12, src: 'https://images.unsplash.com/photo-1504545102780-26774c1bb073?w=600&h=440&q=85&auto=format&fit=crop', alt: 'Blue Oyster full flush',        species: 'Blue Oyster',  user: '@spore.co',       tall: false },
 ]
 
 export function CommunityGallery() {
