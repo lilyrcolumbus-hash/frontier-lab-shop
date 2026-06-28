@@ -1,5 +1,8 @@
+'use client'
+
+import { useRef } from 'react'
+import { motion, useInView } from 'framer-motion'
 import { useTranslations } from 'next-intl'
-import { Badge } from '@/components/ui/Badge'
 import { cn } from '@/lib/utils'
 import type { CultivationSpecs as CultivationSpecsType } from '@/types/product'
 
@@ -36,8 +39,18 @@ const icons = {
   ),
 }
 
+const DIFFICULTY_CONFIG = {
+  beginner:     { dots: 1, color: 'bg-accent',   text: 'text-accent',   label: 'Beginner' },
+  intermediate: { dots: 2, color: 'bg-amber-600', text: 'text-amber-600', label: 'Intermediate' },
+  advanced:     { dots: 3, color: 'bg-red-500',   text: 'text-red-500',  label: 'Advanced' },
+}
+
 export function CultivationSpecs({ specs }: CultivationSpecsProps) {
   const t = useTranslations('shop.product.specs')
+  const ref = useRef<HTMLDivElement>(null)
+  const isInView = useInView(ref, { once: true, margin: '-10% 0px' })
+
+  const diff = DIFFICULTY_CONFIG[specs.difficulty]
 
   const rows = [
     { label: t('colonization'), value: specs.colonizationTime, icon: icons.clock },
@@ -51,32 +64,54 @@ export function CultivationSpecs({ specs }: CultivationSpecsProps) {
     },
   ]
 
-  const difficultyVariant =
-    specs.difficulty === 'beginner' ? 'success' :
-    specs.difficulty === 'intermediate' ? 'warning' : 'error'
-
   return (
-    <div className="rounded-2xl border border-ds-border overflow-hidden">
+    <div ref={ref} className="rounded-2xl border border-ds-border overflow-hidden">
+      {/* Header */}
       <div className="flex items-center justify-between px-4 py-3 bg-elevated border-b border-ds-border">
         <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-cream-muted">{t('title')}</p>
-        <Badge variant={difficultyVariant}>
-          {specs.difficulty.charAt(0).toUpperCase() + specs.difficulty.slice(1)}
-        </Badge>
+
+        {/* Animated difficulty dots */}
+        <div className="flex items-center gap-2.5">
+          <div className="flex gap-1">
+            {[1, 2, 3].map((level) => (
+              <motion.div
+                key={level}
+                className={cn(
+                  'w-2 h-2 rounded-full',
+                  level <= diff.dots ? diff.color : 'bg-ds-border'
+                )}
+                initial={{ scale: 0, opacity: 0 }}
+                animate={isInView ? { scale: 1, opacity: 1 } : {}}
+                transition={{
+                  delay: 0.2 + (level - 1) * 0.12,
+                  type: 'spring',
+                  stiffness: 400,
+                  damping: 20,
+                }}
+              />
+            ))}
+          </div>
+          <span className={cn('font-mono text-[9px] uppercase tracking-wider', diff.text)}>{diff.label}</span>
+        </div>
       </div>
 
+      {/* Rows with stagger */}
       <div className="grid grid-cols-2 divide-x divide-y divide-ds-border">
         {rows.map((row, i) => (
-          <div
+          <motion.div
             key={row.label}
             className={cn(
               'flex flex-col gap-1.5 p-4 bg-surface',
               i === rows.length - 1 && rows.length % 2 !== 0 && 'col-span-2'
             )}
+            initial={{ opacity: 0, x: i % 2 === 0 ? -12 : 12 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.45, delay: 0.15 + i * 0.07, ease: [0.16, 1, 0.3, 1] }}
           >
-            <div className="flex items-center gap-1.5 text-accent/60">{row.icon}</div>
-            <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-cream-muted/50 mt-0.5">{row.label}</p>
+            <div className="text-accent/55">{row.icon}</div>
+            <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-cream-muted/50">{row.label}</p>
             <p className="text-sm text-cream font-medium leading-snug">{row.value}</p>
-          </div>
+          </motion.div>
         ))}
       </div>
     </div>

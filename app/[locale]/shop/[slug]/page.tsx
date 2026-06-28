@@ -1,7 +1,8 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import Link from 'next/link'
+import { motion, AnimatePresence } from 'framer-motion'
 import { useLocale, useTranslations } from 'next-intl'
 import { notFound } from 'next/navigation'
 import { ProductGallery } from '@/components/shop/ProductGallery'
@@ -175,6 +176,19 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
   const [selectedVariant, setSelectedVariant] = useState(product.variants[0])
   const [quantity, setQuantity] = useState(1)
   const [activeTab, setActiveTab] = useState<typeof TABS[number]>('description')
+  const [showSticky, setShowSticky] = useState(false)
+  const ctaRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const el = ctaRef.current
+    if (!el) return
+    const observer = new IntersectionObserver(
+      ([entry]) => setShowSticky(!entry.isIntersecting),
+      { threshold: 0 }
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
 
   const name = product.name[locale]
   const description = product.description[locale]
@@ -279,7 +293,7 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
             </div>
 
             {/* CTAs */}
-            <div className="flex flex-col sm:flex-row gap-3">
+            <div ref={ctaRef} className="flex flex-col sm:flex-row gap-3">
               <Button fullWidth size="lg" disabled={!product.inStock}>
                 {product.inStock ? `${t('addToCart')} — ${formatPrice(selectedVariant.price * quantity)}` : tc('outOfStock')}
               </Button>
@@ -312,11 +326,17 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
                       label: 'Instruction\nCard',
                       icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="7" y1="9" x2="17" y2="9"/><line x1="7" y1="13" x2="13" y2="13"/></svg>,
                     },
-                  ].map((item) => (
-                    <div key={item.label} className="flex flex-col items-center gap-2 py-4 px-1">
+                  ].map((item, i) => (
+                    <motion.div
+                      key={item.label}
+                      initial={{ opacity: 0, y: 14 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: i * 0.09, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                      className="flex flex-col items-center gap-2 py-4 px-1"
+                    >
                       <div className="text-accent/50">{item.icon}</div>
                       <p className="font-mono text-[8px] uppercase tracking-wider text-cream-muted/60 text-center whitespace-pre-line leading-relaxed">{item.label}</p>
-                    </div>
+                    </motion.div>
                   ))}
                 </div>
               </div>
@@ -373,45 +393,80 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
           </div>
 
           <div className="max-w-3xl">
-            {activeTab === 'description' && (
-              <div className="space-y-4">
-                {description.split('\n\n').map((para, i) => (
-                  <p key={i} className="text-cream-muted leading-relaxed">{para}</p>
-                ))}
-              </div>
-            )}
-            {activeTab === 'howToUse' && (
-              <div className="space-y-4 text-cream-muted">
-                {product.howToUseSteps ? (
-                  product.howToUseSteps.map((step, i) => (
-                    <p key={i}>{i + 1}. {step}</p>
-                  ))
-                ) : (
-                  <>
-                    <p>1. Sterilize your substrate (hardwood sawdust bags work best).</p>
-                    <p>2. Allow substrate to cool to room temperature before inoculating.</p>
-                    <p>3. In a sterile environment, mix grain spawn into substrate at 10–20% rate.</p>
-                    <p>4. Seal bag and colonize at 70–75°F for 2–3 weeks until fully white.</p>
-                    <p>5. Introduce fruiting conditions: fresh air exchange + 85–95% humidity.</p>
-                    <p>6. Harvest mushrooms just as the veil begins to separate from the cap edges.</p>
-                  </>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeTab}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -6 }}
+                transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+              >
+                {activeTab === 'description' && (
+                  <div className="space-y-4">
+                    {description.split('\n\n').map((para, i) => (
+                      <p key={i} className="text-cream-muted leading-relaxed">{para}</p>
+                    ))}
+                  </div>
                 )}
-              </div>
-            )}
-            {activeTab === 'science' && (
-              <div className="space-y-4 text-cream-muted">
-                <p>Pleurotus ostreatus produces significant quantities of lovastatin, a natural statin compound. Research indicates 30% dry weight protein content with all essential amino acids.</p>
-                <p>Beta-glucan content: 25–30% dry weight (primarily β-1,3 and β-1,6 glucans). These compounds are primary immunomodulators and have been studied extensively for their therapeutic potential.</p>
-              </div>
-            )}
-            {activeTab === 'reviews' && (
-              <div className="space-y-4">
-                <p className="text-cream-muted">Reviews coming soon. Be the first to leave a review.</p>
-              </div>
-            )}
+                {activeTab === 'howToUse' && (
+                  <div className="space-y-3">
+                    {(product.howToUseSteps ?? [
+                      'Sterilize your substrate (hardwood sawdust bags work best).',
+                      'Allow substrate to cool to room temperature before inoculating.',
+                      'In a sterile environment, mix grain spawn into substrate at 10–20% rate.',
+                      'Seal bag and colonize at 70–75°F for 2–3 weeks until fully white.',
+                      'Introduce fruiting conditions: fresh air exchange + 85–95% humidity.',
+                      'Harvest mushrooms just as the veil begins to separate from the cap edges.',
+                    ]).map((step, i) => (
+                      <div key={i} className="flex gap-4 items-start">
+                        <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent/10 border border-accent/20 text-accent font-mono text-[10px] flex items-center justify-center mt-0.5">{i + 1}</span>
+                        <p className="text-cream-muted leading-relaxed">{step}</p>
+                      </div>
+                    ))}
+                  </div>
+                )}
+                {activeTab === 'science' && (
+                  <div className="space-y-4 text-cream-muted">
+                    <p>Pleurotus ostreatus produces significant quantities of lovastatin, a natural statin compound. Research indicates 30% dry weight protein content with all essential amino acids.</p>
+                    <p>Beta-glucan content: 25–30% dry weight (primarily β-1,3 and β-1,6 glucans). These compounds are primary immunomodulators and have been studied extensively for their therapeutic potential.</p>
+                  </div>
+                )}
+                {activeTab === 'reviews' && (
+                  <p className="text-cream-muted">Reviews coming soon. Be the first to leave a review.</p>
+                )}
+              </motion.div>
+            </AnimatePresence>
           </div>
         </div>
       </div>
     </div>
+
+    {/* Sticky CTA */}
+    <AnimatePresence>
+      {showSticky && (
+        <motion.div
+          initial={{ y: 80, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: 80, opacity: 0 }}
+          transition={{ type: 'spring', stiffness: 340, damping: 30 }}
+          className="fixed bottom-0 left-0 right-0 z-50 bg-bg/90 backdrop-blur-xl border-t border-ds-border"
+        >
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center gap-4">
+            <div className="flex-1 min-w-0">
+              <p className="font-body font-semibold text-cream text-sm truncate">{name}</p>
+              <div className="flex items-center gap-2 mt-0.5">
+                <span className="text-accent font-bold text-sm">{formatPrice(selectedVariant.price)}</span>
+                {hasDiscount && (
+                  <span className="text-xs text-cream-muted/45 line-through">{formatPrice(product.compareAtPrice!)}</span>
+                )}
+              </div>
+            </div>
+            <Button size="md" disabled={!product.inStock} className="flex-shrink-0">
+              {product.inStock ? t('addToCart') : tc('outOfStock')}
+            </Button>
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   )
 }
