@@ -88,7 +88,7 @@ const LC_PRODUCTS: Record<string, Product> = {
   },
   'yellow-oyster-liquid-culture': {
     id: 'lc4', slug: 'yellow-oyster-liquid-culture',
-    name: { en: 'Yellow Oyster Liquid Culture Syringe', es: 'Jeringa de Cultivo Líquido Ostra Amarilla' },
+    name: { en: 'Golden Oyster Liquid Culture Syringe', es: 'Jeringa de Cultivo Líquido Ostra Dorada' },
     description: {
       en: "shrooms Culture Bank — 10cc of live Pleurotus citrinopileatus mycelium suspended in nutrient broth. Lab-isolated for purity and vigor, this culture colonizes grain spawn in 5–10 days — up to 3× faster than spores.\n\nEach packet includes: 10cc syringe · 16G sterile needle · alcohol prep swab · shrooms instruction card. Refrigerate upon arrival. Best used within 2 months.",
       es: "shrooms Culture Bank — 10cc de micelio vivo de Pleurotus citrinopileatus suspendido en caldo nutritivo. Coloniza en 5–10 días.\n\nCada paquete incluye: jeringa 10cc · aguja estéril 16G · swab de alcohol · tarjeta de instrucciones shrooms.",
@@ -129,36 +129,6 @@ const LC_PRODUCTS: Record<string, Product> = {
     images: [],
     cultivationSpecs: { difficulty: 'intermediate', colonizationTime: '5–10 days (on grain)', fruitingTempF: '55–75°F', fruitingTempC: '13–24°C', idealSubstrate: 'Hardwood sawdust or oak logs', expectedYield: 'Multiple flushes', indoorOutdoor: 'both' },
     isOrganic: true, inStock: true, tags: ['edible', 'liquid-culture', 'shiitake'], relatedProducts: ['shiitake-log-kit'],
-    howToUseSteps: LC_HOW_TO_USE_STEPS,
-  },
-  'turkey-tail-liquid-culture': {
-    id: 'lc7', slug: 'turkey-tail-liquid-culture',
-    name: { en: 'Turkey Tail Liquid Culture Syringe', es: 'Jeringa de Cultivo Líquido Cola de Pavo' },
-    description: {
-      en: "shrooms Culture Bank — 10cc of live Trametes versicolor mycelium suspended in nutrient broth. Lab-isolated for purity and vigor, this culture colonizes grain spawn in 5–10 days — up to 3× faster than spores.\n\nEach packet includes: 10cc syringe · 16G sterile needle · alcohol prep swab · shrooms instruction card. Refrigerate upon arrival. Best used within 2 months.",
-      es: "shrooms Culture Bank — 10cc de micelio vivo de Trametes versicolor suspendido en caldo nutritivo. Coloniza en 5–10 días.\n\nCada paquete incluye: jeringa 10cc · aguja estéril 16G · swab de alcohol · tarjeta de instrucciones shrooms.",
-    },
-    category: 'spawn', subcategory: 'Liquid Culture', species: 'turkey-tail',
-    price: 1799, compareAtPrice: 1999,
-    variants: [{ id: 'lc7v', name: '10cc', price: 1799, stock: 30, sku: 'TTL-10CC' }],
-    images: [],
-    cultivationSpecs: { difficulty: 'intermediate', colonizationTime: '5–10 days (on grain)', fruitingTempF: '60–75°F', fruitingTempC: '15–24°C', idealSubstrate: 'Hardwood logs or supplemented sawdust', expectedYield: 'Medicinal — polypore brackets', indoorOutdoor: 'both' },
-    isOrganic: true, inStock: true, tags: ['medicinal', 'liquid-culture', 'turkey-tail'], relatedProducts: [],
-    howToUseSteps: LC_HOW_TO_USE_STEPS,
-  },
-  'maitake-liquid-culture': {
-    id: 'lc8', slug: 'maitake-liquid-culture',
-    name: { en: 'Maitake Liquid Culture Syringe', es: 'Jeringa de Cultivo Líquido Maitake' },
-    description: {
-      en: "shrooms Culture Bank — 10cc of live Grifola frondosa mycelium suspended in nutrient broth. Lab-isolated for purity and vigor, this culture colonizes grain spawn in 5–10 days — up to 3× faster than spores.\n\nEach packet includes: 10cc syringe · 16G sterile needle · alcohol prep swab · shrooms instruction card. Refrigerate upon arrival. Best used within 2 months.",
-      es: "shrooms Culture Bank — 10cc de micelio vivo de Grifola frondosa suspendido en caldo nutritivo. Coloniza en 5–10 días.\n\nCada paquete incluye: jeringa 10cc · aguja estéril 16G · swab de alcohol · tarjeta de instrucciones shrooms.",
-    },
-    category: 'spawn', subcategory: 'Liquid Culture', species: 'maitake',
-    price: 1799, compareAtPrice: 1999,
-    variants: [{ id: 'lc8v', name: '10cc', price: 1799, stock: 25, sku: 'MAL-10CC' }],
-    images: [],
-    cultivationSpecs: { difficulty: 'advanced', colonizationTime: '5–10 days (on grain)', fruitingTempF: '55–65°F', fruitingTempC: '13–18°C', idealSubstrate: 'Hardwood logs or oak sawdust', expectedYield: 'Variable — dense frond clusters', indoorOutdoor: 'both' },
-    isOrganic: true, inStock: true, tags: ['medicinal', 'edible', 'liquid-culture', 'maitake'], relatedProducts: [],
     howToUseSteps: LC_HOW_TO_USE_STEPS,
   },
 }

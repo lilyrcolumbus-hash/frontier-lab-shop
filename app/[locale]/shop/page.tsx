@@ -97,7 +97,7 @@ const PRODUCTS: Product[] = [
   },
   {
     id: 'lc4', slug: 'yellow-oyster-liquid-culture',
-    name: { en: 'Yellow Oyster Liquid Culture Syringe', es: 'Jeringa de Cultivo Líquido Ostra Amarilla' },
+    name: { en: 'Golden Oyster Liquid Culture Syringe', es: 'Jeringa de Cultivo Líquido Ostra Dorada' },
     description: { en: "shrooms Culture Bank. Live Pleurotus citrinopileatus mycelium, 10cc. Colonizes grain in 5–10 days. Includes 16G needle + alcohol swab.", es: 'shrooms Culture Bank. Micelio vivo de Pleurotus citrinopileatus, 10cc. Coloniza en 5–10 días. Incluye aguja 16G + swab de alcohol.' },
     category: 'spawn', subcategory: 'Liquid Culture', species: 'yellow-oyster',
     price: 1799, compareAtPrice: 1999,
@@ -127,28 +127,6 @@ const PRODUCTS: Product[] = [
     images: [],
     cultivationSpecs: { difficulty: 'intermediate', colonizationTime: '5–10 days (on grain)', fruitingTempF: '55–75°F', fruitingTempC: '13–24°C', idealSubstrate: 'Hardwood sawdust or oak logs', expectedYield: 'Multiple flushes', indoorOutdoor: 'both' },
     isOrganic: true, inStock: true, tags: ['edible', 'liquid-culture', 'shiitake'], relatedProducts: [],
-  },
-  {
-    id: 'lc7', slug: 'turkey-tail-liquid-culture',
-    name: { en: 'Turkey Tail Liquid Culture Syringe', es: 'Jeringa de Cultivo Líquido Cola de Pavo' },
-    description: { en: "shrooms Culture Bank. Live Trametes versicolor mycelium, 10cc. Colonizes grain in 5–10 days. Includes 16G needle + alcohol swab.", es: 'shrooms Culture Bank. Micelio vivo de Trametes versicolor, 10cc. Coloniza en 5–10 días. Incluye aguja 16G + swab de alcohol.' },
-    category: 'spawn', subcategory: 'Liquid Culture', species: 'turkey-tail',
-    price: 1799, compareAtPrice: 1999,
-    variants: [{ id: 'lc7v', name: '10cc', price: 1799, stock: 30, sku: 'TTL-10CC' }],
-    images: [],
-    cultivationSpecs: { difficulty: 'intermediate', colonizationTime: '5–10 days (on grain)', fruitingTempF: '60–75°F', fruitingTempC: '15–24°C', idealSubstrate: 'Hardwood logs or supplemented sawdust', expectedYield: 'Medicinal — polypore brackets', indoorOutdoor: 'both' },
-    isOrganic: true, inStock: true, tags: ['medicinal', 'liquid-culture', 'turkey-tail'], relatedProducts: [],
-  },
-  {
-    id: 'lc8', slug: 'maitake-liquid-culture',
-    name: { en: 'Maitake Liquid Culture Syringe', es: 'Jeringa de Cultivo Líquido Maitake' },
-    description: { en: "shrooms Culture Bank. Live Grifola frondosa mycelium, 10cc. Colonizes grain in 5–10 days. Includes 16G needle + alcohol swab.", es: 'shrooms Culture Bank. Micelio vivo de Grifola frondosa, 10cc. Coloniza en 5–10 días. Incluye aguja 16G + swab de alcohol.' },
-    category: 'spawn', subcategory: 'Liquid Culture', species: 'maitake',
-    price: 1799, compareAtPrice: 1999,
-    variants: [{ id: 'lc8v', name: '10cc', price: 1799, stock: 25, sku: 'MAL-10CC' }],
-    images: [],
-    cultivationSpecs: { difficulty: 'advanced', colonizationTime: '5–10 days (on grain)', fruitingTempF: '55–65°F', fruitingTempC: '13–18°C', idealSubstrate: 'Hardwood logs or oak sawdust', expectedYield: 'Variable — dense frond clusters', indoorOutdoor: 'both' },
-    isOrganic: true, inStock: true, tags: ['medicinal', 'edible', 'liquid-culture', 'maitake'], relatedProducts: [],
   },
 ]
 

@@ -236,7 +236,7 @@ export const SPECIES_LIST: SpeciesData[] = [
   {
     id: '6',
     slug: 'yellow-oyster',
-    commonName: 'Yellow Oyster',
+    commonName: 'Golden Oyster',
     scientificName: 'Pleurotus citrinopileatus',
     family: 'Pleurotaceae',
     order: 'Agaricales',
@@ -251,7 +251,7 @@ export const SPECIES_LIST: SpeciesData[] = [
     betaGlucanContent: 'High',
     indoorOutdoor: 'indoor',
     description: {
-      en: 'Golden clusters that glow like sunlight. The Yellow Oyster — native to the birch forests of Eastern Russia and Northern China — is a beginner favorite with a premium aesthetic. Pleurotus citrinopileatus fruits in delicate, ruffled clusters with a bright golden-yellow color that makes it one of the most photogenic edible mushrooms. Fast, beautiful, and packed with longevity-supporting antioxidants.',
+      en: 'Golden clusters that glow like sunlight. The Golden Oyster — native to the birch forests of Eastern Russia and Northern China — is a beginner favorite with a premium aesthetic. Pleurotus citrinopileatus fruits in delicate, ruffled clusters with a bright golden-yellow color that makes it one of the most photogenic edible mushrooms. Fast, beautiful, and packed with longevity-supporting antioxidants.',
       es: 'Racimos dorados que brillan como la luz del sol. La Ostra Amarilla — nativa de los bosques de abedul del este de Rusia y norte de China — es favorita de principiantes con estética premium. Pleurotus citrinopileatus fructifica en delicados racimos ondulados con un brillante color amarillo-dorado que lo convierte en uno de los hongos comestibles más fotogénicos. Rápida, hermosa y llena de antioxidantes que apoyan la longevidad.',
     },
     cultivationNotes: {
@@ -276,97 +276,8 @@ export const SPECIES_LIST: SpeciesData[] = [
       { icon: 'leaf', label: 'B-Vitamin Complex', detail: 'Rich in B1, B2, B3, and B5 — supports energy metabolism, nervous system function, and cellular health' },
     ],
   },
-  {
-    id: '7',
-    slug: 'turkey-tail',
-    commonName: 'Turkey Tail',
-    scientificName: 'Trametes versicolor',
-    family: 'Polyporaceae',
-    order: 'Polyporales',
-    type: 'medicinal',
-    difficulty: 'intermediate',
-    substrate: ['Hardwood logs', 'Hardwood stumps', 'Hardwood sawdust'],
-    colonizationWeeks: { min: 4, max: 8 },
-    fruitingTempF: { min: 50, max: 75 },
-    fruitingTempC: { min: 10, max: 24 },
-    expectedFlushes: 2,
-    biologicalEfficiency: '10–15%',
-    betaGlucanContent: 'Very High (PSK, PSP)',
-    indoorOutdoor: 'both',
-    description: {
-      en: "Turkey Tail is one of the most studied medicinal mushrooms on Earth, named for its colorful concentric rings that mirror a wild turkey's tail feathers. Found on fallen logs across every forested continent, Trametes versicolor contains PSK (polysaccharide-K) and PSP (polysaccharide peptide) — two of the most rigorously researched immunomodulatory compounds in oncology. Not a culinary mushroom, but a profound medicinal ally consumed as tea or tincture.",
-      es: "La Cola de Pavo es uno de los hongos medicinales más estudiados del planeta, nombrado por sus coloridos anillos concéntricos que imitan las plumas de la cola de un pavo salvaje. Encontrado en troncos caídos en todos los continentes forestados, Trametes versicolor contiene PSK y PSP — dos de los compuestos inmunomoduladores más rigurosamente investigados en oncología. No es un hongo culinario, sino un profundo aliado medicinal consumido como té o tintura.",
-    },
-    cultivationNotes: {
-      en: "Turkey Tail grows naturally on dead hardwood and is moderately easy to cultivate. Inoculate oak, maple, or alder logs with plug spawn and allow 4–8 weeks for outdoor colonization. On sterilized sawdust blocks, colonization is faster (3–5 weeks). Does not require aggressive FAE or humidity control compared to edible species — it is adapted to outdoor forest conditions.",
-      es: "La Cola de Pavo crece naturalmente en madera dura muerta y es moderadamente fácil de cultivar. Inocula troncos de roble, arce o aliso con spawn en tacos y permite 4-8 semanas de colonización en exteriores. En bloques de aserrín esterilizado, la colonización es más rápida (3-5 semanas). No requiere FAE agresivo ni control estricto de humedad en comparación con especies comestibles.",
-    },
-    medicalNotes: {
-      en: "PSK (krestin) is approved in Japan and China as a cancer immunotherapy adjunct and has been used clinically since the 1970s. Multiple randomized controlled trials demonstrate improved survival rates in gastric, colorectal, breast, and lung cancers when used alongside chemotherapy. PSP shows strong antiviral properties and clinical trials demonstrate significant HPV clearance. Also a powerful prebiotic — selectively feeds beneficial gut bacteria.",
-      es: "El PSK (krestin) está aprobado en Japón y China como adyuvante de inmunoterapia contra el cáncer y se ha usado clínicamente desde los años 70. Múltiples ensayos clínicos aleatorizados demuestran tasas de supervivencia mejoradas en cánceres gástrico, colorrectal, de mama y pulmón cuando se usa junto a quimioterapia. El PSP muestra potentes propiedades antivirales y ensayos clínicos demuestran tasas significativas de eliminación del VPH.",
-    },
-    cookingNotes: {
-      en: "Not consumed as food — the fruiting body is too thin, tough, and leathery for culinary use. Best prepared as a decoction (simmer 20–30 minutes) or dual-extract tincture (hot water + alcohol). The tea has a pleasant earthy, slightly sweet flavor. Also available as powder for coffee or smoothies. Daily consistent use is key for therapeutic benefit.",
-      es: "No se consume como alimento — el cuerpo fructificante es demasiado delgado, duro y coriáceo para uso culinario. Se prepara mejor como decocción (hervida 20-30 minutos) o tintura de doble extracción. El té tiene un sabor agradable, terroso y ligeramente dulce. También disponible en polvo para café o batidos. El uso diario consistente es clave para el beneficio terapéutico.",
-    },
-    lookalikes: ['Stereum ostrea (False Turkey Tail)', 'Trametes hirsuta'],
-    imageUrl: '',
-    thumbnailUrl: '',
-    openartPrompt:
-      'Macro nature photography, Turkey Tail mushrooms (Trametes versicolor) growing on a mossy weathered hardwood log, vivid concentric rings in rust orange, cream white, teal blue and chocolate brown, multiple fan-shaped overlapping polypore brackets, soft dappled forest light filtering through canopy, extreme surface detail with fine velvet texture visible, shallow depth of field with green bokeh background, professional mycology photography, photorealistic, 8K',
-    keyBenefits: [
-      { icon: 'activity', label: 'Cancer Immunotherapy', detail: 'PSK approved in Japan & China since the 1970s — clinical trials show improved survival in multiple cancer types alongside chemo' },
-      { icon: 'shield', label: 'Strongest Immune Activator', detail: 'PSK and PSP among the most potent immunomodulatory compounds ever isolated from any living organism' },
-      { icon: 'leaf', label: 'Gut Microbiome', detail: 'Prebiotic effect selectively feeds Bifidobacterium and Lactobacillus — studied for microbiome diversity and gut barrier integrity' },
-      { icon: 'zap', label: 'Antiviral', detail: 'Clinical trials demonstrate significant HPV clearance rates in women with cervical dysplasia — strongest antiviral mushroom studied' },
-    ],
-  },
-  {
-    id: '8',
-    slug: 'maitake',
-    commonName: 'Maitake',
-    scientificName: 'Grifola frondosa',
-    family: 'Meripilaceae',
-    order: 'Polyporales',
-    type: 'medicinal',
-    difficulty: 'advanced',
-    substrate: ['Hardwood logs', 'Oak stumps', 'Supplemented hardwood sawdust'],
-    colonizationWeeks: { min: 12, max: 20 },
-    fruitingTempF: { min: 50, max: 65 },
-    fruitingTempC: { min: 10, max: 18 },
-    expectedFlushes: 1,
-    biologicalEfficiency: '20–30%',
-    betaGlucanContent: 'Extremely High (D-fraction)',
-    indoorOutdoor: 'both',
-    description: {
-      en: 'Maitake — the "dancing mushroom" in Japanese — is a prized culinary and medicinal powerhouse. Its overlapping, ruffled fronds grow in massive clusters at the base of oak trees, resembling a hen on a nest (hence its English name, Hen of the Woods). Wild specimens can weigh over 50 lbs. It is the only mushroom with published human clinical trials for both immune function and insulin receptor activation — making it unique in the fungal world.',
-      es: 'Maitake — el "hongo danzante" en japonés — es un poderoso hongo culinario y medicinal. Sus frondas rizadas y superpuestas crecen en grandes racimos en la base de robles, pareciendo una gallina en su nido. Los especímenes silvestres pueden pesar más de 20 kg. Es el único hongo con ensayos clínicos humanos publicados tanto para función inmune como para activación de receptores de insulina — haciéndolo único en el mundo fúngico.',
-    },
-    cultivationNotes: {
-      en: 'Maitake is among the most challenging species to cultivate. Requires extended colonization on supplemented hardwood (12–20 weeks), cold shock fruiting (40–50°F / 4–10°C), and very high relative humidity (90–95%). Outdoors: inoculate oak stumps in fall for natural fruiting the following autumn. Commercial indoor cultivation requires precise environmental control and experience.',
-      es: 'El Maitake es una de las especies más difíciles de cultivar. Requiere colonización extendida en madera dura suplementada (12-20 semanas), fructificación con shock frío (4-10°C) y humedad relativa muy alta (90-95%). En exteriores: inocula tocones de roble en otoño para una fructificación natural el otoño siguiente. El cultivo interior comercial requiere control ambiental preciso y experiencia.',
-    },
-    medicalNotes: {
-      en: "Maitake D-fraction is a unique beta-1,3/1,6-glucan with demonstrated anti-tumor activity and immune potentiation in published human clinical trials. Activates insulin receptors independently of insulin — making it the most studied mushroom for blood sugar regulation and type 2 diabetes support. Also being researched for PCOS management and metabolic syndrome. Contains SX-fraction, a specific polysaccharide for blood glucose control.",
-      es: "La D-fracción del Maitake es un beta-1,3/1,6-glucano único con actividad antitumoral demostrada y potenciación inmune en ensayos clínicos humanos publicados. Activa los receptores de insulina de forma independiente a la insulina — convirtiéndolo en el hongo más estudiado para la regulación del azúcar en sangre y el apoyo en diabetes tipo 2. También se investiga para el manejo del SOP y el síndrome metabólico.",
-    },
-    cookingNotes: {
-      en: 'Outstanding culinary mushroom with a rich, woodsy, deep umami flavor. The ruffled fronds develop a satisfying chewy-crisp texture when cooked at high heat. Best roasted whole at 425°F until edges crisp, or sautéed in butter with soy and ginger. The fronds naturally separate into meaty pieces — excellent in risotto, pasta, grain bowls, or as a standalone side dish.',
-      es: 'Hongo culinario excepcional con un rico sabor umami profundo y ahumado. Las frondas rizadas desarrollan una textura satisfactoriamente masticable y crujiente cuando se cocinan a fuego alto. Mejor asado entero a 220°C hasta que los bordes estén crujientes, o salteado en mantequilla con soya y jengibre. Las frondas se separan naturalmente en trozos carnosos — excelente en risotto, pasta, bowls de granos o como guarnición.',
-    },
-    lookalikes: ['Meripilus sumstinei (Black-Staining Polypore)', 'Bondarzewia berkeleyi'],
-    imageUrl: '',
-    thumbnailUrl: '',
-    openartPrompt:
-      'Macro nature photography, large fresh Maitake mushroom cluster (Grifola frondosa, Hen of the Woods) growing at the base of an ancient oak tree, multiple layered ruffled overlapping fronds in warm honey caramel and pale cream tones radiating from a central base, golden hour directional forest light casting soft volumetric shadows, extreme surface texture detail on each individual frond, mossy forest floor with autumn leaves, shallow depth of field with warm bokeh background, professional nature photography, photorealistic, 8K',
-    keyBenefits: [
-      { icon: 'activity', label: 'Anti-Cancer D-Fraction', detail: 'Unique beta-1,3/1,6-glucan with demonstrated tumor inhibition — the only mushroom with published human cancer trials for D-fraction' },
-      { icon: 'droplet', label: 'Blood Sugar Control', detail: "D-fraction activates insulin receptors independently of insulin — the most studied mushroom for type 2 diabetes and PCOS support" },
-      { icon: 'shield', label: 'Immune Potentiation', detail: 'Activates NK cells, T-cells, and macrophages simultaneously — among the strongest immune-stimulating mushrooms ever documented' },
-      { icon: 'leaf', label: 'Metabolic Support', detail: 'Clinically studied for metabolic syndrome, weight regulation, cholesterol balance, and blood pressure reduction' },
-    ],
-  },
 ]
+
 
 export const SPECIES_MAP: Record<string, SpeciesData> = Object.fromEntries(
   SPECIES_LIST.map((s) => [s.slug, s])
