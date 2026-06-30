@@ -5,10 +5,10 @@ import Link from 'next/link'
 import { motion, AnimatePresence, useMotionValue, useSpring } from 'framer-motion'
 import { useLocale, useTranslations } from 'next-intl'
 import { notFound } from 'next/navigation'
+import { useCartStore } from '@/lib/cart-store'
 import { ProductGallery } from '@/components/shop/ProductGallery'
 import { CultivationSpecs } from '@/components/shop/CultivationSpecs'
 import { Button } from '@/components/ui/Button'
-import { Badge } from '@/components/ui/Badge'
 import { formatPrice } from '@/lib/utils'
 import type { Product } from '@/types/product'
 
@@ -173,6 +173,8 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
   const product = PRODUCTS[params.slug] ?? LC_PRODUCTS[params.slug]
   if (!product) notFound()
 
+  const { addItem, openCart } = useCartStore()
+
   const [selectedVariant, setSelectedVariant] = useState(product.variants[0])
   const [quantity, setQuantity] = useState(1)
   const [activeTab, setActiveTab] = useState<typeof TABS[number]>('description')
@@ -192,6 +194,18 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
     my.set((e.clientY - rect.top - rect.height / 2) * 0.3)
   }
   const handleMagnetLeave = () => { mx.set(0); my.set(0) }
+
+  const handleAddToCart = () => {
+    addItem({
+      productId: product.id,
+      variantId: selectedVariant.id,
+      name: product.name[locale],
+      price: selectedVariant.price,
+      quantity,
+      image: product.images[0] ?? '',
+    })
+    openCart()
+  }
 
   const handleRipple = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect()
@@ -322,7 +336,7 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
                 style={{ x: springX, y: springY }}
                 onMouseMove={handleMagnetMove}
                 onMouseLeave={handleMagnetLeave}
-                onClick={handleRipple}
+                onClick={(e) => { handleRipple(e); handleAddToCart() }}
               >
                 <Button fullWidth size="lg" disabled={!product.inStock}>
                   {product.inStock ? `${t('addToCart')} — ${formatPrice(selectedVariant.price * quantity)}` : tc('outOfStock')}
@@ -503,7 +517,7 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
                 )}
               </div>
             </div>
-            <Button size="md" disabled={!product.inStock} className="flex-shrink-0">
+            <Button size="md" disabled={!product.inStock} className="flex-shrink-0" onClick={handleAddToCart}>
               {product.inStock ? t('addToCart') : tc('outOfStock')}
             </Button>
           </div>
