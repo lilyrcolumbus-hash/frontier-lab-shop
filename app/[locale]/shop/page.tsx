@@ -298,9 +298,12 @@ const CATEGORIES = [
 
 type CategoryKey = typeof CATEGORIES[number]['key']
 
+type CultureSubKey = 'all' | 'lc' | 'spore'
+
 export default function ShopPage() {
   const t = useTranslations('shop')
   const [activeCategory, setActiveCategory] = useState<CategoryKey>('culture-bank')
+  const [cultureSub, setCultureSub] = useState<CultureSubKey>('lc')
   const [sortBy, setSortBy] = useState('featured')
 
   const filtered = useMemo(() => {
@@ -318,11 +321,11 @@ export default function ShopPage() {
       {/* Culture Bank hero banner */}
       {activeCategory === 'culture-bank' && (
         <div className="bg-elevated border-b border-ds-border">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
             <div>
               <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-accent mb-2">shrooms Culture Bank</p>
               <h1 className="font-body font-bold text-3xl sm:text-4xl text-cream tracking-tight mb-2">Live Mycelium — Lab Isolated</h1>
-              <p className="text-cream-muted max-w-md">8 species. Liquid cultures colonize in 5–10 days. Spore syringes for agar work and genetics. Every syringe includes 16G needle + alcohol swab + instruction card.</p>
+              <p className="text-cream-muted max-w-md">8 species. Liquid cultures colonize in 5–10 days. Spore syringes for agar work and genetics. Every syringe: 16G needle + swab + instruction card.</p>
             </div>
             <div className="flex gap-6 flex-shrink-0">
               {[['8', 'Species'], ['10cc', 'Syringe'], ['Lab', 'Isolated']].map(([val, label]) => (
@@ -332,6 +335,27 @@ export default function ShopPage() {
                 </div>
               ))}
             </div>
+          </div>
+          {/* Sub-filter pills */}
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-4 flex gap-2">
+            {([
+              { key: 'lc', label: 'Liquid Culture', sub: '5–10 days · $17.99' },
+              { key: 'spore', label: 'Spore Syringes', sub: 'Agar work · $12.99' },
+            ] as const).map(({ key, label, sub }) => (
+              <button
+                key={key}
+                onClick={() => setCultureSub(key)}
+                className={cn(
+                  'flex flex-col items-start px-4 py-2.5 rounded-xl border text-left transition-all',
+                  cultureSub === key
+                    ? 'bg-surface border-accent text-cream shadow-sm'
+                    : 'bg-transparent border-ds-border text-cream-muted hover:border-accent/40 hover:text-cream'
+                )}
+              >
+                <span className="text-sm font-medium leading-tight">{label}</span>
+                <span className="font-mono text-[10px] tracking-wide text-cream-muted mt-0.5">{sub}</span>
+              </button>
+            ))}
           </div>
         </div>
       )}
@@ -378,69 +402,51 @@ export default function ShopPage() {
 
         {/* Grid */}
         {activeCategory === 'culture-bank' ? (
-          <div className="space-y-16">
-            {/* Liquid Culture section */}
-            <div>
-              <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-8">
-                <div>
-                  <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-accent mb-1">Ready to inoculate</p>
-                  <h2 className="font-body font-bold text-2xl text-cream tracking-tight">Liquid Culture Syringes</h2>
+          <div>
+            {cultureSub === 'lc' && (
+              <div>
+                <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-8">
+                  <div>
+                    <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-accent mb-1">Ready to inoculate — no agar needed</p>
+                    <h2 className="font-body font-bold text-2xl text-cream tracking-tight">Liquid Culture Syringes</h2>
+                  </div>
+                  <div className="hidden sm:flex items-center gap-4 text-sm text-cream-muted">
+                    <span className="flex items-center gap-1.5">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                      5–10 day grain colonization
+                    </span>
+                    <span className="flex items-center gap-1.5">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                      Lab isolated
+                    </span>
+                  </div>
                 </div>
-                <div className="flex items-center gap-4 text-sm text-cream-muted">
-                  <span className="flex items-center gap-1.5">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                    5–10 day grain colonization
-                  </span>
-                  <span className="flex items-center gap-1.5">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                    Lab isolated
-                  </span>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                  {filtered.filter((p) => p.subcategory === 'Liquid Culture').map((product) => (
+                    <ProductCard key={product.id} product={product} />
+                  ))}
                 </div>
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                {filtered.filter((p) => p.subcategory === 'Liquid Culture').map((product) => (
-                  <ProductCard key={product.id} product={product} />
-                ))}
-              </div>
-            </div>
+            )}
 
-            {/* Divider with label */}
-            <div className="relative flex items-center gap-4">
-              <div className="flex-1 h-px bg-ds-border" />
-              <div className="flex items-center gap-2 px-4 py-2 bg-elevated border border-ds-border rounded-full">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-amber"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
-                <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-amber">For the mycologist</span>
-              </div>
-              <div className="flex-1 h-px bg-ds-border" />
-            </div>
-
-            {/* Spore Syringe section */}
-            <div>
-              <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-4">
-                <div>
-                  <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-amber mb-1">Agar work &amp; strain development</p>
-                  <h2 className="font-body font-bold text-2xl text-cream tracking-tight">Spore Syringes</h2>
+            {cultureSub === 'spore' && (
+              <div>
+                <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-4">
+                  <div>
+                    <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-amber mb-1">Agar work &amp; strain development</p>
+                    <h2 className="font-body font-bold text-2xl text-cream tracking-tight">Spore Syringes</h2>
+                  </div>
                 </div>
-                <div className="flex items-center gap-4 text-sm text-cream-muted">
-                  <span className="flex items-center gap-1.5">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-                    Genetic diversity
-                  </span>
-                  <span className="flex items-center gap-1.5">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-                    From $12.99
-                  </span>
+                <p className="text-cream-muted max-w-2xl mb-8">
+                  For isolating your own high-performance strains, building a personal liquid culture library, or preserving genetic diversity. Spores carry natural variation that clonal LC cannot — the foundation of serious mushroom genetics work.
+                </p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                  {filtered.filter((p) => p.subcategory === 'Spore Syringe').map((product) => (
+                    <ProductCard key={product.id} product={product} />
+                  ))}
                 </div>
               </div>
-              <p className="text-cream-muted max-w-2xl mb-8">
-                For isolating your own high-performance strains, building a personal liquid culture library, or preserving genetic diversity. Spores carry natural variation that clonal LC cannot — the foundation of serious mushroom genetics work.
-              </p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                {filtered.filter((p) => p.subcategory === 'Spore Syringe').map((product) => (
-                  <ProductCard key={product.id} product={product} />
-                ))}
-              </div>
-            </div>
+            )}
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
