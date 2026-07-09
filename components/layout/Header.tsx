@@ -2,7 +2,6 @@
 
 import { useState, useRef, useEffect } from 'react'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { Logo } from '@/components/ui/Logo'
 import { LanguageSwitcher } from './LanguageSwitcher'
@@ -90,16 +89,10 @@ function NavDropdown({ label, items, footer, scrolled = false }: NavDropdownProp
 
 export function Header() {
   const t = useTranslations()
-  const pathname = usePathname()
   const [mobileOpen, setMobileOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const { count, items, removeItem, updateQty, isOpen, openCart, closeCart } = useCartStore()
   const cartCount = count()
-
-  // Only the homepage has a dark hero sitting behind the fixed header at scroll 0.
-  // Every other page is light from the top, so it must never use the white/transparent nav style.
-  const isHome = /^\/(en|es)?\/?$/.test(pathname)
-  const overDarkHero = isHome && !scrolled
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20)
@@ -130,10 +123,10 @@ export function Header() {
     { label: t('nav.toolsDropdown.mixer'), href: '/tools/substrate-mixer' },
   ]
 
-  const navText = overDarkHero ? 'text-white/65 hover:text-white' : 'text-cream-muted hover:text-amber'
-  const iconBtn = overDarkHero
-    ? 'text-white/55 hover:text-white rounded-xl hover:bg-white/8'
-    : 'text-cream-muted hover:text-amber rounded-xl hover:bg-amber/8'
+  const navText = scrolled ? 'text-cream-muted hover:text-amber' : 'text-white/65 hover:text-white'
+  const iconBtn = scrolled
+    ? 'text-cream-muted hover:text-amber rounded-xl hover:bg-amber/8'
+    : 'text-white/55 hover:text-white rounded-xl hover:bg-white/8'
 
   return (
     <>
@@ -142,7 +135,7 @@ export function Header() {
           'fixed top-0 inset-x-0 z-30 transition-all duration-500',
           scrolled
             ? 'bg-bg/90 backdrop-blur-xl border-b border-ds-border shadow-[0_1px_12px_rgba(0,0,0,0.06)]'
-            : 'bg-transparent'
+            : 'bg-gradient-to-b from-black/55 via-black/25 to-transparent'
         )}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -156,16 +149,16 @@ export function Header() {
                 label={t('nav.shop')}
                 items={shopItems}
                 footer={{ label: t('nav.shopDropdown.bySpecies'), href: '/encyclopedia' }}
-                scrolled={!overDarkHero}
+                scrolled={scrolled}
               />
-              <NavDropdown label={t('nav.learn')} items={learnItems} scrolled={!overDarkHero} />
+              <NavDropdown label={t('nav.learn')} items={learnItems} scrolled={scrolled} />
               <Link
                 href="/encyclopedia"
                 className={cn('text-sm font-body font-medium transition-colors px-3 py-2', navText)}
               >
                 {t('nav.encyclopedia')}
               </Link>
-              <NavDropdown label={t('nav.tools')} items={toolItems} scrolled={!overDarkHero} />
+              <NavDropdown label={t('nav.tools')} items={toolItems} scrolled={scrolled} />
               <Link
                 href="/community"
                 className={cn('text-sm font-body font-medium transition-colors px-3 py-2', navText)}
@@ -174,7 +167,7 @@ export function Header() {
               </Link>
               <Link
                 href="/garden"
-                className={cn('text-sm font-body font-medium transition-colors px-3 py-2', overDarkHero ? 'text-white/55 hover:text-white' : 'text-amber/80 hover:text-amber')}
+                className={cn('text-sm font-body font-medium transition-colors px-3 py-2', scrolled ? 'text-amber/80 hover:text-amber' : 'text-white/55 hover:text-white')}
               >
                 {t('nav.garden')}
               </Link>
