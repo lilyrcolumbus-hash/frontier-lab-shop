@@ -189,17 +189,17 @@ const PRODUCTS: Product[] = [
     isOrganic: true, inStock: true, tags: ['grain-bag', 'rye', 'beginner'], relatedProducts: [],
   },
   {
-    id: 'gb2', slug: 'corn-grain-spawn-bag-3lb',
-    name: { en: 'Whole Corn Grain Bag — 3lb', es: 'Bolsa de Grano Maíz — 3lb' },
+    id: 'gb2', slug: 'drippy-corn-grain-spawn-bag-3lb',
+    name: { en: 'Drippy Corn Grain Bag — 3lb', es: 'Bolsa Drippy Corn (Maíz Húmedo) — 3lb' },
     description: {
-      en: "High nutrient density and excellent moisture hold — built for growers scaling toward bulk substrate. Whole-kernel corn, sterilized and ready to inoculate.",
-      es: "Alta densidad de nutrientes y excelente retención de humedad — ideal para escalar a sustrato a granel. Maíz en grano entero, esterilizado y listo para inocular.",
+      en: "Known in the grow community as \"Drippy Corn\" — high nutrient density and excellent moisture hold, built for growers scaling toward bulk substrate. Whole-kernel corn, sterilized and ready to inoculate.",
+      es: "Conocido en la comunidad cultivadora como \"Drippy Corn\" — alta densidad de nutrientes y excelente retención de humedad, ideal para escalar a sustrato a granel. Maíz en grano entero, esterilizado y listo para inocular.",
     },
     category: 'substrate', subcategory: 'Grain Bags',
     price: 1999, compareAtPrice: 2299,
     variants: [{ id: 'gb2v', name: '3 lb', price: 1999, stock: 55, sku: 'CRN-3LB' }],
     images: [],
-    isOrganic: true, inStock: true, tags: ['grain-bag', 'corn', 'beginner'], relatedProducts: [],
+    isOrganic: true, inStock: true, tags: ['grain-bag', 'corn', 'drippy-corn', 'beginner'], relatedProducts: [],
   },
   {
     id: 'gb3', slug: 'milo-grain-spawn-bag-3lb',

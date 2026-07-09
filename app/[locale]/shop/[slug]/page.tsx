@@ -291,18 +291,18 @@ const GRAIN_PRODUCTS: Record<string, Product> = {
     },
     grainBagSpecs: { ...GRAIN_SPECS_BASE, colonizationEstimate: '10–14 days once inoculated' },
   },
-  'corn-grain-spawn-bag-3lb': {
-    id: 'gb2', slug: 'corn-grain-spawn-bag-3lb',
-    name: { en: 'Whole Corn Grain Bag — 3lb', es: 'Bolsa de Grano Maíz — 3lb' },
+  'drippy-corn-grain-spawn-bag-3lb': {
+    id: 'gb2', slug: 'drippy-corn-grain-spawn-bag-3lb',
+    name: { en: 'Drippy Corn Grain Bag — 3lb', es: 'Bolsa Drippy Corn (Maíz Húmedo) — 3lb' },
     description: {
-      en: "Whole-kernel corn packs more stored energy per bag than any other grain in our lineup — built for growers scaling from a single spawn bag into large-format bulk substrate. Its starch content keeps the substrate hydrated deep into colonization, even in drier grow spaces where leaner grains dry out.\n\nEach bag is pressure-sterilized and pre-hydrated to spec, ready to inject the moment it arrives. Corn's larger kernel size means slightly slower initial colonization than small-grain options, but it pays that back with substrate volume — one bag of corn expands further as bulk spawn than the equivalent weight in rye or millet.\n\nEach bag: 3lb sterilized whole corn · 0.2-micron filter patch · self-healing injection port · shrooms instruction card. Store cool and dark until use.",
-      es: "El maíz en grano entero contiene más energía almacenada por bolsa que cualquier otro grano de nuestra línea — pensado para escalar de una bolsa a sustrato a granel de gran formato. Su contenido de almidón mantiene el sustrato hidratado incluso en espacios de cultivo más secos.\n\nCada bolsa viene esterilizada a presión e hidratada, lista para inyectar apenas llega.\n\nCada bolsa: 3lb de maíz esterilizado · parche filtrante de 0.2 micras · puerto de inyección autosellante · tarjeta de instrucciones shrooms.",
+      en: "Known across the grow community as \"Drippy Corn\" — whole-kernel corn packs more stored energy per bag than any other grain in our lineup, built for growers scaling from a single spawn bag into large-format bulk substrate. Its starch content keeps the substrate hydrated deep into colonization, even in drier grow spaces where leaner grains dry out.\n\nEach bag is pressure-sterilized and pre-hydrated to spec, ready to inject the moment it arrives. Corn's larger kernel size means slightly slower initial colonization than small-grain options, but it pays that back with substrate volume — one bag of corn expands further as bulk spawn than the equivalent weight in rye or millet.\n\nEach bag: 3lb sterilized whole corn · 0.2-micron filter patch · self-healing injection port · shrooms instruction card. Store cool and dark until use.",
+      es: "Conocido en la comunidad cultivadora como \"Drippy Corn\" — el maíz en grano entero contiene más energía almacenada por bolsa que cualquier otro grano de nuestra línea, pensado para escalar de una bolsa a sustrato a granel de gran formato. Su contenido de almidón mantiene el sustrato hidratado incluso en espacios de cultivo más secos.\n\nCada bolsa viene esterilizada a presión e hidratada, lista para inyectar apenas llega.\n\nCada bolsa: 3lb de maíz esterilizado · parche filtrante de 0.2 micras · puerto de inyección autosellante · tarjeta de instrucciones shrooms.",
     },
     category: 'substrate', subcategory: 'Grain Bags',
     price: 1999, compareAtPrice: 2299,
     variants: [{ id: 'gb2v', name: '3 lb', price: 1999, stock: 55, sku: 'CRN-3LB' }],
     images: [],
-    isOrganic: true, inStock: true, tags: ['grain-bag', 'corn', 'beginner'], relatedProducts: ['beginners-grow-kit-bundle'],
+    isOrganic: true, inStock: true, tags: ['grain-bag', 'corn', 'drippy-corn', 'beginner'], relatedProducts: ['beginners-grow-kit-bundle'],
     howToUseSteps: GRAIN_HOW_TO_USE_STEPS,
     scienceContent: {
       en: "Whole corn's nutritional density comes from its endosperm — a starch-and-protein reserve several times larger per kernel than rye or millet. That reserve is what lets colonized corn spawn punch above its weight when mixed into bulk substrate: a 1:8 spawn ratio with corn delivers more usable nutrition per bag than the same ratio with a smaller grain.\n\nThe tradeoff is kernel size: fewer, larger inoculation points mean mycelium takes a few more days to establish full network coverage compared to millet or milo. Growers who prioritize bulk-substrate economics over speed consistently choose corn.",
