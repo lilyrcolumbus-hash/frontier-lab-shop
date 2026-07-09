@@ -378,11 +378,24 @@ export default function ShopPage() {
 
         {/* Grid */}
         {activeCategory === 'culture-bank' ? (
-          <div className="space-y-12">
+          <div className="space-y-16">
+            {/* Liquid Culture section */}
             <div>
-              <div className="flex items-center gap-3 mb-6">
-                <h2 className="font-body font-bold text-xl text-cream">Liquid Culture Syringes</h2>
-                <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-accent bg-accent/10 px-2 py-1 rounded-full">5–10 day colonization</span>
+              <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-8">
+                <div>
+                  <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-accent mb-1">Ready to inoculate</p>
+                  <h2 className="font-body font-bold text-2xl text-cream tracking-tight">Liquid Culture Syringes</h2>
+                </div>
+                <div className="flex items-center gap-4 text-sm text-cream-muted">
+                  <span className="flex items-center gap-1.5">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    5–10 day grain colonization
+                  </span>
+                  <span className="flex items-center gap-1.5">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    Lab isolated
+                  </span>
+                </div>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 {filtered.filter((p) => p.subcategory === 'Liquid Culture').map((product) => (
@@ -390,12 +403,38 @@ export default function ShopPage() {
                 ))}
               </div>
             </div>
-            <div>
-              <div className="flex items-center gap-3 mb-2">
-                <h2 className="font-body font-bold text-xl text-cream">Spore Syringes</h2>
-                <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-amber bg-amber/10 px-2 py-1 rounded-full">Agar &amp; genetics work</span>
+
+            {/* Divider with label */}
+            <div className="relative flex items-center gap-4">
+              <div className="flex-1 h-px bg-ds-border" />
+              <div className="flex items-center gap-2 px-4 py-2 bg-elevated border border-ds-border rounded-full">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-amber"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+                <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-amber">For the mycologist</span>
               </div>
-              <p className="text-sm text-cream-muted mb-6 max-w-lg">Ideal for agar-based isolation, creating your own liquid cultures, and preserving genetic diversity. Germination takes 14–28 days.</p>
+              <div className="flex-1 h-px bg-ds-border" />
+            </div>
+
+            {/* Spore Syringe section */}
+            <div>
+              <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-4">
+                <div>
+                  <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-amber mb-1">Agar work &amp; strain development</p>
+                  <h2 className="font-body font-bold text-2xl text-cream tracking-tight">Spore Syringes</h2>
+                </div>
+                <div className="flex items-center gap-4 text-sm text-cream-muted">
+                  <span className="flex items-center gap-1.5">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                    Genetic diversity
+                  </span>
+                  <span className="flex items-center gap-1.5">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                    From $12.99
+                  </span>
+                </div>
+              </div>
+              <p className="text-cream-muted max-w-2xl mb-8">
+                For isolating your own high-performance strains, building a personal liquid culture library, or preserving genetic diversity. Spores carry natural variation that clonal LC cannot — the foundation of serious mushroom genetics work.
+              </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 {filtered.filter((p) => p.subcategory === 'Spore Syringe').map((product) => (
                   <ProductCard key={product.id} product={product} />
