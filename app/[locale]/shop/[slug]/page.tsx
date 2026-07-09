@@ -253,6 +253,122 @@ const LC_PRODUCTS: Record<string, Product> = {
   },
 }
 
+const GRAIN_HOW_TO_USE_STEPS = [
+  'Let the bag reach room temperature before opening or injecting — cold substrate slows colonization.',
+  'Sterilize the injection port with the included alcohol swab and let it dry completely.',
+  'Inject 2.5–5cc of liquid culture (or 1–2cc of spore solution) directly through the self-healing port.',
+  'Press the swabbed area firmly over the injection point — the port seals itself around the needle hole.',
+  'Gently massage the bag to spread the inoculation point through the grain without shaking excessively.',
+  'Incubate at 70–75°F in darkness. Watch for contamination (green, black, or pink patches) before colonization completes.',
+  'Once fully colonized (white throughout), use as spawn: break up and mix into bulk substrate at a 1:5–1:10 ratio, or transfer directly to a monotub.',
+]
+
+const GRAIN_SPECS_BASE = {
+  bagSize: '3 lb — 10 × 6 × 6 in bag',
+  sterilization: 'Autoclaved 15 PSI / 100 min, batch-tested',
+  moisture: '~50% — hydrated and ready to inoculate',
+  recommendedInoculation: '2.5–5cc liquid culture or 1–2cc spore solution',
+  shelfLife: '4–6 months, stored cool and dark',
+}
+
+const GRAIN_PRODUCTS: Record<string, Product> = {
+  'rye-grain-spawn-bag-3lb': {
+    id: 'gb1', slug: 'rye-grain-spawn-bag-3lb',
+    name: { en: 'Rye Berry Grain Bag — 3lb', es: 'Bolsa de Grano Centeno — 3lb' },
+    description: {
+      en: "The grain every serious grower reaches for first. Rye berries carry the highest surface area of any large grain we carry, holding moisture evenly through the full colonization cycle — no dry pockets, no stalled mycelium. It works reliably across nearly every cultivated species, which is why it's the default substrate in most commercial spawn operations.\n\nOur 3lb bags come pre-hydrated to ~50% moisture and sterilized in a commercial autoclave at 15 PSI, then batch-tested with biological indicators before shipping. Inject directly through the self-healing filter patch — no repackaging, no additional prep.\n\nEach bag: 3lb sterilized rye berries · 0.2-micron filter patch · self-healing injection port · shrooms instruction card. Store cool and dark until use.",
+      es: "El grano al que recurre primero todo cultivador serio. El centeno tiene la mayor superficie de cualquier grano grande, reteniendo humedad de forma pareja durante toda la colonización. Funciona de forma confiable en casi cualquier especie cultivada.\n\nNuestras bolsas de 3lb vienen pre-hidratadas al ~50% de humedad y esterilizadas en autoclave comercial a 15 PSI, luego probadas por lote antes de enviar.\n\nCada bolsa: 3lb de centeno esterilizado · parche filtrante de 0.2 micras · puerto de inyección autosellante · tarjeta de instrucciones shrooms.",
+    },
+    category: 'substrate', subcategory: 'Grain Bags',
+    price: 1999, compareAtPrice: 2199,
+    variants: [{ id: 'gb1v', name: '3 lb', price: 1999, stock: 60, sku: 'RYE-3LB' }],
+    images: [],
+    isOrganic: true, inStock: true, tags: ['grain-bag', 'rye', 'beginner'], relatedProducts: ['blue-oyster-liquid-culture'],
+    howToUseSteps: GRAIN_HOW_TO_USE_STEPS,
+    scienceContent: {
+      en: "Rye berries (Secale cereale) owe their cultivation dominance to kernel geometry: an elongated, grooved hull that maximizes surface area relative to volume while still holding structural integrity under autoclave pressure. That surface area translates directly into inoculation points — the locations where mycelium first establishes and begins radiating outward.\n\nEqually important is rye's starch-to-moisture behavior. Its hull absorbs water slowly and releases it slowly, which is why properly hydrated rye rarely turns anaerobic or mushy — the two failure modes that stall colonization in other grains. This forgiving moisture curve is the primary reason rye remains the substrate taught in nearly every cultivation course.",
+      es: "El centeno (Secale cereale) domina el cultivo por la geometría de su grano: una cáscara alargada y acanalada que maximiza la superficie relativa al volumen. Esa superficie se traduce directamente en puntos de inoculación.\n\nIgual de importante es su comportamiento de humedad: absorbe y libera agua lentamente, por lo que rara vez se vuelve anaeróbico o pastoso — los dos modos de falla que detienen la colonización en otros granos.",
+    },
+    grainBagSpecs: { ...GRAIN_SPECS_BASE, colonizationEstimate: '10–14 days once inoculated' },
+  },
+  'corn-grain-spawn-bag-3lb': {
+    id: 'gb2', slug: 'corn-grain-spawn-bag-3lb',
+    name: { en: 'Whole Corn Grain Bag — 3lb', es: 'Bolsa de Grano Maíz — 3lb' },
+    description: {
+      en: "Whole-kernel corn packs more stored energy per bag than any other grain in our lineup — built for growers scaling from a single spawn bag into large-format bulk substrate. Its starch content keeps the substrate hydrated deep into colonization, even in drier grow spaces where leaner grains dry out.\n\nEach bag is pressure-sterilized and pre-hydrated to spec, ready to inject the moment it arrives. Corn's larger kernel size means slightly slower initial colonization than small-grain options, but it pays that back with substrate volume — one bag of corn expands further as bulk spawn than the equivalent weight in rye or millet.\n\nEach bag: 3lb sterilized whole corn · 0.2-micron filter patch · self-healing injection port · shrooms instruction card. Store cool and dark until use.",
+      es: "El maíz en grano entero contiene más energía almacenada por bolsa que cualquier otro grano de nuestra línea — pensado para escalar de una bolsa a sustrato a granel de gran formato. Su contenido de almidón mantiene el sustrato hidratado incluso en espacios de cultivo más secos.\n\nCada bolsa viene esterilizada a presión e hidratada, lista para inyectar apenas llega.\n\nCada bolsa: 3lb de maíz esterilizado · parche filtrante de 0.2 micras · puerto de inyección autosellante · tarjeta de instrucciones shrooms.",
+    },
+    category: 'substrate', subcategory: 'Grain Bags',
+    price: 1799, compareAtPrice: 1999,
+    variants: [{ id: 'gb2v', name: '3 lb', price: 1799, stock: 55, sku: 'CRN-3LB' }],
+    images: [],
+    isOrganic: true, inStock: true, tags: ['grain-bag', 'corn', 'beginner'], relatedProducts: ['beginners-grow-kit-bundle'],
+    howToUseSteps: GRAIN_HOW_TO_USE_STEPS,
+    scienceContent: {
+      en: "Whole corn's nutritional density comes from its endosperm — a starch-and-protein reserve several times larger per kernel than rye or millet. That reserve is what lets colonized corn spawn punch above its weight when mixed into bulk substrate: a 1:8 spawn ratio with corn delivers more usable nutrition per bag than the same ratio with a smaller grain.\n\nThe tradeoff is kernel size: fewer, larger inoculation points mean mycelium takes a few more days to establish full network coverage compared to millet or milo. Growers who prioritize bulk-substrate economics over speed consistently choose corn.",
+      es: "La densidad nutricional del maíz proviene de su endospermo — una reserva de almidón y proteína varias veces mayor por grano que el centeno o el mijo. Esa reserva es lo que permite que el spawn de maíz rinda más al mezclarse en sustrato a granel.\n\nLa contrapartida es el tamaño del grano: menos puntos de inoculación implican que el micelio tarda algunos días más en cubrir toda la red, comparado con mijo o milo.",
+    },
+    grainBagSpecs: { ...GRAIN_SPECS_BASE, colonizationEstimate: '10–14 days once inoculated' },
+  },
+  'milo-grain-spawn-bag-3lb': {
+    id: 'gb3', slug: 'milo-grain-spawn-bag-3lb',
+    name: { en: 'Milo (Sorghum) Grain Bag — 3lb', es: 'Bolsa de Grano Milo (Sorgo) — 3lb' },
+    description: {
+      en: "Small, uniform sorghum kernels create thousands of inoculation points per bag — fast, even colonization at the lowest cost per bag in our entire lineup. Milo is the substrate of choice for growers running multiple bags at once, where cost-per-bag compounds fast.\n\nBecause the kernels are small and consistent in size, hydration is easier to get right on a first attempt than with oats or corn — one of the more forgiving grains for a first grain bag. Expect visible colonization within a week under normal incubation conditions.\n\nEach bag: 3lb sterilized milo · 0.2-micron filter patch · self-healing injection port · shrooms instruction card. Store cool and dark until use.",
+      es: "Granos de sorgo pequeños y uniformes crean miles de puntos de inoculación por bolsa — colonización rápida y pareja al menor costo por bolsa de toda nuestra línea. Ideal para cultivadores que corren varias bolsas a la vez.\n\nAl ser granos pequeños y consistentes, la hidratación es más fácil de acertar en un primer intento que con avena o maíz.\n\nCada bolsa: 3lb de milo esterilizado · parche filtrante de 0.2 micras · puerto de inyección autosellante · tarjeta de instrucciones shrooms.",
+    },
+    category: 'substrate', subcategory: 'Grain Bags',
+    price: 1499, compareAtPrice: 1699,
+    variants: [{ id: 'gb3v', name: '3 lb', price: 1499, stock: 65, sku: 'MLO-3LB' }],
+    images: [],
+    isOrganic: true, inStock: true, tags: ['grain-bag', 'milo', 'beginner', 'budget'], relatedProducts: ['pink-oyster-liquid-culture'],
+    howToUseSteps: GRAIN_HOW_TO_USE_STEPS,
+    scienceContent: {
+      en: "Sorghum's small, rounded kernel gives it one of the highest inoculation-point densities per pound of any common spawn grain — more individual grains means more discrete sites where mycelium first establishes, which is what drives faster visible colonization in the first week.\n\nMilo is also considerably cheaper to produce at scale than rye or oats, which is reflected in bag price without any compromise in sterility or moisture consistency — the same autoclave and hydration protocol applies across every grain we carry.",
+      es: "El grano pequeño y redondeado del sorgo le da una de las densidades de puntos de inoculación más altas por libra de cualquier grano común — más granos individuales significa más sitios donde el micelio se establece primero.\n\nEl milo también es considerablemente más barato de producir a escala que el centeno o la avena, lo cual se refleja en el precio sin comprometer esterilidad ni humedad.",
+    },
+    grainBagSpecs: { ...GRAIN_SPECS_BASE, colonizationEstimate: '7–10 days once inoculated' },
+  },
+  'millet-grain-spawn-bag-3lb': {
+    id: 'gb4', slug: 'millet-grain-spawn-bag-3lb',
+    name: { en: 'Millet Grain Bag — 3lb', es: 'Bolsa de Grano Mijo — 3lb' },
+    description: {
+      en: "The smallest kernel we carry — and the highest surface-area-to-volume ratio of any grain in our lineup. More surface area means more contact points for mycelium to establish from, which is why millet consistently colonizes faster than rye or corn at the same inoculation volume. It also carries a naturally lower endospore load than larger grains, giving mycelium a cleaner head start against competing microbes.\n\nThe tradeoff is handling: millet's small, light kernels shift and settle more than larger grains, so a gentler hand when massaging the bag pays off in more even coverage. Recommended for growers past their first few grows.\n\nEach bag: 3lb sterilized millet · 0.2-micron filter patch · self-healing injection port · shrooms instruction card. Store cool and dark until use.",
+      es: "El grano más pequeño de nuestra línea — y la mayor relación superficie-volumen. Más superficie significa más puntos de contacto para que el micelio se establezca, por lo que el mijo coloniza consistentemente más rápido que el centeno o el maíz. También tiene una carga natural de endosporas más baja, dando al micelio una ventaja más limpia frente a microbios competidores.\n\nLa contrapartida es el manejo: los granos pequeños y livianos se acomodan de forma distinta, así que una mano más suave al masajear la bolsa da mejores resultados.\n\nCada bolsa: 3lb de mijo esterilizado · parche filtrante de 0.2 micras · puerto de inyección autosellante · tarjeta de instrucciones shrooms.",
+    },
+    category: 'substrate', subcategory: 'Grain Bags',
+    price: 1699, compareAtPrice: 1899,
+    variants: [{ id: 'gb4v', name: '3 lb', price: 1699, stock: 45, sku: 'MLT-3LB' }],
+    images: [],
+    isOrganic: true, inStock: true, tags: ['grain-bag', 'millet', 'intermediate'], relatedProducts: ['lions-mane-liquid-culture'],
+    howToUseSteps: GRAIN_HOW_TO_USE_STEPS,
+    scienceContent: {
+      en: "Millet's kernel diameter is roughly a third that of rye, which — for a fixed bag weight — multiplies the total number of individual grains, and therefore the number of discrete inoculation points, several times over. This is the direct mechanical reason small-grain substrates colonize faster than large-grain ones at equal inoculation volume.\n\nMillet also measures lower in natural bacterial endospore load than wheat-family grains (rye, wheat, barley), reducing the population of heat-resistant contaminants that can survive autoclave sterilization and compete with mycelium during the early colonization window.",
+      es: "El diámetro del grano de mijo es aproximadamente un tercio del centeno, lo que — a igual peso de bolsa — multiplica el número total de granos individuales y, por lo tanto, de puntos de inoculación.\n\nEl mijo también tiene una carga natural de endosporas bacterianas más baja que los granos de la familia del trigo, reduciendo contaminantes resistentes al calor que sobreviven la esterilización.",
+    },
+    grainBagSpecs: { ...GRAIN_SPECS_BASE, colonizationEstimate: '5–9 days once inoculated' },
+  },
+  'oat-grain-spawn-bag-3lb': {
+    id: 'gb5', slug: 'oat-grain-spawn-bag-3lb',
+    name: { en: 'Oat Groat Grain Bag — 3lb', es: 'Bolsa de Grano Avena — 3lb' },
+    description: {
+      en: "Consistently the fastest-colonizing grain in side-by-side comparisons — oat groats are the top pick for aggressive Oyster strains that reward every day shaved off colonization time. Their loose hull structure lets mycelium establish and spread with less resistance than denser grains.\n\nThat same loose structure is why oats reward precision: over-hydrate and they turn mushy before colonization finishes; under-hydrate and growth stalls. Our bags ship pre-hydrated to the correct moisture target so you're starting from spec, not guessing.\n\nEach bag: 3lb sterilized oat groats · 0.2-micron filter patch · self-healing injection port · shrooms instruction card. Store cool and dark until use.",
+      es: "Consistentemente el grano de colonización más rápida en comparaciones directas — la avena es la primera opción para cepas agresivas de Ostra. Su estructura de cáscara suelta permite que el micelio se establezca y expanda con menos resistencia.\n\nEsa misma estructura hace que la avena exija precisión: con exceso de humedad se vuelve pastosa antes de terminar de colonizar; con poca, el crecimiento se detiene. Nuestras bolsas se envían pre-hidratadas al punto correcto.\n\nCada bolsa: 3lb de avena esterilizada · parche filtrante de 0.2 micras · puerto de inyección autosellante · tarjeta de instrucciones shrooms.",
+    },
+    category: 'substrate', subcategory: 'Grain Bags',
+    price: 1899, compareAtPrice: 2099,
+    variants: [{ id: 'gb5v', name: '3 lb', price: 1899, stock: 40, sku: 'OAT-3LB' }],
+    images: [],
+    isOrganic: true, inStock: true, tags: ['grain-bag', 'oats', 'intermediate'], relatedProducts: ['blue-oyster-liquid-culture', 'pink-oyster-liquid-culture'],
+    howToUseSteps: GRAIN_HOW_TO_USE_STEPS,
+    scienceContent: {
+      en: "Oat groats retain their bran layer, which is more porous and less dense than the hull structures of rye or corn. That porosity lowers mechanical resistance to hyphal growth, which is the primary driver behind oats' consistent lead in colonization-speed comparisons.\n\nThe same porosity makes oats considerably more sensitive to moisture content than denser grains — small deviations from the ~50% target compound quickly into either anaerobic mush or stalled dry patches, which is why oats are generally recommended after a grower has dialed in hydration technique on a more forgiving grain.",
+      es: "La avena conserva su capa de salvado, más porosa y menos densa que la cáscara del centeno o el maíz. Esa porosidad reduce la resistencia mecánica al crecimiento de las hifas, lo que explica su ventaja constante en velocidad de colonización.\n\nEsa misma porosidad hace que la avena sea más sensible al contenido de humedad — pequeñas desviaciones del ~50% objetivo se acumulan rápido en zonas anaeróbicas o secas, por lo que se recomienda después de dominar la hidratación en un grano más indulgente.",
+    },
+    grainBagSpecs: { ...GRAIN_SPECS_BASE, colonizationEstimate: '5–8 days once inoculated' },
+  },
+}
+
 const TABS = ['description', 'howToUse', 'science', 'reviews'] as const
 
 export default function ProductPage({ params }: { params: { slug: string } }) {
@@ -260,7 +376,7 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
   const t = useTranslations('shop.product')
   const tc = useTranslations('common')
 
-  const product = PRODUCTS[params.slug] ?? LC_PRODUCTS[params.slug]
+  const product = PRODUCTS[params.slug] ?? LC_PRODUCTS[params.slug] ?? GRAIN_PRODUCTS[params.slug]
   if (!product) notFound()
 
   const { addItem, openCart } = useCartStore()
@@ -488,6 +604,47 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
               </div>
             )}
 
+            {/* Grain bag contents */}
+            {product.subcategory === 'Grain Bags' && (
+              <div className="rounded-2xl border border-ds-border overflow-hidden">
+                <div className="px-4 py-2.5 bg-elevated border-b border-ds-border">
+                  <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-cream-muted">What&apos;s in the bag</p>
+                </div>
+                <div className="grid grid-cols-4 divide-x divide-ds-border bg-surface">
+                  {[
+                    {
+                      label: '3lb\nSterile Grain',
+                      icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round"><rect x="4" y="7" width="16" height="14" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>,
+                    },
+                    {
+                      label: '0.2μm\nFilter Patch',
+                      icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18"/></svg>,
+                    },
+                    {
+                      label: 'Self-Healing\nInjection Port',
+                      icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="19" x2="19" y2="5"/><path d="M15 5h4v4"/></svg>,
+                    },
+                    {
+                      label: 'Instruction\nCard',
+                      icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="7" y1="9" x2="17" y2="9"/><line x1="7" y1="13" x2="13" y2="13"/></svg>,
+                    },
+                  ].map((item, i) => (
+                    <motion.div
+                      key={item.label}
+                      initial={{ opacity: 0, y: 28, scale: 0.88 }}
+                      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                      viewport={{ once: true, margin: '-5% 0px' }}
+                      transition={{ delay: i * 0.14, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                      className="flex flex-col items-center gap-2 py-4 px-1"
+                    >
+                      <div className="text-accent/50">{item.icon}</div>
+                      <p className="font-mono text-[8px] uppercase tracking-wider text-cream-muted/60 text-center whitespace-pre-line leading-relaxed">{item.label}</p>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            )}
+
             {/* Trust badges */}
             <div className="flex flex-wrap items-center gap-5 py-4 border-t border-ds-border">
               {[
@@ -514,6 +671,38 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
             {/* Cultivation Specs */}
             {product.cultivationSpecs && (
               <CultivationSpecs specs={product.cultivationSpecs} />
+            )}
+
+            {/* Grain Bag Specs */}
+            {product.grainBagSpecs && (
+              <div className="rounded-2xl border border-ds-border overflow-hidden">
+                <div className="px-4 py-3 bg-elevated border-b border-ds-border">
+                  <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-cream-muted">Grain Bag Specs</p>
+                </div>
+                <div className="grid grid-cols-2 divide-x divide-y divide-ds-border">
+                  {[
+                    { label: 'Bag Size', value: product.grainBagSpecs.bagSize, icon: <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="4" y="7" width="16" height="14" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg> },
+                    { label: 'Colonization', value: product.grainBagSpecs.colonizationEstimate, icon: <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> },
+                    { label: 'Sterilization', value: product.grainBagSpecs.sterilization, icon: <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> },
+                    { label: 'Moisture', value: product.grainBagSpecs.moisture, icon: <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg> },
+                    { label: 'Recommended Inoculation', value: product.grainBagSpecs.recommendedInoculation, icon: <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M14.5 4l5.5 5.5-9 9-3 .5.5-3 6-6z"/><path d="M12 6.5l5 5"/></svg> },
+                    { label: 'Shelf Life', value: product.grainBagSpecs.shelfLife, icon: <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> },
+                  ].map((row, i) => (
+                    <motion.div
+                      key={row.label}
+                      className="flex flex-col gap-1.5 p-4 bg-surface"
+                      initial={{ opacity: 0, clipPath: 'inset(0 100% 0 0)' }}
+                      whileInView={{ opacity: 1, clipPath: 'inset(0 0% 0 0)' }}
+                      viewport={{ once: true, margin: '-10% 0px' }}
+                      transition={{ duration: 0.5, delay: 0.12 + i * 0.09, ease: [0.16, 1, 0.3, 1] }}
+                    >
+                      <div className="text-accent/55">{row.icon}</div>
+                      <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-cream-muted/50">{row.label}</p>
+                      <p className="text-sm text-cream font-medium leading-snug">{row.value}</p>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
             )}
           </div>
         </div>

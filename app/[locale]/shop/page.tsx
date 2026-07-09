@@ -174,10 +174,77 @@ const PRODUCTS: Product[] = [
     cultivationSpecs: { difficulty: 'advanced', colonizationTime: '5–10 days (on grain)', fruitingTempF: '70–82°F', fruitingTempC: '21–28°C', idealSubstrate: 'Supplemented hardwood sawdust', expectedYield: '1–2 flushes (medicinal use)', indoorOutdoor: 'indoor' },
     isOrganic: true, inStock: true, tags: ['medicinal', 'liquid-culture', 'reishi', 'antler'], relatedProducts: [],
   },
+  // ── Grain Spawn Bags ─────────────────────────────────────────────────────
+  {
+    id: 'gb1', slug: 'rye-grain-spawn-bag-3lb',
+    name: { en: 'Rye Berry Grain Bag — 3lb', es: 'Bolsa de Grano Centeno — 3lb' },
+    description: {
+      en: "The industry-standard substrate — highest surface area of any common grain, exceptional moisture retention, works reliably across nearly every cultivated species. Sterilized, hydrated, and ready to inoculate.",
+      es: "El sustrato estándar de la industria — mayor superficie de cualquier grano común, excelente retención de humedad. Esterilizado, hidratado y listo para inocular.",
+    },
+    category: 'substrate', subcategory: 'Grain Bags',
+    price: 1999, compareAtPrice: 2199,
+    variants: [{ id: 'gb1v', name: '3 lb', price: 1999, stock: 60, sku: 'RYE-3LB' }],
+    images: [],
+    isOrganic: true, inStock: true, tags: ['grain-bag', 'rye', 'beginner'], relatedProducts: [],
+  },
+  {
+    id: 'gb2', slug: 'corn-grain-spawn-bag-3lb',
+    name: { en: 'Whole Corn Grain Bag — 3lb', es: 'Bolsa de Grano Maíz — 3lb' },
+    description: {
+      en: "High nutrient density and excellent moisture hold — built for growers scaling toward bulk substrate. Whole-kernel corn, sterilized and ready to inoculate.",
+      es: "Alta densidad de nutrientes y excelente retención de humedad — ideal para escalar a sustrato a granel. Maíz en grano entero, esterilizado y listo para inocular.",
+    },
+    category: 'substrate', subcategory: 'Grain Bags',
+    price: 1799, compareAtPrice: 1999,
+    variants: [{ id: 'gb2v', name: '3 lb', price: 1799, stock: 55, sku: 'CRN-3LB' }],
+    images: [],
+    isOrganic: true, inStock: true, tags: ['grain-bag', 'corn', 'beginner'], relatedProducts: [],
+  },
+  {
+    id: 'gb3', slug: 'milo-grain-spawn-bag-3lb',
+    name: { en: 'Milo (Sorghum) Grain Bag — 3lb', es: 'Bolsa de Grano Milo (Sorgo) — 3lb' },
+    description: {
+      en: "Small, uniform kernels create thousands of inoculation points per bag — fast, even colonization at the lowest cost per bag in our lineup. A favorite for growers running multiple bags at once.",
+      es: "Granos pequeños y uniformes crean miles de puntos de inoculación por bolsa — colonización rápida y pareja al menor costo de la línea.",
+    },
+    category: 'substrate', subcategory: 'Grain Bags',
+    price: 1499, compareAtPrice: 1699,
+    variants: [{ id: 'gb3v', name: '3 lb', price: 1499, stock: 65, sku: 'MLO-3LB' }],
+    images: [],
+    isOrganic: true, inStock: true, tags: ['grain-bag', 'milo', 'beginner', 'budget'], relatedProducts: [],
+  },
+  {
+    id: 'gb4', slug: 'millet-grain-spawn-bag-3lb',
+    name: { en: 'Millet Grain Bag — 3lb', es: 'Bolsa de Grano Mijo — 3lb' },
+    description: {
+      en: "The smallest kernel we carry — highest surface-area-to-volume ratio of any grain, meaning more contact points for mycelium and a lower natural contamination load than larger grains.",
+      es: "El grano más pequeño de nuestra línea — mayor relación superficie-volumen, más puntos de contacto para el micelio y menor riesgo de contaminación que granos más grandes.",
+    },
+    category: 'substrate', subcategory: 'Grain Bags',
+    price: 1699, compareAtPrice: 1899,
+    variants: [{ id: 'gb4v', name: '3 lb', price: 1699, stock: 45, sku: 'MLT-3LB' }],
+    images: [],
+    isOrganic: true, inStock: true, tags: ['grain-bag', 'millet', 'intermediate'], relatedProducts: [],
+  },
+  {
+    id: 'gb5', slug: 'oat-grain-spawn-bag-3lb',
+    name: { en: 'Oat Groat Grain Bag — 3lb', es: 'Bolsa de Grano Avena — 3lb' },
+    description: {
+      en: "Consistently the fastest-colonizing grain in side-by-side grows — ideal for aggressive Oyster strains. Rewards precise hydration for best results.",
+      es: "El grano de colonización más rápida en pruebas comparativas — ideal para cepas agresivas de Ostra. Requiere hidratación precisa para mejores resultados.",
+    },
+    category: 'substrate', subcategory: 'Grain Bags',
+    price: 1899, compareAtPrice: 2099,
+    variants: [{ id: 'gb5v', name: '3 lb', price: 1899, stock: 40, sku: 'OAT-3LB' }],
+    images: [],
+    isOrganic: true, inStock: true, tags: ['grain-bag', 'oats', 'intermediate'], relatedProducts: [],
+  },
 ]
 
 const CATEGORIES = [
   { key: 'culture-bank', label: 'Culture Bank' },
+  { key: 'substrate',    label: 'Grain Bags' },
   { key: 'kit',          label: 'Grow Kits' },
   { key: 'wellness',     label: 'Wellness' },
   { key: 'all',          label: 'All Products' },

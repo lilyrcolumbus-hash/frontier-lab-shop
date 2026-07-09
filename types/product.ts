@@ -36,6 +36,14 @@ export interface Product {
   howToUseSteps?: string[]
   scienceContent?: Record<'en' | 'es', string>
   keyBenefits?: { icon: 'brain' | 'shield' | 'heart' | 'leaf' | 'activity' | 'zap' | 'sun' | 'droplet'; label: string; detail: string }[]
+  grainBagSpecs?: {
+    bagSize: string
+    sterilization: string
+    moisture: string
+    colonizationEstimate: string
+    recommendedInoculation: string
+    shelfLife: string
+  }
 }
 
 export interface CartItem {
