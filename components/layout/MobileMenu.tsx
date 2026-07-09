@@ -28,10 +28,8 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
   }, [onClose])
 
   const shopLinks = [
+    { label: 'Culture Bank', href: '/shop' },
     { label: t('nav.shopDropdown.kits'), href: '/shop?category=kit' },
-    { label: t('nav.shopDropdown.spawn'), href: '/shop?category=spawn' },
-    { label: t('nav.shopDropdown.substrates'), href: '/shop?category=substrate' },
-    { label: t('nav.shopDropdown.equipment'), href: '/shop?category=equipment' },
     { label: t('nav.shopDropdown.wellness'), href: '/shop?category=wellness' },
     { label: t('nav.shopDropdown.bundles'), href: '/shop?category=bundle' },
   ]
