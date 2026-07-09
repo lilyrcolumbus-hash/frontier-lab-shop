@@ -11,7 +11,7 @@ export interface SpeciesData extends Species {
   openartPrompt?: string
 }
 
-export const SPECIES_LIST: SpeciesData[] = [
+const SPECIES_LIST_BASE: SpeciesData[] = [
   {
     id: '1',
     slug: 'blue-oyster',
@@ -278,6 +278,56 @@ export const SPECIES_LIST: SpeciesData[] = [
   },
 ]
 
+
+export const CORDYCEPS_SPECIES: SpeciesData = {
+  id: '7',
+  slug: 'cordyceps',
+  commonName: 'Cordyceps',
+  scientificName: 'Cordyceps militaris',
+  family: 'Cordycipitaceae',
+  order: 'Hypocreales',
+  type: 'medicinal',
+  difficulty: 'advanced',
+  substrate: ['Cooked grain (wheat berries, brown rice)', 'Insect pupae (wild)'],
+  colonizationWeeks: { min: 2, max: 3 },
+  fruitingTempF: { min: 60, max: 75 },
+  fruitingTempC: { min: 15, max: 24 },
+  expectedFlushes: 1,
+  biologicalEfficiency: '50–150g dry per substrate',
+  betaGlucanContent: 'High (cordycepin + adenosine)',
+  indoorOutdoor: 'indoor',
+  description: {
+    en: "Cordyceps militaris is the cultivatable species behind the legendary Cordyceps performance benefits — without the ethical and ecological concerns of wild-harvested Ophiocordyceps sinensis ($20,000/kg). In the wild, C. militaris parasitizes insect pupae; in cultivation, it grows on sterilized grain or rice, producing the same bioactive compounds — most critically cordycepin and adenosine — through an entirely sustainable lab process. Its vivid orange club-shaped stromata are visually unlike any other cultivated mushroom.",
+    es: "Cordyceps militaris es la especie cultivable detrás de los legendarios beneficios de rendimiento del Cordyceps — sin los problemas éticos y ecológicos del Ophiocordyceps sinensis silvestre ($20,000/kg). En la naturaleza parasita pupas de insectos; en cultivo crece en grano esterilizado produciendo los mismos compuestos bioactivos — principalmente cordycepina y adenosina — a través de un proceso de laboratorio completamente sostenible. Sus vibrantes estromatos naranjas en forma de maza son visualmente únicos entre los hongos cultivados.",
+  },
+  cultivationNotes: {
+    en: "Cordyceps is one of the most technically demanding cultivated fungi. Colonization occurs on cooked grain (wheat berries or brown rice) over 14–21 days at 65–72°F. Fruiting requires a 12-hour light/dark cycle — light is critical to trigger stroma formation. Maintain 85–95% humidity and 60–75°F. Orange stromata develop slowly over 30–60 days. Harvest when tips show bright orange color, before the white spore layer appears.",
+    es: "El Cordyceps es uno de los hongos cultivados más técnicamente exigentes. La colonización ocurre en grano cocido (trigo o arroz integral) en 14–21 días a 18–22°C. La fructificación requiere ciclo luz/oscuridad de 12 horas — la luz es crítica para detonar la formación de estromatos. Mantener 85–95% humedad. Los estromatos naranjas se desarrollan lentamente en 30–60 días.",
+  },
+  medicalNotes: {
+    en: "Cordycepin (3'-deoxyadenosine) is the primary bioactive compound — it mimics adenosine in the body, increasing ATP synthesis at the cellular level. Randomized controlled trials in trained athletes show significant improvements in VO2 max, time to exhaustion, and lactate clearance. Also studied for: immune modulation (via beta-glucan polysaccharides), kidney protection (nephroprotective), libido and testosterone support, and anti-aging properties. A 2010 study published in the Journal of Alternative and Complementary Medicine showed 11% improvement in VO2 max vs. placebo.",
+    es: "La cordycepina (3'-desoxiadenosina) es el principal compuesto bioactivo — imita la adenosina en el cuerpo, aumentando la síntesis de ATP a nivel celular. Ensayos controlados aleatorizados en atletas entrenados muestran mejoras significativas en VO2 máx, tiempo hasta el agotamiento y aclaramiento de lactato. También estudiado para: modulación inmune, protección renal, soporte de libido y testosterona, y propiedades antienvejecimiento.",
+  },
+  cookingNotes: {
+    en: "Not typically consumed as a culinary mushroom due to its small fruiting body size and slightly bitter flavor. Best consumed as a powder, capsule, or tincture. The dried stromata can be steeped in hot water as a tea. Dose: 1–3g of powder daily. Pairs well with coffee and chocolate in functional beverage blends.",
+    es: "Generalmente no se consume como hongo culinario por el pequeño tamaño de sus cuerpos fructificantes y sabor ligeramente amargo. Mejor consumido como polvo, cápsula o tintura. Los estromatos secos pueden prepararse en infusión de agua caliente. Dosis: 1–3g de polvo diario. Combina bien con café y chocolate en mezclas funcionales.",
+  },
+  lookalikes: ['Ophiocordyceps sinensis (wild)', 'Isaria farinosa'],
+  imageUrl: '',
+  thumbnailUrl: '',
+  openartPrompt: "Macro nature photography, Cordyceps militaris mushrooms showing vivid orange club-shaped stromata (fruiting bodies) growing upright from sterilized grain substrate in a laboratory cultivation container. Multiple thin orange stalks 3–6cm tall with slightly swollen club-shaped tips, glowing warm orange against a dark blurred background. Extreme surface detail showing the fine granular texture of the stromata surface. Soft directional studio lighting highlighting the saturated orange color. Professional mycology/scientific photography, photorealistic, 8K",
+  keyBenefits: [
+    { icon: 'zap', label: 'ATP & Energy', detail: 'Cordycepin increases cellular ATP production — the same mechanism used by the world\'s most elite endurance athletes' },
+    { icon: 'activity', label: 'VO2 Max', detail: 'Randomized trials show 11%+ improvement in VO2 max and time-to-exhaustion in trained athletes after 3 weeks' },
+    { icon: 'shield', label: 'Immune Modulation', detail: 'Beta-glucan polysaccharides activate NK cells and macrophages — studied for immune enhancement and anti-tumor activity' },
+    { icon: 'heart', label: 'Kidney & Vitality', detail: 'Nephroprotective compounds support kidney function; traditionally used for libido, fatigue, and age-related vitality' },
+  ],
+}
+
+export const SPECIES_LIST: SpeciesData[] = [
+  ...SPECIES_LIST_BASE,
+  CORDYCEPS_SPECIES,
+]
 
 export const SPECIES_MAP: Record<string, SpeciesData> = Object.fromEntries(
   SPECIES_LIST.map((s) => [s.slug, s])
