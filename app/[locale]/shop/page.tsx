@@ -174,6 +174,119 @@ const PRODUCTS: Product[] = [
     cultivationSpecs: { difficulty: 'advanced', colonizationTime: '5–10 days (on grain)', fruitingTempF: '70–82°F', fruitingTempC: '21–28°C', idealSubstrate: 'Supplemented hardwood sawdust', expectedYield: '1–2 flushes (medicinal use)', indoorOutdoor: 'indoor' },
     isOrganic: true, inStock: true, tags: ['medicinal', 'liquid-culture', 'reishi', 'antler'], relatedProducts: [],
   },
+  // ── Spore Syringes ───────────────────────────────────────────────────────
+  {
+    id: 'sp1', slug: 'lions-mane-spore-syringe',
+    name: { en: "Lion's Mane Spore Syringe", es: 'Jeringa de Esporas Melena de León' },
+    description: {
+      en: "shrooms Culture Bank. Hericium erinaceus spore suspension, 10cc. Slower than liquid culture (14–28 days) but ideal for agar work, creating your own LC, or genetic diversity projects. 16G needle + alcohol swab included.",
+      es: "shrooms Culture Bank. Suspensión de esporas de Hericium erinaceus, 10cc. Más lenta que cultivo líquido (14–28 días) pero ideal para trabajo en agar, crear tu propio LC o proyectos de diversidad genética. Aguja 16G + swab incluidos.",
+    },
+    category: 'spawn', subcategory: 'Spore Syringe', species: 'lions-mane',
+    price: 1299, compareAtPrice: 1499,
+    variants: [{ id: 'sp1v', name: '10cc', price: 1299, stock: 40, sku: 'LMS-10CC' }],
+    images: [],
+    cultivationSpecs: { difficulty: 'intermediate', colonizationTime: '14–28 days', fruitingTempF: '65–75°F', fruitingTempC: '18–24°C', idealSubstrate: 'Supplemented hardwood sawdust', expectedYield: '200–400g per flush', indoorOutdoor: 'indoor' },
+    isOrganic: true, inStock: true, tags: ['medicinal', 'spore-syringe', 'lions-mane'], relatedProducts: ['lions-mane-liquid-culture'],
+  },
+  {
+    id: 'sp2', slug: 'blue-oyster-spore-syringe',
+    name: { en: 'Blue Oyster Spore Syringe', es: 'Jeringa de Esporas Ostra Azul' },
+    description: {
+      en: "shrooms Culture Bank. Pleurotus ostreatus spore suspension, 10cc. Perfect entry point for beginners learning sterile technique. Use on agar to isolate vigorous genetics before transferring to grain. 16G needle + alcohol swab included.",
+      es: "shrooms Culture Bank. Suspensión de esporas de Pleurotus ostreatus, 10cc. Punto de entrada perfecto para principiantes aprendiendo técnica estéril. Usar en agar para aislar genética vigorosa antes de transferir a grano. Aguja 16G + swab incluidos.",
+    },
+    category: 'spawn', subcategory: 'Spore Syringe', species: 'blue-oyster',
+    price: 1299, compareAtPrice: 1499,
+    variants: [{ id: 'sp2v', name: '10cc', price: 1299, stock: 50, sku: 'BOS-10CC' }],
+    images: [],
+    cultivationSpecs: { difficulty: 'beginner', colonizationTime: '14–28 days', fruitingTempF: '55–65°F', fruitingTempC: '13–18°C', idealSubstrate: 'Hardwood sawdust, straw, coffee grounds', expectedYield: '3–4 flushes, 25%+ BE', indoorOutdoor: 'both' },
+    isOrganic: true, inStock: true, tags: ['beginner', 'spore-syringe', 'oyster'], relatedProducts: ['blue-oyster-liquid-culture'],
+  },
+  {
+    id: 'sp3', slug: 'pink-oyster-spore-syringe',
+    name: { en: 'Pink Oyster Spore Syringe', es: 'Jeringa de Esporas Ostra Rosa' },
+    description: {
+      en: "shrooms Culture Bank. Pleurotus djamor spore suspension, 10cc. The most affordable way to start a Pink Oyster grow. Spores germinate rapidly in warm conditions (75–85°F). 16G needle + alcohol swab included.",
+      es: "shrooms Culture Bank. Suspensión de esporas de Pleurotus djamor, 10cc. La forma más accesible de iniciar un cultivo de Ostra Rosa. Las esporas germinan rápido en condiciones cálidas (24–29°C). Aguja 16G + swab incluidos.",
+    },
+    category: 'spawn', subcategory: 'Spore Syringe', species: 'pink-oyster',
+    price: 1299, compareAtPrice: 1499,
+    variants: [{ id: 'sp3v', name: '10cc', price: 1299, stock: 40, sku: 'POS-10CC' }],
+    images: [],
+    cultivationSpecs: { difficulty: 'beginner', colonizationTime: '14–21 days', fruitingTempF: '75–85°F', fruitingTempC: '24–29°C', idealSubstrate: 'Straw, hardwood sawdust', expectedYield: '3 flushes, 20–25% BE', indoorOutdoor: 'indoor' },
+    isOrganic: true, inStock: true, tags: ['beginner', 'spore-syringe', 'oyster'], relatedProducts: ['pink-oyster-liquid-culture'],
+  },
+  {
+    id: 'sp4', slug: 'golden-oyster-spore-syringe',
+    name: { en: 'Golden Oyster Spore Syringe', es: 'Jeringa de Esporas Ostra Dorada' },
+    description: {
+      en: "shrooms Culture Bank. Pleurotus citrinopileatus spore suspension, 10cc. Use on agar to select for the most vivid golden coloration before moving to grain. 16G needle + alcohol swab included.",
+      es: "shrooms Culture Bank. Suspensión de esporas de Pleurotus citrinopileatus, 10cc. Usar en agar para seleccionar la coloración dorada más vibrante antes de pasar a grano. Aguja 16G + swab incluidos.",
+    },
+    category: 'spawn', subcategory: 'Spore Syringe', species: 'yellow-oyster',
+    price: 1299, compareAtPrice: 1499,
+    variants: [{ id: 'sp4v', name: '10cc', price: 1299, stock: 35, sku: 'GOS-10CC' }],
+    images: [],
+    cultivationSpecs: { difficulty: 'beginner', colonizationTime: '14–21 days', fruitingTempF: '64–77°F', fruitingTempC: '18–25°C', idealSubstrate: 'Hardwood sawdust, straw', expectedYield: '3 flushes, 20% BE', indoorOutdoor: 'indoor' },
+    isOrganic: true, inStock: true, tags: ['beginner', 'spore-syringe', 'oyster'], relatedProducts: ['yellow-oyster-liquid-culture'],
+  },
+  {
+    id: 'sp5', slug: 'reishi-spore-syringe',
+    name: { en: 'Reishi Spore Syringe', es: 'Jeringa de Esporas Reishi' },
+    description: {
+      en: "shrooms Culture Bank. Ganoderma lucidum spore suspension, 10cc. The most economical entry into Reishi cultivation. Recommended for agar-based selection before transferring to grain. Advanced cultivators. 16G needle + alcohol swab included.",
+      es: "shrooms Culture Bank. Suspensión de esporas de Ganoderma lucidum, 10cc. La entrada más económica al cultivo de Reishi. Recomendado para selección en agar antes de transferir a grano. Cultivadores avanzados. Aguja 16G + swab incluidos.",
+    },
+    category: 'spawn', subcategory: 'Spore Syringe', species: 'reishi',
+    price: 1299, compareAtPrice: 1499,
+    variants: [{ id: 'sp5v', name: '10cc', price: 1299, stock: 30, sku: 'RES-10CC' }],
+    images: [],
+    cultivationSpecs: { difficulty: 'advanced', colonizationTime: '21–35 days', fruitingTempF: '70–80°F', fruitingTempC: '21–27°C', idealSubstrate: 'Hardwood logs or supplemented sawdust', expectedYield: '1–2 flushes (medicinal)', indoorOutdoor: 'both' },
+    isOrganic: true, inStock: true, tags: ['medicinal', 'spore-syringe', 'reishi'], relatedProducts: ['reishi-liquid-culture'],
+  },
+  {
+    id: 'sp6', slug: 'shiitake-spore-syringe',
+    name: { en: 'Shiitake Spore Syringe', es: 'Jeringa de Esporas Shiitake' },
+    description: {
+      en: "shrooms Culture Bank. Lentinula edodes spore suspension, 10cc. Best used on agar to develop vigorous isolates before inoculating sawdust blocks or oak logs. Patient cultivators are rewarded with superior flavor. 16G needle + alcohol swab included.",
+      es: "shrooms Culture Bank. Suspensión de esporas de Lentinula edodes, 10cc. Mejor utilizada en agar para desarrollar aislados vigorosos antes de inocular bloques de aserrín o troncos de roble. Los cultivadores pacientes son recompensados con un sabor superior. Aguja 16G + swab incluidos.",
+    },
+    category: 'spawn', subcategory: 'Spore Syringe', species: 'shiitake',
+    price: 1299, compareAtPrice: 1499,
+    variants: [{ id: 'sp6v', name: '10cc', price: 1299, stock: 45, sku: 'SHS-10CC' }],
+    images: [],
+    cultivationSpecs: { difficulty: 'intermediate', colonizationTime: '21–35 days (on grain)', fruitingTempF: '55–75°F', fruitingTempC: '13–24°C', idealSubstrate: 'Hardwood sawdust blocks or oak logs', expectedYield: 'Multiple flushes (perennial on logs)', indoorOutdoor: 'both' },
+    isOrganic: true, inStock: true, tags: ['edible', 'spore-syringe', 'shiitake'], relatedProducts: ['shiitake-liquid-culture'],
+  },
+  {
+    id: 'sp7', slug: 'cordyceps-militaris-spore-syringe',
+    name: { en: 'Cordyceps Militaris Spore Syringe', es: 'Jeringa de Esporas Cordyceps Militaris' },
+    description: {
+      en: "shrooms Culture Bank. Cordyceps militaris spore suspension, 10cc. For mycologists wanting to develop their own isolates. Germination on agar takes 7–14 days; select fast-growing sectors before transferring to grain. Advanced only. 16G needle + alcohol swab included.",
+      es: "shrooms Culture Bank. Suspensión de esporas de Cordyceps militaris, 10cc. Para micólogos que quieren desarrollar sus propios aislados. La germinación en agar tarda 7–14 días; seleccionar sectores de crecimiento rápido antes de transferir a grano. Solo avanzados. Aguja 16G + swab incluidos.",
+    },
+    category: 'spawn', subcategory: 'Spore Syringe', species: 'cordyceps',
+    price: 1299, compareAtPrice: 1499,
+    variants: [{ id: 'sp7v', name: '10cc', price: 1299, stock: 25, sku: 'CMS-10CC' }],
+    images: [],
+    cultivationSpecs: { difficulty: 'advanced', colonizationTime: '21–35 days', fruitingTempF: '60–75°F', fruitingTempC: '15–24°C', idealSubstrate: 'Cooked grain (wheat berries, brown rice)', expectedYield: '50–150g dry per substrate', indoorOutdoor: 'indoor' },
+    isOrganic: true, inStock: true, tags: ['medicinal', 'spore-syringe', 'cordyceps'], relatedProducts: ['cordyceps-militaris-liquid-culture'],
+  },
+  {
+    id: 'sp8', slug: 'antler-reishi-spore-syringe',
+    name: { en: 'Antler Reishi Spore Syringe', es: 'Jeringa de Esporas Reishi Antler' },
+    description: {
+      en: "shrooms Culture Bank. Ganoderma lucidum (antler strain) spore suspension, 10cc. Select isolates on agar under high-CO2 conditions to confirm antler-forming genetics before scaling. Advanced cultivators. 16G needle + alcohol swab included.",
+      es: "shrooms Culture Bank. Suspensión de esporas de Ganoderma lucidum (cepa antler), 10cc. Seleccionar aislados en agar bajo condiciones de alto CO2 para confirmar genética formadora de astas antes de escalar. Cultivadores avanzados. Aguja 16G + swab incluidos.",
+    },
+    category: 'spawn', subcategory: 'Spore Syringe', species: 'reishi',
+    price: 1299, compareAtPrice: 1499,
+    variants: [{ id: 'sp8v', name: '10cc', price: 1299, stock: 20, sku: 'ARS-10CC' }],
+    images: [],
+    cultivationSpecs: { difficulty: 'advanced', colonizationTime: '21–35 days', fruitingTempF: '70–82°F', fruitingTempC: '21–28°C', idealSubstrate: 'Supplemented hardwood sawdust', expectedYield: '1–2 flushes (medicinal)', indoorOutdoor: 'indoor' },
+    isOrganic: true, inStock: true, tags: ['medicinal', 'spore-syringe', 'reishi', 'antler'], relatedProducts: ['antler-reishi-liquid-culture'],
+  },
 ]
 
 const CATEGORIES = [
@@ -193,7 +306,7 @@ export default function ShopPage() {
   const filtered = useMemo(() => {
     let items: typeof PRODUCTS
     if (activeCategory === 'all') items = PRODUCTS
-    else if (activeCategory === 'culture-bank') items = PRODUCTS.filter((p) => p.subcategory === 'Liquid Culture')
+    else if (activeCategory === 'culture-bank') items = PRODUCTS.filter((p) => p.subcategory === 'Liquid Culture' || p.subcategory === 'Spore Syringe')
     else items = PRODUCTS.filter((p) => p.category === activeCategory)
     if (sortBy === 'price-low') items = [...items].sort((a, b) => a.price - b.price)
     if (sortBy === 'price-high') items = [...items].sort((a, b) => b.price - a.price)
@@ -209,10 +322,10 @@ export default function ShopPage() {
             <div>
               <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-accent mb-2">shrooms Culture Bank</p>
               <h1 className="font-body font-bold text-3xl sm:text-4xl text-cream tracking-tight mb-2">Live Mycelium — Lab Isolated</h1>
-              <p className="text-cream-muted max-w-md">8 species. 10cc syringes. Colonizes grain in 5–10 days — up to 3× faster than spores. Each packet includes 16G needle + alcohol swab + instruction card.</p>
+              <p className="text-cream-muted max-w-md">8 species. Liquid cultures colonize in 5–10 days. Spore syringes for agar work and genetics. Every syringe includes 16G needle + alcohol swab + instruction card.</p>
             </div>
             <div className="flex gap-6 flex-shrink-0">
-              {[['8', 'Species'], ['10cc', 'Syringe'], ['3×', 'Faster than spores']].map(([val, label]) => (
+              {[['8', 'Species'], ['10cc', 'Syringe'], ['Lab', 'Isolated']].map(([val, label]) => (
                 <div key={label} className="text-center">
                   <p className="font-body font-bold text-2xl text-accent">{val}</p>
                   <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-cream-muted mt-0.5">{label}</p>
@@ -264,11 +377,39 @@ export default function ShopPage() {
         </div>
 
         {/* Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {filtered.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </div>
+        {activeCategory === 'culture-bank' ? (
+          <div className="space-y-12">
+            <div>
+              <div className="flex items-center gap-3 mb-6">
+                <h2 className="font-body font-bold text-xl text-cream">Liquid Culture Syringes</h2>
+                <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-accent bg-accent/10 px-2 py-1 rounded-full">5–10 day colonization</span>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                {filtered.filter((p) => p.subcategory === 'Liquid Culture').map((product) => (
+                  <ProductCard key={product.id} product={product} />
+                ))}
+              </div>
+            </div>
+            <div>
+              <div className="flex items-center gap-3 mb-2">
+                <h2 className="font-body font-bold text-xl text-cream">Spore Syringes</h2>
+                <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-amber bg-amber/10 px-2 py-1 rounded-full">Agar &amp; genetics work</span>
+              </div>
+              <p className="text-sm text-cream-muted mb-6 max-w-lg">Ideal for agar-based isolation, creating your own liquid cultures, and preserving genetic diversity. Germination takes 14–28 days.</p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                {filtered.filter((p) => p.subcategory === 'Spore Syringe').map((product) => (
+                  <ProductCard key={product.id} product={product} />
+                ))}
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {filtered.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   )
