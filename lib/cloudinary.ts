@@ -8,7 +8,7 @@ cloudinary.config({
 
 export { cloudinary }
 
-export async function uploadImage(base64: string, folder = 'dirtyshrooms') {
+export async function uploadImage(base64: string, folder = 'shrooms') {
   const result = await cloudinary.uploader.upload(base64, {
     folder,
     resource_type: 'image',

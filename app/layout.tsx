@@ -44,7 +44,7 @@ export const metadata: Metadata = {
   description:
     "The world's most complete mushroom platform. Cultivate, learn, and connect. Premium grow kits, spawn, and the deepest mushroom encyclopedia online.",
   keywords: ['mushroom grow kits', 'spawn', 'mycology', 'mushroom cultivation', 'lion\'s mane', 'oyster mushrooms'],
-  metadataBase: new URL('https://dirtyshrooms.com'),
+  metadataBase: new URL('https://shrooms.com'),
   openGraph: {
     type: 'website',
     locale: 'en_US',
