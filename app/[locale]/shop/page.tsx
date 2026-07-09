@@ -240,19 +240,6 @@ const PRODUCTS: Product[] = [
     images: [],
     isOrganic: true, inStock: true, tags: ['grain-bag', 'oats', 'intermediate'], relatedProducts: [],
   },
-  {
-    id: 'gb6', slug: 'wheat-grain-spawn-bag-3lb',
-    name: { en: 'Wheat Berry Grain Bag — 3lb', es: 'Bolsa de Grano Trigo — 3lb' },
-    description: {
-      en: "The everyday alternative to rye — similar moisture retention and species compatibility, at a lower production cost since wheat is grown at far larger scale. Sterilized, hydrated, and ready to inoculate.",
-      es: "La alternativa cotidiana al centeno — retención de humedad y compatibilidad de especies similar, a menor costo de producción por cultivarse a mayor escala. Esterilizado, hidratado y listo para inocular.",
-    },
-    category: 'substrate', subcategory: 'Grain Bags',
-    price: 1999, compareAtPrice: 2299,
-    variants: [{ id: 'gb6v', name: '3 lb', price: 1999, stock: 50, sku: 'WHT-3LB' }],
-    images: [],
-    isOrganic: true, inStock: true, tags: ['grain-bag', 'wheat', 'beginner'], relatedProducts: [],
-  },
 ]
 
 const CATEGORIES = [

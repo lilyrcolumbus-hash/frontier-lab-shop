@@ -367,25 +367,6 @@ const GRAIN_PRODUCTS: Record<string, Product> = {
     },
     grainBagSpecs: { ...GRAIN_SPECS_BASE, colonizationEstimate: '5–8 days once inoculated' },
   },
-  'wheat-grain-spawn-bag-3lb': {
-    id: 'gb6', slug: 'wheat-grain-spawn-bag-3lb',
-    name: { en: 'Wheat Berry Grain Bag — 3lb', es: 'Bolsa de Grano Trigo — 3lb' },
-    description: {
-      en: "The everyday alternative to rye. Wheat berries share nearly the same hull structure and moisture-holding behavior as rye, which is why the two are used almost interchangeably across commercial spawn operations — the difference comes down to cost, not performance. Wheat is grown at a scale rye never reaches, which keeps this bag priced the same as every other grain in our lineup without cutting any corners on sterilization or hydration.\n\nEach bag is pressure-sterilized and pre-hydrated to spec, ready to inject the moment it arrives. A dependable, no-surprises choice for growers who already know rye and want to compare.\n\nEach bag: 3lb sterilized wheat berries · 0.2-micron filter patch · self-healing injection port · shrooms instruction card. Store cool and dark until use.",
-      es: "La alternativa cotidiana al centeno. El trigo comparte casi la misma estructura de cáscara y comportamiento de humedad que el centeno, por lo que ambos se usan casi indistintamente en operaciones comerciales de spawn — la diferencia está en el costo, no en el rendimiento.\n\nCada bolsa viene esterilizada a presión e hidratada, lista para inyectar apenas llega. Una opción confiable y sin sorpresas para cultivadores que ya conocen el centeno y quieren comparar.\n\nCada bolsa: 3lb de trigo esterilizado · parche filtrante de 0.2 micras · puerto de inyección autosellante · tarjeta de instrucciones shrooms.",
-    },
-    category: 'substrate', subcategory: 'Grain Bags',
-    price: 1999, compareAtPrice: 2299,
-    variants: [{ id: 'gb6v', name: '3 lb', price: 1999, stock: 50, sku: 'WHT-3LB' }],
-    images: [],
-    isOrganic: true, inStock: true, tags: ['grain-bag', 'wheat', 'beginner'], relatedProducts: ['rye-grain-spawn-bag-3lb'],
-    howToUseSteps: GRAIN_HOW_TO_USE_STEPS,
-    scienceContent: {
-      en: "Wheat berries (Triticum aestivum) and rye berries (Secale cereale) are close botanical relatives within the grass family, and their kernels share nearly identical hull geometry — an elongated, grooved structure that governs both surface area and moisture retention. This is why cultivation literature routinely lists them as direct substitutes for one another.\n\nThe meaningful difference is agricultural, not biological: wheat is the second most-produced cereal crop on Earth by volume, grown across a far wider geography than rye. That production scale is what keeps wheat's raw material cost lower even as the sterilization, hydration, and packaging process stays identical across every grain we carry.",
-      es: "El trigo (Triticum aestivum) y el centeno (Secale cereale) son parientes botánicos cercanos dentro de la familia de las gramíneas, y sus granos comparten una geometría de cáscara casi idéntica — una estructura alargada y acanalada que rige tanto la superficie como la retención de humedad. Por eso la literatura de cultivo los lista habitualmente como sustitutos directos.\n\nLa diferencia relevante es agrícola, no biológica: el trigo es el segundo cereal más producido del mundo por volumen, cultivado en una geografía mucho más amplia que el centeno.",
-    },
-    grainBagSpecs: { ...GRAIN_SPECS_BASE, colonizationEstimate: '10–14 days once inoculated' },
-  },
 }
 
 const TABS = ['description', 'howToUse', 'science', 'reviews'] as const
