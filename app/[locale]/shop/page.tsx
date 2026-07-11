@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo, useEffect } from 'react'
+import { useState, useMemo, useEffect, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { useTranslations, useLocale } from 'next-intl'
 import { ProductCard } from '@/components/shop/ProductCard'
@@ -352,7 +352,7 @@ const CATEGORIES = [
 type CategoryKey = typeof CATEGORIES[number]['key']
 const CATEGORY_KEYS: readonly string[] = CATEGORIES.map((c) => c.key)
 
-export default function ShopPage() {
+function ShopPageContent() {
   const t = useTranslations('shop')
   const searchParams = useSearchParams()
   const categoryParam = searchParams.get('category')
@@ -472,5 +472,13 @@ export default function ShopPage() {
         )}
       </div>
     </div>
+  )
+}
+
+export default function ShopPage() {
+  return (
+    <Suspense fallback={null}>
+      <ShopPageContent />
+    </Suspense>
   )
 }
