@@ -265,7 +265,7 @@ const GRAIN_HOW_TO_USE_STEPS = [
 
 const GRAIN_SPECS_BASE = {
   bagSize: '3 lb — 10 × 6 × 6 in bag',
-  sterilization: 'Autoclaved 15 PSI / 100 min, batch-tested',
+  sterilization: 'Autoclaved 15 PSI / 100 min — verified per batch with biological indicators + temp/pressure logging',
   moisture: '~50% — hydrated and ready to inoculate',
   recommendedInoculation: '2.5–5cc liquid culture or 1–2cc spore solution',
   shelfLife: '4–6 months, stored cool and dark',
@@ -295,8 +295,8 @@ const GRAIN_PRODUCTS: Record<string, Product> = {
     id: 'gb2', slug: 'drippy-corn-grain-spawn-bag-3lb',
     name: { en: 'Drippy Corn Grain Bag — 3lb', es: 'Bolsa Drippy Corn (Maíz Húmedo) — 3lb' },
     description: {
-      en: "Known across the grow community as \"Drippy Corn\" — whole-kernel corn packs more stored energy per bag than any other grain in our lineup, built for growers scaling from a single spawn bag into large-format bulk substrate. Its starch content keeps the substrate hydrated deep into colonization, even in drier grow spaces where leaner grains dry out.\n\nEach bag is pressure-sterilized and pre-hydrated to spec, ready to inject the moment it arrives. Corn's larger kernel size means slightly slower initial colonization than small-grain options, but it pays that back with substrate volume — one bag of corn expands further as bulk spawn than the equivalent weight in rye or millet.\n\nEach bag: 3lb sterilized whole corn · 0.2-micron filter patch · self-healing injection port · shrooms instruction card. Store cool and dark until use.",
-      es: "Conocido en la comunidad cultivadora como \"Drippy Corn\" — el maíz en grano entero contiene más energía almacenada por bolsa que cualquier otro grano de nuestra línea, pensado para escalar de una bolsa a sustrato a granel de gran formato. Su contenido de almidón mantiene el sustrato hidratado incluso en espacios de cultivo más secos.\n\nCada bolsa viene esterilizada a presión e hidratada, lista para inyectar apenas llega.\n\nCada bolsa: 3lb de maíz esterilizado · parche filtrante de 0.2 micras · puerto de inyección autosellante · tarjeta de instrucciones shrooms.",
+      en: "Known across the grow community as \"Drippy Corn\" — whole-kernel corn packs more stored energy per bag than any other grain in our lineup, built for growers scaling from a single spawn bag into large-format bulk substrate. Its starch content keeps the substrate hydrated deep into colonization, even in drier grow spaces where leaner grains dry out.\n\nEach bag is sterilized in a commercial autoclave at 15 PSI and pre-hydrated to spec, then batch-tested with biological indicators before it ships — ready to inject the moment it arrives. Corn's larger kernel size means slightly slower initial colonization than small-grain options, but it pays that back with substrate volume — one bag of corn expands further as bulk spawn than the equivalent weight in rye or millet.\n\nEach bag: 3lb sterilized whole corn · 0.2-micron filter patch · self-healing injection port · shrooms instruction card. Store cool and dark until use.",
+      es: "Conocido en la comunidad cultivadora como \"Drippy Corn\" — el maíz en grano entero contiene más energía almacenada por bolsa que cualquier otro grano de nuestra línea, pensado para escalar de una bolsa a sustrato a granel de gran formato. Su contenido de almidón mantiene el sustrato hidratado incluso en espacios de cultivo más secos.\n\nCada bolsa se esteriliza en autoclave comercial a 15 PSI e hidrata a especificación, luego se prueba por lote con indicadores biológicos antes de enviarse — lista para inyectar apenas llega.\n\nCada bolsa: 3lb de maíz esterilizado · parche filtrante de 0.2 micras · puerto de inyección autosellante · tarjeta de instrucciones shrooms.",
     },
     category: 'substrate', subcategory: 'Grain Bags',
     price: 1999, compareAtPrice: 2299,
@@ -314,8 +314,8 @@ const GRAIN_PRODUCTS: Record<string, Product> = {
     id: 'gb3', slug: 'milo-grain-spawn-bag-3lb',
     name: { en: 'Milo (Sorghum) Grain Bag — 3lb', es: 'Bolsa de Grano Milo (Sorgo) — 3lb' },
     description: {
-      en: "Small, uniform sorghum kernels create thousands of inoculation points per bag — fast, even colonization. Milo is the substrate of choice for growers running multiple bags at once, favored across the cultivation community for its speed and consistency.\n\nBecause the kernels are small and consistent in size, hydration is easier to get right on a first attempt than with oats or corn — one of the more forgiving grains for a first grain bag. Expect visible colonization within a week under normal incubation conditions.\n\nEach bag: 3lb sterilized milo · 0.2-micron filter patch · self-healing injection port · shrooms instruction card. Store cool and dark until use.",
-      es: "Granos de sorgo pequeños y uniformes crean miles de puntos de inoculación por bolsa — colonización rápida y pareja. Favorito de cultivadores que corren varias bolsas a la vez.\n\nAl ser granos pequeños y consistentes, la hidratación es más fácil de acertar en un primer intento que con avena o maíz.\n\nCada bolsa: 3lb de milo esterilizado · parche filtrante de 0.2 micras · puerto de inyección autosellante · tarjeta de instrucciones shrooms.",
+      en: "Small, uniform sorghum kernels create thousands of inoculation points per bag — fast, even colonization. Milo is the substrate of choice for growers running multiple bags at once, favored across the cultivation community for its speed and consistency.\n\nBecause the kernels are small and consistent in size, hydration is easier to get right on a first attempt than with oats or corn — one of the more forgiving grains for a first grain bag. Every bag is sterilized in a commercial autoclave at 15 PSI and batch-tested with biological indicators before it ships, so you're never gambling on sterility. Expect visible colonization within a week under normal incubation conditions.\n\nEach bag: 3lb sterilized milo · 0.2-micron filter patch · self-healing injection port · shrooms instruction card. Store cool and dark until use.",
+      es: "Granos de sorgo pequeños y uniformes crean miles de puntos de inoculación por bolsa — colonización rápida y pareja. Favorito de cultivadores que corren varias bolsas a la vez.\n\nAl ser granos pequeños y consistentes, la hidratación es más fácil de acertar en un primer intento que con avena o maíz. Cada bolsa se esteriliza en autoclave comercial a 15 PSI y se prueba por lote con indicadores biológicos antes de enviarse.\n\nCada bolsa: 3lb de milo esterilizado · parche filtrante de 0.2 micras · puerto de inyección autosellante · tarjeta de instrucciones shrooms.",
     },
     category: 'substrate', subcategory: 'Grain Bags',
     price: 1999, compareAtPrice: 2299,
@@ -333,8 +333,8 @@ const GRAIN_PRODUCTS: Record<string, Product> = {
     id: 'gb4', slug: 'millet-grain-spawn-bag-3lb',
     name: { en: 'Millet Grain Bag — 3lb', es: 'Bolsa de Grano Mijo — 3lb' },
     description: {
-      en: "The smallest kernel we carry — and the highest surface-area-to-volume ratio of any grain in our lineup. More surface area means more contact points for mycelium to establish from, which is why millet consistently colonizes faster than rye or corn at the same inoculation volume. It also carries a naturally lower endospore load than larger grains, giving mycelium a cleaner head start against competing microbes.\n\nThe tradeoff is handling: millet's small, light kernels shift and settle more than larger grains, so a gentler hand when massaging the bag pays off in more even coverage. Recommended for growers past their first few grows.\n\nEach bag: 3lb sterilized millet · 0.2-micron filter patch · self-healing injection port · shrooms instruction card. Store cool and dark until use.",
-      es: "El grano más pequeño de nuestra línea — y la mayor relación superficie-volumen. Más superficie significa más puntos de contacto para que el micelio se establezca, por lo que el mijo coloniza consistentemente más rápido que el centeno o el maíz. También tiene una carga natural de endosporas más baja, dando al micelio una ventaja más limpia frente a microbios competidores.\n\nLa contrapartida es el manejo: los granos pequeños y livianos se acomodan de forma distinta, así que una mano más suave al masajear la bolsa da mejores resultados.\n\nCada bolsa: 3lb de mijo esterilizado · parche filtrante de 0.2 micras · puerto de inyección autosellante · tarjeta de instrucciones shrooms.",
+      en: "The smallest kernel we carry — and the highest surface-area-to-volume ratio of any grain in our lineup. More surface area means more contact points for mycelium to establish from, which is why millet consistently colonizes faster than rye or corn at the same inoculation volume. It also carries a naturally lower endospore load than larger grains, giving mycelium a cleaner head start against competing microbes.\n\nThe tradeoff is handling: millet's small, light kernels shift and settle more than larger grains, so a gentler hand when massaging the bag pays off in more even coverage. Every bag is sterilized in a commercial autoclave at 15 PSI and batch-tested with biological indicators before it ships. Recommended for growers past their first few grows.\n\nEach bag: 3lb sterilized millet · 0.2-micron filter patch · self-healing injection port · shrooms instruction card. Store cool and dark until use.",
+      es: "El grano más pequeño de nuestra línea — y la mayor relación superficie-volumen. Más superficie significa más puntos de contacto para que el micelio se establezca, por lo que el mijo coloniza consistentemente más rápido que el centeno o el maíz. También tiene una carga natural de endosporas más baja, dando al micelio una ventaja más limpia frente a microbios competidores.\n\nLa contrapartida es el manejo: los granos pequeños y livianos se acomodan de forma distinta, así que una mano más suave al masajear la bolsa da mejores resultados. Cada bolsa se esteriliza en autoclave comercial a 15 PSI y se prueba por lote con indicadores biológicos antes de enviarse.\n\nCada bolsa: 3lb de mijo esterilizado · parche filtrante de 0.2 micras · puerto de inyección autosellante · tarjeta de instrucciones shrooms.",
     },
     category: 'substrate', subcategory: 'Grain Bags',
     price: 1999, compareAtPrice: 2299,
@@ -352,8 +352,8 @@ const GRAIN_PRODUCTS: Record<string, Product> = {
     id: 'gb5', slug: 'oat-grain-spawn-bag-3lb',
     name: { en: 'Oat Groat Grain Bag — 3lb', es: 'Bolsa de Grano Avena — 3lb' },
     description: {
-      en: "Consistently the fastest-colonizing grain in side-by-side comparisons — oat groats are the top pick for aggressive Oyster strains that reward every day shaved off colonization time. Their loose hull structure lets mycelium establish and spread with less resistance than denser grains.\n\nThat same loose structure is why oats reward precision: over-hydrate and they turn mushy before colonization finishes; under-hydrate and growth stalls. Our bags ship pre-hydrated to the correct moisture target so you're starting from spec, not guessing.\n\nEach bag: 3lb sterilized oat groats · 0.2-micron filter patch · self-healing injection port · shrooms instruction card. Store cool and dark until use.",
-      es: "Consistentemente el grano de colonización más rápida en comparaciones directas — la avena es la primera opción para cepas agresivas de Ostra. Su estructura de cáscara suelta permite que el micelio se establezca y expanda con menos resistencia.\n\nEsa misma estructura hace que la avena exija precisión: con exceso de humedad se vuelve pastosa antes de terminar de colonizar; con poca, el crecimiento se detiene. Nuestras bolsas se envían pre-hidratadas al punto correcto.\n\nCada bolsa: 3lb de avena esterilizada · parche filtrante de 0.2 micras · puerto de inyección autosellante · tarjeta de instrucciones shrooms.",
+      en: "Consistently the fastest-colonizing grain in side-by-side comparisons — oat groats are the top pick for aggressive Oyster strains that reward every day shaved off colonization time. Their loose hull structure lets mycelium establish and spread with less resistance than denser grains.\n\nThat same loose structure is why oats reward precision: over-hydrate and they turn mushy before colonization finishes; under-hydrate and growth stalls. Our bags ship pre-hydrated to the correct moisture target so you're starting from spec, not guessing — and every bag is sterilized in a commercial autoclave at 15 PSI, batch-tested with biological indicators before it ships.\n\nEach bag: 3lb sterilized oat groats · 0.2-micron filter patch · self-healing injection port · shrooms instruction card. Store cool and dark until use.",
+      es: "Consistentemente el grano de colonización más rápida en comparaciones directas — la avena es la primera opción para cepas agresivas de Ostra. Su estructura de cáscara suelta permite que el micelio se establezca y expanda con menos resistencia.\n\nEsa misma estructura hace que la avena exija precisión: con exceso de humedad se vuelve pastosa antes de terminar de colonizar; con poca, el crecimiento se detiene. Nuestras bolsas se envían pre-hidratadas al punto correcto, y cada bolsa se esteriliza en autoclave comercial a 15 PSI y se prueba por lote con indicadores biológicos antes de enviarse.\n\nCada bolsa: 3lb de avena esterilizada · parche filtrante de 0.2 micras · puerto de inyección autosellante · tarjeta de instrucciones shrooms.",
     },
     category: 'substrate', subcategory: 'Grain Bags',
     price: 1999, compareAtPrice: 2299,
@@ -369,6 +369,168 @@ const GRAIN_PRODUCTS: Record<string, Product> = {
   },
 }
 
+const FRUITING_HOW_TO_USE_STEPS = [
+  'Unbox and inspect — the block should be solid white with mycelium, no green, black, or pink patches.',
+  'Cut a 2–3 inch X or cross slit into the front of the bag, over the filter patch or wherever you want fruiting to begin.',
+  'Mist the opening 2–3× daily to hold 85–95% humidity without soaking the block itself.',
+  'Set it somewhere with indirect light and real fresh air exchange — stagnant CO2 is the #1 cause of leggy or stalled pins.',
+  'Pins appear in 5–10 days. Once caps form, mist morning and evening only, avoiding direct contact with the caps.',
+  "Harvest when caps flatten and the edges just begin to curl upward (Oysters) or the spines fully extend (Lion's Mane). Twist and pull at the base.",
+  'Rehydrate by soaking the block 1–12 hours, then rest 5–7 days for a second flush. Expect 2–3 total flushes per block.',
+]
+
+const ALLINONE_HOW_TO_USE_STEPS = [
+  'Let the bag reach room temperature before injecting — cold substrate slows colonization.',
+  'Sterilize the injection port with the included alcohol swab and let it dry completely.',
+  'Inject a full 10cc liquid culture syringe, or break up one colonized 3lb grain bag and pour it in through the port.',
+  'Press the swabbed area firmly over the injection point — the port seals itself around the needle hole.',
+  'Incubate at 70–75°F in darkness. Watch for green, black, or pink patches — a sign of contamination — before colonization completes.',
+  'Once fully white and colonized, cut a 2–3 inch X in the bag and move it straight into fruiting conditions — no transfer to a separate container needed.',
+  'Mist 2–3× daily, keep fresh air exchange high, and expect first pins 5–10 days after cutting.',
+]
+
+const ALLINONE_SPECS_BASE = {
+  bagSize: "5 lb — Master's Mix (soy hull + hardwood pellets)",
+  sterilization: 'Autoclaved 15 PSI / 120 min — verified per batch with biological indicators + temp/pressure logging',
+  moisture: '~65% — hydrated and ready to inoculate',
+  recommendedInoculation: 'Full 10cc liquid culture syringe or 1 colonized 3lb grain bag',
+  shelfLife: '2–3 months, stored cool and dark',
+}
+
+const FRUITING_PRODUCTS: Record<string, Product> = {
+  'lions-mane-fruiting-block': {
+    id: 'fb1', slug: 'lions-mane-fruiting-block',
+    name: { en: "Lion's Mane Fruiting Block", es: 'Bloque Fructificante Melena de León' },
+    description: {
+      en: "Skip colonization entirely — this block is already fully colonized with our Hericium erinaceus culture, selected for dense pom-pom formation. Cut it open, mist it, and watch pins form within 5–10 days. No injection, no incubation period, no risk of contamination on your end.\n\nSupplemented hardwood sawdust, autoclave-sterilized and colonized in our lab under HEPA-filtered positive pressure. Fruit at 65–75°F with 90–95% humidity and strong fresh air exchange — CO2 buildup causes icicle-form spines instead of the classic pom-pom.\n\nExpect 200–400g on the first flush, with 2–3 total flushes per block over 4–6 weeks.",
+      es: "Sáltate la colonización por completo — este bloque ya está completamente colonizado con nuestro cultivo de Hericium erinaceus, seleccionado para formación de pompón denso. Córtalo, rocíalo y verás pines formarse en 5–10 días. Sin inyección, sin incubación, sin riesgo de contaminación de tu parte.\n\nAserrín de madera dura suplementada, esterilizado en autoclave y colonizado en nuestro laboratorio bajo presión positiva con filtración HEPA. Fructificar a 18–24°C con 90–95% humedad y buen intercambio de aire fresco.\n\nEspera 200–400g en el primer flush, con 2–3 flushes totales por bloque en 4–6 semanas.",
+    },
+    category: 'kit', subcategory: 'Fruiting Blocks', species: 'lions-mane',
+    price: 2999,
+    variants: [{ id: 'fb1v', name: '5 lb Block', price: 2999, stock: 30, sku: 'LMF-5LB' }],
+    images: [],
+    cultivationSpecs: { difficulty: 'beginner', colonizationTime: 'Pre-colonized — ready now', fruitingTempF: '65–75°F', fruitingTempC: '18–24°C', idealSubstrate: 'Supplemented hardwood sawdust (pre-colonized)', expectedYield: '200–400g per flush, 2–3 flushes', indoorOutdoor: 'indoor' },
+    isOrganic: true, inStock: true, tags: ['beginner', 'kit', 'lions-mane', 'fruiting-block'], relatedProducts: ['lions-mane-liquid-culture'],
+    howToUseSteps: FRUITING_HOW_TO_USE_STEPS,
+    scienceContent: LC_PRODUCTS['lions-mane-liquid-culture'].scienceContent,
+    keyBenefits: LC_PRODUCTS['lions-mane-liquid-culture'].keyBenefits,
+  },
+  'blue-oyster-fruiting-block': {
+    id: 'fb2', slug: 'blue-oyster-fruiting-block',
+    name: { en: 'Blue Oyster Fruiting Block', es: 'Bloque Fructificante Ostra Azul' },
+    description: {
+      en: "Already colonized, already easy — this is the lowest-effort way to grow mushrooms at home. Our Blue Oyster block arrives fully colonized with Pleurotus ostreatus on hardwood sawdust and straw. Cut it open, mist, and get your first pins within a week.\n\nBlue Oyster is famously forgiving — the block tolerates temperature swings and inconsistent misting better than any other species we carry, which is why it's the block we recommend for a first-timer or a gift. Expect 3–4 dense flushes at 25%+ biological efficiency over 6–8 weeks.\n\nEach block: 5lb pre-colonized Blue Oyster substrate, sealed and ready to fruit. Store in a cool spot out of direct sun until you're ready to cut it open.",
+      es: "Ya colonizado, ya fácil — la forma de menor esfuerzo para cultivar hongos en casa. Nuestro bloque de Ostra Azul llega completamente colonizado con Pleurotus ostreatus sobre aserrín y paja. Córtalo, rocíalo y tendrás tus primeros pines en una semana.\n\nLa Ostra Azul es famosamente indulgente — tolera cambios de temperatura y riego inconsistente mejor que cualquier otra especie. Espera 3–4 flushes densos con 25%+ de eficiencia biológica en 6–8 semanas.\n\nCada bloque: 5lb de sustrato de Ostra Azul pre-colonizado, sellado y listo para fructificar.",
+    },
+    category: 'kit', subcategory: 'Fruiting Blocks', species: 'blue-oyster',
+    price: 2999,
+    variants: [{ id: 'fb2v', name: '5 lb Block', price: 2999, stock: 35, sku: 'BOF-5LB' }],
+    images: [],
+    cultivationSpecs: { difficulty: 'beginner', colonizationTime: 'Pre-colonized — ready now', fruitingTempF: '55–65°F', fruitingTempC: '13–18°C', idealSubstrate: 'Hardwood sawdust, straw (pre-colonized)', expectedYield: '3–4 flushes, 25%+ BE', indoorOutdoor: 'indoor' },
+    isOrganic: true, inStock: true, tags: ['beginner', 'kit', 'oyster', 'fruiting-block'], relatedProducts: ['blue-oyster-liquid-culture'],
+    howToUseSteps: FRUITING_HOW_TO_USE_STEPS,
+    scienceContent: LC_PRODUCTS['blue-oyster-liquid-culture'].scienceContent,
+    keyBenefits: LC_PRODUCTS['blue-oyster-liquid-culture'].keyBenefits,
+  },
+  'shiitake-fruiting-block': {
+    id: 'fb3', slug: 'shiitake-fruiting-block',
+    name: { en: 'Shiitake Fruiting Block', es: 'Bloque Fructificante Shiitake' },
+    description: {
+      en: "Already colonized on supplemented hardwood sawdust — skip the 8–12 week wait that a from-scratch Shiitake block normally takes. Cold-shock it (50°F water, 12–24 hours) once it arrives to trigger fruiting, and you'll see pins within 1–2 weeks of that soak.\n\nThe umami king rewards patience with flavor no Oyster species matches — thick caps, deep smoky aroma, and the texture chefs specifically ask for. Expect 2 solid flushes per block.\n\nEach block: 5lb pre-colonized Shiitake substrate, sealed and ready to cold-shock and fruit. Store in a cool spot out of direct sun until you're ready.",
+      es: "Ya colonizado en aserrín de madera dura suplementada — sáltate las 8–12 semanas de espera que normalmente toma un bloque de Shiitake desde cero. Aplica un baño de choque frío (10°C, 12–24 horas) al recibirlo para detonar la fructificación, y verás pines en 1–2 semanas.\n\nEl rey del umami recompensa la paciencia con un sabor que ninguna Ostra iguala — sombreros gruesos, aroma ahumado profundo y la textura que los chefs piden. Espera 2 flushes sólidos por bloque.\n\nCada bloque: 5lb de sustrato de Shiitake pre-colonizado, sellado y listo para choque frío y fructificación.",
+    },
+    category: 'kit', subcategory: 'Fruiting Blocks', species: 'shiitake',
+    price: 2999,
+    variants: [{ id: 'fb3v', name: '5 lb Block', price: 2999, stock: 25, sku: 'SHF-5LB' }],
+    images: [],
+    cultivationSpecs: { difficulty: 'intermediate', colonizationTime: 'Pre-colonized — ready to cold-shock', fruitingTempF: '55–75°F', fruitingTempC: '13–24°C', idealSubstrate: 'Supplemented hardwood sawdust block (pre-colonized)', expectedYield: '2 flushes per block', indoorOutdoor: 'indoor' },
+    isOrganic: true, inStock: true, tags: ['kit', 'shiitake', 'fruiting-block'], relatedProducts: ['shiitake-liquid-culture'],
+    howToUseSteps: FRUITING_HOW_TO_USE_STEPS,
+    scienceContent: LC_PRODUCTS['shiitake-liquid-culture'].scienceContent,
+    keyBenefits: LC_PRODUCTS['shiitake-liquid-culture'].keyBenefits,
+  },
+  'pink-oyster-fruiting-block': {
+    id: 'fb4', slug: 'pink-oyster-fruiting-block',
+    name: { en: 'Pink Oyster Fruiting Block', es: 'Bloque Fructificante Ostra Rosa' },
+    description: {
+      en: "Already colonized with our fastest, most dramatic species — cut this block open and you'll see vivid magenta pins within days, not weeks. Pleurotus djamor clusters double in size every 12 hours once fruiting starts, so check daily once pins appear.\n\nLoves warmth (75–85°F) and needs no special climate control in most homes. Harvest before the wavy edges appear for the best color and flavor — the pink fades fast once cooked, so plan to cook the same day you pick.\n\nEach block: 5lb pre-colonized Pink Oyster substrate, sealed and ready to fruit. Store in a cool spot out of direct sun until you're ready to cut it open.",
+      es: "Ya colonizado con nuestra especie más rápida y dramática — corta este bloque y verás pines magenta vibrantes en días, no semanas. Los racimos de Pleurotus djamor duplican tamaño cada 12 horas una vez que empieza la fructificación.\n\nAma el calor (24–29°C) y no necesita control climático especial. Cosecha antes de que aparezcan los bordes ondulados para mejor color y sabor — el rosa se desvanece rápido al cocinar.\n\nCada bloque: 5lb de sustrato de Ostra Rosa pre-colonizado, sellado y listo para fructificar.",
+    },
+    category: 'kit', subcategory: 'Fruiting Blocks', species: 'pink-oyster',
+    price: 2999,
+    variants: [{ id: 'fb4v', name: '5 lb Block', price: 2999, stock: 30, sku: 'POF-5LB' }],
+    images: [],
+    cultivationSpecs: { difficulty: 'beginner', colonizationTime: 'Pre-colonized — ready now', fruitingTempF: '75–85°F', fruitingTempC: '24–29°C', idealSubstrate: 'Straw, hardwood sawdust (pre-colonized)', expectedYield: '3 flushes, 20–25% BE', indoorOutdoor: 'indoor' },
+    isOrganic: true, inStock: true, tags: ['beginner', 'kit', 'oyster', 'fruiting-block'], relatedProducts: ['pink-oyster-liquid-culture'],
+    howToUseSteps: FRUITING_HOW_TO_USE_STEPS,
+    scienceContent: LC_PRODUCTS['pink-oyster-liquid-culture'].scienceContent,
+    keyBenefits: LC_PRODUCTS['pink-oyster-liquid-culture'].keyBenefits,
+  },
+}
+
+const ALLINONE_PRODUCTS: Record<string, Product> = {
+  'lions-mane-all-in-one-grow-bag': {
+    id: 'aio1', slug: 'lions-mane-all-in-one-grow-bag',
+    name: { en: "Lion's Mane All-in-One Grow Bag", es: 'Bolsa Todo-en-Uno Melena de León' },
+    description: {
+      en: "The whole grow in one bag — no separate grain spawn, no bulk substrate to mix, no monotub prep. This 5lb bag of Master's Mix (soy hull + hardwood fuel pellets) is sterilized in a commercial autoclave at 15 PSI, batch-tested with biological indicators, hydrated, and ready for you to inject directly. Once colonized, cut it open and fruit from the same bag.\n\nMaster's Mix is the substrate most Lion's Mane growers graduate to after their first grain-only grow — it holds moisture through a longer colonization window and supports denser pom-pom formation than straight grain. Inject with a full 10cc Lion's Mane liquid culture syringe for best results.\n\nEach bag: 5lb autoclave-sterilized Master's Mix · 0.2-micron filter patch · self-healing injection port · shrooms instruction card. Store cool and dark until use.",
+      es: "Todo el cultivo en una sola bolsa — sin spawn de grano por separado, sin mezclar sustrato a granel, sin preparar monotub. Esta bolsa de 5lb de Master's Mix (cáscara de soya + pellets de madera dura) se esteriliza en autoclave comercial a 15 PSI, se prueba por lote con indicadores biológicos, se hidrata y queda lista para inyectar directamente. Una vez colonizada, se corta y se fructifica desde la misma bolsa.\n\nMaster's Mix es el sustrato al que la mayoría de cultivadores de Melena de León pasan después de su primer cultivo solo en grano. Inyecta con una jeringa completa de cultivo líquido de Melena de León para mejores resultados.\n\nCada bolsa: 5lb de Master's Mix esterilizado en autoclave · parche filtrante de 0.2 micras · puerto de inyección autosellante · tarjeta de instrucciones shrooms.",
+    },
+    category: 'substrate', subcategory: 'All-in-One Bags', species: 'lions-mane',
+    price: 2499, compareAtPrice: 2799,
+    variants: [{ id: 'aio1v', name: '5 lb', price: 2499, stock: 40, sku: 'LMA-5LB' }],
+    images: [],
+    isOrganic: true, inStock: true, tags: ['all-in-one', 'lions-mane', 'intermediate'], relatedProducts: ['lions-mane-liquid-culture'],
+    howToUseSteps: ALLINONE_HOW_TO_USE_STEPS,
+    grainBagSpecs: { ...ALLINONE_SPECS_BASE, colonizationEstimate: '18–24 days once inoculated' },
+  },
+  'blue-oyster-all-in-one-grow-bag': {
+    id: 'aio2', slug: 'blue-oyster-all-in-one-grow-bag',
+    name: { en: 'Blue Oyster All-in-One Grow Bag', es: 'Bolsa Todo-en-Uno Ostra Azul' },
+    description: {
+      en: "The whole grow in one bag — inject, incubate, cut, fruit, all from the same 5lb bag of autoclave-sterilized Master's Mix. Every bag is sterilized at 15 PSI and batch-tested with biological indicators before it ships. No separate grain-to-bulk transfer step, no extra sterile work after the first injection. Built for Blue Oyster's forgiving, aggressive colonization style.\n\nBlue Oyster is the easiest species to run as an all-in-one — it tolerates minor contamination pressure better than almost anything else in cultivation, which makes it the safest species to learn bulk-substrate technique on. Expect 3–4 flushes at 25%+ biological efficiency.\n\nEach bag: 5lb autoclave-sterilized Master's Mix · 0.2-micron filter patch · self-healing injection port · shrooms instruction card. Store cool and dark until use.",
+      es: "Todo el cultivo en una sola bolsa — inyecta, incuba, corta, fructifica, todo desde la misma bolsa de 5lb de Master's Mix esterilizado en autoclave. Cada bolsa se esteriliza a 15 PSI y se prueba por lote con indicadores biológicos antes de enviarse. Sin paso de transferencia de grano a sustrato a granel. Ideal para el estilo de colonización agresivo e indulgente de la Ostra Azul.\n\nLa Ostra Azul es la especie más fácil para correr en formato all-in-one — tolera mejor la presión de contaminación menor que casi cualquier otra en cultivo. Espera 3–4 flushes con 25%+ de eficiencia biológica.\n\nCada bolsa: 5lb de Master's Mix esterilizado en autoclave · parche filtrante de 0.2 micras · puerto de inyección autosellante · tarjeta de instrucciones shrooms.",
+    },
+    category: 'substrate', subcategory: 'All-in-One Bags', species: 'blue-oyster',
+    price: 2499, compareAtPrice: 2799,
+    variants: [{ id: 'aio2v', name: '5 lb', price: 2499, stock: 45, sku: 'BOA-5LB' }],
+    images: [],
+    isOrganic: true, inStock: true, tags: ['all-in-one', 'oyster', 'beginner'], relatedProducts: ['blue-oyster-liquid-culture'],
+    howToUseSteps: ALLINONE_HOW_TO_USE_STEPS,
+    grainBagSpecs: { ...ALLINONE_SPECS_BASE, colonizationEstimate: '12–16 days once inoculated' },
+  },
+  'shiitake-all-in-one-grow-bag': {
+    id: 'aio3', slug: 'shiitake-all-in-one-grow-bag',
+    name: { en: 'Shiitake All-in-One Grow Bag', es: 'Bolsa Todo-en-Uno Shiitake' },
+    description: {
+      en: "The whole grow in one bag — inject, incubate, and fruit Shiitake from a single 5lb bag of autoclave-sterilized Master's Mix, no log inoculation or years-long wait required. Every bag is sterilized at 15 PSI and batch-tested with biological indicators before it ships. Colonization runs longer than Oyster species (Shiitake is a slower grower by nature), but you still skip the 8–12 week sawdust-block lead time of a from-scratch commercial setup.\n\nOnce fully colonized, trigger fruiting with a cold-shock soak (50°F water for 12–24 hours) — this is what separates a strong Shiitake flush from a weak one. Expect the deep umami flavor and thick caps this species is prized for.\n\nEach bag: 5lb autoclave-sterilized Master's Mix · 0.2-micron filter patch · self-healing injection port · shrooms instruction card. Store cool and dark until use.",
+      es: "Todo el cultivo en una sola bolsa — inyecta, incuba y fructifica Shiitake desde una sola bolsa de 5lb de Master's Mix esterilizado en autoclave, sin inoculación de troncos ni años de espera. Cada bolsa se esteriliza a 15 PSI y se prueba por lote con indicadores biológicos antes de enviarse. La colonización toma más tiempo que las Ostras (el Shiitake crece más lento por naturaleza), pero te ahorras las 8–12 semanas de espera de un bloque de aserrín desde cero.\n\nUna vez colonizado, detona la fructificación con un baño de choque frío (10°C por 12–24 horas) — esto es lo que separa un buen flush de Shiitake de uno débil.\n\nCada bolsa: 5lb de Master's Mix esterilizado en autoclave · parche filtrante de 0.2 micras · puerto de inyección autosellante · tarjeta de instrucciones shrooms.",
+    },
+    category: 'substrate', subcategory: 'All-in-One Bags', species: 'shiitake',
+    price: 2499, compareAtPrice: 2799,
+    variants: [{ id: 'aio3v', name: '5 lb', price: 2499, stock: 30, sku: 'SHA-5LB' }],
+    images: [],
+    isOrganic: true, inStock: true, tags: ['all-in-one', 'shiitake', 'intermediate'], relatedProducts: ['shiitake-liquid-culture'],
+    howToUseSteps: ALLINONE_HOW_TO_USE_STEPS,
+    grainBagSpecs: { ...ALLINONE_SPECS_BASE, colonizationEstimate: '18–25 days once inoculated' },
+  },
+  'pink-oyster-all-in-one-grow-bag': {
+    id: 'aio4', slug: 'pink-oyster-all-in-one-grow-bag',
+    name: { en: 'Pink Oyster All-in-One Grow Bag', es: 'Bolsa Todo-en-Uno Ostra Rosa' },
+    description: {
+      en: "The whole grow in one bag — and with Pink Oyster's speed, the fastest path from syringe to harvest we offer. Inject this 5lb bag of autoclave-sterilized Master's Mix, incubate in a warm spot, and cut it open in as little as 10–14 days. Every bag is sterilized at 15 PSI and batch-tested with biological indicators before it ships.\n\nPink Oyster loves heat (75–85°F) and thrives without climate control in most homes. Once fruiting starts, clusters double in size every 12 hours — harvest before the vivid magenta edges begin to wave, and cook quickly, since the color fades with heat.\n\nEach bag: 5lb autoclave-sterilized Master's Mix · 0.2-micron filter patch · self-healing injection port · shrooms instruction card. Store cool and dark until use.",
+      es: "Todo el cultivo en una sola bolsa — y con la velocidad de la Ostra Rosa, el camino más rápido de jeringa a cosecha que ofrecemos. Inyecta esta bolsa de 5lb de Master's Mix esterilizado en autoclave, incuba en un lugar cálido, y ábrela en tan solo 10–14 días. Cada bolsa se esteriliza a 15 PSI y se prueba por lote con indicadores biológicos antes de enviarse.\n\nLa Ostra Rosa ama el calor (24–29°C) y prospera sin control climático en la mayoría de los hogares. Una vez que empieza a fructificar, los racimos duplican tamaño cada 12 horas.\n\nCada bolsa: 5lb de Master's Mix esterilizado en autoclave · parche filtrante de 0.2 micras · puerto de inyección autosellante · tarjeta de instrucciones shrooms.",
+    },
+    category: 'substrate', subcategory: 'All-in-One Bags', species: 'pink-oyster',
+    price: 2499, compareAtPrice: 2799,
+    variants: [{ id: 'aio4v', name: '5 lb', price: 2499, stock: 35, sku: 'POA-5LB' }],
+    images: [],
+    isOrganic: true, inStock: true, tags: ['all-in-one', 'oyster', 'beginner'], relatedProducts: ['pink-oyster-liquid-culture'],
+    howToUseSteps: ALLINONE_HOW_TO_USE_STEPS,
+    grainBagSpecs: { ...ALLINONE_SPECS_BASE, colonizationEstimate: '10–14 days once inoculated' },
+  },
+}
+
 const TABS = ['description', 'howToUse', 'science', 'reviews'] as const
 
 export default function ProductPage({ params }: { params: { slug: string } }) {
@@ -376,7 +538,7 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
   const t = useTranslations('shop.product')
   const tc = useTranslations('common')
 
-  const product = PRODUCTS[params.slug] ?? LC_PRODUCTS[params.slug] ?? GRAIN_PRODUCTS[params.slug]
+  const product = PRODUCTS[params.slug] ?? LC_PRODUCTS[params.slug] ?? GRAIN_PRODUCTS[params.slug] ?? FRUITING_PRODUCTS[params.slug] ?? ALLINONE_PRODUCTS[params.slug]
   if (!product) notFound()
 
   const { addItem, openCart } = useCartStore()
@@ -604,8 +766,8 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
               </div>
             )}
 
-            {/* Grain bag contents */}
-            {product.subcategory === 'Grain Bags' && (
+            {/* Grain bag / all-in-one bag contents */}
+            {(product.subcategory === 'Grain Bags' || product.subcategory === 'All-in-One Bags') && (
               <div className="rounded-2xl border border-ds-border overflow-hidden">
                 <div className="px-4 py-2.5 bg-elevated border-b border-ds-border">
                   <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-cream-muted">What&apos;s in the bag</p>
@@ -613,7 +775,7 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
                 <div className="grid grid-cols-4 divide-x divide-ds-border bg-surface">
                   {[
                     {
-                      label: '3lb\nSterile Grain',
+                      label: product.subcategory === 'All-in-One Bags' ? "5lb\nMaster's Mix" : '3lb\nSterile Grain',
                       icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round"><rect x="4" y="7" width="16" height="14" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>,
                     },
                     {
@@ -623,6 +785,43 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
                     {
                       label: 'Self-Healing\nInjection Port',
                       icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="19" x2="19" y2="5"/><path d="M15 5h4v4"/></svg>,
+                    },
+                    {
+                      label: 'Instruction\nCard',
+                      icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="7" y1="9" x2="17" y2="9"/><line x1="7" y1="13" x2="13" y2="13"/></svg>,
+                    },
+                  ].map((item, i) => (
+                    <motion.div
+                      key={item.label}
+                      initial={{ opacity: 0, y: 28, scale: 0.88 }}
+                      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                      viewport={{ once: true, margin: '-5% 0px' }}
+                      transition={{ delay: i * 0.14, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                      className="flex flex-col items-center gap-2 py-4 px-1"
+                    >
+                      <div className="text-accent/50">{item.icon}</div>
+                      <p className="font-mono text-[8px] uppercase tracking-wider text-cream-muted/60 text-center whitespace-pre-line leading-relaxed">{item.label}</p>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Fruiting block contents */}
+            {product.subcategory === 'Fruiting Blocks' && (
+              <div className="rounded-2xl border border-ds-border overflow-hidden">
+                <div className="px-4 py-2.5 bg-elevated border-b border-ds-border">
+                  <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-cream-muted">What&apos;s in the box</p>
+                </div>
+                <div className="grid grid-cols-3 divide-x divide-ds-border bg-surface">
+                  {[
+                    {
+                      label: '5lb\nColonized Block',
+                      icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round"><rect x="4" y="7" width="16" height="14" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>,
+                    },
+                    {
+                      label: 'Fruiting-Ready\nFilter Bag',
+                      icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18"/></svg>,
                     },
                     {
                       label: 'Instruction\nCard',
@@ -677,7 +876,7 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
             {product.grainBagSpecs && (
               <div className="rounded-2xl border border-ds-border overflow-hidden">
                 <div className="px-4 py-3 bg-elevated border-b border-ds-border">
-                  <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-cream-muted">Grain Bag Specs</p>
+                  <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-cream-muted">{product.subcategory === 'All-in-One Bags' ? 'Substrate Specs' : 'Grain Bag Specs'}</p>
                 </div>
                 <div className="grid grid-cols-2 divide-x divide-y divide-ds-border">
                   {[
