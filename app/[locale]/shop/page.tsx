@@ -1,6 +1,7 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
+import { useSearchParams } from 'next/navigation'
 import { useTranslations, useLocale } from 'next-intl'
 import { ProductCard } from '@/components/shop/ProductCard'
 import { cn } from '@/lib/utils'
@@ -349,11 +350,20 @@ const CATEGORIES = [
 ] as const
 
 type CategoryKey = typeof CATEGORIES[number]['key']
+const CATEGORY_KEYS: readonly string[] = CATEGORIES.map((c) => c.key)
 
 export default function ShopPage() {
   const t = useTranslations('shop')
-  const [activeCategory, setActiveCategory] = useState<CategoryKey>('culture-bank')
+  const searchParams = useSearchParams()
+  const categoryParam = searchParams.get('category')
+  const [activeCategory, setActiveCategory] = useState<CategoryKey>(
+    categoryParam && CATEGORY_KEYS.includes(categoryParam) ? (categoryParam as CategoryKey) : 'culture-bank'
+  )
   const [sortBy, setSortBy] = useState('featured')
+
+  useEffect(() => {
+    if (categoryParam && CATEGORY_KEYS.includes(categoryParam)) setActiveCategory(categoryParam as CategoryKey)
+  }, [categoryParam])
 
   const filtered = useMemo(() => {
     let items: typeof PRODUCTS
