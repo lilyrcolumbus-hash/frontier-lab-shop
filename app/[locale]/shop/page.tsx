@@ -112,8 +112,8 @@ const PRODUCTS: Product[] = [
     id: 'lc1', slug: 'lions-mane-liquid-culture',
     name: { en: "Lion's Mane Liquid Culture Syringe", es: 'Jeringa de Cultivo Líquido Melena de León' },
     description: {
-      en: "The only mushroom that stimulates Nerve Growth Factor (NGF). shrooms Culture Bank — lab-isolated Hericium erinaceus, 10cc. Colonizes supplemented hardwood grain in 5–10 days. Yields 200–400g per flush. 16G needle + alcohol swab included.",
-      es: "El único hongo que estimula el Factor de Crecimiento Nervioso (NGF). shrooms Culture Bank — Hericium erinaceus aislado en laboratorio, 10cc. Coloniza en 5–10 días. Rinde 200–400g por flush. Aguja 16G + swab incluidos.",
+      en: "The only mushroom that stimulates Nerve Growth Factor (NGF). Culture Bank — lab-isolated Hericium erinaceus, 10cc. Colonizes supplemented hardwood grain in 5–10 days. Yields 200–400g per flush. 16G needle + alcohol swab included.",
+      es: "El único hongo que estimula el Factor de Crecimiento Nervioso (NGF). Culture Bank — Hericium erinaceus aislado en laboratorio, 10cc. Coloniza en 5–10 días. Rinde 200–400g por flush. Aguja 16G + swab incluidos.",
     },
     category: 'spawn', subcategory: 'Liquid Culture', species: 'lions-mane',
     price: 1799, compareAtPrice: 1999,
@@ -126,8 +126,8 @@ const PRODUCTS: Product[] = [
     id: 'lc2', slug: 'blue-oyster-liquid-culture',
     name: { en: 'Blue Oyster Liquid Culture Syringe', es: 'Jeringa de Cultivo Líquido Ostra Azul' },
     description: {
-      en: "The benchmark beginner species — and the one professionals keep growing. shrooms Culture Bank — lab-isolated Pleurotus ostreatus, 10cc. 25%+ biological efficiency on hardwood. 3–4 dense flushes over 8 weeks. 16G needle + alcohol swab included.",
-      es: "La especie referencia para principiantes — y la que los profesionales siguen cultivando. shrooms Culture Bank — Pleurotus ostreatus aislado en laboratorio, 10cc. 25%+ eficiencia biológica en madera dura. 3–4 flushes densos en 8 semanas. Aguja 16G + swab incluidos.",
+      en: "The benchmark beginner species — and the one professionals keep growing. Culture Bank — lab-isolated Pleurotus ostreatus, 10cc. 25%+ biological efficiency on hardwood. 3–4 dense flushes over 8 weeks. 16G needle + alcohol swab included.",
+      es: "La especie referencia para principiantes — y la que los profesionales siguen cultivando. Culture Bank — Pleurotus ostreatus aislado en laboratorio, 10cc. 25%+ eficiencia biológica en madera dura. 3–4 flushes densos en 8 semanas. Aguja 16G + swab incluidos.",
     },
     category: 'spawn', subcategory: 'Liquid Culture', species: 'blue-oyster',
     price: 1799, compareAtPrice: 1999,
@@ -140,8 +140,8 @@ const PRODUCTS: Product[] = [
     id: 'lc3', slug: 'pink-oyster-liquid-culture',
     name: { en: 'Pink Oyster Liquid Culture Syringe', es: 'Jeringa de Cultivo Líquido Ostra Rosa' },
     description: {
-      en: "Fastest pinning edible mushroom in cultivation. shrooms Culture Bank — lab-isolated Pleurotus djamor, 10cc. First pins within 5 days of fruiting conditions. Vivid magenta clusters that double in size every 12 hours. 16G needle + alcohol swab included.",
-      es: "El hongo comestible de pinado más rápido en cultivo. shrooms Culture Bank — Pleurotus djamor aislado en laboratorio, 10cc. Primeros pines en 5 días de fructificación. Racimos magenta vibrantes que duplican tamaño cada 12 horas. Aguja 16G + swab incluidos.",
+      en: "Fastest pinning edible mushroom in cultivation. Culture Bank — lab-isolated Pleurotus djamor, 10cc. First pins within 5 days of fruiting conditions. Vivid magenta clusters that double in size every 12 hours. 16G needle + alcohol swab included.",
+      es: "El hongo comestible de pinado más rápido en cultivo. Culture Bank — Pleurotus djamor aislado en laboratorio, 10cc. Primeros pines en 5 días de fructificación. Racimos magenta vibrantes que duplican tamaño cada 12 horas. Aguja 16G + swab incluidos.",
     },
     category: 'spawn', subcategory: 'Liquid Culture', species: 'pink-oyster',
     price: 1799, compareAtPrice: 1999,
@@ -154,8 +154,8 @@ const PRODUCTS: Product[] = [
     id: 'lc4', slug: 'yellow-oyster-liquid-culture',
     name: { en: 'Golden Oyster Liquid Culture Syringe', es: 'Jeringa de Cultivo Líquido Ostra Dorada' },
     description: {
-      en: "Highest ergothioneine content of any Oyster species — the mitochondria-protective antioxidant synthesized only by fungi. shrooms Culture Bank — lab-isolated Pleurotus citrinopileatus, 10cc. Vivid golden clusters, 5–10 day colonization. 16G needle + alcohol swab included.",
-      es: "Mayor contenido de ergotionina de cualquier especie de Ostra — el antioxidante protector de mitocondrias sintetizado solo por hongos. shrooms Culture Bank — Pleurotus citrinopileatus aislado en laboratorio, 10cc. Racimos dorados vibrantes. Aguja 16G + swab incluidos.",
+      en: "Highest ergothioneine content of any Oyster species — the mitochondria-protective antioxidant synthesized only by fungi. Culture Bank — lab-isolated Pleurotus citrinopileatus, 10cc. Vivid golden clusters, 5–10 day colonization. 16G needle + alcohol swab included.",
+      es: "Mayor contenido de ergotionina de cualquier especie de Ostra — el antioxidante protector de mitocondrias sintetizado solo por hongos. Culture Bank — Pleurotus citrinopileatus aislado en laboratorio, 10cc. Racimos dorados vibrantes. Aguja 16G + swab incluidos.",
     },
     category: 'spawn', subcategory: 'Liquid Culture', species: 'yellow-oyster',
     price: 1799, compareAtPrice: 1999,
@@ -168,8 +168,8 @@ const PRODUCTS: Product[] = [
     id: 'lc5', slug: 'reishi-liquid-culture',
     name: { en: 'Reishi Liquid Culture Syringe', es: 'Jeringa de Cultivo Líquido Reishi' },
     description: {
-      en: "The most clinically researched medicinal mushroom on Earth. 400+ bioactive compounds. 2,000 years in Chinese pharmacopoeia. shrooms Culture Bank — lab-isolated Ganoderma lucidum, 10cc. Experienced cultivators only. 16G needle + alcohol swab included.",
-      es: "El hongo medicinal más investigado clínicamente del mundo. 400+ compuestos bioactivos. 2,000 años en la farmacopea china. shrooms Culture Bank — Ganoderma lucidum aislado en laboratorio, 10cc. Solo para cultivadores experimentados. Aguja 16G + swab incluidos.",
+      en: "The most clinically researched medicinal mushroom on Earth. 400+ bioactive compounds. 2,000 years in Chinese pharmacopoeia. Culture Bank — lab-isolated Ganoderma lucidum, 10cc. Experienced cultivators only. 16G needle + alcohol swab included.",
+      es: "El hongo medicinal más investigado clínicamente del mundo. 400+ compuestos bioactivos. 2,000 años en la farmacopea china. Culture Bank — Ganoderma lucidum aislado en laboratorio, 10cc. Solo para cultivadores experimentados. Aguja 16G + swab incluidos.",
     },
     category: 'spawn', subcategory: 'Liquid Culture', species: 'reishi',
     price: 1799, compareAtPrice: 1999,
@@ -182,8 +182,8 @@ const PRODUCTS: Product[] = [
     id: 'lc6', slug: 'shiitake-liquid-culture',
     name: { en: 'Shiitake Liquid Culture Syringe', es: 'Jeringa de Cultivo Líquido Shiitake' },
     description: {
-      en: "The umami king — and the mushroom with an FDA Orphan Drug designation (lentinan). shrooms Culture Bank — lab-isolated Lentinula edodes, 10cc. On sawdust blocks: 8–12 weeks to first flush. On oak logs: perennial harvest for 3–5 years. 16G needle + alcohol swab included.",
-      es: "El rey del umami — y el hongo con designación de Medicamento Huérfano FDA (lentinan). shrooms Culture Bank — Lentinula edodes aislado en laboratorio, 10cc. En bloques de aserrín: 8–12 semanas al primer flush. En troncos de roble: cosecha perenne 3–5 años. Aguja 16G + swab incluidos.",
+      en: "The umami king — and the mushroom with an FDA Orphan Drug designation (lentinan). Culture Bank — lab-isolated Lentinula edodes, 10cc. On sawdust blocks: 8–12 weeks to first flush. On oak logs: perennial harvest for 3–5 years. 16G needle + alcohol swab included.",
+      es: "El rey del umami — y el hongo con designación de Medicamento Huérfano FDA (lentinan). Culture Bank — Lentinula edodes aislado en laboratorio, 10cc. En bloques de aserrín: 8–12 semanas al primer flush. En troncos de roble: cosecha perenne 3–5 años. Aguja 16G + swab incluidos.",
     },
     category: 'spawn', subcategory: 'Liquid Culture', species: 'shiitake',
     price: 1799, compareAtPrice: 1999,
@@ -196,8 +196,8 @@ const PRODUCTS: Product[] = [
     id: 'lc7', slug: 'cordyceps-militaris-liquid-culture',
     name: { en: 'Cordyceps Militaris Liquid Culture Syringe', es: 'Jeringa de Cultivo Líquido Cordyceps Militaris' },
     description: {
-      en: "The athlete's mushroom — and the sustainable alternative to wild Ophiocordyceps sinensis ($20,000/kg). shrooms Culture Bank — lab-isolated Cordyceps militaris, 10cc. High cordycepin content clinically shown to increase ATP production and VO2 max. Vivid orange stromata. 16G needle + alcohol swab included.",
-      es: "El hongo del atleta — y la alternativa sostenible al Ophiocordyceps sinensis silvestre ($20,000/kg). shrooms Culture Bank — Cordyceps militaris aislado en laboratorio, 10cc. Alto contenido de cordycepina que aumenta la producción de ATP y el VO2 máx. Estromatas naranjas vibrantes. Aguja 16G + swab incluidos.",
+      en: "The athlete's mushroom — and the sustainable alternative to wild Ophiocordyceps sinensis ($20,000/kg). Culture Bank — lab-isolated Cordyceps militaris, 10cc. High cordycepin content clinically shown to increase ATP production and VO2 max. Vivid orange stromata. 16G needle + alcohol swab included.",
+      es: "El hongo del atleta — y la alternativa sostenible al Ophiocordyceps sinensis silvestre ($20,000/kg). Culture Bank — Cordyceps militaris aislado en laboratorio, 10cc. Alto contenido de cordycepina que aumenta la producción de ATP y el VO2 máx. Estromatas naranjas vibrantes. Aguja 16G + swab incluidos.",
     },
     category: 'spawn', subcategory: 'Liquid Culture', species: 'cordyceps',
     price: 1799, compareAtPrice: 1999,
@@ -210,8 +210,8 @@ const PRODUCTS: Product[] = [
     id: 'lc8', slug: 'antler-reishi-liquid-culture',
     name: { en: 'Antler Reishi Liquid Culture Syringe', es: 'Jeringa de Cultivo Líquido Reishi Antler' },
     description: {
-      en: "Ganoderma lucidum grown under elevated CO2 — producing dramatic antler-shaped fruiting bodies instead of the classic kidney cap. Same 400+ bioactive compounds as standard Reishi. shrooms Culture Bank — 10cc. Prized for tincture making and display. Advanced growers only. 16G needle + alcohol swab included.",
-      es: "Ganoderma lucidum cultivado bajo CO2 elevado — produciendo dramáticos cuerpos fructificantes en forma de asta en lugar del clásico sombrero renal. Los mismos 400+ compuestos bioactivos que el Reishi estándar. shrooms Culture Bank — 10cc. Ideal para tintura y exhibición. Solo cultivadores avanzados. Aguja 16G + swab incluidos.",
+      en: "Ganoderma lucidum grown under elevated CO2 — producing dramatic antler-shaped fruiting bodies instead of the classic kidney cap. Same 400+ bioactive compounds as standard Reishi. Culture Bank — 10cc. Prized for tincture making and display. Advanced growers only. 16G needle + alcohol swab included.",
+      es: "Ganoderma lucidum cultivado bajo CO2 elevado — produciendo dramáticos cuerpos fructificantes en forma de asta en lugar del clásico sombrero renal. Los mismos 400+ compuestos bioactivos que el Reishi estándar. Culture Bank — 10cc. Ideal para tintura y exhibición. Solo cultivadores avanzados. Aguja 16G + swab incluidos.",
     },
     category: 'spawn', subcategory: 'Liquid Culture', species: 'reishi',
     price: 1799, compareAtPrice: 1999,
@@ -382,7 +382,7 @@ function ShopPageContent() {
         <div className="bg-elevated border-b border-ds-border">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
             <div>
-              <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-accent mb-2">shrooms Culture Bank</p>
+              <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-accent mb-2">Culture Bank</p>
               <h1 className="font-body font-bold text-3xl sm:text-4xl text-cream tracking-tight mb-2">Live Mycelium — Lab Isolated</h1>
               <p className="text-cream-muted max-w-md">8 species. 10cc syringes. Colonizes grain in 5–10 days — up to 3× faster than spores. Each packet includes 16G needle + alcohol swab + instruction card.</p>
             </div>

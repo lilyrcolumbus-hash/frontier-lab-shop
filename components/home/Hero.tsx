@@ -50,7 +50,7 @@ export function Hero() {
               {...fadeUp(0.1)}
               className="text-[11px] font-mono font-medium text-white/40 uppercase tracking-[0.28em]"
             >
-              From Spore to Ritual
+              Wild Genetics. Lab Verified.
             </motion.p>
 
             <div>

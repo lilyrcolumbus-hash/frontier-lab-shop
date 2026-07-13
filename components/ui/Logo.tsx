@@ -87,7 +87,7 @@ export function Logo({ size = 'md', href = '/', showTagline, className }: LogoPr
 
       {showTagline && (
         <span className="font-mono font-light uppercase tracking-[0.22em] text-[9px] mt-1.5 text-cream-muted/50">
-          From Spore to Ritual
+          Wild Genetics. Lab Verified.
         </span>
       )}
     </div>
