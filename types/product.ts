@@ -24,6 +24,7 @@ export interface Product {
   category: 'kit' | 'spawn' | 'substrate' | 'equipment' | 'wellness' | 'bundle'
   subcategory: string
   species?: string
+  scientificName?: string
   price: number
   compareAtPrice?: number
   variants: ProductVariant[]

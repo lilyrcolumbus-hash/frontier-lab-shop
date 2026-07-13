@@ -96,6 +96,9 @@ export function ProductCard({ product }: ProductCardProps) {
           <div className="flex-1">
             <p className="font-mono text-[9px] uppercase tracking-[0.2em] text-cream-muted/50 mb-1.5">{product.subcategory}</p>
             <h3 className="font-body text-base font-semibold text-cream leading-snug">{name}</h3>
+            {product.scientificName && (
+              <p className="font-mono text-xs text-cream-muted/60 italic mt-0.5 tracking-wide">{product.scientificName}</p>
+            )}
           </div>
           <div className="flex items-baseline gap-2">
             <span className="font-body text-xl font-bold text-cream">{formatPrice(product.price)}</span>
