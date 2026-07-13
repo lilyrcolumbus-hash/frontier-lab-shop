@@ -443,6 +443,26 @@ const FRUITING_HOW_TO_USE_STEPS = [
   'Rehydrate by soaking the block 1–12 hours, then rest 5–7 days for a second flush. Expect 2–3 total flushes per block.',
 ]
 
+const REISHI_FRUITING_HOW_TO_USE_STEPS = [
+  'Unbox and inspect — the block should be solid white with mycelium, no green, black, or pink patches.',
+  'Cut a 2–3 inch X or cross slit into the front of the bag, over the filter patch.',
+  'Mist the opening 2–3× daily to hold 85–90% humidity without soaking the block itself.',
+  'Set it somewhere with indirect light and steady fresh air exchange at 70–80°F — Reishi is far more patient than Oyster or Lion\'s Mane.',
+  'A white, coral-like growth appears first (the antler stage) before it starts forming a cap — this is normal, not a sign of a problem.',
+  'The lacquered red-orange cap fully forms and hardens over 60–90+ days. Do not rush harvest — ganoderic acid content builds as the cap matures.',
+  'Harvest once the growing white margin stops expanding and the surface has fully hardened. Expect 1–2 flushes total, spaced months apart.',
+]
+
+const ANTLER_FRUITING_HOW_TO_USE_STEPS = [
+  'Unbox and inspect — the block should be solid white with mycelium, no green, black, or pink patches.',
+  'Cut a 2–3 inch X or cross slit into the front of the bag, over the filter patch.',
+  'Mist the opening 2× daily to hold 85–90% humidity without soaking the block itself.',
+  'Unlike our other fruiting blocks, limit fresh air exchange — keep it in a mostly sealed tub or bag to maintain CO2 above 5,000 ppm. High airflow causes it to revert to a normal kidney-shaped cap instead of antlers.',
+  'Set it at 70–82°F. Growth is slow and coral-like at first, branching upward into antler form over several weeks.',
+  'If you see a flat cap starting to form instead of branching antlers, seal the container further to raise CO2.',
+  'Harvest once the antler tips stop elongating and the surface begins to harden, typically 60–90+ days after cutting. Expect 1–2 flushes.',
+]
+
 const ALLINONE_HOW_TO_USE_STEPS = [
   'Let the bag reach room temperature before injecting — cold substrate slows colonization.',
   'Sterilize the injection port with the included alcohol swab and let it dry completely.',
@@ -451,6 +471,16 @@ const ALLINONE_HOW_TO_USE_STEPS = [
   'Incubate at 70–75°F in darkness. Watch for green, black, or pink patches — a sign of contamination — before colonization completes.',
   'Once fully white and colonized, cut a 2–3 inch X in the bag and move it straight into fruiting conditions — no transfer to a separate container needed.',
   'Mist 2–3× daily, keep fresh air exchange high, and expect first pins 5–10 days after cutting.',
+]
+
+const ANTLER_ALLINONE_HOW_TO_USE_STEPS = [
+  'Let the bag reach room temperature before injecting — cold substrate slows colonization.',
+  'Sterilize the injection port with the included alcohol swab and let it dry completely.',
+  'Inject a full 10cc liquid culture syringe, or break up one colonized 3lb grain bag and pour it in through the port.',
+  'Press the swabbed area firmly over the injection point — the port seals itself around the needle hole.',
+  'Incubate at 70–75°F in darkness. Watch for green, black, or pink patches — a sign of contamination — before colonization completes.',
+  'Once fully white and colonized, cut a 2–3 inch X in the bag — but unlike our other All-in-One bags, limit fresh air exchange afterward to maintain CO2 above 5,000 ppm and grow antler form instead of a normal cap.',
+  'Growth is slow and coral-like at first, branching upward over several weeks. Expect harvest 60–90+ days after cutting.',
 ]
 
 const ALLINONE_SPECS_BASE = {
@@ -530,6 +560,57 @@ const FRUITING_PRODUCTS: Record<string, Product> = {
     scienceContent: LC_PRODUCTS['pink-oyster-liquid-culture'].scienceContent,
     keyBenefits: LC_PRODUCTS['pink-oyster-liquid-culture'].keyBenefits,
   },
+  'yellow-oyster-fruiting-block': {
+    id: 'fb5', slug: 'yellow-oyster-fruiting-block',
+    name: { en: 'Golden Oyster Fruiting Block', es: 'Bloque Fructificante Ostra Dorada' },
+    description: {
+      en: "Already colonized with Pleurotus citrinopileatus, selected for vivid golden-yellow color and tight, ruffled cluster formation. Cut it open, mist it, and expect pins within a week — Golden Oyster is one of the fastest fruiters in our lineup.\n\nSupplemented hardwood sawdust, autoclave-sterilized and colonized in our lab under HEPA-filtered positive pressure. Fruit at 64–77°F with 85–90% humidity and strong fresh air exchange — CO2 buildup causes long stems and small caps instead of the tight golden clusters this species is known for.\n\nExpect 3 flushes at roughly 20% biological efficiency over 4–6 weeks.",
+      es: "Ya colonizado con Pleurotus citrinopileatus, seleccionado por su color dorado intenso y formación de racimos compactos. Córtalo, rocíalo y espera pines en una semana — la Ostra Dorada es una de las fructificadoras más rápidas de nuestra línea.\n\nAserrín de madera dura suplementada, esterilizado en autoclave y colonizado en nuestro laboratorio bajo presión positiva con filtración HEPA. Fructificar a 18–25°C con 85–90% humedad y buen intercambio de aire — el CO2 acumulado causa tallos largos y sombreros pequeños.\n\nEspera 3 flushes con ~20% de eficiencia biológica en 4–6 semanas.",
+    },
+    category: 'kit', subcategory: 'Fruiting Blocks', species: 'yellow-oyster',
+    price: 2999,
+    variants: [{ id: 'fb5v', name: '5 lb Block', price: 2999, stock: 30, sku: 'YOF-5LB' }],
+    images: [],
+    cultivationSpecs: { difficulty: 'beginner', colonizationTime: 'Pre-colonized — ready now', fruitingTempF: '64–77°F', fruitingTempC: '18–25°C', idealSubstrate: 'Hardwood sawdust, straw (pre-colonized)', expectedYield: '3 flushes, 20% BE', indoorOutdoor: 'indoor' },
+    isOrganic: true, inStock: true, tags: ['beginner', 'kit', 'oyster', 'fruiting-block'], relatedProducts: ['yellow-oyster-liquid-culture'],
+    howToUseSteps: FRUITING_HOW_TO_USE_STEPS,
+    scienceContent: LC_PRODUCTS['yellow-oyster-liquid-culture'].scienceContent,
+    keyBenefits: LC_PRODUCTS['yellow-oyster-liquid-culture'].keyBenefits,
+  },
+  'reishi-fruiting-block': {
+    id: 'fb6', slug: 'reishi-fruiting-block',
+    name: { en: 'Reishi Fruiting Block', es: 'Bloque Fructificante Reishi' },
+    description: {
+      en: "Skip colonization entirely — this block is already fully colonized with our Ganoderma lucidum culture. Unlike our Oyster and Lion's Mane blocks, cutting it open won't give you mushrooms within a week — Reishi is not a fast grow. Expect a white, coral-like antler stage first, developing into the classic lacquered red-orange conk over 60–90+ days.\n\nSupplemented hardwood sawdust, autoclave-sterilized and colonized in our lab. Fruit at 70–80°F with 85–90% humidity and steady fresh air exchange. Do not rush the harvest — ganoderic acid content builds as the cap fully hardens.\n\nExpect 1–2 flushes total, spaced months apart. The fruiting body is too woody and bitter to eat — best processed as a dual-extract tincture once harvested.",
+      es: "Sáltate la colonización por completo — este bloque ya está completamente colonizado con nuestro cultivo de Ganoderma lucidum. A diferencia de nuestros bloques de Ostra y Melena de León, abrirlo no te dará hongos en una semana — el Reishi no es un cultivo rápido. Espera primero una etapa blanca tipo coral, que se desarrolla en el clásico sombrero laqueado rojo-naranja en 60–90+ días.\n\nAserrín de madera dura suplementada, esterilizado en autoclave y colonizado en nuestro laboratorio. Fructificar a 21–27°C con 85–90% humedad. No apresures la cosecha — el contenido de ácidos ganodéricos aumenta mientras el sombrero termina de endurecerse.\n\nEspera 1–2 flushes totales, espaciados por meses. El cuerpo fructífero es demasiado leñoso y amargo para comer — mejor procesado como tintura de doble extracción.",
+    },
+    category: 'kit', subcategory: 'Fruiting Blocks', species: 'reishi',
+    price: 2999,
+    variants: [{ id: 'fb6v', name: '5 lb Block', price: 2999, stock: 20, sku: 'REF-5LB' }],
+    images: [],
+    cultivationSpecs: { difficulty: 'intermediate', colonizationTime: 'Pre-colonized — ready to fruit', fruitingTempF: '70–80°F', fruitingTempC: '21–27°C', idealSubstrate: 'Supplemented hardwood sawdust (pre-colonized)', expectedYield: '1–2 flushes over 60–90+ days', indoorOutdoor: 'indoor' },
+    isOrganic: true, inStock: true, tags: ['kit', 'medicinal', 'reishi', 'fruiting-block'], relatedProducts: ['reishi-liquid-culture', 'reishi-dual-extract-tincture'],
+    howToUseSteps: REISHI_FRUITING_HOW_TO_USE_STEPS,
+    scienceContent: LC_PRODUCTS['reishi-liquid-culture'].scienceContent,
+    keyBenefits: LC_PRODUCTS['reishi-liquid-culture'].keyBenefits,
+  },
+  'antler-reishi-fruiting-block': {
+    id: 'fb7', slug: 'antler-reishi-fruiting-block',
+    name: { en: 'Antler Reishi Fruiting Block', es: 'Bloque Fructificante Reishi Antler' },
+    description: {
+      en: "Already colonized under our antler-cultivation protocol — Ganoderma lucidum grown to produce dramatic stag-horn fruiting bodies instead of the classic kidney cap. Same species, same 400+ bioactive compounds, completely different growing experience.\n\nCut it open and maintain elevated CO2 (above 5,000 ppm) throughout fruiting by limiting fresh air exchange — the opposite of most fruiting blocks. Too much airflow and it reverts to a normal cap instead of branching antlers. Fruit at 70–82°F with 85–90% humidity.\n\nExpect 60–90+ days to full antler development, 1–2 flushes total. Advanced growers only — this is the most technically demanding block we sell.",
+      es: "Ya colonizado bajo nuestro protocolo de cultivo antler — Ganoderma lucidum cultivado para producir dramáticos cuerpos fructificantes en forma de asta en lugar del sombrero renal clásico. Misma especie, mismos 400+ compuestos bioactivos, experiencia de cultivo completamente distinta.\n\nCórtalo y mantén el CO2 elevado (por encima de 5,000 ppm) durante toda la fructificación limitando el intercambio de aire — lo opuesto a la mayoría de los bloques. Demasiado flujo de aire y revertirá a un sombrero normal en vez de astas. Fructificar a 21–28°C con 85–90% humedad.\n\nEspera 60–90+ días para el desarrollo completo de las astas, 1–2 flushes totales. Solo cultivadores avanzados — es el bloque técnicamente más exigente que vendemos.",
+    },
+    category: 'kit', subcategory: 'Fruiting Blocks', species: 'reishi',
+    price: 2999,
+    variants: [{ id: 'fb7v', name: '5 lb Block', price: 2999, stock: 15, sku: 'ARF-5LB' }],
+    images: [],
+    cultivationSpecs: { difficulty: 'advanced', colonizationTime: 'Pre-colonized — ready to fruit', fruitingTempF: '70–82°F', fruitingTempC: '21–28°C', idealSubstrate: 'Supplemented hardwood sawdust (pre-colonized, antler protocol)', expectedYield: '1–2 flushes over 60–90+ days', indoorOutdoor: 'indoor' },
+    isOrganic: true, inStock: true, tags: ['kit', 'medicinal', 'reishi', 'antler', 'fruiting-block'], relatedProducts: ['antler-reishi-liquid-culture', 'reishi-dual-extract-tincture'],
+    howToUseSteps: ANTLER_FRUITING_HOW_TO_USE_STEPS,
+    scienceContent: LC_PRODUCTS['antler-reishi-liquid-culture'].scienceContent,
+    keyBenefits: LC_PRODUCTS['antler-reishi-liquid-culture'].keyBenefits,
+  },
 }
 
 const ALLINONE_PRODUCTS: Record<string, Product> = {
@@ -592,6 +673,51 @@ const ALLINONE_PRODUCTS: Record<string, Product> = {
     isOrganic: true, inStock: true, tags: ['all-in-one', 'oyster', 'beginner'], relatedProducts: ['pink-oyster-liquid-culture'],
     howToUseSteps: ALLINONE_HOW_TO_USE_STEPS,
     grainBagSpecs: { ...ALLINONE_SPECS_BASE, colonizationEstimate: '10–14 days once inoculated' },
+  },
+  'yellow-oyster-all-in-one-grow-bag': {
+    id: 'aio5', slug: 'yellow-oyster-all-in-one-grow-bag',
+    name: { en: 'Golden Oyster All-in-One Grow Bag', es: 'Bolsa Todo-en-Uno Ostra Dorada' },
+    description: {
+      en: "The whole grow in one bag — inject, incubate, cut, fruit, all from the same 5lb bag of autoclave-sterilized Master's Mix. Every bag is sterilized at 15 PSI and batch-tested with biological indicators before it ships. Built for Golden Oyster's fast, aggressive colonization style.\n\nGolden Oyster requires strong fresh air exchange once fruiting starts — CO2 buildup causes long stems and small caps instead of the tight golden clusters this species is known for. Expect 3 flushes at roughly 20% biological efficiency.\n\nEach bag: 5lb autoclave-sterilized Master's Mix · 0.2-micron filter patch · self-healing injection port · shrooms instruction card. Store cool and dark until use.",
+      es: "Todo el cultivo en una sola bolsa — inyecta, incuba, corta, fructifica, todo desde la misma bolsa de 5lb de Master's Mix esterilizado en autoclave. Cada bolsa se esteriliza a 15 PSI y se prueba por lote con indicadores biológicos antes de enviarse. Ideal para el estilo de colonización rápido y agresivo de la Ostra Dorada.\n\nLa Ostra Dorada requiere buen intercambio de aire fresco una vez inicia la fructificación — el CO2 acumulado causa tallos largos y sombreros pequeños. Espera 3 flushes con ~20% de eficiencia biológica.\n\nCada bolsa: 5lb de Master's Mix esterilizado en autoclave · parche filtrante de 0.2 micras · puerto de inyección autosellante · tarjeta de instrucciones shrooms.",
+    },
+    category: 'substrate', subcategory: 'All-in-One Bags', species: 'yellow-oyster',
+    price: 2499, compareAtPrice: 2799,
+    variants: [{ id: 'aio5v', name: '5 lb', price: 2499, stock: 40, sku: 'YOA-5LB' }],
+    images: [],
+    isOrganic: true, inStock: true, tags: ['all-in-one', 'oyster', 'beginner'], relatedProducts: ['yellow-oyster-liquid-culture'],
+    howToUseSteps: ALLINONE_HOW_TO_USE_STEPS,
+    grainBagSpecs: { ...ALLINONE_SPECS_BASE, colonizationEstimate: '10–14 days once inoculated' },
+  },
+  'reishi-all-in-one-grow-bag': {
+    id: 'aio6', slug: 'reishi-all-in-one-grow-bag',
+    name: { en: 'Reishi All-in-One Grow Bag', es: 'Bolsa Todo-en-Uno Reishi' },
+    description: {
+      en: "The whole grow in one bag — inject, incubate, cut, and fruit Reishi from the same 5lb bag of autoclave-sterilized Master's Mix, no separate bulk-substrate transfer step. Every bag is sterilized at 15 PSI and batch-tested with biological indicators before it ships.\n\nColonization runs 3–4 weeks — slower than Oyster species, and fruiting takes far longer still: 60–90+ days from cutting to a fully hardened conk. Reishi rewards patience, not speed. Not recommended as a first all-in-one grow.\n\nEach bag: 5lb autoclave-sterilized Master's Mix · 0.2-micron filter patch · self-healing injection port · shrooms instruction card. Store cool and dark until use.",
+      es: "Todo el cultivo en una sola bolsa — inyecta, incuba, corta y fructifica Reishi desde la misma bolsa de 5lb de Master's Mix esterilizado en autoclave, sin paso de transferencia a sustrato a granel. Cada bolsa se esteriliza a 15 PSI y se prueba por lote con indicadores biológicos antes de enviarse.\n\nLa colonización toma 3–4 semanas — más lenta que las Ostras, y la fructificación toma aún más: 60–90+ días desde el corte hasta un sombrero completamente endurecido. El Reishi premia la paciencia, no la velocidad. No recomendado como primer cultivo todo-en-uno.\n\nCada bolsa: 5lb de Master's Mix esterilizado en autoclave · parche filtrante de 0.2 micras · puerto de inyección autosellante · tarjeta de instrucciones shrooms.",
+    },
+    category: 'substrate', subcategory: 'All-in-One Bags', species: 'reishi',
+    price: 2499, compareAtPrice: 2799,
+    variants: [{ id: 'aio6v', name: '5 lb', price: 2499, stock: 25, sku: 'REA-5LB' }],
+    images: [],
+    isOrganic: true, inStock: true, tags: ['all-in-one', 'medicinal', 'reishi'], relatedProducts: ['reishi-liquid-culture', 'reishi-dual-extract-tincture'],
+    howToUseSteps: ALLINONE_HOW_TO_USE_STEPS,
+    grainBagSpecs: { ...ALLINONE_SPECS_BASE, colonizationEstimate: '21–28 days once inoculated' },
+  },
+  'antler-reishi-all-in-one-grow-bag': {
+    id: 'aio7', slug: 'antler-reishi-all-in-one-grow-bag',
+    name: { en: 'Antler Reishi All-in-One Grow Bag', es: 'Bolsa Todo-en-Uno Reishi Antler' },
+    description: {
+      en: "The whole grow in one bag — inject, incubate, cut, and fruit under our antler-cultivation protocol from the same 5lb bag of autoclave-sterilized Master's Mix. Every bag is sterilized at 15 PSI and batch-tested with biological indicators before it ships.\n\nColonization runs 3–4 weeks like standard Reishi — the difference is entirely in fruiting. Once you cut the bag open, limit fresh air exchange to hold CO2 above 5,000 ppm and drive antler-shaped growth instead of a normal cap. The most technically demanding all-in-one we sell. Advanced growers only.\n\nEach bag: 5lb autoclave-sterilized Master's Mix · 0.2-micron filter patch · self-healing injection port · shrooms instruction card. Store cool and dark until use.",
+      es: "Todo el cultivo en una sola bolsa — inyecta, incuba, corta y fructifica bajo nuestro protocolo de cultivo antler desde la misma bolsa de 5lb de Master's Mix esterilizado en autoclave. Cada bolsa se esteriliza a 15 PSI y se prueba por lote con indicadores biológicos antes de enviarse.\n\nLa colonización toma 3–4 semanas como el Reishi estándar — la diferencia está toda en la fructificación. Al cortar la bolsa, limita el intercambio de aire para mantener el CO2 por encima de 5,000 ppm y dirigir el crecimiento en forma de asta en vez de un sombrero normal. La bolsa todo-en-uno técnicamente más exigente que vendemos. Solo cultivadores avanzados.\n\nCada bolsa: 5lb de Master's Mix esterilizado en autoclave · parche filtrante de 0.2 micras · puerto de inyección autosellante · tarjeta de instrucciones shrooms.",
+    },
+    category: 'substrate', subcategory: 'All-in-One Bags', species: 'reishi',
+    price: 2499, compareAtPrice: 2799,
+    variants: [{ id: 'aio7v', name: '5 lb', price: 2499, stock: 15, sku: 'ARA-5LB' }],
+    images: [],
+    isOrganic: true, inStock: true, tags: ['all-in-one', 'medicinal', 'reishi', 'antler'], relatedProducts: ['antler-reishi-liquid-culture', 'reishi-dual-extract-tincture'],
+    howToUseSteps: ANTLER_ALLINONE_HOW_TO_USE_STEPS,
+    grainBagSpecs: { ...ALLINONE_SPECS_BASE, colonizationEstimate: '21–28 days once inoculated' },
   },
 }
 
