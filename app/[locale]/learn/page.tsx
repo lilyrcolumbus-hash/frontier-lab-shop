@@ -26,7 +26,7 @@ export default async function LearnPage({ params }: PageProps) {
       {/* Hero */}
       <div className="bg-surface border-b border-ds-border py-16 text-center">
         <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-accent mb-3">
-          Shrooms Academy
+          Frontier Lab Academy
         </p>
         <h1 className="font-body font-bold text-4xl sm:text-5xl tracking-tight text-cream mb-4">
           {lang === 'en' ? 'The Science of Cultivation' : 'La Ciencia del Cultivo'}

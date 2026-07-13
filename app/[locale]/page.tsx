@@ -10,7 +10,7 @@ import { CommunityGallery } from '@/components/home/CommunityGallery'
 import { Newsletter } from '@/components/home/Newsletter'
 
 export const metadata: Metadata = {
-  title: 'Shrooms — From Spore to Ritual',
+  title: { absolute: 'Frontier Lab — From Spore to Ritual' },
   description:
     "The world's most complete mushroom platform. Premium grow kits, spawn, and the deepest mushroom encyclopedia. Cultivate. Learn. Connect.",
 }

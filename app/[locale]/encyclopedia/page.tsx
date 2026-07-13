@@ -33,7 +33,7 @@ export default function EncyclopediaPage() {
       <div className="bg-surface border-b border-ds-border py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-accent mb-3">
-            Shrooms Encyclopedia
+            Frontier Lab Encyclopedia
           </p>
           <h1 className="font-body font-bold text-4xl sm:text-5xl tracking-tight text-cream mb-4">
             {t('title')}

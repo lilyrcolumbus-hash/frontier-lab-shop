@@ -63,9 +63,9 @@ function MushroomI({ scale = 1 }: { scale?: number }) {
 }
 
 const configs = {
-  sm: { shroomsSize: 26, dirtySize: 11, scale: 0.72, gap: -1 },
-  md: { shroomsSize: 38, dirtySize: 14, scale: 1.0,  gap: -2 },
-  lg: { shroomsSize: 58, dirtySize: 20, scale: 1.5,  gap: -4 },
+  sm: { shroomsSize: 20, dirtySize: 11, scale: 0.72, gap: -1 },
+  md: { shroomsSize: 29, dirtySize: 14, scale: 1.0,  gap: -2 },
+  lg: { shroomsSize: 44, dirtySize: 20, scale: 1.5,  gap: -4 },
 }
 
 export function Logo({ size = 'md', href = '/', showTagline, className }: LogoProps) {
@@ -74,15 +74,15 @@ export function Logo({ size = 'md', href = '/', showTagline, className }: LogoPr
   const content = (
     <div className={cn('flex flex-col items-start select-none', className)}>
 
-      {/* ── "shrooms" — the protagonist ── */}
+      {/* ── "Frontier Lab" — the protagonist ── */}
       <span
-        className="font-heading font-bold text-cream tracking-tight leading-none"
+        className="font-heading font-bold text-cream tracking-tight leading-none whitespace-nowrap"
         style={{
           fontSize: cfg.shroomsSize,
           textShadow: '0 0 30px rgba(212,145,58,0.08)',
         }}
       >
-        shrooms
+        Frontier Lab
       </span>
 
       {showTagline && (

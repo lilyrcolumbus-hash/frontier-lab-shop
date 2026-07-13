@@ -50,7 +50,7 @@ export function AcademyPreview() {
           <div>
             <span className="inline-flex items-center gap-2 font-mono text-violet text-xs uppercase tracking-[0.2em] mb-4">
               <span className="w-4 h-px bg-violet" />
-              Shrooms Academy
+              Frontier Lab Academy
             </span>
             <h2 className="font-body font-bold text-3xl sm:text-4xl text-cream tracking-tight">
               {t('title')}

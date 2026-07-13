@@ -38,8 +38,8 @@ const spaceMono = Space_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Shrooms — From Spore to Ritual',
-    template: '%s | Shrooms',
+    default: 'Frontier Lab — From Spore to Ritual',
+    template: '%s | Frontier Lab',
   },
   description:
     "The world's most complete mushroom platform. Cultivate, learn, and connect. Premium grow kits, spawn, and the deepest mushroom encyclopedia online.",
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    siteName: 'Shrooms',
+    siteName: 'Frontier Lab',
   },
 }
 

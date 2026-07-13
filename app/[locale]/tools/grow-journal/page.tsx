@@ -27,7 +27,7 @@ export default function GrowJournalPage() {
   return (
     <div className="pt-20 min-h-screen">
       <div className="bg-surface border-b border-ds-border py-16 text-center">
-        <p className="font-body font-light uppercase tracking-[0.2em] text-moss text-sm mb-3">Shrooms Tools</p>
+        <p className="font-body font-light uppercase tracking-[0.2em] text-moss text-sm mb-3">Frontier Lab Tools</p>
         <h1 className="font-heading text-5xl font-bold text-cream mb-3">📔 {t('title')}</h1>
         <p className="text-cream-muted text-lg">{t('subtitle')}</p>
       </div>
