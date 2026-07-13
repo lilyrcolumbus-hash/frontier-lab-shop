@@ -12,35 +12,6 @@ import { Button } from '@/components/ui/Button'
 import { formatPrice } from '@/lib/utils'
 import type { Product } from '@/types/product'
 
-const BUNDLE_HOW_TO_USE_STEPS = [
-  'Unbox your kit and check that the spawn bag, substrate, humidity dome, and mister are all included per the guide.',
-  'Mix the included spawn into the included substrate at the ratio specified in your guide, working in a clean area.',
-  'Seal and colonize at 70–75°F for 2–3 weeks, out of direct light, until the substrate turns fully white.',
-  'Once colonized, remove the humidity dome and introduce fresh air exchange to trigger pinning.',
-  'Mist 2–3× daily with the included mister to hold 85–95% humidity without soaking the substrate.',
-  'Harvest when caps flatten and the edges just begin to curl upward — twist and pull gently at the base.',
-  'Rehydrate the block for a second flush per your guide; most kits yield 2–3 flushes total.',
-]
-
-const LOG_KIT_HOW_TO_USE_STEPS = [
-  'Select fresh-cut oak logs, 3–4 inches in diameter, cut within 2–4 weeks of felling — older wood has a lower success rate.',
-  'Drill holes in a diamond pattern, 6–8 inches apart, using the bit diameter matched to your plug spawn.',
-  'Hammer a plug spawn dowel into each hole until flush with the bark.',
-  'Seal each inoculated hole with the included melted cheese wax to lock in moisture and block contaminants.',
-  'Stack logs off the ground in a shaded, humid spot and let them colonize for 6–12 months.',
-  'Once fully colonized, force a flush by soaking the log in cold water for 24 hours.',
-  'Expect flushes every few months for 3–5 years — each log is a perennial producer.',
-]
-
-const TINCTURE_HOW_TO_USE_STEPS = [
-  'Shake well before each use — natural sediment settles at the bottom of the bottle.',
-  'Take 1–2 full droppers (about 1ml) under the tongue, or mix into water, tea, or coffee.',
-  'Hold under the tongue for 30 seconds before swallowing for faster absorption.',
-  'Use once or twice daily, consistently, for at least 4–6 weeks to notice effects.',
-  'Store in a cool, dark place away from direct sunlight — no refrigeration required.',
-  'Shelf life: up to 2 years unopened, 1 year once opened.',
-]
-
 const PRODUCTS: Record<string, Product> = {
   'blue-oyster-grain-spawn': {
     id: '1', slug: 'blue-oyster-grain-spawn',
@@ -55,42 +26,7 @@ const PRODUCTS: Record<string, Product> = {
     ],
     images: [],
     cultivationSpecs: { difficulty: 'beginner', colonizationTime: '2–3 weeks', fruitingTempF: '55–65°F', fruitingTempC: '13–18°C', idealSubstrate: 'Hardwood sawdust, straw, coffee grounds', expectedYield: '1–3 flushes, 25% biological efficiency', indoorOutdoor: 'both' },
-    isOrganic: true, inStock: true, tags: ['beginner', 'oyster', 'organic'], relatedProducts: ['beginners-grow-kit-bundle'],
-  },
-  'beginners-grow-kit-bundle': {
-    id: '3', slug: 'beginners-grow-kit-bundle',
-    name: { en: "Beginner's Complete Grow Kit", es: 'Kit de Cultivo Completo para Principiantes' },
-    description: { en: "Everything to grow your first mushrooms: spawn, substrate, dome, mister, and guide.", es: 'Todo lo que necesitas para tu primer cultivo: spawn, sustrato, cúpula, atomizador y guía.' },
-    category: 'bundle', subcategory: 'Beginner Bundles', species: 'blue-oyster', scientificName: 'Pleurotus ostreatus',
-    price: 4999, compareAtPrice: 6999,
-    variants: [{ id: 'v3', name: 'Standard', price: 4999, stock: 30, sku: 'BKT-STD' }],
-    images: [],
-    cultivationSpecs: { difficulty: 'beginner', colonizationTime: '2–3 weeks', fruitingTempF: '55–65°F', fruitingTempC: '13–18°C', idealSubstrate: 'Included', expectedYield: '150–300g per flush', indoorOutdoor: 'indoor' },
-    isOrganic: true, inStock: true, tags: ['beginner', 'bundle', 'best-seller'], relatedProducts: [],
-    howToUseSteps: BUNDLE_HOW_TO_USE_STEPS,
-  },
-  'shiitake-log-kit': {
-    id: '4', slug: 'shiitake-log-kit',
-    name: { en: 'Shiitake Log Inoculation Kit', es: 'Kit de Inoculación de Tronco Shiitake' },
-    description: { en: 'Grow Shiitake on oak logs. Includes plug spawn, wax, and full guide. Produces 3–5 years.', es: 'Cultiva Shiitake en troncos de roble. Incluye spawn en tacos, cera y guía completa.' },
-    category: 'kit', subcategory: 'Log Kits', species: 'shiitake', scientificName: 'Lentinula edodes',
-    price: 2999, compareAtPrice: undefined,
-    variants: [{ id: 'v4', name: 'Standard', price: 2999, stock: 40, sku: 'SLK-STD' }],
-    images: [],
-    cultivationSpecs: { difficulty: 'intermediate', colonizationTime: '6–12 months on logs', fruitingTempF: '55–75°F', fruitingTempC: '13–24°C', idealSubstrate: 'Oak logs', expectedYield: 'Perennial', indoorOutdoor: 'outdoor' },
-    isOrganic: true, inStock: true, tags: ['shiitake', 'outdoor'], relatedProducts: ['shiitake-liquid-culture'],
-    howToUseSteps: LOG_KIT_HOW_TO_USE_STEPS,
-  },
-  'reishi-dual-extract-tincture': {
-    id: '5', slug: 'reishi-dual-extract-tincture',
-    name: { en: 'Reishi Dual-Extract Tincture', es: 'Tintura de Doble Extracción de Reishi' },
-    description: { en: '2oz dual-extract tincture. Organic Ganoderma lucidum fruiting bodies. 50:1 concentration.', es: 'Tintura de doble extracción de 60ml. Cuerpos fructificantes orgánicos de Ganoderma lucidum. Concentración 50:1.' },
-    category: 'wellness', subcategory: 'Tinctures', species: 'reishi', scientificName: 'Ganoderma lucidum',
-    price: 3999, compareAtPrice: undefined,
-    variants: [{ id: 'v5', name: '2oz', price: 3999, stock: 60, sku: 'RDT-2OZ' }],
-    images: [],
-    isOrganic: true, inStock: true, tags: ['reishi', 'wellness', 'tincture'], relatedProducts: ['reishi-liquid-culture'],
-    howToUseSteps: TINCTURE_HOW_TO_USE_STEPS,
+    isOrganic: true, inStock: true, tags: ['beginner', 'oyster', 'organic'], relatedProducts: [],
   },
 }
 
@@ -227,7 +163,7 @@ const LC_PRODUCTS: Record<string, Product> = {
     variants: [{ id: 'lc5v', name: '10cc', price: 1799, stock: 30, sku: 'REL-10CC' }],
     images: [],
     cultivationSpecs: { difficulty: 'advanced', colonizationTime: '5–10 days (on grain)', fruitingTempF: '70–80°F', fruitingTempC: '21–27°C', idealSubstrate: 'Hardwood logs or supplemented sawdust', expectedYield: '1–2 flushes (medicinal use)', indoorOutdoor: 'both' },
-    isOrganic: true, inStock: true, tags: ['medicinal', 'liquid-culture', 'reishi'], relatedProducts: ['reishi-dual-extract-tincture'],
+    isOrganic: true, inStock: true, tags: ['medicinal', 'liquid-culture', 'reishi'], relatedProducts: [],
     howToUseSteps: LC_HOW_TO_USE_STEPS,
     scienceContent: {
       en: "Ganoderma lucidum contains the most complex pharmacological profile of any known medicinal mushroom: over 400 identified bioactive compounds across six primary categories — polysaccharides (beta-glucans), triterpenoids (ganoderic acids), proteins, steroids, alkaloids, and fatty acids.\n\nThe triterpenoids are unique to Reishi among cultivated medicinal fungi. Ganoderic acids A, B, C, and D have demonstrated direct inhibition of HMG-CoA reductase (the same target as pharmaceutical statins), angiotensin-converting enzyme (ACE) for blood pressure, and 5-alpha-reductase. Over 100 individual ganoderic acid structures have been isolated and characterized.\n\nAdaptogenic effects are mediated through the HPA (hypothalamic-pituitary-adrenal) axis. Clinical studies show Reishi supplementation reduces salivary cortisol, improves sleep quality (via effects on adenosine receptors), and reduces fatigue in cancer patients (JAMA Oncology, 2016). The beta-glucan fraction is responsible for immune modulation — meta-analyses show significant enhancement of NK cell activity and Th1/Th2 balance. For cancer applications, Reishi is used as an adjunct (not primary) therapy; a 2016 Cochrane systematic review found insufficient evidence to recommend as primary treatment but noted meaningful supportive effects.",
@@ -252,7 +188,7 @@ const LC_PRODUCTS: Record<string, Product> = {
     variants: [{ id: 'lc6v', name: '10cc', price: 1799, stock: 45, sku: 'SHL-10CC' }],
     images: [],
     cultivationSpecs: { difficulty: 'intermediate', colonizationTime: '5–10 days (on grain)', fruitingTempF: '55–75°F', fruitingTempC: '13–24°C', idealSubstrate: 'Hardwood sawdust blocks or oak logs', expectedYield: 'Multiple flushes (perennial on logs)', indoorOutdoor: 'both' },
-    isOrganic: true, inStock: true, tags: ['edible', 'liquid-culture', 'shiitake'], relatedProducts: ['shiitake-log-kit'],
+    isOrganic: true, inStock: true, tags: ['edible', 'liquid-culture', 'shiitake'], relatedProducts: [],
     howToUseSteps: LC_HOW_TO_USE_STEPS,
     scienceContent: {
       en: "Lentinula edodes is the most studied edible mushroom in the world, and uniquely, the only edible species with a compound holding FDA Orphan Drug designation. Lentinan — a highly purified beta-1,3-glucan — received this designation for use as a cancer immunotherapy adjunct. It is administered intravenously in Japanese hospitals alongside chemotherapy, with meta-analyses showing improved survival outcomes in gastric cancer (Hazard Ratio 0.67, 95% CI 0.52–0.86).\n\nEritadenine is a unique Shiitake-exclusive compound that lowers plasma cholesterol through a distinct mechanism from statins: it inhibits the enzyme that converts dietary cholesterol into its storage form. Clinical trials show reductions of 15–25% in total cholesterol after 7 days of daily consumption.\n\nAHCC (Active Hexose Correlated Compound) is a proprietary preparation derived from Shiitake mycelia, used as a standard adjunct to chemotherapy in Japan. A 2016 randomized trial (n=87) showed AHCC significantly improved NK cell activity vs. placebo in patients with advanced cancer. Shiitake also contains lenthionine — the compound responsible for its distinctive aroma — which has demonstrated platelet aggregation inhibition (anticoagulant effect) in laboratory studies.",
@@ -302,7 +238,7 @@ const LC_PRODUCTS: Record<string, Product> = {
     variants: [{ id: 'lc8v', name: '10cc', price: 1799, stock: 20, sku: 'ARL-10CC' }],
     images: [],
     cultivationSpecs: { difficulty: 'advanced', colonizationTime: '5–10 days (on grain)', fruitingTempF: '70–82°F', fruitingTempC: '21–28°C', idealSubstrate: 'Supplemented hardwood sawdust', expectedYield: '1–2 flushes (medicinal use)', indoorOutdoor: 'indoor' },
-    isOrganic: true, inStock: true, tags: ['medicinal', 'liquid-culture', 'reishi', 'antler'], relatedProducts: ['reishi-liquid-culture', 'reishi-dual-extract-tincture'],
+    isOrganic: true, inStock: true, tags: ['medicinal', 'liquid-culture', 'reishi', 'antler'], relatedProducts: ['reishi-liquid-culture'],
     howToUseSteps: LC_HOW_TO_USE_STEPS,
     scienceContent: {
       en: "Antler Reishi is Ganoderma multipileum, a species within the broader Ganoderma lucidum complex that was only formally separated from G. lucidum in 2009 through ITS DNA sequencing — before that, it was sold and studied under the \"G. lucidum\" name alongside several related Asian lingzhi species. Cultivated under deliberately elevated CO2 concentrations (above 5,000 ppm), it suppresses cap formation and drives vertical antler or stag-horn growth — vendors report it takes to antler form more readily than typical G. lucidum strains under the same conditions.\n\nThe antler form exposes significantly more tissue surface area per gram than a flat kidney-shaped cap. For dual-extraction tincture preparation, this means better solvent penetration, higher extraction efficiency of triterpenoids (alcohol-soluble) and beta-glucans (water-soluble), and more consistent batch-to-batch yield. Professional tincture makers consistently prefer antler form for this reason.\n\nAs a member of the Ganoderma lucidum species complex, G. multipileum shares the same core pharmacological categories documented for standard Reishi — ganoderic acid inhibition of HMG-CoA reductase and ACE, beta-glucan immunomodulation, cortisol regulation via the HPA axis, NK cell activation, and hepatoprotective effects — though as a distinct species, exact compound concentrations haven't been directly compared head-to-head in published studies. See the standard Reishi listing for full clinical references specific to G. lucidum.",
@@ -366,7 +302,7 @@ const GRAIN_PRODUCTS: Record<string, Product> = {
     price: 1999, compareAtPrice: 2299,
     variants: [{ id: 'gb2v', name: '3 lb', price: 1999, stock: 55, sku: 'CRN-3LB' }],
     images: [],
-    isOrganic: true, inStock: true, tags: ['grain-bag', 'corn', 'drippy-corn', 'beginner'], relatedProducts: ['beginners-grow-kit-bundle'],
+    isOrganic: true, inStock: true, tags: ['grain-bag', 'corn', 'drippy-corn', 'beginner'], relatedProducts: [],
     howToUseSteps: GRAIN_HOW_TO_USE_STEPS,
     scienceContent: {
       en: "Whole corn's nutritional density comes from its endosperm — a starch-and-protein reserve several times larger per kernel than rye or millet. That reserve is what lets colonized corn spawn punch above its weight when mixed into bulk substrate: a 1:8 spawn ratio with corn delivers more usable nutrition per bag than the same ratio with a smaller grain.\n\nThe tradeoff is kernel size: fewer, larger inoculation points mean mycelium takes a few more days to establish full network coverage compared to millet or milo. Growers who prioritize bulk-substrate economics over speed consistently choose corn.",
@@ -599,7 +535,7 @@ const FRUITING_PRODUCTS: Record<string, Product> = {
     variants: [{ id: 'fb6v', name: '5 lb Block', price: 2999, stock: 20, sku: 'REF-5LB' }],
     images: [],
     cultivationSpecs: { difficulty: 'intermediate', colonizationTime: 'Pre-colonized — ready to fruit', fruitingTempF: '70–80°F', fruitingTempC: '21–27°C', idealSubstrate: 'Supplemented hardwood sawdust (pre-colonized)', expectedYield: '1–2 flushes over 60–90+ days', indoorOutdoor: 'indoor' },
-    isOrganic: true, inStock: true, tags: ['kit', 'medicinal', 'reishi', 'fruiting-block'], relatedProducts: ['reishi-liquid-culture', 'reishi-dual-extract-tincture'],
+    isOrganic: true, inStock: true, tags: ['kit', 'medicinal', 'reishi', 'fruiting-block'], relatedProducts: ['reishi-liquid-culture'],
     howToUseSteps: REISHI_FRUITING_HOW_TO_USE_STEPS,
     scienceContent: LC_PRODUCTS['reishi-liquid-culture'].scienceContent,
     keyBenefits: LC_PRODUCTS['reishi-liquid-culture'].keyBenefits,
@@ -616,7 +552,7 @@ const FRUITING_PRODUCTS: Record<string, Product> = {
     variants: [{ id: 'fb7v', name: '5 lb Block', price: 2999, stock: 15, sku: 'ARF-5LB' }],
     images: [],
     cultivationSpecs: { difficulty: 'advanced', colonizationTime: 'Pre-colonized — ready to fruit', fruitingTempF: '70–82°F', fruitingTempC: '21–28°C', idealSubstrate: 'Supplemented hardwood sawdust (pre-colonized, antler protocol)', expectedYield: '1–2 flushes over 60–90+ days', indoorOutdoor: 'indoor' },
-    isOrganic: true, inStock: true, tags: ['kit', 'medicinal', 'reishi', 'antler', 'fruiting-block'], relatedProducts: ['antler-reishi-liquid-culture', 'reishi-dual-extract-tincture'],
+    isOrganic: true, inStock: true, tags: ['kit', 'medicinal', 'reishi', 'antler', 'fruiting-block'], relatedProducts: ['antler-reishi-liquid-culture'],
     howToUseSteps: ANTLER_FRUITING_HOW_TO_USE_STEPS,
     scienceContent: LC_PRODUCTS['antler-reishi-liquid-culture'].scienceContent,
     keyBenefits: LC_PRODUCTS['antler-reishi-liquid-culture'].keyBenefits,
@@ -710,7 +646,7 @@ const BULK_PRODUCTS: Record<string, Product> = {
     price: 2299, compareAtPrice: 2799,
     variants: [{ id: 'bs6v', name: '5 lb', price: 2299, stock: 20, sku: 'REB-BULK' }],
     images: [],
-    isOrganic: true, inStock: true, tags: ['bulk-substrate', 'medicinal', 'reishi'], relatedProducts: ['reishi-liquid-culture', 'reishi-dual-extract-tincture'],
+    isOrganic: true, inStock: true, tags: ['bulk-substrate', 'medicinal', 'reishi'], relatedProducts: ['reishi-liquid-culture'],
     howToUseSteps: BULK_REISHI_HOW_TO_USE_STEPS,
     grainBagSpecs: { ...BULK_SPECS_BASE, colonizationEstimate: '3–4 weeks once inoculated' },
   },
@@ -725,7 +661,7 @@ const BULK_PRODUCTS: Record<string, Product> = {
     price: 2299, compareAtPrice: 2799,
     variants: [{ id: 'bs7v', name: '5 lb', price: 2299, stock: 15, sku: 'ARB-BULK' }],
     images: [],
-    isOrganic: true, inStock: true, tags: ['bulk-substrate', 'medicinal', 'reishi', 'antler'], relatedProducts: ['antler-reishi-liquid-culture', 'reishi-dual-extract-tincture'],
+    isOrganic: true, inStock: true, tags: ['bulk-substrate', 'medicinal', 'reishi', 'antler'], relatedProducts: ['antler-reishi-liquid-culture'],
     howToUseSteps: BULK_ANTLER_HOW_TO_USE_STEPS,
     grainBagSpecs: { ...BULK_SPECS_BASE, colonizationEstimate: '3–4 weeks once inoculated' },
   },
