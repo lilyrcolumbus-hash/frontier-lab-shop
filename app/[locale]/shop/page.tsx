@@ -265,7 +265,7 @@ const PRODUCTS: Product[] = [
   // ── Grain Spawn Bags ─────────────────────────────────────────────────────
   {
     id: 'gb1', slug: 'rye-grain-spawn-bag-3lb',
-    name: { en: 'Rye Berry Grain Bag — 3lb', es: 'Bolsa de Grano Centeno — 3lb' },
+    name: { en: 'Rye Berry Sterile Grain Bag — 3lb', es: 'Bolsa de Grano Esterilizado Centeno — 3lb' },
     description: {
       en: "The industry-standard substrate — highest surface area of any common grain, exceptional moisture retention, works reliably across nearly every cultivated species. Autoclave-sterilized and batch-tested for sterility, hydrated and ready to inoculate.",
       es: "El sustrato estándar de la industria — mayor superficie de cualquier grano común, excelente retención de humedad. Esterilizado en autoclave y probado por lote, hidratado y listo para inocular.",
@@ -278,7 +278,7 @@ const PRODUCTS: Product[] = [
   },
   {
     id: 'gb2', slug: 'drippy-corn-grain-spawn-bag-3lb',
-    name: { en: 'Drippy Corn Grain Bag — 3lb', es: 'Bolsa Drippy Corn (Maíz Húmedo) — 3lb' },
+    name: { en: 'Drippy Corn Sterile Grain Bag — 3lb', es: 'Bolsa Esterilizada Drippy Corn (Maíz Húmedo) — 3lb' },
     description: {
       en: "Known in the grow community as \"Drippy Corn\" — high nutrient density and excellent moisture hold, built for growers scaling toward bulk substrate. Whole-kernel corn, autoclave-sterilized and batch-tested, ready to inoculate.",
       es: "Conocido en la comunidad cultivadora como \"Drippy Corn\" — alta densidad de nutrientes y excelente retención de humedad, ideal para escalar a sustrato a granel. Maíz en grano entero, esterilizado en autoclave y probado por lote, listo para inocular.",
@@ -291,7 +291,7 @@ const PRODUCTS: Product[] = [
   },
   {
     id: 'gb3', slug: 'milo-grain-spawn-bag-3lb',
-    name: { en: 'Milo (Sorghum) Grain Bag — 3lb', es: 'Bolsa de Grano Milo (Sorgo) — 3lb' },
+    name: { en: 'Milo (Sorghum) Sterile Grain Bag — 3lb', es: 'Bolsa de Grano Esterilizado Milo (Sorgo) — 3lb' },
     description: {
       en: "Small, uniform kernels create thousands of inoculation points per bag — fast, even colonization. Autoclave-sterilized and batch-tested for sterility, a favorite for growers running multiple bags at once.",
       es: "Granos pequeños y uniformes crean miles de puntos de inoculación por bolsa — colonización rápida y pareja. Esterilizado en autoclave y probado por lote, favorito de cultivadores que corren varias bolsas a la vez.",
@@ -304,7 +304,7 @@ const PRODUCTS: Product[] = [
   },
   {
     id: 'gb4', slug: 'millet-grain-spawn-bag-3lb',
-    name: { en: 'Millet Grain Bag — 3lb', es: 'Bolsa de Grano Mijo — 3lb' },
+    name: { en: 'Millet Sterile Grain Bag — 3lb', es: 'Bolsa de Grano Esterilizado Mijo — 3lb' },
     description: {
       en: "The smallest kernel we carry — highest surface-area-to-volume ratio of any grain, meaning more contact points for mycelium and a lower natural contamination load than larger grains. Autoclave-sterilized and batch-tested for sterility.",
       es: "El grano más pequeño de nuestra línea — mayor relación superficie-volumen, más puntos de contacto para el micelio y menor riesgo de contaminación que granos más grandes. Esterilizado en autoclave y probado por lote.",
@@ -317,7 +317,7 @@ const PRODUCTS: Product[] = [
   },
   {
     id: 'gb5', slug: 'oat-grain-spawn-bag-3lb',
-    name: { en: 'Oat Groat Grain Bag — 3lb', es: 'Bolsa de Grano Avena — 3lb' },
+    name: { en: 'Oat Groat Sterile Grain Bag — 3lb', es: 'Bolsa de Grano Esterilizado Avena — 3lb' },
     description: {
       en: "Consistently the fastest-colonizing grain in side-by-side grows — ideal for aggressive Oyster strains. Autoclave-sterilized and batch-tested for sterility. Rewards precise hydration for best results.",
       es: "El grano de colonización más rápida en pruebas comparativas — ideal para cepas agresivas de Ostra. Esterilizado en autoclave y probado por lote. Requiere hidratación precisa para mejores resultados.",
@@ -331,7 +331,7 @@ const PRODUCTS: Product[] = [
   // ── All-in-One Grow Bags ─────────────────────────────────────────────────
   {
     id: 'aio1', slug: 'lions-mane-all-in-one-grow-bag',
-    name: { en: "Lion's Mane All-in-One Grow Bag", es: 'Bolsa Todo-en-Uno Melena de León' },
+    name: { en: "Lion's Mane Sterile All-in-One Grow Bag", es: 'Bolsa Todo-en-Uno Esterilizada Melena de León' },
     description: {
       en: "The whole grow in one bag — no separate spawn, no bulk substrate to mix. Inject directly, incubate, cut, and fruit from the same 5lb bag of autoclave-sterilized Master's Mix.",
       es: "Todo el cultivo en una sola bolsa — sin spawn por separado. Inyecta, incuba, corta y fructifica desde la misma bolsa de 5lb de Master's Mix esterilizado en autoclave.",
@@ -344,7 +344,7 @@ const PRODUCTS: Product[] = [
   },
   {
     id: 'aio2', slug: 'blue-oyster-all-in-one-grow-bag',
-    name: { en: 'Blue Oyster All-in-One Grow Bag', es: 'Bolsa Todo-en-Uno Ostra Azul' },
+    name: { en: 'Blue Oyster Sterile All-in-One Grow Bag', es: 'Bolsa Todo-en-Uno Esterilizada Ostra Azul' },
     description: {
       en: "The whole grow in one bag — inject, incubate, cut, fruit, all from the same 5lb bag of autoclave-sterilized Master's Mix. Built for Blue Oyster's forgiving, aggressive colonization style.",
       es: "Todo el cultivo en una sola bolsa. Ideal para el estilo de colonización agresivo e indulgente de la Ostra Azul.",
@@ -357,7 +357,7 @@ const PRODUCTS: Product[] = [
   },
   {
     id: 'aio3', slug: 'shiitake-all-in-one-grow-bag',
-    name: { en: 'Shiitake All-in-One Grow Bag', es: 'Bolsa Todo-en-Uno Shiitake' },
+    name: { en: 'Shiitake Sterile All-in-One Grow Bag', es: 'Bolsa Todo-en-Uno Esterilizada Shiitake' },
     description: {
       en: "Inject, incubate, and fruit Shiitake from a single 5lb bag of autoclave-sterilized Master's Mix — no log inoculation or years-long wait required.",
       es: "Inyecta, incuba y fructifica Shiitake desde una sola bolsa de 5lb de Master's Mix esterilizado en autoclave — sin inoculación de troncos.",
@@ -370,7 +370,7 @@ const PRODUCTS: Product[] = [
   },
   {
     id: 'aio4', slug: 'pink-oyster-all-in-one-grow-bag',
-    name: { en: 'Pink Oyster All-in-One Grow Bag', es: 'Bolsa Todo-en-Uno Ostra Rosa' },
+    name: { en: 'Pink Oyster Sterile All-in-One Grow Bag', es: 'Bolsa Todo-en-Uno Esterilizada Ostra Rosa' },
     description: {
       en: "The fastest path from syringe to harvest we offer. Inject this 5lb bag of autoclave-sterilized Master's Mix and cut it open in as little as 10–14 days.",
       es: "El camino más rápido de jeringa a cosecha. Inyecta esta bolsa de 5lb de Master's Mix esterilizado en autoclave y ábrela en tan solo 10–14 días.",
@@ -383,7 +383,7 @@ const PRODUCTS: Product[] = [
   },
   {
     id: 'aio5', slug: 'yellow-oyster-all-in-one-grow-bag',
-    name: { en: 'Golden Oyster All-in-One Grow Bag', es: 'Bolsa Todo-en-Uno Ostra Dorada' },
+    name: { en: 'Golden Oyster Sterile All-in-One Grow Bag', es: 'Bolsa Todo-en-Uno Esterilizada Ostra Dorada' },
     description: {
       en: "The whole grow in one bag — inject, incubate, cut, and fruit our fastest-colonizing Oyster from the same 5lb bag of autoclave-sterilized Master's Mix.",
       es: "Todo el cultivo en una sola bolsa — inyecta, incuba, corta y fructifica nuestra Ostra de colonización más rápida desde la misma bolsa de 5lb de Master's Mix esterilizado en autoclave.",
@@ -396,7 +396,7 @@ const PRODUCTS: Product[] = [
   },
   {
     id: 'aio6', slug: 'reishi-all-in-one-grow-bag',
-    name: { en: 'Reishi All-in-One Grow Bag', es: 'Bolsa Todo-en-Uno Reishi' },
+    name: { en: 'Reishi Sterile All-in-One Grow Bag', es: 'Bolsa Todo-en-Uno Esterilizada Reishi' },
     description: {
       en: "The whole grow in one bag — inject, incubate, cut, and fruit Reishi from the same 5lb bag of autoclave-sterilized Master's Mix. A slow, patient grow — not a beginner species.",
       es: "Todo el cultivo en una sola bolsa — inyecta, incuba, corta y fructifica Reishi desde la misma bolsa de 5lb de Master's Mix esterilizado en autoclave. Un cultivo lento y paciente — no es para principiantes.",
@@ -409,7 +409,7 @@ const PRODUCTS: Product[] = [
   },
   {
     id: 'aio7', slug: 'antler-reishi-all-in-one-grow-bag',
-    name: { en: 'Antler Reishi All-in-One Grow Bag', es: 'Bolsa Todo-en-Uno Reishi Antler' },
+    name: { en: 'Antler Reishi Sterile All-in-One Grow Bag', es: 'Bolsa Todo-en-Uno Esterilizada Reishi Antler' },
     description: {
       en: "The whole grow in one bag — inject, incubate, cut, and fruit under our antler-cultivation protocol from the same 5lb bag of autoclave-sterilized Master's Mix. Advanced growers only.",
       es: "Todo el cultivo en una sola bolsa — inyecta, incuba, corta y fructifica bajo nuestro protocolo de cultivo antler desde la misma bolsa de 5lb de Master's Mix esterilizado en autoclave. Solo cultivadores avanzados.",
