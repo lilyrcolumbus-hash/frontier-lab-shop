@@ -462,6 +462,7 @@ function ShopPageContent() {
     categoryParam && CATEGORY_KEYS.includes(categoryParam) ? (categoryParam as CategoryKey) : 'culture-bank'
   )
   const [sortBy, setSortBy] = useState('featured')
+  const [substrateSubFilter, setSubstrateSubFilter] = useState<string>(SUBSTRATE_STAGES[0].subcategory)
 
   useEffect(() => {
     if (categoryParam && CATEGORY_KEYS.includes(categoryParam)) setActiveCategory(categoryParam as CategoryKey)
@@ -576,29 +577,43 @@ function ShopPageContent() {
             </div>
           </div>
         ) : activeCategory === 'substrate' ? (
-          <div className="space-y-14">
-            {substrateStageGroups.map((group, i) => (
-              <div key={group.subcategory}>
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="flex-1">
-                    <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-accent mb-1">{group.eyebrow}</p>
-                    <h2 className="font-body font-bold text-2xl text-cream tracking-tight">{group.title}</h2>
-                    <p className="text-cream-muted text-sm mt-1 max-w-xl">{group.note}</p>
-                  </div>
-                  {i < substrateStageGroups.length - 1 && (
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="hidden sm:block text-cream-muted/40 flex-shrink-0" aria-hidden="true">
-                      <path d="M12 5v14M12 19l-5-5M12 19l5-5" />
-                    </svg>
+          <div>
+            {/* Sub-filter pills — pick one stage instead of scrolling through all of them */}
+            <div className="flex gap-2 overflow-x-auto pb-1 mb-8">
+              {substrateStageGroups.map((group) => (
+                <button
+                  key={group.subcategory}
+                  onClick={() => setSubstrateSubFilter(group.subcategory)}
+                  className={cn(
+                    'px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors border',
+                    substrateSubFilter === group.subcategory
+                      ? 'bg-cream text-bg border-cream'
+                      : 'bg-surface text-cream-muted hover:text-cream border-ds-border'
                   )}
+                >
+                  {group.title}
+                </button>
+              ))}
+            </div>
+
+            {(() => {
+              const active = substrateStageGroups.find((g) => g.subcategory === substrateSubFilter) ?? substrateStageGroups[0]
+              if (!active) return null
+              return (
+                <div>
+                  <div className="mb-6">
+                    <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-accent mb-1">{active.eyebrow}</p>
+                    <h2 className="font-body font-bold text-2xl text-cream tracking-tight">{active.title}</h2>
+                    <p className="text-cream-muted text-sm mt-1 max-w-xl">{active.note}</p>
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    {active.items.map((product) => (
+                      <ProductCard key={product.id} product={product} />
+                    ))}
+                  </div>
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                  {group.items.map((product) => (
-                    <ProductCard key={product.id} product={product} />
-                  ))}
-                </div>
-                {i < substrateStageGroups.length - 1 && <div className="mt-14 border-b border-ds-border" />}
-              </div>
-            ))}
+              )
+            })()}
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
