@@ -12,6 +12,35 @@ import { Button } from '@/components/ui/Button'
 import { formatPrice } from '@/lib/utils'
 import type { Product } from '@/types/product'
 
+const BUNDLE_HOW_TO_USE_STEPS = [
+  'Unbox your kit and check that the spawn bag, substrate, humidity dome, and mister are all included per the guide.',
+  'Mix the included spawn into the included substrate at the ratio specified in your guide, working in a clean area.',
+  'Seal and colonize at 70–75°F for 2–3 weeks, out of direct light, until the substrate turns fully white.',
+  'Once colonized, remove the humidity dome and introduce fresh air exchange to trigger pinning.',
+  'Mist 2–3× daily with the included mister to hold 85–95% humidity without soaking the substrate.',
+  'Harvest when caps flatten and the edges just begin to curl upward — twist and pull gently at the base.',
+  'Rehydrate the block for a second flush per your guide; most kits yield 2–3 flushes total.',
+]
+
+const LOG_KIT_HOW_TO_USE_STEPS = [
+  'Select fresh-cut oak logs, 3–4 inches in diameter, cut within 2–4 weeks of felling — older wood has a lower success rate.',
+  'Drill holes in a diamond pattern, 6–8 inches apart, using the bit diameter matched to your plug spawn.',
+  'Hammer a plug spawn dowel into each hole until flush with the bark.',
+  'Seal each inoculated hole with the included melted cheese wax to lock in moisture and block contaminants.',
+  'Stack logs off the ground in a shaded, humid spot and let them colonize for 6–12 months.',
+  'Once fully colonized, force a flush by soaking the log in cold water for 24 hours.',
+  'Expect flushes every few months for 3–5 years — each log is a perennial producer.',
+]
+
+const TINCTURE_HOW_TO_USE_STEPS = [
+  'Shake well before each use — natural sediment settles at the bottom of the bottle.',
+  'Take 1–2 full droppers (about 1ml) under the tongue, or mix into water, tea, or coffee.',
+  'Hold under the tongue for 30 seconds before swallowing for faster absorption.',
+  'Use once or twice daily, consistently, for at least 4–6 weeks to notice effects.',
+  'Store in a cool, dark place away from direct sunlight — no refrigeration required.',
+  'Shelf life: up to 2 years unopened, 1 year once opened.',
+]
+
 const PRODUCTS: Record<string, Product> = {
   'blue-oyster-grain-spawn': {
     id: '1', slug: 'blue-oyster-grain-spawn',
@@ -27,6 +56,41 @@ const PRODUCTS: Record<string, Product> = {
     images: [],
     cultivationSpecs: { difficulty: 'beginner', colonizationTime: '2–3 weeks', fruitingTempF: '55–65°F', fruitingTempC: '13–18°C', idealSubstrate: 'Hardwood sawdust, straw, coffee grounds', expectedYield: '1–3 flushes, 25% biological efficiency', indoorOutdoor: 'both' },
     isOrganic: true, inStock: true, tags: ['beginner', 'oyster', 'organic'], relatedProducts: ['beginners-grow-kit-bundle'],
+  },
+  'beginners-grow-kit-bundle': {
+    id: '3', slug: 'beginners-grow-kit-bundle',
+    name: { en: "Beginner's Complete Grow Kit", es: 'Kit de Cultivo Completo para Principiantes' },
+    description: { en: "Everything to grow your first mushrooms: spawn, substrate, dome, mister, and guide.", es: 'Todo lo que necesitas para tu primer cultivo: spawn, sustrato, cúpula, atomizador y guía.' },
+    category: 'bundle', subcategory: 'Beginner Bundles', species: 'blue-oyster',
+    price: 4999, compareAtPrice: 6999,
+    variants: [{ id: 'v3', name: 'Standard', price: 4999, stock: 30, sku: 'BKT-STD' }],
+    images: [],
+    cultivationSpecs: { difficulty: 'beginner', colonizationTime: '2–3 weeks', fruitingTempF: '55–65°F', fruitingTempC: '13–18°C', idealSubstrate: 'Included', expectedYield: '150–300g per flush', indoorOutdoor: 'indoor' },
+    isOrganic: true, inStock: true, tags: ['beginner', 'bundle', 'best-seller'], relatedProducts: [],
+    howToUseSteps: BUNDLE_HOW_TO_USE_STEPS,
+  },
+  'shiitake-log-kit': {
+    id: '4', slug: 'shiitake-log-kit',
+    name: { en: 'Shiitake Log Inoculation Kit', es: 'Kit de Inoculación de Tronco Shiitake' },
+    description: { en: 'Grow Shiitake on oak logs. Includes plug spawn, wax, and full guide. Produces 3–5 years.', es: 'Cultiva Shiitake en troncos de roble. Incluye spawn en tacos, cera y guía completa.' },
+    category: 'kit', subcategory: 'Log Kits', species: 'shiitake',
+    price: 2999, compareAtPrice: undefined,
+    variants: [{ id: 'v4', name: 'Standard', price: 2999, stock: 40, sku: 'SLK-STD' }],
+    images: [],
+    cultivationSpecs: { difficulty: 'intermediate', colonizationTime: '6–12 months on logs', fruitingTempF: '55–75°F', fruitingTempC: '13–24°C', idealSubstrate: 'Oak logs', expectedYield: 'Perennial', indoorOutdoor: 'outdoor' },
+    isOrganic: true, inStock: true, tags: ['shiitake', 'outdoor'], relatedProducts: ['shiitake-liquid-culture'],
+    howToUseSteps: LOG_KIT_HOW_TO_USE_STEPS,
+  },
+  'reishi-dual-extract-tincture': {
+    id: '5', slug: 'reishi-dual-extract-tincture',
+    name: { en: 'Reishi Dual-Extract Tincture', es: 'Tintura de Doble Extracción de Reishi' },
+    description: { en: '2oz dual-extract tincture. Organic Ganoderma lucidum fruiting bodies. 50:1 concentration.', es: 'Tintura de doble extracción de 60ml. Cuerpos fructificantes orgánicos de Ganoderma lucidum. Concentración 50:1.' },
+    category: 'wellness', subcategory: 'Tinctures',
+    price: 3999, compareAtPrice: undefined,
+    variants: [{ id: 'v5', name: '2oz', price: 3999, stock: 60, sku: 'RDT-2OZ' }],
+    images: [],
+    isOrganic: true, inStock: true, tags: ['reishi', 'wellness', 'tincture'], relatedProducts: ['reishi-liquid-culture'],
+    howToUseSteps: TINCTURE_HOW_TO_USE_STEPS,
   },
 }
 
