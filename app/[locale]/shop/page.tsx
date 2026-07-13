@@ -525,6 +525,33 @@ const CATEGORIES = [
 type CategoryKey = typeof CATEGORIES[number]['key']
 const CATEGORY_KEYS: readonly string[] = CATEGORIES.map((c) => c.key)
 
+const SUBSTRATE_STAGES = [
+  {
+    subcategory: 'Grain Bags',
+    eyebrow: 'Stage 1 — small inoculant',
+    title: 'Grain Bags',
+    note: 'Inject with a Liquid Culture syringe. Becomes grain spawn once colonized — used to inoculate everything below.',
+  },
+  {
+    subcategory: 'Bulk Substrate',
+    eyebrow: 'Stage 2 — no injection port',
+    title: 'Sterile Bulk Substrate',
+    note: 'Open it and hand-mix in grain spawn you already have. No syringe needed.',
+  },
+  {
+    subcategory: 'All-in-One Bags',
+    eyebrow: 'Stage 3 — inject directly',
+    title: 'All-in-One Grow Bags',
+    note: 'Inoculate and fruit from the same bag — no separate transfer step.',
+  },
+  {
+    subcategory: 'Fruiting Blocks',
+    eyebrow: 'Stage 4 — ready now',
+    title: 'Fruiting Blocks',
+    note: 'Already colonized. Cut, mist, and harvest — no colonizing wait.',
+  },
+] as const
+
 function ShopPageContent() {
   const t = useTranslations('shop')
   const searchParams = useSearchParams()
@@ -546,6 +573,16 @@ function ShopPageContent() {
     if (sortBy === 'price-low') items = [...items].sort((a, b) => a.price - b.price)
     if (sortBy === 'price-high') items = [...items].sort((a, b) => b.price - a.price)
     return items
+  }, [activeCategory, sortBy])
+
+  const substrateStageGroups = useMemo(() => {
+    if (activeCategory !== 'substrate') return []
+    return SUBSTRATE_STAGES.map((stage) => {
+      let items = PRODUCTS.filter((p) => p.subcategory === stage.subcategory)
+      if (sortBy === 'price-low') items = [...items].sort((a, b) => a.price - b.price)
+      if (sortBy === 'price-high') items = [...items].sort((a, b) => b.price - a.price)
+      return { ...stage, items }
+    }).filter((group) => group.items.length > 0)
   }, [activeCategory, sortBy])
 
   return (
@@ -635,6 +672,31 @@ function ShopPageContent() {
                 <ProductCard key={product.id} product={product} />
               ))}
             </div>
+          </div>
+        ) : activeCategory === 'substrate' ? (
+          <div className="space-y-14">
+            {substrateStageGroups.map((group, i) => (
+              <div key={group.subcategory}>
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="flex-1">
+                    <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-accent mb-1">{group.eyebrow}</p>
+                    <h2 className="font-body font-bold text-2xl text-cream tracking-tight">{group.title}</h2>
+                    <p className="text-cream-muted text-sm mt-1 max-w-xl">{group.note}</p>
+                  </div>
+                  {i < substrateStageGroups.length - 1 && (
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="hidden sm:block text-cream-muted/40 flex-shrink-0" aria-hidden="true">
+                      <path d="M12 5v14M12 19l-5-5M12 19l5-5" />
+                    </svg>
+                  )}
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                  {group.items.map((product) => (
+                    <ProductCard key={product.id} product={product} />
+                  ))}
+                </div>
+                {i < substrateStageGroups.length - 1 && <div className="mt-14 border-b border-ds-border" />}
+              </div>
+            ))}
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
