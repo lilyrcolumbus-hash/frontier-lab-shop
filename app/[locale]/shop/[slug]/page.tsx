@@ -491,6 +491,44 @@ const ALLINONE_SPECS_BASE = {
   shelfLife: '2–3 months, stored cool and dark',
 }
 
+const BULK_SPECS_BASE = {
+  bagSize: '5 lb — sterile hardwood substrate',
+  sterilization: 'Autoclaved 15 PSI / 120 min — verified per batch with biological indicators + temp/pressure logging',
+  moisture: '~60% — hydrated and ready for spawn',
+  recommendedInoculation: '1 lb colonized grain spawn per 5 lb bag (spawn sold separately)',
+  shelfLife: '2–3 months, stored cool and dark',
+}
+
+const BULK_HOW_TO_USE_STEPS = [
+  'Let the bag reach room temperature before opening — cold substrate slows colonization.',
+  'Working in a clean, sanitized area (or still-air box), cut the bag open and add 1 lb of fully colonized grain spawn for every 5 lb of substrate. This bag has no injection port — you need grain spawn on hand already, not a liquid culture syringe.',
+  'Massage and mix gently through the bag or a clean container until the grain spawn is distributed evenly throughout the substrate.',
+  'Reseal or transfer to a clean fruiting container. Incubate at 70–75°F in darkness until fully colonized white throughout, typically 2–3 weeks.',
+  'Once colonized, introduce fruiting conditions: fresh air exchange + 85–95% humidity.',
+  'Mist 2–3× daily and harvest when caps flatten and the edges just begin to curl upward.',
+  "Don't have grain spawn yet? Pair this bag with one of our Grain Bags — inject it with a Liquid Culture syringe first, then use it to inoculate this substrate.",
+]
+
+const BULK_REISHI_HOW_TO_USE_STEPS = [
+  'Let the bag reach room temperature before opening — cold substrate slows colonization.',
+  'Working in a clean, sanitized area (or still-air box), cut the bag open and add 1 lb of fully colonized grain spawn for every 5 lb of substrate. This bag has no injection port — you need grain spawn on hand already, not a liquid culture syringe.',
+  'Massage and mix gently through the bag or a clean container until the grain spawn is distributed evenly throughout the substrate.',
+  'Reseal or transfer to a clean fruiting container. Incubate at 70–75°F in darkness until fully colonized white throughout, typically 3–4 weeks — Reishi runs slower than Oyster species.',
+  'Once colonized, introduce fruiting conditions: 70–80°F with 85–90% humidity and steady fresh air exchange.',
+  'A white, coral-like antler stage appears first, developing into the lacquered red-orange conk over 60–90+ days. Do not rush harvest.',
+  'Harvest once the growing white margin stops expanding and the surface has fully hardened. Expect 1–2 flushes total, spaced months apart.',
+]
+
+const BULK_ANTLER_HOW_TO_USE_STEPS = [
+  'Let the bag reach room temperature before opening — cold substrate slows colonization.',
+  'Working in a clean, sanitized area (or still-air box), cut the bag open and add 1 lb of fully colonized grain spawn for every 5 lb of substrate. This bag has no injection port — you need grain spawn on hand already, not a liquid culture syringe.',
+  'Massage and mix gently through the bag or a clean container until the grain spawn is distributed evenly throughout the substrate.',
+  'Reseal or transfer to a clean fruiting container. Incubate at 70–75°F in darkness until fully colonized white throughout, typically 3–4 weeks.',
+  'Once colonized, move to fruiting — but unlike our other substrate bags, limit fresh air exchange to hold CO2 above 5,000 ppm and drive antler-shaped growth instead of a normal cap.',
+  'Growth is slow and coral-like at first, branching upward into antler form over several weeks at 70–82°F.',
+  'Harvest once the antler tips stop elongating and the surface begins to harden, typically 60–90+ days after fruiting begins. Expect 1–2 flushes.',
+]
+
 const FRUITING_PRODUCTS: Record<string, Product> = {
   'lions-mane-fruiting-block': {
     id: 'fb1', slug: 'lions-mane-fruiting-block',
@@ -721,6 +759,114 @@ const ALLINONE_PRODUCTS: Record<string, Product> = {
   },
 }
 
+const BULK_PRODUCTS: Record<string, Product> = {
+  'lions-mane-bulk-substrate': {
+    id: 'bs1', slug: 'lions-mane-bulk-substrate',
+    name: { en: "Lion's Mane Sterile Bulk Substrate", es: 'Sustrato a Granel Esterilizado Melena de León' },
+    description: {
+      en: "Sterile, autoclaved hardwood substrate for growers who already have colonized grain spawn on hand — no injection port here, just open and mix. Built for Lion's Mane's longer colonization window and dense pom-pom formation.\n\nEvery bag is sterilized at 15 PSI and batch-tested with biological indicators before it ships. Mix in 1lb of colonized grain spawn per 5lb bag, incubate, then fruit from the same container — no separate grain-to-bulk transfer container needed.\n\nDon't have grain spawn yet? Pair this with one of our Grain Bags and a Lion's Mane Liquid Culture syringe.\n\nEach bag: 5lb sterile hardwood substrate · 0.2-micron filter patch · shrooms instruction card. Store cool and dark until use.",
+      es: "Sustrato de madera dura esterilizado en autoclave para cultivadores que ya tienen grain spawn colonizado — sin puerto de inyección, solo abrir y mezclar. Pensado para la ventana de colonización más larga de la Melena de León y su formación de pompón denso.\n\nCada bolsa se esteriliza a 15 PSI y se prueba por lote con indicadores biológicos antes de enviarse. Mezcla 1lb de grain spawn colonizado por cada 5lb de bolsa, incuba, y fructifica desde el mismo contenedor.\n\n¿No tienes grain spawn todavía? Combina esta bolsa con uno de nuestros Grain Bags y una jeringa de Cultivo Líquido de Melena de León.\n\nCada bolsa: 5lb de sustrato de madera dura esterilizado · parche filtrante de 0.2 micras · tarjeta de instrucciones shrooms.",
+    },
+    category: 'substrate', subcategory: 'Bulk Substrate', species: 'lions-mane',
+    price: 2299, compareAtPrice: 2799,
+    variants: [{ id: 'bs1v', name: '5 lb', price: 2299, stock: 35, sku: 'LMB-BULK' }],
+    images: [],
+    isOrganic: true, inStock: true, tags: ['bulk-substrate', 'lions-mane', 'intermediate'], relatedProducts: ['lions-mane-liquid-culture', 'rye-grain-spawn-bag-3lb'],
+    howToUseSteps: BULK_HOW_TO_USE_STEPS,
+    grainBagSpecs: { ...BULK_SPECS_BASE, colonizationEstimate: '2–3 weeks once inoculated' },
+  },
+  'blue-oyster-bulk-substrate': {
+    id: 'bs2', slug: 'blue-oyster-bulk-substrate',
+    name: { en: 'Blue Oyster Sterile Bulk Substrate', es: 'Sustrato a Granel Esterilizado Ostra Azul' },
+    description: {
+      en: "Sterile, autoclaved hardwood substrate for growers who already have colonized grain spawn on hand — no injection port here, just open and mix. Blue Oyster's forgiving, aggressive colonization style makes this the easiest bulk substrate to learn hand-mixing technique on.\n\nEvery bag is sterilized at 15 PSI and batch-tested with biological indicators before it ships. Mix in 1lb of colonized grain spawn per 5lb bag, incubate, then fruit from the same container.\n\nDon't have grain spawn yet? Pair this with one of our Grain Bags and a Blue Oyster Liquid Culture syringe.\n\nEach bag: 5lb sterile hardwood substrate · 0.2-micron filter patch · shrooms instruction card. Store cool and dark until use.",
+      es: "Sustrato de madera dura esterilizado en autoclave para cultivadores que ya tienen grain spawn colonizado — sin puerto de inyección, solo abrir y mezclar. El estilo de colonización indulgente y agresivo de la Ostra Azul la hace la más fácil para aprender la técnica de mezcla a mano.\n\nCada bolsa se esteriliza a 15 PSI y se prueba por lote con indicadores biológicos antes de enviarse. Mezcla 1lb de grain spawn colonizado por cada 5lb de bolsa, incuba, y fructifica desde el mismo contenedor.\n\n¿No tienes grain spawn todavía? Combina esta bolsa con uno de nuestros Grain Bags y una jeringa de Cultivo Líquido de Ostra Azul.\n\nCada bolsa: 5lb de sustrato de madera dura esterilizado · parche filtrante de 0.2 micras · tarjeta de instrucciones shrooms.",
+    },
+    category: 'substrate', subcategory: 'Bulk Substrate', species: 'blue-oyster',
+    price: 2299, compareAtPrice: 2799,
+    variants: [{ id: 'bs2v', name: '5 lb', price: 2299, stock: 40, sku: 'BOB-BULK' }],
+    images: [],
+    isOrganic: true, inStock: true, tags: ['bulk-substrate', 'oyster', 'beginner'], relatedProducts: ['blue-oyster-liquid-culture', 'rye-grain-spawn-bag-3lb'],
+    howToUseSteps: BULK_HOW_TO_USE_STEPS,
+    grainBagSpecs: { ...BULK_SPECS_BASE, colonizationEstimate: '10–16 days once inoculated' },
+  },
+  'shiitake-bulk-substrate': {
+    id: 'bs3', slug: 'shiitake-bulk-substrate',
+    name: { en: 'Shiitake Sterile Bulk Substrate', es: 'Sustrato a Granel Esterilizado Shiitake' },
+    description: {
+      en: "Sterile, autoclaved hardwood substrate for growers who already have colonized grain spawn on hand — no injection port here, just open and mix. Colonization runs longer than Oyster species (Shiitake is a slower grower by nature).\n\nEvery bag is sterilized at 15 PSI and batch-tested with biological indicators before it ships. Mix in 1lb of colonized grain spawn per 5lb bag, incubate, then trigger fruiting with a cold-shock soak once fully colonized.\n\nDon't have grain spawn yet? Pair this with one of our Grain Bags and a Shiitake Liquid Culture syringe.\n\nEach bag: 5lb sterile hardwood substrate · 0.2-micron filter patch · shrooms instruction card. Store cool and dark until use.",
+      es: "Sustrato de madera dura esterilizado en autoclave para cultivadores que ya tienen grain spawn colonizado — sin puerto de inyección, solo abrir y mezclar. La colonización toma más tiempo que las Ostras (el Shiitake crece más lento por naturaleza).\n\nCada bolsa se esteriliza a 15 PSI y se prueba por lote con indicadores biológicos antes de enviarse. Mezcla 1lb de grain spawn colonizado por cada 5lb de bolsa, incuba, y detona la fructificación con un baño de choque frío una vez colonizado.\n\n¿No tienes grain spawn todavía? Combina esta bolsa con uno de nuestros Grain Bags y una jeringa de Cultivo Líquido de Shiitake.\n\nCada bolsa: 5lb de sustrato de madera dura esterilizado · parche filtrante de 0.2 micras · tarjeta de instrucciones shrooms.",
+    },
+    category: 'substrate', subcategory: 'Bulk Substrate', species: 'shiitake',
+    price: 2299, compareAtPrice: 2799,
+    variants: [{ id: 'bs3v', name: '5 lb', price: 2299, stock: 25, sku: 'SHB-BULK' }],
+    images: [],
+    isOrganic: true, inStock: true, tags: ['bulk-substrate', 'shiitake', 'intermediate'], relatedProducts: ['shiitake-liquid-culture', 'rye-grain-spawn-bag-3lb'],
+    howToUseSteps: BULK_HOW_TO_USE_STEPS,
+    grainBagSpecs: { ...BULK_SPECS_BASE, colonizationEstimate: '3–4 weeks once inoculated' },
+  },
+  'pink-oyster-bulk-substrate': {
+    id: 'bs4', slug: 'pink-oyster-bulk-substrate',
+    name: { en: 'Pink Oyster Sterile Bulk Substrate', es: 'Sustrato a Granel Esterilizado Ostra Rosa' },
+    description: {
+      en: "Sterile, autoclaved hardwood substrate for growers who already have colonized grain spawn on hand — no injection port here, just open and mix. Pairs with our fastest, most dramatic species — vivid magenta clusters within days of fruiting.\n\nEvery bag is sterilized at 15 PSI and batch-tested with biological indicators before it ships. Mix in 1lb of colonized grain spawn per 5lb bag and incubate in a warm spot — Pink Oyster loves heat.\n\nDon't have grain spawn yet? Pair this with one of our Grain Bags and a Pink Oyster Liquid Culture syringe.\n\nEach bag: 5lb sterile hardwood substrate · 0.2-micron filter patch · shrooms instruction card. Store cool and dark until use.",
+      es: "Sustrato de madera dura esterilizado en autoclave para cultivadores que ya tienen grain spawn colonizado — sin puerto de inyección, solo abrir y mezclar. Combina con nuestra especie más rápida y dramática — racimos magenta vibrantes a días de fructificar.\n\nCada bolsa se esteriliza a 15 PSI y se prueba por lote con indicadores biológicos antes de enviarse. Mezcla 1lb de grain spawn colonizado por cada 5lb de bolsa e incuba en un lugar cálido — la Ostra Rosa ama el calor.\n\n¿No tienes grain spawn todavía? Combina esta bolsa con uno de nuestros Grain Bags y una jeringa de Cultivo Líquido de Ostra Rosa.\n\nCada bolsa: 5lb de sustrato de madera dura esterilizado · parche filtrante de 0.2 micras · tarjeta de instrucciones shrooms.",
+    },
+    category: 'substrate', subcategory: 'Bulk Substrate', species: 'pink-oyster',
+    price: 2299, compareAtPrice: 2799,
+    variants: [{ id: 'bs4v', name: '5 lb', price: 2299, stock: 35, sku: 'POB-BULK' }],
+    images: [],
+    isOrganic: true, inStock: true, tags: ['bulk-substrate', 'oyster', 'beginner'], relatedProducts: ['pink-oyster-liquid-culture', 'rye-grain-spawn-bag-3lb'],
+    howToUseSteps: BULK_HOW_TO_USE_STEPS,
+    grainBagSpecs: { ...BULK_SPECS_BASE, colonizationEstimate: '8–12 days once inoculated' },
+  },
+  'yellow-oyster-bulk-substrate': {
+    id: 'bs5', slug: 'yellow-oyster-bulk-substrate',
+    name: { en: 'Golden Oyster Sterile Bulk Substrate', es: 'Sustrato a Granel Esterilizado Ostra Dorada' },
+    description: {
+      en: "Sterile, autoclaved hardwood substrate for growers who already have colonized grain spawn on hand — no injection port here, just open and mix. Built for Golden Oyster's fast, aggressive colonization style.\n\nEvery bag is sterilized at 15 PSI and batch-tested with biological indicators before it ships. Mix in 1lb of colonized grain spawn per 5lb bag and incubate — expect strong fresh air exchange needs once fruiting starts, or you'll get long stems instead of tight golden clusters.\n\nDon't have grain spawn yet? Pair this with one of our Grain Bags and a Golden Oyster Liquid Culture syringe.\n\nEach bag: 5lb sterile hardwood substrate · 0.2-micron filter patch · shrooms instruction card. Store cool and dark until use.",
+      es: "Sustrato de madera dura esterilizado en autoclave para cultivadores que ya tienen grain spawn colonizado — sin puerto de inyección, solo abrir y mezclar. Pensado para el estilo de colonización rápido y agresivo de la Ostra Dorada.\n\nCada bolsa se esteriliza a 15 PSI y se prueba por lote con indicadores biológicos antes de enviarse. Mezcla 1lb de grain spawn colonizado por cada 5lb de bolsa — necesitará buen intercambio de aire una vez inicie la fructificación, o tendrás tallos largos en vez de racimos dorados compactos.\n\n¿No tienes grain spawn todavía? Combina esta bolsa con uno de nuestros Grain Bags y una jeringa de Cultivo Líquido de Ostra Dorada.\n\nCada bolsa: 5lb de sustrato de madera dura esterilizado · parche filtrante de 0.2 micras · tarjeta de instrucciones shrooms.",
+    },
+    category: 'substrate', subcategory: 'Bulk Substrate', species: 'yellow-oyster',
+    price: 2299, compareAtPrice: 2799,
+    variants: [{ id: 'bs5v', name: '5 lb', price: 2299, stock: 30, sku: 'YOB-BULK' }],
+    images: [],
+    isOrganic: true, inStock: true, tags: ['bulk-substrate', 'oyster', 'beginner'], relatedProducts: ['yellow-oyster-liquid-culture', 'rye-grain-spawn-bag-3lb'],
+    howToUseSteps: BULK_HOW_TO_USE_STEPS,
+    grainBagSpecs: { ...BULK_SPECS_BASE, colonizationEstimate: '8–12 days once inoculated' },
+  },
+  'reishi-bulk-substrate': {
+    id: 'bs6', slug: 'reishi-bulk-substrate',
+    name: { en: 'Reishi Sterile Bulk Substrate', es: 'Sustrato a Granel Esterilizado Reishi' },
+    description: {
+      en: "Sterile, autoclaved hardwood substrate for growers who already have colonized grain spawn on hand — no injection port here, just open and mix. Colonization runs 3–4 weeks, and fruiting takes far longer still: 60–90+ days from cutting to a fully hardened conk. Not a fast grow, and not recommended as a first bulk substrate.\n\nEvery bag is sterilized at 15 PSI and batch-tested with biological indicators before it ships. Mix in 1lb of colonized grain spawn per 5lb bag and incubate.\n\nDon't have grain spawn yet? Pair this with one of our Grain Bags and a Reishi Liquid Culture syringe.\n\nEach bag: 5lb sterile hardwood substrate · 0.2-micron filter patch · shrooms instruction card. Store cool and dark until use.",
+      es: "Sustrato de madera dura esterilizado en autoclave para cultivadores que ya tienen grain spawn colonizado — sin puerto de inyección, solo abrir y mezclar. La colonización toma 3–4 semanas, y la fructificación toma mucho más: 60–90+ días desde el corte hasta un sombrero completamente endurecido. No es un cultivo rápido, y no se recomienda como primer sustrato a granel.\n\nCada bolsa se esteriliza a 15 PSI y se prueba por lote con indicadores biológicos antes de enviarse. Mezcla 1lb de grain spawn colonizado por cada 5lb de bolsa e incuba.\n\n¿No tienes grain spawn todavía? Combina esta bolsa con uno de nuestros Grain Bags y una jeringa de Cultivo Líquido de Reishi.\n\nCada bolsa: 5lb de sustrato de madera dura esterilizado · parche filtrante de 0.2 micras · tarjeta de instrucciones shrooms.",
+    },
+    category: 'substrate', subcategory: 'Bulk Substrate', species: 'reishi',
+    price: 2299, compareAtPrice: 2799,
+    variants: [{ id: 'bs6v', name: '5 lb', price: 2299, stock: 20, sku: 'REB-BULK' }],
+    images: [],
+    isOrganic: true, inStock: true, tags: ['bulk-substrate', 'medicinal', 'reishi'], relatedProducts: ['reishi-liquid-culture', 'reishi-dual-extract-tincture'],
+    howToUseSteps: BULK_REISHI_HOW_TO_USE_STEPS,
+    grainBagSpecs: { ...BULK_SPECS_BASE, colonizationEstimate: '3–4 weeks once inoculated' },
+  },
+  'antler-reishi-bulk-substrate': {
+    id: 'bs7', slug: 'antler-reishi-bulk-substrate',
+    name: { en: 'Antler Reishi Sterile Bulk Substrate', es: 'Sustrato a Granel Esterilizado Reishi Antler' },
+    description: {
+      en: "Sterile, autoclaved hardwood substrate for growers who already have colonized grain spawn on hand — no injection port here, just open and mix. Colonization runs 3–4 weeks like standard Reishi; the difference is entirely in fruiting, where you limit fresh air exchange to grow dramatic antler-shaped bodies instead of a normal cap.\n\nEvery bag is sterilized at 15 PSI and batch-tested with biological indicators before it ships. The most technically demanding bulk substrate we sell — advanced growers only.\n\nDon't have grain spawn yet? Pair this with one of our Grain Bags and an Antler Reishi Liquid Culture syringe.\n\nEach bag: 5lb sterile hardwood substrate · 0.2-micron filter patch · shrooms instruction card. Store cool and dark until use.",
+      es: "Sustrato de madera dura esterilizado en autoclave para cultivadores que ya tienen grain spawn colonizado — sin puerto de inyección, solo abrir y mezclar. La colonización toma 3–4 semanas como el Reishi estándar; la diferencia está toda en la fructificación, donde limitas el intercambio de aire para lograr formas de asta dramáticas en vez de un sombrero normal.\n\nCada bolsa se esteriliza a 15 PSI y se prueba por lote con indicadores biológicos antes de enviarse. El sustrato a granel técnicamente más exigente que vendemos — solo cultivadores avanzados.\n\n¿No tienes grain spawn todavía? Combina esta bolsa con uno de nuestros Grain Bags y una jeringa de Cultivo Líquido de Reishi Antler.\n\nCada bolsa: 5lb de sustrato de madera dura esterilizado · parche filtrante de 0.2 micras · tarjeta de instrucciones shrooms.",
+    },
+    category: 'substrate', subcategory: 'Bulk Substrate', species: 'reishi',
+    price: 2299, compareAtPrice: 2799,
+    variants: [{ id: 'bs7v', name: '5 lb', price: 2299, stock: 15, sku: 'ARB-BULK' }],
+    images: [],
+    isOrganic: true, inStock: true, tags: ['bulk-substrate', 'medicinal', 'reishi', 'antler'], relatedProducts: ['antler-reishi-liquid-culture', 'reishi-dual-extract-tincture'],
+    howToUseSteps: BULK_ANTLER_HOW_TO_USE_STEPS,
+    grainBagSpecs: { ...BULK_SPECS_BASE, colonizationEstimate: '3–4 weeks once inoculated' },
+  },
+}
+
 const TABS = ['description', 'howToUse', 'science', 'reviews'] as const
 
 export default function ProductPage({ params }: { params: { slug: string } }) {
@@ -728,7 +874,7 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
   const t = useTranslations('shop.product')
   const tc = useTranslations('common')
 
-  const product = PRODUCTS[params.slug] ?? LC_PRODUCTS[params.slug] ?? GRAIN_PRODUCTS[params.slug] ?? FRUITING_PRODUCTS[params.slug] ?? ALLINONE_PRODUCTS[params.slug]
+  const product = PRODUCTS[params.slug] ?? LC_PRODUCTS[params.slug] ?? GRAIN_PRODUCTS[params.slug] ?? FRUITING_PRODUCTS[params.slug] ?? ALLINONE_PRODUCTS[params.slug] ?? BULK_PRODUCTS[params.slug]
   if (!product) notFound()
 
   const { addItem, openCart } = useCartStore()
@@ -997,6 +1143,43 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
               </div>
             )}
 
+            {/* Bulk substrate contents (no injection port — opened and hand-mixed with grain spawn) */}
+            {product.subcategory === 'Bulk Substrate' && (
+              <div className="rounded-2xl border border-ds-border overflow-hidden">
+                <div className="px-4 py-2.5 bg-elevated border-b border-ds-border">
+                  <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-cream-muted">What&apos;s in the bag</p>
+                </div>
+                <div className="grid grid-cols-3 divide-x divide-ds-border bg-surface">
+                  {[
+                    {
+                      label: '5lb\nSterile Substrate',
+                      icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round"><rect x="4" y="7" width="16" height="14" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>,
+                    },
+                    {
+                      label: '0.2μm\nFilter Patch',
+                      icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18"/></svg>,
+                    },
+                    {
+                      label: 'Instruction\nCard',
+                      icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="7" y1="9" x2="17" y2="9"/><line x1="7" y1="13" x2="13" y2="13"/></svg>,
+                    },
+                  ].map((item, i) => (
+                    <motion.div
+                      key={item.label}
+                      initial={{ opacity: 0, y: 28, scale: 0.88 }}
+                      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                      viewport={{ once: true, margin: '-5% 0px' }}
+                      transition={{ delay: i * 0.14, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                      className="flex flex-col items-center gap-2 py-4 px-1"
+                    >
+                      <div className="text-accent/50">{item.icon}</div>
+                      <p className="font-mono text-[8px] uppercase tracking-wider text-cream-muted/60 text-center whitespace-pre-line leading-relaxed">{item.label}</p>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            )}
+
             {/* Fruiting block contents */}
             {product.subcategory === 'Fruiting Blocks' && (
               <div className="rounded-2xl border border-ds-border overflow-hidden">
@@ -1066,7 +1249,7 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
             {product.grainBagSpecs && (
               <div className="rounded-2xl border border-ds-border overflow-hidden">
                 <div className="px-4 py-3 bg-elevated border-b border-ds-border">
-                  <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-cream-muted">{product.subcategory === 'All-in-One Bags' ? 'Substrate Specs' : 'Grain Bag Specs'}</p>
+                  <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-cream-muted">{product.subcategory === 'Grain Bags' ? 'Grain Bag Specs' : 'Substrate Specs'}</p>
                 </div>
                 <div className="grid grid-cols-2 divide-x divide-y divide-ds-border">
                   {[

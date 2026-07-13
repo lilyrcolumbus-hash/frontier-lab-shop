@@ -420,6 +420,98 @@ const PRODUCTS: Product[] = [
     images: [],
     isOrganic: true, inStock: true, tags: ['all-in-one', 'medicinal', 'reishi', 'antler'], relatedProducts: ['antler-reishi-liquid-culture'],
   },
+  // ── Sterile Bulk Substrate (no injection port — mix with your own grain spawn) ──
+  {
+    id: 'bs1', slug: 'lions-mane-bulk-substrate',
+    name: { en: "Lion's Mane Sterile Bulk Substrate", es: 'Sustrato a Granel Esterilizado Melena de León' },
+    description: {
+      en: "Sterile, autoclaved hardwood substrate for growers who already have colonized grain spawn — no injection port, just open and mix. Built for Lion's Mane's longer colonization window.",
+      es: "Sustrato de madera dura esterilizado en autoclave para cultivadores que ya tienen grain spawn colonizado — sin puerto de inyección, solo abrir y mezclar. Pensado para la Melena de León.",
+    },
+    category: 'substrate', subcategory: 'Bulk Substrate', species: 'lions-mane',
+    price: 2299, compareAtPrice: 2799,
+    variants: [{ id: 'bs1v', name: '5 lb', price: 2299, stock: 35, sku: 'LMB-BULK' }],
+    images: [],
+    isOrganic: true, inStock: true, tags: ['bulk-substrate', 'lions-mane', 'intermediate'], relatedProducts: ['lions-mane-liquid-culture'],
+  },
+  {
+    id: 'bs2', slug: 'blue-oyster-bulk-substrate',
+    name: { en: 'Blue Oyster Sterile Bulk Substrate', es: 'Sustrato a Granel Esterilizado Ostra Azul' },
+    description: {
+      en: "Sterile, autoclaved hardwood substrate for growers who already have colonized grain spawn — no injection port, just open and mix. Blue Oyster's forgiving style makes it the easiest bulk substrate to learn on.",
+      es: "Sustrato de madera dura esterilizado en autoclave para cultivadores que ya tienen grain spawn colonizado — sin puerto de inyección, solo abrir y mezclar. El más fácil para aprender la técnica de mezcla.",
+    },
+    category: 'substrate', subcategory: 'Bulk Substrate', species: 'blue-oyster',
+    price: 2299, compareAtPrice: 2799,
+    variants: [{ id: 'bs2v', name: '5 lb', price: 2299, stock: 40, sku: 'BOB-BULK' }],
+    images: [],
+    isOrganic: true, inStock: true, tags: ['bulk-substrate', 'oyster', 'beginner'], relatedProducts: ['blue-oyster-liquid-culture'],
+  },
+  {
+    id: 'bs3', slug: 'shiitake-bulk-substrate',
+    name: { en: 'Shiitake Sterile Bulk Substrate', es: 'Sustrato a Granel Esterilizado Shiitake' },
+    description: {
+      en: "Sterile, autoclaved hardwood substrate for growers who already have colonized grain spawn — no injection port, just open and mix. Colonization runs longer than Oyster species by nature.",
+      es: "Sustrato de madera dura esterilizado en autoclave para cultivadores que ya tienen grain spawn colonizado — sin puerto de inyección, solo abrir y mezclar. La colonización toma más tiempo que las Ostras.",
+    },
+    category: 'substrate', subcategory: 'Bulk Substrate', species: 'shiitake',
+    price: 2299, compareAtPrice: 2799,
+    variants: [{ id: 'bs3v', name: '5 lb', price: 2299, stock: 25, sku: 'SHB-BULK' }],
+    images: [],
+    isOrganic: true, inStock: true, tags: ['bulk-substrate', 'shiitake', 'intermediate'], relatedProducts: ['shiitake-liquid-culture'],
+  },
+  {
+    id: 'bs4', slug: 'pink-oyster-bulk-substrate',
+    name: { en: 'Pink Oyster Sterile Bulk Substrate', es: 'Sustrato a Granel Esterilizado Ostra Rosa' },
+    description: {
+      en: "Sterile, autoclaved hardwood substrate for growers who already have colonized grain spawn — no injection port, just open and mix. Pairs with our fastest, most dramatic species.",
+      es: "Sustrato de madera dura esterilizado en autoclave para cultivadores que ya tienen grain spawn colonizado — sin puerto de inyección, solo abrir y mezclar. Combina con nuestra especie más rápida y dramática.",
+    },
+    category: 'substrate', subcategory: 'Bulk Substrate', species: 'pink-oyster',
+    price: 2299, compareAtPrice: 2799,
+    variants: [{ id: 'bs4v', name: '5 lb', price: 2299, stock: 35, sku: 'POB-BULK' }],
+    images: [],
+    isOrganic: true, inStock: true, tags: ['bulk-substrate', 'oyster', 'beginner'], relatedProducts: ['pink-oyster-liquid-culture'],
+  },
+  {
+    id: 'bs5', slug: 'yellow-oyster-bulk-substrate',
+    name: { en: 'Golden Oyster Sterile Bulk Substrate', es: 'Sustrato a Granel Esterilizado Ostra Dorada' },
+    description: {
+      en: "Sterile, autoclaved hardwood substrate for growers who already have colonized grain spawn — no injection port, just open and mix. Built for Golden Oyster's fast, aggressive colonization style.",
+      es: "Sustrato de madera dura esterilizado en autoclave para cultivadores que ya tienen grain spawn colonizado — sin puerto de inyección, solo abrir y mezclar. Pensado para el estilo de colonización rápido de la Ostra Dorada.",
+    },
+    category: 'substrate', subcategory: 'Bulk Substrate', species: 'yellow-oyster',
+    price: 2299, compareAtPrice: 2799,
+    variants: [{ id: 'bs5v', name: '5 lb', price: 2299, stock: 30, sku: 'YOB-BULK' }],
+    images: [],
+    isOrganic: true, inStock: true, tags: ['bulk-substrate', 'oyster', 'beginner'], relatedProducts: ['yellow-oyster-liquid-culture'],
+  },
+  {
+    id: 'bs6', slug: 'reishi-bulk-substrate',
+    name: { en: 'Reishi Sterile Bulk Substrate', es: 'Sustrato a Granel Esterilizado Reishi' },
+    description: {
+      en: "Sterile, autoclaved hardwood substrate for growers who already have colonized grain spawn — no injection port, just open and mix. Not a fast grow — 60–90+ days from cutting to a fully hardened conk.",
+      es: "Sustrato de madera dura esterilizado en autoclave para cultivadores que ya tienen grain spawn colonizado — sin puerto de inyección, solo abrir y mezclar. No es un cultivo rápido — 60–90+ días hasta un sombrero completamente endurecido.",
+    },
+    category: 'substrate', subcategory: 'Bulk Substrate', species: 'reishi',
+    price: 2299, compareAtPrice: 2799,
+    variants: [{ id: 'bs6v', name: '5 lb', price: 2299, stock: 20, sku: 'REB-BULK' }],
+    images: [],
+    isOrganic: true, inStock: true, tags: ['bulk-substrate', 'medicinal', 'reishi'], relatedProducts: ['reishi-liquid-culture'],
+  },
+  {
+    id: 'bs7', slug: 'antler-reishi-bulk-substrate',
+    name: { en: 'Antler Reishi Sterile Bulk Substrate', es: 'Sustrato a Granel Esterilizado Reishi Antler' },
+    description: {
+      en: "Sterile, autoclaved hardwood substrate for growers who already have colonized grain spawn — no injection port, just open and mix. Limit fresh air exchange during fruiting to grow antlers instead of a normal cap.",
+      es: "Sustrato de madera dura esterilizado en autoclave para cultivadores que ya tienen grain spawn colonizado — sin puerto de inyección, solo abrir y mezclar. Limita el intercambio de aire durante la fructificación para lograr astas.",
+    },
+    category: 'substrate', subcategory: 'Bulk Substrate', species: 'reishi',
+    price: 2299, compareAtPrice: 2799,
+    variants: [{ id: 'bs7v', name: '5 lb', price: 2299, stock: 15, sku: 'ARB-BULK' }],
+    images: [],
+    isOrganic: true, inStock: true, tags: ['bulk-substrate', 'medicinal', 'reishi', 'antler'], relatedProducts: ['antler-reishi-liquid-culture'],
+  },
 ]
 
 const CATEGORIES = [
