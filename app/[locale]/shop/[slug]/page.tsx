@@ -463,34 +463,6 @@ const ANTLER_FRUITING_HOW_TO_USE_STEPS = [
   'Harvest once the antler tips stop elongating and the surface begins to harden, typically 60–90+ days after cutting. Expect 1–2 flushes.',
 ]
 
-const ALLINONE_HOW_TO_USE_STEPS = [
-  'Let the bag reach room temperature before injecting — cold substrate slows colonization.',
-  'Sterilize the injection port with the included alcohol swab and let it dry completely.',
-  'Inject a full 10cc liquid culture syringe, or break up one colonized 3lb grain bag and pour it in through the port.',
-  'Press the swabbed area firmly over the injection point — the port seals itself around the needle hole.',
-  'Incubate at 70–75°F in darkness. Watch for green, black, or pink patches — a sign of contamination — before colonization completes.',
-  'Once fully white and colonized, cut a 2–3 inch X in the bag and move it straight into fruiting conditions — no transfer to a separate container needed.',
-  'Mist 2–3× daily, keep fresh air exchange high, and expect first pins 5–10 days after cutting.',
-]
-
-const ANTLER_ALLINONE_HOW_TO_USE_STEPS = [
-  'Let the bag reach room temperature before injecting — cold substrate slows colonization.',
-  'Sterilize the injection port with the included alcohol swab and let it dry completely.',
-  'Inject a full 10cc liquid culture syringe, or break up one colonized 3lb grain bag and pour it in through the port.',
-  'Press the swabbed area firmly over the injection point — the port seals itself around the needle hole.',
-  'Incubate at 70–75°F in darkness. Watch for green, black, or pink patches — a sign of contamination — before colonization completes.',
-  'Once fully white and colonized, cut a 2–3 inch X in the bag — but unlike our other All-in-One bags, limit fresh air exchange afterward to maintain CO2 above 5,000 ppm and grow antler form instead of a normal cap.',
-  'Growth is slow and coral-like at first, branching upward over several weeks. Expect harvest 60–90+ days after cutting.',
-]
-
-const ALLINONE_SPECS_BASE = {
-  bagSize: "5 lb — Master's Mix (soy hull + hardwood pellets)",
-  sterilization: 'Autoclaved 15 PSI / 120 min — verified per batch with biological indicators + temp/pressure logging',
-  moisture: '~65% — hydrated and ready to inoculate',
-  recommendedInoculation: 'Full 10cc liquid culture syringe or 1 colonized 3lb grain bag',
-  shelfLife: '2–3 months, stored cool and dark',
-}
-
 const BULK_SPECS_BASE = {
   bagSize: '5 lb — sterile hardwood substrate',
   sterilization: 'Autoclaved 15 PSI / 120 min — verified per batch with biological indicators + temp/pressure logging',
@@ -651,114 +623,6 @@ const FRUITING_PRODUCTS: Record<string, Product> = {
   },
 }
 
-const ALLINONE_PRODUCTS: Record<string, Product> = {
-  'lions-mane-all-in-one-grow-bag': {
-    id: 'aio1', slug: 'lions-mane-all-in-one-grow-bag',
-    name: { en: "Lion's Mane Sterile All-in-One Grow Bag", es: 'Bolsa Todo-en-Uno Esterilizada Melena de León' },
-    description: {
-      en: "The whole grow in one bag — no separate grain spawn, no bulk substrate to mix, no monotub prep. This 5lb bag of Master's Mix (soy hull + hardwood fuel pellets) is sterilized in a commercial autoclave at 15 PSI, batch-tested with biological indicators, hydrated, and ready for you to inject directly. Once colonized, cut it open and fruit from the same bag.\n\nMaster's Mix is the substrate most Lion's Mane growers graduate to after their first grain-only grow — it holds moisture through a longer colonization window and supports denser pom-pom formation than straight grain. Inject with a full 10cc Lion's Mane liquid culture syringe for best results.\n\nEach bag: 5lb autoclave-sterilized Master's Mix · 0.2-micron filter patch · self-healing injection port · shrooms instruction card. Store cool and dark until use.",
-      es: "Todo el cultivo en una sola bolsa — sin spawn de grano por separado, sin mezclar sustrato a granel, sin preparar monotub. Esta bolsa de 5lb de Master's Mix (cáscara de soya + pellets de madera dura) se esteriliza en autoclave comercial a 15 PSI, se prueba por lote con indicadores biológicos, se hidrata y queda lista para inyectar directamente. Una vez colonizada, se corta y se fructifica desde la misma bolsa.\n\nMaster's Mix es el sustrato al que la mayoría de cultivadores de Melena de León pasan después de su primer cultivo solo en grano. Inyecta con una jeringa completa de cultivo líquido de Melena de León para mejores resultados.\n\nCada bolsa: 5lb de Master's Mix esterilizado en autoclave · parche filtrante de 0.2 micras · puerto de inyección autosellante · tarjeta de instrucciones shrooms.",
-    },
-    category: 'substrate', subcategory: 'All-in-One Bags', species: 'lions-mane',
-    price: 2499, compareAtPrice: 2799,
-    variants: [{ id: 'aio1v', name: '5 lb', price: 2499, stock: 40, sku: 'LMA-5LB' }],
-    images: [],
-    isOrganic: true, inStock: true, tags: ['all-in-one', 'lions-mane', 'intermediate'], relatedProducts: ['lions-mane-liquid-culture'],
-    howToUseSteps: ALLINONE_HOW_TO_USE_STEPS,
-    grainBagSpecs: { ...ALLINONE_SPECS_BASE, colonizationEstimate: '18–24 days once inoculated' },
-  },
-  'blue-oyster-all-in-one-grow-bag': {
-    id: 'aio2', slug: 'blue-oyster-all-in-one-grow-bag',
-    name: { en: 'Blue Oyster Sterile All-in-One Grow Bag', es: 'Bolsa Todo-en-Uno Esterilizada Ostra Azul' },
-    description: {
-      en: "The whole grow in one bag — inject, incubate, cut, fruit, all from the same 5lb bag of autoclave-sterilized Master's Mix. Every bag is sterilized at 15 PSI and batch-tested with biological indicators before it ships. No separate grain-to-bulk transfer step, no extra sterile work after the first injection. Built for Blue Oyster's forgiving, aggressive colonization style.\n\nBlue Oyster is the easiest species to run as an all-in-one — it tolerates minor contamination pressure better than almost anything else in cultivation, which makes it the safest species to learn bulk-substrate technique on. Expect 3–4 flushes at 25%+ biological efficiency.\n\nEach bag: 5lb autoclave-sterilized Master's Mix · 0.2-micron filter patch · self-healing injection port · shrooms instruction card. Store cool and dark until use.",
-      es: "Todo el cultivo en una sola bolsa — inyecta, incuba, corta, fructifica, todo desde la misma bolsa de 5lb de Master's Mix esterilizado en autoclave. Cada bolsa se esteriliza a 15 PSI y se prueba por lote con indicadores biológicos antes de enviarse. Sin paso de transferencia de grano a sustrato a granel. Ideal para el estilo de colonización agresivo e indulgente de la Ostra Azul.\n\nLa Ostra Azul es la especie más fácil para correr en formato all-in-one — tolera mejor la presión de contaminación menor que casi cualquier otra en cultivo. Espera 3–4 flushes con 25%+ de eficiencia biológica.\n\nCada bolsa: 5lb de Master's Mix esterilizado en autoclave · parche filtrante de 0.2 micras · puerto de inyección autosellante · tarjeta de instrucciones shrooms.",
-    },
-    category: 'substrate', subcategory: 'All-in-One Bags', species: 'blue-oyster',
-    price: 2499, compareAtPrice: 2799,
-    variants: [{ id: 'aio2v', name: '5 lb', price: 2499, stock: 45, sku: 'BOA-5LB' }],
-    images: [],
-    isOrganic: true, inStock: true, tags: ['all-in-one', 'oyster', 'beginner'], relatedProducts: ['blue-oyster-liquid-culture'],
-    howToUseSteps: ALLINONE_HOW_TO_USE_STEPS,
-    grainBagSpecs: { ...ALLINONE_SPECS_BASE, colonizationEstimate: '12–16 days once inoculated' },
-  },
-  'shiitake-all-in-one-grow-bag': {
-    id: 'aio3', slug: 'shiitake-all-in-one-grow-bag',
-    name: { en: 'Shiitake Sterile All-in-One Grow Bag', es: 'Bolsa Todo-en-Uno Esterilizada Shiitake' },
-    description: {
-      en: "The whole grow in one bag — inject, incubate, and fruit Shiitake from a single 5lb bag of autoclave-sterilized Master's Mix, no log inoculation or years-long wait required. Every bag is sterilized at 15 PSI and batch-tested with biological indicators before it ships. Colonization runs longer than Oyster species (Shiitake is a slower grower by nature), but you still skip the 8–12 week sawdust-block lead time of a from-scratch commercial setup.\n\nOnce fully colonized, trigger fruiting with a cold-shock soak (50°F water for 12–24 hours) — this is what separates a strong Shiitake flush from a weak one. Expect the deep umami flavor and thick caps this species is prized for.\n\nEach bag: 5lb autoclave-sterilized Master's Mix · 0.2-micron filter patch · self-healing injection port · shrooms instruction card. Store cool and dark until use.",
-      es: "Todo el cultivo en una sola bolsa — inyecta, incuba y fructifica Shiitake desde una sola bolsa de 5lb de Master's Mix esterilizado en autoclave, sin inoculación de troncos ni años de espera. Cada bolsa se esteriliza a 15 PSI y se prueba por lote con indicadores biológicos antes de enviarse. La colonización toma más tiempo que las Ostras (el Shiitake crece más lento por naturaleza), pero te ahorras las 8–12 semanas de espera de un bloque de aserrín desde cero.\n\nUna vez colonizado, detona la fructificación con un baño de choque frío (10°C por 12–24 horas) — esto es lo que separa un buen flush de Shiitake de uno débil.\n\nCada bolsa: 5lb de Master's Mix esterilizado en autoclave · parche filtrante de 0.2 micras · puerto de inyección autosellante · tarjeta de instrucciones shrooms.",
-    },
-    category: 'substrate', subcategory: 'All-in-One Bags', species: 'shiitake',
-    price: 2499, compareAtPrice: 2799,
-    variants: [{ id: 'aio3v', name: '5 lb', price: 2499, stock: 30, sku: 'SHA-5LB' }],
-    images: [],
-    isOrganic: true, inStock: true, tags: ['all-in-one', 'shiitake', 'intermediate'], relatedProducts: ['shiitake-liquid-culture'],
-    howToUseSteps: ALLINONE_HOW_TO_USE_STEPS,
-    grainBagSpecs: { ...ALLINONE_SPECS_BASE, colonizationEstimate: '18–25 days once inoculated' },
-  },
-  'pink-oyster-all-in-one-grow-bag': {
-    id: 'aio4', slug: 'pink-oyster-all-in-one-grow-bag',
-    name: { en: 'Pink Oyster Sterile All-in-One Grow Bag', es: 'Bolsa Todo-en-Uno Esterilizada Ostra Rosa' },
-    description: {
-      en: "The whole grow in one bag — and with Pink Oyster's speed, the fastest path from syringe to harvest we offer. Inject this 5lb bag of autoclave-sterilized Master's Mix, incubate in a warm spot, and cut it open in as little as 10–14 days. Every bag is sterilized at 15 PSI and batch-tested with biological indicators before it ships.\n\nPink Oyster loves heat (75–85°F) and thrives without climate control in most homes. Once fruiting starts, clusters double in size every 12 hours — harvest before the vivid magenta edges begin to wave, and cook quickly, since the color fades with heat.\n\nEach bag: 5lb autoclave-sterilized Master's Mix · 0.2-micron filter patch · self-healing injection port · shrooms instruction card. Store cool and dark until use.",
-      es: "Todo el cultivo en una sola bolsa — y con la velocidad de la Ostra Rosa, el camino más rápido de jeringa a cosecha que ofrecemos. Inyecta esta bolsa de 5lb de Master's Mix esterilizado en autoclave, incuba en un lugar cálido, y ábrela en tan solo 10–14 días. Cada bolsa se esteriliza a 15 PSI y se prueba por lote con indicadores biológicos antes de enviarse.\n\nLa Ostra Rosa ama el calor (24–29°C) y prospera sin control climático en la mayoría de los hogares. Una vez que empieza a fructificar, los racimos duplican tamaño cada 12 horas.\n\nCada bolsa: 5lb de Master's Mix esterilizado en autoclave · parche filtrante de 0.2 micras · puerto de inyección autosellante · tarjeta de instrucciones shrooms.",
-    },
-    category: 'substrate', subcategory: 'All-in-One Bags', species: 'pink-oyster',
-    price: 2499, compareAtPrice: 2799,
-    variants: [{ id: 'aio4v', name: '5 lb', price: 2499, stock: 35, sku: 'POA-5LB' }],
-    images: [],
-    isOrganic: true, inStock: true, tags: ['all-in-one', 'oyster', 'beginner'], relatedProducts: ['pink-oyster-liquid-culture'],
-    howToUseSteps: ALLINONE_HOW_TO_USE_STEPS,
-    grainBagSpecs: { ...ALLINONE_SPECS_BASE, colonizationEstimate: '10–14 days once inoculated' },
-  },
-  'yellow-oyster-all-in-one-grow-bag': {
-    id: 'aio5', slug: 'yellow-oyster-all-in-one-grow-bag',
-    name: { en: 'Golden Oyster Sterile All-in-One Grow Bag', es: 'Bolsa Todo-en-Uno Esterilizada Ostra Dorada' },
-    description: {
-      en: "The whole grow in one bag — inject, incubate, cut, fruit, all from the same 5lb bag of autoclave-sterilized Master's Mix. Every bag is sterilized at 15 PSI and batch-tested with biological indicators before it ships. Built for Golden Oyster's fast, aggressive colonization style.\n\nGolden Oyster requires strong fresh air exchange once fruiting starts — CO2 buildup causes long stems and small caps instead of the tight golden clusters this species is known for. Expect 3 flushes at roughly 20% biological efficiency.\n\nEach bag: 5lb autoclave-sterilized Master's Mix · 0.2-micron filter patch · self-healing injection port · shrooms instruction card. Store cool and dark until use.",
-      es: "Todo el cultivo en una sola bolsa — inyecta, incuba, corta, fructifica, todo desde la misma bolsa de 5lb de Master's Mix esterilizado en autoclave. Cada bolsa se esteriliza a 15 PSI y se prueba por lote con indicadores biológicos antes de enviarse. Ideal para el estilo de colonización rápido y agresivo de la Ostra Dorada.\n\nLa Ostra Dorada requiere buen intercambio de aire fresco una vez inicia la fructificación — el CO2 acumulado causa tallos largos y sombreros pequeños. Espera 3 flushes con ~20% de eficiencia biológica.\n\nCada bolsa: 5lb de Master's Mix esterilizado en autoclave · parche filtrante de 0.2 micras · puerto de inyección autosellante · tarjeta de instrucciones shrooms.",
-    },
-    category: 'substrate', subcategory: 'All-in-One Bags', species: 'yellow-oyster',
-    price: 2499, compareAtPrice: 2799,
-    variants: [{ id: 'aio5v', name: '5 lb', price: 2499, stock: 40, sku: 'YOA-5LB' }],
-    images: [],
-    isOrganic: true, inStock: true, tags: ['all-in-one', 'oyster', 'beginner'], relatedProducts: ['yellow-oyster-liquid-culture'],
-    howToUseSteps: ALLINONE_HOW_TO_USE_STEPS,
-    grainBagSpecs: { ...ALLINONE_SPECS_BASE, colonizationEstimate: '10–14 days once inoculated' },
-  },
-  'reishi-all-in-one-grow-bag': {
-    id: 'aio6', slug: 'reishi-all-in-one-grow-bag',
-    name: { en: 'Reishi Sterile All-in-One Grow Bag', es: 'Bolsa Todo-en-Uno Esterilizada Reishi' },
-    description: {
-      en: "The whole grow in one bag — inject, incubate, cut, and fruit Reishi from the same 5lb bag of autoclave-sterilized Master's Mix, no separate bulk-substrate transfer step. Every bag is sterilized at 15 PSI and batch-tested with biological indicators before it ships.\n\nColonization runs 3–4 weeks — slower than Oyster species, and fruiting takes far longer still: 60–90+ days from cutting to a fully hardened conk. Reishi rewards patience, not speed. Not recommended as a first all-in-one grow.\n\nEach bag: 5lb autoclave-sterilized Master's Mix · 0.2-micron filter patch · self-healing injection port · shrooms instruction card. Store cool and dark until use.",
-      es: "Todo el cultivo en una sola bolsa — inyecta, incuba, corta y fructifica Reishi desde la misma bolsa de 5lb de Master's Mix esterilizado en autoclave, sin paso de transferencia a sustrato a granel. Cada bolsa se esteriliza a 15 PSI y se prueba por lote con indicadores biológicos antes de enviarse.\n\nLa colonización toma 3–4 semanas — más lenta que las Ostras, y la fructificación toma aún más: 60–90+ días desde el corte hasta un sombrero completamente endurecido. El Reishi premia la paciencia, no la velocidad. No recomendado como primer cultivo todo-en-uno.\n\nCada bolsa: 5lb de Master's Mix esterilizado en autoclave · parche filtrante de 0.2 micras · puerto de inyección autosellante · tarjeta de instrucciones shrooms.",
-    },
-    category: 'substrate', subcategory: 'All-in-One Bags', species: 'reishi',
-    price: 2499, compareAtPrice: 2799,
-    variants: [{ id: 'aio6v', name: '5 lb', price: 2499, stock: 25, sku: 'REA-5LB' }],
-    images: [],
-    isOrganic: true, inStock: true, tags: ['all-in-one', 'medicinal', 'reishi'], relatedProducts: ['reishi-liquid-culture', 'reishi-dual-extract-tincture'],
-    howToUseSteps: ALLINONE_HOW_TO_USE_STEPS,
-    grainBagSpecs: { ...ALLINONE_SPECS_BASE, colonizationEstimate: '21–28 days once inoculated' },
-  },
-  'antler-reishi-all-in-one-grow-bag': {
-    id: 'aio7', slug: 'antler-reishi-all-in-one-grow-bag',
-    name: { en: 'Antler Reishi Sterile All-in-One Grow Bag', es: 'Bolsa Todo-en-Uno Esterilizada Reishi Antler' },
-    description: {
-      en: "The whole grow in one bag — inject, incubate, cut, and fruit under our antler-cultivation protocol from the same 5lb bag of autoclave-sterilized Master's Mix. Every bag is sterilized at 15 PSI and batch-tested with biological indicators before it ships.\n\nColonization runs 3–4 weeks like standard Reishi — the difference is entirely in fruiting. Once you cut the bag open, limit fresh air exchange to hold CO2 above 5,000 ppm and drive antler-shaped growth instead of a normal cap. The most technically demanding all-in-one we sell. Advanced growers only.\n\nEach bag: 5lb autoclave-sterilized Master's Mix · 0.2-micron filter patch · self-healing injection port · shrooms instruction card. Store cool and dark until use.",
-      es: "Todo el cultivo en una sola bolsa — inyecta, incuba, corta y fructifica bajo nuestro protocolo de cultivo antler desde la misma bolsa de 5lb de Master's Mix esterilizado en autoclave. Cada bolsa se esteriliza a 15 PSI y se prueba por lote con indicadores biológicos antes de enviarse.\n\nLa colonización toma 3–4 semanas como el Reishi estándar — la diferencia está toda en la fructificación. Al cortar la bolsa, limita el intercambio de aire para mantener el CO2 por encima de 5,000 ppm y dirigir el crecimiento en forma de asta en vez de un sombrero normal. La bolsa todo-en-uno técnicamente más exigente que vendemos. Solo cultivadores avanzados.\n\nCada bolsa: 5lb de Master's Mix esterilizado en autoclave · parche filtrante de 0.2 micras · puerto de inyección autosellante · tarjeta de instrucciones shrooms.",
-    },
-    category: 'substrate', subcategory: 'All-in-One Bags', species: 'reishi',
-    price: 2499, compareAtPrice: 2799,
-    variants: [{ id: 'aio7v', name: '5 lb', price: 2499, stock: 15, sku: 'ARA-5LB' }],
-    images: [],
-    isOrganic: true, inStock: true, tags: ['all-in-one', 'medicinal', 'reishi', 'antler'], relatedProducts: ['antler-reishi-liquid-culture', 'reishi-dual-extract-tincture'],
-    howToUseSteps: ANTLER_ALLINONE_HOW_TO_USE_STEPS,
-    grainBagSpecs: { ...ALLINONE_SPECS_BASE, colonizationEstimate: '21–28 days once inoculated' },
-  },
-}
-
 const BULK_PRODUCTS: Record<string, Product> = {
   'lions-mane-bulk-substrate': {
     id: 'bs1', slug: 'lions-mane-bulk-substrate',
@@ -874,7 +738,7 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
   const t = useTranslations('shop.product')
   const tc = useTranslations('common')
 
-  const product = PRODUCTS[params.slug] ?? LC_PRODUCTS[params.slug] ?? GRAIN_PRODUCTS[params.slug] ?? FRUITING_PRODUCTS[params.slug] ?? ALLINONE_PRODUCTS[params.slug] ?? BULK_PRODUCTS[params.slug]
+  const product = PRODUCTS[params.slug] ?? LC_PRODUCTS[params.slug] ?? GRAIN_PRODUCTS[params.slug] ?? FRUITING_PRODUCTS[params.slug] ?? BULK_PRODUCTS[params.slug]
   if (!product) notFound()
 
   const { addItem, openCart } = useCartStore()
