@@ -1,7 +1,7 @@
 'use client'
 
 import { useLocale } from 'next-intl'
-import { useRouter, usePathname } from 'next/navigation'
+import { useRouter, usePathname } from '@/navigation'
 import { cn } from '@/lib/utils'
 
 export function LanguageSwitcher({ className }: { className?: string }) {
@@ -9,16 +9,10 @@ export function LanguageSwitcher({ className }: { className?: string }) {
   const router = useRouter()
   const pathname = usePathname()
 
-  const switchLocale = (newLocale: string) => {
+  const switchLocale = (newLocale: 'en' | 'es') => {
     if (newLocale === locale) return
-
-    const newPath =
-      newLocale === 'en'
-        ? pathname.replace(/^\/es/, '') || '/'
-        : `/es${pathname}`
-
     document.cookie = `NEXT_LOCALE=${newLocale};path=/;max-age=31536000`
-    router.push(newPath)
+    router.push(pathname, { locale: newLocale })
   }
 
   return (
