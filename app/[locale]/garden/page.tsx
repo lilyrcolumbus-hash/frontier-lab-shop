@@ -1,5 +1,6 @@
 import { setRequestLocale } from 'next-intl/server'
 import { GardenTour } from '@/components/garden/GardenTour'
+import { VideoMoment } from '@/components/ui/VideoMoment'
 
 export default async function GardenPage({
   params: { locale },
@@ -10,6 +11,13 @@ export default async function GardenPage({
 
   return (
     <div className="pt-16 lg:pt-20">
+      <VideoMoment
+        src="/video/garden-farm.mp4"
+        eyebrow="Step Inside"
+        headline="A closer look at what commercial-scale cultivation actually looks like"
+        subtext="Racks of mushrooms at every stage of the grow cycle. Explore each room below to see how yours gets made, start to finish."
+        align="center"
+      />
       <GardenTour />
     </div>
   )
