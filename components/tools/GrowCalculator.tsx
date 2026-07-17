@@ -161,7 +161,7 @@ export function GrowCalculator() {
 
         {/* Humidity */}
         <Input
-          label={`${t('humidity')} (%)`}
+          label={t('humidity')}
           type="number"
           value={humidity}
           onChange={(e) => setHumidity(e.target.value)}

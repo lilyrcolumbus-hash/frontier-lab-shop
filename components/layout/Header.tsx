@@ -121,7 +121,6 @@ export function Header() {
     { label: t('nav.toolsDropdown.calculator'), href: '/tools/grow-calculator' },
     { label: t('nav.toolsDropdown.journal'), href: '/tools/grow-journal' },
     { label: t('nav.toolsDropdown.finder'), href: '/tools/species-finder' },
-    { label: t('nav.toolsDropdown.mixer'), href: '/tools/substrate-mixer' },
   ]
 
   const navText = scrolled ? 'text-cream-muted hover:text-amber' : 'text-white/65 hover:text-white'

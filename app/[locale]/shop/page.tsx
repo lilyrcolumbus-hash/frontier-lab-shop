@@ -426,6 +426,7 @@ function ShopPageContent() {
   const t = useTranslations('shop')
   const searchParams = useSearchParams()
   const categoryParam = searchParams.get('category')
+  const speciesParam = searchParams.get('species')
   const [activeCategory, setActiveCategory] = useState<CategoryKey>(
     categoryParam && CATEGORY_KEYS.includes(categoryParam) ? (categoryParam as CategoryKey) : 'culture-bank'
   )
@@ -435,6 +436,13 @@ function ShopPageContent() {
   useEffect(() => {
     if (categoryParam && CATEGORY_KEYS.includes(categoryParam)) setActiveCategory(categoryParam as CategoryKey)
   }, [categoryParam])
+
+  const speciesFiltered = useMemo(() => {
+    if (!speciesParam) return []
+    return PRODUCTS.filter((p) => p.species === speciesParam)
+  }, [speciesParam])
+
+  const speciesLabel = speciesParam?.split('-').map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')
 
   const filtered = useMemo(() => {
     let items: typeof PRODUCTS
@@ -455,6 +463,30 @@ function ShopPageContent() {
       return { ...stage, items }
     }).filter((group) => group.items.length > 0)
   }, [activeCategory, sortBy])
+
+  if (speciesParam && speciesFiltered.length > 0) {
+    return (
+      <div className="pt-20 min-h-screen">
+        <div className="bg-surface border-b border-ds-border py-12">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-accent mb-3">Filtered by species</p>
+            <h1 className="font-body font-bold text-4xl text-cream tracking-tight mb-2">{speciesLabel}</h1>
+            <p className="text-cream-muted">{speciesFiltered.length} product{speciesFiltered.length === 1 ? '' : 's'} across our catalog</p>
+            <a href="/shop" className="inline-block mt-4 text-sm text-accent hover:underline">
+              ← View full catalog
+            </a>
+          </div>
+        </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {speciesFiltered.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="pt-20 min-h-screen">
