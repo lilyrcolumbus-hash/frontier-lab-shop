@@ -9,17 +9,6 @@ import type { Product } from '@/types/product'
 
 const PRODUCTS: Product[] = [
   {
-    id: '1', slug: 'blue-oyster-grain-spawn',
-    name: { en: 'Blue Oyster Grain Spawn', es: 'Spawn de Grano Ostra Azul' },
-    description: { en: 'Premium Blue Oyster grain spawn on sterilized rye berries. Lab-tested, certified organic.', es: 'Spawn de grano premium de Ostra Azul en bayas de centeno esterilizadas.' },
-    category: 'spawn', subcategory: 'Grain Spawn', species: 'blue-oyster', scientificName: 'Pleurotus ostreatus',
-    price: 1499, compareAtPrice: 1999,
-    variants: [{ id: 'v1', name: 'Standard', price: 1499, stock: 50, sku: 'BOS-STD' }],
-    images: [],
-    cultivationSpecs: { difficulty: 'beginner', colonizationTime: '2–3 weeks', fruitingTempF: '55–65°F', fruitingTempC: '13–18°C', idealSubstrate: 'Hardwood sawdust, straw', expectedYield: '1–3 flushes', indoorOutdoor: 'both' },
-    isOrganic: true, inStock: true, tags: ['beginner', 'oyster'], relatedProducts: [],
-  },
-  {
     id: 'fb1', slug: 'lions-mane-fruiting-block',
     name: { en: "Lion's Mane Fruiting Block", es: 'Bloque Fructificante Melena de León' },
     description: {
@@ -399,7 +388,14 @@ const PRODUCTS: Product[] = [
     category: 'equipment', subcategory: 'Jar Lids',
     price: 2304, compareAtPrice: undefined,
     variants: [{ id: 'eq1v', name: 'Wide Mouth (16oz/32oz)', price: 2304, stock: 40, sku: 'LCEL-WM' }],
-    images: [],
+    images: [
+      '/images/products/equipment/liquid-culture-extraction-lid-wide-mouth/openart-image_5HTaQdiO_1784244242752_raw.png',
+      '/images/products/equipment/liquid-culture-extraction-lid-wide-mouth/openart-image_aPdSJ7mu_1784247290297_raw.png',
+      '/images/products/equipment/liquid-culture-extraction-lid-wide-mouth/openart-image_JZLlnXdJ_1784492446600_raw.jpg',
+      '/images/products/equipment/liquid-culture-extraction-lid-wide-mouth/openart-image_7KjTX4iR_1784252569408_raw.png',
+      '/images/products/equipment/liquid-culture-extraction-lid-wide-mouth/openart-image_InhsFsw7_1784245505536_raw.png',
+      '/images/products/equipment/liquid-culture-extraction-lid-wide-mouth/openart-image_6GJ0IYlZ_1784246304128_raw.png',
+    ],
     isOrganic: false, inStock: true, tags: ['equipment', 'lid', 'wide-mouth'], relatedProducts: [],
   },
 ]

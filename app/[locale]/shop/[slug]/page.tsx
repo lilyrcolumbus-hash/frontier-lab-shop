@@ -13,21 +13,6 @@ import { formatPrice } from '@/lib/utils'
 import type { Product } from '@/types/product'
 
 const PRODUCTS: Record<string, Product> = {
-  'blue-oyster-grain-spawn': {
-    id: '1', slug: 'blue-oyster-grain-spawn',
-    name: { en: 'Blue Oyster Grain Spawn', es: 'Spawn de Grano Ostra Azul' },
-    description: { en: 'Premium Blue Oyster grain spawn on sterilized rye berries. Lab-tested for contamination, certified organic, and ready to inoculate any hardwood substrate. Each bag contains vigorous, fully-colonized mycelium ready to transfer.\n\nOur spawn is produced in a positive-pressure laboratory environment with HEPA filtration. Each batch is tested for contaminants before shipping.', es: 'Spawn de grano premium de Ostra Azul en bayas de centeno esterilizadas. Probado en laboratorio para contaminación, certificado orgánico.' },
-    category: 'spawn', subcategory: 'Grain Spawn', species: 'blue-oyster', scientificName: 'Pleurotus ostreatus',
-    price: 1499, compareAtPrice: 1999,
-    variants: [
-      { id: 'v1-sm', name: '1 lb', price: 1499, stock: 50, sku: 'BOS-1LB' },
-      { id: 'v1-md', name: '5 lbs', price: 5999, stock: 30, sku: 'BOS-5LB' },
-      { id: 'v1-lg', name: '10 lbs', price: 9999, stock: 15, sku: 'BOS-10LB' },
-    ],
-    images: [],
-    cultivationSpecs: { difficulty: 'beginner', colonizationTime: '2–3 weeks', fruitingTempF: '55–65°F', fruitingTempC: '13–18°C', idealSubstrate: 'Hardwood sawdust, straw, coffee grounds', expectedYield: '1–3 flushes, 25% biological efficiency', indoorOutdoor: 'both' },
-    isOrganic: true, inStock: true, tags: ['beginner', 'oyster', 'organic'], relatedProducts: [],
-  },
   'liquid-culture-extraction-lid-wide-mouth': {
     id: 'eq1', slug: 'liquid-culture-extraction-lid-wide-mouth',
     name: { en: 'Advanced Liquid Culture Lid — Wide Mouth', es: 'Tapa Avanzada de Cultivo Líquido — Boca Ancha' },
@@ -38,7 +23,14 @@ const PRODUCTS: Record<string, Product> = {
     category: 'equipment', subcategory: 'Jar Lids',
     price: 2304, compareAtPrice: undefined,
     variants: [{ id: 'eq1v', name: 'Wide Mouth (16oz/32oz)', price: 2304, stock: 40, sku: 'LCEL-WM' }],
-    images: [],
+    images: [
+      '/images/products/equipment/liquid-culture-extraction-lid-wide-mouth/openart-image_5HTaQdiO_1784244242752_raw.png',
+      '/images/products/equipment/liquid-culture-extraction-lid-wide-mouth/openart-image_aPdSJ7mu_1784247290297_raw.png',
+      '/images/products/equipment/liquid-culture-extraction-lid-wide-mouth/openart-image_JZLlnXdJ_1784492446600_raw.jpg',
+      '/images/products/equipment/liquid-culture-extraction-lid-wide-mouth/openart-image_7KjTX4iR_1784252569408_raw.png',
+      '/images/products/equipment/liquid-culture-extraction-lid-wide-mouth/openart-image_InhsFsw7_1784245505536_raw.png',
+      '/images/products/equipment/liquid-culture-extraction-lid-wide-mouth/openart-image_6GJ0IYlZ_1784246304128_raw.png',
+    ],
     isOrganic: false, inStock: true, tags: ['equipment', 'lid', 'wide-mouth'], relatedProducts: [],
     howToUseSteps: [
       'Fill your Wide Mouth jar (16oz or 32oz) with your liquid culture nutrient broth, then screw on the lid.',
@@ -110,7 +102,7 @@ const LC_PRODUCTS: Record<string, Product> = {
     variants: [{ id: 'lc2v', name: '10cc', price: 1799, stock: 50, sku: 'BOL-10CC' }],
     images: [],
     cultivationSpecs: { difficulty: 'beginner', colonizationTime: '5–10 days', fruitingTempF: '55–65°F', fruitingTempC: '13–18°C', idealSubstrate: 'Hardwood sawdust, straw, coffee grounds', expectedYield: '3–4 flushes, 25%+ BE', indoorOutdoor: 'both' },
-    isOrganic: true, inStock: true, tags: ['beginner', 'liquid-culture', 'oyster'], relatedProducts: ['blue-oyster-grain-spawn'],
+    isOrganic: true, inStock: true, tags: ['beginner', 'liquid-culture', 'oyster'], relatedProducts: ['blue-oyster-bulk-substrate'],
     howToUseSteps: LC_HOW_TO_USE_STEPS,
     scienceContent: {
       en: "Pleurotus ostreatus is one of the most nutritionally complete foods in nature. At 30% protein by dry weight — with all essential amino acids and a PDCAAS score comparable to beef — it outperforms virtually every plant-based protein source.\n\nThe primary medicinal compounds are beta-1,3 and beta-1,6 glucans (25–30% dry weight), which activate macrophages and natural killer cells through Dectin-1 receptor binding. This mechanism is well-established in over 300 peer-reviewed studies. Additionally, P. ostreatus naturally produces lovastatin (mevinolin) — the same compound used in pharmaceutical cholesterol drugs — at levels shown to reduce LDL by 7–10% in controlled studies.\n\nErgothioneine content is particularly high: this sulfur-containing amino acid is synthesized only by fungi and certain bacteria. Humans actively transport it into cells via a specific transporter (OCTN1), where it concentrates in mitochondria and protects against oxidative damage. Plasma ergothioneine levels are increasingly used as a longevity biomarker.",
