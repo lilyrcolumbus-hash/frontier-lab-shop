@@ -30,10 +30,10 @@ const PRODUCTS: Record<string, Product> = {
   },
   'liquid-culture-extraction-lid-wide-mouth': {
     id: 'eq1', slug: 'liquid-culture-extraction-lid-wide-mouth',
-    name: { en: 'Liquid Culture Extraction Lid — Wide Mouth', es: 'Tapa de Extracción de Cultivo Líquido — Boca Ancha' },
+    name: { en: 'Advanced Liquid Culture Lid — Wide Mouth', es: 'Tapa Avanzada de Cultivo Líquido — Boca Ancha' },
     description: {
-      en: "Extract sterile liquid culture straight from the jar — no needle, no opening the lid, no contamination risk. This lid combines three things in one: a self-healing injection port for inoculating, a 0.2-micron filter patch for clean gas exchange during colonization, and a shut-off valve with attached tubing for drawing off liquid culture once it's ready.\n\nFits Wide Mouth (86mm opening) Mason jars — both 16oz and 32oz, since the mouth size is standardized independent of jar volume. Food-grade, autoclavable, reusable across many cycles.\n\nEach lid: injection port · 0.2-micron filter patch · shut-off valve · attached tubing.",
-      es: "Extrae cultivo líquido estéril directo del frasco — sin aguja, sin abrir la tapa, sin riesgo de contaminación. Esta tapa combina tres cosas en una: puerto de inyección autosellante para inocular, parche filtrante de 0.2 micras para intercambio de aire limpio durante la colonización, y una válvula de corte con manguera para sacar el cultivo líquido cuando esté listo.\n\nSirve para frascos Mason Wide Mouth (abertura de 86mm) — tanto 16oz como 32oz, ya que el ancho de la boca es el mismo sin importar el volumen del frasco. Grado alimenticio, esterilizable en autoclave, reutilizable.\n\nCada tapa incluye: puerto de inyección · parche filtrante de 0.2 micras · válvula de corte · manguera.",
+      en: "Grow cleaner, more oxygenated liquid culture — no needle for feeding, no opening the lid, no contamination risk. This lid combines four things in one: a self-healing injection port for inoculating, an air filter patch for clean gas exchange, and a built-in airstone diffuser with a shut-off valve (connected via silicone tubing) to bubble controlled aeration through your liquid culture whenever you want it.\n\nFits Wide Mouth (86mm opening) Mason jars — both 16oz and 32oz, since the mouth size is standardized independent of jar volume. Plastic construction, reusable across many cycles.\n\nEach lid: injection port · air filter patch · airstone diffuser · shut-off valve · silicone tubing.",
+      es: "Cultiva cultivo líquido más limpio y oxigenado — sin aguja para alimentar, sin abrir la tapa, sin riesgo de contaminación. Esta tapa combina cuatro cosas en una: puerto de inyección autosellante para inocular, parche filtrante para intercambio de aire limpio, y un difusor airstone incorporado con válvula de corte (conectado por manguera de silicona) para airear tu cultivo líquido de forma controlada cuando quieras.\n\nSirve para frascos Mason Wide Mouth (abertura de 86mm) — tanto 16oz como 32oz, ya que el ancho de la boca es el mismo sin importar el volumen del frasco. Construcción plástica, reutilizable.\n\nCada tapa incluye: puerto de inyección · parche filtrante · difusor airstone · válvula de corte · manguera de silicona.",
     },
     category: 'equipment', subcategory: 'Jar Lids',
     price: 2304, compareAtPrice: undefined,
@@ -41,13 +41,13 @@ const PRODUCTS: Record<string, Product> = {
     images: [],
     isOrganic: false, inStock: true, tags: ['equipment', 'lid', 'wide-mouth'], relatedProducts: [],
     howToUseSteps: [
-      'Autoclave the lid along with your jar and substrate before first use (15 PSI, ~30-45 min for a jar this size).',
-      'Fill your Wide Mouth jar (16oz or 32oz) with sterilized substrate or nutrient media, then screw on the lid.',
+      'Fill your Wide Mouth jar (16oz or 32oz) with your liquid culture nutrient broth, then screw on the lid.',
       "Sterilize the injection port with an alcohol swab and let it dry before each use.",
-      'Inject liquid culture or spores through the self-healing port to inoculate.',
-      'Incubate as normal — the 0.2-micron filter handles gas exchange without letting contaminants in.',
-      "Once colonized, open the shut-off valve and draw sterile liquid culture out through the tubing with a syringe — no need to open the jar.",
-      'Close the valve after extraction. Reusable for multiple inoculation/extraction cycles after autoclaving between uses.',
+      'Inject spores or a liquid culture starter through the self-healing port to inoculate.',
+      'Incubate as normal — the air filter patch handles gas exchange without letting contaminants in.',
+      "To aerate, connect an air pump to the tubing and open the shut-off valve — the built-in airstone diffuses a steady stream of filtered air through the culture.",
+      'Close the valve when you\'re done aerating or need to move the jar.',
+      'Reusable for multiple cycles — wipe down and re-sterilize the injection port between uses.',
     ],
   },
 }

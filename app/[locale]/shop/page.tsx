@@ -391,10 +391,10 @@ const PRODUCTS: Product[] = [
   // ── Equipment ─────────────────────────────────────────────────────────────
   {
     id: 'eq1', slug: 'liquid-culture-extraction-lid-wide-mouth',
-    name: { en: 'Liquid Culture Extraction Lid — Wide Mouth', es: 'Tapa de Extracción de Cultivo Líquido — Boca Ancha' },
+    name: { en: 'Advanced Liquid Culture Lid — Wide Mouth', es: 'Tapa Avanzada de Cultivo Líquido — Boca Ancha' },
     description: {
-      en: "Extract sterile liquid culture without opening the jar or reaching for a needle. Self-healing injection port + 0.2-micron filter + shut-off valve with tubing, all in one lid.",
-      es: "Extrae cultivo líquido estéril sin abrir el frasco ni usar aguja. Puerto de inyección autosellante + filtro de 0.2 micras + válvula de corte con manguera, todo en una tapa.",
+      en: "Self-healing injection port for syringe access + air filter patch for gas exchange + built-in airstone diffuser with shut-off valve for controlled aeration of your liquid culture, all in one lid.",
+      es: "Puerto de inyección autosellante para acceso con jeringa + parche filtrante para intercambio de aire + difusor airstone incorporado con válvula de corte para airear tu cultivo líquido de forma controlada, todo en una tapa.",
     },
     category: 'equipment', subcategory: 'Jar Lids',
     price: 2304, compareAtPrice: undefined,
