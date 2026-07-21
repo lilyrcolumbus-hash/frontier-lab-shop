@@ -388,12 +388,27 @@ const PRODUCTS: Product[] = [
     images: [],
     isOrganic: true, inStock: true, tags: ['bulk-substrate', 'medicinal', 'reishi', 'antler'], relatedProducts: ['antler-reishi-liquid-culture'],
   },
+  // ── Equipment ─────────────────────────────────────────────────────────────
+  {
+    id: 'eq1', slug: 'liquid-culture-extraction-lid-wide-mouth',
+    name: { en: 'Liquid Culture Extraction Lid — Wide Mouth', es: 'Tapa de Extracción de Cultivo Líquido — Boca Ancha' },
+    description: {
+      en: "Extract sterile liquid culture without opening the jar or reaching for a needle. Self-healing injection port + 0.2-micron filter + shut-off valve with tubing, all in one lid.",
+      es: "Extrae cultivo líquido estéril sin abrir el frasco ni usar aguja. Puerto de inyección autosellante + filtro de 0.2 micras + válvula de corte con manguera, todo en una tapa.",
+    },
+    category: 'equipment', subcategory: 'Jar Lids',
+    price: 2304, compareAtPrice: undefined,
+    variants: [{ id: 'eq1v', name: 'Wide Mouth (16oz/32oz)', price: 2304, stock: 40, sku: 'LCEL-WM' }],
+    images: [],
+    isOrganic: false, inStock: true, tags: ['equipment', 'lid', 'wide-mouth'], relatedProducts: [],
+  },
 ]
 
 const CATEGORIES = [
   { key: 'culture-bank', label: 'Culture Bank' },
   { key: 'substrate',    label: 'Substrate' },
   { key: 'kit',          label: 'Grow Kits' },
+  { key: 'equipment',    label: 'Equipment' },
   { key: 'wellness',     label: 'Wellness' },
   { key: 'all',          label: 'All Products' },
 ] as const

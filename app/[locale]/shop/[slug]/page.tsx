@@ -28,6 +28,28 @@ const PRODUCTS: Record<string, Product> = {
     cultivationSpecs: { difficulty: 'beginner', colonizationTime: '2–3 weeks', fruitingTempF: '55–65°F', fruitingTempC: '13–18°C', idealSubstrate: 'Hardwood sawdust, straw, coffee grounds', expectedYield: '1–3 flushes, 25% biological efficiency', indoorOutdoor: 'both' },
     isOrganic: true, inStock: true, tags: ['beginner', 'oyster', 'organic'], relatedProducts: [],
   },
+  'liquid-culture-extraction-lid-wide-mouth': {
+    id: 'eq1', slug: 'liquid-culture-extraction-lid-wide-mouth',
+    name: { en: 'Liquid Culture Extraction Lid — Wide Mouth', es: 'Tapa de Extracción de Cultivo Líquido — Boca Ancha' },
+    description: {
+      en: "Extract sterile liquid culture straight from the jar — no needle, no opening the lid, no contamination risk. This lid combines three things in one: a self-healing injection port for inoculating, a 0.2-micron filter patch for clean gas exchange during colonization, and a shut-off valve with attached tubing for drawing off liquid culture once it's ready.\n\nFits Wide Mouth (86mm opening) Mason jars — both 16oz and 32oz, since the mouth size is standardized independent of jar volume. Food-grade, autoclavable, reusable across many cycles.\n\nEach lid: injection port · 0.2-micron filter patch · shut-off valve · attached tubing.",
+      es: "Extrae cultivo líquido estéril directo del frasco — sin aguja, sin abrir la tapa, sin riesgo de contaminación. Esta tapa combina tres cosas en una: puerto de inyección autosellante para inocular, parche filtrante de 0.2 micras para intercambio de aire limpio durante la colonización, y una válvula de corte con manguera para sacar el cultivo líquido cuando esté listo.\n\nSirve para frascos Mason Wide Mouth (abertura de 86mm) — tanto 16oz como 32oz, ya que el ancho de la boca es el mismo sin importar el volumen del frasco. Grado alimenticio, esterilizable en autoclave, reutilizable.\n\nCada tapa incluye: puerto de inyección · parche filtrante de 0.2 micras · válvula de corte · manguera.",
+    },
+    category: 'equipment', subcategory: 'Jar Lids',
+    price: 2304, compareAtPrice: undefined,
+    variants: [{ id: 'eq1v', name: 'Wide Mouth (16oz/32oz)', price: 2304, stock: 40, sku: 'LCEL-WM' }],
+    images: [],
+    isOrganic: false, inStock: true, tags: ['equipment', 'lid', 'wide-mouth'], relatedProducts: [],
+    howToUseSteps: [
+      'Autoclave the lid along with your jar and substrate before first use (15 PSI, ~30-45 min for a jar this size).',
+      'Fill your Wide Mouth jar (16oz or 32oz) with sterilized substrate or nutrient media, then screw on the lid.',
+      "Sterilize the injection port with an alcohol swab and let it dry before each use.",
+      'Inject liquid culture or spores through the self-healing port to inoculate.',
+      'Incubate as normal — the 0.2-micron filter handles gas exchange without letting contaminants in.',
+      "Once colonized, open the shut-off valve and draw sterile liquid culture out through the tubing with a syringe — no need to open the jar.",
+      'Close the valve after extraction. Reusable for multiple inoculation/extraction cycles after autoclaving between uses.',
+    ],
+  },
 }
 
 const LC_HOW_TO_USE_STEPS = [
