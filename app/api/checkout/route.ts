@@ -23,6 +23,7 @@ export async function POST(req: NextRequest) {
           product_data: {
             name: item.name,
             images: item.image ? [item.image] : [],
+            metadata: { productId: item.productId, variantId: item.variantId },
           },
         },
         quantity: item.quantity,

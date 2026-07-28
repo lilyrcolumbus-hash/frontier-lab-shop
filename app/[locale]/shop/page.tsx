@@ -389,8 +389,8 @@ const PRODUCTS: Product[] = [
     price: 2304, compareAtPrice: undefined,
     variants: [{ id: 'eq1v', name: 'Wide Mouth (16oz/32oz)', price: 2304, stock: 40, sku: 'LCEL-WM' }],
     images: [
-      '/images/products/equipment/liquid-culture-extraction-lid-wide-mouth/openart-image_5HTaQdiO_1784244242752_raw.png',
       '/images/products/equipment/liquid-culture-extraction-lid-wide-mouth/openart-image_aPdSJ7mu_1784247290297_raw.png',
+      '/images/products/equipment/liquid-culture-extraction-lid-wide-mouth/openart-image_5HTaQdiO_1784244242752_raw.png',
       '/images/products/equipment/liquid-culture-extraction-lid-wide-mouth/openart-image_JZLlnXdJ_1784492446600_raw.jpg',
       '/images/products/equipment/liquid-culture-extraction-lid-wide-mouth/openart-image_7KjTX4iR_1784252569408_raw.png',
       '/images/products/equipment/liquid-culture-extraction-lid-wide-mouth/openart-image_InhsFsw7_1784245505536_raw.png',
