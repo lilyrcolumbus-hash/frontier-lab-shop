@@ -64,10 +64,10 @@ const SECTIONS: { title: Record<Lang, string>; body: Record<Lang, string[]> }[] 
     title: { en: '5. Shipping', es: '5. Envíos' },
     body: {
       en: [
-        'We currently ship to the United States, Canada, and Mexico. Standard shipping (free, 5–7 business days) and Express shipping ($12, 2–3 business days) are available at checkout. Delivery times are estimates, not guarantees, and we are not responsible for delays caused by the carrier or customs.',
+        'We currently ship to the United States, Canada, and Mexico. Standard Shipping is a flat $9.99 and takes 3–5 business days. Delivery times are estimates, not guarantees, and we are not responsible for delays caused by the carrier or customs.',
       ],
       es: [
-        'Actualmente enviamos a Estados Unidos, Canadá y México. Envío Estándar (gratis, 5–7 días hábiles) y Envío Express ($12, 2–3 días hábiles) están disponibles al finalizar la compra. Los tiempos de entrega son estimados, no garantizados, y no somos responsables de retrasos causados por la paquetería o aduanas.',
+        'Actualmente enviamos a Estados Unidos, Canadá y México. El Envío Estándar tiene una tarifa fija de $9.99 y toma de 3 a 5 días hábiles. Los tiempos de entrega son estimados, no garantizados, y no somos responsables de retrasos causados por la paquetería o aduanas.',
       ],
     },
   },
