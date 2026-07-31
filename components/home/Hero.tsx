@@ -48,7 +48,7 @@ export function Hero() {
           <div className="space-y-8">
             <motion.p
               {...fadeUp(0.1)}
-              className="text-[11px] font-mono font-medium text-white/40 uppercase tracking-[0.28em]"
+              className="text-[11px] font-mono font-medium text-white/40 tracking-[0.28em]"
             >
               Wild Genetics. Lab Verified.
             </motion.p>
