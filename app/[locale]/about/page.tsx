@@ -14,15 +14,15 @@ const SECTIONS: { title: Record<Lang, string>; body: Record<Lang, string> }[] = 
   {
     title: { en: 'Wild Genetics. Lab Verified.', es: 'Genética Silvestre. Verificado en Laboratorio.' },
     body: {
-      en: "Frontier Lab started with a simple frustration: most mushroom genetics sold online are inconsistent, and most grow instructions are written for someone who's already an expert. We set out to build a cultivation facility run with the same discipline as a lab — sealed, humidity-controlled grow rooms, sterile technique at every transfer, and equipment built for precision — so that what ships is exactly what we say it is.",
-      es: 'Frontier Lab nació de una frustración simple: la mayoría de la genética de hongos que se vende en línea es inconsistente, y la mayoría de las instrucciones de cultivo están escritas para alguien que ya es experto. Nos propusimos construir una instalación de cultivo operada con la misma disciplina de un laboratorio — cuartos de cultivo sellados y con control de humedad, técnica estéril en cada transferencia, y equipo pensado para la precisión — para que lo que enviamos sea exactamente lo que decimos que es.',
+      en: "Frontier Lab started with a simple frustration: most mushroom genetics sold online are inconsistent, and most grow instructions are written for someone who's already an expert. So we built a real laboratory — sealed, humidity-controlled growing rooms, professional-grade equipment, and sterile technique at every transfer — held to the standard of precision the word 'laboratory' is supposed to mean. What ships is exactly what we say it is.",
+      es: 'Frontier Lab nació de una frustración simple: la mayoría de la genética de hongos que se vende en línea es inconsistente, y la mayoría de las instrucciones de cultivo están escritas para alguien que ya es experto. Por eso construimos un laboratorio real — cuartos de cultivo sellados y con control de humedad, equipo de grado profesional, y técnica estéril en cada transferencia — con el estándar de precisión que la palabra "laboratorio" debería significar. Lo que enviamos es exactamente lo que decimos que es.',
     },
   },
   {
     title: { en: 'How we work', es: 'Cómo trabajamos' },
     body: {
-      en: "Every liquid culture, spawn bag, and substrate block that leaves Frontier Lab passes through the same controlled environment and sterile handling we'd want if we were the ones buying it. We're outfitted with lab-grade tools for culture work — from clean-air transfers to sealed incubation — and we hold every batch to that standard before it ships.",
-      es: 'Cada cultivo líquido, bolsa de grano y bloque de sustrato que sale de Frontier Lab pasa por el mismo ambiente controlado y manejo estéril que nosotros mismos querríamos si fuéramos los compradores. Contamos con herramientas de nivel laboratorio para el trabajo de cultivo — desde transferencias en aire limpio hasta incubación sellada — y sometemos cada lote a ese estándar antes de enviarlo.',
+      en: "Every liquid culture, spawn bag, and substrate block that leaves Frontier Lab is prepared inside our own laboratory — the same controlled environment and sterile handling we'd want if we were the ones buying it. From clean-air transfers to sealed incubation, every batch runs through professional lab equipment and passes the same standard before it ships.",
+      es: 'Cada cultivo líquido, bolsa de grano y bloque de sustrato que sale de Frontier Lab se prepara dentro de nuestro propio laboratorio — el mismo ambiente controlado y manejo estéril que nosotros mismos querríamos si fuéramos los compradores. Desde transferencias en aire limpio hasta incubación sellada, cada lote pasa por equipo de laboratorio profesional y cumple el mismo estándar antes de enviarse.',
     },
   },
   {
