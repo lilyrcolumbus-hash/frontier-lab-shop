@@ -76,7 +76,7 @@ export function Logo({ size = 'md', href = '/', showTagline, className }: LogoPr
 
       {/* ── "Frontier Lab" — the protagonist ── */}
       <span
-        className="font-heading font-bold text-cream tracking-tight leading-none whitespace-nowrap"
+        className="font-heading font-bold text-cream uppercase tracking-tight leading-none whitespace-nowrap"
         style={{
           fontSize: cfg.shroomsSize,
           textShadow: '0 0 30px rgba(212,145,58,0.08)',
