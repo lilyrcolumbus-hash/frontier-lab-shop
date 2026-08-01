@@ -92,7 +92,6 @@ export function Footer() {
           {/* Col 4 — Company */}
           <FooterCol title={t('footer.company.title')}>
             <FooterLink href="/about">{t('footer.company.about')}</FooterLink>
-            <FooterLink href="/sustainability">{t('footer.company.sustainability')}</FooterLink>
             <FooterLink href="/careers">{t('footer.company.careers')}</FooterLink>
             <FooterLink href="/press">{t('footer.company.press')}</FooterLink>
             <FooterLink href="/affiliates">{t('footer.company.affiliates')}</FooterLink>
