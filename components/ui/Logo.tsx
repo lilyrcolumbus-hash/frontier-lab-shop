@@ -86,7 +86,7 @@ export function Logo({ size = 'md', href = '/', showTagline, className }: LogoPr
       </span>
 
       {showTagline && (
-        <span className="font-mono font-light tracking-[0.22em] text-[9px] mt-1.5 text-cream-muted/50">
+        <span className="font-mono font-light uppercase tracking-[0.22em] text-[9px] mt-1.5 text-cream-muted/50">
           Wild Genetics. Lab Verified.
         </span>
       )}
