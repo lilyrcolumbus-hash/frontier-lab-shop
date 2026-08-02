@@ -227,3 +227,16 @@ model NewsletterSubscriber {
 
   @@map("newsletter_subscribers")
 }
+
+model Review {
+  id          String   @id @default(cuid())
+  name        String
+  email       String
+  rating      Int
+  comment     String
+  productName String?
+  locale      String   @default("en")
+  createdAt   DateTime @default(now())
+
+  @@map("reviews")
+}
