@@ -29,6 +29,7 @@ export async function POST(req: NextRequest) {
         quantity: item.quantity,
       })),
       shipping_address_collection: { allowed_countries: ['US', 'CA', 'MX'] },
+      allow_promotion_codes: true,
       shipping_options: [
         {
           shipping_rate_data: {
