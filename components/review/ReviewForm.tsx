@@ -43,11 +43,11 @@ const COPY = {
   },
 }
 
-export function ReviewForm({ locale }: { locale: Lang }) {
+export function ReviewForm({ locale, initialProduct }: { locale: Lang; initialProduct?: string }) {
   const t = COPY[locale]
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
-  const [productName, setProductName] = useState('')
+  const [productName, setProductName] = useState(initialProduct ?? '')
   const [rating, setRating] = useState(0)
   const [hoverRating, setHoverRating] = useState(0)
   const [comment, setComment] = useState('')

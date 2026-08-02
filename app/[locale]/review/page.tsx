@@ -3,6 +3,7 @@ import { ReviewForm } from '@/components/review/ReviewForm'
 
 interface PageProps {
   params: { locale: string }
+  searchParams: { product?: string }
 }
 
 export const metadata = {
@@ -11,7 +12,7 @@ export const metadata = {
 
 type Lang = 'en' | 'es'
 
-export default async function ReviewPage({ params }: PageProps) {
+export default async function ReviewPage({ params, searchParams }: PageProps) {
   const { locale } = params
   setRequestLocale(locale)
   const lang = locale as Lang
@@ -35,7 +36,7 @@ export default async function ReviewPage({ params }: PageProps) {
       </div>
 
       <div className="max-w-xl mx-auto px-4 sm:px-6 py-12">
-        <ReviewForm locale={lang} />
+        <ReviewForm locale={lang} initialProduct={searchParams.product} />
       </div>
     </div>
   )
