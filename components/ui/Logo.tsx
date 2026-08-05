@@ -28,12 +28,18 @@ export function Logo({ size = 'md', href = '/', showTagline, className, light = 
   const cfg = configs[size]
   const width = Math.round(cfg.height * ASPECT)
   const letterColor = light ? '#F4F1EA' : '#1C2018'
+  // Contrast insurance for the light (dark-background) state — the header's own scrim already
+  // guarantees a dark base, this adds a second layer so the wordmark never washes out against a
+  // busy, moving background like the hero video.
+  const letterFilter = light
+    ? 'drop-shadow(0 1px 5px rgba(0,0,0,0.55)) drop-shadow(0 0 14px rgba(0,0,0,0.3))'
+    : 'none'
 
   const content = (
     <div className={cn('flex flex-col items-start select-none', className)}>
       <svg viewBox={VIEWBOX} width={width} height={cfg.height} aria-label="Frontier Lab">
-        <path d={LETTERS_PATH} fill={letterColor} />
-        <path d={HELIX_PATH} fill="#9E6820" />
+        <path d={LETTERS_PATH} fill={letterColor} style={{ filter: letterFilter }} />
+        <path d={HELIX_PATH} fill="#9E6820" style={{ filter: 'drop-shadow(0 0 6px rgba(158,104,32,0.55))' }} />
       </svg>
 
       {showTagline && (
