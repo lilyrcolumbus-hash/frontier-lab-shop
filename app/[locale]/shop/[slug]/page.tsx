@@ -1031,10 +1031,10 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
             {/* Trust badges */}
             <div className="flex flex-wrap items-center gap-5 py-4 border-t border-ds-border">
               {[
-                {
+                ...(product.isOrganic ? [{
                   label: t('trustOrganic'),
                   icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>,
-                },
+                }] : []),
                 {
                   label: t('trustShipping'),
                   icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>,

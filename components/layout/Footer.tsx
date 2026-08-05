@@ -53,7 +53,7 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
           {/* Col 1 — Brand */}
           <div className="lg:col-span-1">
-            <Logo size="sm" showTagline />
+            <Logo size="sm" showTagline light />
             <div className="flex items-center gap-3 mt-6">
               {socials.map((s) => (
                 <a

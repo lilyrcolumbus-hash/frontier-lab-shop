@@ -6,84 +6,74 @@ interface LogoProps {
   href?: string
   showTagline?: boolean
   className?: string
+  /** true = white wordmark for dark backgrounds, false = dark wordmark for light backgrounds */
+  light?: boolean
 }
 
-// Mushroom-shaped "i" — stem + dome cap replace the normal letter
-function MushroomI({ scale = 1 }: { scale?: number }) {
-  const w = 10 * scale
-  const h = 26 * scale
-  const capH = 11 * scale
-  const stemW = 3.2 * scale
-  const stemX = (w - stemW) / 2
+// Double-helix glyph replacing the "I" in FRONTIER — two sine strands, sampled from
+// real trig (not hand-drawn), 2 full periods top to bottom.
+const HELIX_VIEWBOX = '0 0 24 64'
+const HELIX_STRAND_A =
+  'M 12 0 L 13.68 1.33 L 15.25 2.67 L 16.6 4 L 17.63 5.33 L 18.28 6.67 L 18.5 8 L 18.28 9.33 L 17.63 10.67 L 16.6 12 L 15.25 13.33 L 13.68 14.67 L 12 16 L 10.32 17.33 L 8.75 18.67 L 7.4 20 L 6.37 21.33 L 5.72 22.67 L 5.5 24 L 5.72 25.33 L 6.37 26.67 L 7.4 28 L 8.75 29.33 L 10.32 30.67 L 12 32 L 13.68 33.33 L 15.25 34.67 L 16.6 36 L 17.63 37.33 L 18.28 38.67 L 18.5 40 L 18.28 41.33 L 17.63 42.67 L 16.6 44 L 15.25 45.33 L 13.68 46.67 L 12 48 L 10.32 49.33 L 8.75 50.67 L 7.4 52 L 6.37 53.33 L 5.72 54.67 L 5.5 56 L 5.72 57.33 L 6.37 58.67 L 7.4 60 L 8.75 61.33 L 10.32 62.67 L 12 64'
+const HELIX_STRAND_B =
+  'M 12 0 L 10.32 1.33 L 8.75 2.67 L 7.4 4 L 6.37 5.33 L 5.72 6.67 L 5.5 8 L 5.72 9.33 L 6.37 10.67 L 7.4 12 L 8.75 13.33 L 10.32 14.67 L 12 16 L 13.68 17.33 L 15.25 18.67 L 16.6 20 L 17.63 21.33 L 18.28 22.67 L 18.5 24 L 18.28 25.33 L 17.63 26.67 L 16.6 28 L 15.25 29.33 L 13.68 30.67 L 12 32 L 10.32 33.33 L 8.75 34.67 L 7.4 36 L 6.37 37.33 L 5.72 38.67 L 5.5 40 L 5.72 41.33 L 6.37 42.67 L 7.4 44 L 8.75 45.33 L 10.32 46.67 L 12 48 L 13.68 49.33 L 15.25 50.67 L 16.6 52 L 17.63 53.33 L 18.28 54.67 L 18.5 56 L 18.28 57.33 L 17.63 58.67 L 16.6 60 L 15.25 61.33 L 13.68 62.67 L 12 64'
 
+function HelixIcon({ heightPx }: { heightPx: number }) {
+  const widthPx = heightPx * (24 / 64)
   return (
     <svg
-      viewBox={`0 0 ${w} ${h}`}
-      width={w}
-      height={h}
-      style={{ display: 'inline-block', verticalAlign: 'bottom', marginBottom: 1 * scale }}
+      viewBox={HELIX_VIEWBOX}
+      width={widthPx}
+      height={heightPx}
+      style={{ display: 'inline-block', verticalAlign: 'baseline', margin: '0 1px' }}
       aria-hidden="true"
     >
-      {/* Mushroom cap dome */}
-      <path
-        d={`
-          M ${w * 0.06} ${capH}
-          Q ${w * 0.0} ${capH * 0.35} ${w * 0.5} ${1 * scale}
-          Q ${w * 1.0} ${capH * 0.35} ${w * 0.94} ${capH}
-          Z
-        `}
-        fill="rgba(212,145,58,0.9)"
-        style={{ filter: `drop-shadow(0 0 ${3 * scale}px rgba(212,145,58,0.5))` }}
-      />
-      {/* Skirt / veil hint */}
-      <path
-        d={`M ${w * 0.08} ${capH * 1.02} Q ${w * 0.5} ${capH * 1.18} ${w * 0.92} ${capH * 1.02}`}
-        stroke="rgba(212,145,58,0.35)"
-        strokeWidth={0.8 * scale}
-        fill="none"
-      />
-      {/* Stem */}
-      <rect
-        x={stemX}
-        y={capH * 1.06}
-        width={stemW}
-        height={h - capH * 1.1}
-        rx={stemW * 0.4}
-        fill="rgba(212,145,58,0.8)"
-      />
-      {/* Glow orb at cap tip */}
-      <circle
-        cx={w * 0.5}
-        cy={2 * scale}
-        r={1.5 * scale}
-        fill="rgba(232,200,122,0.6)"
-      />
+      <path d={HELIX_STRAND_A} stroke="#9E6820" strokeWidth={2.4} strokeLinecap="round" fill="none" />
+      <path d={HELIX_STRAND_B} stroke="#9E6820" strokeWidth={2.4} strokeLinecap="round" fill="none" opacity={0.6} />
     </svg>
   )
 }
 
 const configs = {
-  sm: { shroomsSize: 20, dirtySize: 11, scale: 0.72, gap: -1 },
-  md: { shroomsSize: 29, dirtySize: 14, scale: 1.0,  gap: -2 },
-  lg: { shroomsSize: 44, dirtySize: 20, scale: 1.5,  gap: -4 },
+  sm: { fontSize: 18, helixPx: 13, gap: 8 },
+  md: { fontSize: 24, helixPx: 17, gap: 10 },
+  lg: { fontSize: 36, helixPx: 26, gap: 14 },
 }
 
-export function Logo({ size = 'md', href = '/', showTagline, className }: LogoProps) {
+const HELVETICA = "'Helvetica Neue', Helvetica, Arial, sans-serif"
+
+export function Logo({ size = 'md', href = '/', showTagline, className, light = false }: LogoProps) {
   const cfg = configs[size]
+  const wordmarkColor = light ? '#FFFFFF' : '#1C2018'
 
   const content = (
     <div className={cn('flex flex-col items-start select-none', className)}>
-
-      {/* ── "Frontier Lab" — the protagonist ── */}
-      <span
-        className="font-heading font-bold text-cream uppercase tracking-tight leading-none whitespace-nowrap"
-        style={{
-          fontSize: cfg.shroomsSize,
-          textShadow: '0 0 30px rgba(212,145,58,0.08)',
-        }}
-      >
-        Frontier Lab
-      </span>
+      <div className="flex items-baseline leading-none whitespace-nowrap" style={{ gap: cfg.gap }}>
+        <span
+          style={{
+            fontFamily: HELVETICA,
+            fontWeight: 300,
+            fontSize: cfg.fontSize,
+            letterSpacing: '-0.01em',
+            color: wordmarkColor,
+          }}
+        >
+          FRONTI
+          <HelixIcon heightPx={cfg.helixPx} />
+          ER
+        </span>
+        <span
+          style={{
+            fontFamily: HELVETICA,
+            fontWeight: 400,
+            fontSize: cfg.fontSize,
+            letterSpacing: '0.3em',
+            color: wordmarkColor,
+          }}
+        >
+          LAB
+        </span>
+      </div>
 
       {showTagline && (
         <span className="font-mono font-light uppercase tracking-[0.22em] text-[9px] mt-1.5 text-cream-muted/50">
