@@ -3,10 +3,9 @@
 import { useTranslations } from 'next-intl'
 import { ScrollReveal } from '@/components/ui/ScrollReveal'
 
-const STATS = [
+const STAT_META = [
   {
-    value: '350K+',
-    label: 'Active Growers',
+    key: 'growers',
     color: 'text-accent',
     glow: 'rgba(61,110,69,0.07)',
     icon: (
@@ -19,8 +18,7 @@ const STATS = [
     ),
   },
   {
-    value: '100%',
-    label: 'Organic Certified',
+    key: 'lab',
     color: 'text-amber',
     glow: 'rgba(158,104,32,0.07)',
     icon: (
@@ -31,8 +29,7 @@ const STATS = [
     ),
   },
   {
-    value: '50+',
-    label: 'Species in Database',
+    key: 'species',
     color: 'text-lavender',
     glow: 'rgba(99,80,160,0.07)',
     icon: (
@@ -44,8 +41,7 @@ const STATS = [
     ),
   },
   {
-    value: '30-day',
-    label: 'Growth Guarantee',
+    key: 'guarantee',
     color: 'text-accent',
     glow: 'rgba(61,110,69,0.07)',
     icon: (
@@ -60,11 +56,17 @@ const STATS = [
 export function TrustBar() {
   const t = useTranslations('home.trust')
 
+  const stats = STAT_META.map((meta) => ({
+    ...meta,
+    value: t(`${meta.key}Value`),
+    label: t(`${meta.key}Label`),
+  }))
+
   return (
     <div className="bg-surface border-y border-ds-border relative overflow-hidden">
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
-          {STATS.map((stat, i) => (
+          {stats.map((stat, i) => (
             <ScrollReveal key={stat.label} delay={i * 0.1}>
               <div
                 className="flex flex-col items-center text-center gap-3 p-6 rounded-2xl border border-ds-border transition-all duration-300 hover:border-accent/20 group"

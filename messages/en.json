@@ -95,9 +95,14 @@
       "ctaSecondary": "Shop Now"
     },
     "trust": {
-      "growers": "350k+ Growers Worldwide",
-      "organic": "USDA Organic Certified",
-      "guarantee": "30-Day Grow Guarantee"
+      "growersValue": "350K+",
+      "growersLabel": "Active Growers",
+      "labValue": "Own Lab",
+      "labLabel": "Sterile, Lab-Grade Process",
+      "speciesValue": "50+",
+      "speciesLabel": "Species in Database",
+      "guaranteeValue": "30-day",
+      "guaranteeLabel": "Growth Guarantee"
     },
     "spotlight": {
       "title": "Meet The Shrooms",
@@ -320,8 +325,8 @@
     "yourMatch": "Your Perfect Match"
   },
   "community": {
-    "title": "The Filthy Community",
-    "subtitle": "350,000+ growers sharing grows, tips, and harvests.",
+    "title": "The Growers Community",
+    "subtitle": "Grows, tips, and harvests from the Frontier Lab community.",
     "gallery": {
       "title": "Grow Gallery",
       "subtitle": "Real photos from real growers.",

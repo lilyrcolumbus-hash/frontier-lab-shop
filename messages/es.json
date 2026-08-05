@@ -95,9 +95,14 @@
       "ctaSecondary": "Ir a la Tienda"
     },
     "trust": {
-      "growers": "350k+ Cultivadores en el Mundo",
-      "organic": "Certificado Orgánico USDA",
-      "guarantee": "Garantía de Cultivo 30 Días"
+      "growersValue": "350K+",
+      "growersLabel": "Cultivadores Activos",
+      "labValue": "Laboratorio Propio",
+      "labLabel": "Proceso Estéril de Nivel Laboratorio",
+      "speciesValue": "50+",
+      "speciesLabel": "Especies en la Base de Datos",
+      "guaranteeValue": "30 días",
+      "guaranteeLabel": "Garantía de Cultivo"
     },
     "spotlight": {
       "title": "Conoce Los Hongos",
@@ -320,8 +325,8 @@
     "yourMatch": "Tu Coincidencia Perfecta"
   },
   "community": {
-    "title": "La Comunidad Sucia",
-    "subtitle": "350,000+ cultivadores compartiendo cultivos, consejos y cosechas.",
+    "title": "La Comunidad de Cultivadores",
+    "subtitle": "Cultivos, consejos y cosechas de la comunidad Frontier Lab.",
     "gallery": {
       "title": "Galería de Cultivos",
       "subtitle": "Fotos reales de cultivadores reales.",

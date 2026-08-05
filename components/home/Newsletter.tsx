@@ -2,21 +2,31 @@
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { ScrollReveal } from '@/components/ui/ScrollReveal'
 import { Button } from '@/components/ui/Button'
 
 export function Newsletter() {
   const t = useTranslations('home.newsletter')
+  const locale = useLocale()
   const [email, setEmail] = useState('')
-  const [status, setStatus] = useState<'idle' | 'loading' | 'success'>('idle')
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!email) return
     setStatus('loading')
-    await new Promise((r) => setTimeout(r, 900))
-    setStatus('success')
+    try {
+      const res = await fetch('/api/newsletter', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, locale }),
+      })
+      if (!res.ok) throw new Error('Subscribe failed')
+      setStatus('success')
+    } catch {
+      setStatus('error')
+    }
   }
 
   return (
@@ -75,7 +85,11 @@ export function Newsletter() {
           )}
         </AnimatePresence>
 
-        {status !== 'success' && (
+        {status === 'error' && (
+          <p className="mt-5 text-xs text-error font-mono">{t('error')}</p>
+        )}
+
+        {status !== 'success' && status !== 'error' && (
           <p className="mt-5 text-xs text-cream-muted/40 font-mono">{t('privacy')}</p>
         )}
 

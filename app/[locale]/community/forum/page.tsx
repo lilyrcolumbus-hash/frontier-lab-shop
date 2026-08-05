@@ -1,14 +1,13 @@
 import { useTranslations } from 'next-intl'
 import { setRequestLocale } from 'next-intl/server'
 import { Button } from '@/components/ui/Button'
-import { Badge } from '@/components/ui/Badge'
 
 const CATEGORIES = [
-  { key: 'beginners', icon: '🌱', count: 234, color: 'moss' as const },
-  { key: 'cultivation', icon: '🍄', count: 891, color: 'success' as const },
-  { key: 'identification', icon: '🔍', count: 345, color: 'warning' as const },
-  { key: 'science', icon: '🔬', count: 127, color: 'accent' as const },
-  { key: 'recipes', icon: '🍳', count: 203, color: 'default' as const },
+  { key: 'beginners', icon: '🌱' },
+  { key: 'cultivation', icon: '🍄' },
+  { key: 'identification', icon: '🔍' },
+  { key: 'science', icon: '🔬' },
+  { key: 'recipes', icon: '🍳' },
 ]
 
 export default function ForumPage() {
@@ -38,9 +37,7 @@ export default function ForumPage() {
                 <h3 className="font-heading text-lg font-semibold text-cream group-hover:text-accent transition-colors">
                   {t(`categories.${cat.key}`)}
                 </h3>
-                <p className="text-sm text-cream-muted">{cat.count} posts</p>
               </div>
-              <Badge variant={cat.color}>{cat.count}</Badge>
             </div>
           ))}
         </div>
