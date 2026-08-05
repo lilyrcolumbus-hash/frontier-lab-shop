@@ -15,10 +15,10 @@ import type { Product } from '@/types/product'
 const PRODUCTS: Record<string, Product> = {
   'liquid-culture-extraction-lid-wide-mouth': {
     id: 'eq1', slug: 'liquid-culture-extraction-lid-wide-mouth',
-    name: { en: 'Advanced Liquid Culture Lid — Wide Mouth', es: 'Tapa Avanzada de Cultivo Líquido — Boca Ancha' },
+    name: { en: 'Advanced Liquid Culture Lid — Wide Mouth Mason Jar', es: 'Tapa Avanzada de Cultivo Líquido — Frasco Mason Boca Ancha' },
     description: {
-      en: "Grow cleaner, more oxygenated liquid culture — no needle for feeding, no opening the lid, no contamination risk. This lid combines four things in one: a self-healing injection port for inoculating, an air filter patch for clean gas exchange, and a built-in airstone diffuser with a shut-off valve (connected via silicone tubing) to bubble controlled aeration through your liquid culture whenever you want it.\n\nFits Wide Mouth (86mm opening) Mason jars — both 16oz and 32oz, since the mouth size is standardized independent of jar volume. Plastic construction, reusable across many cycles.\n\nEach lid: injection port · air filter patch · airstone diffuser · shut-off valve · silicone tubing.",
-      es: "Cultiva cultivo líquido más limpio y oxigenado — sin aguja para alimentar, sin abrir la tapa, sin riesgo de contaminación. Esta tapa combina cuatro cosas en una: puerto de inyección autosellante para inocular, parche filtrante para intercambio de aire limpio, y un difusor airstone incorporado con válvula de corte (conectado por manguera de silicona) para airear tu cultivo líquido de forma controlada cuando quieras.\n\nSirve para frascos Mason Wide Mouth (abertura de 86mm) — tanto 16oz como 32oz, ya que el ancho de la boca es el mismo sin importar el volumen del frasco. Construcción plástica, reutilizable.\n\nCada tapa incluye: puerto de inyección · parche filtrante · difusor airstone · válvula de corte · manguera de silicona.",
+      en: "A cleaner way to inoculate and store liquid culture — no drilling a jar lid, no separate injection port to install. This self-healing injection port lid gives you sterile syringe access every time, paired with an air filter patch that lets your culture breathe without letting contaminants in.\n\nFits Wide Mouth (86mm opening) Mason jars — both 16oz and 32oz, since the mouth size is standardized independent of jar volume. Durable white plastic construction, built for repeated sterilization and reuse across many liquid culture and grain spawn cycles.\n\nEach lid: self-healing injection port · air filter patch · compatible with standard Wide Mouth Mason jars.",
+      es: "Una forma más limpia de inocular y almacenar cultivo líquido — sin taladrar la tapa, sin instalar un puerto de inyección aparte. Esta tapa con puerto de inyección autosellante te da acceso estéril con jeringa cada vez, junto con un parche filtrante que deja respirar tu cultivo sin dejar entrar contaminantes.\n\nSirve para frascos Mason Boca Ancha (abertura de 86mm) — tanto 16oz como 32oz, ya que el ancho de la boca es el mismo sin importar el volumen del frasco. Construcción de plástico blanco resistente, diseñada para esterilizarse y reutilizarse en muchos ciclos de cultivo líquido y grano inoculado.\n\nCada tapa incluye: puerto de inyección autosellante · parche filtrante · compatible con frascos Mason Boca Ancha estándar.",
     },
     category: 'equipment', subcategory: 'Jar Lids',
     price: 2304, compareAtPrice: undefined,
@@ -31,14 +31,13 @@ const PRODUCTS: Record<string, Product> = {
       '/images/products/equipment/liquid-culture-extraction-lid-wide-mouth/openart-image_InhsFsw7_1784245505536_raw.png',
       '/images/products/equipment/liquid-culture-extraction-lid-wide-mouth/openart-image_6GJ0IYlZ_1784246304128_raw.png',
     ],
-    isOrganic: false, inStock: true, tags: ['equipment', 'lid', 'wide-mouth'], relatedProducts: [],
+    isOrganic: false, inStock: true, tags: ['equipment', 'lid', 'wide-mouth', 'mason-jar', 'injection-port'], relatedProducts: [],
     howToUseSteps: [
       'Fill your Wide Mouth jar (16oz or 32oz) with your liquid culture nutrient broth, then screw on the lid.',
-      "Sterilize the injection port with an alcohol swab and let it dry before each use.",
+      'Sterilize the injection port with an alcohol swab and let it dry before each use.',
       'Inject spores or a liquid culture starter through the self-healing port to inoculate.',
       'Incubate as normal — the air filter patch handles gas exchange without letting contaminants in.',
-      "To aerate, connect an air pump to the tubing and open the shut-off valve — the built-in airstone diffuses a steady stream of filtered air through the culture.",
-      'Close the valve when you\'re done aerating or need to move the jar.',
+      'Store at room temperature, away from direct light, while the culture colonizes.',
       'Reusable for multiple cycles — wipe down and re-sterilize the injection port between uses.',
     ],
   },

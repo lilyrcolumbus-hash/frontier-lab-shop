@@ -380,10 +380,10 @@ const PRODUCTS: Product[] = [
   // ── Equipment ─────────────────────────────────────────────────────────────
   {
     id: 'eq1', slug: 'liquid-culture-extraction-lid-wide-mouth',
-    name: { en: 'Advanced Liquid Culture Lid — Wide Mouth', es: 'Tapa Avanzada de Cultivo Líquido — Boca Ancha' },
+    name: { en: 'Advanced Liquid Culture Lid — Wide Mouth Mason Jar', es: 'Tapa Avanzada de Cultivo Líquido — Frasco Mason Boca Ancha' },
     description: {
-      en: "Self-healing injection port for syringe access + air filter patch for gas exchange + built-in airstone diffuser with shut-off valve for controlled aeration of your liquid culture, all in one lid.",
-      es: "Puerto de inyección autosellante para acceso con jeringa + parche filtrante para intercambio de aire + difusor airstone incorporado con válvula de corte para airear tu cultivo líquido de forma controlada, todo en una tapa.",
+      en: "Self-healing injection port for sterile syringe access + air filter patch for clean gas exchange, in one reusable lid for Wide Mouth Mason jars.",
+      es: "Puerto de inyección autosellante para acceso estéril con jeringa + parche filtrante para intercambio de aire limpio, en una tapa reutilizable para frascos Mason Boca Ancha.",
     },
     category: 'equipment', subcategory: 'Jar Lids',
     price: 2304, compareAtPrice: undefined,
