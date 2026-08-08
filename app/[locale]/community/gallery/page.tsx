@@ -7,8 +7,8 @@ const PHOTOS = [
   { id: 2, src: 'https://images.unsplash.com/photo-1504545102780-26774c1bb073?w=600', alt: 'Blue Oyster cluster', user: '@growwild_jen', species: 'Blue Oyster', tall: false },
   { id: 3, src: 'https://images.unsplash.com/photo-1773600149997-2b6af77031d7?w=600', alt: 'Pink Oyster flush', user: '@fungi_forager', species: 'Pink Oyster', tall: false },
   { id: 4, src: 'https://images.unsplash.com/photo-1773600149997-2b6af77031d7?w=600', alt: 'Pink Oyster cluster', user: '@spore.ann', species: 'Pink Oyster', tall: true },
-  { id: 5, src: 'https://images.unsplash.com/photo-1748118869505-e75f25812a70?w=600', alt: 'Yellow Oyster golden fan', user: '@myco_lab_co', species: 'Yellow Oyster', tall: false },
-  { id: 6, src: 'https://images.unsplash.com/photo-1748118869505-e75f25812a70?w=600', alt: 'Yellow Oyster cluster', user: '@spore.garden', species: 'Yellow Oyster', tall: false },
+  { id: 5, src: 'https://images.unsplash.com/photo-1748118869505-e75f25812a70?w=600', alt: 'Golden Oyster golden fan', user: '@myco_lab_co', species: 'Golden Oyster', tall: false },
+  { id: 6, src: 'https://images.unsplash.com/photo-1748118869505-e75f25812a70?w=600', alt: 'Golden Oyster cluster', user: '@spore.garden', species: 'Golden Oyster', tall: false },
 ]
 
 export default function GalleryPage() {

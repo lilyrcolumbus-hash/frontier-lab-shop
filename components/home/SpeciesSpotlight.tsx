@@ -13,7 +13,7 @@ const SEED_SPECIES = [
   { slug: 'shiitake', commonName: 'Shiitake', scientificName: 'Lentinula edodes', difficulty: 'intermediate', type: 'edible', thumbnailUrl: 'https://images.unsplash.com/photo-1773600149997-2b6af77031d7?w=500' },
   { slug: 'reishi', commonName: 'Reishi', scientificName: 'Ganoderma lucidum', difficulty: 'advanced', type: 'medicinal', thumbnailUrl: 'https://images.unsplash.com/photo-1748118869505-e75f25812a70?w=500' },
   { slug: 'pink-oyster', commonName: 'Pink Oyster', scientificName: 'Pleurotus djamor', difficulty: 'beginner', type: 'edible', thumbnailUrl: 'https://images.unsplash.com/photo-1773600149997-2b6af77031d7?w=500' },
-  { slug: 'yellow-oyster', commonName: 'Yellow Oyster', scientificName: 'Pleurotus citrinopileatus', difficulty: 'beginner', type: 'edible', thumbnailUrl: 'https://images.unsplash.com/photo-1748118869505-e75f25812a70?w=500' },
+  { slug: 'golden-oyster', commonName: 'Golden Oyster', scientificName: 'Pleurotus citrinopileatus', difficulty: 'beginner', type: 'edible', thumbnailUrl: 'https://images.unsplash.com/photo-1748118869505-e75f25812a70?w=500' },
 ]
 
 const difficultyMap: Record<string, 'success' | 'warning' | 'error'> = {

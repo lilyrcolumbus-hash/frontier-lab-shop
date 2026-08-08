@@ -18,8 +18,8 @@ const PHOTOS = [
   },
   {
     src: 'https://images.unsplash.com/photo-1748118869505-e75f25812a70?w=600&h=400&q=88&auto=format&fit=crop',
-    alt: 'Yellow Oyster golden cluster',
-    label: 'Yellow Oyster',
+    alt: 'Golden Oyster golden cluster',
+    label: 'Golden Oyster',
     span: '',
   },
 ]

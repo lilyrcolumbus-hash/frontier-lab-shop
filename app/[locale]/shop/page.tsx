@@ -65,18 +65,18 @@ const PRODUCTS: Product[] = [
     isOrganic: true, inStock: false, tags: ['beginner', 'kit', 'oyster', 'fruiting-block'], relatedProducts: ['pink-oyster-liquid-culture'],
   },
   {
-    id: 'fb5', slug: 'yellow-oyster-fruiting-block',
+    id: 'fb5', slug: 'golden-oyster-fruiting-block',
     name: { en: 'Golden Oyster Fruiting Block', es: 'Bloque Fructificante Ostra Dorada' },
     description: {
       en: "Already colonized with our fastest-growing Oyster — vivid golden clusters within a week. Requires strong fresh air exchange for tight, ruffled formation.",
       es: "Ya colonizado con nuestra Ostra de crecimiento más rápido — racimos dorados vibrantes en una semana. Requiere buen intercambio de aire para formación compacta.",
     },
-    category: 'kit', subcategory: 'Fruiting Blocks', species: 'yellow-oyster', scientificName: 'Pleurotus citrinopileatus',
+    category: 'kit', subcategory: 'Fruiting Blocks', species: 'golden-oyster', scientificName: 'Pleurotus citrinopileatus',
     price: 2999,
     variants: [{ id: 'fb5v', name: '5 lb Block', price: 2999, stock: 0, sku: 'YOF-5LB' }],
     images: [],
     cultivationSpecs: { difficulty: 'beginner', colonizationTime: 'Pre-colonized — ready now', fruitingTempF: '64–77°F', fruitingTempC: '18–25°C', idealSubstrate: 'Hardwood sawdust, straw (pre-colonized)', expectedYield: '3 flushes, 20% BE', indoorOutdoor: 'indoor' },
-    isOrganic: true, inStock: false, tags: ['beginner', 'kit', 'oyster', 'fruiting-block'], relatedProducts: ['yellow-oyster-liquid-culture'],
+    isOrganic: true, inStock: false, tags: ['beginner', 'kit', 'oyster', 'fruiting-block'], relatedProducts: ['golden-oyster-liquid-culture'],
   },
   {
     id: 'fb6', slug: 'reishi-fruiting-block',
@@ -150,13 +150,13 @@ const PRODUCTS: Product[] = [
     isOrganic: true, inStock: true, tags: ['beginner', 'liquid-culture', 'oyster'], relatedProducts: [],
   },
   {
-    id: 'lc4', slug: 'yellow-oyster-liquid-culture',
+    id: 'lc4', slug: 'golden-oyster-liquid-culture',
     name: { en: 'Golden Oyster Liquid Culture Syringe', es: 'Jeringa de Cultivo Líquido Ostra Dorada' },
     description: {
       en: "Highest ergothioneine content of any Oyster species — the mitochondria-protective antioxidant synthesized only by fungi. Culture Bank — lab-isolated Pleurotus citrinopileatus, 10cc. Vivid golden clusters, 5–10 day colonization. 16G needle + alcohol swab included.",
       es: "Mayor contenido de ergotionina de cualquier especie de Ostra — el antioxidante protector de mitocondrias sintetizado solo por hongos. Culture Bank — Pleurotus citrinopileatus aislado en laboratorio, 10cc. Racimos dorados vibrantes. Aguja 16G + swab incluidos.",
     },
-    category: 'spawn', subcategory: 'Liquid Culture', species: 'yellow-oyster', scientificName: 'Pleurotus citrinopileatus',
+    category: 'spawn', subcategory: 'Liquid Culture', species: 'golden-oyster', scientificName: 'Pleurotus citrinopileatus',
     price: 1799, compareAtPrice: 1999,
     variants: [{ id: 'lc4v', name: '10cc', price: 1799, stock: 50, sku: 'YOL-10CC' }],
     images: [],
@@ -339,17 +339,17 @@ const PRODUCTS: Product[] = [
     isOrganic: true, inStock: false, tags: ['bulk-substrate', 'oyster', 'beginner'], relatedProducts: ['pink-oyster-liquid-culture'],
   },
   {
-    id: 'bs5', slug: 'yellow-oyster-bulk-substrate',
+    id: 'bs5', slug: 'golden-oyster-bulk-substrate',
     name: { en: 'Golden Oyster Sterile Bulk Substrate', es: 'Sustrato a Granel Esterilizado Ostra Dorada' },
     description: {
       en: "Sterile, autoclaved hardwood substrate for growers who already have colonized grain spawn — no injection port, just open and mix. Built for Golden Oyster's fast, aggressive colonization style.",
       es: "Sustrato de madera dura esterilizado en autoclave para cultivadores que ya tienen grain spawn colonizado — sin puerto de inyección, solo abrir y mezclar. Pensado para el estilo de colonización rápido de la Ostra Dorada.",
     },
-    category: 'substrate', subcategory: 'Bulk Substrate', species: 'yellow-oyster', scientificName: 'Pleurotus citrinopileatus',
+    category: 'substrate', subcategory: 'Bulk Substrate', species: 'golden-oyster', scientificName: 'Pleurotus citrinopileatus',
     price: 2299, compareAtPrice: 2799,
     variants: [{ id: 'bs5v', name: '5 lb', price: 2299, stock: 0, sku: 'YOB-BULK' }],
     images: [],
-    isOrganic: true, inStock: false, tags: ['bulk-substrate', 'oyster', 'beginner'], relatedProducts: ['yellow-oyster-liquid-culture'],
+    isOrganic: true, inStock: false, tags: ['bulk-substrate', 'oyster', 'beginner'], relatedProducts: ['golden-oyster-liquid-culture'],
   },
   {
     id: 'bs6', slug: 'reishi-bulk-substrate',

@@ -52,28 +52,28 @@ export const ARTICLES: LearnArticle[] = [
       es: 'Guía Completa para Principiantes: Cómo Cultivar Hongos Ostra',
     },
     excerpt: {
-      en: 'Blue, Pink, and Yellow Oyster mushrooms are the fastest, most forgiving species to grow. This guide covers everything from your first inoculation to your first harvest.',
+      en: 'Blue, Pink, and Golden Oyster mushrooms are the fastest, most forgiving species to grow. This guide covers everything from your first inoculation to your first harvest.',
       es: 'Las ostras Azul, Rosa y Amarilla son las especies más rápidas y tolerantes de cultivar. Esta guía cubre todo desde tu primera inoculación hasta tu primera cosecha.',
     },
     readTime: 12,
     species: 'blue-oyster',
     imageUrl: 'https://images.unsplash.com/photo-1504545102780-26774c1bb073?w=1200&h=500&q=85&auto=format&fit=crop',
     intro: {
-      en: "Oyster mushrooms are the ideal entry point into the world of mushroom cultivation. They colonize fast, tolerate beginner mistakes, fruit abundantly, and reward you with a harvest in as little as three weeks. Blue Oyster (Pleurotus ostreatus) is the most forgiving of all — but Pink and Yellow Oysters follow the same principles and add visual drama to your first grow.",
+      en: "Oyster mushrooms are the ideal entry point into the world of mushroom cultivation. They colonize fast, tolerate beginner mistakes, fruit abundantly, and reward you with a harvest in as little as three weeks. Blue Oyster (Pleurotus ostreatus) is the most forgiving of all — but Pink and Golden Oysters follow the same principles and add visual drama to your first grow.",
       es: 'Los hongos ostra son el punto de entrada ideal al mundo del cultivo de hongos. Colonizan rápido, toleran los errores de principiante, fructifican abundantemente y te recompensan con una cosecha en tan solo tres semanas.',
     },
     sections: [
       {
         title: { en: 'Why Start with Oyster Mushrooms?', es: '¿Por qué empezar con hongos ostra?' },
         content: {
-          en: "Oyster mushrooms are aggressive colonizers — their mycelium out-competes most contaminants before they can take hold. They fruit at room temperature (55–85°F depending on variety), require no specialized equipment beyond a humidity tent, and produce 3–4 flushes from a single block. Blue Oyster prefers cooler temperatures (55–65°F), making it perfect for air-conditioned spaces. Pink Oyster thrives in warmth (75–85°F) and pins within days. Yellow Oyster sits in the middle and has the most spectacular visual payoff.",
+          en: "Oyster mushrooms are aggressive colonizers — their mycelium out-competes most contaminants before they can take hold. They fruit at room temperature (55–85°F depending on variety), require no specialized equipment beyond a humidity tent, and produce 3–4 flushes from a single block. Blue Oyster prefers cooler temperatures (55–65°F), making it perfect for air-conditioned spaces. Pink Oyster thrives in warmth (75–85°F) and pins within days. Golden Oyster sits in the middle and has the most spectacular visual payoff.",
           es: 'Los hongos ostra son colonizadores agresivos — su micelio supera a la mayoría de los contaminantes antes de que puedan establecerse. Fructifican a temperatura ambiente, no requieren equipo especializado más allá de una tienda de humedad, y producen 3-4 flushes de un solo bloque.',
         },
       },
       {
         title: { en: 'What You Need', es: 'Qué necesitas' },
         content: {
-          en: "The essentials: grain spawn (Blue, Pink, or Yellow Oyster), one pre-sterilized hardwood substrate bag, a humidity tent or clear tote, a misting bottle, and a thermometer. Total investment for your first grow: under $40. You don't need a pressure cooker, laminar flow hood, or agar work for oyster mushrooms — they are forgiving enough for open-air inoculation when done cleanly.",
+          en: "The essentials: grain spawn (Blue, Pink, or Golden Oyster), one pre-sterilized hardwood substrate bag, a humidity tent or clear tote, a misting bottle, and a thermometer. Total investment for your first grow: under $40. You don't need a pressure cooker, laminar flow hood, or agar work for oyster mushrooms — they are forgiving enough for open-air inoculation when done cleanly.",
           es: 'Lo esencial: spawn de grano (ostra azul, rosa o amarilla), una bolsa de sustrato de madera dura pre-esterilizada, una tienda de humedad o tote transparente, atomizador y termómetro. Inversión total para tu primer cultivo: menos de $40.',
         },
       },
@@ -448,7 +448,7 @@ export const ARTICLES: LearnArticle[] = [
       {
         title: { en: 'Oyster Mushrooms: Quick and Hot', es: 'Hongos Ostra: Rápido y Caliente' },
         content: {
-          en: "Blue, Pink, and Yellow Oysters have a delicate, tender texture that overcooks quickly. Heat a pan (stainless or cast iron) over high heat until smoking. Add oil (not butter — it burns too fast at this stage), then add mushrooms in a single layer. Do not touch for 2 minutes — let them sear. Flip once, add butter and garlic, and cook 1–2 more minutes. Total cook time: 4–5 minutes. Season only at the end — salt draws out moisture. Pink Oyster: cook especially fast, 3 minutes maximum to preserve color. Yellow Oyster: same technique, pairs beautifully with soy sauce and sesame oil.",
+          en: "Blue, Pink, and Golden Oysters have a delicate, tender texture that overcooks quickly. Heat a pan (stainless or cast iron) over high heat until smoking. Add oil (not butter — it burns too fast at this stage), then add mushrooms in a single layer. Do not touch for 2 minutes — let them sear. Flip once, add butter and garlic, and cook 1–2 more minutes. Total cook time: 4–5 minutes. Season only at the end — salt draws out moisture. Pink Oyster: cook especially fast, 3 minutes maximum to preserve color. Golden Oyster: same technique, pairs beautifully with soy sauce and sesame oil.",
           es: 'Las ostras Azul, Rosa y Amarilla tienen una textura delicada y tierna que se cocina demasiado rápido. Calienta una sartén a fuego alto hasta que humee. Agrega aceite, luego los hongos en una sola capa. No toques durante 2 minutos — déjalos sellar. Voltea una vez, agrega mantequilla y ajo, y cocina 1-2 minutos más. Tiempo total: 4-5 minutos.',
         },
       },

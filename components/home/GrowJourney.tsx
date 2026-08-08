@@ -43,7 +43,7 @@ const STEPS = [
       "Twist and pull just before the veil breaks. First flush — pure reward for your precision and patience. Plate it. Extract it. Grow again.",
     timing: 'Week 4–5',
     src: 'https://images.unsplash.com/photo-1748118869505-e75f25812a70?w=520&h=620&q=85&auto=format&fit=crop',
-    alt: 'Yellow Oyster ready to harvest',
+    alt: 'Golden Oyster ready to harvest',
   },
 ]
 

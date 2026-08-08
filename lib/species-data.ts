@@ -235,7 +235,7 @@ const SPECIES_LIST_BASE: SpeciesData[] = [
   },
   {
     id: '6',
-    slug: 'yellow-oyster',
+    slug: 'golden-oyster',
     commonName: 'Golden Oyster',
     scientificName: 'Pleurotus citrinopileatus',
     family: 'Pleurotaceae',
