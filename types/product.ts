@@ -35,6 +35,7 @@ export interface Product {
   tags: string[]
   relatedProducts: string[]
   howToUseSteps?: string[]
+  faqs?: { q: Record<'en' | 'es', string>; a: Record<'en' | 'es', string> }[]
   scienceContent?: Record<'en' | 'es', string>
   keyBenefits?: { icon: 'brain' | 'shield' | 'heart' | 'leaf' | 'activity' | 'zap' | 'sun' | 'droplet'; label: string; detail: string }[]
   grainBagSpecs?: {

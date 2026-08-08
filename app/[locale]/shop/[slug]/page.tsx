@@ -40,6 +40,29 @@ const PRODUCTS: Record<string, Product> = {
       'Store at room temperature, away from direct light, while the culture colonizes.',
       'Reusable for multiple cycles — wipe down and re-sterilize the injection port between uses.',
     ],
+    faqs: [
+      {
+        q: { en: 'Does this fit both 16oz and 32oz jars?', es: '¿Sirve para frascos de 16oz y 32oz?' },
+        a: {
+          en: 'Yes — Wide Mouth (86mm opening) is standardized across jar sizes, so this lid fits both 16oz and 32oz Wide Mouth Mason jars.',
+          es: 'Sí — la abertura Boca Ancha (86mm) es la misma sin importar el tamaño del frasco, así que esta tapa sirve tanto para frascos de 16oz como de 32oz.',
+        },
+      },
+      {
+        q: { en: 'How many times can I reuse it?', es: '¿Cuántas veces se puede reutilizar?' },
+        a: {
+          en: 'It\'s built for repeated use across many cycles — just wipe it down and re-sterilize the injection port with an alcohol swab between batches. Replace it if the self-healing port stops sealing cleanly after repeated punctures.',
+          es: 'Está hecha para usarse muchas veces — solo límpiala y vuelve a esterilizar el puerto de inyección con un swab de alcohol entre lotes. Reemplázala si el puerto autosellante deja de cerrar bien después de varias perforaciones.',
+        },
+      },
+      {
+        q: { en: 'Does it come with a jar?', es: '¿Incluye el frasco?' },
+        a: {
+          en: 'No — this is the lid only. You\'ll need your own Wide Mouth Mason jar (16oz or 32oz).',
+          es: 'No — esto es solo la tapa. Necesitas tu propio frasco Mason Boca Ancha (16oz o 32oz).',
+        },
+      },
+    ],
   },
 }
 
@@ -63,6 +86,37 @@ const CORDYCEPS_HOW_TO_USE_STEPS = [
   'Vivid orange club-shaped stromata develop over 30–60 days. Harvest when tips show bright orange and before spores release.',
 ]
 
+const LC_FAQS = [
+  {
+    q: { en: 'How long does the syringe stay viable?', es: '¿Cuánto tiempo se mantiene viable la jeringa?' },
+    a: {
+      en: 'Up to 2 months refrigerated (35–40°F). Do not freeze — freezing kills the mycelium. Viability drops the longer it sits, so inject sooner rather than later for the fastest, most reliable colonization.',
+      es: 'Hasta 2 meses refrigerada (2–4°C). No congelar — el congelamiento mata el micelio. La viabilidad baja mientras más tiempo pase, así que inyecta lo antes posible para una colonización más rápida y confiable.',
+    },
+  },
+  {
+    q: { en: 'What if I see contamination?', es: '¿Qué hago si veo contaminación?' },
+    a: {
+      en: 'Green, black, or pink patches (usually mold or bacterial wetness) mean the batch is compromised — discard it, don\'t try to cut around it. If it happens before colonization completes, it\'s almost always a sterile-technique issue on the inoculation side, not the culture itself. If your syringe arrived and produced contamination on first use, contact us within 48 hours with photos — see the guarantee above.',
+      es: 'Parches verdes, negros o rosados (generalmente moho o humedad bacteriana) significan que el lote está comprometido — descártalo, no intentes recortar alrededor. Si pasa antes de que termine la colonización, casi siempre es un problema de técnica estéril en la inoculación, no del cultivo. Si tu jeringa llegó y produjo contaminación en el primer uso, contáctanos dentro de 48 horas con fotos — ver la garantía arriba.',
+    },
+  },
+  {
+    q: { en: 'Can I inject directly into bulk substrate instead of grain?', es: '¿Puedo inyectar directo a sustrato en vez de grano?' },
+    a: {
+      en: 'Not recommended. 10cc of liquid culture is formulated to expand into grain spawn first — injected straight into bulk substrate, the culture is too diluted relative to the substrate volume, which colonizes slower and gives contaminants more time to take hold. Always expand to grain first, then use the colonized grain to inoculate your bulk substrate.',
+      es: 'No es recomendable. Los 10cc de cultivo líquido están formulados para expandirse primero en grano — inyectados directo a sustrato a granel, el cultivo queda muy diluido respecto al volumen, coloniza más lento y le da más tiempo a los contaminantes. Siempre expande a grano primero, y usa ese grano colonizado para inocular el sustrato a granel.',
+    },
+  },
+  {
+    q: { en: 'Can I reuse the needle?', es: '¿Puedo reutilizar la aguja?' },
+    a: {
+      en: 'For multiple injections from the same syringe on the same day, yes — just re-sterilize the injection port with the alcohol swab between each one. Don\'t reuse a needle across different syringes or after it has touched anything non-sterile.',
+      es: 'Para varias inyecciones de la misma jeringa el mismo día, sí — solo vuelve a esterilizar el puerto de inyección con el swab de alcohol entre cada una. No reutilices una aguja entre jeringas distintas ni después de tocar algo no estéril.',
+    },
+  },
+]
+
 const LC_PRODUCTS: Record<string, Product> = {
   'lions-mane-liquid-culture': {
     id: 'lc1', slug: 'lions-mane-liquid-culture',
@@ -78,6 +132,7 @@ const LC_PRODUCTS: Record<string, Product> = {
     cultivationSpecs: { difficulty: 'intermediate', colonizationTime: '5–10 days', fruitingTempF: '65–75°F', fruitingTempC: '18–24°C', idealSubstrate: 'Supplemented hardwood sawdust', expectedYield: '200–400g per flush', indoorOutdoor: 'indoor' },
     isOrganic: true, inStock: true, tags: ['medicinal', 'liquid-culture', 'lions-mane'], relatedProducts: ['lions-mane-fruiting-block'],
     howToUseSteps: LC_HOW_TO_USE_STEPS,
+    faqs: LC_FAQS,
     scienceContent: {
       en: "Hericium erinaceus is the only mushroom known to contain hericenones (in the fruiting body) and erinacines (in the mycelium) — two structurally distinct compound families that both cross the blood-brain barrier and stimulate the synthesis of Nerve Growth Factor (NGF). NGF is the protein responsible for the growth, maintenance, and survival of neurons; without it, neurons atrophy and die.\n\nA 2009 double-blind, placebo-controlled trial (Mori et al., Phytotherapy Research) showed significant cognitive improvement in adults with mild cognitive impairment after 16 weeks of daily Lion's Mane supplementation — with regression upon cessation, confirming the effect was compound-dependent.\n\nSubsequent research has identified benefits in: reducing anxiety and depression (Inanaga 2014, 4-week RCT), peripheral nerve regeneration (myelin sheath repair), and reduction of amyloid-beta plaques associated with Alzheimer's disease in animal models. Currently under investigation in Phase II clinical trials for neurodegenerative disease prevention.",
       es: "Hericium erinaceus es el único hongo conocido que contiene hericenones (en el cuerpo fructificante) y erinacinas (en el micelio) — dos familias de compuestos estructuralmente distintos que cruzan la barrera hematoencefálica y estimulan la síntesis del Factor de Crecimiento Nervioso (NGF). El NGF es la proteína responsable del crecimiento, mantenimiento y supervivencia de las neuronas.\n\nUn ensayo doble ciego controlado con placebo (Mori et al., 2009) mostró mejora cognitiva significativa en adultos con deterioro cognitivo leve después de 16 semanas de suplementación diaria. Investigación posterior ha identificado beneficios en: reducción de ansiedad y depresión, regeneración de nervios periféricos, y reducción de placas amiloide-beta en modelos animales.",
@@ -103,6 +158,7 @@ const LC_PRODUCTS: Record<string, Product> = {
     cultivationSpecs: { difficulty: 'beginner', colonizationTime: '5–10 days', fruitingTempF: '55–65°F', fruitingTempC: '13–18°C', idealSubstrate: 'Hardwood sawdust, straw, coffee grounds', expectedYield: '3–4 flushes, 25%+ BE', indoorOutdoor: 'both' },
     isOrganic: true, inStock: true, tags: ['beginner', 'liquid-culture', 'oyster'], relatedProducts: ['blue-oyster-bulk-substrate'],
     howToUseSteps: LC_HOW_TO_USE_STEPS,
+    faqs: LC_FAQS,
     scienceContent: {
       en: "Pleurotus ostreatus is one of the most nutritionally complete foods in nature. At 30% protein by dry weight — with all essential amino acids and a PDCAAS score comparable to beef — it outperforms virtually every plant-based protein source.\n\nThe primary medicinal compounds are beta-1,3 and beta-1,6 glucans (25–30% dry weight), which activate macrophages and natural killer cells through Dectin-1 receptor binding. This mechanism is well-established in over 300 peer-reviewed studies. Additionally, P. ostreatus naturally produces lovastatin (mevinolin) — the same compound used in pharmaceutical cholesterol drugs — at levels shown to reduce LDL by 7–10% in controlled studies.\n\nErgothioneine content is particularly high: this sulfur-containing amino acid is synthesized only by fungi and certain bacteria. Humans actively transport it into cells via a specific transporter (OCTN1), where it concentrates in mitochondria and protects against oxidative damage. Plasma ergothioneine levels are increasingly used as a longevity biomarker.",
       es: "Pleurotus ostreatus es uno de los alimentos más completos nutricionalmente. Con 30% de proteína en peso seco — todos los aminoácidos esenciales y una puntuación PDCAAS comparable a la carne de res — supera prácticamente a cualquier fuente proteica vegetal.\n\nLos principales compuestos medicinales son los beta-glucanos 1,3 y 1,6 (25–30% peso seco), que activan macrófagos y células NK mediante la unión al receptor Dectina-1. Adicionalmente, produce lovastatina natural a niveles que reducen el LDL en 7–10% en estudios controlados.\n\nEl contenido de ergotionina es especialmente alto: este aminoácido sulforado sintetizado solo por hongos se concentra en las mitocondrias y protege contra el daño oxidativo.",
@@ -128,6 +184,7 @@ const LC_PRODUCTS: Record<string, Product> = {
     cultivationSpecs: { difficulty: 'beginner', colonizationTime: '5–10 days', fruitingTempF: '75–85°F', fruitingTempC: '24–29°C', idealSubstrate: 'Straw, hardwood sawdust, sugarcane bagasse', expectedYield: '3 flushes, 20–25% BE', indoorOutdoor: 'indoor' },
     isOrganic: true, inStock: true, tags: ['beginner', 'liquid-culture', 'oyster'], relatedProducts: [],
     howToUseSteps: LC_HOW_TO_USE_STEPS,
+    faqs: LC_FAQS,
     scienceContent: {
       en: "Pleurotus djamor shares the core beta-glucan profile of Blue Oyster but with a notably higher concentration of phenolic antioxidants — compounds that neutralize reactive oxygen species (ROS) and reduce systemic inflammation. A 2021 study (Food Chemistry) measured P. djamor's DPPH radical scavenging activity at 78%, higher than most edible Pleurotus species.\n\nLike other Oyster mushrooms, Pink Oyster contains natural lovastatin for cholesterol balance, ergothioneine for mitochondrial protection, and complete protein with all essential amino acids. The distinctive magenta pigment (from terpene and carotenoid precursors) fades when cooked but represents a concentrated source of antioxidant phytocompounds in raw or lightly dried preparations.\n\nThe extremely fast colonization and fruiting of P. djamor makes it valuable not just as a food source but as a bioremediation agent — studies show high efficacy in breaking down agricultural waste and petroleum-contaminated soil through lignin-degrading enzymes (laccase, manganese peroxidase).",
       es: "Pleurotus djamor comparte el perfil central de beta-glucanos de la Ostra Azul pero con una concentración notablemente mayor de antioxidantes fenólicos. Un estudio de 2021 (Food Chemistry) midió la actividad captadora de radicales DPPH de P. djamor en 78%, mayor que la mayoría de las especies de Pleurotus comestibles.\n\nComo otras Ostras, contiene lovastatina natural, ergotionina y proteína completa con todos los aminoácidos esenciales. El pigmento magenta característico representa una fuente concentrada de fitocompuestos antioxidantes en preparaciones crudas o ligeramente secadas.",
@@ -153,6 +210,7 @@ const LC_PRODUCTS: Record<string, Product> = {
     cultivationSpecs: { difficulty: 'beginner', colonizationTime: '5–10 days', fruitingTempF: '64–77°F', fruitingTempC: '18–25°C', idealSubstrate: 'Hardwood sawdust, straw', expectedYield: '3 flushes, 20% BE', indoorOutdoor: 'indoor' },
     isOrganic: true, inStock: true, tags: ['beginner', 'liquid-culture', 'oyster'], relatedProducts: [],
     howToUseSteps: LC_HOW_TO_USE_STEPS,
+    faqs: LC_FAQS,
     scienceContent: {
       en: "Pleurotus citrinopileatus is the richest dietary source of ergothioneine among all cultivated Oyster species — a distinction that has attracted significant scientific attention. Ergothioneine (EGT) is a sulfur-containing amino acid synthesized exclusively by fungi and certain bacteria. Unlike most antioxidants, EGT is actively transported into human cells via the OCTN1 transporter, where it concentrates in mitochondria, the nucleus, and erythrocytes. Its role in protecting against oxidative stress linked to neurodegeneration, cardiovascular disease, and aging is the subject of over 100 published studies.\n\nPlasma EGT levels decline with age and are consistently lower in patients with Parkinson's disease, mild cognitive impairment, and cardiovascular disease — suggesting it may function as a longevity vitamin. A 2020 epidemiological study (Singapore Chinese Health Study, n=663) found that dietary mushroom consumption was inversely associated with mild cognitive impairment, with a 50% reduced odds ratio at 2+ portions per week.\n\nAdditionally, P. citrinopileatus contains mevinolin (natural lovastatin analog) and high beta-glucan content, providing complementary cardiovascular and immune benefits.",
       es: "Pleurotus citrinopileatus es la fuente dietética más rica en ergotionina entre todas las especies de Ostra cultivadas. La EGT es un aminoácido azufrado sintetizado exclusivamente por hongos que se concentra activamente en las mitocondrias, el núcleo y los eritrocitos humanos.\n\nLos niveles plasmáticos de EGT disminuyen con la edad y son consistentemente más bajos en pacientes con Parkinson, deterioro cognitivo leve y enfermedades cardiovasculares. Un estudio epidemiológico de 2020 (Singapore Chinese Health Study, n=663) encontró que el consumo de hongos se asoció inversamente con el deterioro cognitivo leve, con una reducción del 50% en la razón de probabilidades con 2+ porciones semanales.",
@@ -178,6 +236,7 @@ const LC_PRODUCTS: Record<string, Product> = {
     cultivationSpecs: { difficulty: 'advanced', colonizationTime: '5–10 days (on grain)', fruitingTempF: '70–80°F', fruitingTempC: '21–27°C', idealSubstrate: 'Hardwood logs or supplemented sawdust', expectedYield: '1–2 flushes (medicinal use)', indoorOutdoor: 'both' },
     isOrganic: true, inStock: true, tags: ['medicinal', 'liquid-culture', 'reishi'], relatedProducts: [],
     howToUseSteps: LC_HOW_TO_USE_STEPS,
+    faqs: LC_FAQS,
     scienceContent: {
       en: "Ganoderma lucidum contains the most complex pharmacological profile of any known medicinal mushroom: over 400 identified bioactive compounds across six primary categories — polysaccharides (beta-glucans), triterpenoids (ganoderic acids), proteins, steroids, alkaloids, and fatty acids.\n\nThe triterpenoids are unique to Reishi among cultivated medicinal fungi. Ganoderic acids A, B, C, and D have demonstrated direct inhibition of HMG-CoA reductase (the same target as pharmaceutical statins), angiotensin-converting enzyme (ACE) for blood pressure, and 5-alpha-reductase. Over 100 individual ganoderic acid structures have been isolated and characterized.\n\nAdaptogenic effects are mediated through the HPA (hypothalamic-pituitary-adrenal) axis. Clinical studies show Reishi supplementation reduces salivary cortisol, improves sleep quality (via effects on adenosine receptors), and reduces fatigue in cancer patients (JAMA Oncology, 2016). The beta-glucan fraction is responsible for immune modulation — meta-analyses show significant enhancement of NK cell activity and Th1/Th2 balance. For cancer applications, Reishi is used as an adjunct (not primary) therapy; a 2016 Cochrane systematic review found insufficient evidence to recommend as primary treatment but noted meaningful supportive effects.",
       es: "Ganoderma lucidum contiene el perfil farmacológico más complejo de cualquier hongo medicinal conocido: más de 400 compuestos bioactivos identificados en seis categorías principales — polisacáridos, triterpenoides (ácidos ganodéricos), proteínas, esteroides, alcaloides y ácidos grasos.\n\nLos triterpenoides son únicos del Reishi entre los hongos medicinales cultivados. Los ácidos ganodéricos A, B, C y D han demostrado inhibición directa de HMG-CoA reductasa (mismo objetivo que las estatinas farmacéuticas) y la enzima convertidora de angiotensina (ECA) para la presión arterial.\n\nLos efectos adaptogénicos se median a través del eje HPA. Estudios clínicos muestran que la suplementación con Reishi reduce el cortisol salival, mejora la calidad del sueño y reduce la fatiga en pacientes con cáncer (JAMA Oncology, 2016).",
@@ -203,6 +262,7 @@ const LC_PRODUCTS: Record<string, Product> = {
     cultivationSpecs: { difficulty: 'intermediate', colonizationTime: '5–10 days (on grain)', fruitingTempF: '55–75°F', fruitingTempC: '13–24°C', idealSubstrate: 'Hardwood sawdust blocks or oak logs', expectedYield: 'Multiple flushes (perennial on logs)', indoorOutdoor: 'both' },
     isOrganic: true, inStock: true, tags: ['edible', 'liquid-culture', 'shiitake'], relatedProducts: [],
     howToUseSteps: LC_HOW_TO_USE_STEPS,
+    faqs: LC_FAQS,
     scienceContent: {
       en: "Lentinula edodes is the most studied edible mushroom in the world, and uniquely, the only edible species with a compound holding FDA Orphan Drug designation. Lentinan — a highly purified beta-1,3-glucan — received this designation for use as a cancer immunotherapy adjunct. It is administered intravenously in Japanese hospitals alongside chemotherapy, with meta-analyses showing improved survival outcomes in gastric cancer (Hazard Ratio 0.67, 95% CI 0.52–0.86).\n\nEritadenine is a unique Shiitake-exclusive compound that lowers plasma cholesterol through a distinct mechanism from statins: it inhibits the enzyme that converts dietary cholesterol into its storage form. Clinical trials show reductions of 15–25% in total cholesterol after 7 days of daily consumption.\n\nAHCC (Active Hexose Correlated Compound) is a proprietary preparation derived from Shiitake mycelia, used as a standard adjunct to chemotherapy in Japan. A 2016 randomized trial (n=87) showed AHCC significantly improved NK cell activity vs. placebo in patients with advanced cancer. Shiitake also contains lenthionine — the compound responsible for its distinctive aroma — which has demonstrated platelet aggregation inhibition (anticoagulant effect) in laboratory studies.",
       es: "Lentinula edodes es el hongo comestible más estudiado del mundo y el único con un compuesto con designación de Medicamento Huérfano FDA. El Lentinan — un beta-1,3-glucano altamente purificado — se administra intravenosamente en hospitales japoneses junto a la quimioterapia, con meta-análisis que muestran mejoras en la supervivencia en cáncer gástrico (HR 0.67).\n\nLa eritadenina es un compuesto exclusivo del Shiitake que reduce el colesterol plasmático a través de un mecanismo distinto al de las estatinas, con reducciones del 15–25% en colesterol total después de 7 días de consumo diario.\n\nEl AHCC (compuesto de hexosa activa correlacionada), derivado del micelio de Shiitake, es un adjunto estándar de quimioterapia en Japón con evidencia publicada de mejora en la actividad de células NK.",
@@ -228,6 +288,7 @@ const LC_PRODUCTS: Record<string, Product> = {
     cultivationSpecs: { difficulty: 'advanced', colonizationTime: '14–21 days (on grain/rice)', fruitingTempF: '60–75°F', fruitingTempC: '15–24°C', idealSubstrate: 'Cooked grain (wheat berries, brown rice)', expectedYield: '50–150g dry per substrate', indoorOutdoor: 'indoor' },
     isOrganic: true, inStock: true, tags: ['medicinal', 'liquid-culture', 'cordyceps', 'performance'], relatedProducts: [],
     howToUseSteps: CORDYCEPS_HOW_TO_USE_STEPS,
+    faqs: LC_FAQS,
     scienceContent: {
       en: "Cordycepin (3'-deoxyadenosine) is the primary bioactive compound in Cordyceps militaris — a structural analog of adenosine that competes for adenosine receptors throughout the body. Its most studied effect is on cellular energy metabolism: by mimicking adenosine, cordycepin enhances ATP synthesis in mitochondria, increases oxygen utilization efficiency, and delays lactate accumulation in muscle tissue during exercise.\n\nA landmark 2010 randomized, double-blind, placebo-controlled trial (Chen et al., Journal of Alternative and Complementary Medicine) showed an 11.8% improvement in VO2 max in healthy older adults after 12 weeks of Cordyceps supplementation vs. placebo. A 2017 study in healthy young adults (University of Georgia) showed similar improvements in time-trial performance and lactate threshold.\n\nBeyond athletic performance, cordycepin has demonstrated: nephroprotective effects (kidney function protection, studied in chronic kidney disease models), immunomodulation via beta-glucan polysaccharides, and anti-tumor activity through apoptosis induction in cancer cell lines. Wild Ophiocordyceps sinensis contains the same bioactives but costs $20,000/kg — C. militaris cultivated on grain produces equivalent cordycepin concentrations at a fraction of the cost.",
       es: "La cordycepina (3'-desoxiadenosina) es el principal compuesto bioactivo de Cordyceps militaris — un análogo estructural de la adenosina que compite por sus receptores en todo el cuerpo. Su efecto más estudiado es sobre el metabolismo energético celular: mejora la síntesis de ATP mitocondrial, aumenta la eficiencia de utilización del oxígeno y retrasa la acumulación de lactato en el músculo durante el ejercicio.\n\nUn ensayo clave de 2010 (Chen et al., Journal of Alternative and Complementary Medicine) mostró una mejora del 11.8% en el VO2 máx en adultos mayores sanos después de 12 semanas de suplementación. Un estudio de 2017 en adultos jóvenes sanos mostró mejoras similares en el rendimiento en prueba de tiempo y el umbral de lactato.",
@@ -253,6 +314,7 @@ const LC_PRODUCTS: Record<string, Product> = {
     cultivationSpecs: { difficulty: 'advanced', colonizationTime: '5–10 days (on grain)', fruitingTempF: '70–82°F', fruitingTempC: '21–28°C', idealSubstrate: 'Supplemented hardwood sawdust', expectedYield: '1–2 flushes (medicinal use)', indoorOutdoor: 'indoor' },
     isOrganic: true, inStock: true, tags: ['medicinal', 'liquid-culture', 'reishi', 'antler'], relatedProducts: ['reishi-liquid-culture'],
     howToUseSteps: LC_HOW_TO_USE_STEPS,
+    faqs: LC_FAQS,
     scienceContent: {
       en: "Antler Reishi is Ganoderma multipileum, a species within the broader Ganoderma lucidum complex that was only formally separated from G. lucidum in 2009 through ITS DNA sequencing — before that, it was sold and studied under the \"G. lucidum\" name alongside several related Asian lingzhi species. Cultivated under deliberately elevated CO2 concentrations (above 5,000 ppm), it suppresses cap formation and drives vertical antler or stag-horn growth — vendors report it takes to antler form more readily than typical G. lucidum strains under the same conditions.\n\nThe antler form exposes significantly more tissue surface area per gram than a flat kidney-shaped cap. For dual-extraction tincture preparation, this means better solvent penetration, higher extraction efficiency of triterpenoids (alcohol-soluble) and beta-glucans (water-soluble), and more consistent batch-to-batch yield. Professional tincture makers consistently prefer antler form for this reason.\n\nAs a member of the Ganoderma lucidum species complex, G. multipileum shares the same core pharmacological categories documented for standard Reishi — ganoderic acid inhibition of HMG-CoA reductase and ACE, beta-glucan immunomodulation, cortisol regulation via the HPA axis, NK cell activation, and hepatoprotective effects — though as a distinct species, exact compound concentrations haven't been directly compared head-to-head in published studies. See the standard Reishi listing for full clinical references specific to G. lucidum.",
       es: "El Reishi Antler es Ganoderma multipileum, una especie dentro del complejo más amplio de Ganoderma lucidum que se separó formalmente de G. lucidum recién en 2009 mediante secuenciación de ADN (ITS) — antes de eso, se vendía y estudiaba bajo el nombre \"G. lucidum\" junto a varias especies relacionadas de lingzhi asiático. Cultivado bajo concentraciones de CO2 deliberadamente elevadas (por encima de 5,000 ppm), suprime la formación del sombrero y dirige el crecimiento vertical en forma de asta — los vendedores reportan que forma astas más fácilmente que las cepas típicas de G. lucidum bajo las mismas condiciones.\n\nLa forma antler expone significativamente más superficie de tejido por gramo que un sombrero renal plano. Para la preparación de tintura de doble extracción, esto significa mejor penetración del solvente y mayor eficiencia de extracción de triterpenoides y beta-glucanos.\n\nComo miembro del complejo Ganoderma lucidum, G. multipileum comparte las mismas categorías farmacológicas centrales documentadas para el Reishi estándar — inhibición de HMG-CoA reductasa y ACE por ácidos ganodéricos, inmunomodulación por beta-glucanos, regulación de cortisol vía eje HPA — aunque al ser una especie distinta, las concentraciones exactas de compuestos no se han comparado directamente en estudios publicados.",
@@ -274,6 +336,37 @@ const GRAIN_HOW_TO_USE_STEPS = [
   'Gently massage the bag to spread the inoculation point through the grain without shaking excessively.',
   'Incubate at 70–75°F in darkness. Watch for contamination (green, black, or pink patches) before colonization completes.',
   'Once fully colonized (white throughout), use as spawn: break up and mix into bulk substrate at a 1:5–1:10 ratio, or transfer directly to a monotub.',
+]
+
+const GRAIN_FAQS = [
+  {
+    q: { en: 'How do I know when it\'s fully colonized?', es: '¿Cómo sé cuándo está completamente colonizado?' },
+    a: {
+      en: 'The grain turns solid white with mycelium — no tan, brown, or translucent grain visible through the bag. Colonization time varies by species (see the Colonization spec above); don\'t break it up or transfer it until it\'s fully white, even at the edges.',
+      es: 'El grano se pone completamente blanco de micelio — sin grano café, translúcido o sin colonizar visible a través de la bolsa. El tiempo varía según la especie (ver el dato de Colonización arriba); no lo rompas ni lo transfieras hasta que esté blanco por completo, incluso en los bordes.',
+    },
+  },
+  {
+    q: { en: 'How long can I store the bag before inoculating?', es: '¿Cuánto puedo guardar la bolsa antes de inocular?' },
+    a: {
+      en: 'See the Shelf Life spec above for this bag — keep it sealed, cool, and dark until you\'re ready to inject. The sooner you inoculate after receiving it, the more predictable your colonization time will be.',
+      es: 'Ver el dato de Vida Útil arriba para esta bolsa — mantenla sellada, fresca y en oscuridad hasta que estés listo para inyectar. Mientras antes inocules después de recibirla, más predecible será tu tiempo de colonización.',
+    },
+  },
+  {
+    q: { en: 'What ratio do I use to mix into bulk substrate?', es: '¿Qué proporción uso para mezclar con sustrato a granel?' },
+    a: {
+      en: 'Once fully colonized, break up the grain and mix into bulk substrate at a 1:5–1:10 ratio (spawn:substrate by volume) — more spawn means faster colonization but higher cost per grow, less means slower colonization but better economics for large batches.',
+      es: 'Una vez colonizado por completo, rompe el grano y mézclalo con sustrato a granel en proporción 1:5–1:10 (spawn:sustrato por volumen) — más spawn coloniza más rápido pero cuesta más por cultivo, menos coloniza más lento pero rinde mejor en lotes grandes.',
+    },
+  },
+  {
+    q: { en: 'Can I use this straight for fruiting, without bulk substrate?', es: '¿Puedo usar esto directo para fructificar, sin sustrato a granel?' },
+    a: {
+      en: 'Yes, colonized grain alone can fruit ("grain-to-cake" style), but yields are much smaller than a properly expanded bulk substrate block since there\'s less total food source. Expanding into bulk substrate first is the standard path for a real harvest.',
+      es: 'Sí, el grano colonizado solo puede fructificar, pero el rendimiento es mucho menor que un bloque de sustrato a granel bien expandido, porque hay menos fuente de alimento total. Expandir primero a sustrato a granel es el camino estándar para una cosecha real.',
+    },
+  },
 ]
 
 const GRAIN_SPECS_BASE = {
@@ -298,6 +391,7 @@ const GRAIN_PRODUCTS: Record<string, Product> = {
     images: [],
     isOrganic: true, inStock: true, tags: ['grain-bag', 'rye', 'beginner'], relatedProducts: ['blue-oyster-liquid-culture'],
     howToUseSteps: GRAIN_HOW_TO_USE_STEPS,
+    faqs: GRAIN_FAQS,
     scienceContent: {
       en: "Rye berries (Secale cereale) owe their cultivation dominance to kernel geometry: an elongated, grooved hull that maximizes surface area relative to volume while still holding structural integrity under autoclave pressure. That surface area translates directly into inoculation points — the locations where mycelium first establishes and begins radiating outward.\n\nEqually important is rye's starch-to-moisture behavior. Its hull absorbs water slowly and releases it slowly, which is why properly hydrated rye rarely turns anaerobic or mushy — the two failure modes that stall colonization in other grains. This forgiving moisture curve is the primary reason rye remains the substrate taught in nearly every cultivation course.",
       es: "El centeno (Secale cereale) domina el cultivo por la geometría de su grano: una cáscara alargada y acanalada que maximiza la superficie relativa al volumen. Esa superficie se traduce directamente en puntos de inoculación.\n\nIgual de importante es su comportamiento de humedad: absorbe y libera agua lentamente, por lo que rara vez se vuelve anaeróbico o pastoso — los dos modos de falla que detienen la colonización en otros granos.",
@@ -317,6 +411,7 @@ const GRAIN_PRODUCTS: Record<string, Product> = {
     images: [],
     isOrganic: true, inStock: true, tags: ['grain-bag', 'corn', 'drippy-corn', 'beginner'], relatedProducts: [],
     howToUseSteps: GRAIN_HOW_TO_USE_STEPS,
+    faqs: GRAIN_FAQS,
     scienceContent: {
       en: "Whole corn's nutritional density comes from its endosperm — a starch-and-protein reserve several times larger per kernel than rye or millet. That reserve is what lets colonized corn spawn punch above its weight when mixed into bulk substrate: a 1:8 spawn ratio with corn delivers more usable nutrition per bag than the same ratio with a smaller grain.\n\nThe tradeoff is kernel size: fewer, larger inoculation points mean mycelium takes a few more days to establish full network coverage compared to millet or milo. Growers who prioritize bulk-substrate economics over speed consistently choose corn.",
       es: "La densidad nutricional del maíz proviene de su endospermo — una reserva de almidón y proteína varias veces mayor por grano que el centeno o el mijo. Esa reserva es lo que permite que el spawn de maíz rinda más al mezclarse en sustrato a granel.\n\nLa contrapartida es el tamaño del grano: menos puntos de inoculación implican que el micelio tarda algunos días más en cubrir toda la red, comparado con mijo o milo.",
@@ -336,6 +431,7 @@ const GRAIN_PRODUCTS: Record<string, Product> = {
     images: [],
     isOrganic: true, inStock: true, tags: ['grain-bag', 'milo', 'beginner'], relatedProducts: ['pink-oyster-liquid-culture'],
     howToUseSteps: GRAIN_HOW_TO_USE_STEPS,
+    faqs: GRAIN_FAQS,
     scienceContent: {
       en: "Sorghum's small, rounded kernel gives it one of the highest inoculation-point densities per pound of any common spawn grain — more individual grains means more discrete sites where mycelium first establishes, which is what drives faster visible colonization in the first week.\n\nMilo is also cheaper to produce at scale than rye or oats, which is why it's the substrate most cited in grower communities (Shroomery, r/MushroomGrowers) for running many bags at once — the same autoclave and hydration protocol applies across every grain we carry, so sterility and moisture consistency don't change.",
       es: "El grano pequeño y redondeado del sorgo le da una de las densidades de puntos de inoculación más altas por libra de cualquier grano común — más granos individuales significa más sitios donde el micelio se establece primero.\n\nEl milo también es más barato de producir a escala que el centeno o la avena, por eso es el sustrato más citado en comunidades de cultivo para correr muchas bolsas a la vez.",
@@ -355,6 +451,7 @@ const GRAIN_PRODUCTS: Record<string, Product> = {
     images: [],
     isOrganic: true, inStock: true, tags: ['grain-bag', 'millet', 'intermediate'], relatedProducts: ['lions-mane-liquid-culture'],
     howToUseSteps: GRAIN_HOW_TO_USE_STEPS,
+    faqs: GRAIN_FAQS,
     scienceContent: {
       en: "Millet's kernel diameter is roughly a third that of rye, which — for a fixed bag weight — multiplies the total number of individual grains, and therefore the number of discrete inoculation points, several times over. This is the direct mechanical reason small-grain substrates colonize faster than large-grain ones at equal inoculation volume.\n\nMillet also measures lower in natural bacterial endospore load than wheat-family grains (rye, wheat, barley), reducing the population of heat-resistant contaminants that can survive autoclave sterilization and compete with mycelium during the early colonization window.",
       es: "El diámetro del grano de mijo es aproximadamente un tercio del centeno, lo que — a igual peso de bolsa — multiplica el número total de granos individuales y, por lo tanto, de puntos de inoculación.\n\nEl mijo también tiene una carga natural de endosporas bacterianas más baja que los granos de la familia del trigo, reduciendo contaminantes resistentes al calor que sobreviven la esterilización.",
@@ -374,6 +471,7 @@ const GRAIN_PRODUCTS: Record<string, Product> = {
     images: [],
     isOrganic: true, inStock: true, tags: ['grain-bag', 'oats', 'intermediate'], relatedProducts: ['blue-oyster-liquid-culture', 'pink-oyster-liquid-culture'],
     howToUseSteps: GRAIN_HOW_TO_USE_STEPS,
+    faqs: GRAIN_FAQS,
     scienceContent: {
       en: "Oat groats retain their bran layer, which is more porous and less dense than the hull structures of rye or corn. That porosity lowers mechanical resistance to hyphal growth, which is the primary driver behind oats' consistent lead in colonization-speed comparisons.\n\nThe same porosity makes oats considerably more sensitive to moisture content than denser grains — small deviations from the ~50% target compound quickly into either anaerobic mush or stalled dry patches, which is why oats are generally recommended after a grower has dialed in hydration technique on a more forgiving grain.",
       es: "La avena conserva su capa de salvado, más porosa y menos densa que la cáscara del centeno o el maíz. Esa porosidad reduce la resistencia mecánica al crecimiento de las hifas, lo que explica su ventaja constante en velocidad de colonización.\n\nEsa misma porosidad hace que la avena sea más sensible al contenido de humedad — pequeñas desviaciones del ~50% objetivo se acumulan rápido en zonas anaeróbicas o secas, por lo que se recomienda después de dominar la hidratación en un grano más indulgente.",
@@ -680,7 +778,7 @@ const BULK_PRODUCTS: Record<string, Product> = {
   },
 }
 
-const TABS = ['description', 'howToUse', 'science', 'reviews'] as const
+const TABS = ['description', 'howToUse', 'science', 'faq', 'reviews'] as const
 
 export default function ProductPage({ params }: { params: { slug: string } }) {
   const locale = useLocale() as 'en' | 'es'
@@ -1202,6 +1300,20 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
                       ))
                     ) : (
                       <p>Detailed scientific research available soon.</p>
+                    )}
+                  </div>
+                )}
+                {activeTab === 'faq' && (
+                  <div className="space-y-6">
+                    {product.faqs && product.faqs.length > 0 ? (
+                      product.faqs.map((faq, i) => (
+                        <div key={i} className="border-b border-ds-border pb-5 last:border-b-0 last:pb-0">
+                          <p className="text-cream font-medium mb-2">{faq.q[locale]}</p>
+                          <p className="text-cream-muted leading-relaxed text-sm">{faq.a[locale]}</p>
+                        </div>
+                      ))
+                    ) : (
+                      <p className="text-cream-muted">{locale === 'es' ? 'Preguntas frecuentes próximamente.' : 'FAQ coming soon.'}</p>
                     )}
                   </div>
                 )}
