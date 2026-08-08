@@ -1,29 +1,15 @@
-import Image from 'next/image'
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
 
 interface LogoProps {
   size?: 'sm' | 'md' | 'lg'
   href?: string
-  /** pass the translated tagline text to show it below the wordmark (stacked layout only) */
+  /** pass the translated tagline text to show it below the wordmark */
   tagline?: string
   className?: string
   /** true = cream wordmark for dark backgrounds, false = dark wordmark for light backgrounds */
   light?: boolean
-  /**
-   * 'stacked' (default) — FRONTIER / helix / LAB, used in the header, footer, and mobile menu.
-   * 'horizontal' — FRONTIER + helix + LAB on one line, for wide placements (email signatures,
-   * print, partner pages, anywhere the tall stacked mark doesn't fit).
-   */
-  layout?: 'stacked' | 'horizontal'
 }
-
-// The horizontal lockup is real exported artwork (not a live-text reconstruction), from
-// ~/Desktop/Frontier Lab Logo/palette-amber-{dark,white}.png — same construction as the stacked
-// mark (Helvetica Neue, real helix geometry), just laid out on one line for wide placements.
-const HORIZONTAL_SRC_DARK = '/images/brand/logo-horizontal-dark.png'
-const HORIZONTAL_SRC_CREAM = '/images/brand/logo-horizontal-cream.png'
-const HORIZONTAL_ASPECT = 3954 / 574
 
 // Exact vector paths from the approved final logo — the stacked FRONTIER / (helix) / LAB lockup,
 // text converted to paths in `~/Desktop/Frontier Lab Logo/editable-frontierlab-*.svg`. Rendered as
@@ -39,8 +25,10 @@ const configs = {
   lg: { height: 82 },
 }
 
-export function Logo({ size = 'md', href = '/', tagline, className, light = false, layout = 'stacked' }: LogoProps) {
+export function Logo({ size = 'md', href = '/', tagline, className, light = false }: LogoProps) {
   const cfg = configs[size]
+  const width = Math.round(cfg.height * ASPECT)
+  const letterColor = light ? '#F4F1EA' : '#1C2018'
   // Contrast insurance for the light (dark-background) state — the header's own scrim already
   // guarantees a dark base, this adds a second layer so the wordmark never washes out against a
   // busy, moving background like the hero video.
@@ -48,27 +36,14 @@ export function Logo({ size = 'md', href = '/', tagline, className, light = fals
     ? 'drop-shadow(0 1px 5px rgba(0,0,0,0.55)) drop-shadow(0 0 14px rgba(0,0,0,0.3))'
     : 'none'
 
-  const mark =
-    layout === 'horizontal' ? (
-      <Image
-        src={light ? HORIZONTAL_SRC_CREAM : HORIZONTAL_SRC_DARK}
-        alt="Frontier Lab"
-        width={Math.round(cfg.height * HORIZONTAL_ASPECT)}
-        height={cfg.height}
-        style={{ filter: letterFilter, width: Math.round(cfg.height * HORIZONTAL_ASPECT), height: cfg.height }}
-      />
-    ) : (
-      <svg viewBox={VIEWBOX} width={Math.round(cfg.height * ASPECT)} height={cfg.height} aria-label="Frontier Lab">
-        <path d={LETTERS_PATH} fill={light ? '#F4F1EA' : '#1C2018'} style={{ filter: letterFilter }} />
-        <path d={HELIX_PATH} fill="#9E6820" style={{ filter: 'drop-shadow(0 0 6px rgba(158,104,32,0.55))' }} />
-      </svg>
-    )
-
   const content = (
     <div className={cn('flex flex-col items-start select-none', className)}>
-      {mark}
+      <svg viewBox={VIEWBOX} width={width} height={cfg.height} aria-label="Frontier Lab">
+        <path d={LETTERS_PATH} fill={letterColor} style={{ filter: letterFilter }} />
+        <path d={HELIX_PATH} fill="#9E6820" style={{ filter: 'drop-shadow(0 0 6px rgba(158,104,32,0.55))' }} />
+      </svg>
 
-      {tagline && layout === 'stacked' && (
+      {tagline && (
         <span className="font-mono font-light uppercase tracking-[0.22em] text-[9px] mt-1.5 text-cream-muted/50">
           {tagline}
         </span>
