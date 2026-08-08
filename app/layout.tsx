@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Bebas_Neue, Playfair_Display, Inter, Cormorant_Garamond, Space_Mono } from 'next/font/google'
+import { getLocale } from 'next-intl/server'
 import './globals.css'
 
 const bebasNeue = Bebas_Neue({
@@ -52,10 +53,12 @@ export const metadata: Metadata = {
   },
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const locale = await getLocale()
+
   return (
     <html
-      lang="en"
+      lang={locale}
       className={`${bebasNeue.variable} ${playfairDisplay.variable} ${inter.variable} ${cormorantGaramond.variable} ${spaceMono.variable}`}
     >
       <body className="bg-bg text-cream font-body antialiased">{children}</body>

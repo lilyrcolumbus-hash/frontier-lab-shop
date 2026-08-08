@@ -14,6 +14,7 @@ const fadeUp = (delay = 0) => ({
 
 export function Hero() {
   const t = useTranslations('home.hero')
+  const tFooter = useTranslations('footer')
 
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
@@ -50,7 +51,7 @@ export function Hero() {
               {...fadeUp(0.1)}
               className="text-[11px] font-mono font-medium text-white/40 uppercase tracking-[0.28em]"
             >
-              Wild Genetics. Lab Verified.
+              {tFooter('tagline')}
             </motion.p>
 
             <div>

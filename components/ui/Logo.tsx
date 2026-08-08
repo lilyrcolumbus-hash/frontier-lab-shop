@@ -4,7 +4,8 @@ import { cn } from '@/lib/utils'
 interface LogoProps {
   size?: 'sm' | 'md' | 'lg'
   href?: string
-  showTagline?: boolean
+  /** pass the translated tagline text to show it below the wordmark */
+  tagline?: string
   className?: string
   /** true = cream wordmark for dark backgrounds, false = dark wordmark for light backgrounds */
   light?: boolean
@@ -24,7 +25,7 @@ const configs = {
   lg: { height: 82 },
 }
 
-export function Logo({ size = 'md', href = '/', showTagline, className, light = false }: LogoProps) {
+export function Logo({ size = 'md', href = '/', tagline, className, light = false }: LogoProps) {
   const cfg = configs[size]
   const width = Math.round(cfg.height * ASPECT)
   const letterColor = light ? '#F4F1EA' : '#1C2018'
@@ -42,9 +43,9 @@ export function Logo({ size = 'md', href = '/', showTagline, className, light = 
         <path d={HELIX_PATH} fill="#9E6820" style={{ filter: 'drop-shadow(0 0 6px rgba(158,104,32,0.55))' }} />
       </svg>
 
-      {showTagline && (
+      {tagline && (
         <span className="font-mono font-light uppercase tracking-[0.22em] text-[9px] mt-1.5 text-cream-muted/50">
-          Wild Genetics. Lab Verified.
+          {tagline}
         </span>
       )}
     </div>
