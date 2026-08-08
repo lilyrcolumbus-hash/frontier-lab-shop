@@ -129,7 +129,8 @@
       "placeholder": "Tu correo electrónico",
       "cta": "Suscribirme Gratis",
       "success": "¡Ya eres parte! Revisa tu bandeja.",
-      "privacy": "Sin spam. Date de baja cuando quieras."
+      "privacy": "Sin spam. Date de baja cuando quieras.",
+      "error": "Algo salió mal. Intenta de nuevo."
     }
   },
   "shop": {

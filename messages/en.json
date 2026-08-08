@@ -129,7 +129,8 @@
       "placeholder": "Enter your email",
       "cta": "Subscribe Free",
       "success": "You're in! Check your inbox.",
-      "privacy": "No spam. Unsubscribe anytime."
+      "privacy": "No spam. Unsubscribe anytime.",
+      "error": "Something went wrong. Please try again."
     }
   },
   "shop": {

@@ -3,7 +3,7 @@ import { z } from 'zod'
 import { prisma } from '@/lib/prisma'
 
 const subscribeSchema = z.object({
-  email: z.string().trim().email().max(200),
+  email: z.string().trim().email().max(200).transform((v) => v.toLowerCase()),
   locale: z.enum(['en', 'es']).default('en'),
 })
 
