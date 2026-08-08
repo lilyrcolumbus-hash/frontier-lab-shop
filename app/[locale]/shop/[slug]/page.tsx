@@ -1051,6 +1051,23 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
               ))}
             </div>
 
+            {/* Viability guarantee — living/biological products only, matches /terms exactly */}
+            {product.category !== 'equipment' && (
+              <div className="flex items-start gap-3 rounded-2xl border border-accent/25 bg-accent/5 px-4 py-3.5">
+                <span className="text-accent flex-shrink-0 mt-0.5">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+                </span>
+                <p className="text-sm text-cream-muted leading-relaxed">
+                  <span className="text-cream font-medium">
+                    {locale === 'es' ? 'Cultivo viable garantizado.' : 'Viable culture guaranteed.'}
+                  </span>{' '}
+                  {locale === 'es'
+                    ? 'Si llega dañado, muerto o visiblemente contaminado, escríbenos dentro de las 48 horas con fotos y coordinamos reemplazo o reembolso.'
+                    : "If it arrives damaged, dead, or visibly contaminated, contact us within 48 hours with photos and we'll arrange a replacement or refund."}
+                </p>
+              </div>
+            )}
+
             {/* Cultivation Specs */}
             {product.cultivationSpecs && (
               <CultivationSpecs specs={product.cultivationSpecs} />
