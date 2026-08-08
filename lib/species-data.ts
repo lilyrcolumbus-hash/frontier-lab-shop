@@ -324,9 +324,56 @@ export const CORDYCEPS_SPECIES: SpeciesData = {
   ],
 }
 
+export const ANTLER_REISHI_SPECIES: SpeciesData = {
+  id: '8',
+  slug: 'antler-reishi',
+  commonName: 'Antler Reishi',
+  scientificName: 'Ganoderma multipileum',
+  family: 'Ganodermataceae',
+  order: 'Polyporales',
+  type: 'medicinal',
+  difficulty: 'advanced',
+  substrate: ['Hardwood logs', 'Hardwood stumps'],
+  colonizationWeeks: { min: 12, max: 16 },
+  fruitingTempF: { min: 70, max: 82 },
+  fruitingTempC: { min: 21, max: 28 },
+  expectedFlushes: 1,
+  biologicalEfficiency: '5–15%',
+  betaGlucanContent: 'High (triterpenoids + beta-glucans)',
+  indoorOutdoor: 'both',
+  description: {
+    en: 'Antler Reishi grows dramatic branching, stag-horn fruiting bodies instead of the classic kidney-shaped cap. For decades it was sold and studied under the "Ganoderma lucidum" name — DNA sequencing only separated it into its own species, Ganoderma multipileum, in 2009. It shares the same core bioactive compound classes as standard Reishi, but as a distinct species its exact concentrations haven\'t been directly compared in published studies. A different growing experience from the same medicinal lineage.',
+    es: 'El Reishi Antler forma dramáticos cuerpos fructificantes ramificados en forma de asta en lugar del clásico sombrero renal. Durante décadas se vendió y estudió bajo el nombre "Ganoderma lucidum" — la secuenciación de ADN recién lo separó en su propia especie, Ganoderma multipileum, en 2009. Comparte las mismas clases principales de compuestos bioactivos que el Reishi estándar, pero al ser una especie distinta sus concentraciones exactas no se han comparado directamente en estudios publicados. Una experiencia de cultivo distinta, dentro del mismo linaje medicinal.',
+  },
+  cultivationNotes: {
+    en: 'Colonization matches standard Reishi — slow, at warm temperatures (75–82°F). The difference is entirely in fruiting: while most species need strong fresh air exchange, Antler Reishi requires the opposite — CO2 held above 5,000 ppm throughout fruiting by deliberately limiting FAE. This suppresses cap formation and drives vertical antler growth. Too much fresh air and it reverts to a normal kidney cap. Advanced growers only.',
+    es: 'La colonización iguala al Reishi estándar — lenta, a temperaturas cálidas (24-28°C). La diferencia está toda en la fructificación: mientras la mayoría de las especies necesita buen intercambio de aire fresco, el Reishi Antler requiere lo opuesto — mantener el CO2 por encima de 5,000 ppm durante toda la fructificación limitando deliberadamente el FAE. Esto suprime la formación del sombrero y dirige el crecimiento vertical en forma de asta. Demasiado aire fresco y revierte a un sombrero renal normal. Solo cultivadores avanzados.',
+  },
+  medicalNotes: {
+    en: 'As a member of the Ganoderma lucidum species complex, Antler Reishi shares the same core pharmacological categories documented for standard Reishi — ganoderic acids (triterpenoids), beta-glucan polysaccharides, and immunomodulating proteins. Because it was only formally separated into its own species in 2009, exact compound concentrations haven\'t been directly compared head-to-head against G. lucidum in published studies. The antler form\'s greater surface area per gram is prized for tincture extraction efficiency.',
+    es: 'Como miembro del complejo de especies Ganoderma lucidum, el Reishi Antler comparte las mismas categorías farmacológicas centrales documentadas para el Reishi estándar — ácidos ganodéricos (triterpenoides), polisacáridos beta-glucanos y proteínas inmunomoduladoras. Al haberse separado formalmente en su propia especie recién en 2009, las concentraciones exactas de compuestos no se han comparado directamente contra G. lucidum en estudios publicados. La mayor superficie por gramo de la forma antler es apreciada por su eficiencia de extracción en tinturas.',
+  },
+  cookingNotes: {
+    en: 'Not consumed as food — like standard Reishi, the fruiting body is tough and bitter. Best prepared as a dual-extract tincture (hot water + alcohol) or powder. The branching antler form exposes more surface area than a flat cap, which tincture makers report improves solvent penetration and extraction consistency.',
+    es: 'No se consume como alimento — como el Reishi estándar, el cuerpo fructificante es duro y amargo. Se prepara mejor como tintura de doble extracción (agua caliente + alcohol) o en polvo. La forma ramificada de asta expone más superficie que un sombrero plano, lo cual los fabricantes de tinturas reportan que mejora la penetración del solvente y la consistencia de extracción.',
+  },
+  lookalikes: ['Ganoderma lucidum', 'Ganoderma applanatum'],
+  imageUrl: '',
+  thumbnailUrl: '',
+  openartPrompt:
+    'Macro nature photography, Antler Reishi mushroom (Ganoderma multipileum) showing dramatic branching stag-horn fruiting bodies with a lacquered mahogany-red surface, growing upright from a hardwood log in a controlled cultivation environment. No kidney-shaped cap — instead multiple antler-like branches with actively-growing white tips. Dramatic directional lighting highlighting the glossy lacquered texture. Extreme surface detail, shallow depth of field. Professional mycology photography, photorealistic, 8K',
+  keyBenefits: [
+    { icon: 'shield', label: 'Shared Ganoderma Compounds', detail: 'Ganoderic acids and immunomodulating polysaccharides — the same core compound classes as standard Reishi' },
+    { icon: 'leaf', label: 'Adaptogen Lineage', detail: 'Member of the clinically-studied Ganoderma lucidum complex, historically used for stress resilience and the HPA axis' },
+    { icon: 'zap', label: 'Extraction Efficiency', detail: 'The antler form\'s branching structure exposes more surface area per gram — preferred by tincture makers for solvent penetration' },
+    { icon: 'activity', label: 'Distinct Species', detail: 'Formally separated from G. lucidum only in 2009 via DNA sequencing — a related but scientifically distinct organism' },
+  ],
+}
+
 export const SPECIES_LIST: SpeciesData[] = [
   ...SPECIES_LIST_BASE,
   CORDYCEPS_SPECIES,
+  ANTLER_REISHI_SPECIES,
 ]
 
 export const SPECIES_MAP: Record<string, SpeciesData> = Object.fromEntries(
