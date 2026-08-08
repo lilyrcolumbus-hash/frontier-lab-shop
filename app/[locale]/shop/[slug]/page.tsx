@@ -1166,6 +1166,68 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
               </div>
             )}
 
+            {/* How we guarantee freshness — genetics/process, no fabricated dates or lot numbers */}
+            {product.category === 'spawn' && (
+              <div className="rounded-2xl border border-ds-border overflow-hidden">
+                <div className="px-4 py-3 bg-elevated border-b border-ds-border">
+                  <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-cream-muted">
+                    {locale === 'es' ? 'Cómo garantizamos que llegue fresco' : 'How we guarantee it arrives fresh'}
+                  </p>
+                </div>
+                <div className="grid sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-ds-border bg-surface">
+                  {[
+                    {
+                      label: locale === 'es' ? 'Genética aislada en laboratorio' : 'Lab-isolated genetics',
+                      detail: locale === 'es' ? 'Cada especie seleccionada por rasgos específicos, no colectada al azar en el bosque.' : 'Each species selected for specific traits, not randomly wild-collected.',
+                    },
+                    {
+                      label: locale === 'es' ? 'Nuestro propio laboratorio' : 'Grown in our own lab',
+                      detail: locale === 'es' ? 'Técnica estéril, sin subcontratar el cultivo a terceros.' : 'Sterile technique, not outsourced to a third party.',
+                    },
+                    {
+                      label: locale === 'es' ? 'Envío rápido' : 'Ships fast',
+                      detail: locale === 'es' ? 'Sale en 24h — menos tiempo en tránsito, más viabilidad al llegar.' : 'Ships within 24h — less time in transit, more viability on arrival.',
+                    },
+                  ].map((item) => (
+                    <div key={item.label} className="p-4 flex flex-col gap-1.5">
+                      <p className="text-sm text-cream font-medium">{item.label}</p>
+                      <p className="text-xs text-cream-muted leading-relaxed">{item.detail}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+            {product.category === 'substrate' && product.subcategory === 'Grain Bags' && (
+              <div className="rounded-2xl border border-ds-border overflow-hidden">
+                <div className="px-4 py-3 bg-elevated border-b border-ds-border">
+                  <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-cream-muted">
+                    {locale === 'es' ? 'Cómo garantizamos que llegue estéril' : 'How we guarantee it arrives sterile'}
+                  </p>
+                </div>
+                <div className="grid sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-ds-border bg-surface">
+                  {[
+                    {
+                      label: locale === 'es' ? 'Autoclave a 15 PSI' : 'Autoclaved at 15 PSI',
+                      detail: locale === 'es' ? 'Esterilización comercial real, no solo pasteurizado.' : 'Real commercial-grade sterilization, not just pasteurized.',
+                    },
+                    {
+                      label: locale === 'es' ? 'Probado por lote' : 'Batch-tested',
+                      detail: locale === 'es' ? 'Verificado con indicadores biológicos antes de enviar, no solo por presión/temperatura.' : 'Verified with biological indicators before shipping, not just pressure/temp logs.',
+                    },
+                    {
+                      label: locale === 'es' ? 'Parche filtrante 0.2 micras' : '0.2-micron filter patch',
+                      detail: locale === 'es' ? 'Deja pasar aire, bloquea contaminantes después de esterilizar.' : 'Lets air exchange through, blocks contaminants after sterilization.',
+                    },
+                  ].map((item) => (
+                    <div key={item.label} className="p-4 flex flex-col gap-1.5">
+                      <p className="text-sm text-cream font-medium">{item.label}</p>
+                      <p className="text-xs text-cream-muted leading-relaxed">{item.detail}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
             {/* Cultivation Specs */}
             {product.cultivationSpecs && (
               <CultivationSpecs specs={product.cultivationSpecs} />
