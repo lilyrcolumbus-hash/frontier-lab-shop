@@ -5,21 +5,16 @@ const FROM = process.env.RESEND_FROM_EMAIL ?? 'Frontier Lab <onboarding@resend.d
 
 export const emailConfigured = Boolean(resend)
 
-// Real approved logo, resized for email and hosted as a static asset — base64-embedded images
-// get stripped by some mail clients' security filters (data: URIs), so a plain https URL is more
-// broadly compatible.
 const SITE_ORIGIN = 'https://shrooms-lilyrcolumbus-hashs-projects.vercel.app'
 
-// Hero graphic: the darkened photo + white logo + tagline are baked into a single flattened PNG
-// (generated locally with PIL from the same verified Blue Oyster photo the site's own Hero uses,
-// darkened to match its overlay treatment) instead of layering them with CSS background-image —
-// Gmail's app doesn't render background-image on <td>, and its automatic dark-mode color
-// inversion then flips the intended near-black fallback into a pale, low-contrast box. A plain
-// <img> renders identically everywhere and is immune to that inversion.
-const HERO_IMAGE_URL: Record<'en' | 'es', string> = {
-  en: SITE_ORIGIN + '/images/email/hero-verify-en.png',
-  es: SITE_ORIGIN + '/images/email/hero-verify-es.png',
-}
+// Hero photo: darkened (same treatment as the site's own Hero overlay) and flattened into a
+// single PNG with PIL rather than layered via CSS background-image — Gmail's app doesn't render
+// background-image on <td>, and its automatic dark-mode color inversion then flips the intended
+// near-black fallback into a pale, low-contrast box. A plain <img> is immune to both. Purely
+// decorative — brand identity (name + tagline) lives in real HTML text in the brand bar below,
+// which still renders even when remote images are blocked (Gmail blocks them by default on
+// anything filed to Spam).
+const HERO_PHOTO_URL = SITE_ORIGIN + '/images/email/hero-photo.png'
 
 async function sendEmail(to: string, subject: string, html: string, text: string, context: string) {
   if (!resend) {
@@ -47,8 +42,9 @@ function emailShell(opts: {
   disclaimer: string
 }) {
   const { locale, eyebrow, heading, body, ctaLabel, ctaUrl, footer, disclaimer } = opts
-  const heroAlt =
-    locale === 'es' ? 'Frontier Lab — Genética Silvestre. Verificado en Laboratorio.' : 'Frontier Lab — Wild Genetics. Lab Verified.'
+  const heroAlt = locale === 'es' ? 'Cultivo de hongos silvestres' : 'Wild mushroom cultivation'
+  const tagline =
+    locale === 'es' ? 'GENÉTICA SILVESTRE. VERIFICADO EN LABORATORIO.' : 'WILD GENETICS. LAB VERIFIED.'
 
   return `<!DOCTYPE html>
 <html lang="${locale}">
@@ -65,11 +61,22 @@ function emailShell(opts: {
       <td align="center">
         <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:480px; background-color:#F8F9F8; border-radius:20px; border:1px solid #D2D8D2; overflow:hidden;">
 
-          <!-- Hero: single flattened image (darkened photo + logo + tagline) — see comment above
-               HERO_IMAGE_URL for why this isn't a CSS background-image layer -->
+          <!-- Brand bar: real HTML text on a solid CSS background — renders every time, even with
+               remote images blocked (Gmail blocks images by default on anything in Spam, which
+               would otherwise wipe out all brand identity if it lived only in the hero photo). -->
+          <tr>
+            <td align="center" bgcolor="#0A1A0F" style="background-color:#0A1A0F; padding:32px 32px 22px;">
+              <p style="margin:0; font-family:Helvetica,Arial,sans-serif; font-size:26px; font-weight:300; letter-spacing:2px; color:#F4F1EA;">
+                FRONT<span style="color:#9E6820; font-weight:600;">I</span>ER&nbsp;<span style="font-weight:600;">LAB</span>
+              </p>
+              <p style="margin:10px 0 0; font-family:'SFMono-Regular',Consolas,'Liberation Mono',Menlo,monospace; font-size:10px; font-weight:700; letter-spacing:2.5px; color:#F4F1EA; opacity:0.75;">${tagline}</p>
+            </td>
+          </tr>
+
+          <!-- Hero photo: decorative, secondary to the brand bar above -->
           <tr>
             <td>
-              <img src="${HERO_IMAGE_URL[locale]}" width="480" alt="${heroAlt}" style="display:block; width:100%; height:auto;" />
+              <img src="${HERO_PHOTO_URL}" width="480" alt="${heroAlt}" style="display:block; width:100%; height:auto;" />
             </td>
           </tr>
 
