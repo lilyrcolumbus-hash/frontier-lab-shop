@@ -376,7 +376,17 @@
     "resendVerification": "Resend verification email",
     "verificationSent": "Verification email sent — check your inbox.",
     "verifySuccess": "Your email is verified.",
-    "verifyExpired": "That verification link expired or is invalid. Request a new one below."
+    "verifyExpired": "That verification link expired or is invalid. Request a new one below.",
+    "forgotPasswordTitle": "Reset your password",
+    "forgotPasswordSubtitle": "Enter your email and we'll send you a reset link.",
+    "sendResetLink": "Send reset link",
+    "resetLinkSent": "If that email has an account, a reset link is on its way. Check your inbox.",
+    "backToSignIn": "Back to sign in",
+    "resetPasswordTitle": "Set a new password",
+    "newPassword": "New password",
+    "resetSuccess": "Password updated — sign in with your new password.",
+    "resetExpired": "That reset link expired or is invalid. Request a new one.",
+    "resetError": "Something went wrong. Try again."
   },
   "footer": {
     "tagline": "Wild Genetics. Lab Verified.",

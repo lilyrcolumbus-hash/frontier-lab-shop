@@ -376,7 +376,17 @@
     "resendVerification": "Reenviar correo de verificación",
     "verificationSent": "Correo de verificación enviado — revisa tu bandeja.",
     "verifySuccess": "Tu correo está verificado.",
-    "verifyExpired": "Ese enlace de verificación venció o no es válido. Pide uno nuevo abajo."
+    "verifyExpired": "Ese enlace de verificación venció o no es válido. Pide uno nuevo abajo.",
+    "forgotPasswordTitle": "Restablece tu contraseña",
+    "forgotPasswordSubtitle": "Ingresá tu correo y te mandamos un enlace para restablecerla.",
+    "sendResetLink": "Enviar enlace",
+    "resetLinkSent": "Si ese correo tiene una cuenta, te llega un enlace en camino. Revisá tu bandeja.",
+    "backToSignIn": "Volver a iniciar sesión",
+    "resetPasswordTitle": "Elegí una nueva contraseña",
+    "newPassword": "Nueva contraseña",
+    "resetSuccess": "Contraseña actualizada — iniciá sesión con la nueva.",
+    "resetExpired": "Ese enlace venció o no es válido. Pedí uno nuevo.",
+    "resetError": "Algo salió mal. Intentá de nuevo."
   },
   "footer": {
     "tagline": "Genética Silvestre. Verificado en Laboratorio.",

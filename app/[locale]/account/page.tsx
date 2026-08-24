@@ -173,6 +173,12 @@ export default function AccountPage() {
             />
           </div>
 
+          <div className="text-right -mt-2">
+            <Link href="/forgot-password" className="text-sm text-accent hover:text-accent-hover transition-colors">
+              {t('forgotPassword')}
+            </Link>
+          </div>
+
           {error && <p className="text-sm text-error">{error}</p>}
 
           <Button type="submit" fullWidth size="lg" isLoading={loading}>
