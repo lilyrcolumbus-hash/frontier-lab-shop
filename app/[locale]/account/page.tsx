@@ -1,11 +1,73 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import { useSession, signIn, signOut } from 'next-auth/react'
 import { useTranslations, useLocale } from 'next-intl'
+import { useSearchParams } from 'next/navigation'
 import { useRouter, Link } from '@/navigation'
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
+
+function VerifyBanner() {
+  const t = useTranslations('account')
+  const searchParams = useSearchParams()
+  const verifyParam = searchParams.get('verify')
+  const { data: session, status } = useSession()
+
+  const [emailVerified, setEmailVerified] = useState<boolean | null>(null)
+  const [resendStatus, setResendStatus] = useState<'idle' | 'sending' | 'sent'>('idle')
+
+  useEffect(() => {
+    if (status !== 'authenticated') return
+    fetch('/api/account/me')
+      .then((r) => r.json())
+      .then((data) => setEmailVerified(Boolean(data.emailVerified) || verifyParam === 'success'))
+      .catch(() => setEmailVerified(null))
+  }, [status, verifyParam])
+
+  const handleResend = async () => {
+    setResendStatus('sending')
+    await fetch('/api/auth/resend-verification', { method: 'POST' }).catch(() => {})
+    setResendStatus('sent')
+  }
+
+  if (status !== 'authenticated' || !session?.user) return null
+
+  if (verifyParam === 'success') {
+    return (
+      <div className="max-w-md mx-auto px-4 pt-8">
+        <div className="bg-accent/10 border border-accent/25 rounded-xl px-4 py-3.5">
+          <p className="text-sm text-accent">✓ {t('verifySuccess')}</p>
+        </div>
+      </div>
+    )
+  }
+
+  if (emailVerified) {
+    return null
+  }
+
+  return (
+    <div className="max-w-md mx-auto px-4 pt-8">
+      <div className="bg-amber/10 border border-amber/25 rounded-xl px-4 py-3.5 space-y-2">
+        <p className="text-sm text-cream">
+          {verifyParam === 'expired' ? t('verifyExpired') : t('verifyEmailPrompt')}
+        </p>
+        {resendStatus === 'sent' ? (
+          <p className="text-sm text-accent">{t('verificationSent')}</p>
+        ) : (
+          <button
+            onClick={handleResend}
+            disabled={resendStatus === 'sending'}
+            className="text-sm text-accent hover:text-accent-hover font-medium disabled:opacity-50"
+          >
+            {t('resendVerification')}
+          </button>
+        )}
+      </div>
+    </div>
+  )
+}
 
 export default function AccountPage() {
   const t = useTranslations('account')
@@ -52,6 +114,10 @@ export default function AccountPage() {
             {t('signedInAs')} {session.user.email}
           </p>
         </div>
+
+        <Suspense fallback={null}>
+          <VerifyBanner />
+        </Suspense>
 
         <div className="max-w-md mx-auto px-4 py-16">
           <div className="bg-elevated rounded-2xl border border-ds-border p-8 space-y-4">

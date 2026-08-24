@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 import bcrypt from 'bcryptjs'
+import { randomBytes } from 'crypto'
 import { prisma } from '@/lib/prisma'
+import { sendVerificationEmail } from '@/lib/email'
 
 const registerSchema = z.object({
   name: z.string().trim().min(1).max(100),
@@ -39,6 +41,13 @@ export async function POST(req: NextRequest) {
         create: { email, locale },
       })
     }
+
+    const token = randomBytes(32).toString('hex')
+    await prisma.verificationToken.create({
+      data: { identifier: email, token, expires: new Date(Date.now() + 24 * 60 * 60 * 1000) },
+    })
+    const verifyUrl = `${req.nextUrl.origin}/api/auth/verify?token=${token}&email=${encodeURIComponent(email)}`
+    await sendVerificationEmail(email, verifyUrl, locale)
 
     return NextResponse.json({ ok: true, email: user.email })
   } catch (err) {

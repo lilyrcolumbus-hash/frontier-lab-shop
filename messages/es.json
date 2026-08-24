@@ -371,7 +371,12 @@
     "registerError": "Algo salió mal creando tu cuenta. Intenta de nuevo.",
     "welcomeBack": "Inicia sesión para guardar tu diario de cultivo y pedidos.",
     "createAccountSubtitle": "Guarda tus pedidos y diario de cultivo en un solo lugar.",
-    "signedInAs": "Sesión iniciada como"
+    "signedInAs": "Sesión iniciada como",
+    "verifyEmailPrompt": "Por favor verifica tu correo electrónico.",
+    "resendVerification": "Reenviar correo de verificación",
+    "verificationSent": "Correo de verificación enviado — revisa tu bandeja.",
+    "verifySuccess": "Tu correo está verificado.",
+    "verifyExpired": "Ese enlace de verificación venció o no es válido. Pide uno nuevo abajo."
   },
   "footer": {
     "tagline": "Genética Silvestre. Verificado en Laboratorio.",
