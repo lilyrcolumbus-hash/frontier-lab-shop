@@ -20,7 +20,7 @@ export async function sendVerificationEmail(to: string, verifyUrl: string, local
   const cta = locale === 'es' ? 'Verificar correo' : 'Verify email'
   const expires = locale === 'es' ? 'Este enlace vence en 24 horas.' : 'This link expires in 24 hours.'
 
-  await resend.emails.send({
+  const { error } = await resend.emails.send({
     from: FROM,
     to,
     subject,
@@ -33,4 +33,8 @@ export async function sendVerificationEmail(to: string, verifyUrl: string, local
       </div>
     `,
   })
+
+  if (error) {
+    console.error('Resend failed to send verification email to', to, error)
+  }
 }
