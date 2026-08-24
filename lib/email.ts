@@ -7,24 +7,27 @@ export const emailConfigured = Boolean(resend)
 
 // Real approved logo, resized for email and hosted as a static asset — base64-embedded images
 // get stripped by some mail clients' security filters (data: URIs), so a plain https URL is more
-// broadly compatible. White-letter variant for the dark hero, dark-letter for the light card below.
+// broadly compatible.
 const SITE_ORIGIN = 'https://shrooms-lilyrcolumbus-hashs-projects.vercel.app'
-const LOGO_WHITE_URL = SITE_ORIGIN + '/images/email/logo-white.png'
 
-// Verified real photo (Blue Oyster cluster) — same one used in the site's own Hero/Encyclopedia,
-// per the project's photo-verification policy. Darkened via imgix blend params to match the real
-// site Hero's overlay (rgba(4,9,4,~0.88)) so white logo/tagline text stays legible on top of it —
-// baked into the image itself rather than a CSS overlay, which email clients render inconsistently.
-const HERO_IMAGE =
-  'https://images.unsplash.com/photo-1504545102780-26774c1bb073?w=960&h=340&q=80&auto=format&fit=crop&blend=040904&blend-mode=multiply&blend-alpha=62'
+// Hero graphic: the darkened photo + white logo + tagline are baked into a single flattened PNG
+// (generated locally with PIL from the same verified Blue Oyster photo the site's own Hero uses,
+// darkened to match its overlay treatment) instead of layering them with CSS background-image —
+// Gmail's app doesn't render background-image on <td>, and its automatic dark-mode color
+// inversion then flips the intended near-black fallback into a pale, low-contrast box. A plain
+// <img> renders identically everywhere and is immune to that inversion.
+const HERO_IMAGE_URL: Record<'en' | 'es', string> = {
+  en: SITE_ORIGIN + '/images/email/hero-verify-en.png',
+  es: SITE_ORIGIN + '/images/email/hero-verify-es.png',
+}
 
-async function sendEmail(to: string, subject: string, html: string, context: string) {
+async function sendEmail(to: string, subject: string, html: string, text: string, context: string) {
   if (!resend) {
     console.warn(`RESEND_API_KEY not set — skipping ${context} email to`, to)
     return
   }
 
-  const { error } = await resend.emails.send({ from: FROM, to, subject, html })
+  const { error } = await resend.emails.send({ from: FROM, to, subject, html, text })
 
   if (error) {
     console.error(`Resend failed to send ${context} email to`, to, error)
@@ -34,7 +37,7 @@ async function sendEmail(to: string, subject: string, html: string, context: str
 // Table-based layout for cross-client compatibility (Outlook desktop still renders on Word's
 // engine — it ignores border-radius/flex but degrades gracefully to square corners).
 function emailShell(opts: {
-  tagline: string
+  locale: 'en' | 'es'
   eyebrow: string
   heading: string
   body: string
@@ -43,14 +46,17 @@ function emailShell(opts: {
   footer: string
   disclaimer: string
 }) {
-  const { tagline, eyebrow, heading, body, ctaLabel, ctaUrl, footer, disclaimer } = opts
+  const { locale, eyebrow, heading, body, ctaLabel, ctaUrl, footer, disclaimer } = opts
+  const heroAlt =
+    locale === 'es' ? 'Frontier Lab — Genética Silvestre. Verificado en Laboratorio.' : 'Frontier Lab — Wild Genetics. Lab Verified.'
 
   return `<!DOCTYPE html>
-<html lang="en">
+<html lang="${locale}">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="color-scheme" content="light" />
+<meta name="supported-color-schemes" content="light" />
 <title>${heading}</title>
 </head>
 <body style="margin:0; padding:0; background-color:#F0F2F0; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
@@ -59,27 +65,11 @@ function emailShell(opts: {
       <td align="center">
         <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:480px; background-color:#F8F9F8; border-radius:20px; border:1px solid #D2D8D2; overflow:hidden;">
 
-          <!-- Hero: logo + tagline are the primary content, the photo is a darkened backdrop
-               behind them (same treatment as the site's own video Hero) -->
+          <!-- Hero: single flattened image (darkened photo + logo + tagline) — see comment above
+               HERO_IMAGE_URL for why this isn't a CSS background-image layer -->
           <tr>
-            <td background="${HERO_IMAGE}" bgcolor="#0A1A0F" style="background-image:url('${HERO_IMAGE}'); background-size:cover; background-position:center; background-color:#0A1A0F;">
-              <!--[if mso]>
-              <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="width:480px;height:220px;">
-                <v:fill type="frame" src="${HERO_IMAGE}" color="#0A1A0F" />
-                <v:textbox inset="0,0,0,0">
-              <![endif]-->
-              <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
-                <tr>
-                  <td align="center" style="padding:52px 32px;">
-                    <img src="${LOGO_WHITE_URL}" width="240" alt="Frontier Lab" style="display:block; width:240px; height:auto; margin:0 auto 16px;" />
-                    <p style="margin:0; font-family:'SFMono-Regular',Consolas,'Liberation Mono',Menlo,monospace; font-size:11px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:#F4F1EA; opacity:0.85;">${tagline}</p>
-                  </td>
-                </tr>
-              </table>
-              <!--[if mso]>
-                </v:textbox>
-              </v:rect>
-              <![endif]-->
+            <td>
+              <img src="${HERO_IMAGE_URL[locale]}" width="480" alt="${heroAlt}" style="display:block; width:100%; height:auto;" />
             </td>
           </tr>
 
@@ -133,8 +123,7 @@ function emailShell(opts: {
 export async function sendVerificationEmail(to: string, verifyUrl: string, locale: 'en' | 'es') {
   const subject = locale === 'es' ? 'Verifica tu correo — Frontier Lab' : 'Verify your email — Frontier Lab'
   const html = emailShell({
-    tagline:
-      locale === 'es' ? 'Genética Silvestre. Verificado en Laboratorio.' : 'Wild Genetics. Lab Verified.',
+    locale,
     eyebrow: locale === 'es' ? 'Verificación de cuenta' : 'Account verification',
     heading: locale === 'es' ? 'Verifica tu correo' : 'Verify your email',
     body:
@@ -149,14 +138,17 @@ export async function sendVerificationEmail(to: string, verifyUrl: string, local
         ? 'Este enlace vence en 24 horas. Si no creaste esta cuenta, podés ignorar este correo.'
         : "This link expires in 24 hours. If you didn't create this account, you can safely ignore this email.",
   })
-  await sendEmail(to, subject, html, 'verification')
+  const text =
+    locale === 'es'
+      ? `Verifica tu correo — Frontier Lab\n\nUn último paso para activar tu cuenta. Abrí este enlace para confirmar que este correo es tuyo:\n${verifyUrl}\n\nEste enlace vence en 24 horas. Si no creaste esta cuenta, podés ignorar este correo.`
+      : `Verify your email — Frontier Lab\n\nOne last step to activate your account. Open this link to confirm this email is yours:\n${verifyUrl}\n\nThis link expires in 24 hours. If you didn't create this account, you can safely ignore this email.`
+  await sendEmail(to, subject, html, text, 'verification')
 }
 
 export async function sendPasswordResetEmail(to: string, resetUrl: string, locale: 'en' | 'es') {
   const subject = locale === 'es' ? 'Restablece tu contraseña — Frontier Lab' : 'Reset your password — Frontier Lab'
   const html = emailShell({
-    tagline:
-      locale === 'es' ? 'Genética Silvestre. Verificado en Laboratorio.' : 'Wild Genetics. Lab Verified.',
+    locale,
     eyebrow: locale === 'es' ? 'Seguridad de la cuenta' : 'Account security',
     heading: locale === 'es' ? 'Restablece tu contraseña' : 'Reset your password',
     body:
@@ -171,5 +163,9 @@ export async function sendPasswordResetEmail(to: string, resetUrl: string, local
         ? 'Este enlace vence en 1 hora. Si no fuiste vos, podés ignorar este correo — tu contraseña no va a cambiar.'
         : "This link expires in 1 hour. If this wasn't you, you can safely ignore this email — your password won't change.",
   })
-  await sendEmail(to, subject, html, 'password reset')
+  const text =
+    locale === 'es'
+      ? `Restablece tu contraseña — Frontier Lab\n\nRecibimos una solicitud para restablecer la contraseña de tu cuenta. Abrí este enlace para continuar:\n${resetUrl}\n\nEste enlace vence en 1 hora. Si no fuiste vos, podés ignorar este correo.`
+      : `Reset your password — Frontier Lab\n\nWe received a request to reset your account's password. Open this link to continue:\n${resetUrl}\n\nThis link expires in 1 hour. If this wasn't you, you can safely ignore this email.`
+  await sendEmail(to, subject, html, text, 'password reset')
 }
