@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@auth/prisma-adapter':
+        specifier: ^2.11.3
+        version: 2.11.3(@prisma/client@5.22.0(prisma@5.22.0))
       '@prisma/client':
         specifier: ^5.17.0
         version: 5.22.0(prisma@5.22.0)
@@ -26,6 +29,9 @@ importers:
       algoliasearch:
         specifier: ^4.24.0
         version: 4.27.0
+      bcryptjs:
+        specifier: ^3.0.3
+        version: 3.0.3
       cloudinary:
         specifier: ^2.3.1
         version: 2.10.0
@@ -170,6 +176,25 @@ packages:
         optional: true
       nodemailer:
         optional: true
+
+  '@auth/core@0.41.3':
+    resolution: {integrity: sha512-sJ3JMHHkXMD3aOjopv7mOBTO1Ocw4b0fAEXJBz6k7YHLpYQI6C40jCUPc5fNvUKxXRXNE1/sRISA15UrwWJBTw==}
+    peerDependencies:
+      '@simplewebauthn/browser': ^9.0.1
+      '@simplewebauthn/server': ^9.0.2
+      nodemailer: ^7.0.7 || ^8.0.5
+    peerDependenciesMeta:
+      '@simplewebauthn/browser':
+        optional: true
+      '@simplewebauthn/server':
+        optional: true
+      nodemailer:
+        optional: true
+
+  '@auth/prisma-adapter@2.11.3':
+    resolution: {integrity: sha512-jZbpVAO6PTc9zNtdTWc0RLWG8qap4iMc54/3oWaWbuKdj92wHxzPrs3HivWB2mB9975GPW0l3YM/wFUWiUlTlg==}
+    peerDependencies:
+      '@prisma/client': '>=2.26.0 || >=3 || >=4 || >=5 || >=6'
 
   '@dimforge/rapier3d-compat@0.12.0':
     resolution: {integrity: sha512-uekIGetywIgopfD97oDL5PfeezkFpNhwlzlaEYNOA0N6ghdsOvh/HYjSMek5Q2O1PYvRSDFcqFVJl4r4ZBwOow==}
@@ -1062,6 +1087,10 @@ packages:
   baseline-browser-mapping@2.10.38:
     resolution: {integrity: sha512-31/02mVB4yuQU6adKk5SlY6m+mxDwUq5KZkyYgnLrrKl7TEm1+3PyDtDBz2kOv/wxZz41GHsvV1A/u6RmiyBvw==}
     engines: {node: '>=6.0.0'}
+    hasBin: true
+
+  bcryptjs@3.0.3:
+    resolution: {integrity: sha512-GlF5wPWnSa/X5LKM1o0wz0suXIINz1iHRLvTS+sLyi7XPbe5ycmYI3DlZqVGZZtDgl4DmasFg7gOB3JYbphV5g==}
     hasBin: true
 
   binary-extensions@2.3.0:
@@ -2728,6 +2757,23 @@ snapshots:
       preact: 10.24.3
       preact-render-to-string: 6.5.11(preact@10.24.3)
 
+  '@auth/core@0.41.3':
+    dependencies:
+      '@panva/hkdf': 1.2.1
+      jose: 6.2.3
+      oauth4webapi: 3.8.6
+      preact: 10.24.3
+      preact-render-to-string: 6.5.11(preact@10.24.3)
+
+  '@auth/prisma-adapter@2.11.3(@prisma/client@5.22.0(prisma@5.22.0))':
+    dependencies:
+      '@auth/core': 0.41.3
+      '@prisma/client': 5.22.0(prisma@5.22.0)
+    transitivePeerDependencies:
+      - '@simplewebauthn/browser'
+      - '@simplewebauthn/server'
+      - nodemailer
+
   '@dimforge/rapier3d-compat@0.12.0': {}
 
   '@emnapi/core@1.10.0':
@@ -3519,6 +3565,8 @@ snapshots:
   balanced-match@4.0.4: {}
 
   baseline-browser-mapping@2.10.38: {}
+
+  bcryptjs@3.0.3: {}
 
   binary-extensions@2.3.0: {}
 

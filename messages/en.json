@@ -362,7 +362,16 @@
     "email": "Email",
     "password": "Password",
     "name": "Full name",
-    "forgotPassword": "Forgot password?"
+    "forgotPassword": "Forgot password?",
+    "continueWithGoogle": "Continue with Google",
+    "noAccount": "Don't have an account?",
+    "alreadyHaveAccount": "Already have an account?",
+    "invalidCredentials": "Incorrect email or password.",
+    "emailInUse": "An account with this email already exists.",
+    "registerError": "Something went wrong creating your account. Try again.",
+    "welcomeBack": "Sign in to save your grow journal and orders.",
+    "createAccountSubtitle": "Save your orders and grow journal in one place.",
+    "signedInAs": "Signed in as"
   },
   "footer": {
     "tagline": "Wild Genetics. Lab Verified.",

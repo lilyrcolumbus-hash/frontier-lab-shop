@@ -362,7 +362,16 @@
     "email": "Correo electrónico",
     "password": "Contraseña",
     "name": "Nombre completo",
-    "forgotPassword": "¿Olvidaste tu contraseña?"
+    "forgotPassword": "¿Olvidaste tu contraseña?",
+    "continueWithGoogle": "Continuar con Google",
+    "noAccount": "¿No tenés cuenta?",
+    "alreadyHaveAccount": "¿Ya tenés cuenta?",
+    "invalidCredentials": "Correo o contraseña incorrectos.",
+    "emailInUse": "Ya existe una cuenta con este correo.",
+    "registerError": "Algo salió mal creando tu cuenta. Intenta de nuevo.",
+    "welcomeBack": "Inicia sesión para guardar tu diario de cultivo y pedidos.",
+    "createAccountSubtitle": "Guarda tus pedidos y diario de cultivo en un solo lugar.",
+    "signedInAs": "Sesión iniciada como"
   },
   "footer": {
     "tagline": "Genética Silvestre. Verificado en Laboratorio.",

@@ -3,6 +3,7 @@ import { NextIntlClientProvider } from 'next-intl'
 import { getMessages, setRequestLocale } from 'next-intl/server'
 import { notFound } from 'next/navigation'
 import { locales, type Locale } from '@/i18n'
+import { AuthProvider } from '@/components/providers/AuthProvider'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { GlowCursor } from '@/components/ui/GlowCursor'
@@ -42,15 +43,17 @@ export default async function LocaleLayout({
 
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
-      <SmoothScroll>
-        <GlowCursor />
-        <PageTransition />
-        <div className="flex flex-col min-h-screen">
-          <Header />
-          <main className="flex-1">{children}</main>
-          <Footer />
-        </div>
-      </SmoothScroll>
+      <AuthProvider>
+        <SmoothScroll>
+          <GlowCursor />
+          <PageTransition />
+          <div className="flex flex-col min-h-screen">
+            <Header />
+            <main className="flex-1">{children}</main>
+            <Footer />
+          </div>
+        </SmoothScroll>
+      </AuthProvider>
     </NextIntlClientProvider>
   )
 }
