@@ -1,16 +1,19 @@
 import { NextResponse } from 'next/server'
-import { auth } from '@/auth'
 import { prisma } from '@/lib/prisma'
+import { createClient } from '@/lib/supabase/server'
 
 export async function GET() {
-  const session = await auth()
+  const supabase = await createClient()
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
 
-  if (!session?.user?.email) {
+  if (!user?.email) {
     return NextResponse.json({ error: 'Not authenticated' }, { status: 401 })
   }
 
   const orders = await prisma.order.findMany({
-    where: { email: session.user.email },
+    where: { email: user.email },
     include: { items: true },
     orderBy: { createdAt: 'desc' },
   })

@@ -1,9 +1,9 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { useSession } from 'next-auth/react'
 import { useTranslations, useLocale } from 'next-intl'
 import { Link, useRouter } from '@/navigation'
+import { useSupabaseUser } from '@/components/providers/AuthProvider'
 import { formatPrice } from '@/lib/utils'
 
 interface OrderItem {
@@ -27,23 +27,22 @@ export default function OrdersPage() {
   const t = useTranslations('account')
   const locale = useLocale()
   const router = useRouter()
-  const { data: session, status } = useSession()
+  const { user, loading } = useSupabaseUser()
   const [orders, setOrders] = useState<Order[] | null>(null)
 
   useEffect(() => {
-    if (status === 'unauthenticated') {
+    if (loading) return
+    if (!user) {
       router.push('/account')
       return
     }
-    if (status === 'authenticated') {
-      fetch('/api/account/orders')
-        .then((r) => r.json())
-        .then((data) => setOrders(data.orders ?? []))
-        .catch(() => setOrders([]))
-    }
-  }, [status, router])
+    fetch('/api/account/orders')
+      .then((r) => r.json())
+      .then((data) => setOrders(data.orders ?? []))
+      .catch(() => setOrders([]))
+  }, [loading, user, router])
 
-  if (status === 'loading' || !session?.user) {
+  if (loading || !user) {
     return <div className="pt-20 min-h-screen" />
   }
 

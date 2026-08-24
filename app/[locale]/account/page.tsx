@@ -1,10 +1,11 @@
 'use client'
 
 import { Suspense, useEffect, useState } from 'react'
-import { useSession, signIn, signOut } from 'next-auth/react'
 import { useTranslations, useLocale } from 'next-intl'
 import { useSearchParams } from 'next/navigation'
 import { useRouter, Link } from '@/navigation'
+import { useSupabaseUser } from '@/components/providers/AuthProvider'
+import { createClient } from '@/lib/supabase/client'
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
 
@@ -12,26 +13,19 @@ function VerifyBanner() {
   const t = useTranslations('account')
   const searchParams = useSearchParams()
   const verifyParam = searchParams.get('verify')
-  const { data: session, status } = useSession()
+  const { user, loading } = useSupabaseUser()
 
-  const [emailVerified, setEmailVerified] = useState<boolean | null>(null)
   const [resendStatus, setResendStatus] = useState<'idle' | 'sending' | 'sent'>('idle')
 
-  useEffect(() => {
-    if (status !== 'authenticated') return
-    fetch('/api/account/me')
-      .then((r) => r.json())
-      .then((data) => setEmailVerified(Boolean(data.emailVerified) || verifyParam === 'success'))
-      .catch(() => setEmailVerified(null))
-  }, [status, verifyParam])
-
   const handleResend = async () => {
+    if (!user?.email) return
     setResendStatus('sending')
-    await fetch('/api/auth/resend-verification', { method: 'POST' }).catch(() => {})
+    const supabase = createClient()
+    await supabase.auth.resend({ type: 'signup', email: user.email }).catch(() => {})
     setResendStatus('sent')
   }
 
-  if (status !== 'authenticated' || !session?.user) return null
+  if (loading || !user) return null
 
   if (verifyParam === 'success') {
     return (
@@ -43,9 +37,8 @@ function VerifyBanner() {
     )
   }
 
-  if (emailVerified) {
-    return null
-  }
+  const emailVerified = Boolean(user.email_confirmed_at)
+  if (emailVerified) return null
 
   return (
     <div className="max-w-md mx-auto px-4 pt-8">
@@ -73,45 +66,53 @@ export default function AccountPage() {
   const t = useTranslations('account')
   const locale = useLocale()
   const router = useRouter()
-  const { data: session, status } = useSession()
+  const { user, loading } = useSupabaseUser()
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
-  const [loading, setLoading] = useState(false)
-  const [googleEnabled, setGoogleEnabled] = useState(false)
-
-  useEffect(() => {
-    fetch('/api/auth/providers')
-      .then((r) => r.json())
-      .then((providers) => setGoogleEnabled(Boolean(providers?.google)))
-      .catch(() => setGoogleEnabled(false))
-  }, [])
+  const [formLoading, setFormLoading] = useState(false)
 
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault()
     setError('')
-    setLoading(true)
-    const res = await signIn('credentials', { email, password, redirect: false })
-    setLoading(false)
-    if (res?.error) {
+    setFormLoading(true)
+    const supabase = createClient()
+    const { error: signInError } = await supabase.auth.signInWithPassword({ email, password })
+    setFormLoading(false)
+    if (signInError) {
       setError(t('invalidCredentials'))
       return
     }
     router.refresh()
   }
 
-  if (status === 'loading') {
+  const handleSignOut = async () => {
+    const supabase = createClient()
+    await supabase.auth.signOut()
+    router.push('/')
+    router.refresh()
+  }
+
+  const handleGoogleSignIn = async () => {
+    const supabase = createClient()
+    await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: { redirectTo: `${window.location.origin}/${locale}/account` },
+    })
+  }
+
+  if (loading) {
     return <div className="pt-20 min-h-screen" />
   }
 
-  if (session?.user) {
+  if (user) {
     return (
       <div className="pt-20 min-h-screen">
         <div className="bg-surface border-b border-ds-border py-16 text-center">
           <h1 className="font-heading text-5xl font-bold text-cream mb-3">{t('title')}</h1>
           <p className="text-cream-muted">
-            {t('signedInAs')} {session.user.email}
+            {t('signedInAs')} {user.email}
           </p>
         </div>
 
@@ -136,7 +137,7 @@ export default function AccountPage() {
                 </Link>
               ))}
             </div>
-            <Button fullWidth variant="outline" size="lg" onClick={() => signOut({ callbackUrl: '/' })}>
+            <Button fullWidth variant="outline" size="lg" onClick={handleSignOut}>
               {t('signOut')}
             </Button>
           </div>
@@ -181,32 +182,22 @@ export default function AccountPage() {
 
           {error && <p className="text-sm text-error">{error}</p>}
 
-          <Button type="submit" fullWidth size="lg" isLoading={loading}>
+          <Button type="submit" fullWidth size="lg" isLoading={formLoading}>
             {t('signIn')}
           </Button>
 
-          {googleEnabled && (
-            <>
-              <div className="relative">
-                <div className="absolute inset-0 flex items-center">
-                  <div className="w-full border-t border-ds-border" />
-                </div>
-                <div className="relative flex justify-center text-sm">
-                  <span className="bg-elevated px-3 text-cream-muted">or</span>
-                </div>
-              </div>
+          <div className="relative">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t border-ds-border" />
+            </div>
+            <div className="relative flex justify-center text-sm">
+              <span className="bg-elevated px-3 text-cream-muted">or</span>
+            </div>
+          </div>
 
-              <Button
-                type="button"
-                fullWidth
-                variant="outline"
-                size="lg"
-                onClick={() => signIn('google', { callbackUrl: `/${locale}/account` })}
-              >
-                {t('continueWithGoogle')}
-              </Button>
-            </>
-          )}
+          <Button type="button" fullWidth variant="outline" size="lg" onClick={handleGoogleSignIn}>
+            {t('continueWithGoogle')}
+          </Button>
 
           <p className="text-center text-sm text-cream-muted">
             {t('noAccount')}{' '}

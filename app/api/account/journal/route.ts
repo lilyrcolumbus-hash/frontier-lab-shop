@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
-import { auth } from '@/auth'
 import { prisma } from '@/lib/prisma'
+import { createClient } from '@/lib/supabase/server'
 
 const createEntrySchema = z.object({
   species: z.string().trim().min(1).max(120),
@@ -15,13 +15,17 @@ const createEntrySchema = z.object({
 })
 
 export async function GET() {
-  const session = await auth()
-  if (!session?.user?.id) {
+  const supabase = await createClient()
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
+
+  if (!user) {
     return NextResponse.json({ error: 'Not authenticated' }, { status: 401 })
   }
 
   const entries = await prisma.growJournalEntry.findMany({
-    where: { userId: session.user.id },
+    where: { userId: user.id },
     orderBy: { createdAt: 'desc' },
   })
 
@@ -29,8 +33,12 @@ export async function GET() {
 }
 
 export async function POST(req: NextRequest) {
-  const session = await auth()
-  if (!session?.user?.id) {
+  const supabase = await createClient()
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
+
+  if (!user) {
     return NextResponse.json({ error: 'Not authenticated' }, { status: 401 })
   }
 
@@ -41,7 +49,7 @@ export async function POST(req: NextRequest) {
   }
 
   const entry = await prisma.growJournalEntry.create({
-    data: { ...parsed.data, userId: session.user.id },
+    data: { ...parsed.data, userId: user.id },
   })
 
   return NextResponse.json({ entry })

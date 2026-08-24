@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { useTranslations, useLocale } from 'next-intl'
 import { Link } from '@/navigation'
+import { createClient } from '@/lib/supabase/client'
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
 
@@ -17,11 +18,10 @@ export default function ForgotPasswordPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
-    await fetch('/api/auth/forgot-password', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, locale }),
-    }).catch(() => {})
+    const supabase = createClient()
+    await supabase.auth
+      .resetPasswordForEmail(email, { redirectTo: `${window.location.origin}/${locale}/reset-password` })
+      .catch(() => {})
     setLoading(false)
     setSent(true)
   }

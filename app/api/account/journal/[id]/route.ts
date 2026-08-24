@@ -1,15 +1,19 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
-import { auth } from '@/auth'
 import { prisma } from '@/lib/prisma'
+import { createClient } from '@/lib/supabase/server'
 
 const updateStatusSchema = z.object({
   status: z.enum(['inoculated', 'colonizing', 'pinning', 'fruiting', 'harvested']),
 })
 
 export async function PATCH(req: NextRequest, { params }: { params: { id: string } }) {
-  const session = await auth()
-  if (!session?.user?.id) {
+  const supabase = await createClient()
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
+
+  if (!user) {
     return NextResponse.json({ error: 'Not authenticated' }, { status: 401 })
   }
 
@@ -20,7 +24,7 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
   }
 
   const existing = await prisma.growJournalEntry.findUnique({ where: { id: params.id } })
-  if (!existing || existing.userId !== session.user.id) {
+  if (!existing || existing.userId !== user.id) {
     return NextResponse.json({ error: 'Not found' }, { status: 404 })
   }
 

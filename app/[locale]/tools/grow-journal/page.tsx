@@ -1,23 +1,23 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { useSession } from 'next-auth/react'
 import { useTranslations } from 'next-intl'
+import { useSupabaseUser } from '@/components/providers/AuthProvider'
 import { GrowJournal } from '@/components/tools/GrowJournal'
 import type { GrowJournalEntry } from '@/types/user'
 
 export default function GrowJournalPage() {
   const t = useTranslations('tools.journal')
-  const { data: session, status } = useSession()
+  const { user, loading } = useSupabaseUser()
   const [entries, setEntries] = useState<GrowJournalEntry[]>([])
 
   useEffect(() => {
-    if (status !== 'authenticated') return
+    if (loading || !user) return
     fetch('/api/account/journal')
       .then((r) => r.json())
       .then((data) => setEntries(data.entries ?? []))
       .catch(() => setEntries([]))
-  }, [status])
+  }, [loading, user])
 
   const handleAdd = async (entry: Omit<GrowJournalEntry, 'id' | 'userId' | 'createdAt' | 'updatedAt'>) => {
     const res = await fetch('/api/account/journal', {
@@ -48,7 +48,7 @@ export default function GrowJournalPage() {
       </div>
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <GrowJournal
-          isAuthenticated={status === 'authenticated'}
+          isAuthenticated={Boolean(user)}
           entries={entries}
           onAddEntry={handleAdd}
           onUpdateStatus={handleUpdateStatus}

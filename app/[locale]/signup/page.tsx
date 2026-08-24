@@ -1,9 +1,9 @@
 'use client'
 
 import { useState } from 'react'
-import { signIn } from 'next-auth/react'
 import { useTranslations, useLocale } from 'next-intl'
 import { useRouter, Link } from '@/navigation'
+import { createClient } from '@/lib/supabase/client'
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
 
@@ -18,38 +18,67 @@ export default function SignUpPage() {
   const [subscribeToNewsletter, setSubscribeToNewsletter] = useState(false)
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
+  const [submitted, setSubmitted] = useState(false)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setError('')
     setLoading(true)
 
-    try {
-      const res = await fetch('/api/auth/register', {
+    const supabase = createClient()
+    const { data, error: signUpError } = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        data: { name, locale },
+        emailRedirectTo: `${window.location.origin}/${locale}/account`,
+      },
+    })
+
+    if (signUpError) {
+      setError(signUpError.message.toLowerCase().includes('already') ? t('emailInUse') : t('registerError'))
+      setLoading(false)
+      return
+    }
+
+    if (subscribeToNewsletter) {
+      await fetch('/api/newsletter', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, password, locale, subscribeToNewsletter }),
-      })
-      const data = await res.json()
-
-      if (!res.ok) {
-        setError(res.status === 409 ? t('emailInUse') : t('registerError'))
-        setLoading(false)
-        return
-      }
-
-      const signInRes = await signIn('credentials', { email, password, redirect: false })
-      setLoading(false)
-      if (signInRes?.error) {
-        router.push('/account')
-        return
-      }
-      router.push('/account')
-      router.refresh()
-    } catch {
-      setError(t('registerError'))
-      setLoading(false)
+        body: JSON.stringify({ email, locale }),
+      }).catch(() => {})
     }
+
+    setLoading(false)
+
+    // Supabase requires email confirmation before a session is issued (no `session` on the
+    // response yet) — show a "check your email" state instead of redirecting into a page that
+    // would just show the sign-in form again with no explanation.
+    if (!data.session) {
+      setSubmitted(true)
+      return
+    }
+
+    router.push('/account')
+    router.refresh()
+  }
+
+  if (submitted) {
+    return (
+      <div className="pt-20 min-h-screen">
+        <div className="bg-surface border-b border-ds-border py-16 text-center">
+          <h1 className="font-heading text-5xl font-bold text-cream mb-3">{t('signUp')}</h1>
+        </div>
+        <div className="max-w-md mx-auto px-4 py-16">
+          <div className="bg-elevated rounded-2xl border border-ds-border p-8 text-center space-y-2">
+            <p className="text-accent">✓ {t('verificationSent')}</p>
+            <Link href="/account" className="text-sm text-accent hover:text-accent-hover font-medium">
+              {t('backToSignIn')}
+            </Link>
+          </div>
+        </div>
+      </div>
+    )
   }
 
   return (
