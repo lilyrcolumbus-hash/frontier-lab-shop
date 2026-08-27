@@ -4,8 +4,12 @@ import Link from 'next/link'
 import { Badge } from '@/components/ui/Badge'
 import { Button } from '@/components/ui/Button'
 import { ImagePlaceholder } from '@/components/encyclopedia/ImagePlaceholder'
-import { SPECIES_MAP } from '@/lib/species-data'
+import { prisma } from '@/lib/prisma'
+import { toSpeciesData } from '@/lib/species-mappers'
 import type { SpeciesBenefit } from '@/lib/species-data'
+
+// Reads live from the DB, editable via /admin — must not be frozen at build time.
+export const dynamic = 'force-dynamic'
 
 // ─── Benefit icon ─────────────────────────────────────────────────────────────
 
@@ -103,8 +107,9 @@ export default async function SpeciesDetailPage({
   setRequestLocale(params.locale)
 
   const locale = params.locale as 'en' | 'es'
-  const species = SPECIES_MAP[params.slug]
-  if (!species) notFound()
+  const speciesRow = await prisma.species.findUnique({ where: { slug: params.slug } })
+  if (!speciesRow) notFound()
+  const species = toSpeciesData(speciesRow)
 
   const hasImage = Boolean(species.imageUrl)
 

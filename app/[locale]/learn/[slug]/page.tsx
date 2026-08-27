@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { setRequestLocale } from 'next-intl/server'
 import { getTranslations } from 'next-intl/server'
 import { ARTICLES_MAP, CATEGORY_LABEL, CATEGORY_COLOR, CATEGORY_GRADIENT } from '@/lib/learn-data'
-import { SPECIES_MAP } from '@/lib/species-data'
+import { prisma } from '@/lib/prisma'
 import { cn } from '@/lib/utils'
 
 interface PageProps {
@@ -25,7 +25,9 @@ export default async function ArticlePage({ params }: PageProps) {
   const cat = CATEGORY_LABEL[article.category]
   const catColor = CATEGORY_COLOR[article.category]
   const catGradient = CATEGORY_GRADIENT[article.category]
-  const relatedSpecies = article.species ? SPECIES_MAP[article.species] : null
+  const relatedSpecies = article.species
+    ? await prisma.species.findUnique({ where: { slug: article.species }, select: { slug: true, commonName: true } })
+    : null
 
   return (
     <div className="pt-20 min-h-screen">

@@ -1,3 +1,7 @@
+// SpeciesData/SpeciesBenefit types below are still used live (lib/species-mappers.ts,
+// components/encyclopedia/*). SPECIES_LIST/SPECIES_MAP are a source snapshot for
+// prisma/migrate-catalog.ts only — the live site reads species from the database
+// (see app/[locale]/encyclopedia/page.tsx), not from here.
 import type { Species } from '@/types/species'
 
 export interface SpeciesBenefit {

@@ -39,6 +39,10 @@ model Species {
   lookalikes           String[]
   imageUrl             String
   thumbnailUrl         String
+  openartPrompt        String?
+  // Icon + label + detail benefit cards shown on the encyclopedia detail page. Shape matches
+  // SpeciesBenefit in lib/species-data.ts.
+  keyBenefits          Json?
   createdAt            DateTime @default(now())
   updatedAt            DateTime @updatedAt
 
@@ -57,12 +61,14 @@ model Product {
   category       String
   subcategory    String
   speciesId      String?
+  scientificName String?
   price          Int
   compareAtPrice Int?
   images         String[]
   isOrganic      Boolean  @default(false)
   inStock        Boolean  @default(true)
   tags           String[]
+  relatedProducts String[]
 
   specsDifficulty      String?
   specsColonizationTime String?
@@ -71,6 +77,15 @@ model Product {
   specsIdealSubstrate  String?
   specsExpectedYield   String?
   specsIndoorOutdoor   String?
+
+  // Rich per-product content carried over from the hardcoded catalog as-is — nested/bilingual
+  // shape doesn't map cleanly to relational columns, and the admin UI doesn't edit these yet
+  // (see CLAUDE.md Backlog #16). Shapes match types/product.ts's Product interface.
+  howToUseSteps  Json?
+  faqs           Json?
+  scienceContent Json?
+  keyBenefits    Json?
+  grainBagSpecs  Json?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

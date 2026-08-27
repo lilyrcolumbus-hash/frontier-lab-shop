@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import Stripe from 'stripe'
+import { prisma } from '@/lib/prisma'
 import type { CartItem } from '@/types/product'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: '2024-06-20' })
@@ -12,22 +13,43 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Cart is empty' }, { status: 400 })
     }
 
+    const lang = locale === 'es' ? 'es' : 'en'
     const origin = req.headers.get('origin') ?? 'http://localhost:3000'
+
+    // Never trust price/name from the client cart — look up the canonical record for every
+    // line item server-side before creating the Checkout Session (price-tampering fix).
+    const lineItems = await Promise.all(
+      items.map(async (item) => {
+        const variant = await prisma.productVariant.findUnique({
+          where: { id: item.variantId },
+          include: { product: true },
+        })
+
+        if (!variant || variant.productId !== item.productId) {
+          throw new Error('One of the items in your cart is no longer available.')
+        }
+        if (!variant.product.inStock) {
+          throw new Error(`${variant.product.nameEn} is currently out of stock.`)
+        }
+
+        return {
+          price_data: {
+            currency: 'usd',
+            unit_amount: variant.price,
+            product_data: {
+              name: lang === 'es' ? variant.product.nameEs : variant.product.nameEn,
+              images: variant.product.images[0] ? [variant.product.images[0]] : [],
+              metadata: { productId: variant.productId, variantId: variant.id },
+            },
+          },
+          quantity: item.quantity,
+        }
+      })
+    )
 
     const session = await stripe.checkout.sessions.create({
       mode: 'payment',
-      line_items: items.map((item) => ({
-        price_data: {
-          currency: 'usd',
-          unit_amount: item.price,
-          product_data: {
-            name: item.name,
-            images: item.image ? [item.image] : [],
-            metadata: { productId: item.productId, variantId: item.variantId },
-          },
-        },
-        quantity: item.quantity,
-      })),
+      line_items: lineItems,
       shipping_address_collection: { allowed_countries: ['US', 'CA', 'MX'] },
       allow_promotion_codes: true,
       shipping_options: [
