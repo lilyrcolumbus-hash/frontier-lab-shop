@@ -19,6 +19,8 @@ export default function NewProductPage() {
           isOrganic: false,
           inStock: true,
           tags: [],
+          status: 'draft',
+          collectionIds: [],
           sku: '',
           stock: 0,
         }}

@@ -60,6 +60,7 @@ model Product {
   descriptionEs  String   @db.Text
   category       String
   subcategory    String
+  status         String   @default("draft") // 'draft' | 'active' | 'archived' — controls visibility on the live site, separate from `inStock` (purchasability)
   speciesId      String?
   scientificName String?
   price          Int
@@ -93,8 +94,25 @@ model Product {
   species        Species?       @relation(fields: [speciesId], references: [id])
   variants       ProductVariant[]
   wishlistItems  WishlistItem[]
+  collections    Collection[]
 
   @@map("products")
+}
+
+model Collection {
+  id            String   @id @default(cuid())
+  slug          String   @unique
+  titleEn       String
+  titleEs       String
+  descriptionEn String?  @db.Text
+  descriptionEs String?  @db.Text
+  image         String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  products Product[]
+
+  @@map("collections")
 }
 
 model ProductVariant {

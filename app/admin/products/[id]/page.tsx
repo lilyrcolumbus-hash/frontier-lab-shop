@@ -3,7 +3,7 @@ import { ProductForm } from '@/components/admin/ProductForm'
 import { prisma } from '@/lib/prisma'
 
 export default async function EditProductPage({ params }: { params: { id: string } }) {
-  const product = await prisma.product.findUnique({ where: { id: params.id } })
+  const product = await prisma.product.findUnique({ where: { id: params.id }, include: { collections: true } })
   if (!product) notFound()
 
   return (
@@ -24,6 +24,8 @@ export default async function EditProductPage({ params }: { params: { id: string
           isOrganic: product.isOrganic,
           inStock: product.inStock,
           tags: product.tags,
+          status: product.status as 'draft' | 'active' | 'archived',
+          collectionIds: product.collections.map((c) => c.id),
         }}
       />
     </div>

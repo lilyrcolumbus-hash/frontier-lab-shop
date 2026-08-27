@@ -17,6 +17,8 @@ const updateProductSchema = z.object({
   isOrganic: z.coerce.boolean().default(false),
   inStock: z.coerce.boolean().default(true),
   tags: z.array(z.string()).default([]),
+  status: z.enum(['draft', 'active', 'archived']).default('draft'),
+  collectionIds: z.array(z.string()).default([]),
 })
 
 async function requireAdmin() {
@@ -31,7 +33,10 @@ export async function GET(_req: NextRequest, { params }: { params: { id: string 
   const admin = await requireAdmin()
   if (!admin) return NextResponse.json({ error: 'Not authorized' }, { status: 403 })
 
-  const product = await prisma.product.findUnique({ where: { id: params.id }, include: { variants: true } })
+  const product = await prisma.product.findUnique({
+    where: { id: params.id },
+    include: { variants: true, collections: true },
+  })
   if (!product) return NextResponse.json({ error: 'Not found' }, { status: 404 })
   return NextResponse.json({ product })
 }
@@ -49,10 +54,14 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
   const existing = await prisma.product.findUnique({ where: { id: params.id } })
   if (!existing) return NextResponse.json({ error: 'Not found' }, { status: 404 })
 
+  const { collectionIds, ...updateData } = parsed.data
   const product = await prisma.product.update({
     where: { id: params.id },
-    data: parsed.data,
-    include: { variants: true },
+    data: {
+      ...updateData,
+      collections: { set: collectionIds.map((id) => ({ id })) },
+    },
+    include: { variants: true, collections: true },
   })
 
   // Keep the default variant's price in sync with the product's headline price — this admin

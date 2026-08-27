@@ -18,6 +18,7 @@ const createProductSchema = z.object({
   isOrganic: z.coerce.boolean().default(false),
   inStock: z.coerce.boolean().default(true),
   tags: z.array(z.string()).default([]),
+  collectionIds: z.array(z.string()).default([]),
   sku: z.string().trim().min(1).max(60),
   stock: z.coerce.number().int().min(0).default(0),
 })
@@ -35,7 +36,7 @@ export async function GET() {
   if (!admin) return NextResponse.json({ error: 'Not authorized' }, { status: 403 })
 
   const products = await prisma.product.findMany({
-    include: { variants: true },
+    include: { variants: true, collections: { select: { id: true, titleEn: true } } },
     orderBy: { createdAt: 'desc' },
   })
   return NextResponse.json({ products })
@@ -56,7 +57,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'A product with this slug already exists' }, { status: 409 })
   }
 
-  const { sku, stock, ...productData } = parsed.data
+  const { sku, stock, collectionIds, ...productData } = parsed.data
   const product = await prisma.product.create({
     data: {
       ...productData,
@@ -65,8 +66,9 @@ export async function POST(req: NextRequest) {
       variants: {
         create: [{ name: 'Default', price: parsed.data.price, stock, sku }],
       },
+      collections: { connect: collectionIds.map((id) => ({ id })) },
     },
-    include: { variants: true },
+    include: { variants: true, collections: true },
   })
 
   return NextResponse.json({ product })

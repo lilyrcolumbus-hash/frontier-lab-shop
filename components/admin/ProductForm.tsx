@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Input } from '@/components/ui/Input'
 import { Button } from '@/components/ui/Button'
@@ -19,11 +19,19 @@ export interface ProductFormValues {
   isOrganic: boolean
   inStock: boolean
   tags: string[]
+  status: 'draft' | 'active' | 'archived'
+  collectionIds: string[]
   sku?: string
   stock?: number
 }
 
+interface AvailableCollection {
+  id: string
+  titleEn: string
+}
+
 const CATEGORIES = ['kit', 'spawn', 'substrate', 'equipment', 'wellness', 'bundle']
+const STATUSES = ['draft', 'active', 'archived'] as const
 
 export function ProductForm({
   initial,
@@ -40,9 +48,44 @@ export function ProductForm({
   const [saving, setSaving] = useState(false)
   const [uploading, setUploading] = useState(false)
   const [deleting, setDeleting] = useState(false)
+  const [availableCollections, setAvailableCollections] = useState<AvailableCollection[]>([])
 
   const update = <K extends keyof ProductFormValues>(key: K, value: ProductFormValues[K]) =>
     setValues((v) => ({ ...v, [key]: value }))
+
+  useEffect(() => {
+    fetch('/api/admin/collections')
+      .then((r) => r.json())
+      .then((data) => setAvailableCollections(data.collections ?? []))
+      .catch(() => setAvailableCollections([]))
+  }, [])
+
+  const toggleCollection = (id: string) => {
+    update('collectionIds', values.collectionIds.includes(id) ? values.collectionIds.filter((c) => c !== id) : [...values.collectionIds, id])
+  }
+
+  const handlePublish = async () => {
+    update('status', 'active')
+    // Publish immediately rather than waiting for a separate "Save" click — matches the
+    // one-click Publish action in Shopify's own product editor.
+    setError('')
+    setSaving(true)
+    const url = productId ? `/api/admin/products/${productId}` : '/api/admin/products'
+    const method = productId ? 'PATCH' : 'POST'
+    const res = await fetch(url, {
+      method,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ...values, status: 'active' }),
+    })
+    const data = await res.json()
+    setSaving(false)
+    if (!res.ok) {
+      setError(data.error ?? 'Could not publish product')
+      return
+    }
+    router.push('/admin/products')
+    router.refresh()
+  }
 
   const handleUpload = async (file: File) => {
     setUploading(true)
@@ -226,11 +269,59 @@ export function ProductForm({
         onChange={(e) => update('tags', e.target.value.split(',').map((t) => t.trim()).filter(Boolean))}
       />
 
+      <div>
+        <label className="block text-sm font-medium text-cream-muted mb-1.5">Collections</label>
+        {availableCollections.length === 0 ? (
+          <p className="text-sm text-cream-muted">
+            No collections yet — <a href="/admin/collections/new" className="text-accent hover:underline">create one</a>.
+          </p>
+        ) : (
+          <div className="flex flex-wrap gap-2">
+            {availableCollections.map((c) => (
+              <label
+                key={c.id}
+                className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-ds-border text-sm text-cream-muted cursor-pointer has-[:checked]:border-accent has-[:checked]:text-cream"
+              >
+                <input type="checkbox" checked={values.collectionIds.includes(c.id)} onChange={() => toggleCollection(c.id)} className="hidden" />
+                {c.titleEn}
+              </label>
+            ))}
+          </div>
+        )}
+      </div>
+
+      <div className="border border-ds-border rounded-xl p-4 space-y-3">
+        <label className="block text-sm font-medium text-cream-muted">Status</label>
+        <div className="flex items-center gap-4">
+          <select
+            className="bg-surface border border-ds-border rounded-xl px-4 py-2.5 text-cream text-sm"
+            value={values.status}
+            onChange={(e) => update('status', e.target.value as ProductFormValues['status'])}
+          >
+            {STATUSES.map((s) => (
+              <option key={s} value={s}>
+                {s}
+              </option>
+            ))}
+          </select>
+          {values.status !== 'active' && (
+            <Button type="button" size="sm" isLoading={saving} onClick={handlePublish}>
+              Publish
+            </Button>
+          )}
+        </div>
+        <p className="text-xs text-cream-muted">
+          {values.status === 'draft' && "Draft products don't appear on the live site until published."}
+          {values.status === 'active' && 'Live on the site right now.'}
+          {values.status === 'archived' && 'Hidden from the site, kept for records.'}
+        </p>
+      </div>
+
       {error && <p className="text-sm text-error">{error}</p>}
 
       <div className="flex items-center gap-3 pt-2">
         <Button type="submit" isLoading={saving}>
-          {productId ? 'Save changes' : 'Create product'}
+          {productId ? 'Save changes' : 'Save as draft'}
         </Button>
         {productId && (
           <Button type="button" variant="danger" isLoading={deleting} onClick={handleDelete}>

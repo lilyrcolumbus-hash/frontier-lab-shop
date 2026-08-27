@@ -14,7 +14,7 @@ export default async function ProductPage({ params }: { params: { slug: string; 
     where: { slug: params.slug },
     include: { variants: true, species: true },
   })
-  if (!row) notFound()
+  if (!row || row.status !== 'active') notFound()
 
   return <ProductDetailClient product={toProduct(row)} />
 }

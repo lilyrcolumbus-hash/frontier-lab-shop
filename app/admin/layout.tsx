@@ -26,6 +26,9 @@ export default async function AdminLayout({ children }: { children: React.ReactN
               <Link href="/admin/species" className="text-cream-muted hover:text-cream transition-colors">
                 Species
               </Link>
+              <Link href="/admin/collections" className="text-cream-muted hover:text-cream transition-colors">
+                Collections
+              </Link>
             </nav>
           </div>
           <span className="text-xs text-cream-muted">{user?.email}</span>
