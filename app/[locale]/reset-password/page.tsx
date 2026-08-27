@@ -6,6 +6,7 @@ import { Link, useRouter } from '@/navigation'
 import { createClient } from '@/lib/supabase/client'
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
+import { PasswordInput } from '@/components/ui/PasswordInput'
 
 export default function ResetPasswordPage() {
   const t = useTranslations('account')
@@ -44,9 +45,8 @@ export default function ResetPasswordPage() {
             <p className="text-sm text-accent text-center">✓ {t('resetSuccess')}</p>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-5">
-              <Input
+              <PasswordInput
                 label={t('newPassword')}
-                type="password"
                 placeholder="••••••••"
                 minLength={8}
                 value={password}

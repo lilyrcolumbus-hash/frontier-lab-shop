@@ -6,6 +6,7 @@ import { useRouter, Link } from '@/navigation'
 import { createClient } from '@/lib/supabase/client'
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
+import { PasswordInput } from '@/components/ui/PasswordInput'
 
 export default function SignUpPage() {
   const t = useTranslations('account')
@@ -107,9 +108,8 @@ export default function SignUpPage() {
               onChange={(e) => setEmail(e.target.value)}
               required
             />
-            <Input
+            <PasswordInput
               label={t('password')}
-              type="password"
               placeholder="••••••••"
               minLength={8}
               value={password}

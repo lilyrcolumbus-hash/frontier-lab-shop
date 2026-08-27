@@ -8,6 +8,7 @@ import { useSupabaseUser } from '@/components/providers/AuthProvider'
 import { createClient } from '@/lib/supabase/client'
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
+import { PasswordInput } from '@/components/ui/PasswordInput'
 
 function VerifyBanner() {
   const t = useTranslations('account')
@@ -164,9 +165,8 @@ export default function AccountPage() {
               onChange={(e) => setEmail(e.target.value)}
               required
             />
-            <Input
+            <PasswordInput
               label={t('password')}
-              type="password"
               placeholder="••••••••"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
