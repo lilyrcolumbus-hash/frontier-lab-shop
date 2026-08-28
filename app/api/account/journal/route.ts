@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 import { prisma } from '@/lib/prisma'
 import { createClient } from '@/lib/supabase/server'
+import { getCurrentStoreId } from '@/lib/current-store'
 
 const createEntrySchema = z.object({
   species: z.string().trim().min(1).max(120),
@@ -49,7 +50,7 @@ export async function POST(req: NextRequest) {
   }
 
   const entry = await prisma.growJournalEntry.create({
-    data: { ...parsed.data, userId: user.id },
+    data: { ...parsed.data, userId: user.id, storeId: await getCurrentStoreId() },
   })
 
   return NextResponse.json({ entry })

@@ -18,6 +18,15 @@ import {
 import type { Product } from '../types/product'
 
 async function main() {
+  // Historical script — already ran once (Session 27). Kept compiling (storeId threaded
+  // through) rather than deleted, but do not re-run: it deletes existing Product/Species rows
+  // first, which would also wipe the Collection links and storeId backfill already in place.
+  const store = await prisma.store.upsert({
+    where: { slug: 'frontier-lab' },
+    update: {},
+    create: { slug: 'frontier-lab', name: 'Frontier Lab' },
+  })
+
   // Merge the 5 detail-page records (richer content) as the canonical source, keyed by slug.
   const detailBySlug = new Map<string, Product>()
   for (const map of [EQ_PRODUCTS, LC_PRODUCTS, GRAIN_PRODUCTS, FRUITING_PRODUCTS, BULK_PRODUCTS]) {
@@ -43,6 +52,7 @@ async function main() {
   for (const s of SPECIES_LIST) {
     const created = await prisma.species.create({
       data: {
+        storeId: store.id,
         slug: s.slug,
         commonName: s.commonName,
         scientificName: s.scientificName,
@@ -88,6 +98,7 @@ async function main() {
 
     await prisma.product.create({
       data: {
+        storeId: store.id,
         slug: p.slug,
         nameEn: p.name.en,
         nameEs: p.name.es,
@@ -118,6 +129,7 @@ async function main() {
         grainBagSpecs: detail.grainBagSpecs ?? undefined,
         variants: {
           create: detail.variants.map((v) => ({
+            storeId: store.id,
             name: v.name,
             price: v.price,
             stock: v.stock,

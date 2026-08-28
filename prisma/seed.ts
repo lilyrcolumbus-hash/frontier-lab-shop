@@ -5,6 +5,14 @@ const prisma = new PrismaClient()
 async function main() {
   console.log('🍄 Seeding Shrooms database...')
 
+  // Superseded by prisma/migrate-catalog.ts, but still wired to `pnpm db:seed` for local/dev
+  // resets — resolve (or create) the Frontier Lab store so every row below can be scoped.
+  const store = await prisma.store.upsert({
+    where: { slug: 'frontier-lab' },
+    update: {},
+    create: { slug: 'frontier-lab', name: 'Frontier Lab' },
+  })
+
   // ── SPECIES ───────────────────────────────────────────────────────────────
   const speciesData = [
     {
@@ -199,7 +207,7 @@ async function main() {
     await prisma.species.upsert({
       where: { slug: s.slug },
       update: s,
-      create: s,
+      create: { ...s, storeId: store.id },
     })
     console.log(`  ✓ Species: ${s.commonName}`)
   }
@@ -379,7 +387,7 @@ async function main() {
     const created = await prisma.product.upsert({
       where: { slug: p.slug },
       update: { ...productFields, speciesId: speciesId ?? undefined },
-      create: { ...productFields, speciesId: speciesId ?? undefined },
+      create: { ...productFields, speciesId: speciesId ?? undefined, storeId: store.id },
     })
 
     // Create a default variant
@@ -387,6 +395,7 @@ async function main() {
       where: { sku: `${p.slug}-default` },
       update: {},
       create: {
+        storeId: store.id,
         productId: created.id,
         name: 'Standard',
         price: p.price,

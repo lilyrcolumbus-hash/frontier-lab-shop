@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import Stripe from 'stripe'
 import { prisma } from '@/lib/prisma'
+import { getCurrentStoreId } from '@/lib/current-store'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: '2024-06-20' })
 
@@ -58,9 +59,31 @@ async function recordOrder(session: Stripe.Checkout.Session) {
   const shipping = session.shipping_details ?? session.customer_details
   const address = shipping?.address
 
+  const items = lineItems.data.map((item) => {
+    const product = item.price?.product as Stripe.Product | undefined
+    const metadata = product?.metadata ?? {}
+    return {
+      productId: metadata.productId ?? 'unknown',
+      variantId: metadata.variantId ?? 'unknown',
+      name: item.description ?? product?.name ?? 'Unknown item',
+      price: item.price?.unit_amount ?? 0,
+      quantity: item.quantity ?? 1,
+      image: product?.images?.[0] ?? '',
+    }
+  })
+
+  // Resolve the store from the real ProductVariant, never from Stripe metadata directly —
+  // same "don't trust the client" principle already applied to price in app/api/checkout/route.ts.
+  const firstVariantId = items.find((i) => i.variantId !== 'unknown')?.variantId
+  const variant = firstVariantId
+    ? await prisma.productVariant.findUnique({ where: { id: firstVariantId }, select: { storeId: true } })
+    : null
+  const storeId = variant?.storeId ?? (await getCurrentStoreId())
+
   await prisma.order.create({
     data: {
-      email: session.customer_details?.email ?? 'unknown@frontierlab.com',
+      storeId,
+      email: session.customer_details?.email?.toLowerCase() ?? 'unknown@frontierlab.com',
       status: 'paid',
       subtotal: session.amount_subtotal ?? 0,
       shipping: session.total_details?.amount_shipping ?? 0,
@@ -75,18 +98,7 @@ async function recordOrder(session: Stripe.Checkout.Session) {
       shippingPostalCode: address?.postal_code ?? '',
       shippingCountry: address?.country ?? '',
       items: {
-        create: lineItems.data.map((item) => {
-          const product = item.price?.product as Stripe.Product | undefined
-          const metadata = product?.metadata ?? {}
-          return {
-            productId: metadata.productId ?? 'unknown',
-            variantId: metadata.variantId ?? 'unknown',
-            name: item.description ?? product?.name ?? 'Unknown item',
-            price: item.price?.unit_amount ?? 0,
-            quantity: item.quantity ?? 1,
-            image: product?.images?.[0] ?? '',
-          }
-        }),
+        create: items.map((i) => ({ ...i, storeId })),
       },
     },
   })

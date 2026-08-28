@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 import { prisma } from '@/lib/prisma'
+import { getCurrentStoreId } from '@/lib/current-store'
 
 const reviewSchema = z.object({
   name: z.string().trim().min(1).max(100),
@@ -22,7 +23,7 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    await prisma.review.create({ data: parsed.data })
+    await prisma.review.create({ data: { ...parsed.data, storeId: await getCurrentStoreId() } })
     return NextResponse.json({ code: REVIEW_DISCOUNT_CODE })
   } catch (err) {
     console.error('Failed to save review', err)

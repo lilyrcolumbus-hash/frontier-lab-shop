@@ -1,8 +1,7 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { NextResponse } from 'next/server'
 import { z } from 'zod'
 import { prisma } from '@/lib/prisma'
-import { createClient } from '@/lib/supabase/server'
-import { isAdmin } from '@/lib/is-admin'
+import { withStoreAdmin } from '@/lib/with-store-admin'
 
 const updateSpeciesSchema = z.object({
   commonName: z.string().trim().min(1).max(200),
@@ -35,27 +34,13 @@ const updateSpeciesSchema = z.object({
   thumbnailUrl: z.string().trim().min(1),
 })
 
-async function requireAdmin() {
-  const supabase = await createClient()
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
-  return isAdmin(user?.email) ? user : null
-}
-
-export async function GET(_req: NextRequest, { params }: { params: { id: string } }) {
-  const admin = await requireAdmin()
-  if (!admin) return NextResponse.json({ error: 'Not authorized' }, { status: 403 })
-
+export const GET = withStoreAdmin<{ params: { id: string } }>(async (_req, { store }, { params }) => {
   const species = await prisma.species.findUnique({ where: { id: params.id } })
-  if (!species) return NextResponse.json({ error: 'Not found' }, { status: 404 })
+  if (!species || species.storeId !== store.id) return NextResponse.json({ error: 'Not found' }, { status: 404 })
   return NextResponse.json({ species })
-}
+})
 
-export async function PATCH(req: NextRequest, { params }: { params: { id: string } }) {
-  const admin = await requireAdmin()
-  if (!admin) return NextResponse.json({ error: 'Not authorized' }, { status: 403 })
-
+export const PATCH = withStoreAdmin<{ params: { id: string } }>(async (req, { store }, { params }) => {
   const body = await req.json().catch(() => null)
   const parsed = updateSpeciesSchema.safeParse(body)
   if (!parsed.success) {
@@ -63,18 +48,15 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
   }
 
   const existing = await prisma.species.findUnique({ where: { id: params.id } })
-  if (!existing) return NextResponse.json({ error: 'Not found' }, { status: 404 })
+  if (!existing || existing.storeId !== store.id) return NextResponse.json({ error: 'Not found' }, { status: 404 })
 
   const species = await prisma.species.update({ where: { id: params.id }, data: parsed.data })
   return NextResponse.json({ species })
-}
+})
 
-export async function DELETE(_req: NextRequest, { params }: { params: { id: string } }) {
-  const admin = await requireAdmin()
-  if (!admin) return NextResponse.json({ error: 'Not authorized' }, { status: 403 })
-
+export const DELETE = withStoreAdmin<{ params: { id: string } }>(async (_req, { store }, { params }) => {
   const existing = await prisma.species.findUnique({ where: { id: params.id } })
-  if (!existing) return NextResponse.json({ error: 'Not found' }, { status: 404 })
+  if (!existing || existing.storeId !== store.id) return NextResponse.json({ error: 'Not found' }, { status: 404 })
 
   const linkedProducts = await prisma.product.count({ where: { speciesId: params.id } })
   if (linkedProducts > 0) {
@@ -86,4 +68,4 @@ export async function DELETE(_req: NextRequest, { params }: { params: { id: stri
 
   await prisma.species.delete({ where: { id: params.id } })
   return NextResponse.json({ ok: true })
-}
+})

@@ -1,8 +1,7 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { NextResponse } from 'next/server'
 import { z } from 'zod'
 import { prisma } from '@/lib/prisma'
-import { createClient } from '@/lib/supabase/server'
-import { isAdmin } from '@/lib/is-admin'
+import { withStoreAdmin } from '@/lib/with-store-admin'
 
 const createSpeciesSchema = z.object({
   slug: z.string().trim().min(1).max(200),
@@ -36,26 +35,12 @@ const createSpeciesSchema = z.object({
   thumbnailUrl: z.string().trim().min(1),
 })
 
-async function requireAdmin() {
-  const supabase = await createClient()
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
-  return isAdmin(user?.email) ? user : null
-}
-
-export async function GET() {
-  const admin = await requireAdmin()
-  if (!admin) return NextResponse.json({ error: 'Not authorized' }, { status: 403 })
-
-  const species = await prisma.species.findMany({ orderBy: { commonName: 'asc' } })
+export const GET = withStoreAdmin(async (_req, { store }) => {
+  const species = await prisma.species.findMany({ where: { storeId: store.id }, orderBy: { commonName: 'asc' } })
   return NextResponse.json({ species })
-}
+})
 
-export async function POST(req: NextRequest) {
-  const admin = await requireAdmin()
-  if (!admin) return NextResponse.json({ error: 'Not authorized' }, { status: 403 })
-
+export const POST = withStoreAdmin(async (req, { store }) => {
   const body = await req.json().catch(() => null)
   const parsed = createSpeciesSchema.safeParse(body)
   if (!parsed.success) {
@@ -67,6 +52,6 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'A species with this slug already exists' }, { status: 409 })
   }
 
-  const species = await prisma.species.create({ data: parsed.data })
+  const species = await prisma.species.create({ data: { ...parsed.data, storeId: store.id } })
   return NextResponse.json({ species })
-}
+})

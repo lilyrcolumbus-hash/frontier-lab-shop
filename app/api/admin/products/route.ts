@@ -1,8 +1,7 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { NextResponse } from 'next/server'
 import { z } from 'zod'
 import { prisma } from '@/lib/prisma'
-import { createClient } from '@/lib/supabase/server'
-import { isAdmin } from '@/lib/is-admin'
+import { withStoreAdmin } from '@/lib/with-store-admin'
 
 const createProductSchema = z.object({
   slug: z.string().trim().min(1).max(200),
@@ -23,29 +22,16 @@ const createProductSchema = z.object({
   stock: z.coerce.number().int().min(0).default(0),
 })
 
-async function requireAdmin() {
-  const supabase = await createClient()
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
-  return isAdmin(user?.email) ? user : null
-}
-
-export async function GET() {
-  const admin = await requireAdmin()
-  if (!admin) return NextResponse.json({ error: 'Not authorized' }, { status: 403 })
-
+export const GET = withStoreAdmin(async (_req, { store }) => {
   const products = await prisma.product.findMany({
+    where: { storeId: store.id },
     include: { variants: true, collections: { select: { id: true, titleEn: true } } },
     orderBy: { createdAt: 'desc' },
   })
   return NextResponse.json({ products })
-}
+})
 
-export async function POST(req: NextRequest) {
-  const admin = await requireAdmin()
-  if (!admin) return NextResponse.json({ error: 'Not authorized' }, { status: 403 })
-
+export const POST = withStoreAdmin(async (req, { store }) => {
   const body = await req.json().catch(() => null)
   const parsed = createProductSchema.safeParse(body)
   if (!parsed.success) {
@@ -58,18 +44,26 @@ export async function POST(req: NextRequest) {
   }
 
   const { sku, stock, collectionIds, ...productData } = parsed.data
+
+  // Only connect collections that actually belong to this store — an id from another tenant
+  // must silently not link, not error, so a guessed id can't leak a cross-tenant association.
+  const ownedCollections = collectionIds.length
+    ? await prisma.collection.findMany({ where: { id: { in: collectionIds }, storeId: store.id }, select: { id: true } })
+    : []
+
   const product = await prisma.product.create({
     data: {
       ...productData,
+      storeId: store.id,
       relatedProducts: [],
       price: parsed.data.price,
       variants: {
-        create: [{ name: 'Default', price: parsed.data.price, stock, sku }],
+        create: [{ storeId: store.id, name: 'Default', price: parsed.data.price, stock, sku }],
       },
-      collections: { connect: collectionIds.map((id) => ({ id })) },
+      collections: { connect: ownedCollections.map((c) => ({ id: c.id })) },
     },
     include: { variants: true, collections: true },
   })
 
   return NextResponse.json({ product })
-}
+})

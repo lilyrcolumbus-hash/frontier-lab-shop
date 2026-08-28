@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 import { prisma } from '@/lib/prisma'
+import { getCurrentStoreId } from '@/lib/current-store'
 
 const subscribeSchema = z.object({
   email: z.string().trim().email().max(200).transform((v) => v.toLowerCase()),
@@ -19,7 +20,7 @@ export async function POST(req: NextRequest) {
     await prisma.newsletterSubscriber.upsert({
       where: { email: parsed.data.email },
       update: {},
-      create: parsed.data,
+      create: { ...parsed.data, storeId: await getCurrentStoreId() },
     })
     return NextResponse.json({ ok: true })
   } catch (err) {

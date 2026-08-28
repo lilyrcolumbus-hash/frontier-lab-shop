@@ -8,8 +8,49 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
+// The tenant. Each client business (Frontier Lab today, others later) is one Store row —
+// every catalog/order/customer-activity model below is scoped to one via storeId.
+model Store {
+  id        String   @id @default(cuid())
+  slug      String   @unique
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  members        StoreMember[]
+  species        Species[]
+  products       Product[]
+  collections    Collection[]
+  variants       ProductVariant[]
+  orders         Order[]
+  orderItems     OrderItem[]
+  journalEntries GrowJournalEntry[]
+  wishlistItems  WishlistItem[]
+  subscribers    NewsletterSubscriber[]
+  reviews        Review[]
+
+  @@map("stores")
+}
+
+// Maps a Supabase auth.users.id (bare string — no Prisma-managed User table, same pattern as
+// Order.userId/WishlistItem.userId below) to the Store they administer. One login = one store.
+model StoreMember {
+  id        String   @id @default(cuid())
+  storeId   String
+  userId    String
+  role      String   @default("staff") // 'owner' | 'staff'
+  createdAt DateTime @default(now())
+
+  store Store @relation(fields: [storeId], references: [id], onDelete: Cascade)
+
+  @@unique([storeId, userId])
+  @@index([userId])
+  @@map("store_members")
+}
+
 model Species {
   id                   String   @id @default(cuid())
+  storeId              String
   slug                 String   @unique
   commonName           String
   scientificName       String
@@ -46,13 +87,16 @@ model Species {
   createdAt            DateTime @default(now())
   updatedAt            DateTime @updatedAt
 
+  store    Store    @relation(fields: [storeId], references: [id])
   products Product[]
 
+  @@index([storeId])
   @@map("species")
 }
 
 model Product {
   id             String   @id @default(cuid())
+  storeId        String
   slug           String   @unique
   nameEn         String
   nameEs         String
@@ -91,16 +135,19 @@ model Product {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  species        Species?       @relation(fields: [speciesId], references: [id])
+  store          Store           @relation(fields: [storeId], references: [id])
+  species        Species?         @relation(fields: [speciesId], references: [id])
   variants       ProductVariant[]
   wishlistItems  WishlistItem[]
   collections    Collection[]
 
+  @@index([storeId])
   @@map("products")
 }
 
 model Collection {
   id            String   @id @default(cuid())
+  storeId       String
   slug          String   @unique
   titleEn       String
   titleEs       String
@@ -110,29 +157,35 @@ model Collection {
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 
+  store    Store    @relation(fields: [storeId], references: [id])
   products Product[]
 
+  @@index([storeId])
   @@map("collections")
 }
 
 model ProductVariant {
-  id        String @id @default(cuid())
+  id        String  @id @default(cuid())
+  storeId   String
   productId String
   name      String
   price     Int
-  stock     Int    @default(0)
-  sku       String @unique
+  stock     Int     @default(0)
+  sku       String  @unique
 
+  store   Store  @relation(fields: [storeId], references: [id])
   product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
 
+  @@index([storeId])
   @@map("product_variants")
 }
 
 model Order {
   id                    String   @id @default(cuid())
+  storeId               String
   userId                String? // Supabase auth.users.id — no Prisma relation, that schema isn't Prisma-managed
   email                 String
-  status                String   @default("pending")
+  status                String   @default("pending") // 'pending' | 'paid' | 'fulfilled' | 'cancelled' | 'refunded'
   subtotal              Int
   shipping              Int      @default(0)
   tax                   Int      @default(0)
@@ -149,13 +202,17 @@ model Order {
   createdAt             DateTime @default(now())
   updatedAt             DateTime @updatedAt
 
+  store Store      @relation(fields: [storeId], references: [id])
   items OrderItem[]
 
+  @@index([storeId])
+  @@index([email])
   @@map("orders")
 }
 
 model OrderItem {
-  id        String @id @default(cuid())
+  id        String  @id @default(cuid())
+  storeId   String // denormalized from Order — lets analytics scope OrderItem without joining through Order
   orderId   String
   productId String
   variantId String
@@ -164,13 +221,16 @@ model OrderItem {
   quantity  Int
   image     String
 
-  order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  store Store @relation(fields: [storeId], references: [id])
+  order Order  @relation(fields: [orderId], references: [id], onDelete: Cascade)
 
+  @@index([storeId])
   @@map("order_items")
 }
 
 model GrowJournalEntry {
   id          String   @id @default(cuid())
+  storeId     String
   userId      String // Supabase auth.users.id — no Prisma relation, that schema isn't Prisma-managed
   species     String
   speciesSlug String
@@ -183,32 +243,43 @@ model GrowJournalEntry {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
+  store Store @relation(fields: [storeId], references: [id])
+
+  @@index([storeId])
   @@map("grow_journal_entries")
 }
 
 model WishlistItem {
   id        String   @id @default(cuid())
+  storeId   String
   userId    String // Supabase auth.users.id — no Prisma relation, that schema isn't Prisma-managed
   productId String
   createdAt DateTime @default(now())
 
+  store   Store  @relation(fields: [storeId], references: [id])
   product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
 
   @@unique([userId, productId])
+  @@index([storeId])
   @@map("wishlist_items")
 }
 
 model NewsletterSubscriber {
   id        String   @id @default(cuid())
+  storeId   String
   email     String   @unique
   locale    String   @default("en")
   createdAt DateTime @default(now())
 
+  store Store @relation(fields: [storeId], references: [id])
+
+  @@index([storeId])
   @@map("newsletter_subscribers")
 }
 
 model Review {
   id          String   @id @default(cuid())
+  storeId     String
   name        String
   email       String
   rating      Int
@@ -217,5 +288,8 @@ model Review {
   locale      String   @default("en")
   createdAt   DateTime @default(now())
 
+  store Store @relation(fields: [storeId], references: [id])
+
+  @@index([storeId])
   @@map("reviews")
 }

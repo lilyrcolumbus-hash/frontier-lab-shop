@@ -1,20 +1,10 @@
-import { NextRequest, NextResponse } from 'next/server'
-import { createClient } from '@/lib/supabase/server'
-import { isAdmin } from '@/lib/is-admin'
+import { NextResponse } from 'next/server'
+import { withStoreAdmin } from '@/lib/with-store-admin'
 import { uploadImage } from '@/lib/cloudinary'
 
 const MAX_BYTES = 8 * 1024 * 1024
 
-export async function POST(req: NextRequest) {
-  const supabase = await createClient()
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
-
-  if (!isAdmin(user?.email)) {
-    return NextResponse.json({ error: 'Not authorized' }, { status: 403 })
-  }
-
+export const POST = withStoreAdmin(async (req) => {
   const form = await req.formData().catch(() => null)
   const file = form?.get('file')
 
@@ -37,4 +27,4 @@ export async function POST(req: NextRequest) {
     console.error('Cloudinary upload failed', err)
     return NextResponse.json({ error: 'Upload failed — check Cloudinary credentials' }, { status: 500 })
   }
-}
+})

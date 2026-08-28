@@ -24,6 +24,12 @@ function collectionSlugFor(category: string, subcategory: string): string | null
 }
 
 async function main() {
+  const store = await prisma.store.upsert({
+    where: { slug: 'frontier-lab' },
+    update: {},
+    create: { slug: 'frontier-lab', name: 'Frontier Lab' },
+  })
+
   const before = await prisma.product.count({ where: { status: 'active' } })
   const totalBefore = await prisma.product.count()
 
@@ -37,7 +43,7 @@ async function main() {
     const row = await prisma.collection.upsert({
       where: { slug: c.slug },
       update: { titleEn: c.titleEn, titleEs: c.titleEs },
-      create: c,
+      create: { ...c, storeId: store.id },
     })
     slugToId.set(c.slug, row.id)
   }
