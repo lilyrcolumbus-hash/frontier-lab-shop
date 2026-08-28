@@ -71,6 +71,18 @@ const NAV_SECTIONS: { label: string; items: NavItem[] }[] = [
           </svg>
         ),
       },
+      {
+        label: 'Discounts',
+        href: '/admin/discounts',
+        icon: (
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="m9 9 6 6" />
+            <circle cx="9" cy="9" r="1" />
+            <circle cx="15" cy="15" r="1" />
+            <path d="M4 5h6l10 10-6 6L4 11V5Z" />
+          </svg>
+        ),
+      },
     ],
   },
 ]

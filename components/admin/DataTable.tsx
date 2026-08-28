@@ -8,7 +8,7 @@ export type DataTableColumn<T> = {
 type DataTableProps<T extends { id: string }> = {
   columns: DataTableColumn<T>[]
   rows: T[]
-  rowHref: (row: T) => string
+  rowHref?: (row: T) => string
   emptyLabel: string
 }
 
@@ -59,7 +59,7 @@ export function DataTable<T extends { id: string }>({ columns, rows, rowHref, em
             <tr key={row.id} className="border-t border-ds-border hover:bg-elevated/40 transition-colors">
               {columns.map((col, i) => (
                 <td key={col.key} className={`px-4 py-3 ${col.align === 'right' ? 'text-right' : ''}`}>
-                  {i === 0 ? (
+                  {i === 0 && rowHref ? (
                     <a href={rowHref(row)} className="hover:underline">
                       {col.render(row)}
                     </a>
