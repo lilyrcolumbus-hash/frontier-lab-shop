@@ -60,7 +60,7 @@ export default function AdminSpeciesPage() {
         <h1 className="font-body font-bold text-2xl text-cream">Species</h1>
         <Link
           href="/admin/species/new"
-          className="px-4 py-2 rounded-full bg-amber text-bg text-sm font-semibold hover:bg-amber-bright transition-colors"
+          className="px-4 py-2 rounded-lg bg-cream text-surface text-sm font-semibold hover:bg-cream/90 transition-colors"
         >
           Add species
         </Link>
