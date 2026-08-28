@@ -1,17 +1,20 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import Link from 'next/link'
+import { DataTable, Thumbnail, type DataTableColumn } from '@/components/admin/DataTable'
 
 interface AdminCollection {
   id: string
   slug: string
   titleEn: string
+  image: string | null
   _count: { products: number }
 }
 
 export default function AdminCollectionsPage() {
   const [collections, setCollections] = useState<AdminCollection[] | null>(null)
+  const [query, setQuery] = useState('')
 
   useEffect(() => {
     fetch('/api/admin/collections')
@@ -19,6 +22,34 @@ export default function AdminCollectionsPage() {
       .then((data) => setCollections(data.collections ?? []))
       .catch(() => setCollections([]))
   }, [])
+
+  const filtered = useMemo(() => {
+    if (!collections) return []
+    const q = query.trim().toLowerCase()
+    if (!q) return collections
+    return collections.filter((c) => c.titleEn.toLowerCase().includes(q))
+  }, [collections, query])
+
+  const columns: DataTableColumn<AdminCollection>[] = [
+    {
+      key: 'title',
+      header: 'Collection',
+      render: (c) => (
+        <div className="flex items-center gap-3">
+          <Thumbnail src={c.image} alt={c.titleEn} />
+          <div>
+            <div className="font-medium text-cream">{c.titleEn}</div>
+            <div className="text-xs font-mono text-cream-muted">{c.slug}</div>
+          </div>
+        </div>
+      ),
+    },
+    {
+      key: 'products',
+      header: 'Products',
+      render: (c) => <span className="text-cream-muted">{c._count.products}</span>,
+    },
+  ]
 
   return (
     <div>
@@ -28,41 +59,29 @@ export default function AdminCollectionsPage() {
           href="/admin/collections/new"
           className="px-4 py-2 rounded-full bg-amber text-bg text-sm font-semibold hover:bg-amber-bright transition-colors"
         >
-          New collection
+          Add collection
         </Link>
+      </div>
+
+      <div className="mb-4">
+        <input
+          type="text"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Search collections"
+          className="w-full max-w-xs px-3.5 py-2 rounded-lg border border-ds-border bg-surface text-sm text-cream placeholder:text-cream-muted focus:outline-none focus:ring-2 focus:ring-accent/30"
+        />
       </div>
 
       {collections === null ? (
         <p className="text-cream-muted">Loading…</p>
-      ) : collections.length === 0 ? (
-        <p className="text-cream-muted">No collections yet.</p>
       ) : (
-        <div className="border border-ds-border rounded-xl overflow-hidden">
-          <table className="w-full text-sm">
-            <thead className="bg-elevated text-cream-muted">
-              <tr>
-                <th className="text-left px-4 py-3 font-medium">Title</th>
-                <th className="text-left px-4 py-3 font-medium">Slug</th>
-                <th className="text-left px-4 py-3 font-medium">Products</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              {collections.map((c) => (
-                <tr key={c.id} className="border-t border-ds-border">
-                  <td className="px-4 py-3 text-cream">{c.titleEn}</td>
-                  <td className="px-4 py-3 text-cream-muted font-mono text-xs">{c.slug}</td>
-                  <td className="px-4 py-3 text-cream-muted">{c._count.products}</td>
-                  <td className="px-4 py-3 text-right">
-                    <Link href={`/admin/collections/${c.id}`} className="text-accent hover:underline">
-                      Edit
-                    </Link>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+        <DataTable
+          columns={columns}
+          rows={filtered}
+          rowHref={(c) => `/admin/collections/${c.id}`}
+          emptyLabel={query ? 'No collections match your search.' : 'No collections yet.'}
+        />
       )}
     </div>
   )

@@ -1,8 +1,10 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import Link from 'next/link'
 import { formatPrice } from '@/lib/utils'
+import { DataTable, Thumbnail, type DataTableColumn } from '@/components/admin/DataTable'
+import { StatusPill } from '@/components/admin/StatusPill'
 
 interface AdminProduct {
   id: string
@@ -11,10 +13,13 @@ interface AdminProduct {
   category: string
   price: number
   inStock: boolean
+  status: string
+  images: string[]
 }
 
 export default function AdminProductsPage() {
   const [products, setProducts] = useState<AdminProduct[] | null>(null)
+  const [query, setQuery] = useState('')
 
   useEffect(() => {
     fetch('/api/admin/products')
@@ -22,6 +27,34 @@ export default function AdminProductsPage() {
       .then((data) => setProducts(data.products ?? []))
       .catch(() => setProducts([]))
   }, [])
+
+  const filtered = useMemo(() => {
+    if (!products) return []
+    const q = query.trim().toLowerCase()
+    if (!q) return products
+    return products.filter((p) => p.nameEn.toLowerCase().includes(q) || p.category.toLowerCase().includes(q))
+  }, [products, query])
+
+  const columns: DataTableColumn<AdminProduct>[] = [
+    {
+      key: 'name',
+      header: 'Product',
+      render: (p) => (
+        <div className="flex items-center gap-3">
+          <Thumbnail src={p.images[0]} alt={p.nameEn} />
+          <span className="font-medium text-cream">{p.nameEn}</span>
+        </div>
+      ),
+    },
+    { key: 'status', header: 'Status', render: (p) => <StatusPill status={p.status} /> },
+    { key: 'category', header: 'Category', render: (p) => <span className="text-cream-muted">{p.category}</span> },
+    {
+      key: 'inventory',
+      header: 'Inventory',
+      render: (p) => <span className="text-cream-muted">{p.inStock ? 'In stock' : 'Out of stock'}</span>,
+    },
+    { key: 'price', header: 'Price', align: 'right', render: (p) => formatPrice(p.price) },
+  ]
 
   return (
     <div>
@@ -31,47 +64,29 @@ export default function AdminProductsPage() {
           href="/admin/products/new"
           className="px-4 py-2 rounded-full bg-amber text-bg text-sm font-semibold hover:bg-amber-bright transition-colors"
         >
-          New product
+          Add product
         </Link>
+      </div>
+
+      <div className="mb-4">
+        <input
+          type="text"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Search products"
+          className="w-full max-w-xs px-3.5 py-2 rounded-lg border border-ds-border bg-surface text-sm text-cream placeholder:text-cream-muted focus:outline-none focus:ring-2 focus:ring-accent/30"
+        />
       </div>
 
       {products === null ? (
         <p className="text-cream-muted">Loading…</p>
-      ) : products.length === 0 ? (
-        <p className="text-cream-muted">No products yet.</p>
       ) : (
-        <div className="border border-ds-border rounded-xl overflow-hidden">
-          <table className="w-full text-sm">
-            <thead className="bg-elevated text-cream-muted">
-              <tr>
-                <th className="text-left px-4 py-3 font-medium">Name</th>
-                <th className="text-left px-4 py-3 font-medium">Category</th>
-                <th className="text-left px-4 py-3 font-medium">Price</th>
-                <th className="text-left px-4 py-3 font-medium">Stock</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              {products.map((p) => (
-                <tr key={p.id} className="border-t border-ds-border">
-                  <td className="px-4 py-3 text-cream">{p.nameEn}</td>
-                  <td className="px-4 py-3 text-cream-muted">{p.category}</td>
-                  <td className="px-4 py-3 text-cream">{formatPrice(p.price)}</td>
-                  <td className="px-4 py-3">
-                    <span className={p.inStock ? 'text-accent' : 'text-error'}>
-                      {p.inStock ? 'In stock' : 'Out of stock'}
-                    </span>
-                  </td>
-                  <td className="px-4 py-3 text-right">
-                    <Link href={`/admin/products/${p.id}`} className="text-accent hover:underline">
-                      Edit
-                    </Link>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+        <DataTable
+          columns={columns}
+          rows={filtered}
+          rowHref={(p) => `/admin/products/${p.id}`}
+          emptyLabel={query ? 'No products match your search.' : 'No products yet.'}
+        />
       )}
     </div>
   )

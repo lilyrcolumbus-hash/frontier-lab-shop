@@ -1,7 +1,8 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import Link from 'next/link'
+import { DataTable, Thumbnail, type DataTableColumn } from '@/components/admin/DataTable'
 
 interface AdminSpecies {
   id: string
@@ -9,10 +10,12 @@ interface AdminSpecies {
   commonName: string
   scientificName: string
   difficulty: string
+  thumbnailUrl: string
 }
 
 export default function AdminSpeciesPage() {
   const [species, setSpecies] = useState<AdminSpecies[] | null>(null)
+  const [query, setQuery] = useState('')
 
   useEffect(() => {
     fetch('/api/admin/species')
@@ -20,6 +23,36 @@ export default function AdminSpeciesPage() {
       .then((data) => setSpecies(data.species ?? []))
       .catch(() => setSpecies([]))
   }, [])
+
+  const filtered = useMemo(() => {
+    if (!species) return []
+    const q = query.trim().toLowerCase()
+    if (!q) return species
+    return species.filter(
+      (s) => s.commonName.toLowerCase().includes(q) || s.scientificName.toLowerCase().includes(q)
+    )
+  }, [species, query])
+
+  const columns: DataTableColumn<AdminSpecies>[] = [
+    {
+      key: 'name',
+      header: 'Species',
+      render: (s) => (
+        <div className="flex items-center gap-3">
+          <Thumbnail src={s.thumbnailUrl} alt={s.commonName} />
+          <div>
+            <div className="font-medium text-cream">{s.commonName}</div>
+            <div className="text-xs italic text-cream-muted">{s.scientificName}</div>
+          </div>
+        </div>
+      ),
+    },
+    {
+      key: 'difficulty',
+      header: 'Difficulty',
+      render: (s) => <span className="text-cream-muted capitalize">{s.difficulty}</span>,
+    },
+  ]
 
   return (
     <div>
@@ -29,41 +62,29 @@ export default function AdminSpeciesPage() {
           href="/admin/species/new"
           className="px-4 py-2 rounded-full bg-amber text-bg text-sm font-semibold hover:bg-amber-bright transition-colors"
         >
-          New species
+          Add species
         </Link>
+      </div>
+
+      <div className="mb-4">
+        <input
+          type="text"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Search species"
+          className="w-full max-w-xs px-3.5 py-2 rounded-lg border border-ds-border bg-surface text-sm text-cream placeholder:text-cream-muted focus:outline-none focus:ring-2 focus:ring-accent/30"
+        />
       </div>
 
       {species === null ? (
         <p className="text-cream-muted">Loading…</p>
-      ) : species.length === 0 ? (
-        <p className="text-cream-muted">No species yet.</p>
       ) : (
-        <div className="border border-ds-border rounded-xl overflow-hidden">
-          <table className="w-full text-sm">
-            <thead className="bg-elevated text-cream-muted">
-              <tr>
-                <th className="text-left px-4 py-3 font-medium">Common name</th>
-                <th className="text-left px-4 py-3 font-medium">Scientific name</th>
-                <th className="text-left px-4 py-3 font-medium">Difficulty</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              {species.map((s) => (
-                <tr key={s.id} className="border-t border-ds-border">
-                  <td className="px-4 py-3 text-cream">{s.commonName}</td>
-                  <td className="px-4 py-3 text-cream-muted italic">{s.scientificName}</td>
-                  <td className="px-4 py-3 text-cream-muted">{s.difficulty}</td>
-                  <td className="px-4 py-3 text-right">
-                    <Link href={`/admin/species/${s.id}`} className="text-accent hover:underline">
-                      Edit
-                    </Link>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+        <DataTable
+          columns={columns}
+          rows={filtered}
+          rowHref={(s) => `/admin/species/${s.id}`}
+          emptyLabel={query ? 'No species match your search.' : 'No species yet.'}
+        />
       )}
     </div>
   )
