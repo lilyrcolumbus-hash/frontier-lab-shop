@@ -40,5 +40,9 @@ export default async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/((?!api|auth|_next|_vercel|.*\\..*).*)'],
+  // The admin API is matched explicitly on top of the page matcher. Without it those routes
+  // refreshed the Supabase session themselves, in a context that cannot write cookies back:
+  // the refresh token rotated at Supabase but the browser kept the spent one, so every later
+  // refresh failed and auth-js retried with backoff — ~45s per call, which timed the admin out.
+  matcher: ['/((?!api|auth|_next|_vercel|.*\\..*).*)', '/api/admin/:path*'],
 }
