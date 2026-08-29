@@ -18,6 +18,8 @@ const updateProductSchema = z.object({
   tags: z.array(z.string()).default([]),
   status: z.enum(['draft', 'active', 'archived']).default('draft'),
   collectionIds: z.array(z.string()).default([]),
+  sku: z.string().trim().min(1).max(60).optional(),
+  stock: z.coerce.number().int().min(0).optional(),
 })
 
 export const GET = withStoreAdmin<{ params: { id: string } }>(async (_req, { store }, { params }) => {
@@ -39,7 +41,7 @@ export const PATCH = withStoreAdmin<{ params: { id: string } }>(async (req, { st
   const existing = await prisma.product.findUnique({ where: { id: params.id } })
   if (!existing || existing.storeId !== store.id) return NextResponse.json({ error: 'Not found' }, { status: 404 })
 
-  const { collectionIds, ...updateData } = parsed.data
+  const { collectionIds, sku, stock, ...updateData } = parsed.data
   const ownedCollections = collectionIds.length
     ? await prisma.collection.findMany({ where: { id: { in: collectionIds }, storeId: store.id }, select: { id: true } })
     : []
@@ -53,10 +55,18 @@ export const PATCH = withStoreAdmin<{ params: { id: string } }>(async (req, { st
     include: { variants: true, collections: true },
   })
 
-  // Keep the default variant's price in sync with the product's headline price — this admin
-  // form doesn't manage multiple variants per product yet (see CLAUDE.md Backlog).
+  // Keep the default variant in sync with the product-level fields — this admin form
+  // doesn't manage multiple variants per product yet (see CLAUDE.md Backlog). SKU and stock
+  // live on the variant, so an edit here has to write through to it.
   if (product.variants[0]) {
-    await prisma.productVariant.update({ where: { id: product.variants[0].id }, data: { price: parsed.data.price } })
+    await prisma.productVariant.update({
+      where: { id: product.variants[0].id },
+      data: {
+        price: parsed.data.price,
+        ...(sku !== undefined ? { sku } : {}),
+        ...(stock !== undefined ? { stock } : {}),
+      },
+    })
   }
 
   return NextResponse.json({ product })

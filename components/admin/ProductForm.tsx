@@ -211,17 +211,16 @@ export function ProductForm({
         />
       </div>
 
-      {!productId && (
-        <div className="grid grid-cols-2 gap-4">
-          <Input label="SKU" value={values.sku ?? ''} onChange={(e) => update('sku', e.target.value)} required />
-          <Input
-            label="Stock"
-            type="number"
-            value={values.stock ?? 0}
-            onChange={(e) => update('stock', Number(e.target.value))}
-          />
-        </div>
-      )}
+      <div className="grid grid-cols-2 gap-4">
+        <Input label="SKU" value={values.sku ?? ''} onChange={(e) => update('sku', e.target.value)} required />
+        <Input
+          label="Stock (units on hand)"
+          type="number"
+          min={0}
+          value={values.stock ?? 0}
+          onChange={(e) => update('stock', Number(e.target.value))}
+        />
+      </div>
 
       <div>
         <label className="block text-sm font-medium text-cream-muted mb-1.5">Images</label>
