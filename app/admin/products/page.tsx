@@ -1,8 +1,10 @@
 'use client'
 
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import Link from 'next/link'
 import { formatPrice } from '@/lib/utils'
+import { useAdminList } from '@/components/admin/useAdminList'
+import { ListState } from '@/components/admin/ListState'
 import { DataTable, Thumbnail, type DataTableColumn } from '@/components/admin/DataTable'
 import { StatusPill } from '@/components/admin/StatusPill'
 
@@ -18,15 +20,8 @@ interface AdminProduct {
 }
 
 export default function AdminProductsPage() {
-  const [products, setProducts] = useState<AdminProduct[] | null>(null)
+  const { data: products, error, reload } = useAdminList<AdminProduct>('/api/admin/products', 'products')
   const [query, setQuery] = useState('')
-
-  useEffect(() => {
-    fetch('/api/admin/products')
-      .then((r) => r.json())
-      .then((data) => setProducts(data.products ?? []))
-      .catch(() => setProducts([]))
-  }, [])
 
   const filtered = useMemo(() => {
     if (!products) return []
@@ -79,7 +74,7 @@ export default function AdminProductsPage() {
       </div>
 
       {products === null ? (
-        <p className="text-cream-muted">Loading…</p>
+        <ListState error={error} onRetry={reload} />
       ) : (
         <DataTable
           columns={columns}

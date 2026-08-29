@@ -1,7 +1,9 @@
 'use client'
 
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import { formatPrice } from '@/lib/utils'
+import { useAdminList } from '@/components/admin/useAdminList'
+import { ListState } from '@/components/admin/ListState'
 import { DataTable, type DataTableColumn } from '@/components/admin/DataTable'
 
 interface AdminCustomer {
@@ -13,15 +15,8 @@ interface AdminCustomer {
 }
 
 export default function AdminCustomersPage() {
-  const [customers, setCustomers] = useState<AdminCustomer[] | null>(null)
+  const { data: customers, error, reload } = useAdminList<AdminCustomer>('/api/admin/customers', 'customers')
   const [query, setQuery] = useState('')
-
-  useEffect(() => {
-    fetch('/api/admin/customers')
-      .then((r) => r.json())
-      .then((data) => setCustomers(data.customers ?? []))
-      .catch(() => setCustomers([]))
-  }, [])
 
   const filtered = useMemo(() => {
     if (!customers) return []
@@ -71,7 +66,7 @@ export default function AdminCustomersPage() {
       </div>
 
       {customers === null ? (
-        <p className="text-cream-muted">Loading…</p>
+        <ListState error={error} onRetry={reload} />
       ) : (
         <DataTable
           columns={columns}

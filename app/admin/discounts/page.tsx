@@ -1,8 +1,10 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import Link from 'next/link'
 import { formatPrice } from '@/lib/utils'
+import { useAdminList } from '@/components/admin/useAdminList'
+import { ListState } from '@/components/admin/ListState'
 import { DataTable, type DataTableColumn } from '@/components/admin/DataTable'
 import { StatusPill } from '@/components/admin/StatusPill'
 
@@ -24,17 +26,8 @@ function discountValue(d: AdminDiscount) {
 }
 
 export default function AdminDiscountsPage() {
-  const [discounts, setDiscounts] = useState<AdminDiscount[] | null>(null)
+  const { data: discounts, error, reload } = useAdminList<AdminDiscount>('/api/admin/discounts', 'discounts')
   const [busyId, setBusyId] = useState<string | null>(null)
-
-  const load = () => {
-    fetch('/api/admin/discounts')
-      .then((r) => r.json())
-      .then((data) => setDiscounts(data.discounts ?? []))
-      .catch(() => setDiscounts([]))
-  }
-
-  useEffect(load, [])
 
   const toggleActive = async (d: AdminDiscount) => {
     setBusyId(d.id)
@@ -44,7 +37,7 @@ export default function AdminDiscountsPage() {
       body: JSON.stringify({ active: !d.active }),
     })
     setBusyId(null)
-    load()
+    void reload()
   }
 
   const columns: DataTableColumn<AdminDiscount>[] = [
@@ -98,7 +91,7 @@ export default function AdminDiscountsPage() {
       </div>
 
       {discounts === null ? (
-        <p className="text-cream-muted">Loading…</p>
+        <ListState error={error} onRetry={reload} />
       ) : (
         <DataTable columns={columns} rows={discounts} emptyLabel="No discount codes yet." />
       )}

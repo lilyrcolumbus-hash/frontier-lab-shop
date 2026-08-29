@@ -1,7 +1,9 @@
 'use client'
 
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import Link from 'next/link'
+import { useAdminList } from '@/components/admin/useAdminList'
+import { ListState } from '@/components/admin/ListState'
 import { DataTable, Thumbnail, type DataTableColumn } from '@/components/admin/DataTable'
 
 interface AdminCollection {
@@ -13,15 +15,8 @@ interface AdminCollection {
 }
 
 export default function AdminCollectionsPage() {
-  const [collections, setCollections] = useState<AdminCollection[] | null>(null)
+  const { data: collections, error, reload } = useAdminList<AdminCollection>('/api/admin/collections', 'collections')
   const [query, setQuery] = useState('')
-
-  useEffect(() => {
-    fetch('/api/admin/collections')
-      .then((r) => r.json())
-      .then((data) => setCollections(data.collections ?? []))
-      .catch(() => setCollections([]))
-  }, [])
 
   const filtered = useMemo(() => {
     if (!collections) return []
@@ -74,7 +69,7 @@ export default function AdminCollectionsPage() {
       </div>
 
       {collections === null ? (
-        <p className="text-cream-muted">Loading…</p>
+        <ListState error={error} onRetry={reload} />
       ) : (
         <DataTable
           columns={columns}

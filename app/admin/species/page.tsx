@@ -1,7 +1,9 @@
 'use client'
 
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import Link from 'next/link'
+import { useAdminList } from '@/components/admin/useAdminList'
+import { ListState } from '@/components/admin/ListState'
 import { DataTable, Thumbnail, type DataTableColumn } from '@/components/admin/DataTable'
 
 interface AdminSpecies {
@@ -14,15 +16,8 @@ interface AdminSpecies {
 }
 
 export default function AdminSpeciesPage() {
-  const [species, setSpecies] = useState<AdminSpecies[] | null>(null)
+  const { data: species, error, reload } = useAdminList<AdminSpecies>('/api/admin/species', 'species')
   const [query, setQuery] = useState('')
-
-  useEffect(() => {
-    fetch('/api/admin/species')
-      .then((r) => r.json())
-      .then((data) => setSpecies(data.species ?? []))
-      .catch(() => setSpecies([]))
-  }, [])
 
   const filtered = useMemo(() => {
     if (!species) return []
@@ -77,7 +72,7 @@ export default function AdminSpeciesPage() {
       </div>
 
       {species === null ? (
-        <p className="text-cream-muted">Loading…</p>
+        <ListState error={error} onRetry={reload} />
       ) : (
         <DataTable
           columns={columns}
