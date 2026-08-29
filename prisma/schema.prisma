@@ -110,6 +110,9 @@ model Product {
   price          Int
   compareAtPrice Int?
   images         String[]
+  // Alt text, index-aligned with `images` (imageAlts[i] describes images[i]). The admin form
+  // keeps both arrays in sync on add/remove/reorder; a missing entry falls back to the product name.
+  imageAlts      String[] @default([])
   isOrganic      Boolean  @default(false)
   inStock        Boolean  @default(true)
   tags           String[]

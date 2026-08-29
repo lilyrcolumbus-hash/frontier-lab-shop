@@ -15,7 +15,10 @@ type DataTableProps<T extends { id: string }> = {
 export function Thumbnail({ src, alt }: { src?: string | null; alt: string }) {
   if (!src) {
     return (
-      <div className="w-10 h-10 rounded-lg bg-elevated border border-ds-border flex items-center justify-center text-cream-muted flex-shrink-0">
+      <div
+        title="No image yet"
+        className="w-10 h-10 rounded-lg bg-elevated border border-dashed border-ds-border flex items-center justify-center text-cream-muted/40 flex-shrink-0"
+      >
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
           <rect x="3" y="3" width="18" height="18" rx="2" />
           <circle cx="8.5" cy="8.5" r="1.5" />
