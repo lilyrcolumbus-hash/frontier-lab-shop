@@ -13,7 +13,8 @@ const intlMiddleware = createIntlMiddleware({
 export default async function middleware(request: NextRequest) {
   // /admin is an internal tool, not locale-prefixed customer content — skip next-intl's
   // locale routing for it, but still refresh the Supabase session below.
-  const isAdminRoute = request.nextUrl.pathname.startsWith('/admin')
+  const { pathname } = request.nextUrl
+  const isAdminRoute = pathname.startsWith('/admin') || pathname.startsWith('/api/admin')
   const response = isAdminRoute ? NextResponse.next() : intlMiddleware(request)
 
   // Refresh the Supabase session cookie on every navigation — required by @supabase/ssr
