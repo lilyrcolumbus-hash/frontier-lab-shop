@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import { withStoreAdmin } from '@/lib/with-store-admin'
-import { uploadImage } from '@/lib/cloudinary'
+import { uploadProductImage } from '@/lib/supabase/storage'
 
 const MAX_BYTES = 8 * 1024 * 1024
 
@@ -19,12 +19,11 @@ export const POST = withStoreAdmin(async (req) => {
   }
 
   try {
-    const buffer = Buffer.from(await file.arrayBuffer())
-    const base64 = `data:${file.type};base64,${buffer.toString('base64')}`
-    const url = await uploadImage(base64, 'frontier-lab')
+    const url = await uploadProductImage(file)
     return NextResponse.json({ url })
   } catch (err) {
-    console.error('Cloudinary upload failed', err)
-    return NextResponse.json({ error: 'Upload failed — check Cloudinary credentials' }, { status: 500 })
+    console.error('Product image upload failed', err)
+    const message = err instanceof Error ? err.message : 'Upload failed'
+    return NextResponse.json({ error: `Upload failed — ${message}` }, { status: 500 })
   }
 })
