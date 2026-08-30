@@ -34,7 +34,11 @@ export function CollectionForm({ initial, collectionId }: { initial: CollectionF
     const res = await fetch(url, {
       method,
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(values),
+      body: JSON.stringify({
+        ...values,
+        titleEs: values.titleEs || values.titleEn,
+        descriptionEs: values.descriptionEs || values.descriptionEn,
+      }),
     })
     const data = await res.json()
     setSaving(false)
@@ -69,25 +73,16 @@ export function CollectionForm({ initial, collectionId }: { initial: CollectionF
       )}
 
       <div className="grid grid-cols-2 gap-4">
-        <Input label="Title (English)" value={values.titleEn} onChange={(e) => update('titleEn', e.target.value)} required />
-        <Input label="Title (Spanish)" value={values.titleEs} onChange={(e) => update('titleEs', e.target.value)} required />
+        <Input label="Title" value={values.titleEn} onChange={(e) => update('titleEn', e.target.value)} required />
       </div>
 
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-cream-muted mb-1.5">Description (English)</label>
+          <label className="block text-sm font-medium text-cream-muted mb-1.5">Description</label>
           <textarea
             className="w-full bg-surface border border-ds-border rounded-xl px-4 py-3 text-cream text-sm min-h-24"
             value={values.descriptionEn}
             onChange={(e) => update('descriptionEn', e.target.value)}
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium text-cream-muted mb-1.5">Description (Spanish)</label>
-          <textarea
-            className="w-full bg-surface border border-ds-border rounded-xl px-4 py-3 text-cream text-sm min-h-24"
-            value={values.descriptionEs}
-            onChange={(e) => update('descriptionEs', e.target.value)}
           />
         </div>
       </div>

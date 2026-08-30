@@ -75,7 +75,13 @@ export function SpeciesForm({ initial, speciesId }: { initial: SpeciesFormValues
     const res = await fetch(url, {
       method,
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(values),
+      body: JSON.stringify({
+        ...values,
+        descriptionEs: values.descriptionEs || values.descriptionEn,
+        cultivationNotesEs: values.cultivationNotesEs || values.cultivationNotesEn,
+        medicalNotesEs: values.medicalNotesEs || values.medicalNotesEn,
+        cookingNotesEs: values.cookingNotesEs || values.cookingNotesEn,
+      }),
     })
     const data = await res.json()
     setSaving(false)
@@ -217,20 +223,16 @@ export function SpeciesForm({ initial, speciesId }: { initial: SpeciesFormValues
       </div>
 
       <div className="grid grid-cols-2 gap-4">
-        <TextArea label="Description (English)" value={values.descriptionEn} onChange={(v) => update('descriptionEn', v)} />
-        <TextArea label="Description (Spanish)" value={values.descriptionEs} onChange={(v) => update('descriptionEs', v)} />
+        <TextArea label="Description" value={values.descriptionEn} onChange={(v) => update('descriptionEn', v)} />
       </div>
       <div className="grid grid-cols-2 gap-4">
-        <TextArea label="Cultivation notes (English)" value={values.cultivationNotesEn} onChange={(v) => update('cultivationNotesEn', v)} />
-        <TextArea label="Cultivation notes (Spanish)" value={values.cultivationNotesEs} onChange={(v) => update('cultivationNotesEs', v)} />
+        <TextArea label="Cultivation notes" value={values.cultivationNotesEn} onChange={(v) => update('cultivationNotesEn', v)} />
       </div>
       <div className="grid grid-cols-2 gap-4">
-        <TextArea label="Medical notes (English)" value={values.medicalNotesEn} onChange={(v) => update('medicalNotesEn', v)} />
-        <TextArea label="Medical notes (Spanish)" value={values.medicalNotesEs} onChange={(v) => update('medicalNotesEs', v)} />
+        <TextArea label="Medical notes" value={values.medicalNotesEn} onChange={(v) => update('medicalNotesEn', v)} />
       </div>
       <div className="grid grid-cols-2 gap-4">
-        <TextArea label="Cooking notes (English)" value={values.cookingNotesEn} onChange={(v) => update('cookingNotesEn', v)} />
-        <TextArea label="Cooking notes (Spanish)" value={values.cookingNotesEs} onChange={(v) => update('cookingNotesEs', v)} />
+        <TextArea label="Cooking notes" value={values.cookingNotesEn} onChange={(v) => update('cookingNotesEn', v)} />
       </div>
 
       <Input

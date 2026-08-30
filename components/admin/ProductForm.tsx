@@ -178,7 +178,11 @@ export function ProductForm({
     const res = await fetch(url, {
       method,
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(values),
+      body: JSON.stringify({
+        ...values,
+        nameEs: values.nameEs || values.nameEn,
+        descriptionEs: values.descriptionEs || values.descriptionEn,
+      }),
     })
     const data = await res.json()
     setSaving(false)
@@ -217,30 +221,16 @@ export function ProductForm({
         />
       )}
 
-      <div className="grid grid-cols-2 gap-4">
-        <Input label="Name (English)" value={values.nameEn} onChange={(e) => update('nameEn', e.target.value)} required />
-        <Input label="Name (Spanish)" value={values.nameEs} onChange={(e) => update('nameEs', e.target.value)} required />
-      </div>
+      <Input label="Name" value={values.nameEn} onChange={(e) => update('nameEn', e.target.value)} required />
 
-      <div className="grid grid-cols-2 gap-4">
-        <div>
-          <label className="block text-sm font-medium text-cream-muted mb-1.5">Description (English)</label>
-          <textarea
-            className="w-full bg-surface border border-ds-border rounded-xl px-4 py-3 text-cream text-sm min-h-32"
-            value={values.descriptionEn}
-            onChange={(e) => update('descriptionEn', e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium text-cream-muted mb-1.5">Description (Spanish)</label>
-          <textarea
-            className="w-full bg-surface border border-ds-border rounded-xl px-4 py-3 text-cream text-sm min-h-32"
-            value={values.descriptionEs}
-            onChange={(e) => update('descriptionEs', e.target.value)}
-            required
-          />
-        </div>
+      <div>
+        <label className="block text-sm font-medium text-cream-muted mb-1.5">Description</label>
+        <textarea
+          className="w-full bg-surface border border-ds-border rounded-xl px-4 py-3 text-cream text-sm min-h-32"
+          value={values.descriptionEn}
+          onChange={(e) => update('descriptionEn', e.target.value)}
+          required
+        />
       </div>
 
       <div className="grid grid-cols-2 gap-4">
