@@ -16,8 +16,12 @@ const createDiscountSchema = z
     amountOff: z.coerce.number().int().min(1).optional(),
     maxRedemptions: z.coerce.number().int().min(1).optional(),
     expiresAt: z.string().trim().optional(),
+    /** Minimum order subtotal, in cents, before the code can be redeemed. */
+    minimumAmount: z.coerce.number().int().min(1).optional(),
+    firstTimeOnly: z.coerce.boolean().default(false),
   })
   .refine((d) => d.percentOff || d.amountOff, { message: 'Set either a percent or a fixed amount off' })
+  .refine((d) => !(d.percentOff && d.amountOff), { message: 'Use a percent or a fixed amount, not both' })
 
 export const GET = withStoreAdmin(async () => {
   const promotionCodes = await stripe.promotionCodes.list({ limit: 100, expand: ['data.coupon'] })
@@ -34,6 +38,8 @@ export const GET = withStoreAdmin(async () => {
       timesRedeemed: pc.times_redeemed,
       maxRedemptions: pc.max_redemptions,
       expiresAt: pc.expires_at ? new Date(pc.expires_at * 1000).toISOString() : null,
+      minimumAmount: pc.restrictions?.minimum_amount ?? null,
+      firstTimeOnly: pc.restrictions?.first_time_transaction ?? false,
     }
   })
 
@@ -47,7 +53,7 @@ export const POST = withStoreAdmin(async (req) => {
     return NextResponse.json({ error: 'Invalid discount', details: parsed.error.flatten() }, { status: 400 })
   }
 
-  const { code, percentOff, amountOff, maxRedemptions, expiresAt } = parsed.data
+  const { code, percentOff, amountOff, maxRedemptions, expiresAt, minimumAmount, firstTimeOnly } = parsed.data
 
   const coupon = await stripe.coupons.create({
     percent_off: percentOff,
@@ -62,6 +68,12 @@ export const POST = withStoreAdmin(async (req) => {
       code: code.toUpperCase(),
       max_redemptions: maxRedemptions,
       expires_at: expiresAt ? Math.floor(new Date(expiresAt).getTime() / 1000) : undefined,
+      // Restrictions are checked by Stripe at redemption time, so they hold even though the
+      // shopper types the code on Stripe's own page after our session was created.
+      restrictions: {
+        ...(minimumAmount ? { minimum_amount: minimumAmount, minimum_amount_currency: 'usd' } : {}),
+        ...(firstTimeOnly ? { first_time_transaction: true } : {}),
+      },
     })
     return NextResponse.json({ discount: { id: promotionCode.id, code: promotionCode.code } })
   } catch (err) {

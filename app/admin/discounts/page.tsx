@@ -17,6 +17,8 @@ interface AdminDiscount {
   timesRedeemed: number
   maxRedemptions: number | null
   expiresAt: string | null
+  minimumAmount: number | null
+  firstTimeOnly: boolean
 }
 
 function discountValue(d: AdminDiscount) {
@@ -43,6 +45,17 @@ export default function AdminDiscountsPage() {
   const columns: DataTableColumn<AdminDiscount>[] = [
     { key: 'code', header: 'Code', render: (d) => <span className="font-mono font-semibold text-cream">{d.code}</span> },
     { key: 'value', header: 'Discount', render: (d) => <span className="text-cream-muted">{discountValue(d)}</span> },
+    {
+      key: 'conditions',
+      header: 'Conditions',
+      render: (d) => {
+        const conditions = [
+          d.minimumAmount ? `${formatPrice(d.minimumAmount)} minimum` : null,
+          d.firstTimeOnly ? 'First order only' : null,
+        ].filter(Boolean)
+        return <span className="text-cream-muted">{conditions.length ? conditions.join(' · ') : '—'}</span>
+      },
+    },
     { key: 'status', header: 'Status', render: (d) => <StatusPill status={d.active ? 'active' : 'archived'} /> },
     {
       key: 'redemptions',

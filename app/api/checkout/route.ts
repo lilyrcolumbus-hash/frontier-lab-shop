@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import Stripe from 'stripe'
 import { prisma } from '@/lib/prisma'
+import { getCurrentStore } from '@/lib/current-store'
 import type { CartItem } from '@/types/product'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: '2024-06-20' })
@@ -56,6 +57,15 @@ export async function POST(req: NextRequest) {
       })
     )
 
+    // Shipping comes from the store's own settings, and the subtotal is the one just computed
+    // from canonical prices — never the cart's. A discount code cannot reach the shipping rate
+    // (Stripe discounts the subtotal only), so a free-shipping offer has to be decided here.
+    const store = await getCurrentStore()
+    const subtotal = lineItems.reduce((sum, line) => sum + line.price_data.unit_amount * line.quantity, 0)
+    const shipsFree =
+      store.freeShippingThreshold > 0 && subtotal >= store.freeShippingThreshold
+    const shippingAmount = shipsFree ? 0 : store.shippingRate
+
     const session = await stripe.checkout.sessions.create({
       mode: 'payment',
       line_items: lineItems,
@@ -65,8 +75,8 @@ export async function POST(req: NextRequest) {
         {
           shipping_rate_data: {
             type: 'fixed_amount',
-            fixed_amount: { amount: 999, currency: 'usd' },
-            display_name: 'Standard Shipping',
+            fixed_amount: { amount: shippingAmount, currency: 'usd' },
+            display_name: shipsFree ? 'Free Shipping' : 'Standard Shipping',
             delivery_estimate: {
               minimum: { unit: 'business_day', value: 3 },
               maximum: { unit: 'business_day', value: 5 },

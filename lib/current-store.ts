@@ -14,3 +14,12 @@ export async function getCurrentStoreId(): Promise<string> {
   cachedStoreId = store.id
   return store.id
 }
+
+/**
+ * The full store record, for settings the storefront needs at request time (shipping rate,
+ * free-shipping threshold). Not cached like the id: these values are edited from /admin and a
+ * stale copy would quietly charge the wrong shipping.
+ */
+export async function getCurrentStore() {
+  return prisma.store.findUniqueOrThrow({ where: { slug: STORE_SLUG } })
+}

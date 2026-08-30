@@ -17,6 +17,12 @@ model Store {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  // Shipping, in cents. A discount code can never cover shipping — Stripe applies discounts to
+  // the subtotal only — so free shipping is granted here, at the moment the session is built.
+  shippingRate           Int  @default(999)
+  // freeShippingThreshold: order subtotal at or above which shipping is free; 0 disables it.
+  freeShippingThreshold  Int  @default(0)
+
   members        StoreMember[]
   species        Species[]
   products       Product[]
