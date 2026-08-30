@@ -6,6 +6,9 @@ import { cn } from '@/lib/utils'
 
 interface ProductGalleryProps {
   images: string[]
+  /** Per-image alt text from the admin, index-aligned with `images`. */
+  imageAlts?: string[]
+  /** Fallback description (the product name) when an image has no alt text of its own. */
   alt: string
 }
 
@@ -69,7 +72,7 @@ const SLOTS = [
   },
 ]
 
-export function ProductGallery({ images, alt }: ProductGalleryProps) {
+export function ProductGallery({ images, imageAlts, alt }: ProductGalleryProps) {
   const [active, setActive] = useState(0)
 
   if (!images.length) {
@@ -147,7 +150,7 @@ export function ProductGallery({ images, alt }: ProductGalleryProps) {
         >
           <img
             src={images[active]}
-            alt={`${alt} - image ${active + 1}`}
+            alt={imageAlts?.[active] || `${alt} - image ${active + 1}`}
             className="w-full h-full object-cover"
           />
           {images.length > 1 && (
@@ -183,7 +186,7 @@ export function ProductGallery({ images, alt }: ProductGalleryProps) {
               )}
               aria-label={`View image ${i + 1}`}
             >
-              <img src={src} alt={`${alt} thumbnail ${i + 1}`} className="w-full h-full object-cover" />
+              <img src={src} alt={imageAlts?.[i] || `${alt} thumbnail ${i + 1}`} className="w-full h-full object-cover" />
             </button>
           ))}
         </div>

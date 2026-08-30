@@ -16,6 +16,7 @@ export interface ProductFormValues {
   price: number
   compareAtPrice?: number | null
   images: string[]
+  imageAlts: string[]
   isOrganic: boolean
   inStock: boolean
   tags: string[]
@@ -87,20 +88,59 @@ export function ProductForm({
     router.refresh()
   }
 
-  const handleUpload = async (file: File) => {
+  const handleUpload = async (files: FileList) => {
     setUploading(true)
     setError('')
-    const formData = new FormData()
-    formData.append('file', file)
-    const res = await fetch('/api/admin/upload', { method: 'POST', body: formData })
-    const data = await res.json()
-    setUploading(false)
-    if (!res.ok) {
-      setError(data.error ?? 'Upload failed')
-      return
+    const uploaded: string[] = []
+
+    for (const file of Array.from(files)) {
+      const formData = new FormData()
+      formData.append('file', file)
+      const res = await fetch('/api/admin/upload', { method: 'POST', body: formData })
+      const data = await res.json().catch(() => null)
+      if (!res.ok) {
+        setError(data?.error ?? `Upload failed for ${file.name}`)
+        break
+      }
+      uploaded.push(data.url)
     }
-    update('images', [...values.images, data.url])
+
+    setUploading(false)
+    if (uploaded.length) {
+      setValues((v) => ({
+        ...v,
+        images: [...v.images, ...uploaded],
+        imageAlts: [...v.imageAlts, ...uploaded.map(() => '')],
+      }))
+    }
   }
+
+  // `images` and `imageAlts` are index-aligned, so every reorder/removal has to move both.
+  const removeImage = (index: number) =>
+    setValues((v) => ({
+      ...v,
+      images: v.images.filter((_, i) => i !== index),
+      imageAlts: v.imageAlts.filter((_, i) => i !== index),
+    }))
+
+  const moveImage = (index: number, direction: -1 | 1) =>
+    setValues((v) => {
+      const target = index + direction
+      if (target < 0 || target >= v.images.length) return v
+      const images = [...v.images]
+      const imageAlts = [...v.imageAlts]
+      ;[images[index], images[target]] = [images[target], images[index]]
+      ;[imageAlts[index], imageAlts[target]] = [imageAlts[target] ?? '', imageAlts[index] ?? '']
+      return { ...v, images, imageAlts }
+    })
+
+  const setAlt = (index: number, text: string) =>
+    setValues((v) => {
+      const imageAlts = [...v.imageAlts]
+      while (imageAlts.length < v.images.length) imageAlts.push('')
+      imageAlts[index] = text
+      return { ...v, imageAlts }
+    })
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -224,30 +264,77 @@ export function ProductForm({
 
       <div>
         <label className="block text-sm font-medium text-cream-muted mb-1.5">Images</label>
-        <div className="flex flex-wrap gap-3 mb-3">
+        <p className="text-xs text-cream-muted mb-3">
+          The first image is the one shoppers see on the shop grid. Alt text describes the photo for
+          screen readers and search engines.
+        </p>
+
+        <div className="space-y-3 mb-3">
           {values.images.map((img, i) => (
-            <div key={img} className="relative w-20 h-20 rounded-lg overflow-hidden border border-ds-border group">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={img} alt="" className="w-full h-full object-cover" />
-              <button
-                type="button"
-                onClick={() => update('images', values.images.filter((_, idx) => idx !== i))}
-                className="absolute inset-0 bg-bg/70 opacity-0 group-hover:opacity-100 transition-opacity text-error text-xs font-medium"
-              >
-                Remove
-              </button>
+            <div key={img} className="flex items-start gap-3 p-3 rounded-lg border border-ds-border bg-surface">
+              <div className="relative w-20 h-20 rounded-lg overflow-hidden border border-ds-border flex-shrink-0">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={img} alt={values.imageAlts[i] || ''} className="w-full h-full object-cover" />
+                {i === 0 && (
+                  <span className="absolute bottom-0 inset-x-0 bg-bg/80 text-[10px] text-cream text-center py-0.5">
+                    Main
+                  </span>
+                )}
+              </div>
+
+              <div className="flex-1 min-w-0">
+                <Input
+                  label={`Alt text — image ${i + 1}`}
+                  value={values.imageAlts[i] ?? ''}
+                  onChange={(e) => setAlt(i, e.target.value)}
+                  placeholder="e.g. Blue Oyster fruiting block ready to harvest"
+                />
+              </div>
+
+              <div className="flex flex-col gap-1 pt-6">
+                <button
+                  type="button"
+                  onClick={() => moveImage(i, -1)}
+                  disabled={i === 0}
+                  aria-label="Move image up"
+                  className="px-2 py-1 rounded border border-ds-border text-xs text-cream-muted hover:text-cream disabled:opacity-30"
+                >
+                  ↑
+                </button>
+                <button
+                  type="button"
+                  onClick={() => moveImage(i, 1)}
+                  disabled={i === values.images.length - 1}
+                  aria-label="Move image down"
+                  className="px-2 py-1 rounded border border-ds-border text-xs text-cream-muted hover:text-cream disabled:opacity-30"
+                >
+                  ↓
+                </button>
+                <button
+                  type="button"
+                  onClick={() => removeImage(i)}
+                  className="px-2 py-1 rounded border border-ds-border text-xs text-error hover:bg-error/10"
+                >
+                  ✕
+                </button>
+              </div>
             </div>
           ))}
         </div>
+
         <input
           ref={fileInputRef}
           type="file"
           accept="image/*"
+          multiple
           className="hidden"
-          onChange={(e) => e.target.files?.[0] && handleUpload(e.target.files[0])}
+          onChange={(e) => {
+            if (e.target.files?.length) handleUpload(e.target.files)
+            e.target.value = ''
+          }}
         />
         <Button type="button" variant="outline" size="sm" isLoading={uploading} onClick={() => fileInputRef.current?.click()}>
-          Upload image
+          Upload images
         </Button>
       </div>
 

@@ -90,7 +90,7 @@ export function ProductDetailClient({ product }: { product: Product }) {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Gallery */}
           <div>
-            <ProductGallery images={product.images} alt={name} />
+            <ProductGallery images={product.images} imageAlts={product.imageAlts} alt={name} />
           </div>
 
           {/* Product info */}

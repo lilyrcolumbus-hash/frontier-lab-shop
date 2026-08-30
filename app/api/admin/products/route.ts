@@ -14,6 +14,7 @@ const createProductSchema = z.object({
   price: z.coerce.number().int().min(0),
   compareAtPrice: z.coerce.number().int().min(0).optional().nullable(),
   images: z.array(z.string()).default([]),
+  imageAlts: z.array(z.string()).default([]),
   isOrganic: z.coerce.boolean().default(false),
   inStock: z.coerce.boolean().default(true),
   tags: z.array(z.string()).default([]),

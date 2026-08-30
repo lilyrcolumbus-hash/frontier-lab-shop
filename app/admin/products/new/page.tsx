@@ -16,6 +16,7 @@ export default function NewProductPage() {
           price: 0,
           compareAtPrice: null,
           images: [],
+          imageAlts: [],
           isOrganic: false,
           inStock: true,
           tags: [],

@@ -29,6 +29,8 @@ export interface Product {
   compareAtPrice?: number
   variants: ProductVariant[]
   images: string[]
+  /** Alt text, index-aligned with `images`; may be shorter or hold empty strings. */
+  imageAlts?: string[]
   cultivationSpecs?: CultivationSpecs
   isOrganic: boolean
   inStock: boolean

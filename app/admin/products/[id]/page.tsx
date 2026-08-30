@@ -21,6 +21,7 @@ export default async function EditProductPage({ params }: { params: { id: string
           price: product.price,
           compareAtPrice: product.compareAtPrice,
           images: product.images,
+          imageAlts: product.imageAlts,
           isOrganic: product.isOrganic,
           inStock: product.inStock,
           tags: product.tags,

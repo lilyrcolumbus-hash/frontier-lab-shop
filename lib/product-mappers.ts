@@ -39,6 +39,7 @@ export function toProduct(row: ProductWithVariants): Product {
     compareAtPrice: row.compareAtPrice ?? undefined,
     variants: row.variants.map((v) => ({ id: v.id, name: v.name, price: v.price, stock: v.stock, sku: v.sku })),
     images: row.images,
+    imageAlts: row.imageAlts,
     cultivationSpecs,
     isOrganic: row.isOrganic,
     inStock: row.inStock,

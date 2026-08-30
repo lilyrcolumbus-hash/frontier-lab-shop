@@ -55,7 +55,7 @@ export function ProductCard({ product }: ProductCardProps) {
           {product.images[0] ? (
             <motion.img
               src={product.images[0]}
-              alt={name}
+              alt={product.imageAlts?.[0] || name}
               style={{ x: smoothX, y: smoothY }}
               className="w-full h-full object-cover scale-110"
             />
