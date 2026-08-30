@@ -23,6 +23,7 @@ export default function NewProductPage() {
           tags: [],
           status: 'draft',
           collectionIds: [],
+          relatedProducts: [],
         }}
       />
     </div>

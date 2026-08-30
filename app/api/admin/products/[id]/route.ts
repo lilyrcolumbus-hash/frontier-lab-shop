@@ -27,6 +27,7 @@ const updateProductSchema = z.object({
   tags: z.array(z.string()).default([]),
   status: z.enum(['draft', 'active', 'archived']).default('draft'),
   collectionIds: z.array(z.string()).default([]),
+  relatedProducts: z.array(z.string()).default([]),
   variants: z.array(variantSchema).min(1).optional(),
 })
 

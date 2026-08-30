@@ -22,6 +22,8 @@ export interface ProductFormValues {
   tags: string[]
   status: 'draft' | 'active' | 'archived'
   collectionIds: string[]
+  /** Slugs of other products shown as "You'll Also Need" on the storefront. */
+  relatedProducts: string[]
   variants: ProductFormVariant[]
 }
 
@@ -37,6 +39,12 @@ export interface ProductFormVariant {
 interface AvailableCollection {
   id: string
   titleEn: string
+}
+
+interface AvailableProduct {
+  id: string
+  slug: string
+  nameEn: string
 }
 
 const CATEGORIES = ['kit', 'spawn', 'substrate', 'equipment', 'wellness', 'bundle']
@@ -58,6 +66,8 @@ export function ProductForm({
   const [uploading, setUploading] = useState(false)
   const [deleting, setDeleting] = useState(false)
   const [availableCollections, setAvailableCollections] = useState<AvailableCollection[]>([])
+  const [availableProducts, setAvailableProducts] = useState<AvailableProduct[]>([])
+  const [relatedQuery, setRelatedQuery] = useState('')
 
   const update = <K extends keyof ProductFormValues>(key: K, value: ProductFormValues[K]) =>
     setValues((v) => ({ ...v, [key]: value }))
@@ -67,7 +77,21 @@ export function ProductForm({
       .then((r) => r.json())
       .then((data) => setAvailableCollections(data.collections ?? []))
       .catch(() => setAvailableCollections([]))
+
+    fetch('/api/admin/products')
+      .then((r) => r.json())
+      .then((data) => setAvailableProducts(data.products ?? []))
+      .catch(() => setAvailableProducts([]))
   }, [])
+
+  const toggleRelated = (slug: string) => {
+    update(
+      'relatedProducts',
+      values.relatedProducts.includes(slug)
+        ? values.relatedProducts.filter((s) => s !== slug)
+        : [...values.relatedProducts, slug]
+    )
+  }
 
   const toggleCollection = (id: string) => {
     update('collectionIds', values.collectionIds.includes(id) ? values.collectionIds.filter((c) => c !== id) : [...values.collectionIds, id])
@@ -439,6 +463,57 @@ export function ProductForm({
             ))}
           </div>
         )}
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium text-cream-muted mb-1.5">Related products</label>
+        <p className="text-xs text-cream-muted/70 mb-2">
+          Shown under &quot;You&apos;ll Also Need&quot; on this product&apos;s page, in the order picked here.
+        </p>
+        {values.relatedProducts.length > 0 && (
+          <div className="flex flex-wrap gap-2 mb-3">
+            {values.relatedProducts.map((slug) => {
+              const match = availableProducts.find((p) => p.slug === slug)
+              return (
+                <button
+                  key={slug}
+                  type="button"
+                  onClick={() => toggleRelated(slug)}
+                  className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-accent text-sm text-cream"
+                >
+                  {match?.nameEn ?? slug}
+                  <span aria-hidden className="text-cream-muted">&times;</span>
+                </button>
+              )
+            })}
+          </div>
+        )}
+        <input
+          type="text"
+          value={relatedQuery}
+          onChange={(e) => setRelatedQuery(e.target.value)}
+          placeholder="Search products to add"
+          className="w-full px-3.5 py-2 rounded-lg border border-ds-border bg-surface text-sm text-cream placeholder:text-cream-muted focus:outline-none focus:ring-2 focus:ring-accent/30"
+        />
+        <div className="mt-2 max-h-48 overflow-y-auto border border-ds-border rounded-lg divide-y divide-ds-border">
+          {availableProducts
+            .filter((p) => p.slug !== values.slug && !values.relatedProducts.includes(p.slug))
+            .filter((p) => {
+              const q = relatedQuery.trim().toLowerCase()
+              return !q || p.nameEn.toLowerCase().includes(q) || p.slug.includes(q)
+            })
+            .slice(0, 50)
+            .map((p) => (
+              <button
+                key={p.id}
+                type="button"
+                onClick={() => toggleRelated(p.slug)}
+                className="w-full text-left px-3 py-2 text-sm text-cream-muted hover:bg-elevated hover:text-cream"
+              >
+                {p.nameEn}
+              </button>
+            ))}
+        </div>
       </div>
 
       <div className="border border-ds-border rounded-xl p-4 space-y-3">

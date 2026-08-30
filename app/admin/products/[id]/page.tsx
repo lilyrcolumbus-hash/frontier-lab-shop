@@ -12,6 +12,7 @@ export default async function EditProductPage({ params }: { params: { id: string
       <ProductForm
         productId={product.id}
         initial={{
+          slug: product.slug,
           nameEn: product.nameEn,
           nameEs: product.nameEs,
           descriptionEn: product.descriptionEn,
@@ -27,6 +28,7 @@ export default async function EditProductPage({ params }: { params: { id: string
           tags: product.tags,
           status: product.status as 'draft' | 'active' | 'archived',
           collectionIds: product.collections.map((c) => c.id),
+          relatedProducts: product.relatedProducts ?? [],
           variants: product.variants.map((v) => ({ id: v.id, name: v.name, sku: v.sku, price: v.price, stock: v.stock })),
         }}
       />

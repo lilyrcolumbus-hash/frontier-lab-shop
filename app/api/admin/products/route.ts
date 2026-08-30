@@ -27,6 +27,7 @@ const createProductSchema = z.object({
   inStock: z.coerce.boolean().default(true),
   tags: z.array(z.string()).default([]),
   collectionIds: z.array(z.string()).default([]),
+  relatedProducts: z.array(z.string()).default([]),
   variants: z.array(variantSchema).min(1, 'A product needs at least one variant'),
 })
 
@@ -63,7 +64,6 @@ export const POST = withStoreAdmin(async (req, { store }) => {
     data: {
       ...productData,
       storeId: store.id,
-      relatedProducts: [],
       price: parsed.data.price,
       variants: {
         create: variants.map((v) => ({ storeId: store.id, name: v.name, price: v.price, stock: v.stock, sku: v.sku })),
