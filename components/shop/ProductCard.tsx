@@ -5,6 +5,7 @@ import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import { useLocale, useTranslations } from 'next-intl'
 import { Badge } from '@/components/ui/Badge'
 import { Button } from '@/components/ui/Button'
+import { useCartStore } from '@/lib/cart-store'
 import { formatPrice } from '@/lib/utils'
 import type { Product } from '@/types/product'
 
@@ -16,6 +17,26 @@ export function ProductCard({ product }: ProductCardProps) {
   const locale = useLocale() as 'en' | 'es'
   const t = useTranslations('shop.product')
   const tc = useTranslations('common')
+  const { addItem, openCart } = useCartStore()
+
+  // The grid buys the first variant — a product with real options is picked on its own page,
+  // which is why multi-variant cards send the shopper there instead of adding blind.
+  const defaultVariant = product.variants[0]
+  const needsVariantChoice = product.variants.length > 1
+
+  const handleAddToCart = (event: React.MouseEvent) => {
+    event.preventDefault()
+    if (!defaultVariant) return
+    addItem({
+      productId: product.id,
+      variantId: defaultVariant.id,
+      name: product.name[locale],
+      price: defaultVariant.price,
+      quantity: 1,
+      image: product.images[0] ?? '',
+    })
+    openCart()
+  }
 
   const name = product.name[locale]
   const hasDiscount = product.compareAtPrice && product.compareAtPrice > product.price
@@ -110,9 +131,23 @@ export function ProductCard({ product }: ProductCardProps) {
       </Link>
 
       <div className="px-5 pb-5">
-        <Button fullWidth variant="primary" size="sm" disabled={!product.inStock}>
-          {product.inStock ? t('addToCart') : tc('outOfStock')}
-        </Button>
+        {needsVariantChoice ? (
+          <Link href={`/shop/${product.slug}`} className="block">
+            <Button fullWidth variant="primary" size="sm" disabled={!product.inStock}>
+              {product.inStock ? t('chooseOptions') : tc('outOfStock')}
+            </Button>
+          </Link>
+        ) : (
+          <Button
+            fullWidth
+            variant="primary"
+            size="sm"
+            disabled={!product.inStock || !defaultVariant}
+            onClick={handleAddToCart}
+          >
+            {product.inStock ? t('addToCart') : tc('outOfStock')}
+          </Button>
+        )}
       </div>
     </motion.div>
   )

@@ -178,7 +178,8 @@
       "related": "También Necesitarás",
       "breadcrumb": {
         "shop": "Tienda"
-      }
+      },
+      "chooseOptions": "Elegir opciones"
     },
     "cart": {
       "title": "Tu Carrito",
