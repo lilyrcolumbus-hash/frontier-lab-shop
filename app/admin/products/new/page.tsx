@@ -24,6 +24,8 @@ export default function NewProductPage() {
           status: 'draft',
           collectionIds: [],
           relatedProducts: [],
+          metaTitle: '',
+          metaDescription: '',
         }}
       />
     </div>

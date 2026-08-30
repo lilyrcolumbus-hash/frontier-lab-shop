@@ -118,6 +118,11 @@ model Product {
   tags           String[]
   relatedProducts String[]
 
+  // Search-engine overrides. Both are optional and locale-agnostic: the admin is English-only,
+  // and when they are empty the page falls back to the product name and description.
+  metaTitle       String?
+  metaDescription String?
+
   specsDifficulty      String?
   specsColonizationTime String?
   specsFruitingTempF   String?

@@ -24,6 +24,9 @@ export interface ProductFormValues {
   collectionIds: string[]
   /** Slugs of other products shown as "You'll Also Need" on the storefront. */
   relatedProducts: string[]
+  /** Search-engine overrides. Empty means the product name and description are used. */
+  metaTitle: string
+  metaDescription: string
   variants: ProductFormVariant[]
 }
 
@@ -71,6 +74,15 @@ export function ProductForm({
 
   const update = <K extends keyof ProductFormValues>(key: K, value: ProductFormValues[K]) =>
     setValues((v) => ({ ...v, [key]: value }))
+
+  // Mirrors what generateMetadata does on the storefront, so the preview is not a guess.
+  const siteHost = (process.env.NEXT_PUBLIC_SITE_URL ?? 'frontier-lab.com').replace(/^https?:\/\//, '')
+  const seoTitle = values.metaTitle.trim() || values.nameEn
+  const seoDescription =
+    values.metaDescription.trim() ||
+    (values.descriptionEn.length > 160
+      ? `${values.descriptionEn.replace(/\s+/g, ' ').slice(0, 160).trimEnd()}…`
+      : values.descriptionEn)
 
   useEffect(() => {
     fetch('/api/admin/collections')
@@ -513,6 +525,48 @@ export function ProductForm({
                 {p.nameEn}
               </button>
             ))}
+        </div>
+      </div>
+
+      <div className="border border-ds-border rounded-xl p-4 space-y-4">
+        <div>
+          <h3 className="text-sm font-medium text-cream">Search engine listing</h3>
+          <p className="text-xs text-cream-muted/70 mt-1">
+            How this product appears on Google. Leave both empty to use the product name and the
+            first 160 characters of its description.
+          </p>
+        </div>
+
+        <div className="rounded-lg bg-elevated px-4 py-3">
+          <p className="text-xs text-cream-muted/60 truncate">
+            {siteHost}/shop/{values.slug ?? 'product-url'}
+          </p>
+          <p className="text-[15px] text-accent truncate mt-0.5">{seoTitle || 'Product title'}</p>
+          <p className="text-xs text-cream-muted mt-0.5 line-clamp-2">
+            {seoDescription || 'Product description'}
+          </p>
+        </div>
+
+        <div>
+          <Input
+            label="Page title"
+            value={values.metaTitle}
+            maxLength={70}
+            onChange={(e) => update('metaTitle', e.target.value)}
+          />
+          <p className="text-xs text-cream-muted/60 mt-1">{values.metaTitle.length} of 70 characters used</p>
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-cream-muted mb-1.5">Meta description</label>
+          <textarea
+            rows={3}
+            maxLength={160}
+            value={values.metaDescription}
+            onChange={(e) => update('metaDescription', e.target.value)}
+            className="w-full bg-surface border border-ds-border rounded-xl px-4 py-2.5 text-cream text-sm focus:outline-none focus:ring-2 focus:ring-accent/30"
+          />
+          <p className="text-xs text-cream-muted/60 mt-1">{values.metaDescription.length} of 160 characters used</p>
         </div>
       </div>
 

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Bebas_Neue, Playfair_Display, Inter, Cormorant_Garamond, Space_Mono } from 'next/font/google'
 import { getLocale } from 'next-intl/server'
+import { SITE_URL } from '@/lib/site-url'
 import './globals.css'
 
 const bebasNeue = Bebas_Neue({
@@ -45,7 +46,7 @@ export const metadata: Metadata = {
   description:
     "The world's most complete mushroom platform. Cultivate, learn, and connect. Premium grow kits, spawn, and the deepest mushroom encyclopedia online.",
   keywords: ['mushroom grow kits', 'spawn', 'mycology', 'mushroom cultivation', 'lion\'s mane', 'oyster mushrooms'],
-  metadataBase: new URL('https://shrooms.com'),
+  metadataBase: new URL(SITE_URL),
   openGraph: {
     type: 'website',
     locale: 'en_US',
