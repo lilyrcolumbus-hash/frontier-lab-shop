@@ -3,7 +3,9 @@ import { z } from 'zod'
 import { prisma } from '@/lib/prisma'
 import { withStoreAdmin } from '@/lib/with-store-admin'
 
-const ORDER_STATUSES = ['pending', 'paid', 'fulfilled', 'cancelled', 'refunded'] as const
+// Cancelling and refunding go through POST /resolve, which also moves the money and the stock.
+// Accepting them here would let an order be marked refunded without the customer being paid.
+const ORDER_STATUSES = ['pending', 'paid', 'fulfilled'] as const
 
 const updateOrderSchema = z.object({
   status: z.enum(ORDER_STATUSES),
