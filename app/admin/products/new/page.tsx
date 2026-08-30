@@ -17,13 +17,12 @@ export default function NewProductPage() {
           compareAtPrice: null,
           images: [],
           imageAlts: [],
+          variants: [{ name: 'Default', sku: '', price: 0, stock: 0 }],
           isOrganic: false,
           inStock: true,
           tags: [],
           status: 'draft',
           collectionIds: [],
-          sku: '',
-          stock: 0,
         }}
       />
     </div>

@@ -22,8 +22,16 @@ export interface ProductFormValues {
   tags: string[]
   status: 'draft' | 'active' | 'archived'
   collectionIds: string[]
-  sku?: string
-  stock?: number
+  variants: ProductFormVariant[]
+}
+
+export interface ProductFormVariant {
+  /** Absent on a row the admin just added — the API creates it on save. */
+  id?: string
+  name: string
+  sku: string
+  price: number
+  stock: number
 }
 
 interface AvailableCollection {
@@ -133,6 +141,24 @@ export function ProductForm({
       ;[imageAlts[index], imageAlts[target]] = [imageAlts[target] ?? '', imageAlts[index] ?? '']
       return { ...v, images, imageAlts }
     })
+
+  const updateVariant = <K extends keyof ProductFormVariant>(index: number, key: K, value: ProductFormVariant[K]) =>
+    setValues((v) => ({
+      ...v,
+      variants: v.variants.map((variant, i) => (i === index ? { ...variant, [key]: value } : variant)),
+    }))
+
+  const addVariant = () =>
+    setValues((v) => ({
+      ...v,
+      variants: [...v.variants, { name: '', sku: '', price: v.price, stock: 0 }],
+    }))
+
+  // A product always needs at least one variant — that row is what the cart and Stripe charge.
+  const removeVariant = (index: number) =>
+    setValues((v) =>
+      v.variants.length <= 1 ? v : { ...v, variants: v.variants.filter((_, i) => i !== index) }
+    )
 
   const setAlt = (index: number, text: string) =>
     setValues((v) => {
@@ -251,15 +277,64 @@ export function ProductForm({
         />
       </div>
 
-      <div className="grid grid-cols-2 gap-4">
-        <Input label="SKU" value={values.sku ?? ''} onChange={(e) => update('sku', e.target.value)} required />
-        <Input
-          label="Stock (units on hand)"
-          type="number"
-          min={0}
-          value={values.stock ?? 0}
-          onChange={(e) => update('stock', Number(e.target.value))}
-        />
+      <div>
+        <label className="block text-sm font-medium text-cream-muted mb-1.5">Variants</label>
+        <p className="text-xs text-cream-muted mb-3">
+          One row per version of this product a customer can buy — a size, a grain type, a pack
+          count. With a single variant its price follows the product price above. With more than
+          one, each sets its own price and shoppers pick before adding to the cart.
+        </p>
+
+        <div className="space-y-3 mb-3">
+          {values.variants.map((variant, i) => (
+            <div key={variant.id ?? `new-${i}`} className="p-3 rounded-lg border border-ds-border bg-surface">
+              <div className="grid grid-cols-1 sm:grid-cols-4 gap-3">
+                <Input
+                  label="Name"
+                  value={variant.name}
+                  onChange={(e) => updateVariant(i, 'name', e.target.value)}
+                  placeholder="e.g. 10cc syringe"
+                  required
+                />
+                <Input
+                  label="SKU"
+                  value={variant.sku}
+                  onChange={(e) => updateVariant(i, 'sku', e.target.value)}
+                  required
+                />
+                <Input
+                  label={values.variants.length === 1 ? 'Price (follows product)' : 'Price (cents)'}
+                  type="number"
+                  min={0}
+                  value={values.variants.length === 1 ? values.price : variant.price}
+                  disabled={values.variants.length === 1}
+                  onChange={(e) => updateVariant(i, 'price', Number(e.target.value))}
+                />
+                <Input
+                  label="Stock (units on hand)"
+                  type="number"
+                  min={0}
+                  value={variant.stock}
+                  onChange={(e) => updateVariant(i, 'stock', Number(e.target.value))}
+                />
+              </div>
+
+              {values.variants.length > 1 && (
+                <button
+                  type="button"
+                  onClick={() => removeVariant(i)}
+                  className="mt-2 text-xs text-error hover:underline"
+                >
+                  Remove this variant
+                </button>
+              )}
+            </div>
+          ))}
+        </div>
+
+        <Button type="button" variant="outline" size="sm" onClick={addVariant}>
+          Add variant
+        </Button>
       </div>
 
       <div>

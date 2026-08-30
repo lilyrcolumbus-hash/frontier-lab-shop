@@ -31,6 +31,15 @@ export async function POST(req: NextRequest) {
         if (!variant.product.inStock) {
           throw new Error(`${variant.product.nameEn} is currently out of stock.`)
         }
+        // Guard the quantity too, not just the on/off flag — otherwise a cart holding more
+        // units than exist would check out fine and drive stock negative on the webhook.
+        if (variant.stock < item.quantity) {
+          throw new Error(
+            variant.stock > 0
+              ? `Only ${variant.stock} left of ${variant.product.nameEn}.`
+              : `${variant.product.nameEn} is currently out of stock.`
+          )
+        }
 
         return {
           price_data: {

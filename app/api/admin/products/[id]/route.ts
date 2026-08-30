@@ -3,6 +3,14 @@ import { z } from 'zod'
 import { prisma } from '@/lib/prisma'
 import { withStoreAdmin } from '@/lib/with-store-admin'
 
+const variantSchema = z.object({
+  id: z.string().optional(),
+  name: z.string().trim().min(1).max(100),
+  sku: z.string().trim().min(1).max(60),
+  price: z.coerce.number().int().min(0),
+  stock: z.coerce.number().int().min(0),
+})
+
 const updateProductSchema = z.object({
   nameEn: z.string().trim().min(1).max(200),
   nameEs: z.string().trim().min(1).max(200),
@@ -19,8 +27,7 @@ const updateProductSchema = z.object({
   tags: z.array(z.string()).default([]),
   status: z.enum(['draft', 'active', 'archived']).default('draft'),
   collectionIds: z.array(z.string()).default([]),
-  sku: z.string().trim().min(1).max(60).optional(),
-  stock: z.coerce.number().int().min(0).optional(),
+  variants: z.array(variantSchema).min(1).optional(),
 })
 
 export const GET = withStoreAdmin<{ params: { id: string } }>(async (_req, { store }, { params }) => {
@@ -42,7 +49,7 @@ export const PATCH = withStoreAdmin<{ params: { id: string } }>(async (req, { st
   const existing = await prisma.product.findUnique({ where: { id: params.id } })
   if (!existing || existing.storeId !== store.id) return NextResponse.json({ error: 'Not found' }, { status: 404 })
 
-  const { collectionIds, sku, stock, ...updateData } = parsed.data
+  const { collectionIds, variants, ...updateData } = parsed.data
   const ownedCollections = collectionIds.length
     ? await prisma.collection.findMany({ where: { id: { in: collectionIds }, storeId: store.id }, select: { id: true } })
     : []
@@ -56,18 +63,32 @@ export const PATCH = withStoreAdmin<{ params: { id: string } }>(async (req, { st
     include: { variants: true, collections: true },
   })
 
-  // Keep the default variant in sync with the product-level fields — this admin form
-  // doesn't manage multiple variants per product yet (see CLAUDE.md Backlog). SKU and stock
-  // live on the variant, so an edit here has to write through to it.
-  if (product.variants[0]) {
-    await prisma.productVariant.update({
-      where: { id: product.variants[0].id },
-      data: {
-        price: parsed.data.price,
-        ...(sku !== undefined ? { sku } : {}),
-        ...(stock !== undefined ? { stock } : {}),
-      },
+  // Variants are edited as one list: rows with an id are updated, rows without one are new,
+  // and anything missing from the list was removed in the form. OrderItem stores variantId as a
+  // plain string with no foreign key, so deleting a variant never breaks an existing order.
+  if (variants) {
+    const keptIds = variants.filter((v) => v.id).map((v) => v.id as string)
+    await prisma.productVariant.deleteMany({
+      where: { productId: params.id, ...(keptIds.length ? { id: { notIn: keptIds } } : {}) },
     })
+
+    for (const variant of variants) {
+      const data = {
+        name: variant.name,
+        // With a single variant the product price is the price — keeping them in sync avoids a
+        // card showing one number and the buy button charging another. Multi-variant products
+        // price each variant on its own, and the product price is the headline "from" figure.
+        price: variants.length === 1 ? parsed.data.price : variant.price,
+        stock: variant.stock,
+        sku: variant.sku,
+      }
+
+      if (variant.id) {
+        await prisma.productVariant.update({ where: { id: variant.id }, data })
+      } else {
+        await prisma.productVariant.create({ data: { ...data, storeId: store.id, productId: params.id } })
+      }
+    }
   }
 
   return NextResponse.json({ product })

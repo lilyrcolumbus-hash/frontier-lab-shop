@@ -80,7 +80,7 @@ async function recordOrder(session: Stripe.Checkout.Session) {
     : null
   const storeId = variant?.storeId ?? (await getCurrentStoreId())
 
-  await prisma.order.create({
+  const order = await prisma.order.create({
     data: {
       storeId,
       email: session.customer_details?.email?.toLowerCase() ?? 'unknown@frontierlab.com',
@@ -102,4 +102,42 @@ async function recordOrder(session: Stripe.Checkout.Session) {
       },
     },
   })
+
+  await drawDownInventory(items)
+
+  return order
+}
+
+/**
+ * Subtracts what was just sold from the variants' stock, and flips a product to "Sold out"
+ * once every one of its variants is at zero.
+ *
+ * Runs after the order row exists and only on the first delivery of a given payment intent
+ * (recordOrder returns early on retries), so Stripe replaying a webhook cannot double-subtract.
+ * A failure here must not fail the webhook — the payment already succeeded and the order is
+ * saved; a wrong stock number is fixable from the admin, a lost order is not.
+ */
+async function drawDownInventory(items: { variantId: string; quantity: number }[]) {
+  for (const item of items) {
+    if (item.variantId === 'unknown') continue
+
+    try {
+      const variant = await prisma.productVariant.update({
+        where: { id: item.variantId },
+        data: { stock: { decrement: item.quantity } },
+        select: { productId: true },
+      })
+
+      const remaining = await prisma.productVariant.aggregate({
+        where: { productId: variant.productId },
+        _sum: { stock: true },
+      })
+
+      if ((remaining._sum.stock ?? 0) <= 0) {
+        await prisma.product.update({ where: { id: variant.productId }, data: { inStock: false } })
+      }
+    } catch (err) {
+      console.error('Could not draw down stock for variant', item.variantId, err)
+    }
+  }
 }

@@ -27,8 +27,7 @@ export default async function EditProductPage({ params }: { params: { id: string
           tags: product.tags,
           status: product.status as 'draft' | 'active' | 'archived',
           collectionIds: product.collections.map((c) => c.id),
-          sku: product.variants[0]?.sku ?? '',
-          stock: product.variants[0]?.stock ?? 0,
+          variants: product.variants.map((v) => ({ id: v.id, name: v.name, sku: v.sku, price: v.price, stock: v.stock })),
         }}
       />
     </div>
