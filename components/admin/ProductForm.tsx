@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Input } from '@/components/ui/Input'
 import { Button } from '@/components/ui/Button'
+import { SITE_URL } from '@/lib/site-url'
 
 export interface ProductFormValues {
   slug?: string
@@ -76,7 +77,7 @@ export function ProductForm({
     setValues((v) => ({ ...v, [key]: value }))
 
   // Mirrors what generateMetadata does on the storefront, so the preview is not a guess.
-  const siteHost = (process.env.NEXT_PUBLIC_SITE_URL ?? 'frontier-lab.com').replace(/^https?:\/\//, '')
+  const siteHost = SITE_URL.replace(/^https?:\/\//, '')
   const seoTitle = values.metaTitle.trim() || values.nameEn
   const seoDescription =
     values.metaDescription.trim() ||
