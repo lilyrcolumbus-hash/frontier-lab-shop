@@ -32,12 +32,20 @@ export const GET = withStoreAdmin(async (_req, { store }) => {
     // Admin API unavailable — proceed with orders-only data.
   }
 
+  // Tags come from the admin's own notes; a customer with none simply has no profile row.
+  const profiles = await prisma.customerProfile.findMany({
+    where: { storeId: store.id },
+    select: { email: true, tags: true },
+  })
+  const tagsByEmail = new Map(profiles.map((p) => [p.email, p.tags]))
+
   const customers = grouped.map((g) => ({
     email: g.email,
     orderCount: g._count._all,
     totalSpent: g._sum.total ?? 0,
     lastOrderAt: g._max.createdAt,
     registered: registeredEmails.has(g.email.toLowerCase()),
+    tags: tagsByEmail.get(g.email) ?? [],
   }))
 
   return NextResponse.json({ customers })

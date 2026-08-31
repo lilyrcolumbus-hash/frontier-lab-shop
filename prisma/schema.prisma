@@ -31,6 +31,7 @@ model Store {
   orders         Order[]
   orderItems     OrderItem[]
   orderEvents    OrderEvent[]
+  customerProfiles CustomerProfile[]
   journalEntries GrowJournalEntry[]
   wishlistItems  WishlistItem[]
   subscribers    NewsletterSubscriber[]
@@ -41,6 +42,25 @@ model Store {
 
 // Maps a Supabase auth.users.id (bare string — no Prisma-managed User table, same pattern as
 // Order.userId/WishlistItem.userId below) to the Store they administer. One login = one store.
+// A customer is normally derived by grouping orders by email — there is no customer table,
+// because the checkout is guest-only. This holds only what an admin adds by hand about an
+// email address, so a customer with no notes and no tags simply has no row here.
+model CustomerProfile {
+  id        String   @id @default(cuid())
+  storeId   String
+  email     String
+  notes     String   @default("")
+  tags      String[] @default([])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  store Store @relation(fields: [storeId], references: [id])
+
+  @@unique([storeId, email])
+  @@index([storeId])
+  @@map("customer_profiles")
+}
+
 model StoreMember {
   id        String   @id @default(cuid())
   storeId   String

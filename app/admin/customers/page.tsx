@@ -12,18 +12,29 @@ interface AdminCustomer {
   totalSpent: number
   lastOrderAt: string
   registered: boolean
+  tags: string[]
 }
 
 export default function AdminCustomersPage() {
   const { data: customers, error, reload } = useAdminList<AdminCustomer>('/api/admin/customers', 'customers')
   const [query, setQuery] = useState('')
+  const [tag, setTag] = useState('')
+
+  // Every tag in use, so the segment filter offers what actually exists rather than a free
+  // text box that silently matches nothing.
+  const allTags = useMemo(
+    () => Array.from(new Set((customers ?? []).flatMap((c) => c.tags))).sort(),
+    [customers]
+  )
 
   const filtered = useMemo(() => {
     if (!customers) return []
     const q = query.trim().toLowerCase()
-    if (!q) return customers
-    return customers.filter((c) => c.email.toLowerCase().includes(q))
-  }, [customers, query])
+    return customers.filter((c) => {
+      if (tag && !c.tags.includes(tag)) return false
+      return !q || c.email.toLowerCase().includes(q)
+    })
+  }, [customers, query, tag])
 
   const columns: DataTableColumn<AdminCustomer & { id: string }>[] = [
     {
@@ -42,6 +53,16 @@ export default function AdminCustomersPage() {
     },
     { key: 'orders', header: 'Orders', render: (c) => <span className="text-cream-muted">{c.orderCount}</span> },
     {
+      key: 'tags',
+      header: 'Segments',
+      render: (c) =>
+        c.tags.length ? (
+          <span className="text-cream-muted">{c.tags.join(', ')}</span>
+        ) : (
+          <span className="text-cream-muted/50">—</span>
+        ),
+    },
+    {
       key: 'last',
       header: 'Last order',
       render: (c) => <span className="text-cream-muted">{new Date(c.lastOrderAt).toLocaleDateString()}</span>,
@@ -55,7 +76,7 @@ export default function AdminCustomersPage() {
         <h1 className="font-body font-bold text-2xl text-cream">Customers</h1>
       </div>
 
-      <div className="mb-4">
+      <div className="mb-4 flex flex-wrap items-center gap-3">
         <input
           type="text"
           value={query}
@@ -63,6 +84,21 @@ export default function AdminCustomersPage() {
           placeholder="Search by email"
           className="w-full max-w-xs px-3.5 py-2 rounded-lg border border-ds-border bg-surface text-sm text-cream placeholder:text-cream-muted focus:outline-none focus:ring-2 focus:ring-accent/30"
         />
+
+        {allTags.length > 0 && (
+          <select
+            value={tag}
+            onChange={(e) => setTag(e.target.value)}
+            className="px-3.5 py-2 rounded-lg border border-ds-border bg-surface text-sm text-cream"
+          >
+            <option value="">All segments</option>
+            {allTags.map((t) => (
+              <option key={t} value={t}>
+                {t}
+              </option>
+            ))}
+          </select>
+        )}
       </div>
 
       {customers === null ? (
