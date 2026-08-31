@@ -146,8 +146,8 @@ export function AdminShell({
   })).filter((section) => section.items.length > 0)
 
   return (
-    <div className="min-h-screen bg-bg text-cream grid grid-cols-[240px_1fr]">
-      <aside className="border-r border-ds-border bg-surface flex flex-col gap-1 py-5 px-3">
+    <div className="min-h-screen bg-bg text-cream grid grid-cols-[240px_1fr] print:block print:min-h-0 print:bg-white">
+      <aside className="border-r border-ds-border bg-surface flex flex-col gap-1 py-5 px-3 print:hidden">
         <div className="flex items-center gap-2 px-2 pb-5">
           <div className="w-7 h-7 rounded-md bg-accent text-surface flex items-center justify-center text-[11px] font-bold flex-shrink-0">
             {storeName.slice(0, 2).toUpperCase()}
@@ -171,7 +171,7 @@ export function AdminShell({
       </aside>
 
       <div>
-        <div className="border-b border-ds-border bg-surface px-6 py-3.5 flex items-center justify-end gap-4">
+        <div className="border-b border-ds-border bg-surface px-6 py-3.5 flex items-center justify-end gap-4 print:hidden">
           <span className="text-xs text-cream-muted">
             {userEmail}
             <span className="ml-2 text-[10px] uppercase tracking-wider text-cream-muted/60">{role}</span>
