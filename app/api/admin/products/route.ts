@@ -43,7 +43,8 @@ export const GET = withStoreAdmin(async (_req, { store }) => {
     include: { variants: true, collections: { select: { id: true, titleEn: true } } },
     orderBy: { createdAt: 'desc' },
   })
-  return NextResponse.json({ products })
+  // The threshold travels with the list so the table can flag low stock without a second call.
+  return NextResponse.json({ products, lowStockThreshold: store.lowStockThreshold })
 })
 
 export const POST = withStoreAdmin(async (req, { store }) => {

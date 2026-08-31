@@ -26,6 +26,8 @@ export interface OrderEmailInput {
   shippingCountry: string
   items: OrderEmailLine[]
   storeName: string
+  /** Empty when the owner has not set one — the footer line is then left out entirely. */
+  supportEmail: string
 }
 
 /** Escapes values that reach the HTML body — order data is customer-supplied text. */
@@ -66,7 +68,7 @@ function buildHtml(order: OrderEmailInput): string {
     <tr><td align="center">
       <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;background:#F8F9F8;border:1px solid #D2D8D2;">
         <tr><td style="background:#1C2018;padding:20px 24px;">
-          <div style="color:#F4F1EA;font-size:18px;letter-spacing:0.18em;font-weight:700;">FRONTIER LAB</div>
+          <div style="color:#F4F1EA;font-size:18px;letter-spacing:0.18em;font-weight:700;">${escapeHtml(order.storeName.toUpperCase())}</div>
           <div style="color:#9E6820;font-size:11px;letter-spacing:0.22em;margin-top:6px;text-transform:uppercase;">Wild Genetics. Lab Verified.</div>
         </td></tr>
 
@@ -111,7 +113,9 @@ function buildHtml(order: OrderEmailInput): string {
         </td></tr>
 
         <tr><td style="background:#E8ECEA;padding:16px 24px;color:#566458;font-size:12px;line-height:1.6;">
-          Questions about this order? Reply to this email and we will get back to you.
+          Questions about this order? ${
+            order.supportEmail ? `Write to ${escapeHtml(order.supportEmail)}.` : 'Reply to this email and we will get back to you.'
+          }
         </td></tr>
       </table>
     </td></tr>

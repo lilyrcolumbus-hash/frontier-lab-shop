@@ -104,7 +104,7 @@ async function recordOrder(session: Stripe.Checkout.Session) {
         create: items.map((i) => ({ ...i, storeId })),
       },
     },
-    include: { items: true, store: { select: { name: true } } },
+    include: { items: true, store: { select: { name: true, supportEmail: true } } },
   })
 
   await moveInventory(items, -1)
@@ -119,7 +119,12 @@ async function recordOrder(session: Stripe.Checkout.Session) {
   // The payment already succeeded, so a failed email must never fail the webhook: Stripe would
   // retry and the guard above would skip it, leaving the order without its stock movement.
   // A failure is logged here and the admin can re-send from the order page.
-  const emailed = await sendOrderConfirmation({ ...order, orderId: order.id, storeName: order.store.name })
+  const emailed = await sendOrderConfirmation({
+    ...order,
+    orderId: order.id,
+    storeName: order.store.name,
+    supportEmail: order.store.supportEmail,
+  })
   await recordOrderEvent({
     orderId: order.id,
     storeId,

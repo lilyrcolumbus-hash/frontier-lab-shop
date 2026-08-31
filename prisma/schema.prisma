@@ -17,6 +17,18 @@ model Store {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  // Details that appear to customers on packing slips and order emails. Kept here rather than
+  // hardcoded so a rename or a new support address never needs a code change.
+  supportEmail  String  @default("")
+  addressLine1  String  @default("")
+  addressLine2  String  @default("")
+  city          String  @default("")
+  state         String  @default("")
+  postalCode    String  @default("")
+  country       String  @default("US")
+  // Low stock warning threshold: variants at or below this are flagged in the admin. 0 disables.
+  lowStockThreshold Int @default(0)
+
   // Shipping, in cents. A discount code can never cover shipping — Stripe applies discounts to
   // the subtotal only — so free shipping is granted here, at the moment the session is built.
   shippingRate           Int  @default(999)

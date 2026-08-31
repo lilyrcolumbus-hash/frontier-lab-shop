@@ -5,10 +5,19 @@ import { useRouter } from 'next/navigation'
 import { Input } from '@/components/ui/Input'
 import { Button } from '@/components/ui/Button'
 
-interface StoreSettings {
-  /** Both are in cents, the same unit the checkout and Stripe use. */
+export interface StoreSettings {
+  name: string
+  supportEmail: string
+  addressLine1: string
+  addressLine2: string
+  city: string
+  state: string
+  postalCode: string
+  country: string
+  /** Money is in cents, the unit the checkout and Stripe use. */
   shippingRate: number
   freeShippingThreshold: number
+  lowStockThreshold: number
 }
 
 const toDollars = (cents: number) => (cents / 100).toFixed(2)
@@ -16,11 +25,15 @@ const toCents = (dollars: string) => Math.round((Number(dollars) || 0) * 100)
 
 export function SettingsForm({ initial }: { initial: StoreSettings }) {
   const router = useRouter()
+  const [values, setValues] = useState(initial)
   const [shippingRate, setShippingRate] = useState(toDollars(initial.shippingRate))
   const [threshold, setThreshold] = useState(toDollars(initial.freeShippingThreshold))
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState('')
   const [saved, setSaved] = useState(false)
+
+  const update = <K extends keyof StoreSettings>(key: K, value: StoreSettings[K]) =>
+    setValues((v) => ({ ...v, [key]: value }))
 
   const thresholdCents = toCents(threshold)
 
@@ -33,12 +46,16 @@ export function SettingsForm({ initial }: { initial: StoreSettings }) {
     const res = await fetch('/api/admin/settings', {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ shippingRate: toCents(shippingRate), freeShippingThreshold: thresholdCents }),
+      body: JSON.stringify({
+        ...values,
+        shippingRate: toCents(shippingRate),
+        freeShippingThreshold: thresholdCents,
+      }),
     })
 
+    const data = await res.json().catch(() => null)
     setSaving(false)
     if (!res.ok) {
-      const data = await res.json().catch(() => null)
       setError(data?.error ?? 'Could not save the settings')
       return
     }
@@ -46,39 +63,89 @@ export function SettingsForm({ initial }: { initial: StoreSettings }) {
     router.refresh()
   }
 
+  const section = 'bg-surface border border-ds-border rounded-xl p-6 space-y-4'
+
   return (
-    <form onSubmit={handleSubmit} className="bg-surface border border-ds-border rounded-xl p-6 space-y-4">
-      <div>
-        <h2 className="text-sm font-medium text-cream">Shipping</h2>
-        <p className="text-xs text-cream-muted/70 mt-1">
-          Applied to every order at checkout. A discount code can never cover shipping — Stripe
-          discounts the order subtotal only — so free shipping is granted here.
+    <form onSubmit={handleSubmit} className="space-y-6">
+      <div className={section}>
+        <div>
+          <h2 className="text-sm font-medium text-cream">Store details</h2>
+          <p className="text-xs text-cream-muted/70 mt-1">
+            Used on packing slips and order emails, so customers see the right name and know where
+            to reach you.
+          </p>
+        </div>
+
+        <Input label="Store name" value={values.name} onChange={(e) => update('name', e.target.value)} required />
+        <Input
+          label="Support email"
+          type="email"
+          placeholder="you@yourdomain.com"
+          value={values.supportEmail}
+          onChange={(e) => update('supportEmail', e.target.value)}
+        />
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <Input label="Address" value={values.addressLine1} onChange={(e) => update('addressLine1', e.target.value)} />
+          <Input label="Address line 2" value={values.addressLine2} onChange={(e) => update('addressLine2', e.target.value)} />
+          <Input label="City" value={values.city} onChange={(e) => update('city', e.target.value)} />
+          <Input label="State / region" value={values.state} onChange={(e) => update('state', e.target.value)} />
+          <Input label="Postal code" value={values.postalCode} onChange={(e) => update('postalCode', e.target.value)} />
+          <Input label="Country" value={values.country} onChange={(e) => update('country', e.target.value)} />
+        </div>
+      </div>
+
+      <div className={section}>
+        <div>
+          <h2 className="text-sm font-medium text-cream">Shipping</h2>
+          <p className="text-xs text-cream-muted/70 mt-1">
+            Applied to every order at checkout. A discount code can never cover shipping — Stripe
+            discounts the order subtotal only — so free shipping is granted here.
+          </p>
+        </div>
+
+        <Input
+          label="Shipping rate (USD)"
+          type="number"
+          min={0}
+          step={0.01}
+          value={shippingRate}
+          onChange={(e) => setShippingRate(e.target.value)}
+          required
+        />
+        <Input
+          label="Free shipping over (USD)"
+          type="number"
+          min={0}
+          step={0.01}
+          value={threshold}
+          onChange={(e) => setThreshold(e.target.value)}
+        />
+        <p className="text-xs text-cream-muted/70">
+          {thresholdCents > 0
+            ? `Orders of $${toDollars(thresholdCents)} or more ship free.`
+            : 'Set to 0 to charge shipping on every order.'}
         </p>
       </div>
 
-      <Input
-        label="Shipping rate (USD)"
-        type="number"
-        min={0}
-        step={0.01}
-        value={shippingRate}
-        onChange={(e) => setShippingRate(e.target.value)}
-        required
-      />
-
-      <Input
-        label="Free shipping over (USD)"
-        type="number"
-        min={0}
-        step={0.01}
-        value={threshold}
-        onChange={(e) => setThreshold(e.target.value)}
-      />
-      <p className="text-xs text-cream-muted/70">
-        {thresholdCents > 0
-          ? `Orders of $${toDollars(thresholdCents)} or more ship free.`
-          : 'Set to 0 to charge shipping on every order.'}
-      </p>
+      <div className={section}>
+        <div>
+          <h2 className="text-sm font-medium text-cream">Inventory</h2>
+          <p className="text-xs text-cream-muted/70 mt-1">
+            Variants at or below this many units are flagged as low on the products list.
+          </p>
+        </div>
+        <Input
+          label="Low stock warning at"
+          type="number"
+          min={0}
+          value={values.lowStockThreshold}
+          onChange={(e) => update('lowStockThreshold', Number(e.target.value))}
+        />
+        <p className="text-xs text-cream-muted/70">
+          {values.lowStockThreshold > 0 ? 'Set to 0 to turn the warning off.' : 'Warning is off.'}
+        </p>
+      </div>
 
       {error && <p className="text-sm text-error">{error}</p>}
       {saved && <p className="text-sm text-accent">Settings saved.</p>}

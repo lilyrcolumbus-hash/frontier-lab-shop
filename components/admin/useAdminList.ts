@@ -13,6 +13,8 @@ import { useCallback, useEffect, useState } from 'react'
  */
 export function useAdminList<T>(url: string, key: string, timeoutMs = 20000) {
   const [data, setData] = useState<T[] | null>(null)
+  // Some endpoints return more than the list — a threshold, a total — and the caller needs it.
+  const [meta, setMeta] = useState<Record<string, unknown>>({})
   const [error, setError] = useState<string | null>(null)
 
   const load = useCallback(async () => {
@@ -25,6 +27,7 @@ export function useAdminList<T>(url: string, key: string, timeoutMs = 20000) {
         throw new Error(body?.error ?? `Request failed (${response.status})`)
       }
       setData((body?.[key] as T[]) ?? [])
+      setMeta((body as Record<string, unknown>) ?? {})
     } catch (caught) {
       const isTimeout = caught instanceof DOMException && caught.name === 'TimeoutError'
       setError(
@@ -41,5 +44,5 @@ export function useAdminList<T>(url: string, key: string, timeoutMs = 20000) {
     void load()
   }, [load])
 
-  return { data, error, reload: load }
+  return { data, meta, error, reload: load }
 }

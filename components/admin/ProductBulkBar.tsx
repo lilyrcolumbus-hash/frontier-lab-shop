@@ -13,6 +13,7 @@ type BulkAction =
   | { type: 'priceAdjust'; percent: number }
   | { type: 'addCollection'; collectionId: string }
   | { type: 'removeCollection'; collectionId: string }
+  | { type: 'delete'; confirm: 'DELETE' }
 
 /** The action bar that appears once rows are selected in the products table. */
 export function ProductBulkBar({
@@ -152,6 +153,22 @@ export function ProductBulkBar({
             </select>
           </>
         )}
+
+        <span className="w-px h-5 bg-ds-border mx-1" aria-hidden />
+
+        <button
+          type="button"
+          disabled={busy}
+          onClick={() =>
+            apply(
+              { type: 'delete', confirm: 'DELETE' },
+              'Delete these products permanently? Past orders keep their record, but this cannot be undone.'
+            )
+          }
+          className="px-3 py-1.5 rounded-lg border border-error/40 text-xs font-medium text-error hover:bg-error/10 transition-colors disabled:opacity-50"
+        >
+          Delete
+        </button>
 
         <button type="button" onClick={onClear} className="ml-auto text-xs text-cream-muted hover:text-cream underline">
           Clear selection

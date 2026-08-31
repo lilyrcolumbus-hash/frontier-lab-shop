@@ -12,6 +12,7 @@ import { ProductImportButton } from '@/components/admin/ProductImportButton'
 
 interface AdminProduct {
   id: string
+  variants: { id: string; stock: number }[]
   slug: string
   nameEn: string
   category: string
@@ -22,7 +23,8 @@ interface AdminProduct {
 }
 
 export default function AdminProductsPage() {
-  const { data: products, error, reload } = useAdminList<AdminProduct>('/api/admin/products', 'products')
+  const { data: products, meta, error, reload } = useAdminList<AdminProduct>('/api/admin/products', 'products')
+  const lowStockThreshold = Number(meta.lowStockThreshold ?? 0)
   const [query, setQuery] = useState('')
   const [selectedIds, setSelectedIds] = useState<string[]>([])
 
@@ -49,7 +51,17 @@ export default function AdminProductsPage() {
     {
       key: 'inventory',
       header: 'Inventory',
-      render: (p) => <span className="text-cream-muted">{p.inStock ? 'In stock' : 'Out of stock'}</span>,
+      render: (p) => {
+        const units = p.variants.reduce((sum, v) => sum + v.stock, 0)
+        // A warning only means something once the owner has set a threshold in Settings.
+        const isLow = lowStockThreshold > 0 && units > 0 && units <= lowStockThreshold
+        if (!p.inStock) return <span className="text-cream-muted">Out of stock</span>
+        return (
+          <span className={isLow ? 'text-amber' : 'text-cream-muted'}>
+            {units} in stock{isLow && ' · low'}
+          </span>
+        )
+      },
     },
     { key: 'price', header: 'Price', align: 'right', render: (p) => formatPrice(p.price) },
   ]

@@ -11,7 +11,12 @@ export const POST = withStoreAdmin<{ params: { id: string } }>(async (_req, { st
     return NextResponse.json({ error: 'Not found' }, { status: 404 })
   }
 
-  const result = await sendOrderConfirmation({ ...order, orderId: order.id, storeName: store.name })
+  const result = await sendOrderConfirmation({
+    ...order,
+    orderId: order.id,
+    storeName: store.name,
+    supportEmail: store.supportEmail,
+  })
   if (!result.ok) {
     // Nothing is logged on failure: the timeline must not claim an email the customer never got.
     return NextResponse.json({ error: result.error }, { status: 502 })

@@ -12,6 +12,9 @@ const bulkSchema = z.object({
     z.object({ type: z.literal('priceAdjust'), percent: z.coerce.number().min(-90).max(500) }),
     z.object({ type: z.literal('addCollection'), collectionId: z.string().min(1) }),
     z.object({ type: z.literal('removeCollection'), collectionId: z.string().min(1) }),
+    // Deleting is irreversible, so it carries its own confirmation word rather than sharing a
+    // shape with the reversible actions above.
+    z.object({ type: z.literal('delete'), confirm: z.literal('DELETE') }),
   ]),
 })
 
@@ -64,6 +67,14 @@ export const POST = withStoreAdmin(async (req, { store }) => {
           }
         }
       }
+      break
+    }
+
+    case 'delete': {
+      // Variants first: OrderItem holds variantId as a plain string with no foreign key, so a
+      // past order keeps its record of what was sold even after the product is gone.
+      await prisma.productVariant.deleteMany({ where: { productId: { in: ownedIds } } })
+      await prisma.product.deleteMany({ where: { id: { in: ownedIds } } })
       break
     }
 

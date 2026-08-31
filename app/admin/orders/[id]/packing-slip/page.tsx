@@ -13,6 +13,12 @@ export default async function PackingSlipPage({ params }: { params: { id: string
   const order = await prisma.order.findUnique({ where: { id: params.id }, include: { items: true } })
   if (!order || order.storeId !== admin.store.id) notFound()
 
+  // Store details come from Settings so a rename or a new support address never touches code.
+  const store = admin.store
+  const storeAddress = [store.addressLine1, store.city, store.state, store.postalCode]
+    .filter(Boolean)
+    .join(', ')
+
   return (
     <div className="bg-white text-black rounded-xl p-10 max-w-3xl mx-auto print:p-0 print:rounded-none">
       <div className="print:hidden mb-6">
@@ -21,8 +27,8 @@ export default async function PackingSlipPage({ params }: { params: { id: string
 
       <div className="flex justify-between items-start border-b border-black/20 pb-6 mb-6">
         <div>
-          <p className="text-lg font-bold tracking-[0.18em]">FRONTIER LAB</p>
-          <p className="text-xs tracking-[0.2em] uppercase text-black/60 mt-1">Wild Genetics. Lab Verified.</p>
+          <p className="text-lg font-bold tracking-[0.18em]">{store.name.toUpperCase()}</p>
+          {storeAddress && <p className="text-xs text-black/60 mt-1">{storeAddress}</p>}
         </div>
         <div className="text-right text-sm">
           <p className="font-semibold">Packing slip</p>
@@ -86,7 +92,7 @@ export default async function PackingSlipPage({ params }: { params: { id: string
       </div>
 
       <p className="mt-10 text-xs text-black/60 border-t border-black/10 pt-4">
-        Thank you for your order. Questions? {process.env.NEXT_PUBLIC_SUPPORT_EMAIL ?? 'lyhoffllc.info@gmail.com'}
+        Thank you for your order.{store.supportEmail ? ` Questions? ${store.supportEmail}` : ''}
       </p>
     </div>
   )
