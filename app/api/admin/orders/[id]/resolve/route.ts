@@ -71,4 +71,4 @@ export const POST = withStoreAdmin<{ params: { id: string } }>(async (req, { sto
   })
 
   return NextResponse.json({ order: updated })
-})
+}, { requireOwner: true })

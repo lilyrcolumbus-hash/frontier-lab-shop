@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { z } from 'zod'
 import { prisma } from '@/lib/prisma'
 import { withStoreAdmin } from '@/lib/with-store-admin'
+import { syncAutomaticCollectionsForStore } from '@/lib/collection-rules'
 
 const variantSchema = z.object({
   id: z.string().optional(),
@@ -98,6 +99,9 @@ export const PATCH = withStoreAdmin<{ params: { id: string } }>(async (req, { st
       }
     }
   }
+
+  // The category or tags may have just changed what an automatic collection holds.
+  await syncAutomaticCollectionsForStore(store.id)
 
   return NextResponse.json({ product })
 })

@@ -82,4 +82,4 @@ export const POST = withStoreAdmin(async (req) => {
     const message = err instanceof Error ? err.message : 'Could not create the discount code'
     return NextResponse.json({ error: message }, { status: 400 })
   }
-})
+}, { requireOwner: true })

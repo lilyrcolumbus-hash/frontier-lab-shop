@@ -10,7 +10,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   }
 
   return (
-    <AdminShell storeName={admin.store.name} userEmail={admin.user.email ?? ''}>
+    <AdminShell storeName={admin.store.name} userEmail={admin.user.email ?? ''} role={admin.role}>
       {children}
     </AdminShell>
   )

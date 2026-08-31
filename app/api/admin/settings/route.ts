@@ -32,4 +32,4 @@ export const PATCH = withStoreAdmin(async (req, { store }) => {
       freeShippingThreshold: updated.freeShippingThreshold,
     },
   })
-})
+}, { requireOwner: true })

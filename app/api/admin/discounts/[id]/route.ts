@@ -14,4 +14,4 @@ export const PATCH = withStoreAdmin<{ params: { id: string } }>(async (req, _adm
 
   const promotionCode = await stripe.promotionCodes.update(params.id, { active: parsed.data.active })
   return NextResponse.json({ discount: { id: promotionCode.id, active: promotionCode.active } })
-})
+}, { requireOwner: true })

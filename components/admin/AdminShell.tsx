@@ -5,6 +5,8 @@ type NavItem = {
   label: string
   href: string
   icon: React.ReactNode
+  /** Hidden from staff — these pages move money, change settings, or grant access. */
+  ownerOnly?: boolean
 }
 
 const NAV_SECTIONS: { label: string; items: NavItem[] }[] = [
@@ -88,6 +90,7 @@ const NAV_SECTIONS: { label: string; items: NavItem[] }[] = [
       },
       {
         label: 'Discounts',
+        ownerOnly: true,
         href: '/admin/discounts',
         icon: (
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -99,7 +102,20 @@ const NAV_SECTIONS: { label: string; items: NavItem[] }[] = [
         ),
       },
       {
+        label: 'Staff',
+        ownerOnly: true,
+        href: '/admin/staff',
+        icon: (
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+            <circle cx="9" cy="7" r="4" />
+            <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+          </svg>
+        ),
+      },
+      {
         label: 'Settings',
+        ownerOnly: true,
         href: '/admin/settings',
         icon: (
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -115,12 +131,20 @@ const NAV_SECTIONS: { label: string; items: NavItem[] }[] = [
 export function AdminShell({
   storeName,
   userEmail,
+  role,
   children,
 }: {
   storeName: string
   userEmail: string
+  role: 'owner' | 'staff'
   children: React.ReactNode
 }) {
+  // The API enforces this too — hiding a link is a courtesy, never the security boundary.
+  const sections = NAV_SECTIONS.map((section) => ({
+    ...section,
+    items: section.items.filter((item) => role === 'owner' || !item.ownerOnly),
+  })).filter((section) => section.items.length > 0)
+
   return (
     <div className="min-h-screen bg-bg text-cream grid grid-cols-[240px_1fr]">
       <aside className="border-r border-ds-border bg-surface flex flex-col gap-1 py-5 px-3">
@@ -134,7 +158,7 @@ export function AdminShell({
           </div>
         </div>
 
-        {NAV_SECTIONS.map((section) => (
+        {sections.map((section) => (
           <div key={section.label}>
             <div className="px-2 pt-3 pb-1.5 text-[11px] font-semibold uppercase tracking-wider text-cream-muted">
               {section.label}
@@ -148,7 +172,10 @@ export function AdminShell({
 
       <div>
         <div className="border-b border-ds-border bg-surface px-6 py-3.5 flex items-center justify-end gap-4">
-          <span className="text-xs text-cream-muted">{userEmail}</span>
+          <span className="text-xs text-cream-muted">
+            {userEmail}
+            <span className="ml-2 text-[10px] uppercase tracking-wider text-cream-muted/60">{role}</span>
+          </span>
           <AdminSignOutButton />
         </div>
         <div className="max-w-6xl mx-auto px-6 py-10">{children}</div>

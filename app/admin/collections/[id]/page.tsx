@@ -17,6 +17,8 @@ export default async function EditCollectionPage({ params }: { params: { id: str
           descriptionEn: collection.descriptionEn ?? '',
           descriptionEs: collection.descriptionEs ?? '',
           image: collection.image ?? '',
+          ruleField: (collection.ruleField ?? '') as '' | 'category' | 'subcategory' | 'tag',
+          ruleValue: collection.ruleValue ?? '',
         }}
       />
     </div>

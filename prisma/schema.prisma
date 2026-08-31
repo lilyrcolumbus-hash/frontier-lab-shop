@@ -193,6 +193,10 @@ model Collection {
   descriptionEn String?  @db.Text
   descriptionEs String?  @db.Text
   image         String?
+  // An automatic collection derives its products from a rule instead of a hand-picked list:
+  // every product matching the rule belongs, including ones added later. Null means manual.
+  ruleField     String? // 'category' | 'subcategory' | 'tag'
+  ruleValue     String?
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 
