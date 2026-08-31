@@ -23,6 +23,7 @@ export interface ProductFormValues {
   tags: string[]
   status: 'draft' | 'active' | 'archived'
   collectionIds: string[]
+  taxable: boolean
   /** Slugs of other products shown as "You'll Also Need" on the storefront. */
   relatedProducts: string[]
   /** Search-engine overrides. Empty means the product name and description are used. */
@@ -38,6 +39,9 @@ export interface ProductFormVariant {
   sku: string
   price: number
   stock: number
+  /** Both are optional: an empty string means "not recorded", which is not zero. */
+  cost: string
+  weightGrams: string
 }
 
 interface AvailableCollection {
@@ -49,6 +53,15 @@ interface AvailableProduct {
   id: string
   slug: string
   nameEn: string
+}
+
+/** Profit and margin for one variant. Cost is per unit and never shown to shoppers. */
+function marginLabel(priceCents: number, cost: string): string {
+  const costCents = Number(cost)
+  if (cost === '' || !Number.isFinite(costCents)) return 'Enter a cost'
+  if (priceCents <= 0) return '—'
+  const profit = priceCents - costCents
+  return `$${(profit / 100).toFixed(2)} · ${Math.round((profit / priceCents) * 100)}%`
 }
 
 const CATEGORIES = ['kit', 'spawn', 'substrate', 'equipment', 'wellness', 'bundle']
@@ -188,7 +201,7 @@ export function ProductForm({
   const addVariant = () =>
     setValues((v) => ({
       ...v,
-      variants: [...v.variants, { name: '', sku: '', price: v.price, stock: 0 }],
+      variants: [...v.variants, { name: '', sku: '', price: v.price, stock: 0, cost: '', weightGrams: '' }],
     }))
 
   // A product always needs at least one variant — that row is what the cart and Stripe charge.
@@ -219,6 +232,11 @@ export function ProductForm({
         ...values,
         nameEs: values.nameEs || values.nameEn,
         descriptionEs: values.descriptionEs || values.descriptionEn,
+        variants: values.variants.map((v) => ({
+          ...v,
+          cost: v.cost === '' ? null : Number(v.cost),
+          weightGrams: v.weightGrams === '' ? null : Number(v.weightGrams),
+        })),
       }),
     })
     const data = await res.json()
@@ -346,6 +364,31 @@ export function ProductForm({
                 />
               </div>
 
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-3">
+                <Input
+                  label="Cost per item (cents)"
+                  type="number"
+                  min={0}
+                  placeholder="Not recorded"
+                  value={variant.cost}
+                  onChange={(e) => updateVariant(i, 'cost', e.target.value)}
+                />
+                <Input
+                  label="Weight (grams)"
+                  type="number"
+                  min={0}
+                  placeholder="Not recorded"
+                  value={variant.weightGrams}
+                  onChange={(e) => updateVariant(i, 'weightGrams', e.target.value)}
+                />
+                <div>
+                  <label className="block text-sm font-medium text-cream-muted mb-1.5">Margin</label>
+                  <p className="px-4 py-3 rounded-xl border border-ds-border bg-elevated text-sm text-cream">
+                    {marginLabel(values.variants.length === 1 ? values.price : variant.price, variant.cost)}
+                  </p>
+                </div>
+              </div>
+
               {values.variants.length > 1 && (
                 <button
                   type="button"
@@ -448,6 +491,10 @@ export function ProductForm({
         <label className="flex items-center gap-2 text-sm text-cream-muted cursor-pointer">
           <input type="checkbox" checked={values.inStock} onChange={(e) => update('inStock', e.target.checked)} />
           In stock
+        </label>
+        <label className="flex items-center gap-2 text-sm text-cream-muted cursor-pointer">
+          <input type="checkbox" checked={values.taxable} onChange={(e) => update('taxable', e.target.checked)} />
+          Charge tax
         </label>
       </div>
 

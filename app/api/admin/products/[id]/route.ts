@@ -9,6 +9,8 @@ const variantSchema = z.object({
   sku: z.string().trim().min(1).max(60),
   price: z.coerce.number().int().min(0),
   stock: z.coerce.number().int().min(0),
+  cost: z.coerce.number().int().min(0).optional().nullable(),
+  weightGrams: z.coerce.number().int().min(0).optional().nullable(),
 })
 
 const updateProductSchema = z.object({
@@ -30,6 +32,7 @@ const updateProductSchema = z.object({
   relatedProducts: z.array(z.string()).default([]),
   metaTitle: z.string().trim().max(70).optional().nullable(),
   metaDescription: z.string().trim().max(160).optional().nullable(),
+  taxable: z.coerce.boolean().default(true),
   variants: z.array(variantSchema).min(1).optional(),
 })
 
@@ -84,6 +87,8 @@ export const PATCH = withStoreAdmin<{ params: { id: string } }>(async (req, { st
         price: variants.length === 1 ? parsed.data.price : variant.price,
         stock: variant.stock,
         sku: variant.sku,
+        cost: variant.cost ?? null,
+        weightGrams: variant.weightGrams ?? null,
       }
 
       if (variant.id) {

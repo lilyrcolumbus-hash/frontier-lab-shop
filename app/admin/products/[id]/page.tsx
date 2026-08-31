@@ -28,10 +28,19 @@ export default async function EditProductPage({ params }: { params: { id: string
           tags: product.tags,
           status: product.status as 'draft' | 'active' | 'archived',
           collectionIds: product.collections.map((c) => c.id),
+          taxable: product.taxable,
           relatedProducts: product.relatedProducts ?? [],
           metaTitle: product.metaTitle ?? '',
           metaDescription: product.metaDescription ?? '',
-          variants: product.variants.map((v) => ({ id: v.id, name: v.name, sku: v.sku, price: v.price, stock: v.stock })),
+          variants: product.variants.map((v) => ({
+            id: v.id,
+            name: v.name,
+            sku: v.sku,
+            price: v.price,
+            stock: v.stock,
+            cost: v.cost === null ? '' : String(v.cost),
+            weightGrams: v.weightGrams === null ? '' : String(v.weightGrams),
+          })),
         }}
       />
     </div>

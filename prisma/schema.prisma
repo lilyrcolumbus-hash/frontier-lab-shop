@@ -130,6 +130,10 @@ model Product {
   metaTitle       String?
   metaDescription String?
 
+  // Whether sales tax applies to this product. Physical goods are taxable; a digital guide or a
+  // gift card would not be. Nothing calculates tax yet — this records the fact for when it does.
+  taxable Boolean @default(true)
+
   specsDifficulty      String?
   specsColonizationTime String?
   specsFruitingTempF   String?
@@ -187,6 +191,11 @@ model ProductVariant {
   price     Int
   stock     Int     @default(0)
   sku       String  @unique
+  // What this unit costs you, in cents. Never shown to customers — it exists so the admin can
+  // report margin. Null means it has not been entered yet, which is not the same as zero cost.
+  cost        Int?
+  // Shipping weight in grams. Whole grams are enough for a carrier rate and avoid float drift.
+  weightGrams Int?
 
   store   Store  @relation(fields: [storeId], references: [id])
   product Product @relation(fields: [productId], references: [id], onDelete: Cascade)

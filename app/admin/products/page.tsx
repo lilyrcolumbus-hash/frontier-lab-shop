@@ -7,6 +7,8 @@ import { useAdminList } from '@/components/admin/useAdminList'
 import { ListState } from '@/components/admin/ListState'
 import { DataTable, Thumbnail, type DataTableColumn } from '@/components/admin/DataTable'
 import { StatusPill } from '@/components/admin/StatusPill'
+import { ProductBulkBar } from '@/components/admin/ProductBulkBar'
+import { ProductImportButton } from '@/components/admin/ProductImportButton'
 
 interface AdminProduct {
   id: string
@@ -22,6 +24,7 @@ interface AdminProduct {
 export default function AdminProductsPage() {
   const { data: products, error, reload } = useAdminList<AdminProduct>('/api/admin/products', 'products')
   const [query, setQuery] = useState('')
+  const [selectedIds, setSelectedIds] = useState<string[]>([])
 
   const filtered = useMemo(() => {
     if (!products) return []
@@ -55,12 +58,26 @@ export default function AdminProductsPage() {
     <div>
       <div className="flex items-center justify-between mb-6">
         <h1 className="font-body font-bold text-2xl text-cream">Products</h1>
-        <Link
-          href="/admin/products/new"
-          className="px-4 py-2 rounded-lg bg-cream text-surface text-sm font-semibold hover:bg-cream/90 transition-colors"
-        >
-          Add product
-        </Link>
+        <div className="flex items-center gap-2">
+          <ProductImportButton
+            onDone={() => {
+              setSelectedIds([])
+              void reload()
+            }}
+          />
+          <a
+            href="/api/admin/products/export"
+            className="px-4 py-2 rounded-lg border border-ds-border text-sm font-medium text-cream hover:bg-elevated transition-colors"
+          >
+            Export CSV
+          </a>
+          <Link
+            href="/admin/products/new"
+            className="px-4 py-2 rounded-lg bg-cream text-surface text-sm font-semibold hover:bg-cream/90 transition-colors"
+          >
+            Add product
+          </Link>
+        </div>
       </div>
 
       <div className="mb-4">
@@ -73,6 +90,17 @@ export default function AdminProductsPage() {
         />
       </div>
 
+      {selectedIds.length > 0 && (
+        <ProductBulkBar
+          selectedIds={selectedIds}
+          onClear={() => setSelectedIds([])}
+          onDone={() => {
+            setSelectedIds([])
+            void reload()
+          }}
+        />
+      )}
+
       {products === null ? (
         <ListState error={error} onRetry={reload} />
       ) : (
@@ -81,6 +109,7 @@ export default function AdminProductsPage() {
           rows={filtered}
           rowHref={(p) => `/admin/products/${p.id}`}
           emptyLabel={query ? 'No products match your search.' : 'No products yet.'}
+          selection={{ selectedIds, onChange: setSelectedIds }}
         />
       )}
     </div>

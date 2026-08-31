@@ -9,6 +9,8 @@ const variantSchema = z.object({
   sku: z.string().trim().min(1).max(60),
   price: z.coerce.number().int().min(0),
   stock: z.coerce.number().int().min(0),
+  cost: z.coerce.number().int().min(0).optional().nullable(),
+  weightGrams: z.coerce.number().int().min(0).optional().nullable(),
 })
 
 const createProductSchema = z.object({
@@ -30,6 +32,7 @@ const createProductSchema = z.object({
   relatedProducts: z.array(z.string()).default([]),
   metaTitle: z.string().trim().max(70).optional().nullable(),
   metaDescription: z.string().trim().max(160).optional().nullable(),
+  taxable: z.coerce.boolean().default(true),
   variants: z.array(variantSchema).min(1, 'A product needs at least one variant'),
 })
 
@@ -68,7 +71,15 @@ export const POST = withStoreAdmin(async (req, { store }) => {
       storeId: store.id,
       price: parsed.data.price,
       variants: {
-        create: variants.map((v) => ({ storeId: store.id, name: v.name, price: v.price, stock: v.stock, sku: v.sku })),
+        create: variants.map((v) => ({
+          storeId: store.id,
+          name: v.name,
+          price: v.price,
+          stock: v.stock,
+          sku: v.sku,
+          cost: v.cost ?? null,
+          weightGrams: v.weightGrams ?? null,
+        })),
       },
       collections: { connect: ownedCollections.map((c) => ({ id: c.id })) },
     },
