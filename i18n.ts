@@ -1,4 +1,5 @@
 import { getRequestConfig } from 'next-intl/server'
+import { applyContentOverrides } from '@/lib/site-content'
 
 export const locales = ['en', 'es'] as const
 export type Locale = (typeof locales)[number]
@@ -12,8 +13,10 @@ export default getRequestConfig(async ({ requestLocale }) => {
   if (!locale || !locales.includes(locale as Locale)) {
     locale = defaultLocale
   }
+  const messages = (await import(`./messages/${locale}.json`)).default
   return {
     locale,
-    messages: (await import(`./messages/${locale}.json`)).default,
+    // Anything the owner has edited in /admin/content wins over the shipped text.
+    messages: await applyContentOverrides(messages, locale),
   }
 })

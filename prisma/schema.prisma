@@ -32,6 +32,7 @@ model Store {
   orderItems     OrderItem[]
   orderEvents    OrderEvent[]
   customerProfiles CustomerProfile[]
+  siteContent      SiteContent[]
   journalEntries GrowJournalEntry[]
   wishlistItems  WishlistItem[]
   subscribers    NewsletterSubscriber[]
@@ -59,6 +60,24 @@ model CustomerProfile {
   @@unique([storeId, email])
   @@index([storeId])
   @@map("customer_profiles")
+}
+
+// One override for one translation key, e.g. "home.hero.title". Only keys the owner has
+// actually edited get a row; everything else falls back to the text shipped in messages/*.json,
+// so the site never depends on this table being complete.
+model SiteContent {
+  id        String   @id @default(cuid())
+  storeId   String
+  key       String
+  valueEn   String   @db.Text
+  valueEs   String   @db.Text
+  updatedAt DateTime @updatedAt
+
+  store Store @relation(fields: [storeId], references: [id])
+
+  @@unique([storeId, key])
+  @@index([storeId])
+  @@map("site_content")
 }
 
 model StoreMember {
