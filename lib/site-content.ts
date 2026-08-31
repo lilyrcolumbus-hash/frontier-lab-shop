@@ -41,27 +41,18 @@ function setPath(target: Messages, path: string, value: string): void {
   if (typeof node[leaf] === 'string') node[leaf] = value
 }
 
-// i18n runs on every request, so the overrides are held briefly in memory rather than queried
-// each time. Each serverless instance keeps its own copy and refreshes on its own; an edit in
-// the admin shows up within a minute, which the admin page says out loud.
-const CACHE_TTL_MS = 60_000
-let cache: { at: number; rows: { key: string; valueEn: string; valueEs: string }[] } | null = null
-
+// Read on every render rather than held in a timed cache. Rendered pages are already cached by
+// Next, so this query runs only when a page is actually rebuilt — and saving content in the
+// admin revalidates those pages, which is what makes an edit appear. A time-based cache here
+// would fight that: a stale instance could rebuild a page with old text and cache the result.
 async function loadOverrides() {
-  if (cache && Date.now() - cache.at < CACHE_TTL_MS) return cache.rows
   try {
-    const rows = await prisma.siteContent.findMany({ select: { key: true, valueEn: true, valueEs: true } })
-    cache = { at: Date.now(), rows }
-    return rows
+    return await prisma.siteContent.findMany({ select: { key: true, valueEn: true, valueEs: true } })
   } catch (err) {
+    // The site must survive a database problem by falling back to the text it shipped with.
     console.error('[site-content] could not load overrides, using the shipped text', err)
-    return cache?.rows ?? []
+    return []
   }
-}
-
-/** Drops the cache so the next request re-reads — called right after an admin saves. */
-export function invalidateContentCache(): void {
-  cache = null
 }
 
 export async function applyContentOverrides(messages: Messages, locale: string): Promise<Messages> {

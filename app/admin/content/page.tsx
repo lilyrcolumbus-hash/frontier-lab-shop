@@ -52,8 +52,8 @@ export default function AdminContentPage() {
         with; clear both to undo an edit.
       </p>
       <p className="text-xs text-cream-muted/70 mb-6">
-        Saved changes appear on the site within a minute. {editedCount} of {entries?.length ?? 0}{' '}
-        edited so far.
+        Saving rebuilds the affected pages, so a change is live straight away. {editedCount} of{' '}
+        {entries?.length ?? 0} edited so far.
       </p>
 
       <div className="mb-4 flex flex-wrap items-center gap-3">

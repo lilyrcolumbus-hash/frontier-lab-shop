@@ -1,8 +1,9 @@
 import { NextResponse } from 'next/server'
+import { revalidatePath } from 'next/cache'
 import { z } from 'zod'
 import { prisma } from '@/lib/prisma'
 import { withStoreAdmin } from '@/lib/with-store-admin'
-import { flattenMessages, invalidateContentCache, type Messages } from '@/lib/site-content'
+import { flattenMessages, type Messages } from '@/lib/site-content'
 import enMessages from '@/messages/en.json'
 import esMessages from '@/messages/es.json'
 
@@ -59,7 +60,9 @@ export const PUT = withStoreAdmin(async (req, { store }) => {
   // Clearing both boxes removes the override entirely and restores the shipped text.
   if (valueEn.trim() === '' && valueEs.trim() === '') {
     await prisma.siteContent.deleteMany({ where: { storeId: store.id, key } })
-    invalidateContentCache()
+    // Storefront pages are cached with their text already rendered in, so they have to be
+    // rebuilt for an edit to show. 'layout' covers every page under the root layout.
+    revalidatePath('/', 'layout')
     return NextResponse.json({ reset: true })
   }
 
@@ -68,7 +71,7 @@ export const PUT = withStoreAdmin(async (req, { store }) => {
     update: { valueEn, valueEs },
     create: { storeId: store.id, key, valueEn, valueEs },
   })
-  invalidateContentCache()
+  revalidatePath('/', 'layout')
 
   return NextResponse.json({ content })
 })
