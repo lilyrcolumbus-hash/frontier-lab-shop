@@ -4,6 +4,7 @@ import { prisma } from '@/lib/prisma'
 import { stripe } from '@/lib/stripe'
 import { moveInventory } from '@/lib/inventory'
 import { withStoreAdmin } from '@/lib/with-store-admin'
+import { recordOrderEvent } from '@/lib/order-events'
 
 const resolveSchema = z.object({ action: z.enum(['cancel', 'refund']) })
 
@@ -14,7 +15,7 @@ const CLOSED_STATUSES = ['cancelled', 'refunded']
  * they are separate endpoints instead of options in the status dropdown. Setting a status by
  * hand is bookkeeping; this actually refunds the customer in Stripe and puts the units back.
  */
-export const POST = withStoreAdmin<{ params: { id: string } }>(async (req, { store }, { params }) => {
+export const POST = withStoreAdmin<{ params: { id: string } }>(async (req, { store, user }, { params }) => {
   const body = await req.json().catch(() => null)
   const parsed = resolveSchema.safeParse(body)
   if (!parsed.success) {
@@ -57,6 +58,17 @@ export const POST = withStoreAdmin<{ params: { id: string } }>(async (req, { sto
     order.items.map((i) => ({ variantId: i.variantId, quantity: i.quantity })),
     1
   )
+
+  await recordOrderEvent({
+    orderId: order.id,
+    storeId: store.id,
+    type: status === 'refunded' ? 'refunded' : 'cancelled',
+    message:
+      status === 'refunded'
+        ? `Refunded ${(order.total / 100).toFixed(2)} USD through Stripe and returned the items to stock`
+        : 'Order cancelled and the items returned to stock',
+    actorEmail: user.email,
+  })
 
   return NextResponse.json({ order: updated })
 })

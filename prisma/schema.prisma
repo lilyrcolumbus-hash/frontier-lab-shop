@@ -30,6 +30,7 @@ model Store {
   variants       ProductVariant[]
   orders         Order[]
   orderItems     OrderItem[]
+  orderEvents    OrderEvent[]
   journalEntries GrowJournalEntry[]
   wishlistItems  WishlistItem[]
   subscribers    NewsletterSubscriber[]
@@ -216,12 +217,33 @@ model Order {
   createdAt             DateTime @default(now())
   updatedAt             DateTime @updatedAt
 
-  store Store      @relation(fields: [storeId], references: [id])
-  items OrderItem[]
+  store  Store        @relation(fields: [storeId], references: [id])
+  items  OrderItem[]
+  events OrderEvent[]
 
   @@index([storeId])
   @@index([email])
   @@map("orders")
+}
+
+// Append-only history of everything that happened to an order: placed, fulfilled, tracking
+// added, cancelled, refunded, email sent. Never edited or deleted — it exists so a dispute can
+// be answered with what actually happened and who did it.
+model OrderEvent {
+  id         String   @id @default(cuid())
+  storeId    String
+  orderId    String
+  type       String // 'placed' | 'status' | 'fulfilment' | 'tracking' | 'cancelled' | 'refunded' | 'email' | 'note'
+  message    String
+  actorEmail String? // null when the system wrote it (the Stripe webhook)
+  createdAt  DateTime @default(now())
+
+  order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  store Store @relation(fields: [storeId], references: [id])
+
+  @@index([orderId])
+  @@index([storeId])
+  @@map("order_events")
 }
 
 model OrderItem {
@@ -234,6 +256,9 @@ model OrderItem {
   price     Int
   quantity  Int
   image     String
+  // Units already shipped. Partial fulfilment is normal when one line is out of stock: the
+  // order stays open until every line has caught up with its quantity.
+  fulfilledQuantity Int @default(0)
 
   store Store @relation(fields: [storeId], references: [id])
   order Order  @relation(fields: [orderId], references: [id], onDelete: Cascade)

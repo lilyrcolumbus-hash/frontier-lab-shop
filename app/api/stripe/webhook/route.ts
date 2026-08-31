@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server'
 import Stripe from 'stripe'
 import { prisma } from '@/lib/prisma'
 import { moveInventory } from '@/lib/inventory'
+import { recordOrderEvent } from '@/lib/order-events'
+import { sendOrderConfirmation } from '@/lib/order-email'
 import { getCurrentStoreId } from '@/lib/current-store'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: '2024-06-20' })
@@ -102,9 +104,30 @@ async function recordOrder(session: Stripe.Checkout.Session) {
         create: items.map((i) => ({ ...i, storeId })),
       },
     },
+    include: { items: true, store: { select: { name: true } } },
   })
 
   await moveInventory(items, -1)
+
+  await recordOrderEvent({
+    orderId: order.id,
+    storeId,
+    type: 'placed',
+    message: `Order placed and paid — ${(order.total / 100).toFixed(2)} USD`,
+  })
+
+  // The payment already succeeded, so a failed email must never fail the webhook: Stripe would
+  // retry and the guard above would skip it, leaving the order without its stock movement.
+  // A failure is logged here and the admin can re-send from the order page.
+  const emailed = await sendOrderConfirmation({ ...order, orderId: order.id, storeName: order.store.name })
+  await recordOrderEvent({
+    orderId: order.id,
+    storeId,
+    type: 'email',
+    message: emailed.ok
+      ? `Confirmation email sent to ${order.email}`
+      : `Confirmation email could not be sent — ${emailed.error}`,
+  })
 
   return order
 }

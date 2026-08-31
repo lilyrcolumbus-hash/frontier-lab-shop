@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { z } from 'zod'
 import { prisma } from '@/lib/prisma'
 import { withStoreAdmin } from '@/lib/with-store-admin'
+import { recordOrderEvent } from '@/lib/order-events'
 
 // Cancelling and refunding go through POST /resolve, which also moves the money and the stock.
 // Accepting them here would let an order be marked refunded without the customer being paid.
@@ -18,7 +19,7 @@ export const GET = withStoreAdmin<{ params: { id: string } }>(async (_req, { sto
   return NextResponse.json({ order })
 })
 
-export const PATCH = withStoreAdmin<{ params: { id: string } }>(async (req, { store }, { params }) => {
+export const PATCH = withStoreAdmin<{ params: { id: string } }>(async (req, { store, user }, { params }) => {
   const body = await req.json().catch(() => null)
   const parsed = updateOrderSchema.safeParse(body)
   if (!parsed.success) {
@@ -33,6 +34,26 @@ export const PATCH = withStoreAdmin<{ params: { id: string } }>(async (req, { st
     data: parsed.data,
     include: { items: true },
   })
+
+  // Only log what actually changed — a save that changed nothing should not add noise.
+  if (order.status !== existing.status) {
+    await recordOrderEvent({
+      orderId: order.id,
+      storeId: store.id,
+      type: 'status',
+      message: `Status changed from ${existing.status} to ${order.status}`,
+      actorEmail: user.email,
+    })
+  }
+  if ((order.trackingNumber ?? '') !== (existing.trackingNumber ?? '')) {
+    await recordOrderEvent({
+      orderId: order.id,
+      storeId: store.id,
+      type: 'tracking',
+      message: order.trackingNumber ? `Tracking number set to ${order.trackingNumber}` : 'Tracking number removed',
+      actorEmail: user.email,
+    })
+  }
 
   return NextResponse.json({ order })
 })

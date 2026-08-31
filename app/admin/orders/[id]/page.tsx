@@ -4,6 +4,9 @@ import { requireStoreAdmin } from '@/lib/require-store-admin'
 import { formatPrice } from '@/lib/utils'
 import { StatusPill } from '@/components/admin/StatusPill'
 import { OrderStatusForm } from '@/components/admin/OrderStatusForm'
+import { OrderTimeline } from '@/components/admin/OrderTimeline'
+import { OrderFulfilmentForm } from '@/components/admin/OrderFulfilmentForm'
+import { OrderEmailButton } from '@/components/admin/OrderEmailButton'
 
 export default async function AdminOrderDetailPage({ params }: { params: { id: string } }) {
   const admin = await requireStoreAdmin()
@@ -11,9 +14,11 @@ export default async function AdminOrderDetailPage({ params }: { params: { id: s
 
   const order = await prisma.order.findUnique({
     where: { id: params.id },
-    include: { items: true },
+    include: { items: true, events: { orderBy: { createdAt: 'desc' } } },
   })
   if (!order || order.storeId !== admin.store.id) notFound()
+
+  const isClosed = order.status === 'cancelled' || order.status === 'refunded'
 
   return (
     <div className="max-w-4xl">
@@ -24,7 +29,15 @@ export default async function AdminOrderDetailPage({ params }: { params: { id: s
             {order.email} · {new Date(order.createdAt).toLocaleString()}
           </p>
         </div>
-        <StatusPill status={order.status} />
+        <div className="flex items-center gap-3">
+          <a
+            href={`/admin/orders/${order.id}/packing-slip`}
+            className="px-4 py-2 rounded-full border border-ds-border text-sm font-medium text-cream hover:bg-elevated transition-colors"
+          >
+            Packing slip
+          </a>
+          <StatusPill status={order.status} />
+        </div>
       </div>
 
       <div className="grid grid-cols-3 gap-6">
@@ -35,6 +48,7 @@ export default async function AdminOrderDetailPage({ params }: { params: { id: s
                 <tr>
                   <th className="text-left px-4 py-3 font-medium text-[11px] uppercase tracking-wider">Item</th>
                   <th className="text-left px-4 py-3 font-medium text-[11px] uppercase tracking-wider">Qty</th>
+                  <th className="text-left px-4 py-3 font-medium text-[11px] uppercase tracking-wider">Shipped</th>
                   <th className="text-right px-4 py-3 font-medium text-[11px] uppercase tracking-wider">Price</th>
                 </tr>
               </thead>
@@ -49,6 +63,12 @@ export default async function AdminOrderDetailPage({ params }: { params: { id: s
                       <span className="text-cream">{item.name}</span>
                     </td>
                     <td className="px-4 py-3 text-cream-muted">{item.quantity}</td>
+                    <td className="px-4 py-3 text-cream-muted">
+                      {item.fulfilledQuantity}
+                      {item.fulfilledQuantity > 0 && item.fulfilledQuantity < item.quantity && (
+                        <span className="ml-2 text-[11px] text-amber">partial</span>
+                      )}
+                    </td>
                     <td className="px-4 py-3 text-right text-cream">{formatPrice(item.price)}</td>
                   </tr>
                 ))}
@@ -87,12 +107,30 @@ export default async function AdminOrderDetailPage({ params }: { params: { id: s
           </div>
         </div>
 
-        <div>
+        <div className="space-y-6">
           <OrderStatusForm
             orderId={order.id}
             initialStatus={order.status}
             initialTrackingNumber={order.trackingNumber}
           />
+
+          <OrderFulfilmentForm
+            orderId={order.id}
+            items={order.items.map((i) => ({
+              id: i.id,
+              name: i.name,
+              quantity: i.quantity,
+              fulfilledQuantity: i.fulfilledQuantity,
+            }))}
+            disabled={isClosed}
+          />
+
+          <div className="bg-surface border border-ds-border rounded-xl p-5">
+            <h2 className="font-semibold text-cream text-sm mb-3">Customer email</h2>
+            <OrderEmailButton orderId={order.id} email={order.email} />
+          </div>
+
+          <OrderTimeline events={order.events} />
         </div>
       </div>
     </div>
