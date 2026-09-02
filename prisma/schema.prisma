@@ -70,6 +70,7 @@ model Store {
   giftCards        GiftCard[]
   locations        Location[]
   inventoryLevels  InventoryLevel[]
+  emailTemplates   EmailTemplate[]
   journalEntries GrowJournalEntry[]
   wishlistItems  WishlistItem[]
   subscribers    NewsletterSubscriber[]
@@ -293,6 +294,29 @@ model InventoryLevel {
   @@unique([variantId, locationId])
   @@index([storeId])
   @@map("inventory_levels")
+}
+
+// An editable version of a transactional email. Only the wording is stored — the layout, the
+// order table and the totals are built in code, so a saved template can never break an email.
+model EmailTemplate {
+  id        String   @id @default(cuid())
+  storeId   String
+  key       String // 'orderConfirmation'
+  subjectEn String   @default("")
+  subjectEs String   @default("")
+  headingEn String   @default("")
+  headingEs String   @default("")
+  introEn   String   @default("") @db.Text
+  introEs   String   @default("") @db.Text
+  footerEn  String   @default("") @db.Text
+  footerEs  String   @default("") @db.Text
+  updatedAt DateTime @updatedAt
+
+  store Store @relation(fields: [storeId], references: [id])
+
+  @@unique([storeId, key])
+  @@index([storeId])
+  @@map("email_templates")
 }
 
 model StoreMember {

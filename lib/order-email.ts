@@ -1,6 +1,7 @@
 import { Resend } from 'resend'
 import { formatPrice } from '@/lib/utils'
 import { SITE_URL } from '@/lib/site-url'
+import { resolveEmailTemplate, type ResolvedTemplate } from '@/lib/email-templates'
 
 interface OrderEmailLine {
   name: string
@@ -28,6 +29,8 @@ export interface OrderEmailInput {
   storeName: string
   /** Empty when the owner has not set one — the footer line is then left out entirely. */
   supportEmail: string
+  /** Which language the buyer saw at checkout. */
+  locale?: 'en' | 'es'
 }
 
 /** Escapes values that reach the HTML body — order data is customer-supplied text. */
@@ -39,7 +42,7 @@ function escapeHtml(value: string): string {
     .replace(/"/g, '&quot;')
 }
 
-function buildHtml(order: OrderEmailInput): string {
+function buildHtml(order: OrderEmailInput, copy: ResolvedTemplate): string {
   const rows = order.items
     .map(
       (item) => `
@@ -73,10 +76,11 @@ function buildHtml(order: OrderEmailInput): string {
         </td></tr>
 
         <tr><td style="padding:28px 24px 8px;">
-          <h1 style="margin:0 0 6px;font-size:20px;color:#1C2018;">Thank you for your order</h1>
+          <h1 style="margin:0 0 6px;font-size:20px;color:#1C2018;">${escapeHtml(copy.heading)}</h1>
           <p style="margin:0;color:#566458;font-size:14px;">
             Order #${escapeHtml(order.orderId.slice(-8))} · ${order.createdAt.toDateString()}
           </p>
+          ${copy.intro ? `<p style="margin:12px 0 0;color:#566458;font-size:14px;line-height:1.6;">${escapeHtml(copy.intro)}</p>` : ''}
         </td></tr>
 
         <tr><td style="padding:16px 24px 0;">
@@ -113,9 +117,7 @@ function buildHtml(order: OrderEmailInput): string {
         </td></tr>
 
         <tr><td style="background:#E8ECEA;padding:16px 24px;color:#566458;font-size:12px;line-height:1.6;">
-          Questions about this order? ${
-            order.supportEmail ? `Write to ${escapeHtml(order.supportEmail)}.` : 'Reply to this email and we will get back to you.'
-          }
+          ${escapeHtml(copy.footer)}${order.supportEmail ? ` ${escapeHtml(order.supportEmail)}` : ''}
         </td></tr>
       </table>
     </td></tr>
@@ -123,10 +125,10 @@ function buildHtml(order: OrderEmailInput): string {
 </body></html>`
 }
 
-function buildText(order: OrderEmailInput): string {
+function buildText(order: OrderEmailInput, copy: ResolvedTemplate): string {
   const lines = order.items.map((i) => `- ${i.name} x ${i.quantity}  ${formatPrice(i.price * i.quantity)}`).join('\n')
   return [
-    `Thank you for your order`,
+    copy.heading,
     `Order #${order.orderId.slice(-8)} · ${order.createdAt.toDateString()}`,
     '',
     lines,
@@ -162,12 +164,17 @@ export async function sendOrderConfirmation(
   }
 
   try {
+    const copy = await resolveEmailTemplate('orderConfirmation', order.locale ?? 'en', {
+      store: order.storeName,
+      number: order.orderId.slice(-8),
+    })
+
     const { error } = await new Resend(apiKey).emails.send({
       from,
       to: order.email,
-      subject: `Your ${order.storeName} order #${order.orderId.slice(-8)}`,
-      html: buildHtml(order),
-      text: buildText(order),
+      subject: copy.subject,
+      html: buildHtml(order, copy),
+      text: buildText(order, copy),
     })
     if (error) {
       console.error('[order-email] Resend rejected the message', error)
