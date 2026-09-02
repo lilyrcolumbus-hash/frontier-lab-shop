@@ -102,6 +102,39 @@ const NAV_SECTIONS: { label: string; items: NavItem[] }[] = [
         ),
       },
       {
+        label: 'Pages',
+        ownerOnly: true,
+        href: '/admin/pages',
+        icon: (
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z" />
+            <path d="M14 2v6h6" />
+          </svg>
+        ),
+      },
+      {
+        label: 'Blog',
+        ownerOnly: true,
+        href: '/admin/blog',
+        icon: (
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-4 0v-9h4" />
+            <path d="M18 14h-8M15 18h-5M10 6h8v4h-8Z" />
+          </svg>
+        ),
+      },
+      {
+        label: 'Home page',
+        ownerOnly: true,
+        href: '/admin/appearance',
+        icon: (
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z" />
+            <path d="M9 22V12h6v10" />
+          </svg>
+        ),
+      },
+      {
         label: 'Content',
         ownerOnly: true,
         href: '/admin/content',

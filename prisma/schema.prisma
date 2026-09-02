@@ -40,6 +40,11 @@ model Store {
   themeElevated  String @default("")
   themeBorder    String @default("")
 
+  // ISO 4217, lower case, as Stripe expects it. Changing this does not convert existing prices.
+  currency String @default("usd")
+  // The public domain, once one is connected — used for canonical links, the sitemap and emails.
+  domain   String @default("")
+
   // Shipping, in cents. A discount code can never cover shipping — Stripe applies discounts to
   // the subtotal only — so free shipping is granted here, at the moment the session is built.
   shippingRate           Int  @default(999)
@@ -56,6 +61,15 @@ model Store {
   orderEvents    OrderEvent[]
   customerProfiles CustomerProfile[]
   siteContent      SiteContent[]
+  pages            Page[]
+  posts            Post[]
+  homeSections     HomeSection[]
+  taxRates         TaxRate[]
+  shippingZones    ShippingZone[]
+  shippingRates    ShippingRate[]
+  giftCards        GiftCard[]
+  locations        Location[]
+  inventoryLevels  InventoryLevel[]
   journalEntries GrowJournalEntry[]
   wishlistItems  WishlistItem[]
   subscribers    NewsletterSubscriber[]
@@ -101,6 +115,184 @@ model SiteContent {
   @@unique([storeId, key])
   @@index([storeId])
   @@map("site_content")
+}
+
+
+// ── Content ───────────────────────────────────────────────────────────────────
+
+// A page the owner composes from blocks in /admin/pages. Replaces having page copy live in
+// .tsx files, which is why the legal pages could not be edited from the panel.
+model Page {
+  id              String   @id @default(cuid())
+  storeId         String
+  slug            String
+  titleEn         String
+  titleEs         String
+  // Array of { id, type, data } — see lib/page-blocks.ts for the shapes each type accepts.
+  blocks          Json     @default("[]")
+  status          String   @default("draft") // 'draft' | 'active'
+  metaTitle       String?
+  metaDescription String?
+  showInFooter    Boolean  @default(false)
+  sortOrder       Int      @default(0)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  store Store @relation(fields: [storeId], references: [id])
+
+  @@unique([storeId, slug])
+  @@index([storeId])
+  @@map("pages")
+}
+
+model Post {
+  id              String    @id @default(cuid())
+  storeId         String
+  slug            String
+  titleEn         String
+  titleEs         String
+  excerptEn       String    @default("") @db.Text
+  excerptEs       String    @default("") @db.Text
+  bodyEn          String    @default("") @db.Text
+  bodyEs          String    @default("") @db.Text
+  coverImage      String?
+  status          String    @default("draft") // 'draft' | 'active'
+  publishedAt     DateTime?
+  metaTitle       String?
+  metaDescription String?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  store Store @relation(fields: [storeId], references: [id])
+
+  @@unique([storeId, slug])
+  @@index([storeId])
+  @@map("posts")
+}
+
+// Which blocks the home page shows and in what order. Rows are created on first visit to
+// /admin/appearance from the known section keys, so the code stays the source of what exists.
+model HomeSection {
+  id        String  @id @default(cuid())
+  storeId   String
+  key       String
+  enabled   Boolean @default(true)
+  sortOrder Int     @default(0)
+
+  store Store @relation(fields: [storeId], references: [id])
+
+  @@unique([storeId, key])
+  @@index([storeId])
+  @@map("home_sections")
+}
+
+// ── Commerce settings ─────────────────────────────────────────────────────────
+
+// Sales tax applied at checkout. Stored in basis points (825 = 8.25%) to avoid float drift.
+model TaxRate {
+  id          String  @id @default(cuid())
+  storeId     String
+  name        String
+  country     String
+  // Null means the rate covers the whole country rather than one state or region.
+  state       String?
+  basisPoints Int
+  enabled     Boolean @default(true)
+
+  store Store @relation(fields: [storeId], references: [id])
+
+  @@index([storeId])
+  @@map("tax_rates")
+}
+
+model ShippingZone {
+  id        String   @id @default(cuid())
+  storeId   String
+  name      String
+  countries String[]
+  sortOrder Int      @default(0)
+
+  store Store          @relation(fields: [storeId], references: [id])
+  rates ShippingRate[]
+
+  @@index([storeId])
+  @@map("shipping_zones")
+}
+
+// A rate inside a zone. The bounds are optional and inclusive-exclusive: a rate applies when the
+// order's subtotal and weight both fall inside whatever bounds are set.
+model ShippingRate {
+  id             String  @id @default(cuid())
+  storeId        String
+  zoneId         String
+  name           String
+  amount         Int
+  minSubtotal    Int?
+  maxSubtotal    Int?
+  minWeightGrams Int?
+  maxWeightGrams Int?
+  minDays        Int     @default(3)
+  maxDays        Int     @default(5)
+  sortOrder      Int     @default(0)
+
+  store Store        @relation(fields: [storeId], references: [id])
+  zone  ShippingZone @relation(fields: [zoneId], references: [id], onDelete: Cascade)
+
+  @@index([storeId])
+  @@index([zoneId])
+  @@map("shipping_rates")
+}
+
+// Balance is what remains; initialAmount never changes, so the history is readable from the row.
+model GiftCard {
+  id            String    @id @default(cuid())
+  storeId       String
+  code          String    @unique
+  initialAmount Int
+  balance       Int
+  status        String    @default("active") // 'active' | 'disabled'
+  note          String    @default("")
+  expiresAt     DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  store Store @relation(fields: [storeId], references: [id])
+
+  @@index([storeId])
+  @@map("gift_cards")
+}
+
+// ── Inventory locations ───────────────────────────────────────────────────────
+
+model Location {
+  id        String  @id @default(cuid())
+  storeId   String
+  name      String
+  address   String  @default("")
+  isDefault Boolean @default(false)
+
+  store  Store            @relation(fields: [storeId], references: [id])
+  levels InventoryLevel[]
+
+  @@index([storeId])
+  @@map("locations")
+}
+
+// Stock of one variant at one location. ProductVariant.stock stays as the total the storefront
+// reads, kept in step with the sum of these rows — the storefront must not have to join.
+model InventoryLevel {
+  id         String @id @default(cuid())
+  storeId    String
+  variantId  String
+  locationId String
+  quantity   Int    @default(0)
+
+  store    Store    @relation(fields: [storeId], references: [id])
+  location Location @relation(fields: [locationId], references: [id], onDelete: Cascade)
+
+  @@unique([variantId, locationId])
+  @@index([storeId])
+  @@map("inventory_levels")
 }
 
 model StoreMember {
