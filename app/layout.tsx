@@ -64,12 +64,14 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       lang={locale}
       className={`${bebasNeue.variable} ${playfairDisplay.variable} ${inter.variable} ${cormorantGaramond.variable} ${spaceMono.variable}`}
     >
-      <head>
-        {/* Empty unless the store has customised its palette, so an untouched site ships no
-            extra style at all. Only "r g b" triples reach this string — see lib/theme.ts. */}
-        {themeCss && <style dangerouslySetInnerHTML={{ __html: themeCss }} />}
-      </head>
-      <body className="bg-bg text-cream font-body antialiased">{children}</body>
+      <body className="bg-bg text-cream font-body antialiased">
+        {/* Rendered only when the store has customised its palette — the shipped defaults live
+            in globals.css. Next hoists a style tag, and :root variables apply document-wide
+            wherever it lands, so no manual <head> is needed: adding one puts a stray text node
+            in the document head and breaks hydration on every page. */}
+        {themeCss ? <style dangerouslySetInnerHTML={{ __html: themeCss }} /> : null}
+        {children}
+      </body>
     </html>
   )
 }
