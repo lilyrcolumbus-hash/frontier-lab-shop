@@ -1,7 +1,9 @@
 import { NextResponse } from 'next/server'
+import { revalidatePath } from 'next/cache'
 import { z } from 'zod'
 import { prisma } from '@/lib/prisma'
 import { withStoreAdmin } from '@/lib/with-store-admin'
+import { isHexColour } from '@/lib/theme'
 
 const settingsSchema = z.object({
   name: z.string().trim().min(1).max(120),
@@ -17,6 +19,19 @@ const settingsSchema = z.object({
   // 0 means the offer is off; any other value is the subtotal at which shipping becomes free.
   freeShippingThreshold: z.coerce.number().int().min(0),
   lowStockThreshold: z.coerce.number().int().min(0),
+  ...Object.fromEntries(
+    [
+      'themeAccent', 'themeAmber', 'themeInk', 'themeInkMuted',
+      'themeBg', 'themeSurface', 'themeElevated', 'themeBorder',
+    ].map((key) => [
+      key,
+      z
+        .string()
+        .trim()
+        .refine((v) => v === '' || isHexColour(v), 'Use a hex colour like #3D6E45, or leave it empty')
+        .default(''),
+    ])
+  ),
 })
 
 const FIELDS = {
@@ -31,6 +46,14 @@ const FIELDS = {
   shippingRate: true,
   freeShippingThreshold: true,
   lowStockThreshold: true,
+  themeAccent: true,
+  themeAmber: true,
+  themeInk: true,
+  themeInkMuted: true,
+  themeBg: true,
+  themeSurface: true,
+  themeElevated: true,
+  themeBorder: true,
 } as const
 
 export const GET = withStoreAdmin(async (_req, { store }) => {
@@ -51,6 +74,8 @@ export const PATCH = withStoreAdmin(
       data: parsed.data,
       select: FIELDS,
     })
+    // Storefront pages are cached with the palette already rendered into their head.
+    revalidatePath('/', 'layout')
     return NextResponse.json({ settings })
   },
   { requireOwner: true }

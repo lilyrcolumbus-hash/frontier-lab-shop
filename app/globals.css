@@ -5,16 +5,32 @@
 @layer base {
   :root {
     color-scheme: light;
-    --color-bg:       #F0F2F0;
-    --color-surface:  #F8F9F8;
-    --color-elevated: #E8ECEA;
-    --color-accent:   #3D6E45;
-    --color-amber:    #9E6820;
-    --color-silver:   #8A9FAE;
-    --color-lavender: #6350A0;
-    --color-cream:    #1C2018;
-    --color-muted:    #566458;
-    --color-border:   #D2D8D2;
+
+    /* RGB channels, not hex: Tailwind's opacity modifiers (bg-accent/30) compose these as
+       rgb(var(--c-accent) / <alpha-value>). These are the shipped defaults — a store that has
+       customised nothing renders exactly like this. /admin/settings overrides them per store. */
+    --c-bg:       240 242 240;
+    --c-surface:  248 249 248;
+    --c-elevated: 232 236 234;
+    --c-accent:    61 110  69;
+    --c-amber:    158 104  32;
+    --c-silver:   138 159 174;
+    --c-lavender:  99  80 160;
+    --c-cream:     28  32  24;
+    --c-muted:     86 100  88;
+    --c-border:   210 216 210;
+
+    /* Kept for the handful of rules below that use colours directly rather than via Tailwind. */
+    --color-bg:       rgb(var(--c-bg));
+    --color-surface:  rgb(var(--c-surface));
+    --color-elevated: rgb(var(--c-elevated));
+    --color-accent:   rgb(var(--c-accent));
+    --color-amber:    rgb(var(--c-amber));
+    --color-silver:   rgb(var(--c-silver));
+    --color-lavender: rgb(var(--c-lavender));
+    --color-cream:    rgb(var(--c-cream));
+    --color-muted:    rgb(var(--c-muted));
+    --color-border:   rgb(var(--c-border));
   }
 
   * {

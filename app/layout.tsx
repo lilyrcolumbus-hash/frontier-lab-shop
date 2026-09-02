@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Bebas_Neue, Playfair_Display, Inter, Cormorant_Garamond, Space_Mono } from 'next/font/google'
 import { getLocale } from 'next-intl/server'
 import { SITE_URL } from '@/lib/site-url'
+import { getStoreThemeCss } from '@/lib/store-theme'
 import './globals.css'
 
 const bebasNeue = Bebas_Neue({
@@ -56,12 +57,18 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const locale = await getLocale()
+  const themeCss = await getStoreThemeCss()
 
   return (
     <html
       lang={locale}
       className={`${bebasNeue.variable} ${playfairDisplay.variable} ${inter.variable} ${cormorantGaramond.variable} ${spaceMono.variable}`}
     >
+      <head>
+        {/* Empty unless the store has customised its palette, so an untouched site ships no
+            extra style at all. Only "r g b" triples reach this string — see lib/theme.ts. */}
+        {themeCss && <style dangerouslySetInnerHTML={{ __html: themeCss }} />}
+      </head>
       <body className="bg-bg text-cream font-body antialiased">{children}</body>
     </html>
   )

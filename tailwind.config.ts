@@ -7,35 +7,38 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      // Colours resolve through CSS variables so a store can restyle the site from /admin/settings
+      // without a rebuild. The `<alpha-value>` form keeps Tailwind's opacity modifiers working
+      // (bg-accent/30). Defaults live in app/globals.css and match the palette this site shipped.
       colors: {
-        bg: '#F0F2F0',
-        surface: '#F8F9F8',
-        elevated: '#E8ECEA',
+        bg: 'rgb(var(--c-bg) / <alpha-value>)',
+        surface: 'rgb(var(--c-surface) / <alpha-value>)',
+        elevated: 'rgb(var(--c-elevated) / <alpha-value>)',
         'forest-deep': '#DFE3DF',
         accent: {
-          DEFAULT: '#3D6E45',
-          hover: '#306038',
-          dim: 'rgba(61,110,69,0.10)',
+          DEFAULT: 'rgb(var(--c-accent) / <alpha-value>)',
+          hover: 'color-mix(in srgb, rgb(var(--c-accent)) 88%, black)',
+          dim: 'rgb(var(--c-accent) / 0.10)',
         },
         amber: {
-          DEFAULT: '#9E6820',
-          bright: '#B47828',
-          dim: 'rgba(158,104,32,0.10)',
+          DEFAULT: 'rgb(var(--c-amber) / <alpha-value>)',
+          bright: 'color-mix(in srgb, rgb(var(--c-amber)) 88%, white)',
+          dim: 'rgb(var(--c-amber) / 0.10)',
         },
         silver: {
-          DEFAULT: '#8A9FAE',
-          bright: '#A0B4C4',
-          dim: 'rgba(138,159,174,0.14)',
+          DEFAULT: 'rgb(var(--c-silver) / <alpha-value>)',
+          bright: 'color-mix(in srgb, rgb(var(--c-silver)) 82%, white)',
+          dim: 'rgb(var(--c-silver) / 0.14)',
         },
         lavender: {
-          DEFAULT: '#6350A0',
-          dim: 'rgba(99,80,160,0.10)',
+          DEFAULT: 'rgb(var(--c-lavender) / <alpha-value>)',
+          dim: 'rgb(var(--c-lavender) / 0.10)',
         },
         cream: {
-          DEFAULT: '#1C2018',
-          muted: '#566458',
+          DEFAULT: 'rgb(var(--c-cream) / <alpha-value>)',
+          muted: 'rgb(var(--c-muted) / <alpha-value>)',
         },
-        'ds-border': '#D2D8D2',
+        'ds-border': 'rgb(var(--c-border) / <alpha-value>)',
         moss: '#3D6443',
         success: '#3D6E45',
         warning: '#9E6820',

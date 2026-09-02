@@ -29,6 +29,17 @@ model Store {
   // Low stock warning threshold: variants at or below this are flagged in the admin. 0 disables.
   lowStockThreshold Int @default(0)
 
+  // Brand colours as hex, each empty by default meaning "use the palette the site ships with".
+  // Applied as CSS variables at render time — see lib/theme.ts.
+  themeAccent    String @default("")
+  themeAmber     String @default("")
+  themeInk       String @default("")
+  themeInkMuted  String @default("")
+  themeBg        String @default("")
+  themeSurface   String @default("")
+  themeElevated  String @default("")
+  themeBorder    String @default("")
+
   // Shipping, in cents. A discount code can never cover shipping — Stripe applies discounts to
   // the subtotal only — so free shipping is granted here, at the moment the session is built.
   shippingRate           Int  @default(999)

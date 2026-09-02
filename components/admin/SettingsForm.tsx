@@ -4,6 +4,8 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Input } from '@/components/ui/Input'
 import { Button } from '@/components/ui/Button'
+import { AppearanceFields, type ThemeValues } from '@/components/admin/AppearanceFields'
+import { THEME_COLUMNS, type ThemeTokenKey } from '@/lib/theme'
 
 export interface StoreSettings {
   name: string
@@ -18,6 +20,14 @@ export interface StoreSettings {
   shippingRate: number
   freeShippingThreshold: number
   lowStockThreshold: number
+  themeAccent: string
+  themeAmber: string
+  themeInk: string
+  themeInkMuted: string
+  themeBg: string
+  themeSurface: string
+  themeElevated: string
+  themeBorder: string
 }
 
 const toDollars = (cents: number) => (cents / 100).toFixed(2)
@@ -34,6 +44,14 @@ export function SettingsForm({ initial }: { initial: StoreSettings }) {
 
   const update = <K extends keyof StoreSettings>(key: K, value: StoreSettings[K]) =>
     setValues((v) => ({ ...v, [key]: value }))
+
+  // The picker speaks in tokens ('accent'); the record stores columns ('themeAccent').
+  const themeValues = Object.fromEntries(
+    Object.entries(THEME_COLUMNS).map(([token, column]) => [token, values[column as keyof StoreSettings] as string])
+  ) as ThemeValues
+
+  const updateTheme = (token: ThemeTokenKey, value: string) =>
+    setValues((v) => ({ ...v, [THEME_COLUMNS[token]]: value }))
 
   const thresholdCents = toCents(threshold)
 
@@ -152,6 +170,10 @@ export function SettingsForm({ initial }: { initial: StoreSettings }) {
         <p className="text-xs text-cream-muted/70">
           {values.lowStockThreshold > 0 ? 'Set to 0 to turn the warning off.' : 'Warning is off.'}
         </p>
+      </div>
+
+      <div className={section}>
+        <AppearanceFields values={themeValues} onChange={updateTheme} />
       </div>
 
       {error && <p className="text-sm text-error">{error}</p>}
