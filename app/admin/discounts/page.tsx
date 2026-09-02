@@ -30,20 +30,29 @@ function discountValue(d: AdminDiscount) {
 export default function AdminDiscountsPage() {
   const { data: discounts, error, reload } = useAdminList<AdminDiscount>('/api/admin/discounts', 'discounts')
   const [busyId, setBusyId] = useState<string | null>(null)
+  const [actionError, setActionError] = useState('')
 
   const toggleActive = async (d: AdminDiscount) => {
     setBusyId(d.id)
+    setActionError('')
     try {
-      await fetch(`/api/admin/discounts/${d.id}`, {
+      const res = await fetch(`/api/admin/discounts/${d.id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ active: !d.active }),
       })
+      if (!res.ok) {
+        const data = await res.json().catch(() => null)
+        setActionError(data?.error ?? 'Could not change that code')
+        return
+      }
+      void reload()
+    } catch {
+      setActionError('Could not reach the server. Check your connection and try again.')
     } finally {
-      // Always release the row, even on a dropped connection — reload() then shows the truth.
+      // Always release the row, even on a dropped connection.
       setBusyId(null)
     }
-    void reload()
   }
 
   const columns: DataTableColumn<AdminDiscount>[] = [
@@ -106,6 +115,8 @@ export default function AdminDiscountsPage() {
           Create discount
         </Link>
       </div>
+
+      {actionError && <p className="text-sm text-error mb-3">{actionError}</p>}
 
       {discounts === null ? (
         <ListState error={error} onRetry={reload} />
