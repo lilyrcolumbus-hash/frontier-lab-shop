@@ -1,3 +1,4 @@
+import { Fragment } from 'react'
 import type { Metadata } from 'next'
 import { Hero } from '@/components/home/Hero'
 import { TrustBar } from '@/components/home/TrustBar'
@@ -50,7 +51,9 @@ export default async function HomePage() {
       {layout
         .filter((section) => section.enabled)
         .map((section) => (
-          <div key={section.key}>{SECTION_COMPONENTS[section.key]}</div>
+          // A Fragment, not a div: several sections are full-bleed or rely on being direct
+          // siblings, so wrapping them would change the layout the site already has.
+          <Fragment key={section.key}>{SECTION_COMPONENTS[section.key]}</Fragment>
         ))}
     </>
   )
