@@ -20,6 +20,8 @@ export interface StoreSettings {
   shippingRate: number
   freeShippingThreshold: number
   lowStockThreshold: number
+  currency: string
+  domain: string
   themeAccent: string
   themeAmber: string
   themeInk: string
@@ -122,6 +124,42 @@ export function SettingsForm({ initial }: { initial: StoreSettings }) {
 
       <div className={section}>
         <div>
+          <h2 className="text-sm font-medium text-cream">Domain and currency</h2>
+          <p className="text-xs text-cream-muted/70 mt-1">
+            The domain is used for links in emails, the sitemap and social previews. Pointing it
+            at this site is done once in your hosting provider — setting it here does not move it.
+          </p>
+        </div>
+
+        <Input
+          label="Domain"
+          value={values.domain}
+          onChange={(e) => update('domain', e.target.value.trim().toLowerCase())}
+          placeholder="frontierlab.com"
+        />
+
+        <div>
+          <label className="block text-sm font-medium text-cream-muted mb-1.5">Currency</label>
+          <select
+            value={values.currency}
+            onChange={(e) => update('currency', e.target.value)}
+            className="w-full bg-surface border border-ds-border rounded-xl px-4 py-2.5 text-cream text-sm"
+          >
+            {['usd', 'eur', 'gbp', 'cad', 'aud', 'mxn'].map((code) => (
+              <option key={code} value={code}>
+                {code.toUpperCase()}
+              </option>
+            ))}
+          </select>
+          <p className="text-xs text-cream-muted/70 mt-1">
+            Charged at checkout. Changing this does not convert your existing prices — the same
+            numbers are charged in the new currency.
+          </p>
+        </div>
+      </div>
+
+      <div className={section}>
+        <div>
           <h2 className="text-sm font-medium text-cream">Shipping</h2>
           <p className="text-xs text-cream-muted/70 mt-1">
             Applied to every order at checkout. A discount code can never cover shipping — Stripe
@@ -150,6 +188,10 @@ export function SettingsForm({ initial }: { initial: StoreSettings }) {
           {thresholdCents > 0
             ? `Orders of $${toDollars(thresholdCents)} or more ship free.`
             : 'Set to 0 to charge shipping on every order.'}
+        </p>
+        <p className="text-xs text-cream-muted/70">
+          This flat rate applies when no shipping zones are defined. Zones, and rates that depend
+          on order total or weight, live under Shipping zones.
         </p>
       </div>
 

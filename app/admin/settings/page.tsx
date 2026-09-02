@@ -22,6 +22,8 @@ export default async function AdminSettingsPage() {
       shippingRate: true,
       freeShippingThreshold: true,
       lowStockThreshold: true,
+      currency: true,
+      domain: true,
       themeAccent: true,
       themeAmber: true,
       themeInk: true,

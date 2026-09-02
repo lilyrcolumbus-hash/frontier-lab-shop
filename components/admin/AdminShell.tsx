@@ -158,6 +158,53 @@ const NAV_SECTIONS: { label: string; items: NavItem[] }[] = [
         ),
       },
       {
+        label: 'Gift cards',
+        ownerOnly: true,
+        href: '/admin/gift-cards',
+        icon: (
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <rect x="3" y="8" width="18" height="13" rx="2" />
+            <path d="M12 8v13M3 12h18M12 8a4 4 0 1 0-4-4 4 4 0 0 0 4 4Zm0 0a4 4 0 1 1 4-4 4 4 0 0 1-4 4Z" />
+          </svg>
+        ),
+      },
+      {
+        label: 'Locations',
+        ownerOnly: true,
+        href: '/admin/locations',
+        icon: (
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+            <circle cx="12" cy="10" r="3" />
+          </svg>
+        ),
+      },
+      {
+        label: 'Shipping zones',
+        ownerOnly: true,
+        href: '/admin/shipping',
+        icon: (
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M10 17h4V5H2v12h3M15 17h2a2 2 0 0 0 2-2v-3l-3-4h-3v9h2Z" />
+            <circle cx="7.5" cy="17.5" r="2.5" />
+            <circle cx="17.5" cy="17.5" r="2.5" />
+          </svg>
+        ),
+      },
+      {
+        label: 'Taxes',
+        ownerOnly: true,
+        href: '/admin/taxes',
+        icon: (
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M9 15 15 9" />
+            <circle cx="9.5" cy="9.5" r="1.5" />
+            <circle cx="14.5" cy="14.5" r="1.5" />
+            <rect x="3" y="3" width="18" height="18" rx="2" />
+          </svg>
+        ),
+      },
+      {
         label: 'Settings',
         ownerOnly: true,
         href: '/admin/settings',

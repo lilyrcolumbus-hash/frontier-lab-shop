@@ -19,6 +19,10 @@ const settingsSchema = z.object({
   // 0 means the offer is off; any other value is the subtotal at which shipping becomes free.
   freeShippingThreshold: z.coerce.number().int().min(0),
   lowStockThreshold: z.coerce.number().int().min(0),
+  // ISO 4217, lower case, as Stripe expects it.
+  currency: z.string().trim().toLowerCase().length(3),
+  // Stored without a scheme so it can be shown and linked consistently.
+  domain: z.string().trim().max(120).regex(/^$|^[a-z0-9.-]+\.[a-z]{2,}$/i, 'Enter a domain like frontierlab.com'),
   ...Object.fromEntries(
     [
       'themeAccent', 'themeAmber', 'themeInk', 'themeInkMuted',
@@ -46,6 +50,8 @@ const FIELDS = {
   shippingRate: true,
   freeShippingThreshold: true,
   lowStockThreshold: true,
+  currency: true,
+  domain: true,
   themeAccent: true,
   themeAmber: true,
   themeInk: true,
