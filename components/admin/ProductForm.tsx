@@ -131,19 +131,26 @@ export function ProductForm({
     setSaving(true)
     const url = productId ? `/api/admin/products/${productId}` : '/api/admin/products'
     const method = productId ? 'PATCH' : 'POST'
-    const res = await fetch(url, {
-      method,
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ ...values, status: 'active' }),
-    })
-    const data = await res.json()
-    setSaving(false)
-    if (!res.ok) {
-      setError(data.error ?? 'Could not publish product')
-      return
+    try {
+      const res = await fetch(url, {
+        method,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...values, status: 'active' }),
+      })
+      // A gateway timeout answers with HTML, not JSON — parsing it unguarded used to throw and
+      // leave the button stuck on "Saving…" with nothing said.
+      const data = await res.json().catch(() => null)
+      if (!res.ok) {
+        setError(data?.error ?? 'Could not publish product')
+        return
+      }
+      router.push('/admin/products')
+      router.refresh()
+    } catch {
+      setError('Could not reach the server. Check your connection and try again.')
+    } finally {
+      setSaving(false)
     }
-    router.push('/admin/products')
-    router.refresh()
   }
 
   const handleUpload = async (files: FileList) => {
@@ -225,44 +232,53 @@ export function ProductForm({
 
     const url = productId ? `/api/admin/products/${productId}` : '/api/admin/products'
     const method = productId ? 'PATCH' : 'POST'
-    const res = await fetch(url, {
-      method,
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        ...values,
-        nameEs: values.nameEs || values.nameEn,
-        descriptionEs: values.descriptionEs || values.descriptionEn,
-        variants: values.variants.map((v) => ({
-          ...v,
-          cost: v.cost === '' ? null : Number(v.cost),
-          weightGrams: v.weightGrams === '' ? null : Number(v.weightGrams),
-        })),
-      }),
-    })
-    const data = await res.json()
-    setSaving(false)
-
-    if (!res.ok) {
-      setError(data.error ?? 'Could not save product')
-      return
+    try {
+      const res = await fetch(url, {
+        method,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...values,
+          nameEs: values.nameEs || values.nameEn,
+          descriptionEs: values.descriptionEs || values.descriptionEn,
+          variants: values.variants.map((v) => ({
+            ...v,
+            cost: v.cost === '' ? null : Number(v.cost),
+            weightGrams: v.weightGrams === '' ? null : Number(v.weightGrams),
+          })),
+        }),
+      })
+      const data = await res.json().catch(() => null)
+      if (!res.ok) {
+        setError(data?.error ?? 'Could not save product')
+        return
+      }
+      router.push('/admin/products')
+      router.refresh()
+    } catch {
+      setError('Could not reach the server. Check your connection and try again.')
+    } finally {
+      setSaving(false)
     }
-    router.push('/admin/products')
-    router.refresh()
   }
 
   const handleDelete = async () => {
     if (!productId) return
     if (!confirm(`Delete "${values.nameEn}"? This cannot be undone.`)) return
     setDeleting(true)
-    const res = await fetch(`/api/admin/products/${productId}`, { method: 'DELETE' })
-    setDeleting(false)
-    if (!res.ok) {
-      const data = await res.json().catch(() => ({}))
-      setError(data.error ?? 'Could not delete product')
-      return
+    try {
+      const res = await fetch(`/api/admin/products/${productId}`, { method: 'DELETE' })
+      if (!res.ok) {
+        const data = await res.json().catch(() => null)
+        setError(data?.error ?? 'Could not delete product')
+        return
+      }
+      router.push('/admin/products')
+      router.refresh()
+    } catch {
+      setError('Could not reach the server. Check your connection and try again.')
+    } finally {
+      setDeleting(false)
     }
-    router.push('/admin/products')
-    router.refresh()
   }
 
   return (

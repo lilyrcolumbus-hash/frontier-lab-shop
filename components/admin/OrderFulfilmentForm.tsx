@@ -35,20 +35,25 @@ export function OrderFulfilmentForm({
   const save = async (lines: Record<string, number>) => {
     setSaving(true)
     setError('')
-    const res = await fetch(`/api/admin/orders/${orderId}/fulfil`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        lines: Object.entries(lines).map(([itemId, fulfilledQuantity]) => ({ itemId, fulfilledQuantity })),
-      }),
-    })
-    const data = await res.json().catch(() => null)
-    setSaving(false)
-    if (!res.ok) {
-      setError(data?.error ?? 'Could not update the fulfilment')
-      return
+    try {
+      const res = await fetch(`/api/admin/orders/${orderId}/fulfil`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          lines: Object.entries(lines).map(([itemId, fulfilledQuantity]) => ({ itemId, fulfilledQuantity })),
+        }),
+      })
+      const data = await res.json().catch(() => null)
+      if (!res.ok) {
+        setError(data?.error ?? 'Could not update the fulfilment')
+        return
+      }
+      router.refresh()
+    } catch {
+      setError('Could not reach the server. Check your connection and try again.')
+    } finally {
+      setSaving(false)
     }
-    router.refresh()
   }
 
   const markAllShipped = () => {

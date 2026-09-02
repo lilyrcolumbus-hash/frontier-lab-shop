@@ -23,19 +23,24 @@ export default function AdminStaffPage() {
     e.preventDefault()
     setBusy(true)
     setFormError('')
-    const res = await fetch('/api/admin/staff', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, role }),
-    })
-    const data = await res.json().catch(() => null)
-    setBusy(false)
-    if (!res.ok) {
-      setFormError(data?.error ?? 'Could not add that person')
-      return
+    try {
+      const res = await fetch('/api/admin/staff', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, role }),
+      })
+      const data = await res.json().catch(() => null)
+      if (!res.ok) {
+        setFormError(data?.error ?? 'Could not add that person')
+        return
+      }
+      setEmail('')
+      void reload()
+    } catch {
+      setFormError('Could not reach the server. Check your connection and try again.')
+    } finally {
+      setBusy(false)
     }
-    setEmail('')
-    void reload()
   }
 
   const changeRole = async (member: StaffMember, next: 'owner' | 'staff') => {

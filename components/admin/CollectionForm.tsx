@@ -34,42 +34,51 @@ export function CollectionForm({ initial, collectionId }: { initial: CollectionF
 
     const url = collectionId ? `/api/admin/collections/${collectionId}` : '/api/admin/collections'
     const method = collectionId ? 'PATCH' : 'POST'
-    const res = await fetch(url, {
-      method,
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        ...values,
-        titleEs: values.titleEs || values.titleEn,
-        descriptionEs: values.descriptionEs || values.descriptionEn,
-        // The API only accepts a complete rule; '' has to become null, not an empty string.
-        ruleField: values.ruleField === '' ? null : values.ruleField,
-        ruleValue: values.ruleField === '' ? null : values.ruleValue,
-      }),
-    })
-    const data = await res.json()
-    setSaving(false)
-
-    if (!res.ok) {
-      setError(data.error ?? 'Could not save collection')
-      return
+    try {
+      const res = await fetch(url, {
+        method,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...values,
+          titleEs: values.titleEs || values.titleEn,
+          descriptionEs: values.descriptionEs || values.descriptionEn,
+          // The API only accepts a complete rule; '' has to become null, not an empty string.
+          ruleField: values.ruleField === '' ? null : values.ruleField,
+          ruleValue: values.ruleField === '' ? null : values.ruleValue,
+        }),
+      })
+      const data = await res.json().catch(() => null)
+      if (!res.ok) {
+        setError(data?.error ?? 'Could not save collection')
+        return
+      }
+      router.push('/admin/collections')
+      router.refresh()
+    } catch {
+      setError('Could not reach the server. Check your connection and try again.')
+    } finally {
+      setSaving(false)
     }
-    router.push('/admin/collections')
-    router.refresh()
   }
 
   const handleDelete = async () => {
     if (!collectionId) return
     if (!confirm(`Delete "${values.titleEn}"? Products stay, they just lose this collection.`)) return
     setDeleting(true)
-    const res = await fetch(`/api/admin/collections/${collectionId}`, { method: 'DELETE' })
-    setDeleting(false)
-    if (!res.ok) {
-      const data = await res.json().catch(() => ({}))
-      setError(data.error ?? 'Could not delete collection')
-      return
+    try {
+      const res = await fetch(`/api/admin/collections/${collectionId}`, { method: 'DELETE' })
+      if (!res.ok) {
+        const data = await res.json().catch(() => null)
+        setError(data?.error ?? 'Could not delete collection')
+        return
+      }
+      router.push('/admin/collections')
+      router.refresh()
+    } catch {
+      setError('Could not reach the server. Check your connection and try again.')
+    } finally {
+      setDeleting(false)
     }
-    router.push('/admin/collections')
-    router.refresh()
   }
 
   return (

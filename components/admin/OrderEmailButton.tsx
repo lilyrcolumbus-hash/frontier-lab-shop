@@ -12,13 +12,18 @@ export function OrderEmailButton({ orderId, email }: { orderId: string; email: s
     if (!window.confirm(`Send the order confirmation to ${email} again?`)) return
     setSending(true)
     setMessage(null)
-    const res = await fetch(`/api/admin/orders/${orderId}/email`, { method: 'POST' })
-    const data = await res.json().catch(() => null)
-    setSending(false)
-    setMessage(
-      res.ok ? { ok: true, text: `Sent to ${email}.` } : { ok: false, text: data?.error ?? 'Could not send the email.' }
-    )
-    if (res.ok) router.refresh()
+    try {
+      const res = await fetch(`/api/admin/orders/${orderId}/email`, { method: 'POST' })
+      const data = await res.json().catch(() => null)
+      setMessage(
+        res.ok ? { ok: true, text: `Sent to ${email}.` } : { ok: false, text: data?.error ?? 'Could not send the email.' }
+      )
+      if (res.ok) router.refresh()
+    } catch {
+      setMessage({ ok: false, text: 'Could not reach the server. Check your connection and try again.' })
+    } finally {
+      setSending(false)
+    }
   }
 
   return (

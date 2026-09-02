@@ -41,18 +41,23 @@ export function ProductBulkBar({
     if (!window.confirm(`${confirmation} (${selectedIds.length} products)`)) return
     setBusy(true)
     setError('')
-    const res = await fetch('/api/admin/products/bulk', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ productIds: selectedIds, action }),
-    })
-    const data = await res.json().catch(() => null)
-    setBusy(false)
-    if (!res.ok) {
-      setError(data?.error ?? 'Could not apply that change')
-      return
+    try {
+      const res = await fetch('/api/admin/products/bulk', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ productIds: selectedIds, action }),
+      })
+      const data = await res.json().catch(() => null)
+      if (!res.ok) {
+        setError(data?.error ?? 'Could not apply that change')
+        return
+      }
+      onDone()
+    } catch {
+      setError('Could not reach the server. Check your connection and try again.')
+    } finally {
+      setBusy(false)
     }
-    onDone()
   }
 
   const buttonClass =

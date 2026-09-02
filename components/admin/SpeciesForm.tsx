@@ -72,41 +72,50 @@ export function SpeciesForm({ initial, speciesId }: { initial: SpeciesFormValues
 
     const url = speciesId ? `/api/admin/species/${speciesId}` : '/api/admin/species'
     const method = speciesId ? 'PATCH' : 'POST'
-    const res = await fetch(url, {
-      method,
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        ...values,
-        descriptionEs: values.descriptionEs || values.descriptionEn,
-        cultivationNotesEs: values.cultivationNotesEs || values.cultivationNotesEn,
-        medicalNotesEs: values.medicalNotesEs || values.medicalNotesEn,
-        cookingNotesEs: values.cookingNotesEs || values.cookingNotesEn,
-      }),
-    })
-    const data = await res.json()
-    setSaving(false)
-
-    if (!res.ok) {
-      setError(data.error ?? 'Could not save species')
-      return
+    try {
+      const res = await fetch(url, {
+        method,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...values,
+          descriptionEs: values.descriptionEs || values.descriptionEn,
+          cultivationNotesEs: values.cultivationNotesEs || values.cultivationNotesEn,
+          medicalNotesEs: values.medicalNotesEs || values.medicalNotesEn,
+          cookingNotesEs: values.cookingNotesEs || values.cookingNotesEn,
+        }),
+      })
+      const data = await res.json().catch(() => null)
+      if (!res.ok) {
+        setError(data?.error ?? 'Could not save species')
+        return
+      }
+      router.push('/admin/species')
+      router.refresh()
+    } catch {
+      setError('Could not reach the server. Check your connection and try again.')
+    } finally {
+      setSaving(false)
     }
-    router.push('/admin/species')
-    router.refresh()
   }
 
   const handleDelete = async () => {
     if (!speciesId) return
     if (!confirm(`Delete "${values.commonName}"? This cannot be undone.`)) return
     setDeleting(true)
-    const res = await fetch(`/api/admin/species/${speciesId}`, { method: 'DELETE' })
-    setDeleting(false)
-    if (!res.ok) {
-      const data = await res.json().catch(() => ({}))
-      setError(data.error ?? 'Could not delete species')
-      return
+    try {
+      const res = await fetch(`/api/admin/species/${speciesId}`, { method: 'DELETE' })
+      if (!res.ok) {
+        const data = await res.json().catch(() => null)
+        setError(data?.error ?? 'Could not delete species')
+        return
+      }
+      router.push('/admin/species')
+      router.refresh()
+    } catch {
+      setError('Could not reach the server. Check your connection and try again.')
+    } finally {
+      setDeleting(false)
     }
-    router.push('/admin/species')
-    router.refresh()
   }
 
   return (

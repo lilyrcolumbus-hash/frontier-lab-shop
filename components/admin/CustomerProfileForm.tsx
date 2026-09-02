@@ -23,22 +23,27 @@ export function CustomerProfileForm({
     setSaving(true)
     setError('')
     setSaved(false)
-    const res = await fetch(`/api/admin/customers/${encodeURIComponent(email)}`, {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        notes,
-        tags: tags.split(',').map((t) => t.trim()).filter(Boolean),
-      }),
-    })
-    const data = await res.json().catch(() => null)
-    setSaving(false)
-    if (!res.ok) {
-      setError(data?.error ?? 'Could not save')
-      return
+    try {
+      const res = await fetch(`/api/admin/customers/${encodeURIComponent(email)}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          notes,
+          tags: tags.split(',').map((t) => t.trim()).filter(Boolean),
+        }),
+      })
+      const data = await res.json().catch(() => null)
+      if (!res.ok) {
+        setError(data?.error ?? 'Could not save')
+        return
+      }
+      setSaved(true)
+      router.refresh()
+    } catch {
+      setError('Could not reach the server. Check your connection and try again.')
+    } finally {
+      setSaving(false)
     }
-    setSaved(true)
-    router.refresh()
   }
 
   return (

@@ -43,24 +43,31 @@ export function SettingsForm({ initial }: { initial: StoreSettings }) {
     setSaved(false)
     setSaving(true)
 
-    const res = await fetch('/api/admin/settings', {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        ...values,
-        shippingRate: toCents(shippingRate),
-        freeShippingThreshold: thresholdCents,
-      }),
-    })
+    try {
+      const res = await fetch('/api/admin/settings', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...values,
+          shippingRate: toCents(shippingRate),
+          freeShippingThreshold: thresholdCents,
+        }),
+      })
 
-    const data = await res.json().catch(() => null)
-    setSaving(false)
-    if (!res.ok) {
-      setError(data?.error ?? 'Could not save the settings')
-      return
+      const data = await res.json().catch(() => null)
+      if (!res.ok) {
+        setError(data?.error ?? 'Could not save the settings')
+        return
+      }
+      setSaved(true)
+      router.refresh()
+    } catch {
+      // A dropped connection rejects the fetch. Without this the button would sit on "Saving…"
+      // for ever with nothing explaining why.
+      setError('Could not reach the server. Check your connection and try again.')
+    } finally {
+      setSaving(false)
     }
-    setSaved(true)
-    router.refresh()
   }
 
   const section = 'bg-surface border border-ds-border rounded-xl p-6 space-y-4'

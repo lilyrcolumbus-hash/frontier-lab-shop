@@ -33,12 +33,16 @@ export default function AdminDiscountsPage() {
 
   const toggleActive = async (d: AdminDiscount) => {
     setBusyId(d.id)
-    await fetch(`/api/admin/discounts/${d.id}`, {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ active: !d.active }),
-    })
-    setBusyId(null)
+    try {
+      await fetch(`/api/admin/discounts/${d.id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ active: !d.active }),
+      })
+    } finally {
+      // Always release the row, even on a dropped connection — reload() then shows the truth.
+      setBusyId(null)
+    }
     void reload()
   }
 

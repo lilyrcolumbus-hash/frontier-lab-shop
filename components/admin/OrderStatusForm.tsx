@@ -27,17 +27,22 @@ export function OrderStatusForm({
   const handleSave = async () => {
     setSaving(true)
     setError('')
-    const res = await fetch(`/api/admin/orders/${orderId}`, {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ status, trackingNumber: trackingNumber || null }),
-    })
-    setSaving(false)
-    if (!res.ok) {
-      setError('Could not update the order')
-      return
+    try {
+      const res = await fetch(`/api/admin/orders/${orderId}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ status, trackingNumber: trackingNumber || null }),
+      })
+      if (!res.ok) {
+        setError('Could not update the order')
+        return
+      }
+      router.refresh()
+    } catch {
+      setError('Could not reach the server. Check your connection and try again.')
+    } finally {
+      setSaving(false)
     }
-    router.refresh()
   }
 
   const handleResolve = async (action: 'cancel' | 'refund') => {
@@ -49,18 +54,23 @@ export function OrderStatusForm({
 
     setResolving(action)
     setError('')
-    const res = await fetch(`/api/admin/orders/${orderId}/resolve`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ action }),
-    })
-    const data = await res.json().catch(() => null)
-    setResolving(null)
-    if (!res.ok) {
-      setError(data?.error ?? 'Could not complete that action')
-      return
+    try {
+      const res = await fetch(`/api/admin/orders/${orderId}/resolve`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action }),
+      })
+      const data = await res.json().catch(() => null)
+      if (!res.ok) {
+        setError(data?.error ?? 'Could not complete that action')
+        return
+      }
+      router.refresh()
+    } catch {
+      setError('Could not reach the server. Check your connection and try again.')
+    } finally {
+      setResolving(null)
     }
-    router.refresh()
   }
 
   const isClosed = initialStatus === 'cancelled' || initialStatus === 'refunded'

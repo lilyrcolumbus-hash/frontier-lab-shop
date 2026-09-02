@@ -22,17 +22,21 @@ export function ProductImportButton({ onDone }: { onDone: () => void }) {
 
     const form = new FormData()
     form.append('file', file)
-    const res = await fetch('/api/admin/products/import', { method: 'POST', body: form })
-    const data = await res.json().catch(() => null)
-    setBusy(false)
-    if (inputRef.current) inputRef.current.value = ''
-
-    if (!res.ok) {
-      setError(data?.error ?? 'Could not import that file')
-      return
+    try {
+      const res = await fetch('/api/admin/products/import', { method: 'POST', body: form })
+      const data = await res.json().catch(() => null)
+      if (!res.ok) {
+        setError(data?.error ?? 'Could not import that file')
+        return
+      }
+      setResult(data)
+      onDone()
+    } catch {
+      setError('Could not reach the server. Check your connection and try again.')
+    } finally {
+      setBusy(false)
+      if (inputRef.current) inputRef.current.value = ''
     }
-    setResult(data)
-    onDone()
   }
 
   return (

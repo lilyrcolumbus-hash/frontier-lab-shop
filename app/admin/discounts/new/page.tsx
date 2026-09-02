@@ -30,28 +30,33 @@ export default function NewDiscountPage() {
     setError('')
     setSaving(true)
 
-    const res = await fetch('/api/admin/discounts', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        code,
-        percentOff: type === 'percentage' && percentOff ? Number(percentOff) : undefined,
-        amountOff: type === 'amount' ? toCents(amountOff) : undefined,
-        minimumAmount: toCents(minimumAmount),
-        firstTimeOnly,
-        maxRedemptions: maxRedemptions ? Number(maxRedemptions) : undefined,
-        expiresAt: expiresAt || undefined,
-      }),
-    })
+    try {
+      const res = await fetch('/api/admin/discounts', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          code,
+          percentOff: type === 'percentage' && percentOff ? Number(percentOff) : undefined,
+          amountOff: type === 'amount' ? toCents(amountOff) : undefined,
+          minimumAmount: toCents(minimumAmount),
+          firstTimeOnly,
+          maxRedemptions: maxRedemptions ? Number(maxRedemptions) : undefined,
+          expiresAt: expiresAt || undefined,
+        }),
+      })
 
-    setSaving(false)
-    if (!res.ok) {
-      const data = await res.json().catch(() => null)
-      setError(data?.error ?? 'Could not create the discount code')
-      return
+      if (!res.ok) {
+        const data = await res.json().catch(() => null)
+        setError(data?.error ?? 'Could not create the discount code')
+        return
+      }
+      router.push('/admin/discounts')
+      router.refresh()
+    } catch {
+      setError('Could not reach the server. Check your connection and try again.')
+    } finally {
+      setSaving(false)
     }
-    router.push('/admin/discounts')
-    router.refresh()
   }
 
   return (

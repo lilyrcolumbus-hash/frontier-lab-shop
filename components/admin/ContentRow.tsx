@@ -19,24 +19,29 @@ export function ContentRow({ entry, onSaved }: { entry: ContentEntry; onSaved: (
     setSaving(true)
     setError('')
     setSaved(false)
-    const res = await fetch('/api/admin/content', {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      // An empty box means "use the shipped text", so the default is sent for that language.
-      body: JSON.stringify({
-        key: entry.key,
-        valueEn: valueEn.trim() === '' && valueEs.trim() === '' ? '' : valueEn.trim() || entry.defaultEn,
-        valueEs: valueEn.trim() === '' && valueEs.trim() === '' ? '' : valueEs.trim() || entry.defaultEs,
-      }),
-    })
-    const data = await res.json().catch(() => null)
-    setSaving(false)
-    if (!res.ok) {
-      setError(data?.error ?? 'Could not save that text')
-      return
+    try {
+      const res = await fetch('/api/admin/content', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        // An empty box means "use the shipped text", so the default is sent for that language.
+        body: JSON.stringify({
+          key: entry.key,
+          valueEn: valueEn.trim() === '' && valueEs.trim() === '' ? '' : valueEn.trim() || entry.defaultEn,
+          valueEs: valueEn.trim() === '' && valueEs.trim() === '' ? '' : valueEs.trim() || entry.defaultEs,
+        }),
+      })
+      const data = await res.json().catch(() => null)
+      if (!res.ok) {
+        setError(data?.error ?? 'Could not save that text')
+        return
+      }
+      setSaved(true)
+      onSaved()
+    } catch {
+      setError('Could not reach the server. Check your connection and try again.')
+    } finally {
+      setSaving(false)
     }
-    setSaved(true)
-    onSaved()
   }
 
   const inputClass =
