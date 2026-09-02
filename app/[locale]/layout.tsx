@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { StoreTheme } from '@/components/StoreTheme'
 import { NextIntlClientProvider } from 'next-intl'
 import { getMessages, setRequestLocale } from 'next-intl/server'
 import { notFound } from 'next/navigation'
@@ -43,6 +44,7 @@ export default async function LocaleLayout({
 
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
+      <StoreTheme />
       <AuthProvider>
         <SmoothScroll>
           <GlowCursor />

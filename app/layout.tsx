@@ -2,7 +2,6 @@ import type { Metadata } from 'next'
 import { Bebas_Neue, Playfair_Display, Inter, Cormorant_Garamond, Space_Mono } from 'next/font/google'
 import { getLocale } from 'next-intl/server'
 import { SITE_URL } from '@/lib/site-url'
-import { getStoreThemeCss } from '@/lib/store-theme'
 import './globals.css'
 
 const bebasNeue = Bebas_Neue({
@@ -57,7 +56,6 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const locale = await getLocale()
-  const themeCss = await getStoreThemeCss()
 
   return (
     <html
@@ -65,11 +63,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       className={`${bebasNeue.variable} ${playfairDisplay.variable} ${inter.variable} ${cormorantGaramond.variable} ${spaceMono.variable}`}
     >
       <body className="bg-bg text-cream font-body antialiased">
-        {/* Rendered only when the store has customised its palette — the shipped defaults live
-            in globals.css. Next hoists a style tag, and :root variables apply document-wide
-            wherever it lands, so no manual <head> is needed: adding one puts a stray text node
-            in the document head and breaks hydration on every page. */}
-        {themeCss ? <style dangerouslySetInnerHTML={{ __html: themeCss }} /> : null}
         {children}
       </body>
     </html>
