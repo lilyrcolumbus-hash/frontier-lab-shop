@@ -27,7 +27,7 @@ function getMatches(state: FinderState): SpeciesMatch[] {
   const all: (SpeciesMatch & { score: number })[] = [
     {
       slug: 'blue-oyster', name: 'Blue Oyster', scientificName: 'Pleurotus ostreatus',
-      image: 'https://images.unsplash.com/photo-1504545102780-26774c1bb073?w=400',
+      image: 'https://images.unsplash.com/photo-1726177972571-0427e1d7d9db?w=400',
       difficulty: 'beginner',
       reason: 'Fast, forgiving, and thrives in most conditions. Perfect first grow.',
       score: 0,

@@ -50,8 +50,8 @@ const SPECIES_LIST_BASE: SpeciesData[] = [
       es: 'Excelente salteado en mantequilla con ajo, asado a temperatura alta, o usado como sustituto de mariscos en tacos y salteados. La textura firme aguanta bien el calor. Combina perfectamente con tomillo, vino blanco, crema y salsa de soya.',
     },
     lookalikes: [],
-    imageUrl: 'https://images.unsplash.com/photo-1504545102780-26774c1bb073?w=1200&h=600&q=85&auto=format&fit=crop',
-    thumbnailUrl: 'https://images.unsplash.com/photo-1504545102780-26774c1bb073?w=600&h=400&q=85&auto=format&fit=crop',
+    imageUrl: 'https://images.unsplash.com/photo-1726177972571-0427e1d7d9db?w=1200&h=600&q=85&auto=format&fit=crop',
+    thumbnailUrl: 'https://images.unsplash.com/photo-1726177972571-0427e1d7d9db?w=600&h=400&q=85&auto=format&fit=crop',
     keyBenefits: [
       { icon: 'shield', label: 'Immune Support', detail: 'Beta-glucans (25–30% dry weight) activate macrophages and natural killer cells in the immune system' },
       { icon: 'heart', label: 'Cholesterol Balance', detail: 'Natural lovastatin reduces LDL cholesterol — a plant-derived statin equivalent without pharmaceuticals' },

@@ -57,7 +57,7 @@ export const ARTICLES: LearnArticle[] = [
     },
     readTime: 12,
     species: 'blue-oyster',
-    imageUrl: 'https://images.unsplash.com/photo-1504545102780-26774c1bb073?w=1200&h=500&q=85&auto=format&fit=crop',
+    imageUrl: 'https://images.unsplash.com/photo-1726177972571-0427e1d7d9db?w=1200&h=500&q=85&auto=format&fit=crop',
     intro: {
       en: "Oyster mushrooms are the ideal entry point into the world of mushroom cultivation. They colonize fast, tolerate beginner mistakes, fruit abundantly, and reward you with a harvest in as little as three weeks. Blue Oyster (Pleurotus ostreatus) is the most forgiving of all — but Pink and Golden Oysters follow the same principles and add visual drama to your first grow.",
       es: 'Los hongos ostra son el punto de entrada ideal al mundo del cultivo de hongos. Colonizan rápido, toleran los errores de principiante, fructifican abundantemente y te recompensan con una cosecha en tan solo tres semanas.',
@@ -439,7 +439,7 @@ export const ARTICLES: LearnArticle[] = [
       es: 'Cada especie de hongo tiene una textura, contenido de humedad y sabor diferente — y cada una requiere un enfoque de cocción diferente. La regla de oro: calor alto, no amontonar en la sartén.',
     },
     readTime: 8,
-    imageUrl: 'https://images.unsplash.com/photo-1504545102780-26774c1bb073?w=1200&h=500&q=85&auto=format&fit=crop',
+    imageUrl: 'https://images.unsplash.com/photo-1726177972571-0427e1d7d9db?w=1200&h=500&q=85&auto=format&fit=crop',
     intro: {
       en: "The most common mistake in cooking mushrooms is the same mistake for every species: low heat in a crowded pan. Mushrooms are 85–95% water by weight. When too many are placed in a pan that isn't hot enough, they release their water faster than it can evaporate, and the mushrooms steam instead of sear. Steamed mushrooms are rubbery and bland. Seared mushrooms — cooked in a hot, uncrowded pan — develop the Maillard reaction and produce the deep, savory, complex flavor that makes people compare mushrooms to meat.",
       es: 'El error más común al cocinar hongos es el mismo para todas las especies: calor bajo en una sartén llena. Los hongos son 85-95% agua en peso. Cuando se colocan demasiados en una sartén que no está suficientemente caliente, liberan su agua más rápido de lo que puede evaporarse, y los hongos se cuecen al vapor en lugar de sellarse.',

@@ -11,7 +11,7 @@ const PHOTOS = [
     span: 'row-span-2',
   },
   {
-    src: 'https://images.unsplash.com/photo-1504545102780-26774c1bb073?w=600&h=400&q=88&auto=format&fit=crop',
+    src: 'https://images.unsplash.com/photo-1726177972571-0427e1d7d9db?w=600&h=400&q=88&auto=format&fit=crop',
     alt: 'Blue Oyster mushroom cluster',
     label: 'Blue Oyster',
     span: '',

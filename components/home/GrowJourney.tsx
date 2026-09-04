@@ -12,7 +12,7 @@ const STEPS = [
     description:
       'Mix sterilized substrate with grain spawn under sterile conditions. Rye berries, straw, or sawdust — every species has its ideal medium.',
     timing: 'Day 1',
-    src: 'https://images.unsplash.com/photo-1504545102780-26774c1bb073?w=520&h=620&q=85&auto=format&fit=crop',
+    src: 'https://images.unsplash.com/photo-1726177972571-0427e1d7d9db?w=520&h=620&q=85&auto=format&fit=crop',
     alt: 'Blue oyster mushroom cluster on substrate',
   },
   {
@@ -22,7 +22,7 @@ const STEPS = [
     description:
       "In the dark, white threads spread through the substrate, building the underground network. Don't touch it. Just wait.",
     timing: 'Weeks 1–3',
-    src: 'https://images.unsplash.com/photo-1504545102780-26774c1bb073?w=520&h=620&q=85&auto=format&fit=crop',
+    src: 'https://images.unsplash.com/photo-1726177972571-0427e1d7d9db?w=520&h=620&q=85&auto=format&fit=crop',
     alt: 'Blue oyster mushroom cluster colonizing',
   },
   {

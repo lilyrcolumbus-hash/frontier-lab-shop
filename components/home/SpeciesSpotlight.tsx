@@ -8,7 +8,7 @@ import { Badge } from '@/components/ui/Badge'
 import { ScrollReveal } from '@/components/ui/ScrollReveal'
 
 const SEED_SPECIES = [
-  { slug: 'blue-oyster', commonName: 'Blue Oyster', scientificName: 'Pleurotus ostreatus', difficulty: 'beginner', type: 'edible', thumbnailUrl: 'https://images.unsplash.com/photo-1504545102780-26774c1bb073?w=500' },
+  { slug: 'blue-oyster', commonName: 'Blue Oyster', scientificName: 'Pleurotus ostreatus', difficulty: 'beginner', type: 'edible', thumbnailUrl: 'https://images.unsplash.com/photo-1726177972571-0427e1d7d9db?w=500' },
   { slug: 'lions-mane', commonName: "Lion's Mane", scientificName: 'Hericium erinaceus', difficulty: 'intermediate', type: 'medicinal', thumbnailUrl: 'https://images.unsplash.com/photo-1625286535466-68a6d71e4568?w=500' },
   { slug: 'shiitake', commonName: 'Shiitake', scientificName: 'Lentinula edodes', difficulty: 'intermediate', type: 'edible', thumbnailUrl: 'https://images.unsplash.com/photo-1755108906864-fdaadb8ab5f1?w=500' },
   { slug: 'reishi', commonName: 'Reishi', scientificName: 'Ganoderma lucidum', difficulty: 'advanced', type: 'medicinal', thumbnailUrl: 'https://images.unsplash.com/photo-1786122622924-118eb20d8850?w=500' },
