@@ -60,7 +60,7 @@ const SCENES: Scene[] = [
           description: 'Everything to grow your first mushrooms: spawn, substrate, dome, mister, and step-by-step guide.',
           descriptionEs: 'Todo lo que necesitas para tu primer cultivo: spawn, sustrato, cúpula, atomizador y guía paso a paso.',
           price: 4999, compareAtPrice: 6999,
-          image: 'https://images.unsplash.com/photo-1726177972571-0427e1d7d9db?w=600&q=85&auto=format&fit=crop',
+          image: 'https://drzwclnecktguodpokir.supabase.co/storage/v1/object/public/product-images/1788523252817-blue-oyster.png',
           badge: 'Best Seller', badgeEs: 'Más Vendido',
         },
       },
@@ -87,7 +87,7 @@ const SCENES: Scene[] = [
     nameEs: 'Laboratorio de Spawn',
     subtitle: 'Inoculate & colonize',
     subtitleEs: 'Inocula y coloniza',
-    bg: 'https://images.unsplash.com/photo-1726177972571-0427e1d7d9db?w=1920&h=1080&q=90&auto=format&fit=crop',
+    bg: 'https://drzwclnecktguodpokir.supabase.co/storage/v1/object/public/product-images/1788523252817-blue-oyster.png',
     hotspots: [
       {
         id: 'hs-3',
@@ -100,7 +100,7 @@ const SCENES: Scene[] = [
           description: 'Sterile, autoclaved hardwood substrate for growers who already have colonized grain spawn on hand — just open and mix.',
           descriptionEs: 'Sustrato de madera dura esterilizado en autoclave para cultivadores que ya tienen grain spawn colonizado — solo abrir y mezclar.',
           price: 2299, compareAtPrice: 2799,
-          image: 'https://images.unsplash.com/photo-1726177972571-0427e1d7d9db?w=600&q=85&auto=format&fit=crop',
+          image: 'https://drzwclnecktguodpokir.supabase.co/storage/v1/object/public/product-images/1788523252817-blue-oyster.png',
           badge: 'Organic', badgeEs: 'Orgánico',
         },
       },

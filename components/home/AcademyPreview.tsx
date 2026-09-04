@@ -12,7 +12,7 @@ const PREVIEW_ARTICLES = [
     badgeVariant: 'success' as const,
     title: "The Complete Beginner's Guide to Growing Oyster Mushrooms",
     readTime: 12,
-    image: 'https://images.unsplash.com/photo-1726177972571-0427e1d7d9db?w=600',
+    image: 'https://drzwclnecktguodpokir.supabase.co/storage/v1/object/public/product-images/1788523252817-blue-oyster.png',
     accent: '#00FFB8',
   },
   {
@@ -21,7 +21,7 @@ const PREVIEW_ARTICLES = [
     badgeVariant: 'accent' as const,
     title: 'Understanding Mycelium: The Underground Network',
     readTime: 8,
-    image: 'https://images.unsplash.com/photo-1726177972571-0427e1d7d9db?w=600',
+    image: 'https://drzwclnecktguodpokir.supabase.co/storage/v1/object/public/product-images/1788523252817-blue-oyster.png',
     accent: '#7C3AED',
   },
   {
