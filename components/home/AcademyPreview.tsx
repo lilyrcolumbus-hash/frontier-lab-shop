@@ -30,7 +30,7 @@ const PREVIEW_ARTICLES = [
     badgeVariant: 'warning' as const,
     title: "Lion's Mane & Brain Health: What the Science Actually Says",
     readTime: 15,
-    image: 'https://images.unsplash.com/photo-1504545102780-26774c1bb073?w=600',
+    image: 'https://images.unsplash.com/photo-1625286535466-68a6d71e4568?w=600',
     accent: '#FFAE00',
   },
 ]

@@ -122,7 +122,7 @@ export const ARTICLES: LearnArticle[] = [
     },
     readTime: 15,
     species: 'lions-mane',
-    imageUrl: '',
+    imageUrl: 'https://images.unsplash.com/photo-1625286535466-68a6d71e4568?w=1200&h=500&q=85&auto=format&fit=crop',
     intro: {
       en: "For thousands of years, Lion's Mane (Hericium erinaceus) was prescribed by Chinese physicians for cognitive clarity and nervous system health. Modern science has identified why: two families of bioactive compounds — hericenones (found in the fruiting body) and erinacines (found in the mycelium) — are the only naturally occurring substances known to cross the blood-brain barrier and stimulate the synthesis of Nerve Growth Factor (NGF), a protein essential for the growth, maintenance, and survival of neurons.",
       es: 'Durante miles de años, la Melena de León fue prescrita por médicos chinos para la claridad cognitiva. La ciencia moderna ha identificado por qué: dos familias de compuestos bioactivos — hericenones y erinacinas — son las únicas sustancias naturales conocidas que cruzan la barrera hematoencefálica y estimulan la síntesis del Factor de Crecimiento Nervioso (NGF).',
@@ -249,7 +249,7 @@ export const ARTICLES: LearnArticle[] = [
     },
     readTime: 20,
     species: 'shiitake',
-    imageUrl: '',
+    imageUrl: 'https://images.unsplash.com/photo-1755108906864-fdaadb8ab5f1?w=1200&h=500&q=85&auto=format&fit=crop',
     intro: {
       en: "Log cultivation is the traditional method used in Japan and Korea for thousands of years — and it produces Shiitake with noticeably superior flavor, texture, and medicinal compound concentration compared to the faster indoor sawdust method. The trade-off is time: log Shiitake takes 6–12 months to fully colonize before first fruiting. But a single log inoculated correctly will produce multiple flushes per year for 3–5 years, making the patient investment worthwhile.",
       es: 'El cultivo en troncos es el método tradicional usado en Japón y Corea durante miles de años — y produce Shiitake con sabor, textura y concentración de compuestos medicinales notablemente superiores. El costo es tiempo: el Shiitake en troncos tarda 6-12 meses en colonizarse completamente antes de la primera fructificación.',
@@ -313,7 +313,7 @@ export const ARTICLES: LearnArticle[] = [
     },
     readTime: 12,
     species: 'reishi',
-    imageUrl: '',
+    imageUrl: 'https://images.unsplash.com/photo-1786122622924-118eb20d8850?w=1200&h=500&q=85&auto=format&fit=crop',
     intro: {
       en: "An adaptogen is a compound that helps the body resist physical, chemical, and biological stress by modulating the HPA (hypothalamic-pituitary-adrenal) axis — the body's central stress-response system. Reishi (Ganoderma lucidum) is classified as a superior adaptogen not because it provides an acute energy boost, but because consistent long-term use strengthens the body's capacity to maintain homeostasis under stress. Think of it as training your stress-response system, not medicating it.",
       es: 'Un adaptógeno es un compuesto que ayuda al cuerpo a resistir el estrés físico, químico y biológico modulando el eje HPA — el sistema central de respuesta al estrés del cuerpo. El Reishi se clasifica como un adaptógeno superior porque el uso consistente a largo plazo fortalece la capacidad del cuerpo para mantener la homeostasis bajo estrés.',

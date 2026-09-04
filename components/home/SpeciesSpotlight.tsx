@@ -9,9 +9,9 @@ import { ScrollReveal } from '@/components/ui/ScrollReveal'
 
 const SEED_SPECIES = [
   { slug: 'blue-oyster', commonName: 'Blue Oyster', scientificName: 'Pleurotus ostreatus', difficulty: 'beginner', type: 'edible', thumbnailUrl: 'https://images.unsplash.com/photo-1504545102780-26774c1bb073?w=500' },
-  { slug: 'lions-mane', commonName: "Lion's Mane", scientificName: 'Hericium erinaceus', difficulty: 'intermediate', type: 'medicinal', thumbnailUrl: 'https://images.unsplash.com/photo-1504545102780-26774c1bb073?w=500' },
-  { slug: 'shiitake', commonName: 'Shiitake', scientificName: 'Lentinula edodes', difficulty: 'intermediate', type: 'edible', thumbnailUrl: 'https://images.unsplash.com/photo-1773600149997-2b6af77031d7?w=500' },
-  { slug: 'reishi', commonName: 'Reishi', scientificName: 'Ganoderma lucidum', difficulty: 'advanced', type: 'medicinal', thumbnailUrl: 'https://images.unsplash.com/photo-1748118869505-e75f25812a70?w=500' },
+  { slug: 'lions-mane', commonName: "Lion's Mane", scientificName: 'Hericium erinaceus', difficulty: 'intermediate', type: 'medicinal', thumbnailUrl: 'https://images.unsplash.com/photo-1625286535466-68a6d71e4568?w=500' },
+  { slug: 'shiitake', commonName: 'Shiitake', scientificName: 'Lentinula edodes', difficulty: 'intermediate', type: 'edible', thumbnailUrl: 'https://images.unsplash.com/photo-1755108906864-fdaadb8ab5f1?w=500' },
+  { slug: 'reishi', commonName: 'Reishi', scientificName: 'Ganoderma lucidum', difficulty: 'advanced', type: 'medicinal', thumbnailUrl: 'https://images.unsplash.com/photo-1786122622924-118eb20d8850?w=500' },
   { slug: 'pink-oyster', commonName: 'Pink Oyster', scientificName: 'Pleurotus djamor', difficulty: 'beginner', type: 'edible', thumbnailUrl: 'https://images.unsplash.com/photo-1773600149997-2b6af77031d7?w=500' },
   { slug: 'golden-oyster', commonName: 'Golden Oyster', scientificName: 'Pleurotus citrinopileatus', difficulty: 'beginner', type: 'edible', thumbnailUrl: 'https://images.unsplash.com/photo-1748118869505-e75f25812a70?w=500' },
 ]

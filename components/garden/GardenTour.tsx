@@ -46,7 +46,8 @@ const SCENES: Scene[] = [
     nameEs: 'Sala de Cultivo',
     subtitle: 'Where the magic begins',
     subtitleEs: 'Donde comienza la magia',
-    bg: 'https://images.unsplash.com/photo-1504545102780-26774c1bb073?w=1920&h=1080&q=90&auto=format&fit=crop',
+    // Lion's Mane — the featured species of this scene (see hs-2 below).
+    bg: 'https://images.unsplash.com/photo-1625286535466-68a6d71e4568?w=1920&h=1080&q=90&auto=format&fit=crop',
     hotspots: [
       {
         id: 'hs-1',
@@ -74,7 +75,7 @@ const SCENES: Scene[] = [
           description: "Ready-to-fruit Lion's Mane block. Fully colonized — just open and mist twice daily.",
           descriptionEs: 'Bloque de Melena de León listo para fructificar. Completamente colonizado — abre y nebuliza dos veces al día.',
           price: 3499,
-          image: 'https://images.unsplash.com/photo-1504545102780-26774c1bb073?w=600&q=85&auto=format&fit=crop',
+          image: 'https://images.unsplash.com/photo-1625286535466-68a6d71e4568?w=600&q=85&auto=format&fit=crop',
           badge: 'Popular', badgeEs: 'Popular',
         },
       },
@@ -114,7 +115,7 @@ const SCENES: Scene[] = [
           description: 'Grow Shiitake on oak logs. Includes plug spawn, wax, and full guide. Produces 3–5 years.',
           descriptionEs: 'Cultiva Shiitake en troncos de roble. Incluye spawn en tacos, cera y guía completa. Produce 3–5 años.',
           price: 2999,
-          image: 'https://images.unsplash.com/photo-1773600149997-2b6af77031d7?w=600&q=85&auto=format&fit=crop',
+          image: 'https://images.unsplash.com/photo-1755108906864-fdaadb8ab5f1?w=600&q=85&auto=format&fit=crop',
           badge: 'Outdoor', badgeEs: 'Exterior',
         },
       },
@@ -126,7 +127,8 @@ const SCENES: Scene[] = [
     nameEs: 'Sala de Fructificación',
     subtitle: 'Watch them emerge',
     subtitleEs: 'Obsérvalos crecer',
-    bg: 'https://images.unsplash.com/photo-1773600149997-2b6af77031d7?w=1920&h=1080&q=90&auto=format&fit=crop',
+    // Shiitake — the featured species of this scene (see hs-5 below).
+    bg: 'https://images.unsplash.com/photo-1755108906864-fdaadb8ab5f1?w=1920&h=1080&q=90&auto=format&fit=crop',
     hotspots: [
       {
         id: 'hs-5',
@@ -139,7 +141,7 @@ const SCENES: Scene[] = [
           description: 'Grow Shiitake on oak logs. Includes plug spawn, wax, and full guide. Produces 3–5 years.',
           descriptionEs: 'Cultiva Shiitake en troncos de roble. Incluye spawn en tacos, cera y guía completa. Produce 3–5 años.',
           price: 2999,
-          image: 'https://images.unsplash.com/photo-1773600149997-2b6af77031d7?w=600&q=85&auto=format&fit=crop',
+          image: 'https://images.unsplash.com/photo-1755108906864-fdaadb8ab5f1?w=600&q=85&auto=format&fit=crop',
         },
       },
       {
@@ -153,7 +155,7 @@ const SCENES: Scene[] = [
           description: "Ready-to-fruit Lion's Mane block. Fully colonized — just open and mist twice daily.",
           descriptionEs: 'Bloque de Melena de León listo para fructificar. Completamente colonizado.',
           price: 3499,
-          image: 'https://images.unsplash.com/photo-1504545102780-26774c1bb073?w=600&q=85&auto=format&fit=crop',
+          image: 'https://images.unsplash.com/photo-1625286535466-68a6d71e4568?w=600&q=85&auto=format&fit=crop',
         },
       },
     ],
@@ -164,7 +166,8 @@ const SCENES: Scene[] = [
     nameEs: 'Apotecaria',
     subtitle: 'Ancient remedies, modern science',
     subtitleEs: 'Remedios ancestrales, ciencia moderna',
-    bg: 'https://images.unsplash.com/photo-1748118869505-e75f25812a70?w=1920&h=1080&q=90&auto=format&fit=crop',
+    // Reishi — the featured species of this scene (see hs-6 below).
+    bg: 'https://images.unsplash.com/photo-1786122622924-118eb20d8850?w=1920&h=1080&q=90&auto=format&fit=crop',
     hotspots: [
       {
         id: 'hs-6',
@@ -177,7 +180,7 @@ const SCENES: Scene[] = [
           description: '2oz dual-extract tincture. Organic Ganoderma lucidum fruiting bodies. 50:1 concentration.',
           descriptionEs: 'Tintura de doble extracción de 60ml. Cuerpos fructificantes orgánicos de Ganoderma lucidum. Concentración 50:1.',
           price: 3999,
-          image: 'https://images.unsplash.com/photo-1748118869505-e75f25812a70?w=600&q=85&auto=format&fit=crop',
+          image: 'https://images.unsplash.com/photo-1786122622924-118eb20d8850?w=600&q=85&auto=format&fit=crop',
           badge: 'Medicinal', badgeEs: 'Medicinal',
         },
       },
