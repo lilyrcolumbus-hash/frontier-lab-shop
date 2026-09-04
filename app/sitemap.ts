@@ -11,7 +11,7 @@ const LOCALES = ['en', 'es'] as const
 
 /** Pages that exist for both locales and are not driven by the database. */
 const STATIC_PATHS = [
-  '/', '/shop', '/encyclopedia', '/learn', '/garden', '/community',
+  '/', '/shop', '/encyclopedia', '/learn', '/lab', '/community',
   '/tools/grow-calculator', '/tools/species-finder',
   '/about', '/faq', '/contact', '/shipping', '/returns', '/track',
   '/careers', '/press', '/affiliates', '/privacy', '/terms',

@@ -210,7 +210,7 @@ function HotspotPin({ label, isActive }: { label: string; isActive: boolean }) {
   )
 }
 
-export function GardenTour() {
+export function LabTour() {
   const locale = useLocale()
   const es = locale === 'es'
 

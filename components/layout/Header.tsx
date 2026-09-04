@@ -167,10 +167,10 @@ export function Header() {
                 {t('nav.community')}
               </Link>
               <Link
-                href="/garden"
+                href="/lab"
                 className={cn('text-sm font-body font-medium transition-colors px-3 py-2', scrolled ? 'text-amber/80 hover:text-amber' : 'text-white/55 hover:text-white')}
               >
-                {t('nav.garden')}
+                {t('nav.lab')}
               </Link>
             </nav>
 
