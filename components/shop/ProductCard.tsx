@@ -68,7 +68,7 @@ export function ProductCard({ product }: ProductCardProps) {
       transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="flex flex-col h-full rounded-none border border-ds-border bg-surface shadow-sm hover:shadow-[0_24px_64px_-8px_rgba(61,110,69,0.35)] hover:border-accent/30 transition-all duration-500"
+      className="flex flex-col h-full rounded-none border border-ds-border bg-surface shadow-sm hover:shadow-[0_24px_64px_-8px_rgba(158,104,32,0.28)] hover:border-accent/30 transition-all duration-500"
     >
       <Link href={`/shop/${product.slug}`} className="flex flex-col flex-1">
         {/* Image */}

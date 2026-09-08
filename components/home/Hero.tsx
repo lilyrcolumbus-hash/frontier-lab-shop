@@ -56,7 +56,7 @@ export function Hero() {
 
             <div>
               <motion.h1
-                className="font-body text-5xl sm:text-6xl lg:text-[4.25rem] xl:text-[4.75rem] font-bold text-white leading-[1.0] tracking-[-0.025em]"
+                className="font-heading text-5xl sm:text-6xl lg:text-[4.25rem] xl:text-[4.75rem] font-medium text-white leading-[1.0] tracking-[-0.025em]"
                 initial={{ opacity: 0, y: 48 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ type: 'spring', stiffness: 75, damping: 16, delay: 0.16 }}
@@ -64,8 +64,10 @@ export function Hero() {
                 {t('headline1')}
               </motion.h1>
               <motion.h1
-                className="font-body text-5xl sm:text-6xl lg:text-[4.25rem] xl:text-[4.75rem] font-bold leading-[1.05] tracking-[-0.025em]"
-                style={{ color: '#82C97E' }}
+                // The gold's bright variant, not the base hex: on near-black this is the one
+                // moment gold is meant to be a headline colour, so it needs the lighter mix to
+                // actually read against the dark hero rather than going muddy.
+                className="font-heading text-5xl sm:text-6xl lg:text-[4.25rem] xl:text-[4.75rem] font-medium leading-[1.05] tracking-[-0.025em] text-amber-bright"
                 initial={{ opacity: 0, y: 48 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ type: 'spring', stiffness: 75, damping: 16, delay: 0.3 }}

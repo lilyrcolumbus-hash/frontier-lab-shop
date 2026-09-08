@@ -65,7 +65,7 @@ export function GlowCursor() {
         }
         .organic-ring {
           width: 38px; height: 38px;
-          border: 1.5px solid rgba(61,110,69,0.48);
+          border: 1.5px solid rgba(158,104,32,0.48);
           border-radius: 50%;
           transform: translate(-50%, -50%);
           animation: cursor-breathe 2.8s ease-in-out infinite;
@@ -75,7 +75,7 @@ export function GlowCursor() {
         }
         .organic-ring--hover {
           width: 56px; height: 56px;
-          border-color: rgba(61,110,69,0.78);
+          border-color: rgba(158,104,32,0.78);
         }
         /* Only animate scale — position is controlled by JS on the outer wrapper */
         @keyframes cursor-breathe {
@@ -85,7 +85,7 @@ export function GlowCursor() {
         .organic-dot {
           position: fixed; top: 0; left: 0;
           width: 5px; height: 5px;
-          background: rgba(61,110,69,0.88);
+          background: rgba(158,104,32,0.88);
           border-radius: 50%;
           pointer-events: none; z-index: 9999;
           opacity: 0;

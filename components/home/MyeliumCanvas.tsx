@@ -104,7 +104,7 @@ export function MyeliumCanvas() {
         ctx.beginPath()
         ctx.moveTo(c.from.x, c.from.y)
         ctx.lineTo(c.from.x + dx * c.progress, c.from.y + dy * c.progress)
-        ctx.strokeStyle = `rgba(130,201,126,${c.alpha})`
+        ctx.strokeStyle = `rgba(212,165,74,${c.alpha})`
         ctx.lineWidth = 0.6
         ctx.stroke()
       }
@@ -112,7 +112,7 @@ export function MyeliumCanvas() {
       for (const n of nodes) {
         ctx.beginPath()
         ctx.arc(n.x, n.y, 1.2, 0, Math.PI * 2)
-        ctx.fillStyle = 'rgba(130,201,126,0.12)'
+        ctx.fillStyle = 'rgba(212,165,74,0.12)'
         ctx.fill()
       }
 

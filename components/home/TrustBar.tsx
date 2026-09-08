@@ -7,7 +7,7 @@ const STAT_META = [
   {
     key: 'growers',
     color: 'text-accent',
-    glow: 'rgba(61,110,69,0.07)',
+    glow: 'rgba(158,104,32,0.07)',
     icon: (
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
@@ -45,7 +45,7 @@ const STAT_META = [
   {
     key: 'guarantee',
     color: 'text-accent',
-    glow: 'rgba(61,110,69,0.07)',
+    glow: 'rgba(158,104,32,0.07)',
     icon: (
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
