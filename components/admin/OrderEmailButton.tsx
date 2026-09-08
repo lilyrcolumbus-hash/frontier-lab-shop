@@ -32,7 +32,7 @@ export function OrderEmailButton({ orderId, email }: { orderId: string; email: s
         type="button"
         onClick={resend}
         disabled={sending}
-        className="px-4 py-2 rounded-full border border-ds-border text-sm font-medium text-cream hover:bg-elevated transition-colors disabled:opacity-50"
+        className="px-4 py-2 rounded-none border border-ds-border text-sm font-medium text-cream hover:bg-elevated transition-colors disabled:opacity-50"
       >
         {sending ? 'Sending…' : 'Resend confirmation email'}
       </button>

@@ -148,7 +148,7 @@ export function ShopBrowser({ products: PRODUCTS }: { products: Product[] }) {
                 key={key}
                 onClick={() => setActiveCategory(key)}
                 className={cn(
-                  'px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors',
+                  'px-4 py-2 rounded-none text-sm font-medium whitespace-nowrap transition-colors',
                   activeCategory === key
                     ? 'bg-accent text-cream'
                     : 'bg-elevated text-cream-muted hover:text-cream border border-ds-border'
@@ -203,7 +203,7 @@ export function ShopBrowser({ products: PRODUCTS }: { products: Product[] }) {
                   key={group.subcategory}
                   onClick={() => setSubstrateSubFilter(group.subcategory)}
                   className={cn(
-                    'px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors border',
+                    'px-4 py-2 rounded-none text-sm font-medium whitespace-nowrap transition-colors border',
                     substrateSubFilter === group.subcategory
                       ? 'bg-cream text-bg border-cream'
                       : 'bg-surface text-cream-muted hover:text-cream border-ds-border'

@@ -96,7 +96,7 @@ export function ProductGallery({ images, imageAlts, alt }: ProductGalleryProps) 
                 <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-accent/60">{slot.label}</p>
                 <p className="text-sm text-cream-muted/40">{slot.hint}</p>
               </div>
-              <div className="mt-1 px-4 py-1.5 rounded-full border border-dashed border-cream-muted/15">
+              <div className="mt-1 px-4 py-1.5 rounded-none border border-dashed border-cream-muted/15">
                 <span className="font-mono text-[9px] uppercase tracking-[0.18em] text-cream-muted/25">Photo coming soon</span>
               </div>
             </div>

@@ -97,7 +97,7 @@ export function OrderFulfilmentForm({
           type="button"
           onClick={() => void save(quantities)}
           disabled={saving || disabled}
-          className="px-4 py-2 rounded-full bg-amber text-bg text-sm font-semibold hover:bg-amber-bright transition-colors disabled:opacity-50"
+          className="px-4 py-2 rounded-none bg-amber text-bg text-sm font-semibold hover:bg-amber-bright transition-colors disabled:opacity-50"
         >
           {saving ? 'Saving…' : 'Save fulfilment'}
         </button>
@@ -105,7 +105,7 @@ export function OrderFulfilmentForm({
           type="button"
           onClick={markAllShipped}
           disabled={saving || disabled || shipped >= ordered}
-          className="px-4 py-2 rounded-full border border-ds-border text-sm font-medium text-cream hover:bg-elevated transition-colors disabled:opacity-50"
+          className="px-4 py-2 rounded-none border border-ds-border text-sm font-medium text-cream hover:bg-elevated transition-colors disabled:opacity-50"
         >
           Mark everything shipped
         </button>

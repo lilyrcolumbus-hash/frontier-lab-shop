@@ -26,7 +26,7 @@ export function StatusPill({ status }: { status: string }) {
   const label = LABELS[status] ?? status
 
   return (
-    <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold ${style}`}>
+    <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-none text-xs font-semibold ${style}`}>
       <span className="w-1.5 h-1.5 rounded-full bg-current" />
       {label}
     </span>

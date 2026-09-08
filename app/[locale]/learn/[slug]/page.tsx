@@ -41,7 +41,7 @@ export default async function ArticlePage({ params }: PageProps) {
           />
           <div className="absolute inset-0 bg-gradient-to-t from-cream/95 via-cream/40 to-transparent" />
           <div className="absolute bottom-0 left-0 right-0 max-w-3xl mx-auto px-4 sm:px-6 pb-10">
-            <span className={`inline-block font-mono text-[10px] uppercase tracking-[0.25em] px-3 py-1 rounded-full border ${catColor} mb-3`}>
+            <span className={`inline-block font-mono text-[10px] uppercase tracking-[0.25em] px-3 py-1 rounded-none border ${catColor} mb-3`}>
               {cat[lang]}
             </span>
             <h1 className="font-heading font-medium text-3xl sm:text-4xl tracking-tight text-cream-900 leading-tight">
@@ -52,7 +52,7 @@ export default async function ArticlePage({ params }: PageProps) {
       ) : (
         <div className={`bg-gradient-to-br ${catGradient} border-b border-ds-border py-16`}>
           <div className="max-w-3xl mx-auto px-4 sm:px-6">
-            <span className={`inline-block font-mono text-[10px] uppercase tracking-[0.25em] px-3 py-1 rounded-full border ${catColor} mb-4`}>
+            <span className={`inline-block font-mono text-[10px] uppercase tracking-[0.25em] px-3 py-1 rounded-none border ${catColor} mb-4`}>
               {cat[lang]}
             </span>
             <h1 className="font-heading font-medium text-3xl sm:text-4xl tracking-tight text-cream leading-tight">
@@ -123,7 +123,7 @@ export default async function ArticlePage({ params }: PageProps) {
           {relatedSpecies && (
             <Link
               href={`/encyclopedia/${relatedSpecies.slug}`}
-              className="inline-flex items-center justify-center gap-2 rounded-full font-body font-medium px-6 py-3 text-base transition-all duration-200 bg-amber text-bg shadow-glow-amber-sm hover:bg-amber-bright hover:shadow-glow-amber active:scale-95"
+              className="inline-flex items-center justify-center gap-2 rounded-none font-body font-medium px-6 py-3 text-base transition-all duration-200 bg-amber text-bg shadow-glow-amber-sm hover:bg-amber-bright hover:shadow-glow-amber active:scale-95"
             >
               {lang === 'en'
                 ? `Explore ${relatedSpecies.commonName} →`
@@ -132,7 +132,7 @@ export default async function ArticlePage({ params }: PageProps) {
           )}
           <Link
             href="/learn"
-            className="inline-flex items-center justify-center gap-2 rounded-full font-body font-medium px-6 py-3 text-base transition-all duration-200 border border-accent/30 hover:border-accent/60 text-accent hover:bg-accent/8 active:scale-95"
+            className="inline-flex items-center justify-center gap-2 rounded-none font-body font-medium px-6 py-3 text-base transition-all duration-200 border border-accent/30 hover:border-accent/60 text-accent hover:bg-accent/8 active:scale-95"
           >
             {lang === 'en' ? '← Back to Academy' : '← Volver a la Academia'}
           </Link>

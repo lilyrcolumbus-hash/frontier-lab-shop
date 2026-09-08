@@ -77,13 +77,13 @@ export function AppearanceFields({
         </p>
         <div className="flex gap-2">
           <span
-            className="px-3 py-1.5 rounded-full text-xs font-semibold"
+            className="px-3 py-1.5 rounded-none text-xs font-semibold"
             style={{ background: 'var(--p-accent)', color: 'var(--p-surface)' }}
           >
             Add to cart
           </span>
           <span
-            className="px-3 py-1.5 rounded-full text-xs font-semibold"
+            className="px-3 py-1.5 rounded-none text-xs font-semibold"
             style={{ background: 'var(--p-amber)', color: 'var(--p-surface)' }}
           >
             Save 10%

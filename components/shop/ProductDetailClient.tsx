@@ -122,7 +122,7 @@ export function ProductDetailClient({ product }: { product: Product }) {
               </div>
               {hasDiscount && (
                 <div className="flex items-center gap-2">
-                  <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-accent/10 border border-accent/20 text-accent text-xs font-mono uppercase tracking-wider">
+                  <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-none bg-accent/10 border border-accent/20 text-accent text-xs font-mono uppercase tracking-wider">
                     <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
                     Save {Math.round((1 - selectedVariant.price / product.compareAtPrice!) * 100)}% — Launch price
                   </span>
@@ -175,7 +175,7 @@ export function ProductDetailClient({ product }: { product: Product }) {
             <div ref={ctaRef} className="flex flex-col sm:flex-row gap-3">
               <motion.div
                 ref={magnetBtnRef}
-                className="flex-1 relative overflow-hidden rounded-full"
+                className="flex-1 relative overflow-hidden rounded-none"
                 style={{ x: springX, y: springY }}
                 onMouseMove={handleMagnetMove}
                 onMouseLeave={handleMagnetLeave}

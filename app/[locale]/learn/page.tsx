@@ -44,7 +44,7 @@ export default async function LearnPage({ params }: PageProps) {
           {(['beginners', 'science', 'cultivation', 'wellness', 'kitchen'] as LearnCategory[]).map((cat) => (
             <span
               key={cat}
-              className={`flex-shrink-0 font-mono text-[10px] uppercase tracking-[0.2em] px-3 py-1.5 rounded-full border ${CATEGORY_COLOR[cat]}`}
+              className={`flex-shrink-0 font-mono text-[10px] uppercase tracking-[0.2em] px-3 py-1.5 rounded-none border ${CATEGORY_COLOR[cat]}`}
             >
               {CATEGORY_LABEL[cat][lang]}
             </span>

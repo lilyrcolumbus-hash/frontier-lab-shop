@@ -51,7 +51,7 @@ export function SpeciesTimeline({ steps }: SpeciesTimelineProps) {
                       {t(step.key)}
                     </h4>
                   </div>
-                  <span className="flex-shrink-0 text-sm font-medium text-accent bg-accent/10 px-3 py-1 rounded-full">
+                  <span className="flex-shrink-0 text-sm font-medium text-accent bg-accent/10 px-3 py-1 rounded-none">
                     {step.duration}
                   </span>
                 </div>

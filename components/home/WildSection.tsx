@@ -100,7 +100,7 @@ export function WildSection() {
                 {['100% organic', 'No chemicals', 'Zone 6a grown', 'Heirloom strains'].map((tag) => (
                   <span
                     key={tag}
-                    className="text-xs font-mono px-3 py-1.5 rounded-full border border-accent/25 text-accent/80"
+                    className="text-xs font-mono px-3 py-1.5 rounded-none border border-accent/25 text-accent/80"
                   >
                     {tag}
                   </span>

@@ -62,7 +62,7 @@ export function BlockRenderer({ blocks, locale }: { blocks: PageBlock[]; locale:
                 href={block.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block px-6 py-3 rounded-full bg-accent text-surface text-sm font-semibold hover:bg-accent-hover transition-colors"
+                className="inline-block px-6 py-3 rounded-none bg-accent text-surface text-sm font-semibold hover:bg-accent-hover transition-colors"
               >
                 {label}
               </a>
@@ -70,7 +70,7 @@ export function BlockRenderer({ blocks, locale }: { blocks: PageBlock[]; locale:
               <Link
                 key={block.id}
                 href={block.href}
-                className="inline-block px-6 py-3 rounded-full bg-accent text-surface text-sm font-semibold hover:bg-accent-hover transition-colors"
+                className="inline-block px-6 py-3 rounded-none bg-accent text-surface text-sm font-semibold hover:bg-accent-hover transition-colors"
               >
                 {label}
               </Link>

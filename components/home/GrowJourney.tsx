@@ -106,7 +106,7 @@ export function GrowJourney() {
                   </div>
 
                   {/* Timing */}
-                  <div className="absolute top-4 right-4 px-2.5 py-1 rounded-full bg-bg/80 border border-ds-border/80 backdrop-blur-sm">
+                  <div className="absolute top-4 right-4 px-2.5 py-1 rounded-none bg-bg/80 border border-ds-border/80 backdrop-blur-sm">
                     <span className="font-mono text-[10px] text-cream-muted/70">{step.timing}</span>
                   </div>
                 </div>

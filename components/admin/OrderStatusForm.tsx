@@ -108,7 +108,7 @@ export function OrderStatusForm({
       <button
         onClick={handleSave}
         disabled={saving || isClosed}
-        className="px-4 py-2 rounded-full bg-amber text-bg text-sm font-semibold hover:bg-amber-bright transition-colors disabled:opacity-50"
+        className="px-4 py-2 rounded-none bg-amber text-bg text-sm font-semibold hover:bg-amber-bright transition-colors disabled:opacity-50"
       >
         {saving ? 'Saving…' : 'Save changes'}
       </button>
@@ -129,14 +129,14 @@ export function OrderStatusForm({
               <button
                 onClick={() => handleResolve('cancel')}
                 disabled={resolving !== null}
-                className="px-4 py-2 rounded-full border border-ds-border text-sm font-medium text-cream hover:bg-elevated transition-colors disabled:opacity-50"
+                className="px-4 py-2 rounded-none border border-ds-border text-sm font-medium text-cream hover:bg-elevated transition-colors disabled:opacity-50"
               >
                 {resolving === 'cancel' ? 'Cancelling…' : 'Cancel order'}
               </button>
               <button
                 onClick={() => handleResolve('refund')}
                 disabled={resolving !== null}
-                className="px-4 py-2 rounded-full border border-error/40 text-sm font-medium text-error hover:bg-error/10 transition-colors disabled:opacity-50"
+                className="px-4 py-2 rounded-none border border-error/40 text-sm font-medium text-error hover:bg-error/10 transition-colors disabled:opacity-50"
               >
                 {resolving === 'refund' ? 'Refunding…' : 'Refund in full'}
               </button>

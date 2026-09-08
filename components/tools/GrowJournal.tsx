@@ -157,7 +157,7 @@ export function GrowJournal({ isAuthenticated, entries, onAddEntry, onUpdateStat
                       key={s}
                       onClick={() => onUpdateStatus(entry.id, s)}
                       className={cn(
-                        'flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-colors',
+                        'flex items-center gap-1.5 px-3 py-1.5 rounded-none text-xs font-medium whitespace-nowrap transition-colors',
                         idx <= currentIdx
                           ? 'bg-accent/20 text-accent border border-accent/30'
                           : 'bg-surface text-cream-muted border border-ds-border hover:border-accent/30'

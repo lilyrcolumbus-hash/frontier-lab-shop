@@ -80,12 +80,12 @@ export function Hero() {
 
             <motion.div {...fadeUp(0.50)} className="flex flex-wrap gap-3">
               <Link href="/quiz">
-                <button className="inline-flex items-center gap-2 rounded-full bg-white text-[#0D1209] px-8 py-3.5 text-sm font-semibold hover:bg-white/90 transition-colors duration-200">
+                <button className="inline-flex items-center gap-2 rounded-none bg-white text-[#0D1209] px-8 py-3.5 text-sm font-semibold hover:bg-white/90 transition-colors duration-200">
                   {t('ctaPrimary')}
                 </button>
               </Link>
               <Link href="/shop">
-                <button className="inline-flex items-center gap-2 rounded-full bg-transparent text-white/85 px-8 py-3.5 text-sm font-medium border border-white/18 hover:bg-white/[0.07] hover:border-white/32 transition-all duration-200">
+                <button className="inline-flex items-center gap-2 rounded-none bg-transparent text-white/85 px-8 py-3.5 text-sm font-medium border border-white/18 hover:bg-white/[0.07] hover:border-white/32 transition-all duration-200">
                   {t('ctaSecondary')} →
                 </button>
               </Link>

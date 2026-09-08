@@ -19,7 +19,7 @@ export default async function AffiliatesPage({ params }: PageProps) {
     <div className="pt-20 min-h-screen">
       <div className="border-b border-ds-border bg-surface py-16">
         <div className="max-w-3xl mx-auto px-4 sm:px-6">
-          <span className="inline-block font-mono text-[10px] uppercase tracking-[0.25em] px-3 py-1 rounded-full border border-amber/30 text-amber mb-4">
+          <span className="inline-block font-mono text-[10px] uppercase tracking-[0.25em] px-3 py-1 rounded-none border border-amber/30 text-amber mb-4">
             {lang === 'en' ? 'Coming Soon' : 'Próximamente'}
           </span>
           <h1 className="font-heading font-medium text-3xl sm:text-4xl tracking-tight text-cream">

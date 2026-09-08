@@ -5,7 +5,7 @@ export function PrintButton() {
     <button
       type="button"
       onClick={() => window.print()}
-      className="px-4 py-2 rounded-full bg-black text-white text-sm font-semibold hover:bg-black/85 transition-colors"
+      className="px-4 py-2 rounded-none bg-black text-white text-sm font-semibold hover:bg-black/85 transition-colors"
     >
       Print packing slip
     </button>

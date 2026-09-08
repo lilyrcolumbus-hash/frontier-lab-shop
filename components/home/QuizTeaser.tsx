@@ -58,7 +58,7 @@ export function QuizTeaser() {
                       initial={{ opacity: 0, scale: 0.85 }}
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ delay: 0.2 + i * 0.1, duration: 0.4, ease: 'backOut' }}
-                      className="inline-block text-xs font-mono px-3 py-1.5 rounded-full border" style={{ color: 'rgba(240,244,240,0.55)', borderColor: 'rgba(240,244,240,0.12)', background: 'rgba(240,244,240,0.05)' }}
+                      className="inline-block text-xs font-mono px-3 py-1.5 rounded-none border" style={{ color: 'rgba(240,244,240,0.55)', borderColor: 'rgba(240,244,240,0.12)', background: 'rgba(240,244,240,0.05)' }}
                     >
                       {i + 1}. {q}
                     </motion.span>

@@ -442,7 +442,7 @@ export function LabTour() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-bg/40 via-transparent to-transparent" />
                 {activeHotspot.product.badge && (
-                  <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full text-xs font-semibold bg-amber text-bg shadow-lg">
+                  <span className="absolute top-3 left-3 px-2.5 py-1 rounded-none text-xs font-semibold bg-amber text-bg shadow-lg">
                     {es ? activeHotspot.product.badgeEs : activeHotspot.product.badge}
                   </span>
                 )}
@@ -481,7 +481,7 @@ export function LabTour() {
                   {trust.map((label) => (
                     <span
                       key={label}
-                      className="text-[11px] text-amber/65 border border-amber/18 rounded-full px-2.5 py-1 font-body"
+                      className="text-[11px] text-amber/65 border border-amber/18 rounded-none px-2.5 py-1 font-body"
                     >
                       {label}
                     </span>

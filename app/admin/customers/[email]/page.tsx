@@ -35,7 +35,7 @@ export default async function AdminCustomerDetailPage({ params }: { params: { em
         {profile && profile.tags.length > 0 && (
           <div className="flex flex-wrap gap-1.5 mt-2">
             {profile.tags.map((tag) => (
-              <span key={tag} className="px-2.5 py-1 rounded-full border border-ds-border text-xs text-cream-muted">
+              <span key={tag} className="px-2.5 py-1 rounded-none border border-ds-border text-xs text-cream-muted">
                 {tag}
               </span>
             ))}

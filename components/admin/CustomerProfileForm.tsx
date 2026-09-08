@@ -84,7 +84,7 @@ export function CustomerProfileForm({
         type="button"
         onClick={save}
         disabled={saving}
-        className="px-4 py-2 rounded-full bg-amber text-bg text-sm font-semibold hover:bg-amber-bright transition-colors disabled:opacity-50"
+        className="px-4 py-2 rounded-none bg-amber text-bg text-sm font-semibold hover:bg-amber-bright transition-colors disabled:opacity-50"
       >
         {saving ? 'Saving…' : 'Save'}
       </button>

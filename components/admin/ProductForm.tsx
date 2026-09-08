@@ -531,7 +531,7 @@ export function ProductForm({
             {availableCollections.map((c) => (
               <label
                 key={c.id}
-                className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-ds-border text-sm text-cream-muted cursor-pointer has-[:checked]:border-accent has-[:checked]:text-cream"
+                className="flex items-center gap-2 px-3 py-1.5 rounded-none border border-ds-border text-sm text-cream-muted cursor-pointer has-[:checked]:border-accent has-[:checked]:text-cream"
               >
                 <input type="checkbox" checked={values.collectionIds.includes(c.id)} onChange={() => toggleCollection(c.id)} className="hidden" />
                 {c.titleEn}
@@ -555,7 +555,7 @@ export function ProductForm({
                   key={slug}
                   type="button"
                   onClick={() => toggleRelated(slug)}
-                  className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-accent text-sm text-cream"
+                  className="flex items-center gap-2 px-3 py-1.5 rounded-none border border-accent text-sm text-cream"
                 >
                   {match?.nameEn ?? slug}
                   <span aria-hidden className="text-cream-muted">&times;</span>
