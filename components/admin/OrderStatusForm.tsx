@@ -76,13 +76,13 @@ export function OrderStatusForm({
   const isClosed = initialStatus === 'cancelled' || initialStatus === 'refunded'
 
   return (
-    <div className="bg-surface border border-ds-border rounded-xl p-5 space-y-4">
+    <div className="bg-surface border border-ds-border rounded-none p-5 space-y-4">
       <div>
         <label className="block text-xs font-medium text-cream-muted mb-1.5">Status</label>
         <select
           value={status}
           onChange={(e) => setStatus(e.target.value)}
-          className="w-full px-3 py-2 rounded-lg border border-ds-border bg-bg text-sm text-cream"
+          className="w-full px-3 py-2 rounded-none border border-ds-border bg-bg text-sm text-cream"
         >
           {ORDER_STATUSES.map((s) => (
             <option key={s} value={s}>
@@ -99,7 +99,7 @@ export function OrderStatusForm({
           value={trackingNumber}
           onChange={(e) => setTrackingNumber(e.target.value)}
           placeholder="Optional"
-          className="w-full px-3 py-2 rounded-lg border border-ds-border bg-bg text-sm text-cream placeholder:text-cream-muted"
+          className="w-full px-3 py-2 rounded-none border border-ds-border bg-bg text-sm text-cream placeholder:text-cream-muted"
         />
       </div>
 

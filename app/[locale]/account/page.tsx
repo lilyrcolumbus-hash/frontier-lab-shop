@@ -31,7 +31,7 @@ function VerifyBanner() {
   if (verifyParam === 'success') {
     return (
       <div className="max-w-md mx-auto px-4 pt-8">
-        <div className="bg-accent/10 border border-accent/25 rounded-xl px-4 py-3.5">
+        <div className="bg-accent/10 border border-accent/25 rounded-none px-4 py-3.5">
           <p className="text-sm text-accent">✓ {t('verifySuccess')}</p>
         </div>
       </div>
@@ -43,7 +43,7 @@ function VerifyBanner() {
 
   return (
     <div className="max-w-md mx-auto px-4 pt-8">
-      <div className="bg-amber/10 border border-amber/25 rounded-xl px-4 py-3.5 space-y-2">
+      <div className="bg-amber/10 border border-amber/25 rounded-none px-4 py-3.5 space-y-2">
         <p className="text-sm text-cream">
           {verifyParam === 'expired' ? t('verifyExpired') : t('verifyEmailPrompt')}
         </p>
@@ -122,7 +122,7 @@ export default function AccountPage() {
         </Suspense>
 
         <div className="max-w-md mx-auto px-4 py-16">
-          <div className="bg-elevated rounded-2xl border border-ds-border p-8 space-y-4">
+          <div className="bg-elevated rounded-none border border-ds-border p-8 space-y-4">
             <div className="space-y-3">
               {[
                 { label: t('orders'), href: '/account/orders' },
@@ -131,7 +131,7 @@ export default function AccountPage() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="flex items-center justify-between px-4 py-3 rounded-xl border border-ds-border text-cream hover:border-accent/40 hover:bg-accent/5 transition-colors"
+                  className="flex items-center justify-between px-4 py-3 rounded-none border border-ds-border text-cream hover:border-accent/40 hover:bg-accent/5 transition-colors"
                 >
                   {item.label}
                   <span className="text-cream-muted">→</span>
@@ -155,7 +155,7 @@ export default function AccountPage() {
       </div>
 
       <div className="max-w-md mx-auto px-4 py-16">
-        <form onSubmit={handleSignIn} className="bg-elevated rounded-2xl border border-ds-border p-8 space-y-5">
+        <form onSubmit={handleSignIn} className="bg-elevated rounded-none border border-ds-border p-8 space-y-5">
           <div className="space-y-4">
             <Input
               label={t('email')}

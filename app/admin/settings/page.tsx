@@ -37,7 +37,7 @@ export default async function AdminSettingsPage() {
 
   return (
     <div className="max-w-2xl">
-      <h1 className="font-body font-bold text-2xl text-cream mb-6">Settings</h1>
+      <h1 className="font-heading font-medium text-2xl text-cream mb-6">Settings</h1>
       <SettingsForm initial={store} />
     </div>
   )

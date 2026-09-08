@@ -15,7 +15,7 @@ export default async function AdminAppearancePage() {
 
   return (
     <div className="max-w-2xl">
-      <h1 className="font-body font-bold text-2xl text-cream mb-2">Home page</h1>
+      <h1 className="font-heading font-medium text-2xl text-cream mb-2">Home page</h1>
       <p className="text-sm text-cream-muted mb-6">
         Choose which sections appear on your home page and in what order. Colours live in
         Settings; the words in each section live in Content.

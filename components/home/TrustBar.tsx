@@ -30,8 +30,10 @@ const STAT_META = [
   },
   {
     key: 'species',
-    color: 'text-lavender',
-    glow: 'rgba(99,80,160,0.07)',
+    // Lavender is banned outright — gold stays reserved for the one CTA/emphasis role, so this
+    // neutral warm-grey differentiates the icon without competing with it.
+    color: 'text-cream-muted',
+    glow: 'rgba(124,119,109,0.07)',
     icon: (
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <ellipse cx="12" cy="5" rx="9" ry="3"/>
@@ -69,14 +71,14 @@ export function TrustBar() {
           {stats.map((stat, i) => (
             <ScrollReveal key={stat.label} delay={i * 0.1}>
               <div
-                className="flex flex-col items-center text-center gap-3 p-6 rounded-2xl border border-ds-border transition-all duration-300 hover:border-accent/20 group"
+                className="flex flex-col items-center text-center gap-3 p-6 rounded-none border border-ds-border transition-all duration-300 hover:border-accent/20 group"
                 style={{ background: `radial-gradient(ellipse at center, ${stat.glow} 0%, transparent 70%)` }}
               >
                 <span className={`${stat.color} opacity-70 group-hover:opacity-100 transition-opacity`}>
                   {stat.icon}
                 </span>
                 <div>
-                  <p className={`font-body font-bold text-3xl tracking-tight ${stat.color}`}>{stat.value}</p>
+                  <p className={`font-heading font-medium text-3xl tracking-tight ${stat.color}`}>{stat.value}</p>
                   <p className="text-xs text-cream-muted mt-0.5 font-mono">{stat.label}</p>
                 </div>
               </div>

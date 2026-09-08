@@ -45,14 +45,14 @@ export function ContentRow({ entry, onSaved }: { entry: ContentEntry; onSaved: (
   }
 
   const inputClass =
-    'w-full px-3 py-2 rounded-lg border border-ds-border bg-bg text-sm text-cream placeholder:text-cream-muted/60'
+    'w-full px-3 py-2 rounded-none border border-ds-border bg-bg text-sm text-cream placeholder:text-cream-muted/60'
 
   return (
-    <div className="p-4 rounded-xl border border-ds-border bg-surface">
+    <div className="p-4 rounded-none border border-ds-border bg-surface">
       <div className="flex items-start justify-between gap-3 mb-2">
         <code className="text-[11px] text-cream-muted/70 break-all">{entry.key}</code>
         {entry.edited && (
-          <span className="text-[10px] uppercase tracking-wide font-semibold px-1.5 py-0.5 rounded bg-accent-dim text-accent flex-shrink-0">
+          <span className="text-[10px] uppercase tracking-wide font-semibold px-1.5 py-0.5 rounded-none bg-accent-dim text-accent flex-shrink-0">
             Edited
           </span>
         )}
@@ -82,7 +82,7 @@ export function ContentRow({ entry, onSaved }: { entry: ContentEntry; onSaved: (
           type="button"
           onClick={save}
           disabled={saving || !dirty}
-          className="px-3.5 py-1.5 rounded-lg bg-cream text-surface text-xs font-semibold hover:bg-cream/90 transition-colors disabled:opacity-40"
+          className="px-3.5 py-1.5 rounded-none bg-cream text-surface text-xs font-semibold hover:bg-cream/90 transition-colors disabled:opacity-40"
         >
           {saving ? 'Saving…' : 'Save'}
         </button>

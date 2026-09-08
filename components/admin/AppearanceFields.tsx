@@ -41,7 +41,7 @@ export function AppearanceFields({
                 aria-label={label}
                 value={current}
                 onChange={(e) => onChange(key, e.target.value.toUpperCase())}
-                className="w-10 h-10 rounded-lg border border-ds-border bg-surface cursor-pointer flex-shrink-0"
+                className="w-10 h-10 rounded-none border border-ds-border bg-surface cursor-pointer flex-shrink-0"
               />
 
               <div className="flex-1 min-w-0">
@@ -65,7 +65,7 @@ export function AppearanceFields({
         })}
       </div>
 
-      <div className="rounded-lg border border-ds-border p-4" style={previewStyle(values)}>
+      <div className="rounded-none border border-ds-border p-4" style={previewStyle(values)}>
         <p className="text-[11px] uppercase tracking-[0.2em] mb-2" style={{ color: 'var(--p-muted)' }}>
           Preview
         </p>

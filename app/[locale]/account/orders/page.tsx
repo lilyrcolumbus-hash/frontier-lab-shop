@@ -70,7 +70,7 @@ export default function OrdersPage() {
         ) : (
           <div className="space-y-4">
             {orders.map((order) => (
-              <div key={order.id} className="bg-elevated rounded-2xl border border-ds-border p-6">
+              <div key={order.id} className="bg-elevated rounded-none border border-ds-border p-6">
                 <div className="flex items-center justify-between mb-4">
                   <div>
                     <p className="text-sm text-cream-muted">

@@ -82,10 +82,10 @@ export function ReviewForm({ locale, initialProduct }: { locale: Lang; initialPr
 
   if (status === 'success') {
     return (
-      <div className="bg-accent/8 border border-accent/25 rounded-2xl p-8 text-center">
-        <p className="font-body font-bold text-xl text-cream mb-2">{t.successTitle}</p>
+      <div className="bg-accent/8 border border-accent/25 rounded-none p-8 text-center">
+        <p className="font-heading font-medium text-xl text-cream mb-2">{t.successTitle}</p>
         <p className="text-cream-muted mb-6">{t.successBody}</p>
-        <div className="inline-flex items-center gap-3 bg-surface border border-ds-border rounded-xl px-6 py-4">
+        <div className="inline-flex items-center gap-3 bg-surface border border-ds-border rounded-none px-6 py-4">
           <span className="font-mono text-2xl font-bold text-accent tracking-widest">{code}</span>
           <button
             type="button"
@@ -151,7 +151,7 @@ export function ReviewForm({ locale, initialProduct }: { locale: Lang; initialPr
           required
           minLength={10}
           rows={5}
-          className="w-full bg-surface border border-ds-border rounded-xl px-4 py-3 text-cream placeholder:text-cream-muted/60 font-body text-base transition-colors focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent resize-none"
+          className="w-full bg-surface border border-ds-border rounded-none px-4 py-3 text-cream placeholder:text-cream-muted/60 font-body text-base transition-colors focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent resize-none"
         />
       </div>
 

@@ -72,7 +72,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
           <Logo size="sm" />
           <button
             onClick={onClose}
-            className="p-2 text-cream-muted hover:text-cream rounded-lg hover:bg-elevated transition-colors"
+            className="p-2 text-cream-muted hover:text-cream rounded-none hover:bg-elevated transition-colors"
             aria-label={t('nav.closeMenu')}
           >
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

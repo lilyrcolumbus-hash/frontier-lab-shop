@@ -6,19 +6,21 @@
   :root {
     color-scheme: light;
 
-    /* RGB channels, not hex: Tailwind's opacity modifiers (bg-accent/30) compose these as
-       rgb(var(--c-accent) / <alpha-value>). These are the shipped defaults — a store that has
-       customised nothing renders exactly like this. /admin/settings overrides them per store. */
-    --c-bg:       240 242 240;
-    --c-surface:  248 249 248;
-    --c-elevated: 232 236 234;
-    --c-accent:    61 110  69;
-    --c-amber:    158 104  32;
-    --c-silver:   138 159 174;
-    --c-lavender:  99  80 160;
-    --c-cream:     28  32  24;
-    --c-muted:     86 100  88;
-    --c-border:   210 216 210;
+    /* "Papel, tinta y un solo dorado" — approved 2026-09-08, replacing the old silver-grey +
+       clinical green + lavender palette. RGB channels, not hex: Tailwind's opacity modifiers
+       (bg-accent/30) compose these as rgb(var(--c-accent) / <alpha-value>). These are the
+       shipped defaults — a store that has customised nothing renders exactly like this.
+       /admin/settings overrides them per store. */
+    --c-bg:       246 245 241;  /* paper — warm off-white, never clinical grey */
+    --c-surface:  255 255 255;  /* the label itself */
+    --c-elevated: 241 236 224;  /* faint warm tint for wells/table headers */
+    --c-accent:   158 104  32;  /* the one gold — exact hex already in the logo helix */
+    --c-amber:    158 104  32;  /* same gold; kept as a separate token for existing bg-amber/text-amber call sites */
+    --c-silver:   124 119 109;  /* silver is retired as a base colour — neutralised to warm grey for any stray use */
+    --c-lavender: 124 119 109;  /* lavender is banned outright — neutralised the same way, actively swept from named uses */
+    --c-cream:     22  21  19;  /* ink — warm near-black, never pure #000 */
+    --c-muted:    124 119 109;  /* captions, specs, secondary copy */
+    --c-border:   228 224 215;  /* hairline — replaces box-shadow as the primary separator */
 
     /* Kept for the handful of rules below that use colours directly rather than via Tailwind. */
     --color-bg:       rgb(var(--c-bg));

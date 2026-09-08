@@ -87,7 +87,7 @@ function BenefitIcon({ name }: { name: SpeciesBenefit['icon'] }) {
 }
 
 const ICON_COLOR: Record<SpeciesBenefit['icon'], string> = {
-  brain:    'bg-lavender/15 text-lavender',
+  brain:    'bg-cream-muted/15 text-cream-muted', // lavender banned — neutral, gold stays for the CTA/emphasis role only
   shield:   'bg-accent/15 text-accent',
   heart:    'bg-amber/15 text-amber',
   leaf:     'bg-moss/15 text-moss',
@@ -135,7 +135,7 @@ export default async function SpeciesDetailPage({
                 </svg>
                 Encyclopedia
               </Link>
-              <h1 className="font-body font-bold text-4xl sm:text-5xl text-white">
+              <h1 className="font-heading font-medium text-4xl sm:text-5xl text-white">
                 {species.commonName}
               </h1>
               <p className="font-mono text-sm text-white/60 italic mt-1">{species.scientificName}</p>
@@ -155,11 +155,11 @@ export default async function SpeciesDetailPage({
               </svg>
               Encyclopedia
             </Link>
-            <h1 className="font-body font-bold text-4xl sm:text-5xl text-cream">{species.commonName}</h1>
+            <h1 className="font-heading font-medium text-4xl sm:text-5xl text-cream">{species.commonName}</h1>
             <p className="font-mono text-sm text-cream-muted italic mt-1">{species.scientificName}</p>
 
             {species.openartPrompt && (
-              <div className="mt-8 bg-amber/8 border-2 border-dashed border-amber/50 rounded-2xl p-6 max-w-2xl">
+              <div className="mt-8 bg-amber/8 border-2 border-dashed border-amber/50 rounded-none p-6 max-w-2xl">
                 <div className="flex items-center gap-2 mb-3">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 text-amber flex-shrink-0">
                     <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
@@ -169,7 +169,7 @@ export default async function SpeciesDetailPage({
                     Imagen pendiente — Generar en OpenArt · FLUX.1 · Photorealistic
                   </span>
                 </div>
-                <div className="bg-bg rounded-xl p-4">
+                <div className="bg-bg rounded-none p-4">
                   <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-amber/60 mb-2">Prompt para {species.commonName}</p>
                   <p className="font-mono text-xs text-cream leading-relaxed">{species.openartPrompt}</p>
                 </div>
@@ -224,17 +224,17 @@ export default async function SpeciesDetailPage({
         {/* ── KEY BENEFITS — first section ───────────────────────────────── */}
         <section className="mb-14">
           <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-accent mb-1">Key Benefits</p>
-          <h2 className="font-body font-bold text-2xl sm:text-3xl tracking-tight text-cream mb-7">
+          <h2 className="font-heading font-medium text-2xl sm:text-3xl tracking-tight text-cream mb-7">
             Why {species.commonName}?
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {species.keyBenefits.map((benefit) => (
               <div
                 key={benefit.label}
-                className="bg-surface border border-ds-border rounded-2xl p-5 flex flex-col gap-3 hover:border-accent/40 transition-colors"
+                className="bg-surface border border-ds-border rounded-none p-5 flex flex-col gap-3 hover:border-accent/40 transition-colors"
               >
                 <div
-                  className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 ${ICON_COLOR[benefit.icon]}`}
+                  className={`w-10 h-10 rounded-none flex items-center justify-center flex-shrink-0 ${ICON_COLOR[benefit.icon]}`}
                 >
                   <BenefitIcon name={benefit.icon} />
                 </div>
@@ -255,27 +255,27 @@ export default async function SpeciesDetailPage({
             {/* About */}
             <section>
               <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-moss mb-1">About</p>
-              <h2 className="font-body font-bold text-xl tracking-tight text-cream mb-4">
+              <h2 className="font-heading font-medium text-xl tracking-tight text-cream mb-4">
                 What is {species.commonName}?
               </h2>
               <p className="text-cream-muted leading-relaxed text-base">{species.description[locale]}</p>
             </section>
 
             {/* Medicinal Properties */}
-            <section className="bg-elevated rounded-2xl border border-ds-border p-6 sm:p-8">
+            <section className="bg-elevated rounded-none border border-ds-border p-6 sm:p-8">
               <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-accent mb-1">Science</p>
-              <h2 className="font-body font-bold text-xl tracking-tight text-cream mb-4">
+              <h2 className="font-heading font-medium text-xl tracking-tight text-cream mb-4">
                 Medicinal Properties
               </h2>
               <p className="text-cream-muted leading-relaxed">{species.medicalNotes[locale]}</p>
               <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <div className="bg-surface rounded-xl p-4">
+                <div className="bg-surface rounded-none p-4">
                   <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-cream-muted mb-1">
                     Beta-Glucan Content
                   </p>
                   <p className="text-cream font-medium text-sm">{species.betaGlucanContent}</p>
                 </div>
-                <div className="bg-surface rounded-xl p-4">
+                <div className="bg-surface rounded-none p-4">
                   <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-cream-muted mb-1">
                     Biological Efficiency
                   </p>
@@ -287,7 +287,7 @@ export default async function SpeciesDetailPage({
             {/* Cultivation */}
             <section>
               <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-moss mb-1">Cultivation</p>
-              <h2 className="font-body font-bold text-xl tracking-tight text-cream mb-4">How to Grow</h2>
+              <h2 className="font-heading font-medium text-xl tracking-tight text-cream mb-4">How to Grow</h2>
               <p className="text-cream-muted leading-relaxed">{species.cultivationNotes[locale]}</p>
             </section>
 
@@ -296,7 +296,7 @@ export default async function SpeciesDetailPage({
               <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-amber mb-1">
                 {species.type === 'medicinal' ? 'Preparation' : 'Kitchen'}
               </p>
-              <h2 className="font-body font-bold text-xl tracking-tight text-cream mb-4">
+              <h2 className="font-heading font-medium text-xl tracking-tight text-cream mb-4">
                 {species.type === 'medicinal' ? 'How to Use' : 'In the Kitchen'}
               </h2>
               <p className="text-cream-muted leading-relaxed">{species.cookingNotes[locale]}</p>
@@ -304,9 +304,9 @@ export default async function SpeciesDetailPage({
 
             {/* Lookalikes — safety */}
             {species.lookalikes.length > 0 && (
-              <section className="bg-amber/8 border border-amber/25 rounded-2xl p-6">
+              <section className="bg-amber/8 border border-amber/25 rounded-none p-6">
                 <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-amber mb-1">Safety</p>
-                <h2 className="font-body font-bold text-xl tracking-tight text-cream mb-3">
+                <h2 className="font-heading font-medium text-xl tracking-tight text-cream mb-3">
                   Toxic Lookalikes
                 </h2>
                 <p className="text-sm text-amber mb-4">
@@ -331,7 +331,7 @@ export default async function SpeciesDetailPage({
           {/* ── Sidebar ──────────────────────────────────────────────────── */}
           <aside className="lg:w-72 flex-shrink-0 space-y-5">
             {/* Cultivation Specs */}
-            <div className="bg-elevated rounded-2xl border border-ds-border p-6">
+            <div className="bg-elevated rounded-none border border-ds-border p-6">
               <h3 className="font-body font-semibold text-cream mb-5">Cultivation Specs</h3>
               <dl className="space-y-4">
                 {[
@@ -370,7 +370,7 @@ export default async function SpeciesDetailPage({
             </div>
 
             {/* Taxonomy */}
-            <div className="bg-elevated rounded-2xl border border-ds-border p-6">
+            <div className="bg-elevated rounded-none border border-ds-border p-6">
               <h3 className="font-body font-semibold text-cream mb-5">Taxonomy</h3>
               <dl className="space-y-4">
                 {[

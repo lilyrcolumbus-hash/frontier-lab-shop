@@ -172,15 +172,15 @@ export function SpeciesFinder() {
     return (
       <div className="max-w-3xl mx-auto animate-fade-in">
         <div className="text-center mb-10">
-          <h2 className="font-body font-bold text-3xl text-cream tracking-tight">{t('results.title')}</h2>
+          <h2 className="font-heading font-medium text-3xl text-cream tracking-tight">{t('results.title')}</h2>
           <p className="text-cream-muted mt-2">{t('results.subtitle')}</p>
         </div>
 
         <div className="space-y-6">
           {results.map((match, i) => (
-            <div key={match.slug} className="flex gap-5 p-5 bg-elevated rounded-2xl border border-ds-border">
+            <div key={match.slug} className="flex gap-5 p-5 bg-elevated rounded-none border border-ds-border">
               <div className="flex-shrink-0 relative">
-                <img src={match.image} alt={match.name} className="w-20 h-20 rounded-xl object-cover" />
+                <img src={match.image} alt={match.name} className="w-20 h-20 rounded-none object-cover" />
                 {i === 0 && (
                   <span className="absolute -top-2 -right-2 w-6 h-6 bg-accent rounded-full flex items-center justify-center text-xs text-cream font-bold">
                     #1
@@ -239,7 +239,7 @@ export function SpeciesFinder() {
 
       <div className="text-center mb-8">
         <p className="text-xs uppercase tracking-widest text-moss mb-3">Step {step + 1} of 4</p>
-        <h2 className="font-body font-bold text-3xl text-cream tracking-tight">{currentStep.question}</h2>
+        <h2 className="font-heading font-medium text-3xl text-cream tracking-tight">{currentStep.question}</h2>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -247,7 +247,7 @@ export function SpeciesFinder() {
           <button
             key={opt.value}
             onClick={() => choose(opt.value)}
-            className="flex items-center gap-4 p-5 bg-elevated hover:bg-surface border border-ds-border hover:border-accent/50 rounded-2xl transition-all group text-left"
+            className="flex items-center gap-4 p-5 bg-elevated hover:bg-surface border border-ds-border hover:border-accent/50 rounded-none transition-all group text-left"
           >
             <span className="flex-shrink-0 text-cream-muted/55 group-hover:text-accent transition-colors">{opt.icon}</span>
             <span className="font-body font-medium text-cream group-hover:text-accent transition-colors">

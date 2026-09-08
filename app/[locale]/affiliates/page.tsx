@@ -22,7 +22,7 @@ export default async function AffiliatesPage({ params }: PageProps) {
           <span className="inline-block font-mono text-[10px] uppercase tracking-[0.25em] px-3 py-1 rounded-full border border-amber/30 text-amber mb-4">
             {lang === 'en' ? 'Coming Soon' : 'Próximamente'}
           </span>
-          <h1 className="font-body font-bold text-3xl sm:text-4xl tracking-tight text-cream">
+          <h1 className="font-heading font-medium text-3xl sm:text-4xl tracking-tight text-cream">
             {lang === 'en' ? 'Affiliate Program' : 'Programa de Afiliados'}
           </h1>
         </div>
@@ -35,7 +35,7 @@ export default async function AffiliatesPage({ params }: PageProps) {
             : 'Estamos construyendo un programa de afiliados para creadores y educadores del mundo de la micología que quieran asociarse con Frontier Lab. Todavía no está activo, pero si te interesa, escríbenos y te contactaremos apenas se lance, con los detalles de comisión.'}
         </p>
 
-        <div className="bg-surface border border-ds-border rounded-2xl p-6 mt-8">
+        <div className="bg-surface border border-ds-border rounded-none p-6 mt-8">
           <p className="text-xs font-mono uppercase tracking-[0.2em] text-cream-muted/50 mb-1">
             {lang === 'en' ? 'Interested? Email us' : '¿Interesado? Escríbenos'}
           </p>

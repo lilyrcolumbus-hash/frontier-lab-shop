@@ -43,7 +43,7 @@ export function ImagePlaceholder({ prompt, name, className = '' }: ImagePlacehol
       </div>
 
       {/* Prompt box */}
-      <div className="w-full max-w-xl bg-bg border border-amber/30 rounded-xl p-4">
+      <div className="w-full max-w-xl bg-bg border border-amber/30 rounded-none p-4">
         <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-amber/70 mb-2">
           Prompt para {name}
         </p>

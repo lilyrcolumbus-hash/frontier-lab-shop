@@ -28,7 +28,7 @@ export default async function LearnPage({ params }: PageProps) {
         <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-accent mb-3">
           Frontier Lab Academy
         </p>
-        <h1 className="font-body font-bold text-4xl sm:text-5xl tracking-tight text-cream mb-4">
+        <h1 className="font-heading font-medium text-4xl sm:text-5xl tracking-tight text-cream mb-4">
           {lang === 'en' ? 'The Science of Cultivation' : 'La Ciencia del Cultivo'}
         </h1>
         <p className="text-cream-muted text-lg max-w-xl mx-auto">
@@ -73,7 +73,7 @@ export default async function LearnPage({ params }: PageProps) {
                     />
                   ) : (
                     <div className={`w-full h-full bg-gradient-to-br ${
-                      article.category === 'science'     ? 'from-lavender/20 to-lavender/5' :
+                      article.category === 'science'     ? 'from-cream-muted/20 to-cream-muted/5' :
                       article.category === 'cultivation' ? 'from-moss/20 to-moss/5' :
                       article.category === 'wellness'    ? 'from-amber/20 to-amber/5' :
                       article.category === 'kitchen'     ? 'from-amber/20 to-amber/5' :

@@ -58,7 +58,7 @@ export function SpeciesCard({ species, index = 0 }: SpeciesCardProps) {
           transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
           onMouseEnter={startScramble}
           onMouseLeave={stopScramble}
-          className="overflow-hidden rounded-2xl border border-ds-border bg-surface shadow-sm hover:shadow-[0_20px_60px_-8px_rgba(61,110,69,0.28)] hover:border-accent/30 transition-all duration-500 h-full flex flex-col group"
+          className="overflow-hidden rounded-none border border-ds-border bg-surface shadow-sm hover:shadow-[0_20px_60px_-8px_rgba(61,110,69,0.28)] hover:border-accent/30 transition-all duration-500 h-full flex flex-col group"
         >
           {/* Image */}
           <div className="relative h-52 overflow-hidden flex-shrink-0 bg-elevated">

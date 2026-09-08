@@ -38,7 +38,7 @@ export function SpeciesSpotlight() {
         <ScrollReveal className="flex items-end justify-between mb-16">
           <div>
             <div className="section-divider mb-4" />
-            <h2 className="font-body font-bold text-3xl sm:text-4xl text-cream tracking-tight">
+            <h2 className="font-heading font-medium text-3xl sm:text-4xl text-cream tracking-tight">
               {t('title')}
             </h2>
             <p className="text-cream-muted mt-3 text-lg max-w-lg">
@@ -64,7 +64,7 @@ export function SpeciesSpotlight() {
               transition={{ duration: 0.6, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
             >
               <Link href={`/encyclopedia/${species.slug}`} className="group block h-full">
-                <div className="relative overflow-hidden rounded-2xl border border-ds-border bg-surface h-full transition-all duration-500 hover:border-accent/30 hover:-translate-y-1">
+                <div className="relative overflow-hidden rounded-none border border-ds-border bg-surface h-full transition-all duration-500 hover:border-accent/30 hover:-translate-y-1">
                   {/* Image */}
                   <div className="relative h-52 overflow-hidden">
                     <img

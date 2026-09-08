@@ -139,7 +139,7 @@ export function ProductDetailClient({ product }: { product: Product }) {
                     <button
                       key={v.id}
                       onClick={() => setSelectedVariant(v)}
-                      className={`px-4 py-2 rounded-xl text-sm font-medium border transition-colors ${
+                      className={`px-4 py-2 rounded-none text-sm font-medium border transition-colors ${
                         selectedVariant.id === v.id
                           ? 'border-accent bg-accent/10 text-accent'
                           : 'border-ds-border text-cream-muted hover:border-accent/50 hover:text-cream'
@@ -156,7 +156,7 @@ export function ProductDetailClient({ product }: { product: Product }) {
             <div>
               <p className="text-sm text-cream-muted mb-2">{t('quantity')}</p>
               <div className="flex items-center gap-3">
-                <div className="flex items-center border border-ds-border rounded-xl overflow-hidden">
+                <div className="flex items-center border border-ds-border rounded-none overflow-hidden">
                   <button
                     onClick={() => setQuantity(Math.max(1, quantity - 1))}
                     className="px-4 py-3 text-cream-muted hover:text-cream hover:bg-elevated transition-colors text-lg"
@@ -202,7 +202,7 @@ export function ProductDetailClient({ product }: { product: Product }) {
 
             {/* LC packet contents */}
             {product.subcategory === 'Liquid Culture' && (
-              <div className="rounded-2xl border border-ds-border overflow-hidden">
+              <div className="rounded-none border border-ds-border overflow-hidden">
                 <div className="px-4 py-2.5 bg-elevated border-b border-ds-border">
                   <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-cream-muted">What&apos;s in the packet</p>
                 </div>
@@ -243,7 +243,7 @@ export function ProductDetailClient({ product }: { product: Product }) {
 
             {/* Grain bag / all-in-one bag contents */}
             {(product.subcategory === 'Grain Bags' || product.subcategory === 'All-in-One Bags') && (
-              <div className="rounded-2xl border border-ds-border overflow-hidden">
+              <div className="rounded-none border border-ds-border overflow-hidden">
                 <div className="px-4 py-2.5 bg-elevated border-b border-ds-border">
                   <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-cream-muted">What&apos;s in the bag</p>
                 </div>
@@ -284,7 +284,7 @@ export function ProductDetailClient({ product }: { product: Product }) {
 
             {/* Bulk substrate contents (no injection port — opened and hand-mixed with grain spawn) */}
             {product.subcategory === 'Bulk Substrate' && (
-              <div className="rounded-2xl border border-ds-border overflow-hidden">
+              <div className="rounded-none border border-ds-border overflow-hidden">
                 <div className="px-4 py-2.5 bg-elevated border-b border-ds-border">
                   <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-cream-muted">What&apos;s in the bag</p>
                 </div>
@@ -321,7 +321,7 @@ export function ProductDetailClient({ product }: { product: Product }) {
 
             {/* Fruiting block contents */}
             {product.subcategory === 'Fruiting Blocks' && (
-              <div className="rounded-2xl border border-ds-border overflow-hidden">
+              <div className="rounded-none border border-ds-border overflow-hidden">
                 <div className="px-4 py-2.5 bg-elevated border-b border-ds-border">
                   <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-cream-muted">What&apos;s in the box</p>
                 </div>
@@ -381,7 +381,7 @@ export function ProductDetailClient({ product }: { product: Product }) {
 
             {/* Viability guarantee — living/biological products only, matches /terms exactly */}
             {product.category !== 'equipment' && (
-              <div className="flex items-start gap-3 rounded-2xl border border-accent/25 bg-accent/5 px-4 py-3.5">
+              <div className="flex items-start gap-3 rounded-none border border-accent/25 bg-accent/5 px-4 py-3.5">
                 <span className="text-accent flex-shrink-0 mt-0.5">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
                 </span>
@@ -398,7 +398,7 @@ export function ProductDetailClient({ product }: { product: Product }) {
 
             {/* How we guarantee freshness — genetics/process, no fabricated dates or lot numbers */}
             {product.category === 'spawn' && (
-              <div className="rounded-2xl border border-ds-border overflow-hidden">
+              <div className="rounded-none border border-ds-border overflow-hidden">
                 <div className="px-4 py-3 bg-elevated border-b border-ds-border">
                   <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-cream-muted">
                     {locale === 'es' ? 'Cómo garantizamos que llegue fresco' : 'How we guarantee it arrives fresh'}
@@ -428,7 +428,7 @@ export function ProductDetailClient({ product }: { product: Product }) {
               </div>
             )}
             {product.category === 'substrate' && product.subcategory === 'Grain Bags' && (
-              <div className="rounded-2xl border border-ds-border overflow-hidden">
+              <div className="rounded-none border border-ds-border overflow-hidden">
                 <div className="px-4 py-3 bg-elevated border-b border-ds-border">
                   <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-cream-muted">
                     {locale === 'es' ? 'Cómo garantizamos que llegue estéril' : 'How we guarantee it arrives sterile'}
@@ -465,7 +465,7 @@ export function ProductDetailClient({ product }: { product: Product }) {
 
             {/* Grain Bag Specs */}
             {product.grainBagSpecs && (
-              <div className="rounded-2xl border border-ds-border overflow-hidden">
+              <div className="rounded-none border border-ds-border overflow-hidden">
                 <div className="px-4 py-3 bg-elevated border-b border-ds-border">
                   <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-cream-muted">{product.subcategory === 'Grain Bags' ? 'Grain Bag Specs' : 'Substrate Specs'}</p>
                 </div>
@@ -509,9 +509,9 @@ export function ProductDetailClient({ product }: { product: Product }) {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.08, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                  className="rounded-2xl border border-ds-border bg-surface p-5 space-y-3"
+                  className="rounded-none border border-ds-border bg-surface p-5 space-y-3"
                 >
-                  <div className="w-9 h-9 rounded-xl bg-accent/8 flex items-center justify-center text-accent">
+                  <div className="w-9 h-9 rounded-none bg-accent/8 flex items-center justify-center text-accent">
                     {b.icon === 'brain' && <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96-.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96-.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z"/></svg>}
                     {b.icon === 'shield' && <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>}
                     {b.icon === 'heart' && <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>}

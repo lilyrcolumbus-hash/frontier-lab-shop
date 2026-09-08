@@ -295,7 +295,7 @@ export function LabTour() {
               <HotspotPin label={hs.label} isActive={activeHotspot?.id === hs.id} />
               {/* Desktop tooltip */}
               <div className="hidden sm:block absolute bottom-full mb-2 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-30">
-                <div className="bg-bg/95 backdrop-blur-md border border-amber/25 rounded-xl px-3 py-2 text-xs text-cream font-medium shadow-xl">
+                <div className="bg-bg/95 backdrop-blur-md border border-amber/25 rounded-none px-3 py-2 text-xs text-cream font-medium shadow-xl">
                   {es ? hs.product.nameEs : hs.product.name}
                 </div>
                 <div className="w-2 h-2 bg-bg/95 border-b border-r border-amber/25 rotate-45 mx-auto -mt-1" />
@@ -434,7 +434,7 @@ export function LabTour() {
               </div>
 
               {/* Product image */}
-              <div className="relative mx-4 h-48 rounded-2xl overflow-hidden flex-shrink-0">
+              <div className="relative mx-4 h-48 rounded-none overflow-hidden flex-shrink-0">
                 <img
                   src={activeHotspot.product.image}
                   alt={es ? activeHotspot.product.nameEs : activeHotspot.product.name}
@@ -491,12 +491,12 @@ export function LabTour() {
 
               {/* CTAs */}
               <div className="px-5 pb-6 pt-3 border-t border-ds-border flex flex-col gap-2.5 flex-shrink-0">
-                <button className="w-full py-3.5 rounded-xl bg-amber text-bg font-semibold text-sm hover:bg-amber-bright transition-colors shadow-[0_4px_20px_rgba(212,145,58,0.35)] active:scale-[0.98]">
+                <button className="w-full py-3.5 rounded-none bg-amber text-bg font-semibold text-sm hover:bg-amber-bright transition-colors shadow-[0_4px_20px_rgba(212,145,58,0.35)] active:scale-[0.98]">
                   {es ? 'Agregar al Carrito' : 'Add to Cart'}
                 </button>
                 <Link
                   href={`/shop/${activeHotspot.product.slug}`}
-                  className="w-full py-3 rounded-xl border border-amber/25 text-amber text-sm font-medium text-center hover:bg-amber/8 hover:border-amber/40 transition-colors font-body"
+                  className="w-full py-3 rounded-none border border-amber/25 text-amber text-sm font-medium text-center hover:bg-amber/8 hover:border-amber/40 transition-colors font-body"
                 >
                   {es ? 'Ver Producto Completo →' : 'View Full Product →'}
                 </Link>

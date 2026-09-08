@@ -72,13 +72,13 @@ export default function AdminStaffPage() {
 
   return (
     <div className="max-w-3xl">
-      <h1 className="font-body font-bold text-2xl text-cream mb-2">Staff</h1>
+      <h1 className="font-heading font-medium text-2xl text-cream mb-2">Staff</h1>
       <p className="text-sm text-cream-muted mb-6">
         Owners can change store settings, create discounts, issue refunds and manage staff. Staff
         can run the catalog and fulfil orders, but cannot move money or grant access.
       </p>
 
-      <form onSubmit={invite} className="bg-surface border border-ds-border rounded-xl p-5 mb-6 space-y-3">
+      <form onSubmit={invite} className="bg-surface border border-ds-border rounded-none p-5 mb-6 space-y-3">
         <h2 className="text-sm font-medium text-cream">Give someone access</h2>
         <p className="text-xs text-cream-muted/70">
           They need a Frontier Lab account first — access is granted to an existing account, not
@@ -91,12 +91,12 @@ export default function AdminStaffPage() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="their@email.com"
-            className="flex-1 min-w-[220px] px-3.5 py-2 rounded-lg border border-ds-border bg-bg text-sm text-cream placeholder:text-cream-muted"
+            className="flex-1 min-w-[220px] px-3.5 py-2 rounded-none border border-ds-border bg-bg text-sm text-cream placeholder:text-cream-muted"
           />
           <select
             value={role}
             onChange={(e) => setRole(e.target.value as 'owner' | 'staff')}
-            className="px-3.5 py-2 rounded-lg border border-ds-border bg-bg text-sm text-cream"
+            className="px-3.5 py-2 rounded-none border border-ds-border bg-bg text-sm text-cream"
           >
             <option value="staff">Staff</option>
             <option value="owner">Owner</option>
@@ -104,7 +104,7 @@ export default function AdminStaffPage() {
           <button
             type="submit"
             disabled={busy}
-            className="px-4 py-2 rounded-lg bg-cream text-surface text-sm font-semibold hover:bg-cream/90 transition-colors disabled:opacity-50"
+            className="px-4 py-2 rounded-none bg-cream text-surface text-sm font-semibold hover:bg-cream/90 transition-colors disabled:opacity-50"
           >
             {busy ? 'Adding…' : 'Add'}
           </button>
@@ -115,7 +115,7 @@ export default function AdminStaffPage() {
       {staff === null ? (
         <ListState error={error} onRetry={reload} />
       ) : (
-        <div className="border border-ds-border rounded-xl bg-surface overflow-hidden">
+        <div className="border border-ds-border rounded-none bg-surface overflow-hidden">
           <table className="w-full text-sm">
             <thead className="bg-elevated text-cream-muted">
               <tr>
@@ -132,7 +132,7 @@ export default function AdminStaffPage() {
                     <select
                       value={member.role}
                       onChange={(e) => changeRole(member, e.target.value as 'owner' | 'staff')}
-                      className="px-2.5 py-1.5 rounded-lg border border-ds-border bg-bg text-xs text-cream"
+                      className="px-2.5 py-1.5 rounded-none border border-ds-border bg-bg text-xs text-cream"
                     >
                       <option value="staff">Staff</option>
                       <option value="owner">Owner</option>

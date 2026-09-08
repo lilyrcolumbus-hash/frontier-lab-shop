@@ -30,7 +30,7 @@ export default async function LegalPage({ params }: PageProps) {
     <div className="pt-20 min-h-screen">
       <div className="border-b border-ds-border bg-surface py-16">
         <div className="max-w-3xl mx-auto px-4 sm:px-6">
-          <h1 className="font-body font-bold text-3xl sm:text-4xl tracking-tight text-cream">
+          <h1 className="font-heading font-medium text-3xl sm:text-4xl tracking-tight text-cream">
             {page?.title ?? (lang === 'en' ? 'Privacy Policy' : 'Política de Privacidad')}
           </h1>
           <p className="mt-3 text-sm text-cream-muted">
@@ -47,7 +47,7 @@ export default async function LegalPage({ params }: PageProps) {
           <div className="space-y-12">
             {PRIVACY_SECTIONS.map((section, i) => (
               <section key={i}>
-                <h2 className="font-body font-bold text-xl tracking-tight text-cream mb-4">
+                <h2 className="font-heading font-medium text-xl tracking-tight text-cream mb-4">
                   {section.title[lang]}
                 </h2>
                 <div className="space-y-3">

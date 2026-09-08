@@ -19,7 +19,7 @@ export default async function ShippingPage({ params }: PageProps) {
     <div className="pt-20 min-h-screen">
       <div className="border-b border-ds-border bg-surface py-16">
         <div className="max-w-3xl mx-auto px-4 sm:px-6">
-          <h1 className="font-body font-bold text-3xl sm:text-4xl tracking-tight text-cream">
+          <h1 className="font-heading font-medium text-3xl sm:text-4xl tracking-tight text-cream">
             {lang === 'en' ? 'Shipping' : 'Envíos'}
           </h1>
         </div>
@@ -27,7 +27,7 @@ export default async function ShippingPage({ params }: PageProps) {
 
       <div className="max-w-3xl mx-auto px-4 sm:px-6 py-12 space-y-10">
         <section>
-          <h2 className="font-body font-bold text-xl tracking-tight text-cream mb-4">
+          <h2 className="font-heading font-medium text-xl tracking-tight text-cream mb-4">
             {lang === 'en' ? 'Where we ship' : 'A dónde enviamos'}
           </h2>
           <p className="text-cream-muted leading-relaxed">
@@ -38,19 +38,19 @@ export default async function ShippingPage({ params }: PageProps) {
         </section>
 
         <section>
-          <h2 className="font-body font-bold text-xl tracking-tight text-cream mb-4">
+          <h2 className="font-heading font-medium text-xl tracking-tight text-cream mb-4">
             {lang === 'en' ? 'Rates & delivery time' : 'Tarifas y tiempo de entrega'}
           </h2>
-          <div className="bg-surface border border-ds-border rounded-2xl p-6 flex items-center justify-between">
+          <div className="bg-surface border border-ds-border rounded-none p-6 flex items-center justify-between">
             <div>
-              <p className="font-body font-bold text-cream">
+              <p className="font-heading font-medium text-cream">
                 {lang === 'en' ? 'Standard Shipping' : 'Envío Estándar'}
               </p>
               <p className="text-cream-muted text-sm mt-1">
                 {lang === 'en' ? '3–5 business days' : '3–5 días hábiles'}
               </p>
             </div>
-            <p className="font-body font-bold text-accent text-lg">$9.99</p>
+            <p className="font-heading font-medium text-accent text-lg">$9.99</p>
           </div>
           <p className="text-cream-muted leading-relaxed mt-4 text-sm">
             {lang === 'en'
@@ -60,7 +60,7 @@ export default async function ShippingPage({ params }: PageProps) {
         </section>
 
         <section>
-          <h2 className="font-body font-bold text-xl tracking-tight text-cream mb-4">
+          <h2 className="font-heading font-medium text-xl tracking-tight text-cream mb-4">
             {lang === 'en' ? 'Order processing' : 'Procesamiento del pedido'}
           </h2>
           <p className="text-cream-muted leading-relaxed">
@@ -71,7 +71,7 @@ export default async function ShippingPage({ params }: PageProps) {
         </section>
 
         <section>
-          <h2 className="font-body font-bold text-xl tracking-tight text-cream mb-4">
+          <h2 className="font-heading font-medium text-xl tracking-tight text-cream mb-4">
             {lang === 'en' ? 'Shipping live cultures' : 'Envío de cultivos vivos'}
           </h2>
           <p className="text-cream-muted leading-relaxed">

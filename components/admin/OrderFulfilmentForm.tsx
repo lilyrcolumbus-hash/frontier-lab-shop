@@ -63,7 +63,7 @@ export function OrderFulfilmentForm({
   }
 
   return (
-    <div className="bg-surface border border-ds-border rounded-xl p-5 space-y-4">
+    <div className="bg-surface border border-ds-border rounded-none p-5 space-y-4">
       <div>
         <h2 className="font-semibold text-cream text-sm">Fulfilment</h2>
         <p className="text-xs text-cream-muted/70 mt-1">
@@ -83,7 +83,7 @@ export function OrderFulfilmentForm({
               value={quantities[item.id] ?? 0}
               disabled={disabled}
               onChange={(e) => setLine(item.id, Number(e.target.value), item.quantity)}
-              className="w-16 px-2 py-1.5 rounded-lg border border-ds-border bg-bg text-sm text-cream text-right disabled:opacity-50"
+              className="w-16 px-2 py-1.5 rounded-none border border-ds-border bg-bg text-sm text-cream text-right disabled:opacity-50"
             />
             <span className="text-xs text-cream-muted/70 w-10">/ {item.quantity}</span>
           </div>

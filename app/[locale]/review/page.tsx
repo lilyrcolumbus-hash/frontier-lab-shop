@@ -24,7 +24,7 @@ export default async function ReviewPage({ params, searchParams }: PageProps) {
           <span className="inline-block font-mono text-[10px] uppercase tracking-[0.25em] px-3 py-1 rounded-full border border-amber/30 text-amber mb-4">
             {lang === 'en' ? '15% Off Your Next Order' : '15% de Descuento en tu Próximo Pedido'}
           </span>
-          <h1 className="font-body font-bold text-3xl sm:text-4xl tracking-tight text-cream">
+          <h1 className="font-heading font-medium text-3xl sm:text-4xl tracking-tight text-cream">
             {lang === 'en' ? 'Leave a Review' : 'Deja tu Reseña'}
           </h1>
           <p className="mt-3 text-cream-muted leading-relaxed">

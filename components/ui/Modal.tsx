@@ -52,7 +52,7 @@ export function Modal({ isOpen, onClose, title, children, size = 'md', className
       <div className="absolute inset-0 bg-black/60 backdrop-blur-sm animate-fade-in" />
       <div
         className={cn(
-          'relative w-full bg-elevated rounded-2xl border border-ds-border shadow-card animate-fade-in',
+          'relative w-full bg-elevated rounded-none border border-ds-border shadow-card animate-fade-in',
           sizes[size],
           className
         )}
@@ -67,7 +67,7 @@ export function Modal({ isOpen, onClose, title, children, size = 'md', className
             </h2>
             <button
               onClick={onClose}
-              className="text-cream-muted hover:text-cream transition-colors p-1 rounded-lg hover:bg-surface"
+              className="text-cream-muted hover:text-cream transition-colors p-1 rounded-none hover:bg-surface"
               aria-label="Close"
             >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

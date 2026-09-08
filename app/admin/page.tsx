@@ -83,12 +83,12 @@ export default async function AdminDashboardPage({
   return (
     <div>
       <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
-        <h1 className="font-body font-bold text-2xl text-cream">Analytics</h1>
+        <h1 className="font-heading font-medium text-2xl text-cream">Analytics</h1>
         <div className="flex items-center gap-2">
           <AnalyticsRangePicker value={range.key} options={RANGE_OPTIONS} />
           <a
             href={`/api/admin/analytics/export?range=${range.key}`}
-            className="px-4 py-2 rounded-lg border border-ds-border text-sm font-medium text-cream hover:bg-elevated transition-colors"
+            className="px-4 py-2 rounded-none border border-ds-border text-sm font-medium text-cream hover:bg-elevated transition-colors"
           >
             Export CSV
           </a>
@@ -103,7 +103,7 @@ export default async function AdminDashboardPage({
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
         {tiles.map((t) => (
-          <div key={t.label} className="bg-surface border border-ds-border rounded-xl p-5">
+          <div key={t.label} className="bg-surface border border-ds-border rounded-none p-5">
             <div className="text-xs font-medium text-cream-muted uppercase tracking-wider mb-1.5">{t.label}</div>
             <div className="text-2xl font-bold text-cream">{t.value}</div>
             <div className="mt-1.5">
@@ -115,11 +115,11 @@ export default async function AdminDashboardPage({
 
       <h2 className="font-body font-semibold text-lg text-cream mb-3">Top products</h2>
       {topProducts.length === 0 ? (
-        <div className="border border-ds-border rounded-xl bg-surface py-16 text-center text-cream-muted text-sm">
+        <div className="border border-ds-border rounded-none bg-surface py-16 text-center text-cream-muted text-sm">
           No sales in this period — top products will show up here once orders come in.
         </div>
       ) : (
-        <div className="border border-ds-border rounded-xl bg-surface overflow-hidden">
+        <div className="border border-ds-border rounded-none bg-surface overflow-hidden">
           <table className="w-full text-sm">
             <thead className="bg-elevated text-cream-muted">
               <tr>

@@ -47,7 +47,7 @@ export function CustomerProfileForm({
   }
 
   return (
-    <div className="bg-surface border border-ds-border rounded-xl p-5 space-y-4">
+    <div className="bg-surface border border-ds-border rounded-none p-5 space-y-4">
       <div>
         <h2 className="font-semibold text-cream text-sm">Notes and tags</h2>
         <p className="text-xs text-cream-muted/70 mt-1">
@@ -62,7 +62,7 @@ export function CustomerProfileForm({
           value={tags}
           onChange={(e) => setTags(e.target.value)}
           placeholder="vip, wholesale, repeat"
-          className="w-full px-3 py-2 rounded-lg border border-ds-border bg-bg text-sm text-cream placeholder:text-cream-muted"
+          className="w-full px-3 py-2 rounded-none border border-ds-border bg-bg text-sm text-cream placeholder:text-cream-muted"
         />
       </div>
 
@@ -73,7 +73,7 @@ export function CustomerProfileForm({
           value={notes}
           onChange={(e) => setNotes(e.target.value)}
           placeholder="Anything worth remembering about this customer"
-          className="w-full px-3 py-2 rounded-lg border border-ds-border bg-bg text-sm text-cream placeholder:text-cream-muted"
+          className="w-full px-3 py-2 rounded-none border border-ds-border bg-bg text-sm text-cream placeholder:text-cream-muted"
         />
       </div>
 

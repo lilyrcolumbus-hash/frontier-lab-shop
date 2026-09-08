@@ -34,7 +34,7 @@ export default function ForgotPasswordPage() {
       </div>
 
       <div className="max-w-md mx-auto px-4 py-16">
-        <div className="bg-elevated rounded-2xl border border-ds-border p-8 space-y-5">
+        <div className="bg-elevated rounded-none border border-ds-border p-8 space-y-5">
           {sent ? (
             <p className="text-sm text-accent">{t('resetLinkSent')}</p>
           ) : (

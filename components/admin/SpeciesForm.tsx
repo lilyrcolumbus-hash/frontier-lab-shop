@@ -46,7 +46,7 @@ function TextArea({ label, value, onChange }: { label: string; value: string; on
     <div>
       <label className="block text-sm font-medium text-cream-muted mb-1.5">{label}</label>
       <textarea
-        className="w-full bg-surface border border-ds-border rounded-xl px-4 py-3 text-cream text-sm min-h-24"
+        className="w-full bg-surface border border-ds-border rounded-none px-4 py-3 text-cream text-sm min-h-24"
         value={value}
         onChange={(e) => onChange(e.target.value)}
         required
@@ -143,7 +143,7 @@ export function SpeciesForm({ initial, speciesId }: { initial: SpeciesFormValues
         <div>
           <label className="block text-sm font-medium text-cream-muted mb-1.5">Type</label>
           <select
-            className="w-full bg-surface border border-ds-border rounded-xl px-4 py-3 text-cream text-sm"
+            className="w-full bg-surface border border-ds-border rounded-none px-4 py-3 text-cream text-sm"
             value={values.type}
             onChange={(e) => update('type', e.target.value)}
           >
@@ -157,7 +157,7 @@ export function SpeciesForm({ initial, speciesId }: { initial: SpeciesFormValues
         <div>
           <label className="block text-sm font-medium text-cream-muted mb-1.5">Difficulty</label>
           <select
-            className="w-full bg-surface border border-ds-border rounded-xl px-4 py-3 text-cream text-sm"
+            className="w-full bg-surface border border-ds-border rounded-none px-4 py-3 text-cream text-sm"
             value={values.difficulty}
             onChange={(e) => update('difficulty', e.target.value)}
           >
@@ -171,7 +171,7 @@ export function SpeciesForm({ initial, speciesId }: { initial: SpeciesFormValues
         <div>
           <label className="block text-sm font-medium text-cream-muted mb-1.5">Indoor/Outdoor</label>
           <select
-            className="w-full bg-surface border border-ds-border rounded-xl px-4 py-3 text-cream text-sm"
+            className="w-full bg-surface border border-ds-border rounded-none px-4 py-3 text-cream text-sm"
             value={values.indoorOutdoor}
             onChange={(e) => update('indoorOutdoor', e.target.value)}
           >

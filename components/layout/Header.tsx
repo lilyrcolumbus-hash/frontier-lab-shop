@@ -51,14 +51,14 @@ function NavDropdown({ label, items, footer, scrolled = false }: NavDropdownProp
       </button>
       {open && (
         <div className="absolute top-full left-0 pt-2 z-50 min-w-[260px]">
-          <div className="glass-strong border border-amber/10 rounded-2xl shadow-card overflow-hidden animate-fade-in">
+          <div className="glass-strong border border-amber/10 rounded-none shadow-card overflow-hidden animate-fade-in">
             <div className="p-2">
               {items.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
                   onClick={() => setOpen(false)}
-                  className="flex flex-col px-4 py-3 rounded-xl hover:bg-amber/8 transition-colors group"
+                  className="flex flex-col px-4 py-3 rounded-none hover:bg-amber/8 transition-colors group"
                 >
                   <span className="text-sm font-medium text-cream-muted group-hover:text-amber transition-colors">
                     {item.label}
@@ -126,8 +126,8 @@ export function Header() {
 
   const navText = scrolled ? 'text-cream-muted hover:text-amber' : 'text-white/65 hover:text-white'
   const iconBtn = scrolled
-    ? 'text-cream-muted hover:text-amber rounded-xl hover:bg-amber/8'
-    : 'text-white/55 hover:text-white rounded-xl hover:bg-white/8'
+    ? 'text-cream-muted hover:text-amber rounded-none hover:bg-amber/8'
+    : 'text-white/55 hover:text-white rounded-none hover:bg-white/8'
 
   return (
     <>

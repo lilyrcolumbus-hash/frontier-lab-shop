@@ -91,7 +91,7 @@ export default async function ProductPage({ params }: { params: { slug: string; 
       {related.length > 0 && (
         <section className="border-t border-ds-border bg-surface">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 py-14">
-            <h2 className="font-body font-bold text-2xl sm:text-3xl tracking-tight text-cream mb-8">
+            <h2 className="font-heading font-medium text-2xl sm:text-3xl tracking-tight text-cream mb-8">
               {t('related')}
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">

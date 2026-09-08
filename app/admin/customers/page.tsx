@@ -44,7 +44,7 @@ export default function AdminCustomersPage() {
         <div className="flex items-center gap-2">
           <span className="text-cream">{c.email}</span>
           {c.registered && (
-            <span className="text-[10px] uppercase tracking-wide font-semibold px-1.5 py-0.5 rounded bg-accent-dim text-accent">
+            <span className="text-[10px] uppercase tracking-wide font-semibold px-1.5 py-0.5 rounded-none bg-accent-dim text-accent">
               Account
             </span>
           )}
@@ -73,7 +73,7 @@ export default function AdminCustomersPage() {
   return (
     <div>
       <div className="flex items-center justify-between mb-6">
-        <h1 className="font-body font-bold text-2xl text-cream">Customers</h1>
+        <h1 className="font-heading font-medium text-2xl text-cream">Customers</h1>
       </div>
 
       <div className="mb-4 flex flex-wrap items-center gap-3">
@@ -82,14 +82,14 @@ export default function AdminCustomersPage() {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search by email"
-          className="w-full max-w-xs px-3.5 py-2 rounded-lg border border-ds-border bg-surface text-sm text-cream placeholder:text-cream-muted focus:outline-none focus:ring-2 focus:ring-accent/30"
+          className="w-full max-w-xs px-3.5 py-2 rounded-none border border-ds-border bg-surface text-sm text-cream placeholder:text-cream-muted focus:outline-none focus:ring-2 focus:ring-accent/30"
         />
 
         {allTags.length > 0 && (
           <select
             value={tag}
             onChange={(e) => setTag(e.target.value)}
-            className="px-3.5 py-2 rounded-lg border border-ds-border bg-surface text-sm text-cream"
+            className="px-3.5 py-2 rounded-none border border-ds-border bg-surface text-sm text-cream"
           >
             <option value="">All segments</option>
             {allTags.map((t) => (

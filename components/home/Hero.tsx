@@ -115,7 +115,7 @@ export function Hero() {
             className="hidden lg:block"
           >
             {/* Main photo */}
-            <div className="relative rounded-2xl overflow-hidden" style={{ height: 520 }}>
+            <div className="relative rounded-none overflow-hidden" style={{ height: 520 }}>
               <img
                 src="https://images.unsplash.com/photo-1625286535466-68a6d71e4568?w=680&h=840&q=90&auto=format&fit=crop"
                 alt="Lion's Mane mushroom, white and shaggy"
@@ -131,7 +131,7 @@ export function Hero() {
               </div>
               {/* Rating badge */}
               <div
-                className="absolute top-5 right-5 rounded-xl px-4 py-2.5 border border-white/8"
+                className="absolute top-5 right-5 rounded-none px-4 py-2.5 border border-white/8"
                 style={{ background: 'rgba(255,255,255,0.06)', backdropFilter: 'blur(12px)' }}
               >
                 <p className="text-white/35 text-[10px] font-mono uppercase tracking-wider">Rated</p>
@@ -147,7 +147,7 @@ export function Hero() {
               ].map((stat) => (
                 <div
                   key={stat.label}
-                  className="rounded-xl px-4 py-3 border border-white/7"
+                  className="rounded-none px-4 py-3 border border-white/7"
                   style={{ background: 'rgba(255,255,255,0.04)', backdropFilter: 'blur(8px)' }}
                 >
                   <p className="text-white/32 text-[10px] font-mono uppercase tracking-wider">{stat.label}</p>

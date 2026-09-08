@@ -18,7 +18,7 @@ const DOT_COLOR: Record<string, string> = {
 
 export function OrderTimeline({ events }: { events: TimelineEvent[] }) {
   return (
-    <div className="bg-surface border border-ds-border rounded-xl p-5">
+    <div className="bg-surface border border-ds-border rounded-none p-5">
       <h2 className="font-semibold text-cream text-sm mb-4">Timeline</h2>
 
       {events.length === 0 ? (

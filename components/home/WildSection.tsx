@@ -65,7 +65,7 @@ export function WildSection() {
             transition={{ duration: 0.7, delay: 0.4 }}
             className="absolute bottom-10 left-8"
           >
-            <div className="glass-warm rounded-2xl px-5 py-4 border border-amber/20 max-w-[220px]">
+            <div className="glass-warm rounded-none px-5 py-4 border border-amber/20 max-w-[220px]">
               <p className="font-mono text-[10px] text-amber/60 uppercase tracking-widest mb-1">In the wild</p>
               <p className="font-body text-cream text-sm font-medium leading-snug">
                 Found in Ohio forests, October — Hen of the Woods
@@ -87,7 +87,7 @@ export function WildSection() {
                 <div className="w-8 h-px bg-amber/40" />
                 Born Wild
               </div>
-              <h2 className="font-body font-bold text-3xl sm:text-4xl text-cream tracking-tight leading-tight">
+              <h2 className="font-heading font-medium text-3xl sm:text-4xl text-cream tracking-tight leading-tight">
                 Grown in the Dark,
                 <br />
                 <span style={{ color: '#C4883A' }}>Born in the Wild</span>
@@ -121,7 +121,7 @@ export function WildSection() {
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={isInView ? { opacity: 1, scale: 1 } : {}}
                   transition={{ duration: 0.6, delay: 0.4 + i * 0.1 }}
-                  className={`group relative overflow-hidden rounded-xl border border-ds-border ${photo.span}`}
+                  className={`group relative overflow-hidden rounded-none border border-ds-border ${photo.span}`}
                 >
                   <img
                     src={photo.src}

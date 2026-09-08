@@ -66,7 +66,7 @@ export function HomeLayoutEditor({ initial }: { initial: Section[] }) {
         {sections.map((section, index) => (
           <div
             key={section.key}
-            className={`flex items-center gap-3 p-3 rounded-xl border bg-surface ${
+            className={`flex items-center gap-3 p-3 rounded-none border bg-surface ${
               section.enabled ? 'border-ds-border' : 'border-dashed border-ds-border opacity-60'
             }`}
           >

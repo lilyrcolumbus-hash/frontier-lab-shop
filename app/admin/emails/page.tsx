@@ -29,7 +29,7 @@ export default function AdminEmailsPage() {
 
   return (
     <div className="max-w-3xl">
-      <h1 className="font-body font-bold text-2xl text-cream mb-2">Emails</h1>
+      <h1 className="font-heading font-medium text-2xl text-cream mb-2">Emails</h1>
       <p className="text-sm text-cream-muted mb-6">
         The wording of the emails your customers receive. The layout, the items and the totals are
         built automatically — you write the words around them. Use{' '}
@@ -51,7 +51,7 @@ export default function AdminEmailsPage() {
 }
 
 const areaClass =
-  'w-full px-3 py-2 rounded-lg border border-ds-border bg-bg text-sm text-cream placeholder:text-cream-muted/60'
+  'w-full px-3 py-2 rounded-none border border-ds-border bg-bg text-sm text-cream placeholder:text-cream-muted/60'
 
 function TemplateCard({ template, onSaved }: { template: Template; onSaved: () => void }) {
   const [values, setValues] = useState<TemplateDefaults>(template.saved ?? {
@@ -102,7 +102,7 @@ function TemplateCard({ template, onSaved }: { template: Template; onSaved: () =
   )
 
   return (
-    <div className="bg-surface border border-ds-border rounded-xl p-5 space-y-4">
+    <div className="bg-surface border border-ds-border rounded-none p-5 space-y-4">
       <div>
         <h2 className="text-sm font-medium text-cream">{template.label}</h2>
         <p className="text-xs text-cream-muted/70 mt-1">{template.description}</p>

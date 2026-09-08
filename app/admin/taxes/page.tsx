@@ -15,7 +15,7 @@ interface TaxRate {
 
 const NETWORK_ERROR = 'Could not reach the server. Check your connection and try again.'
 const inputClass =
-  'px-3 py-2 rounded-lg border border-ds-border bg-bg text-sm text-cream placeholder:text-cream-muted/60'
+  'px-3 py-2 rounded-none border border-ds-border bg-bg text-sm text-cream placeholder:text-cream-muted/60'
 
 export default function AdminTaxesPage() {
   const { data: taxes, error, reload } = useAdminList<TaxRate>('/api/admin/taxes', 'taxes')
@@ -82,20 +82,20 @@ export default function AdminTaxesPage() {
 
   return (
     <div className="max-w-3xl">
-      <h1 className="font-body font-bold text-2xl text-cream mb-2">Taxes</h1>
+      <h1 className="font-heading font-medium text-2xl text-cream mb-2">Taxes</h1>
       <p className="text-sm text-cream-muted mb-6">
         Fixed rates you charge, added to the order at checkout. These are your own rates — not an
         automatic tax service, which charges a fee on every sale.
       </p>
 
-      <form onSubmit={add} className="bg-surface border border-ds-border rounded-xl p-5 mb-6 space-y-3">
+      <form onSubmit={add} className="bg-surface border border-ds-border rounded-none p-5 mb-6 space-y-3">
         <h2 className="text-sm font-medium text-cream">Add a rate</h2>
         <div className="flex flex-wrap gap-2">
           <input required value={name} onChange={(e) => setName(e.target.value)} placeholder="Ohio sales tax" className={`${inputClass} flex-1 min-w-[180px]`} />
           <input required value={country} onChange={(e) => setCountry(e.target.value.toUpperCase())} maxLength={2} placeholder="US" className={`${inputClass} w-20`} />
           <input value={state} onChange={(e) => setState(e.target.value.toUpperCase())} maxLength={10} placeholder="OH (optional)" className={`${inputClass} w-32`} />
           <input required type="number" step="0.01" min="0" max="100" value={percent} onChange={(e) => setPercent(e.target.value)} placeholder="8.25" className={`${inputClass} w-24`} />
-          <button type="submit" disabled={busy} className="px-4 py-2 rounded-lg bg-cream text-surface text-sm font-semibold hover:bg-cream/90 disabled:opacity-50">
+          <button type="submit" disabled={busy} className="px-4 py-2 rounded-none bg-cream text-surface text-sm font-semibold hover:bg-cream/90 disabled:opacity-50">
             {busy ? 'Adding…' : 'Add'}
           </button>
         </div>
@@ -106,11 +106,11 @@ export default function AdminTaxesPage() {
       {taxes === null ? (
         <ListState error={error} onRetry={reload} />
       ) : taxes.length === 0 ? (
-        <div className="border border-ds-border rounded-xl bg-surface py-16 text-center text-cream-muted text-sm">
+        <div className="border border-ds-border rounded-none bg-surface py-16 text-center text-cream-muted text-sm">
           No tax rates yet — orders are charged without tax.
         </div>
       ) : (
-        <div className="border border-ds-border rounded-xl bg-surface overflow-hidden">
+        <div className="border border-ds-border rounded-none bg-surface overflow-hidden">
           <table className="w-full text-sm">
             <thead className="bg-elevated text-cream-muted">
               <tr>

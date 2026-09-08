@@ -297,7 +297,7 @@ export function ProductForm({
       <div>
         <label className="block text-sm font-medium text-cream-muted mb-1.5">Description</label>
         <textarea
-          className="w-full bg-surface border border-ds-border rounded-xl px-4 py-3 text-cream text-sm min-h-32"
+          className="w-full bg-surface border border-ds-border rounded-none px-4 py-3 text-cream text-sm min-h-32"
           value={values.descriptionEn}
           onChange={(e) => update('descriptionEn', e.target.value)}
           required
@@ -308,7 +308,7 @@ export function ProductForm({
         <div>
           <label className="block text-sm font-medium text-cream-muted mb-1.5">Category</label>
           <select
-            className="w-full bg-surface border border-ds-border rounded-xl px-4 py-3 text-cream text-sm"
+            className="w-full bg-surface border border-ds-border rounded-none px-4 py-3 text-cream text-sm"
             value={values.category}
             onChange={(e) => update('category', e.target.value)}
           >
@@ -348,7 +348,7 @@ export function ProductForm({
 
         <div className="space-y-3 mb-3">
           {values.variants.map((variant, i) => (
-            <div key={variant.id ?? `new-${i}`} className="p-3 rounded-lg border border-ds-border bg-surface">
+            <div key={variant.id ?? `new-${i}`} className="p-3 rounded-none border border-ds-border bg-surface">
               <div className="grid grid-cols-1 sm:grid-cols-4 gap-3">
                 <Input
                   label="Name"
@@ -399,7 +399,7 @@ export function ProductForm({
                 />
                 <div>
                   <label className="block text-sm font-medium text-cream-muted mb-1.5">Margin</label>
-                  <p className="px-4 py-3 rounded-xl border border-ds-border bg-elevated text-sm text-cream">
+                  <p className="px-4 py-3 rounded-none border border-ds-border bg-elevated text-sm text-cream">
                     {marginLabel(values.variants.length === 1 ? values.price : variant.price, variant.cost)}
                   </p>
                 </div>
@@ -432,8 +432,8 @@ export function ProductForm({
 
         <div className="space-y-3 mb-3">
           {values.images.map((img, i) => (
-            <div key={img} className="flex items-start gap-3 p-3 rounded-lg border border-ds-border bg-surface">
-              <div className="relative w-20 h-20 rounded-lg overflow-hidden border border-ds-border flex-shrink-0">
+            <div key={img} className="flex items-start gap-3 p-3 rounded-none border border-ds-border bg-surface">
+              <div className="relative w-20 h-20 rounded-none overflow-hidden border border-ds-border flex-shrink-0">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={img} alt={values.imageAlts[i] || ''} className="w-full h-full object-cover" />
                 {i === 0 && (
@@ -458,7 +458,7 @@ export function ProductForm({
                   onClick={() => moveImage(i, -1)}
                   disabled={i === 0}
                   aria-label="Move image up"
-                  className="px-2 py-1 rounded border border-ds-border text-xs text-cream-muted hover:text-cream disabled:opacity-30"
+                  className="px-2 py-1 rounded-none border border-ds-border text-xs text-cream-muted hover:text-cream disabled:opacity-30"
                 >
                   ↑
                 </button>
@@ -467,14 +467,14 @@ export function ProductForm({
                   onClick={() => moveImage(i, 1)}
                   disabled={i === values.images.length - 1}
                   aria-label="Move image down"
-                  className="px-2 py-1 rounded border border-ds-border text-xs text-cream-muted hover:text-cream disabled:opacity-30"
+                  className="px-2 py-1 rounded-none border border-ds-border text-xs text-cream-muted hover:text-cream disabled:opacity-30"
                 >
                   ↓
                 </button>
                 <button
                   type="button"
                   onClick={() => removeImage(i)}
-                  className="px-2 py-1 rounded border border-ds-border text-xs text-error hover:bg-error/10"
+                  className="px-2 py-1 rounded-none border border-ds-border text-xs text-error hover:bg-error/10"
                 >
                   ✕
                 </button>
@@ -569,9 +569,9 @@ export function ProductForm({
           value={relatedQuery}
           onChange={(e) => setRelatedQuery(e.target.value)}
           placeholder="Search products to add"
-          className="w-full px-3.5 py-2 rounded-lg border border-ds-border bg-surface text-sm text-cream placeholder:text-cream-muted focus:outline-none focus:ring-2 focus:ring-accent/30"
+          className="w-full px-3.5 py-2 rounded-none border border-ds-border bg-surface text-sm text-cream placeholder:text-cream-muted focus:outline-none focus:ring-2 focus:ring-accent/30"
         />
-        <div className="mt-2 max-h-48 overflow-y-auto border border-ds-border rounded-lg divide-y divide-ds-border">
+        <div className="mt-2 max-h-48 overflow-y-auto border border-ds-border rounded-none divide-y divide-ds-border">
           {availableProducts
             .filter((p) => p.slug !== values.slug && !values.relatedProducts.includes(p.slug))
             .filter((p) => {
@@ -592,7 +592,7 @@ export function ProductForm({
         </div>
       </div>
 
-      <div className="border border-ds-border rounded-xl p-4 space-y-4">
+      <div className="border border-ds-border rounded-none p-4 space-y-4">
         <div>
           <h3 className="text-sm font-medium text-cream">Search engine listing</h3>
           <p className="text-xs text-cream-muted/70 mt-1">
@@ -601,7 +601,7 @@ export function ProductForm({
           </p>
         </div>
 
-        <div className="rounded-lg bg-elevated px-4 py-3">
+        <div className="rounded-none bg-elevated px-4 py-3">
           <p className="text-xs text-cream-muted/60 truncate">
             {siteHost}/shop/{values.slug ?? 'product-url'}
           </p>
@@ -628,17 +628,17 @@ export function ProductForm({
             maxLength={160}
             value={values.metaDescription}
             onChange={(e) => update('metaDescription', e.target.value)}
-            className="w-full bg-surface border border-ds-border rounded-xl px-4 py-2.5 text-cream text-sm focus:outline-none focus:ring-2 focus:ring-accent/30"
+            className="w-full bg-surface border border-ds-border rounded-none px-4 py-2.5 text-cream text-sm focus:outline-none focus:ring-2 focus:ring-accent/30"
           />
           <p className="text-xs text-cream-muted/60 mt-1">{values.metaDescription.length} of 160 characters used</p>
         </div>
       </div>
 
-      <div className="border border-ds-border rounded-xl p-4 space-y-3">
+      <div className="border border-ds-border rounded-none p-4 space-y-3">
         <label className="block text-sm font-medium text-cream-muted">Status</label>
         <div className="flex items-center gap-4">
           <select
-            className="bg-surface border border-ds-border rounded-xl px-4 py-2.5 text-cream text-sm"
+            className="bg-surface border border-ds-border rounded-none px-4 py-2.5 text-cream text-sm"
             value={values.status}
             onChange={(e) => update('status', e.target.value as ProductFormValues['status'])}
           >

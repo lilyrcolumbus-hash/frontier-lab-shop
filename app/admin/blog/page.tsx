@@ -53,10 +53,10 @@ export default function AdminBlogPage() {
   return (
     <div>
       <div className="flex items-center justify-between mb-6">
-        <h1 className="font-body font-bold text-2xl text-cream">Blog</h1>
+        <h1 className="font-heading font-medium text-2xl text-cream">Blog</h1>
         <Link
           href="/admin/blog/new"
-          className="px-4 py-2 rounded-lg bg-cream text-surface text-sm font-semibold hover:bg-cream/90 transition-colors"
+          className="px-4 py-2 rounded-none bg-cream text-surface text-sm font-semibold hover:bg-cream/90 transition-colors"
         >
           Add post
         </Link>
@@ -68,7 +68,7 @@ export default function AdminBlogPage() {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search posts"
-          className="w-full max-w-xs px-3.5 py-2 rounded-lg border border-ds-border bg-surface text-sm text-cream placeholder:text-cream-muted focus:outline-none focus:ring-2 focus:ring-accent/30"
+          className="w-full max-w-xs px-3.5 py-2 rounded-none border border-ds-border bg-surface text-sm text-cream placeholder:text-cream-muted focus:outline-none focus:ring-2 focus:ring-accent/30"
         />
       </div>
 

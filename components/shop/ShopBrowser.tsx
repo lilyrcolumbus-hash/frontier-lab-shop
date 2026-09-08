@@ -88,7 +88,7 @@ export function ShopBrowser({ products: PRODUCTS }: { products: Product[] }) {
         <div className="bg-surface border-b border-ds-border py-12">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-accent mb-3">Filtered by species</p>
-            <h1 className="font-body font-bold text-4xl text-cream tracking-tight mb-2">{speciesLabel}</h1>
+            <h1 className="font-heading font-medium text-4xl text-cream tracking-tight mb-2">{speciesLabel}</h1>
             <p className="text-cream-muted">{speciesFiltered.length} product{speciesFiltered.length === 1 ? '' : 's'} across our catalog</p>
             <a href="/shop" className="inline-block mt-4 text-sm text-accent hover:underline">
               ← View full catalog
@@ -114,13 +114,13 @@ export function ShopBrowser({ products: PRODUCTS }: { products: Product[] }) {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
             <div>
               <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-accent mb-2">Culture Bank</p>
-              <h1 className="font-body font-bold text-3xl sm:text-4xl text-cream tracking-tight mb-2">Live Mycelium — Lab Isolated</h1>
+              <h1 className="font-heading font-medium text-3xl sm:text-4xl text-cream tracking-tight mb-2">Live Mycelium — Lab Isolated</h1>
               <p className="text-cream-muted max-w-md">8 species. 10cc syringes. Colonizes grain in 5–10 days — up to 3× faster than spores. Each packet includes 16G needle + alcohol swab + instruction card.</p>
             </div>
             <div className="flex gap-6 flex-shrink-0">
               {[['8', 'Species'], ['10cc', 'Syringe'], ['3×', 'Faster than spores']].map(([val, label]) => (
                 <div key={label} className="text-center">
-                  <p className="font-body font-bold text-2xl text-accent">{val}</p>
+                  <p className="font-heading font-medium text-2xl text-accent">{val}</p>
                   <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-cream-muted mt-0.5">{label}</p>
                 </div>
               ))}
@@ -133,7 +133,7 @@ export function ShopBrowser({ products: PRODUCTS }: { products: Product[] }) {
       {activeCategory !== 'culture-bank' && (
         <div className="bg-surface border-b border-ds-border py-12">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h1 className="font-body font-bold text-4xl text-cream tracking-tight mb-2">{t('title')}</h1>
+            <h1 className="font-heading font-medium text-4xl text-cream tracking-tight mb-2">{t('title')}</h1>
             <p className="text-cream-muted">{t('subtitle')}</p>
           </div>
         </div>
@@ -161,7 +161,7 @@ export function ShopBrowser({ products: PRODUCTS }: { products: Product[] }) {
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value)}
-            className="bg-elevated border border-ds-border rounded-xl px-3 py-2 text-sm text-cream focus:outline-none focus:ring-2 focus:ring-accent/50"
+            className="bg-elevated border border-ds-border rounded-none px-3 py-2 text-sm text-cream focus:outline-none focus:ring-2 focus:ring-accent/50"
           >
             <option value="featured">{t('filters.sortFeatured')}</option>
             <option value="price-low">{t('filters.sortPriceLow')}</option>
@@ -175,7 +175,7 @@ export function ShopBrowser({ products: PRODUCTS }: { products: Product[] }) {
             <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-8">
               <div>
                 <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-accent mb-1">Ready to inoculate — no agar needed</p>
-                <h2 className="font-body font-bold text-2xl text-cream tracking-tight">Liquid Culture Syringes</h2>
+                <h2 className="font-heading font-medium text-2xl text-cream tracking-tight">Liquid Culture Syringes</h2>
               </div>
               <div className="hidden sm:flex items-center gap-4 text-sm text-cream-muted">
                 <span className="flex items-center gap-1.5">
@@ -221,7 +221,7 @@ export function ShopBrowser({ products: PRODUCTS }: { products: Product[] }) {
                 <div>
                   <div className="mb-6">
                     <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-accent mb-1">{active.eyebrow}</p>
-                    <h2 className="font-body font-bold text-2xl text-cream tracking-tight">{active.title}</h2>
+                    <h2 className="font-heading font-medium text-2xl text-cream tracking-tight">{active.title}</h2>
                     <p className="text-cream-muted text-sm mt-1 max-w-xl">{active.note}</p>
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">

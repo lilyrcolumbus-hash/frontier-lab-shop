@@ -43,7 +43,7 @@ export default function CartPage() {
             <circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/>
             <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/>
           </svg>
-          <h1 className="font-body font-bold text-3xl text-cream mb-3">
+          <h1 className="font-heading font-medium text-3xl text-cream mb-3">
             {locale === 'es' ? 'Tu carrito está vacío' : 'Your cart is empty'}
           </h1>
           <p className="text-cream-muted mb-8">
@@ -60,7 +60,7 @@ export default function CartPage() {
   return (
     <div className="pt-20 min-h-screen">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <h1 className="font-body font-bold text-3xl tracking-tight text-cream mb-10">
+        <h1 className="font-heading font-medium text-3xl tracking-tight text-cream mb-10">
           {locale === 'es' ? 'Tu Carrito' : 'Your Cart'}
         </h1>
 
@@ -68,8 +68,8 @@ export default function CartPage() {
           {/* Items */}
           <div className="flex-1 space-y-4">
             {items.map((item) => (
-              <div key={`${item.productId}-${item.variantId}`} className="flex gap-4 p-5 bg-surface border border-ds-border rounded-2xl">
-                <div className="w-20 h-20 rounded-xl overflow-hidden flex-shrink-0 bg-elevated">
+              <div key={`${item.productId}-${item.variantId}`} className="flex gap-4 p-5 bg-surface border border-ds-border rounded-none">
+                <div className="w-20 h-20 rounded-none overflow-hidden flex-shrink-0 bg-elevated">
                   {item.image && (
                     <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
                   )}
@@ -86,7 +86,7 @@ export default function CartPage() {
                     </button>
                   </div>
                 </div>
-                <p className="font-body font-bold text-cream text-right flex-shrink-0">
+                <p className="font-heading font-medium text-cream text-right flex-shrink-0">
                   {formatPrice(item.price * item.quantity)}
                 </p>
               </div>
@@ -95,8 +95,8 @@ export default function CartPage() {
 
           {/* Summary */}
           <div className="lg:w-80 flex-shrink-0">
-            <div className="bg-surface border border-ds-border rounded-2xl p-6 sticky top-24">
-              <h2 className="font-body font-bold text-lg text-cream mb-4">
+            <div className="bg-surface border border-ds-border rounded-none p-6 sticky top-24">
+              <h2 className="font-heading font-medium text-lg text-cream mb-4">
                 {locale === 'es' ? 'Resumen' : 'Order Summary'}
               </h2>
               <div className="space-y-3 text-sm mb-6">
@@ -108,7 +108,7 @@ export default function CartPage() {
                   <span>{locale === 'es' ? 'Envío' : 'Shipping'}</span>
                   <span className="text-accent">{locale === 'es' ? 'Calculado al pagar' : 'Calculated at checkout'}</span>
                 </div>
-                <div className="border-t border-ds-border pt-3 flex justify-between font-body font-bold text-cream text-base">
+                <div className="border-t border-ds-border pt-3 flex justify-between font-heading font-medium text-cream text-base">
                   <span>Total</span>
                   <span>{formatPrice(total())}</span>
                 </div>

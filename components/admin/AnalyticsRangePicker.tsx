@@ -20,7 +20,7 @@ export function AnalyticsRangePicker({
         params.set('range', e.target.value)
         router.push(`/admin?${params.toString()}`)
       }}
-      className="px-3.5 py-2 rounded-lg border border-ds-border bg-surface text-sm text-cream"
+      className="px-3.5 py-2 rounded-none border border-ds-border bg-surface text-sm text-cream"
     >
       {options.map((option) => (
         <option key={option.key} value={option.key}>

@@ -44,7 +44,7 @@ export function QuizTeaser() {
                 <span className="text-[11px] font-mono text-amber/55 uppercase tracking-[0.22em]">
                   Find your perfect species
                 </span>
-                <h2 className="font-body font-bold text-3xl sm:text-4xl text-cream tracking-tight leading-tight">
+                <h2 className="font-heading font-medium text-3xl sm:text-4xl text-cream tracking-tight leading-tight">
                   {t('title')}
                 </h2>
                 <p className="font-body text-cream-muted text-lg leading-relaxed">

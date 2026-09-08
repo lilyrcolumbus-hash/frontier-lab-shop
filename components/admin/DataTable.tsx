@@ -22,7 +22,7 @@ export function Thumbnail({ src, alt }: { src?: string | null; alt: string }) {
     return (
       <div
         title="No image yet"
-        className="w-10 h-10 rounded-lg bg-elevated border border-dashed border-ds-border flex items-center justify-center text-cream-muted/40 flex-shrink-0"
+        className="w-10 h-10 rounded-none bg-elevated border border-dashed border-ds-border flex items-center justify-center text-cream-muted/40 flex-shrink-0"
       >
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
           <rect x="3" y="3" width="18" height="18" rx="2" />
@@ -34,7 +34,7 @@ export function Thumbnail({ src, alt }: { src?: string | null; alt: string }) {
   }
   return (
     // eslint-disable-next-line @next/next/no-img-element
-    <img src={src} alt={alt} className="w-10 h-10 rounded-lg object-cover border border-ds-border flex-shrink-0" />
+    <img src={src} alt={alt} className="w-10 h-10 rounded-none object-cover border border-ds-border flex-shrink-0" />
   )
 }
 
@@ -57,14 +57,14 @@ export function DataTable<T extends { id: string }>({
 
   if (rows.length === 0) {
     return (
-      <div className="border border-ds-border rounded-xl bg-surface py-16 text-center text-cream-muted text-sm">
+      <div className="border border-ds-border rounded-none bg-surface py-16 text-center text-cream-muted text-sm">
         {emptyLabel}
       </div>
     )
   }
 
   return (
-    <div className="border border-ds-border rounded-xl bg-surface overflow-hidden overflow-x-auto">
+    <div className="border border-ds-border rounded-none bg-surface overflow-hidden overflow-x-auto">
       <table className="w-full text-sm">
         <thead className="bg-elevated text-cream-muted">
           <tr>

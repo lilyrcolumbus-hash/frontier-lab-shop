@@ -19,7 +19,7 @@ export default async function ReturnsPage({ params }: PageProps) {
     <div className="pt-20 min-h-screen">
       <div className="border-b border-ds-border bg-surface py-16">
         <div className="max-w-3xl mx-auto px-4 sm:px-6">
-          <h1 className="font-body font-bold text-3xl sm:text-4xl tracking-tight text-cream">
+          <h1 className="font-heading font-medium text-3xl sm:text-4xl tracking-tight text-cream">
             {lang === 'en' ? 'Returns & Refunds' : 'Devoluciones y Reembolsos'}
           </h1>
         </div>
@@ -27,7 +27,7 @@ export default async function ReturnsPage({ params }: PageProps) {
 
       <div className="max-w-3xl mx-auto px-4 sm:px-6 py-12 space-y-10">
         <section>
-          <h2 className="font-body font-bold text-xl tracking-tight text-cream mb-4">
+          <h2 className="font-heading font-medium text-xl tracking-tight text-cream mb-4">
             {lang === 'en' ? 'Living cultures & substrate (LC, grain spawn, bulk substrate, fruiting blocks)' : 'Cultivos vivos y sustrato (LC, grano, sustrato a granel, fruiting blocks)'}
           </h2>
           <p className="text-cream-muted leading-relaxed">
@@ -38,7 +38,7 @@ export default async function ReturnsPage({ params }: PageProps) {
         </section>
 
         <section>
-          <h2 className="font-body font-bold text-xl tracking-tight text-cream mb-4">
+          <h2 className="font-heading font-medium text-xl tracking-tight text-cream mb-4">
             {lang === 'en' ? 'Equipment & non-biological items' : 'Equipo y artículos no biológicos'}
           </h2>
           <p className="text-cream-muted leading-relaxed">
@@ -49,7 +49,7 @@ export default async function ReturnsPage({ params }: PageProps) {
         </section>
 
         <section>
-          <h2 className="font-body font-bold text-xl tracking-tight text-cream mb-4">
+          <h2 className="font-heading font-medium text-xl tracking-tight text-cream mb-4">
             {lang === 'en' ? 'How to request a replacement or refund' : 'Cómo solicitar un reemplazo o reembolso'}
           </h2>
           <p className="text-cream-muted leading-relaxed">

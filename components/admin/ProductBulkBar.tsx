@@ -61,10 +61,10 @@ export function ProductBulkBar({
   }
 
   const buttonClass =
-    'px-3 py-1.5 rounded-lg border border-ds-border text-xs font-medium text-cream hover:bg-elevated transition-colors disabled:opacity-50'
+    'px-3 py-1.5 rounded-none border border-ds-border text-xs font-medium text-cream hover:bg-elevated transition-colors disabled:opacity-50'
 
   return (
-    <div className="mb-4 p-3 rounded-xl border border-accent/40 bg-surface">
+    <div className="mb-4 p-3 rounded-none border border-accent/40 bg-surface">
       <div className="flex flex-wrap items-center gap-2">
         <span className="text-sm text-cream mr-1">{selectedIds.length} selected</span>
 
@@ -108,7 +108,7 @@ export function ProductBulkBar({
           value={percent}
           onChange={(e) => setPercent(e.target.value)}
           placeholder="±%"
-          className="w-20 px-2 py-1.5 rounded-lg border border-ds-border bg-bg text-xs text-cream"
+          className="w-20 px-2 py-1.5 rounded-none border border-ds-border bg-bg text-xs text-cream"
         />
         <button
           type="button"
@@ -142,7 +142,7 @@ export function ProductBulkBar({
                 )
                 e.target.value = ''
               }}
-              className="px-2 py-1.5 rounded-lg border border-ds-border bg-bg text-xs text-cream"
+              className="px-2 py-1.5 rounded-none border border-ds-border bg-bg text-xs text-cream"
             >
               <option value="">Collections…</option>
               {collections.map((c) => (
@@ -170,7 +170,7 @@ export function ProductBulkBar({
               'Delete these products permanently? Past orders keep their record, but this cannot be undone.'
             )
           }
-          className="px-3 py-1.5 rounded-lg border border-error/40 text-xs font-medium text-error hover:bg-error/10 transition-colors disabled:opacity-50"
+          className="px-3 py-1.5 rounded-none border border-error/40 text-xs font-medium text-error hover:bg-error/10 transition-colors disabled:opacity-50"
         >
           Delete
         </button>

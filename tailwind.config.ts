@@ -18,12 +18,12 @@ const config: Config = {
         accent: {
           DEFAULT: 'rgb(var(--c-accent) / <alpha-value>)',
           hover: 'color-mix(in srgb, rgb(var(--c-accent)) 88%, black)',
-          dim: 'rgb(var(--c-accent) / 0.10)',
+          dim: 'rgb(var(--c-accent) / 0.12)', // gold-tint — badge fills, button hover, ~12% per spec
         },
         amber: {
           DEFAULT: 'rgb(var(--c-amber) / <alpha-value>)',
           bright: 'color-mix(in srgb, rgb(var(--c-amber)) 88%, white)',
-          dim: 'rgb(var(--c-amber) / 0.10)',
+          dim: 'rgb(var(--c-amber) / 0.12)',
         },
         silver: {
           DEFAULT: 'rgb(var(--c-silver) / <alpha-value>)',
@@ -42,13 +42,13 @@ const config: Config = {
         moss: '#3D6443',
         success: '#3D6E45',
         warning: '#9E6820',
-        error: '#B83A28',
+        error: '#A8392A', // apagado, "brick" — solo estado (fallos/destructivo), nunca decorativo
       },
       fontFamily: {
-        display:  ['var(--font-bebas)', 'sans-serif'],
-        heading:  ['var(--font-playfair)', 'serif'],
+        display:  ['var(--font-bebas)', 'sans-serif'], // prohibida, no usar en componentes nuevos
+        heading:  ['var(--font-fraunces)', 'serif'], // titulares, nombres de producto, frases de una línea
         body:     ['var(--font-inter)', 'sans-serif'],
-        accent:   ['var(--font-cormorant)', 'serif'],
+        accent:   ['var(--font-cormorant)', 'serif'], // prohibida, no usar en componentes nuevos
         mono:     ['var(--font-space-mono)', 'monospace'],
       },
       boxShadow: {

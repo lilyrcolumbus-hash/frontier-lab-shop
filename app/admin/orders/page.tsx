@@ -26,7 +26,7 @@ const STATUS_OPTIONS = [
 ]
 
 const inputClass =
-  'px-3.5 py-2 rounded-lg border border-ds-border bg-surface text-sm text-cream placeholder:text-cream-muted focus:outline-none focus:ring-2 focus:ring-accent/30'
+  'px-3.5 py-2 rounded-none border border-ds-border bg-surface text-sm text-cream placeholder:text-cream-muted focus:outline-none focus:ring-2 focus:ring-accent/30'
 
 export default function AdminOrdersPage() {
   const [status, setStatus] = useState('')
@@ -80,7 +80,7 @@ export default function AdminOrdersPage() {
   return (
     <div>
       <div className="flex items-center justify-between mb-6">
-        <h1 className="font-body font-bold text-2xl text-cream">Orders</h1>
+        <h1 className="font-heading font-medium text-2xl text-cream">Orders</h1>
       </div>
 
       <div className="mb-4 flex flex-wrap items-end gap-3">

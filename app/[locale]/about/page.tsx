@@ -50,7 +50,7 @@ export default async function AboutPage({ params }: PageProps) {
     <div className="pt-20 min-h-screen">
       <div className="border-b border-ds-border bg-surface py-16">
         <div className="max-w-3xl mx-auto px-4 sm:px-6">
-          <h1 className="font-body font-bold text-3xl sm:text-4xl tracking-tight text-cream">
+          <h1 className="font-heading font-medium text-3xl sm:text-4xl tracking-tight text-cream">
             {lang === 'en' ? 'About Frontier Lab' : 'Sobre Frontier Lab'}
           </h1>
         </div>
@@ -59,7 +59,7 @@ export default async function AboutPage({ params }: PageProps) {
       <div className="max-w-3xl mx-auto px-4 sm:px-6 py-12 space-y-12">
         {SECTIONS.map((section, i) => (
           <section key={i}>
-            <h2 className="font-body font-bold text-xl tracking-tight text-cream mb-4">
+            <h2 className="font-heading font-medium text-xl tracking-tight text-cream mb-4">
               {section.title[lang]}
             </h2>
             <p className="text-cream-muted leading-relaxed">{section.body[lang]}</p>

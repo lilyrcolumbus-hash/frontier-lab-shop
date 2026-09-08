@@ -23,7 +23,7 @@ export default async function EncyclopediaPage({ params }: { params: { locale: s
           <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-accent mb-3">
             Frontier Lab Encyclopedia
           </p>
-          <h1 className="font-body font-bold text-4xl sm:text-5xl tracking-tight text-cream mb-4">
+          <h1 className="font-heading font-medium text-4xl sm:text-5xl tracking-tight text-cream mb-4">
             {t('title')}
           </h1>
           <p className="text-cream-muted text-lg max-w-xl mx-auto">{t('subtitle')}</p>

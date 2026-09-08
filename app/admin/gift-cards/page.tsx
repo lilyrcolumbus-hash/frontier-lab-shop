@@ -18,7 +18,7 @@ interface GiftCard {
 
 const NETWORK_ERROR = 'Could not reach the server. Check your connection and try again.'
 const inputClass =
-  'px-3 py-2 rounded-lg border border-ds-border bg-bg text-sm text-cream placeholder:text-cream-muted/60'
+  'px-3 py-2 rounded-none border border-ds-border bg-bg text-sm text-cream placeholder:text-cream-muted/60'
 
 export default function AdminGiftCardsPage() {
   const { data: cards, error, reload } = useAdminList<GiftCard>('/api/admin/gift-cards', 'giftCards')
@@ -77,19 +77,19 @@ export default function AdminGiftCardsPage() {
 
   return (
     <div className="max-w-3xl">
-      <h1 className="font-body font-bold text-2xl text-cream mb-2">Gift cards</h1>
+      <h1 className="font-heading font-medium text-2xl text-cream mb-2">Gift cards</h1>
       <p className="text-sm text-cream-muted mb-6">
         Each card is a single-use code worth a fixed amount off an order. The customer types it in
         the discount box at checkout.
       </p>
 
-      <form onSubmit={create} className="bg-surface border border-ds-border rounded-xl p-5 mb-6 space-y-3">
+      <form onSubmit={create} className="bg-surface border border-ds-border rounded-none p-5 mb-6 space-y-3">
         <h2 className="text-sm font-medium text-cream">Issue a card</h2>
         <div className="flex flex-wrap gap-2">
           <input required type="number" step="1" min="1" value={amount} onChange={(e) => setAmount(e.target.value)} placeholder="50" className={`${inputClass} w-28`} />
           <input value={note} onChange={(e) => setNote(e.target.value)} placeholder="Who it is for (optional)" className={`${inputClass} flex-1 min-w-[180px]`} />
           <input type="date" value={expiresAt} onChange={(e) => setExpiresAt(e.target.value)} className={inputClass} />
-          <button type="submit" disabled={busy} className="px-4 py-2 rounded-lg bg-cream text-surface text-sm font-semibold hover:bg-cream/90 disabled:opacity-50">
+          <button type="submit" disabled={busy} className="px-4 py-2 rounded-none bg-cream text-surface text-sm font-semibold hover:bg-cream/90 disabled:opacity-50">
             {busy ? 'Creating…' : 'Create'}
           </button>
         </div>
@@ -105,11 +105,11 @@ export default function AdminGiftCardsPage() {
       {cards === null ? (
         <ListState error={error} onRetry={reload} />
       ) : cards.length === 0 ? (
-        <div className="border border-ds-border rounded-xl bg-surface py-16 text-center text-cream-muted text-sm">
+        <div className="border border-ds-border rounded-none bg-surface py-16 text-center text-cream-muted text-sm">
           No gift cards yet.
         </div>
       ) : (
-        <div className="border border-ds-border rounded-xl bg-surface overflow-hidden overflow-x-auto">
+        <div className="border border-ds-border rounded-none bg-surface overflow-hidden overflow-x-auto">
           <table className="w-full text-sm">
             <thead className="bg-elevated text-cream-muted">
               <tr>

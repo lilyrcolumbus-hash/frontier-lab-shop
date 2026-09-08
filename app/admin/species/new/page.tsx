@@ -3,7 +3,7 @@ import { SpeciesForm } from '@/components/admin/SpeciesForm'
 export default function NewSpeciesPage() {
   return (
     <div>
-      <h1 className="font-body font-bold text-2xl text-cream mb-6">New species</h1>
+      <h1 className="font-heading font-medium text-2xl text-cream mb-6">New species</h1>
       <SpeciesForm
         initial={{
           slug: '',

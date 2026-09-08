@@ -3,7 +3,7 @@
 import { BLOCK_LABELS, emptyBlock, type BlockType, type PageBlock } from '@/lib/page-blocks'
 
 const inputClass =
-  'w-full px-3 py-2 rounded-lg border border-ds-border bg-bg text-sm text-cream placeholder:text-cream-muted/60'
+  'w-full px-3 py-2 rounded-none border border-ds-border bg-bg text-sm text-cream placeholder:text-cream-muted/60'
 
 /**
  * Builds a page out of blocks: add, reorder, remove.
@@ -43,7 +43,7 @@ export function BlockEditor({
       )}
 
       {blocks.map((block, index) => (
-        <div key={block.id} className="p-4 rounded-xl border border-ds-border bg-surface space-y-3">
+        <div key={block.id} className="p-4 rounded-none border border-ds-border bg-surface space-y-3">
           <div className="flex items-center justify-between gap-2">
             <span className="text-xs font-semibold uppercase tracking-wider text-cream-muted">
               {BLOCK_LABELS[block.type]}
@@ -66,7 +66,7 @@ export function BlockEditor({
               <select
                 value={block.level}
                 onChange={(e) => update(index, { ...block, level: e.target.value as 'h2' | 'h3' })}
-                className="px-3 py-2 rounded-lg border border-ds-border bg-bg text-sm text-cream"
+                className="px-3 py-2 rounded-none border border-ds-border bg-bg text-sm text-cream"
               >
                 <option value="h2">Large heading</option>
                 <option value="h3">Small heading</option>
@@ -140,7 +140,7 @@ export function BlockEditor({
             key={type}
             type="button"
             onClick={() => add(type)}
-            className="px-3 py-1.5 rounded-lg border border-ds-border text-xs font-medium text-cream hover:bg-elevated transition-colors"
+            className="px-3 py-1.5 rounded-none border border-ds-border text-xs font-medium text-cream hover:bg-elevated transition-colors"
           >
             + {BLOCK_LABELS[type]}
           </button>

@@ -10,7 +10,7 @@ export function AdminNavLink({ href, icon, label }: { href: string; icon: React.
   return (
     <Link
       href={href}
-      className={`flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-[13.5px] font-medium transition-colors ${
+      className={`flex items-center gap-2.5 px-2.5 py-2 rounded-none text-[13.5px] font-medium transition-colors ${
         active ? 'bg-accent-dim text-accent' : 'text-cream-muted hover:bg-elevated hover:text-cream'
       }`}
     >

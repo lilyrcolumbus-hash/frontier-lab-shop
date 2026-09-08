@@ -69,7 +69,7 @@ export default function AdminProductsPage() {
   return (
     <div>
       <div className="flex items-center justify-between mb-6">
-        <h1 className="font-body font-bold text-2xl text-cream">Products</h1>
+        <h1 className="font-heading font-medium text-2xl text-cream">Products</h1>
         <div className="flex items-center gap-2">
           <ProductImportButton
             onDone={() => {
@@ -79,13 +79,13 @@ export default function AdminProductsPage() {
           />
           <a
             href="/api/admin/products/export"
-            className="px-4 py-2 rounded-lg border border-ds-border text-sm font-medium text-cream hover:bg-elevated transition-colors"
+            className="px-4 py-2 rounded-none border border-ds-border text-sm font-medium text-cream hover:bg-elevated transition-colors"
           >
             Export CSV
           </a>
           <Link
             href="/admin/products/new"
-            className="px-4 py-2 rounded-lg bg-cream text-surface text-sm font-semibold hover:bg-cream/90 transition-colors"
+            className="px-4 py-2 rounded-none bg-cream text-surface text-sm font-semibold hover:bg-cream/90 transition-colors"
           >
             Add product
           </Link>
@@ -98,7 +98,7 @@ export default function AdminProductsPage() {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search products"
-          className="w-full max-w-xs px-3.5 py-2 rounded-lg border border-ds-border bg-surface text-sm text-cream placeholder:text-cream-muted focus:outline-none focus:ring-2 focus:ring-accent/30"
+          className="w-full max-w-xs px-3.5 py-2 rounded-none border border-ds-border bg-surface text-sm text-cream placeholder:text-cream-muted focus:outline-none focus:ring-2 focus:ring-accent/30"
         />
       </div>
 

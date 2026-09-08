@@ -61,9 +61,9 @@ export default function NewDiscountPage() {
 
   return (
     <div className="max-w-md">
-      <h1 className="font-body font-bold text-2xl text-cream mb-6">Create discount</h1>
+      <h1 className="font-heading font-medium text-2xl text-cream mb-6">Create discount</h1>
 
-      <form onSubmit={handleSubmit} className="bg-surface border border-ds-border rounded-xl p-6 space-y-4">
+      <form onSubmit={handleSubmit} className="bg-surface border border-ds-border rounded-none p-6 space-y-4">
         <Input
           label="Code"
           placeholder="SAVE15"
@@ -85,7 +85,7 @@ export default function NewDiscountPage() {
                 key={option.value}
                 type="button"
                 onClick={() => setType(option.value)}
-                className={`px-3.5 py-2 rounded-lg border text-sm transition-colors ${
+                className={`px-3.5 py-2 rounded-none border text-sm transition-colors ${
                   type === option.value
                     ? 'border-accent text-cream'
                     : 'border-ds-border text-cream-muted hover:text-cream'
@@ -161,7 +161,7 @@ export default function NewDiscountPage() {
         <button
           type="submit"
           disabled={saving}
-          className="px-4 py-2 rounded-lg bg-cream text-surface text-sm font-semibold hover:bg-cream/90 transition-colors disabled:opacity-50"
+          className="px-4 py-2 rounded-none bg-cream text-surface text-sm font-semibold hover:bg-cream/90 transition-colors disabled:opacity-50"
         >
           {saving ? 'Creating…' : 'Create discount'}
         </button>

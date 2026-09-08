@@ -51,7 +51,7 @@ export function VideoMoment({ src, eyebrow, headline, subtext, align = 'left' }:
           className={align === 'center' ? 'max-w-2xl' : 'max-w-xl'}
         >
           <p className="font-mono text-[11px] text-white/50 uppercase tracking-[0.28em] mb-3">{eyebrow}</p>
-          <h2 className="font-body font-bold text-3xl sm:text-4xl lg:text-[2.75rem] text-white tracking-tight leading-[1.05] text-wrap-balance">
+          <h2 className="font-heading font-medium text-3xl sm:text-4xl lg:text-[2.75rem] text-white tracking-tight leading-[1.05] text-wrap-balance">
             {headline}
           </h2>
           {subtext && (

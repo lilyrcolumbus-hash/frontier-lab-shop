@@ -27,7 +27,7 @@ export default function CheckoutSuccessPage() {
         <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-accent mb-3">
           {locale === 'es' ? 'Pago confirmado' : 'Payment confirmed'}
         </p>
-        <h1 className="font-body font-bold text-3xl sm:text-4xl tracking-tight text-cream mb-4">
+        <h1 className="font-heading font-medium text-3xl sm:text-4xl tracking-tight text-cream mb-4">
           {locale === 'es' ? '¡Gracias por tu pedido!' : 'Thank you for your order!'}
         </h1>
         <p className="text-cream-muted text-lg mb-8">

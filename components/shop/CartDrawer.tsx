@@ -43,7 +43,7 @@ export function CartDrawer({ isOpen, onClose, items, onRemove, onUpdateQty }: Ca
           <h2 className="font-heading text-xl font-semibold text-cream">{t('title')}</h2>
           <button
             onClick={onClose}
-            className="p-2 text-cream-muted hover:text-cream rounded-lg hover:bg-elevated transition-colors"
+            className="p-2 text-cream-muted hover:text-cream rounded-none hover:bg-elevated transition-colors"
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M18 6L6 18M6 6l12 12" />
@@ -65,8 +65,8 @@ export function CartDrawer({ isOpen, onClose, items, onRemove, onUpdateQty }: Ca
           ) : (
             <div className="space-y-4">
               {items.map((item) => (
-                <div key={`${item.productId}-${item.variantId}`} className="flex gap-4 p-4 bg-elevated rounded-xl border border-ds-border">
-                  <div className="w-16 h-16 rounded-xl overflow-hidden flex-shrink-0">
+                <div key={`${item.productId}-${item.variantId}`} className="flex gap-4 p-4 bg-elevated rounded-none border border-ds-border">
+                  <div className="w-16 h-16 rounded-none overflow-hidden flex-shrink-0">
                     <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
                   </div>
                   <div className="flex-1 min-w-0">

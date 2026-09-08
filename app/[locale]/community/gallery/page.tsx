@@ -29,7 +29,7 @@ export default function GalleryPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="columns-2 sm:columns-3 lg:columns-4 gap-4 space-y-4">
           {PHOTOS.map((photo) => (
-            <div key={photo.id} className="break-inside-avoid relative group overflow-hidden rounded-2xl border border-ds-border cursor-pointer">
+            <div key={photo.id} className="break-inside-avoid relative group overflow-hidden rounded-none border border-ds-border cursor-pointer">
               <img
                 src={photo.src}
                 alt={photo.alt}

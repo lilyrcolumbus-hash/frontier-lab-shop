@@ -33,7 +33,7 @@ export function CommunityGallery() {
         <ScrollReveal className="flex items-end justify-between mb-16">
           <div>
             <div className="section-divider mb-4" />
-            <h2 className="font-body font-bold text-3xl sm:text-4xl text-cream tracking-tight">
+            <h2 className="font-heading font-medium text-3xl sm:text-4xl text-cream tracking-tight">
               {t('title')}
             </h2>
             <p className="text-cream-muted mt-3 text-lg max-w-md">{t('subtitle')}</p>
@@ -54,7 +54,7 @@ export function CommunityGallery() {
               initial={{ opacity: 0, scale: 0.92, y: 20 }}
               animate={isInView ? { opacity: 1, scale: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="break-inside-avoid relative group overflow-hidden rounded-2xl border border-ds-border cursor-pointer"
+              className="break-inside-avoid relative group overflow-hidden rounded-none border border-ds-border cursor-pointer"
             >
               <img
                 src={item.src}

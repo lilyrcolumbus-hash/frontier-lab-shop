@@ -107,10 +107,10 @@ export default function AdminDiscountsPage() {
   return (
     <div>
       <div className="flex items-center justify-between mb-6">
-        <h1 className="font-body font-bold text-2xl text-cream">Discounts</h1>
+        <h1 className="font-heading font-medium text-2xl text-cream">Discounts</h1>
         <Link
           href="/admin/discounts/new"
-          className="px-4 py-2 rounded-lg bg-cream text-surface text-sm font-semibold hover:bg-cream/90 transition-colors"
+          className="px-4 py-2 rounded-none bg-cream text-surface text-sm font-semibold hover:bg-cream/90 transition-colors"
         >
           Create discount
         </Link>

@@ -90,7 +90,7 @@ export function SettingsForm({ initial }: { initial: StoreSettings }) {
     }
   }
 
-  const section = 'bg-surface border border-ds-border rounded-xl p-6 space-y-4'
+  const section = 'bg-surface border border-ds-border rounded-none p-6 space-y-4'
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
@@ -143,7 +143,7 @@ export function SettingsForm({ initial }: { initial: StoreSettings }) {
           <select
             value={values.currency}
             onChange={(e) => update('currency', e.target.value)}
-            className="w-full bg-surface border border-ds-border rounded-xl px-4 py-2.5 text-cream text-sm"
+            className="w-full bg-surface border border-ds-border rounded-none px-4 py-2.5 text-cream text-sm"
           >
             {['usd', 'eur', 'gbp', 'cad', 'aud', 'mxn'].map((code) => (
               <option key={code} value={code}>

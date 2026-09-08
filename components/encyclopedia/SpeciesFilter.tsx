@@ -26,7 +26,7 @@ export function SpeciesFilter({ filters, onChange }: SpeciesFilterProps) {
     onChange({ ...filters, [key]: value })
 
   return (
-    <div className="space-y-6 p-6 bg-elevated rounded-2xl border border-ds-border sticky top-24">
+    <div className="space-y-6 p-6 bg-elevated rounded-none border border-ds-border sticky top-24">
       {/* Search */}
       <div>
         <label className="block text-xs uppercase tracking-wider text-cream-muted mb-2">
@@ -45,7 +45,7 @@ export function SpeciesFilter({ filters, onChange }: SpeciesFilterProps) {
             value={filters.search}
             onChange={(e) => set('search', e.target.value)}
             placeholder="Search species..."
-            className="w-full bg-surface border border-ds-border rounded-xl pl-9 pr-4 py-2.5 text-sm text-cream placeholder:text-cream-muted/60 focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent"
+            className="w-full bg-surface border border-ds-border rounded-none pl-9 pr-4 py-2.5 text-sm text-cream placeholder:text-cream-muted/60 focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent"
           />
         </div>
       </div>
@@ -59,7 +59,7 @@ export function SpeciesFilter({ filters, onChange }: SpeciesFilterProps) {
               key={type}
               onClick={() => set('type', type)}
               className={cn(
-                'text-left text-sm px-3 py-2 rounded-xl transition-colors',
+                'text-left text-sm px-3 py-2 rounded-none transition-colors',
                 filters.type === type
                   ? 'bg-accent/20 text-accent font-medium'
                   : 'text-cream-muted hover:text-cream hover:bg-surface'
@@ -80,7 +80,7 @@ export function SpeciesFilter({ filters, onChange }: SpeciesFilterProps) {
               key={d}
               onClick={() => set('difficulty', d)}
               className={cn(
-                'text-left text-sm px-3 py-2 rounded-xl transition-colors',
+                'text-left text-sm px-3 py-2 rounded-none transition-colors',
                 filters.difficulty === d
                   ? 'bg-accent/20 text-accent font-medium'
                   : 'text-cream-muted hover:text-cream hover:bg-surface'
@@ -100,7 +100,7 @@ export function SpeciesFilter({ filters, onChange }: SpeciesFilterProps) {
             <button
               key={letter}
               onClick={() => set('search', letter)}
-              className="w-7 h-7 flex items-center justify-center rounded-lg text-xs text-cream-muted hover:text-cream hover:bg-surface transition-colors"
+              className="w-7 h-7 flex items-center justify-center rounded-none text-xs text-cream-muted hover:text-cream hover:bg-surface transition-colors"
             >
               {letter}
             </button>

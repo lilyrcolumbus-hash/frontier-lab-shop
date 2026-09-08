@@ -24,7 +24,7 @@ export default async function AdminOrderDetailPage({ params }: { params: { id: s
     <div className="max-w-4xl">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="font-body font-bold text-2xl text-cream">Order #{order.id.slice(-8)}</h1>
+          <h1 className="font-heading font-medium text-2xl text-cream">Order #{order.id.slice(-8)}</h1>
           <p className="text-sm text-cream-muted">
             {order.email} · {new Date(order.createdAt).toLocaleString()}
           </p>
@@ -42,7 +42,7 @@ export default async function AdminOrderDetailPage({ params }: { params: { id: s
 
       <div className="grid grid-cols-3 gap-6">
         <div className="col-span-2 space-y-6">
-          <div className="bg-surface border border-ds-border rounded-xl overflow-hidden">
+          <div className="bg-surface border border-ds-border rounded-none overflow-hidden">
             <table className="w-full text-sm">
               <thead className="bg-elevated text-cream-muted">
                 <tr>
@@ -58,7 +58,7 @@ export default async function AdminOrderDetailPage({ params }: { params: { id: s
                     <td className="px-4 py-3 flex items-center gap-3">
                       {item.image ? (
                         // eslint-disable-next-line @next/next/no-img-element
-                        <img src={item.image} alt={item.name} className="w-10 h-10 rounded-lg object-cover border border-ds-border" />
+                        <img src={item.image} alt={item.name} className="w-10 h-10 rounded-none object-cover border border-ds-border" />
                       ) : null}
                       <span className="text-cream">{item.name}</span>
                     </td>
@@ -76,7 +76,7 @@ export default async function AdminOrderDetailPage({ params }: { params: { id: s
             </table>
           </div>
 
-          <div className="bg-surface border border-ds-border rounded-xl p-5 space-y-1.5 text-sm">
+          <div className="bg-surface border border-ds-border rounded-none p-5 space-y-1.5 text-sm">
             <div className="flex justify-between text-cream-muted">
               <span>Subtotal</span>
               <span>{formatPrice(order.subtotal)}</span>
@@ -95,7 +95,7 @@ export default async function AdminOrderDetailPage({ params }: { params: { id: s
             </div>
           </div>
 
-          <div className="bg-surface border border-ds-border rounded-xl p-5 space-y-1 text-sm">
+          <div className="bg-surface border border-ds-border rounded-none p-5 space-y-1 text-sm">
             <h2 className="font-semibold text-cream mb-2">Shipping address</h2>
             <p className="text-cream-muted">{order.shippingName}</p>
             <p className="text-cream-muted">{order.shippingLine1}</p>
@@ -125,7 +125,7 @@ export default async function AdminOrderDetailPage({ params }: { params: { id: s
             disabled={isClosed}
           />
 
-          <div className="bg-surface border border-ds-border rounded-xl p-5">
+          <div className="bg-surface border border-ds-border rounded-none p-5">
             <h2 className="font-semibold text-cream text-sm mb-3">Customer email</h2>
             <OrderEmailButton orderId={order.id} email={order.email} />
           </div>

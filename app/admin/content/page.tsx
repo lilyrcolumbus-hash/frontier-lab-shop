@@ -46,7 +46,7 @@ export default function AdminContentPage() {
 
   return (
     <div className="max-w-4xl">
-      <h1 className="font-body font-bold text-2xl text-cream mb-2">Content</h1>
+      <h1 className="font-heading font-medium text-2xl text-cream mb-2">Content</h1>
       <p className="text-sm text-cream-muted mb-1">
         Every piece of text on the storefront. Leave a box empty to keep the text the site ships
         with; clear both to undo an edit.
@@ -62,12 +62,12 @@ export default function AdminContentPage() {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search the text or its name"
-          className="flex-1 min-w-[240px] px-3.5 py-2 rounded-lg border border-ds-border bg-surface text-sm text-cream placeholder:text-cream-muted focus:outline-none focus:ring-2 focus:ring-accent/30"
+          className="flex-1 min-w-[240px] px-3.5 py-2 rounded-none border border-ds-border bg-surface text-sm text-cream placeholder:text-cream-muted focus:outline-none focus:ring-2 focus:ring-accent/30"
         />
         <select
           value={section}
           onChange={(e) => setSection(e.target.value)}
-          className="px-3.5 py-2 rounded-lg border border-ds-border bg-surface text-sm text-cream"
+          className="px-3.5 py-2 rounded-none border border-ds-border bg-surface text-sm text-cream"
         >
           <option value="">All sections</option>
           {sections.map((s) => (
@@ -90,7 +90,7 @@ export default function AdminContentPage() {
       {entries === null ? (
         <ListState error={error} onRetry={reload} />
       ) : filtered.length === 0 ? (
-        <div className="border border-ds-border rounded-xl bg-surface py-16 text-center text-cream-muted text-sm">
+        <div className="border border-ds-border rounded-none bg-surface py-16 text-center text-cream-muted text-sm">
           No text matches that.
         </div>
       ) : (

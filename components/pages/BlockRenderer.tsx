@@ -12,11 +12,11 @@ export function BlockRenderer({ blocks, locale }: { blocks: PageBlock[]; locale:
             const text = block.text[locale] || block.text.en
             if (!text) return null
             return block.level === 'h3' ? (
-              <h3 key={block.id} className="font-body font-bold text-xl text-cream tracking-tight pt-2">
+              <h3 key={block.id} className="font-heading font-medium text-xl text-cream tracking-tight pt-2">
                 {text}
               </h3>
             ) : (
-              <h2 key={block.id} className="font-body font-bold text-2xl sm:text-3xl text-cream tracking-tight pt-4">
+              <h2 key={block.id} className="font-heading font-medium text-2xl sm:text-3xl text-cream tracking-tight pt-4">
                 {text}
               </h2>
             )
@@ -40,7 +40,7 @@ export function BlockRenderer({ blocks, locale }: { blocks: PageBlock[]; locale:
           case 'image': {
             if (!block.url) return null
             return (
-              <div key={block.id} className="relative w-full aspect-[16/9] rounded-xl overflow-hidden border border-ds-border">
+              <div key={block.id} className="relative w-full aspect-[16/9] rounded-none overflow-hidden border border-ds-border">
                 <Image
                   src={block.url}
                   alt={block.alt[locale] || block.alt.en || ''}

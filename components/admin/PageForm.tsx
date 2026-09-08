@@ -102,18 +102,18 @@ export function PageForm({ initial, pageId }: { initial: PageFormValues; pageId?
 
       <BlockEditor blocks={values.blocks} onChange={(blocks) => update('blocks', blocks)} />
 
-      <div className="border border-ds-border rounded-xl p-4 space-y-3">
+      <div className="border border-ds-border rounded-none p-4 space-y-3">
         <h3 className="text-sm font-medium text-cream">Search engine listing</h3>
         <Input label="Page title" value={values.metaTitle} maxLength={70} onChange={(e) => update('metaTitle', e.target.value)} />
         <Input label="Meta description" value={values.metaDescription} maxLength={160} onChange={(e) => update('metaDescription', e.target.value)} />
       </div>
 
-      <div className="border border-ds-border rounded-xl p-4 space-y-3">
+      <div className="border border-ds-border rounded-none p-4 space-y-3">
         <div className="flex items-center gap-4">
           <select
             value={values.status}
             onChange={(e) => update('status', e.target.value as 'draft' | 'active')}
-            className="bg-surface border border-ds-border rounded-xl px-4 py-2.5 text-cream text-sm"
+            className="bg-surface border border-ds-border rounded-none px-4 py-2.5 text-cream text-sm"
           >
             <option value="draft">Draft</option>
             <option value="active">Published</option>

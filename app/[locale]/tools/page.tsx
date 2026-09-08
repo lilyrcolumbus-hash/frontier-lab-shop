@@ -25,7 +25,7 @@ export default function ToolsPage() {
             <Link key={tool.slug} href={`/tools/${tool.slug}`}>
               <Card hover className="h-full">
                 <CardBody className="text-center py-10">
-                  <div className={`inline-flex items-center justify-center w-16 h-16 rounded-2xl border ${tool.color} text-4xl mb-4`}>
+                  <div className={`inline-flex items-center justify-center w-16 h-16 rounded-none border ${tool.color} text-4xl mb-4`}>
                     {tool.icon}
                   </div>
                   <h2 className="font-heading text-xl font-semibold text-cream mb-2">

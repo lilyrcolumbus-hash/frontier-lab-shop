@@ -20,7 +20,7 @@ export default async function PackingSlipPage({ params }: { params: { id: string
     .join(', ')
 
   return (
-    <div className="bg-white text-black rounded-xl p-10 max-w-3xl mx-auto print:p-0 print:rounded-none">
+    <div className="bg-white text-black rounded-none p-10 max-w-3xl mx-auto print:p-0 print:rounded-none">
       <div className="print:hidden mb-6">
         <PrintButton />
       </div>

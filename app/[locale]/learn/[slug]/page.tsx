@@ -44,7 +44,7 @@ export default async function ArticlePage({ params }: PageProps) {
             <span className={`inline-block font-mono text-[10px] uppercase tracking-[0.25em] px-3 py-1 rounded-full border ${catColor} mb-3`}>
               {cat[lang]}
             </span>
-            <h1 className="font-body font-bold text-3xl sm:text-4xl tracking-tight text-cream-900 leading-tight">
+            <h1 className="font-heading font-medium text-3xl sm:text-4xl tracking-tight text-cream-900 leading-tight">
               {article.title[lang]}
             </h1>
           </div>
@@ -55,7 +55,7 @@ export default async function ArticlePage({ params }: PageProps) {
             <span className={`inline-block font-mono text-[10px] uppercase tracking-[0.25em] px-3 py-1 rounded-full border ${catColor} mb-4`}>
               {cat[lang]}
             </span>
-            <h1 className="font-body font-bold text-3xl sm:text-4xl tracking-tight text-cream leading-tight">
+            <h1 className="font-heading font-medium text-3xl sm:text-4xl tracking-tight text-cream leading-tight">
               {article.title[lang]}
             </h1>
           </div>
@@ -85,8 +85,8 @@ export default async function ArticlePage({ params }: PageProps) {
         </p>
 
         {/* Key Takeaways */}
-        <div className="bg-accent/8 border border-accent/20 rounded-2xl p-6 mb-12">
-          <h2 className="font-body font-bold text-base tracking-tight text-accent mb-4 flex items-center gap-2">
+        <div className="bg-accent/8 border border-accent/20 rounded-none p-6 mb-12">
+          <h2 className="font-heading font-medium text-base tracking-tight text-accent mb-4 flex items-center gap-2">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
               <path d="M9 11l3 3L22 4" /><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" />
             </svg>
@@ -108,7 +108,7 @@ export default async function ArticlePage({ params }: PageProps) {
         <div className="space-y-12">
           {article.sections.map((section, i) => (
             <section key={i}>
-              <h2 className="font-body font-bold text-2xl tracking-tight text-cream mb-4">
+              <h2 className="font-heading font-medium text-2xl tracking-tight text-cream mb-4">
                 {section.title[lang]}
               </h2>
               <p className="text-cream-muted leading-relaxed">

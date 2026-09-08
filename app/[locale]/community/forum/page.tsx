@@ -30,7 +30,7 @@ export default function ForumPage() {
           {CATEGORIES.map((cat) => (
             <div
               key={cat.key}
-              className="flex items-center gap-5 p-5 bg-elevated rounded-2xl border border-ds-border hover:border-accent/30 transition-colors cursor-pointer group"
+              className="flex items-center gap-5 p-5 bg-elevated rounded-none border border-ds-border hover:border-accent/30 transition-colors cursor-pointer group"
             >
               <span className="text-3xl flex-shrink-0">{cat.icon}</span>
               <div className="flex-1">

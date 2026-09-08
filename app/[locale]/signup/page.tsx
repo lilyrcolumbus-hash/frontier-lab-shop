@@ -71,7 +71,7 @@ export default function SignUpPage() {
           <h1 className="font-heading text-5xl font-bold text-cream mb-3">{t('signUp')}</h1>
         </div>
         <div className="max-w-md mx-auto px-4 py-16">
-          <div className="bg-elevated rounded-2xl border border-ds-border p-8 text-center space-y-2">
+          <div className="bg-elevated rounded-none border border-ds-border p-8 text-center space-y-2">
             <p className="text-accent">✓ {t('verificationSent')}</p>
             <Link href="/account" className="text-sm text-accent hover:text-accent-hover font-medium">
               {t('backToSignIn')}
@@ -90,7 +90,7 @@ export default function SignUpPage() {
       </div>
 
       <div className="max-w-md mx-auto px-4 py-16">
-        <form onSubmit={handleSubmit} className="bg-elevated rounded-2xl border border-ds-border p-8 space-y-5">
+        <form onSubmit={handleSubmit} className="bg-elevated rounded-none border border-ds-border p-8 space-y-5">
           <div className="space-y-4">
             <Input
               label={t('name')}
@@ -123,7 +123,7 @@ export default function SignUpPage() {
               type="checkbox"
               checked={subscribeToNewsletter}
               onChange={(e) => setSubscribeToNewsletter(e.target.checked)}
-              className="mt-0.5 rounded border-ds-border"
+              className="mt-0.5 rounded-none border-ds-border"
             />
             {locale === 'es'
               ? 'Quiero recibir novedades por correo (sin spam, puedo darme de baja cuando quiera).'

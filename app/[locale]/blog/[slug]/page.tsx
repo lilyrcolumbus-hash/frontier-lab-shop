@@ -55,7 +55,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string;
   return (
     <div className="pt-20 min-h-screen">
       <article className="max-w-3xl mx-auto px-4 sm:px-6 py-16">
-        <h1 className="font-body font-bold text-3xl sm:text-4xl tracking-tight text-cream">
+        <h1 className="font-heading font-medium text-3xl sm:text-4xl tracking-tight text-cream">
           {isSpanish ? post.titleEs : post.titleEn}
         </h1>
         {post.publishedAt && (
@@ -65,7 +65,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string;
         )}
 
         {post.coverImage && (
-          <div className="relative aspect-[16/9] rounded-xl overflow-hidden border border-ds-border my-8">
+          <div className="relative aspect-[16/9] rounded-none overflow-hidden border border-ds-border my-8">
             <Image src={post.coverImage} alt="" fill className="object-cover" sizes="(max-width: 768px) 100vw, 768px" />
           </div>
         )}

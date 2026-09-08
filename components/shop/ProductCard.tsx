@@ -68,11 +68,11 @@ export function ProductCard({ product }: ProductCardProps) {
       transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="flex flex-col h-full rounded-2xl border border-ds-border bg-surface shadow-sm hover:shadow-[0_24px_64px_-8px_rgba(61,110,69,0.35)] hover:border-accent/30 transition-all duration-500"
+      className="flex flex-col h-full rounded-none border border-ds-border bg-surface shadow-sm hover:shadow-[0_24px_64px_-8px_rgba(61,110,69,0.35)] hover:border-accent/30 transition-all duration-500"
     >
       <Link href={`/shop/${product.slug}`} className="flex flex-col flex-1">
         {/* Image */}
-        <div className="relative h-56 bg-elevated overflow-hidden flex-shrink-0 rounded-t-2xl">
+        <div className="relative h-56 bg-elevated overflow-hidden flex-shrink-0 rounded-none">
           {product.images[0] ? (
             <motion.img
               src={product.images[0]}

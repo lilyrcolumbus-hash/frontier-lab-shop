@@ -77,7 +77,7 @@ export function GrowJournal({ isAuthenticated, entries, onAddEntry, onUpdateStat
 
       {/* New entry form */}
       {showForm && (
-        <div className="bg-elevated rounded-2xl border border-ds-border p-6 animate-fade-in">
+        <div className="bg-elevated rounded-none border border-ds-border p-6 animate-fade-in">
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <Input
@@ -114,7 +114,7 @@ export function GrowJournal({ isAuthenticated, entries, onAddEntry, onUpdateStat
                 onChange={(e) => setForm({ ...form, notes: e.target.value })}
                 rows={3}
                 placeholder="Add notes..."
-                className="w-full bg-surface border border-ds-border rounded-xl px-4 py-3 text-cream placeholder:text-cream-muted/60 font-body text-base focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent resize-none"
+                className="w-full bg-surface border border-ds-border rounded-none px-4 py-3 text-cream placeholder:text-cream-muted/60 font-body text-base focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent resize-none"
               />
             </div>
             <div className="flex gap-3 justify-end">
@@ -134,7 +134,7 @@ export function GrowJournal({ isAuthenticated, entries, onAddEntry, onUpdateStat
       ) : (
         <div className="space-y-4">
           {entries.map((entry) => (
-            <div key={entry.id} className="bg-elevated rounded-2xl border border-ds-border p-6">
+            <div key={entry.id} className="bg-elevated rounded-none border border-ds-border p-6">
               <div className="flex items-start justify-between gap-4">
                 <div>
                   <h3 className="font-heading text-xl font-semibold text-cream">{entry.species}</h3>

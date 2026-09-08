@@ -28,7 +28,7 @@ export const CATEGORY_LABEL: Record<LearnCategory, { en: string; es: string }> =
 
 export const CATEGORY_COLOR: Record<LearnCategory, string> = {
   beginners:   'bg-accent/15 text-accent border-accent/20',
-  science:     'bg-lavender/15 text-lavender border-lavender/20',
+  science:     'bg-cream-muted/15 text-cream-muted border-cream-muted/20',
   cultivation: 'bg-moss/15 text-moss border-moss/20',
   wellness:    'bg-amber/15 text-amber border-amber/20',
   kitchen:     'bg-amber/15 text-amber border-amber/20',
@@ -36,7 +36,7 @@ export const CATEGORY_COLOR: Record<LearnCategory, string> = {
 
 export const CATEGORY_GRADIENT: Record<LearnCategory, string> = {
   beginners:   'from-accent/20 to-accent/5',
-  science:     'from-lavender/20 to-lavender/5',
+  science:     'from-cream-muted/20 to-cream-muted/5',
   cultivation: 'from-moss/20 to-moss/5',
   wellness:    'from-amber/20 to-amber/5',
   kitchen:     'from-amber/20 to-amber/5',

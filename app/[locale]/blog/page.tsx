@@ -33,7 +33,7 @@ export default async function BlogIndexPage({ params }: { params: { locale: stri
     <div className="pt-20 min-h-screen">
       <div className="border-b border-ds-border bg-surface py-16">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
-          <h1 className="font-body font-bold text-3xl sm:text-4xl tracking-tight text-cream">Blog</h1>
+          <h1 className="font-heading font-medium text-3xl sm:text-4xl tracking-tight text-cream">Blog</h1>
           <p className="mt-3 text-cream-muted">
             {isSpanish ? 'Notas del laboratorio y del cultivo.' : 'Notes from the lab and the grow room.'}
           </p>
@@ -50,7 +50,7 @@ export default async function BlogIndexPage({ params }: { params: { locale: stri
             {posts.map((post) => (
               <Link key={post.id} href={`/blog/${post.slug}`} className="group block">
                 {post.coverImage ? (
-                  <div className="relative aspect-[16/10] rounded-xl overflow-hidden border border-ds-border mb-4">
+                  <div className="relative aspect-[16/10] rounded-none overflow-hidden border border-ds-border mb-4">
                     <Image
                       src={post.coverImage}
                       alt={isSpanish ? post.titleEs : post.titleEn}
@@ -60,7 +60,7 @@ export default async function BlogIndexPage({ params }: { params: { locale: stri
                     />
                   </div>
                 ) : (
-                  <div className="aspect-[16/10] rounded-xl border border-dashed border-ds-border bg-elevated mb-4" />
+                  <div className="aspect-[16/10] rounded-none border border-dashed border-ds-border bg-elevated mb-4" />
                 )}
                 <h2 className="font-body font-semibold text-lg text-cream group-hover:text-accent transition-colors">
                   {isSpanish ? post.titleEs : post.titleEn}

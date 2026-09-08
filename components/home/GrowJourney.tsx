@@ -65,7 +65,7 @@ export function GrowJourney() {
             The Journey
             <div className="w-10 h-px bg-amber/30" />
           </div>
-          <h2 className="font-body font-bold text-3xl sm:text-4xl text-cream tracking-tight leading-tight">
+          <h2 className="font-heading font-medium text-3xl sm:text-4xl text-cream tracking-tight leading-tight">
             Spore to Table
           </h2>
           <p className="text-cream-muted mt-4 text-lg max-w-lg mx-auto leading-relaxed">
@@ -89,7 +89,7 @@ export function GrowJourney() {
                 </div>
               )}
 
-              <div className="relative overflow-hidden rounded-2xl border border-ds-border bg-bg transition-all duration-500 group-hover:border-amber/30 group-hover:-translate-y-1.5 group-hover:shadow-[0_20px_60px_rgba(0,0,0,0.4)]">
+              <div className="relative overflow-hidden rounded-none border border-ds-border bg-bg transition-all duration-500 group-hover:border-amber/30 group-hover:-translate-y-1.5 group-hover:shadow-[0_20px_60px_rgba(0,0,0,0.4)]">
                 {/* Photo */}
                 <div className="relative h-60 overflow-hidden">
                   <img
@@ -101,7 +101,7 @@ export function GrowJourney() {
                   <div className="absolute inset-0 bg-gradient-to-t from-bg/90 via-bg/20 to-transparent" />
 
                   {/* Step badge */}
-                  <div className="absolute top-4 left-4 w-9 h-9 rounded-xl glass-warm border border-amber/20 flex items-center justify-center">
+                  <div className="absolute top-4 left-4 w-9 h-9 rounded-none glass-warm border border-amber/20 flex items-center justify-center">
                     <span className="font-mono text-xs font-bold text-amber">{step.step}</span>
                   </div>
 

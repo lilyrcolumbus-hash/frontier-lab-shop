@@ -38,7 +38,7 @@ export default async function CustomPage({ params }: { params: { slug: string; l
     <div className="pt-20 min-h-screen">
       <div className="border-b border-ds-border bg-surface py-16">
         <div className="max-w-3xl mx-auto px-4 sm:px-6">
-          <h1 className="font-body font-bold text-3xl sm:text-4xl tracking-tight text-cream">{page.title}</h1>
+          <h1 className="font-heading font-medium text-3xl sm:text-4xl tracking-tight text-cream">{page.title}</h1>
         </div>
       </div>
 

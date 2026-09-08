@@ -26,7 +26,7 @@ interface Zone {
 
 const NETWORK_ERROR = 'Could not reach the server. Check your connection and try again.'
 const inputClass =
-  'px-3 py-2 rounded-lg border border-ds-border bg-bg text-sm text-cream placeholder:text-cream-muted/60'
+  'px-3 py-2 rounded-none border border-ds-border bg-bg text-sm text-cream placeholder:text-cream-muted/60'
 
 const toCents = (v: string) => (v.trim() === '' ? null : Math.round(Number(v) * 100))
 const toGrams = (v: string) => (v.trim() === '' ? null : Math.round(Number(v)))
@@ -87,18 +87,18 @@ export default function AdminShippingPage() {
 
   return (
     <div className="max-w-3xl">
-      <h1 className="font-body font-bold text-2xl text-cream mb-2">Shipping zones</h1>
+      <h1 className="font-heading font-medium text-2xl text-cream mb-2">Shipping zones</h1>
       <p className="text-sm text-cream-muted mb-6">
         A zone is a group of countries; each zone has its own rates, which can depend on the order
         total or its weight. With no zones defined, the flat rate in Settings is used instead.
       </p>
 
-      <form onSubmit={addZone} className="bg-surface border border-ds-border rounded-xl p-5 mb-6 space-y-3">
+      <form onSubmit={addZone} className="bg-surface border border-ds-border rounded-none p-5 mb-6 space-y-3">
         <h2 className="text-sm font-medium text-cream">Add a zone</h2>
         <div className="flex flex-wrap gap-2">
           <input required value={zoneName} onChange={(e) => setZoneName(e.target.value)} placeholder="United States" className={`${inputClass} flex-1 min-w-[180px]`} />
           <input required value={countries} onChange={(e) => setCountries(e.target.value)} placeholder="US, CA, MX" className={`${inputClass} flex-1 min-w-[160px]`} />
-          <button type="submit" disabled={busy} className="px-4 py-2 rounded-lg bg-cream text-surface text-sm font-semibold hover:bg-cream/90 disabled:opacity-50">
+          <button type="submit" disabled={busy} className="px-4 py-2 rounded-none bg-cream text-surface text-sm font-semibold hover:bg-cream/90 disabled:opacity-50">
             Add zone
           </button>
         </div>
@@ -109,7 +109,7 @@ export default function AdminShippingPage() {
       {zones === null ? (
         <ListState error={error} onRetry={reload} />
       ) : zones.length === 0 ? (
-        <div className="border border-ds-border rounded-xl bg-surface py-16 text-center text-cream-muted text-sm">
+        <div className="border border-ds-border rounded-none bg-surface py-16 text-center text-cream-muted text-sm">
           No zones yet — the flat rate from Settings applies to every order.
         </div>
       ) : (
@@ -161,7 +161,7 @@ function ZoneCard({
   }
 
   return (
-    <div className="border border-ds-border rounded-xl bg-surface p-5">
+    <div className="border border-ds-border rounded-none bg-surface p-5">
       <div className="flex items-start justify-between gap-3 mb-3">
         <div>
           <h3 className="font-semibold text-cream text-sm">{zone.name}</h3>
@@ -199,7 +199,7 @@ function ZoneCard({
         <input type="number" step="0.01" min="0" value={minSubtotal} onChange={(e) => setMinSubtotal(e.target.value)} placeholder="min $" className={`${inputClass} w-24`} />
         <input type="number" step="0.01" min="0" value={maxSubtotal} onChange={(e) => setMaxSubtotal(e.target.value)} placeholder="max $" className={`${inputClass} w-24`} />
         <input type="number" min="0" value={maxWeight} onChange={(e) => setMaxWeight(e.target.value)} placeholder="max g" className={`${inputClass} w-24`} />
-        <button type="submit" disabled={busy} className="px-3 py-2 rounded-lg border border-ds-border text-xs font-medium text-cream hover:bg-elevated disabled:opacity-50">
+        <button type="submit" disabled={busy} className="px-3 py-2 rounded-none border border-ds-border text-xs font-medium text-cream hover:bg-elevated disabled:opacity-50">
           Add rate
         </button>
       </form>

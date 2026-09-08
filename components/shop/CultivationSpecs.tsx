@@ -65,7 +65,7 @@ export function CultivationSpecs({ specs }: CultivationSpecsProps) {
   ]
 
   return (
-    <div ref={ref} className="rounded-2xl border border-ds-border overflow-hidden">
+    <div ref={ref} className="rounded-none border border-ds-border overflow-hidden">
       {/* Header */}
       <div className="flex items-center justify-between px-4 py-3 bg-elevated border-b border-ds-border">
         <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-cream-muted">{t('title')}</p>

@@ -3,7 +3,7 @@ import { PostForm } from '@/components/admin/PostForm'
 export default function NewPostPage() {
   return (
     <div>
-      <h1 className="font-body font-bold text-2xl text-cream mb-6">Add post</h1>
+      <h1 className="font-heading font-medium text-2xl text-cream mb-6">Add post</h1>
       <PostForm
         initial={{
           slug: '',

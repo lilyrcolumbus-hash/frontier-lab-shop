@@ -87,7 +87,7 @@ export function ProductGallery({ images, imageAlts, alt }: ProductGalleryProps) 
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.22, ease: 'easeOut' }}
-            className="relative aspect-square rounded-2xl border border-ds-border overflow-hidden bg-elevated"
+            className="relative aspect-square rounded-none border border-ds-border overflow-hidden bg-elevated"
           >
             <div className="absolute inset-0 bg-gradient-to-br from-surface via-elevated to-surface" />
             <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
@@ -115,7 +115,7 @@ export function ProductGallery({ images, imageAlts, alt }: ProductGalleryProps) 
               onClick={() => setActive(i)}
               aria-label={s.label}
               className={cn(
-                'flex-1 aspect-square rounded-xl border-2 transition-all duration-200 flex flex-col items-center justify-center gap-1 p-1',
+                'flex-1 aspect-square rounded-none border-2 transition-all duration-200 flex flex-col items-center justify-center gap-1 p-1',
                 active === i
                   ? 'border-accent bg-accent/8'
                   : 'border-ds-border bg-elevated hover:border-accent/30 hover:bg-elevated'
@@ -146,7 +146,7 @@ export function ProductGallery({ images, imageAlts, alt }: ProductGalleryProps) 
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.2 }}
-          className="relative aspect-square bg-elevated rounded-2xl overflow-hidden border border-ds-border"
+          className="relative aspect-square bg-elevated rounded-none overflow-hidden border border-ds-border"
         >
           <img
             src={images[active]}
@@ -181,7 +181,7 @@ export function ProductGallery({ images, imageAlts, alt }: ProductGalleryProps) 
               key={i}
               onClick={() => setActive(i)}
               className={cn(
-                'flex-shrink-0 w-16 h-16 rounded-xl overflow-hidden border-2 transition-all duration-200',
+                'flex-shrink-0 w-16 h-16 rounded-none overflow-hidden border-2 transition-all duration-200',
                 active === i ? 'border-accent' : 'border-ds-border hover:border-accent/50'
               )}
               aria-label={`View image ${i + 1}`}

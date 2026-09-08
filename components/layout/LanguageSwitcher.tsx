@@ -20,7 +20,7 @@ export function LanguageSwitcher({ className }: { className?: string }) {
       <button
         onClick={() => switchLocale('en')}
         className={cn(
-          'px-2 py-0.5 rounded transition-colors',
+          'px-2 py-0.5 rounded-none transition-colors',
           locale === 'en'
             ? 'text-cream'
             : 'text-cream-muted hover:text-cream'
@@ -33,7 +33,7 @@ export function LanguageSwitcher({ className }: { className?: string }) {
       <button
         onClick={() => switchLocale('es')}
         className={cn(
-          'px-2 py-0.5 rounded transition-colors',
+          'px-2 py-0.5 rounded-none transition-colors',
           locale === 'es'
             ? 'text-cream'
             : 'text-cream-muted hover:text-cream'

@@ -31,7 +31,7 @@ export function Card({ children, className, hover, glow, tilt = false, as: Tag =
   return (
     <Tag
       className={cn(
-        'bg-elevated rounded-2xl border border-ds-border shadow-card',
+        'bg-elevated rounded-none border border-ds-border shadow-card',
         hover && 'transition-all duration-300 hover:-translate-y-1 hover:border-accent/30 hover:shadow-glow-cyan cursor-pointer',
         glow === 'cyan' && 'shadow-glow-cyan border-accent/20',
         glow === 'violet' && 'shadow-glow-violet border-violet/20',

@@ -52,7 +52,7 @@ export function AcademyPreview() {
               <span className="w-4 h-px bg-violet" />
               Frontier Lab Academy
             </span>
-            <h2 className="font-body font-bold text-3xl sm:text-4xl text-cream tracking-tight">
+            <h2 className="font-heading font-medium text-3xl sm:text-4xl text-cream tracking-tight">
               {t('title')}
             </h2>
           </div>
@@ -71,7 +71,7 @@ export function AcademyPreview() {
         >
           {PREVIEW_ARTICLES.map((article) => (
             <Link key={article.slug} href={`/learn/${article.slug}`} className="group">
-              <div className="relative overflow-hidden rounded-2xl border border-ds-border bg-elevated h-full transition-all duration-500 hover:border-accent/25 hover:-translate-y-1.5">
+              <div className="relative overflow-hidden rounded-none border border-ds-border bg-elevated h-full transition-all duration-500 hover:border-accent/25 hover:-translate-y-1.5">
                 {/* Colored top line */}
                 <div className="h-px w-0 group-hover:w-full transition-all duration-500 bg-gradient-to-r from-accent via-violet to-gold" />
 

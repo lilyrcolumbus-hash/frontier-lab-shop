@@ -95,7 +95,7 @@ export function CollectionForm({ initial, collectionId }: { initial: CollectionF
         <div>
           <label className="block text-sm font-medium text-cream-muted mb-1.5">Description</label>
           <textarea
-            className="w-full bg-surface border border-ds-border rounded-xl px-4 py-3 text-cream text-sm min-h-24"
+            className="w-full bg-surface border border-ds-border rounded-none px-4 py-3 text-cream text-sm min-h-24"
             value={values.descriptionEn}
             onChange={(e) => update('descriptionEn', e.target.value)}
           />
@@ -104,7 +104,7 @@ export function CollectionForm({ initial, collectionId }: { initial: CollectionF
 
       <Input label="Image URL (optional)" value={values.image} onChange={(e) => update('image', e.target.value)} />
 
-      <div className="border border-ds-border rounded-xl p-4 space-y-3">
+      <div className="border border-ds-border rounded-none p-4 space-y-3">
         <div>
           <h3 className="text-sm font-medium text-cream">How products get in</h3>
           <p className="text-xs text-cream-muted/70 mt-1">
@@ -116,7 +116,7 @@ export function CollectionForm({ initial, collectionId }: { initial: CollectionF
         <select
           value={values.ruleField}
           onChange={(e) => update('ruleField', e.target.value as CollectionFormValues['ruleField'])}
-          className="w-full bg-surface border border-ds-border rounded-xl px-4 py-2.5 text-cream text-sm"
+          className="w-full bg-surface border border-ds-border rounded-none px-4 py-2.5 text-cream text-sm"
         >
           <option value="">Manual — I pick the products</option>
           <option value="category">Automatic — category is…</option>

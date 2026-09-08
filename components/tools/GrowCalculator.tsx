@@ -81,7 +81,7 @@ export function GrowCalculator() {
           <select
             value={species}
             onChange={(e) => setSpecies(e.target.value)}
-            className="w-full bg-surface border border-ds-border rounded-xl px-4 py-3 text-cream font-body text-base focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent"
+            className="w-full bg-surface border border-ds-border rounded-none px-4 py-3 text-cream font-body text-base focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent"
           >
             <option value="">Select species...</option>
             {SPECIES_OPTIONS.map((s) => (
@@ -96,7 +96,7 @@ export function GrowCalculator() {
           <select
             value={substrate}
             onChange={(e) => setSubstrate(e.target.value)}
-            className="w-full bg-surface border border-ds-border rounded-xl px-4 py-3 text-cream font-body text-base focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent"
+            className="w-full bg-surface border border-ds-border rounded-none px-4 py-3 text-cream font-body text-base focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent"
           >
             <option value="">Select substrate...</option>
             {SUBSTRATE_OPTIONS.map((s) => (
@@ -119,7 +119,7 @@ export function GrowCalculator() {
             />
           </div>
           <div className="pt-7">
-            <div className="flex rounded-xl border border-ds-border overflow-hidden">
+            <div className="flex rounded-none border border-ds-border overflow-hidden">
               {(['lbs', 'kg'] as const).map((u) => (
                 <button
                   key={u}
@@ -145,7 +145,7 @@ export function GrowCalculator() {
             />
           </div>
           <div className="pt-7">
-            <div className="flex rounded-xl border border-ds-border overflow-hidden">
+            <div className="flex rounded-none border border-ds-border overflow-hidden">
               {(['°F', '°C'] as const).map((u) => (
                 <button
                   key={u}
@@ -177,7 +177,7 @@ export function GrowCalculator() {
 
       {/* Results */}
       {result && (
-        <div className="bg-elevated rounded-2xl border border-ds-border p-6 space-y-5 animate-fade-in">
+        <div className="bg-elevated rounded-none border border-ds-border p-6 space-y-5 animate-fade-in">
           <h3 className="font-heading text-xl font-semibold text-cream">{t('results.title')}</h3>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -186,7 +186,7 @@ export function GrowCalculator() {
               { label: t('results.fruitingWindow'), value: result.fruitingWindow, icon: '🌱' },
               { label: t('results.expectedYield'), value: result.expectedYield, icon: '⚖️' },
             ].map((stat) => (
-              <div key={stat.label} className="bg-surface rounded-xl p-4 border border-ds-border">
+              <div key={stat.label} className="bg-surface rounded-none p-4 border border-ds-border">
                 <p className="text-2xl mb-1">{stat.icon}</p>
                 <p className="text-xs text-cream-muted uppercase tracking-wide mb-1">{stat.label}</p>
                 <p className="font-heading font-semibold text-cream">{stat.value}</p>

@@ -27,7 +27,7 @@ export default async function AdminCustomerDetailPage({ params }: { params: { em
   return (
     <div className="max-w-4xl">
       <div className="mb-6">
-        <h1 className="font-body font-bold text-2xl text-cream">{email}</h1>
+        <h1 className="font-heading font-medium text-2xl text-cream">{email}</h1>
         <p className="text-sm text-cream-muted">
           {orders.length} order{orders.length === 1 ? '' : 's'} · {formatPrice(totalSpent)} lifetime value ·{' '}
           {formatPrice(averageOrder)} average order
@@ -43,7 +43,7 @@ export default async function AdminCustomerDetailPage({ params }: { params: { em
         )}
       </div>
 
-      <div className="bg-surface border border-ds-border rounded-xl overflow-hidden">
+      <div className="bg-surface border border-ds-border rounded-none overflow-hidden">
         <table className="w-full text-sm">
           <thead className="bg-elevated text-cream-muted">
             <tr>

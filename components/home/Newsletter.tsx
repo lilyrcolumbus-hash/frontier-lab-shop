@@ -37,7 +37,7 @@ export function Newsletter() {
       <ScrollReveal className="relative max-w-2xl mx-auto px-4 sm:px-6 text-center">
         <div className="w-12 h-px bg-amber/30 mx-auto mb-8" />
 
-        <h2 className="font-body font-bold text-3xl sm:text-4xl text-cream tracking-tight mb-4">
+        <h2 className="font-heading font-medium text-3xl sm:text-4xl text-cream tracking-tight mb-4">
           {t('title')}
         </h2>
         <p className="italic text-cream-muted text-lg mb-10 leading-relaxed">
@@ -51,9 +51,9 @@ export function Newsletter() {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, ease: 'backOut' }}
-              className="bg-amber/10 border border-amber/25 rounded-2xl py-8 px-10 glow-amber"
+              className="bg-amber/10 border border-amber/25 rounded-none py-8 px-10 glow-amber"
             >
-              <p className="text-amber font-body font-bold text-xl">✓ {t('success')}</p>
+              <p className="text-amber font-heading font-medium text-xl">✓ {t('success')}</p>
               <p className="text-cream-muted text-sm mt-2 font-mono">Welcome to the forest network.</p>
             </motion.div>
           ) : (
@@ -71,7 +71,7 @@ export function Newsletter() {
                 placeholder={t('placeholder')}
                 required
                 aria-label="Email address"
-                className="flex-1 bg-elevated border border-ds-border rounded-xl px-5 py-3.5 text-cream placeholder:text-cream-muted/40 font-body text-base focus:outline-none focus:ring-2 focus:ring-amber/35 focus:border-amber/40 transition-all duration-200"
+                className="flex-1 bg-elevated border border-ds-border rounded-none px-5 py-3.5 text-cream placeholder:text-cream-muted/40 font-body text-base focus:outline-none focus:ring-2 focus:ring-amber/35 focus:border-amber/40 transition-all duration-200"
               />
               <Button
                 type="submit"
