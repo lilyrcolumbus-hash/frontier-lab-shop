@@ -623,3 +623,55 @@ model Review {
   @@index([storeId])
   @@map("reviews")
 }
+
+// ── MCP connector (claude.ai custom connector) ──────────────────────────────────────────────
+// A minimal OAuth 2.1 (authorization code + PKCE) authorization server so claude.ai can connect
+// to /api/mcp with read/write access to the admin. Single-tenant on purpose: the only identity
+// that can ever authorize is a real Supabase login that is already a StoreMember — this is not
+// a general-purpose OAuth provider, just enough of one to satisfy the MCP connector handshake.
+
+// Registered once, automatically, the first time claude.ai adds the connector (RFC 7591 Dynamic
+// Client Registration). Knowing a client_id grants nothing by itself — /mcp/authorize still
+// requires a real login before any code is issued.
+model McpClient {
+  id           String   @id @default(cuid())
+  redirectUris String[]
+  name         String   @default("")
+  createdAt    DateTime @default(now())
+
+  @@map("mcp_clients")
+}
+
+// A one-time-use code, alive for ~60s between /mcp/authorize (mints it, after login + consent)
+// and /api/mcp/token (redeems it). storeMemberId is a plain string, same convention as
+// Order.userId — the identity it points at lives in Supabase Auth, not in a Prisma relation.
+model McpAuthCode {
+  id                  String   @id @default(cuid())
+  code                String   @unique
+  clientId            String
+  storeMemberId       String
+  redirectUri         String
+  codeChallenge        String
+  codeChallengeMethod String   @default("S256")
+  expiresAt           DateTime
+  createdAt           DateTime @default(now())
+
+  @@map("mcp_auth_codes")
+}
+
+// Access + refresh token pair for one connector session. Only the SHA-256 hash is ever stored —
+// same principle as any other credential in this project — so a database read alone can never
+// produce a usable bearer token.
+model McpToken {
+  id               String   @id @default(cuid())
+  accessTokenHash  String   @unique
+  refreshTokenHash String   @unique
+  clientId         String
+  storeMemberId    String
+  accessExpiresAt  DateTime
+  refreshExpiresAt DateTime
+  createdAt        DateTime @default(now())
+
+  @@index([storeMemberId])
+  @@map("mcp_tokens")
+}

@@ -11,11 +11,16 @@ const intlMiddleware = createIntlMiddleware({
 })
 
 export default async function middleware(request: NextRequest) {
-  // /admin is an internal tool, not locale-prefixed customer content — skip next-intl's
-  // locale routing for it, but still refresh the Supabase session below.
+  // /admin and the MCP connector's login/consent page are internal tools, not locale-prefixed
+  // customer content — skip next-intl's locale routing for them, but still refresh the Supabase
+  // session below.
   const { pathname } = request.nextUrl
-  const isAdminRoute = pathname.startsWith('/admin') || pathname.startsWith('/api/admin')
-  const response = isAdminRoute ? NextResponse.next() : intlMiddleware(request)
+  const isInternalRoute =
+    pathname.startsWith('/admin') ||
+    pathname.startsWith('/api/admin') ||
+    pathname.startsWith('/mcp') ||
+    pathname.startsWith('/api/mcp')
+  const response = isInternalRoute ? NextResponse.next() : intlMiddleware(request)
 
   // Refresh the Supabase session cookie on every navigation — required by @supabase/ssr
   // so client/server components always see a valid, non-expired session.
@@ -41,9 +46,13 @@ export default async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  // The admin API is matched explicitly on top of the page matcher. Without it those routes
-  // refreshed the Supabase session themselves, in a context that cannot write cookies back:
-  // the refresh token rotated at Supabase but the browser kept the spent one, so every later
-  // refresh failed and auth-js retried with backoff — ~45s per call, which timed the admin out.
-  matcher: ['/((?!api|auth|_next|_vercel|.*\\..*).*)', '/api/admin/:path*'],
+  // The admin API, and the one MCP route that reads the Supabase session cookie
+  // (/api/mcp/authorize — the code-minting step behind the login+consent page), are matched
+  // explicitly on top of the page matcher. Without it those routes refresh the Supabase session
+  // themselves, in a context that cannot write cookies back: the refresh token rotates at
+  // Supabase but the browser keeps the spent one, so every later refresh fails and auth-js
+  // retries with backoff — ~45s per call, which timed the admin out (Session 29). The rest of
+  // /api/mcp/* (register, token, and the MCP endpoint itself) authenticates purely via its own
+  // bearer tokens and never touches this cookie, so it is deliberately left out.
+  matcher: ['/((?!api|auth|_next|_vercel|.*\\..*).*)', '/api/admin/:path*', '/api/mcp/authorize/:path*'],
 }
