@@ -46,7 +46,10 @@ const config: Config = {
       },
       fontFamily: {
         display:  ['var(--font-bebas)', 'sans-serif'], // prohibida, no usar en componentes nuevos
-        heading:  ['var(--font-fraunces)', 'serif'], // titulares, nombres de producto, frases de una línea
+        // Reverted from Fraunces (Session 43) — la usuaria vio la diferencia real y no le gustó.
+        // Todo el sitio queda en Inter (cuerpo y titulares) + Space Mono (utilidad), sin fuente
+        // de display separada.
+        heading:  ['var(--font-inter)', 'sans-serif'],
         body:     ['var(--font-inter)', 'sans-serif'],
         accent:   ['var(--font-cormorant)', 'serif'], // prohibida, no usar en componentes nuevos
         mono:     ['var(--font-space-mono)', 'monospace'],

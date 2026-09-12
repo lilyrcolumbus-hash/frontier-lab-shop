@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Bebas_Neue, Fraunces, Inter, Cormorant_Garamond, Space_Mono } from 'next/font/google'
+import { Bebas_Neue, Inter, Cormorant_Garamond, Space_Mono } from 'next/font/google'
 import { getLocale } from 'next-intl/server'
 import { SITE_URL } from '@/lib/site-url'
 import './globals.css'
@@ -8,17 +8,6 @@ const bebasNeue = Bebas_Neue({
   weight: '400',
   subsets: ['latin'],
   variable: '--font-bebas',
-  display: 'swap',
-})
-
-// "Corte antiguo, montaje moderno" — old-style serif with a wonky, hand-set edge for headlines,
-// product names and one-line copy. Replaces Playfair as the display face (approved 2026-09-08).
-// Weight kept to 400-500: the wonk carries the personality, not a heavy weight.
-const fraunces = Fraunces({
-  weight: ['400', '500'],
-  style: ['normal', 'italic'],
-  subsets: ['latin'],
-  variable: '--font-fraunces',
   display: 'swap',
 })
 
@@ -65,7 +54,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   return (
     <html
       lang={locale}
-      className={`${bebasNeue.variable} ${fraunces.variable} ${inter.variable} ${cormorantGaramond.variable} ${spaceMono.variable}`}
+      className={`${bebasNeue.variable} ${inter.variable} ${cormorantGaramond.variable} ${spaceMono.variable}`}
     >
       <body className="bg-bg text-cream font-body antialiased">
         {children}
