@@ -68,7 +68,6 @@
 /* ─── FONT UTILITIES ─── */
 @layer utilities {
   .font-display   { font-family: var(--font-bebas), sans-serif; }
-  .font-heading   { font-family: var(--font-playfair), serif; }
   .font-mono-lab  { font-family: var(--font-space-mono), monospace; }
   .font-accent    { font-family: var(--font-cormorant), serif; }
 }
