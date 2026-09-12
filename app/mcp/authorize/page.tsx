@@ -2,7 +2,7 @@
 
 import { Suspense, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
-import { useSupabaseUser } from '@/components/providers/AuthProvider'
+import { AuthProvider, useSupabaseUser } from '@/components/providers/AuthProvider'
 import { createClient } from '@/lib/supabase/client'
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
@@ -114,10 +114,16 @@ function AuthorizeInner() {
 
 export default function McpAuthorizePage() {
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 bg-bg">
-      <Suspense fallback={null}>
-        <AuthorizeInner />
-      </Suspense>
-    </div>
+    // This route lives outside app/[locale], the only place <AuthProvider> is normally mounted
+    // (app/[locale]/layout.tsx) — without its own provider here, useSupabaseUser() falls back to
+    // the context's static default ({ user: null, loading: true }) forever, and the page renders
+    // a permanent blank screen since `loading` never becomes false.
+    <AuthProvider>
+      <div className="min-h-screen flex items-center justify-center px-4 bg-bg">
+        <Suspense fallback={null}>
+          <AuthorizeInner />
+        </Suspense>
+      </div>
+    </AuthProvider>
   )
 }
