@@ -13,7 +13,9 @@ const nextConfig = {
     ],
   },
   // TEMP DEBUG ONLY — unminified prod build to decode the #418/#423 hydration stack trace.
-  // Revert before any deploy.
+  // Revert before any deploy. swcMinify is the one that actually matters in Next 14 (webpack's
+  // own optimization.minimize is a no-op here since Next replaces Terser with its SWC minifier).
+  swcMinify: false,
   webpack(config) {
     config.optimization.minimize = false
     return config
