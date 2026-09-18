@@ -63,6 +63,23 @@ function VerifyBanner() {
   )
 }
 
+function AccountRedirect() {
+  // /admin sends unauthenticated visitors here with ?next=/admin (it has no login form of its
+  // own — it borrows this page's). /admin is outside app/[locale] on purpose, so this has to be
+  // a real navigation, not next-intl's router, which would wrongly prefix it with the locale.
+  const searchParams = useSearchParams()
+  const { user } = useSupabaseUser()
+  const next = searchParams.get('next')
+
+  useEffect(() => {
+    if (user && next && next.startsWith('/admin')) {
+      window.location.href = next
+    }
+  }, [user, next])
+
+  return null
+}
+
 export default function AccountPage() {
   const t = useTranslations('account')
   const locale = useLocale()
@@ -110,6 +127,10 @@ export default function AccountPage() {
   if (user) {
     return (
       <div className="pt-20 min-h-screen">
+        <Suspense fallback={null}>
+          <AccountRedirect />
+        </Suspense>
+
         <div className="bg-surface border-b border-ds-border py-16 text-center">
           <h1 className="font-heading text-5xl font-bold text-cream mb-3">{t('title')}</h1>
           <p className="text-cream-muted">

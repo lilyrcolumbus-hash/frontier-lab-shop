@@ -7,7 +7,9 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   const admin = await requireStoreAdmin()
 
   if (!admin) {
-    redirect('/account')
+    // Without ?next, /account has no idea she was trying to reach /admin — she'd sign in
+    // successfully and land on the plain customer account page instead of the panel.
+    redirect('/account?next=/admin')
   }
 
   return (
