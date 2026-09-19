@@ -8,6 +8,8 @@ const nextConfig = {
     remotePatterns: [
       { protocol: 'https', hostname: 'res.cloudinary.com' },
       { protocol: 'https', hostname: 'drzwclnecktguodpokir.supabase.co', pathname: '/storage/v1/object/public/**' },
+      // FL Admin — where the new admin panel uploads product photos.
+      { protocol: 'https', hostname: 'fnvwfceztrxvtahqkxff.supabase.co', pathname: '/storage/v1/object/public/**' },
       { protocol: 'https', hostname: 'cdn.sanity.io' },
       { protocol: 'https', hostname: 'images.unsplash.com' },
     ],

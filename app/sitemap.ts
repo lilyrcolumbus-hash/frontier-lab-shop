@@ -1,5 +1,6 @@
 import type { MetadataRoute } from 'next'
-import { prisma } from '@/lib/prisma'
+import { listProductSlugs } from '@/lib/fl/products'
+import { listSpeciesSlugs } from '@/lib/fl/species'
 import { SITE_URL, localizedPath } from '@/lib/site-url'
 
 // The catalog is edited from /admin, so the sitemap is generated per request rather than
@@ -31,13 +32,13 @@ function entry(path: string, lastModified?: Date): MetadataRoute.Sitemap[number]
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const [products, species] = await Promise.all([
-    prisma.product.findMany({ where: { status: 'active' }, select: { slug: true, updatedAt: true } }),
-    prisma.species.findMany({ select: { slug: true, updatedAt: true } }),
+    listProductSlugs(),
+    listSpeciesSlugs(),
   ])
 
   return [
     ...STATIC_PATHS.map((path) => entry(path)),
-    ...products.map((p) => entry(`/shop/${p.slug}`, p.updatedAt)),
-    ...species.map((s) => entry(`/encyclopedia/${s.slug}`, s.updatedAt)),
+    ...products.map((p) => entry(`/shop/${p.slug}`, new Date(p.updated_at))),
+    ...species.map((s) => entry(`/encyclopedia/${s.slug}`, new Date(s.updated_at))),
   ]
 }

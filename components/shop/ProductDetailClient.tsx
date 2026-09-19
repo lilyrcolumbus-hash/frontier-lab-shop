@@ -167,7 +167,7 @@ export function ProductDetailClient({ product }: { product: Product }) {
                     className="px-4 py-3 text-cream-muted hover:text-cream hover:bg-elevated transition-colors text-lg"
                   >+</button>
                 </div>
-                <span className="text-sm text-cream-muted">{selectedVariant.stock} in stock</span>
+                {selectedVariant.stock !== null && <span className="text-sm text-cream-muted">{selectedVariant.stock} in stock</span>}
               </div>
             </div>
 

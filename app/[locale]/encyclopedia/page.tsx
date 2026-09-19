@@ -2,8 +2,7 @@ import { setRequestLocale } from 'next-intl/server'
 import { getTranslations } from 'next-intl/server'
 import { EncyclopediaBrowser } from '@/components/encyclopedia/EncyclopediaBrowser'
 import { VideoMoment } from '@/components/ui/VideoMoment'
-import { prisma } from '@/lib/prisma'
-import { toSpeciesData } from '@/lib/species-mappers'
+import { listSpecies } from '@/lib/fl/species'
 
 // Reads live from the DB, editable via /admin — must not be frozen at build time.
 export const dynamic = 'force-dynamic'
@@ -12,8 +11,7 @@ export default async function EncyclopediaPage({ params }: { params: { locale: s
   setRequestLocale(params.locale)
   const t = await getTranslations('encyclopedia')
 
-  const rows = await prisma.species.findMany({ orderBy: { commonName: 'asc' } })
-  const speciesList = rows.map(toSpeciesData)
+  const speciesList = await listSpecies()
 
   return (
     <div className="pt-20 min-h-screen">

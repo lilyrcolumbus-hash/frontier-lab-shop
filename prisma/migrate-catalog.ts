@@ -132,7 +132,8 @@ async function main() {
             storeId: store.id,
             name: v.name,
             price: v.price,
-            stock: v.stock,
+            // The old Prisma column can't hold "not tracked"; that only exists in FL Admin.
+            stock: v.stock ?? 0,
             sku: v.sku,
           })),
         },

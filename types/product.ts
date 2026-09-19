@@ -2,7 +2,8 @@ export interface ProductVariant {
   id: string
   name: string
   price: number
-  stock: number
+  /** null = not counted (always sells); a number is a real count. */
+  stock: number | null
   sku: string
 }
 
