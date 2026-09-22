@@ -10,6 +10,33 @@ const intlMiddleware = createIntlMiddleware({
   localeDetection: true,
 })
 
+/**
+ * Temporary full-site outage — owner's call, 2026-09-22 (myfrontierlab.com's domain got
+ * suspended by the registrar). Every customer-facing page and write endpoint answers 503
+ * while it's on; /admin, /api/admin and the MCP connector are left alone so the owner can
+ * keep managing the store. Set back to false (or delete this block) to reopen the site —
+ * nothing else about the app changes.
+ */
+const MAINTENANCE_MODE = true
+
+function maintenanceResponse(request: NextRequest): NextResponse {
+  if (request.nextUrl.pathname.startsWith('/api/')) {
+    return NextResponse.json(
+      { error: 'temporarily_unavailable' },
+      { status: 503, headers: { 'Retry-After': '3600' } }
+    )
+  }
+  return new NextResponse(
+    `<!doctype html><html lang="en"><head><meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Frontier Lab</title></head>
+<body style="margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#F6F5F1;color:#161513;font-family:system-ui,sans-serif;">
+<p style="max-width:26rem;text-align:center;padding:0 1.5rem;line-height:1.5;">We're offline for maintenance right now. Please check back soon.</p>
+</body></html>`,
+    { status: 503, headers: { 'Content-Type': 'text/html; charset=utf-8', 'Retry-After': '3600' } }
+  )
+}
+
 export default async function middleware(request: NextRequest) {
   // /admin and the MCP connector's login/consent page are internal tools, not locale-prefixed
   // customer content — skip next-intl's locale routing for them, but still refresh the Supabase
@@ -20,6 +47,11 @@ export default async function middleware(request: NextRequest) {
     pathname.startsWith('/api/admin') ||
     pathname.startsWith('/mcp') ||
     pathname.startsWith('/api/mcp')
+
+  if (MAINTENANCE_MODE && !isInternalRoute) {
+    return maintenanceResponse(request)
+  }
+
   const response = isInternalRoute ? NextResponse.next() : intlMiddleware(request)
 
   // Refresh the Supabase session cookie on every navigation — required by @supabase/ssr
@@ -54,5 +86,17 @@ export const config = {
   // retries with backoff — ~45s per call, which timed the admin out (Session 29). The rest of
   // /api/mcp/* (register, token, and the MCP endpoint itself) authenticates purely via its own
   // bearer tokens and never touches this cookie, so it is deliberately left out.
-  matcher: ['/((?!api|auth|_next|_vercel|.*\\..*).*)', '/api/admin/:path*', '/api/mcp/authorize/:path*'],
+  matcher: [
+    '/((?!api|auth|_next|_vercel|.*\\..*).*)',
+    '/api/admin/:path*',
+    '/api/mcp/authorize/:path*',
+    // Customer-facing write endpoints — added for the maintenance outage above so a visitor
+    // can't buy or write anything while the pages are down, even by calling the API directly.
+    // /api/stripe/webhook is deliberately left out: harmless to keep answering Stripe with no
+    // storefront reachable, and safer than risking a missed event.
+    '/api/checkout/:path*',
+    '/api/newsletter/:path*',
+    '/api/reviews/:path*',
+    '/api/account/:path*',
+  ],
 }
