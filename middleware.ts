@@ -17,7 +17,7 @@ const intlMiddleware = createIntlMiddleware({
  * keep managing the store. Set back to false (or delete this block) to reopen the site —
  * nothing else about the app changes.
  */
-const MAINTENANCE_MODE = true
+const MAINTENANCE_MODE = false
 
 function maintenanceResponse(request: NextRequest): NextResponse {
   if (request.nextUrl.pathname.startsWith('/api/')) {

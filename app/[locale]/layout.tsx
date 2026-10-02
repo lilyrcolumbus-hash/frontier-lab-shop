@@ -50,6 +50,9 @@ export default async function LocaleLayout({
           <GlowCursor />
           <PageTransition />
           <div className="flex flex-col min-h-screen">
+            <div className="bg-cream text-bg text-center text-xs sm:text-sm py-2 px-4 relative z-50">
+              Portfolio demo project — checkout is disabled, no real orders are processed.
+            </div>
             <Header />
             <main className="flex-1">{children}</main>
             <Footer />
