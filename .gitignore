@@ -10,3 +10,6 @@ out/
 prisma/*.db
 .vercel
 .env*
+
+# internal operating notes — not for public visibility
+CLAUDE.md
