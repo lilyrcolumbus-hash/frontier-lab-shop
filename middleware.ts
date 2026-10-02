@@ -42,11 +42,14 @@ export default async function middleware(request: NextRequest) {
   // customer content — skip next-intl's locale routing for them, but still refresh the Supabase
   // session below.
   const { pathname } = request.nextUrl
-  const isInternalRoute =
-    pathname.startsWith('/admin') ||
-    pathname.startsWith('/api/admin') ||
-    pathname.startsWith('/mcp') ||
-    pathname.startsWith('/api/mcp')
+  // Any /api/* route is never locale-prefixed content, so it must never reach intlMiddleware —
+  // that includes /api/checkout, /api/newsletter, /api/reviews and /api/account, which the
+  // maintenance-mode matcher below started invoking the middleware function for (Session 47)
+  // without ever being added here. While MAINTENANCE_MODE was on this was masked (those paths
+  // got the maintenance response before reaching this check at all); turning it off exposed it:
+  // every one of those routes was being routed through next-intl's page-locale logic instead of
+  // passing straight through, and came back 404.
+  const isInternalRoute = pathname.startsWith('/admin') || pathname.startsWith('/api') || pathname.startsWith('/mcp')
 
   if (MAINTENANCE_MODE && !isInternalRoute) {
     return maintenanceResponse(request)
