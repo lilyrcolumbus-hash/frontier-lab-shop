@@ -95,12 +95,12 @@
       "ctaSecondary": "Shop Now"
     },
     "trust": {
-      "growersValue": "350K+",
-      "growersLabel": "Active Growers",
+      "growersValue": "EN · ES",
+      "growersLabel": "Bilingual Store",
       "labValue": "Own Lab",
       "labLabel": "Sterile, Lab-Grade Process",
-      "speciesValue": "50+",
-      "speciesLabel": "Species in Database",
+      "speciesValue": "8",
+      "speciesLabel": "Species in the Encyclopedia",
       "guaranteeValue": "30-day",
       "guaranteeLabel": "Growth Guarantee"
     },
@@ -119,8 +119,8 @@
       "viewAll": "View All Guides →"
     },
     "community": {
-      "title": "The Growers Community",
-      "subtitle": "Real grows from real growers around the world.",
+      "title": "Photo Gallery",
+      "subtitle": "A look at the species we grow.",
       "cta": "Share Your Grow"
     },
     "newsletter": {
@@ -390,7 +390,7 @@
     "resetError": "Something went wrong. Try again."
   },
   "footer": {
-    "tagline": "Wild Genetics. Lab Verified.",
+    "tagline": "Wild Genetics. Grown in Our Lab.",
     "shop": {
       "title": "Shop",
       "kits": "Grow Kits",

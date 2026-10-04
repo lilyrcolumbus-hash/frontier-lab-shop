@@ -102,14 +102,6 @@ export function ProductDetailClient({ product }: { product: Product }) {
               )}
 
               {/* Rating placeholder */}
-              <div className="flex items-center gap-2 mt-2">
-                <div className="flex">
-                  {[1, 2, 3, 4, 5].map((i) => (
-                    <span key={i} className="text-warning text-sm">★</span>
-                  ))}
-                </div>
-                <span className="text-sm text-cream-muted">4.9 (127 {t('reviews')})</span>
-              </div>
             </div>
 
             {/* Price */}

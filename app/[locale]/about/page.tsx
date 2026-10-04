@@ -12,7 +12,7 @@ type Lang = 'en' | 'es'
 
 const SECTIONS: { title: Record<Lang, string>; body: Record<Lang, string> }[] = [
   {
-    title: { en: 'Wild Genetics. Lab Verified.', es: 'Genética Silvestre. Verificado en Laboratorio.' },
+    title: { en: 'Wild Genetics. Grown in Our Lab.', es: 'Genética Silvestre. Cultivada en Nuestro Laboratorio.' },
     body: {
       en: "Frontier Lab started with a simple frustration: most mushroom genetics sold online are inconsistent, and most grow instructions are written for someone who's already an expert. So we built a real laboratory — sealed, humidity-controlled growing rooms, professional-grade equipment, and sterile technique at every transfer — held to the standard of precision the word 'laboratory' is supposed to mean. What ships is exactly what we say it is.",
       es: 'Frontier Lab nació de una frustración simple: la mayoría de la genética de hongos que se vende en línea es inconsistente, y la mayoría de las instrucciones de cultivo están escritas para alguien que ya es experto. Por eso construimos un laboratorio real — cuartos de cultivo sellados y con control de humedad, equipo de grado profesional, y técnica estéril en cada transferencia — con el estándar de precisión que la palabra "laboratorio" debería significar. Lo que enviamos es exactamente lo que decimos que es.',

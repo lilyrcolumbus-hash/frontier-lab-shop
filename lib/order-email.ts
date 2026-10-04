@@ -72,7 +72,7 @@ function buildHtml(order: OrderEmailInput, copy: ResolvedTemplate): string {
       <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;background:#F8F9F8;border:1px solid #D2D8D2;">
         <tr><td style="background:#1C2018;padding:20px 24px;">
           <div style="color:#F4F1EA;font-size:18px;letter-spacing:0.18em;font-weight:700;">${escapeHtml(order.storeName.toUpperCase())}</div>
-          <div style="color:#9E6820;font-size:11px;letter-spacing:0.22em;margin-top:6px;text-transform:uppercase;">Wild Genetics. Lab Verified.</div>
+          <div style="color:#9E6820;font-size:11px;letter-spacing:0.22em;margin-top:6px;text-transform:uppercase;">Wild Genetics. Grown in Our Lab.</div>
         </td></tr>
 
         <tr><td style="padding:28px 24px 8px;">

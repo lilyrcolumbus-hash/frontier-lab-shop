@@ -34,7 +34,7 @@ const spaceMono = Space_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Frontier Lab — Wild Genetics. Lab Verified.',
+    default: 'Frontier Lab — Wild Genetics. Grown in Our Lab.',
     template: '%s | Frontier Lab',
   },
   description:

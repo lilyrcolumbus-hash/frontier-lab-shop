@@ -95,17 +95,7 @@ export function Hero() {
 
             {/* Social proof */}
             <motion.div {...fadeUp(0.62)} className="flex items-center gap-5 pt-1">
-              <div className="flex items-center gap-0.5">
-                {[1,2,3,4,5].map((i) => (
-                  <svg key={i} width="14" height="14" viewBox="0 0 24 24" fill="currentColor" className="text-white/55">
-                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-                  </svg>
-                ))}
-              </div>
-              <p className="text-sm text-white/38">
-                <span className="text-white/75 font-medium">350,000+</span>{' '}
-                growers worldwide
-              </p>
+              <p className="text-sm text-white/38">Wild genetics, cultured in our own lab</p>
             </motion.div>
           </div>
 
@@ -130,14 +120,6 @@ export function Hero() {
                 </p>
                 <p className="text-white text-xl font-semibold tracking-tight">Lion's Mane</p>
                 <p className="text-white/32 text-sm italic mt-0.5">Hericium erinaceus</p>
-              </div>
-              {/* Rating badge */}
-              <div
-                className="absolute top-5 right-5 rounded-none px-4 py-2.5 border border-white/8"
-                style={{ background: 'rgba(255,255,255,0.06)', backdropFilter: 'blur(12px)' }}
-              >
-                <p className="text-white/35 text-[10px] font-mono uppercase tracking-wider">Rated</p>
-                <p className="text-white text-lg font-bold leading-tight mt-0.5">4.9 ★</p>
               </div>
             </div>
 

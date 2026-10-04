@@ -38,7 +38,6 @@ export default function GalleryPage() {
               <div className="absolute inset-0 bg-bg/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center gap-1 p-4 text-center">
                 <span className="text-xs font-medium text-moss uppercase tracking-wider">{photo.species}</span>
                 <span className="text-sm font-body text-cream">{photo.alt}</span>
-                <span className="text-xs text-cream-muted">{photo.user}</span>
               </div>
             </div>
           ))}

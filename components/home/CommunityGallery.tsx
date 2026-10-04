@@ -68,7 +68,6 @@ export function CommunityGallery() {
               <div className="absolute inset-0 bg-bg/75 opacity-0 group-hover:opacity-100 transition-opacity duration-400 flex flex-col items-center justify-center gap-1.5 p-4 text-center">
                 <span className="text-xs font-mono text-accent uppercase tracking-widest">{item.species}</span>
                 <span className="text-sm font-body font-medium text-cream">{item.alt}</span>
-                <span className="text-xs text-cream-muted font-mono">{item.user}</span>
               </div>
 
               {/* Bottom glow line on hover */}

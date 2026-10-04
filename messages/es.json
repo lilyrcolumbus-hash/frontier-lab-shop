@@ -95,12 +95,12 @@
       "ctaSecondary": "Ir a la Tienda"
     },
     "trust": {
-      "growersValue": "350K+",
-      "growersLabel": "Cultivadores Activos",
+      "growersValue": "EN · ES",
+      "growersLabel": "Tienda Bilingüe",
       "labValue": "Laboratorio Propio",
       "labLabel": "Proceso Estéril de Nivel Laboratorio",
-      "speciesValue": "50+",
-      "speciesLabel": "Especies en la Base de Datos",
+      "speciesValue": "8",
+      "speciesLabel": "Especies en la Enciclopedia",
       "guaranteeValue": "30 días",
       "guaranteeLabel": "Garantía de Cultivo"
     },
@@ -119,8 +119,8 @@
       "viewAll": "Ver Todas las Guías →"
     },
     "community": {
-      "title": "La Comunidad de Cultivadores",
-      "subtitle": "Cultivos reales de cultivadores reales de todo el mundo.",
+      "title": "Galería de Fotos",
+      "subtitle": "Un vistazo a las especies que cultivamos.",
       "cta": "Comparte Tu Cultivo"
     },
     "newsletter": {
@@ -390,7 +390,7 @@
     "resetError": "Algo salió mal. Intentá de nuevo."
   },
   "footer": {
-    "tagline": "Genética Silvestre. Verificado en Laboratorio.",
+    "tagline": "Genética Silvestre. Cultivada en Nuestro Laboratorio.",
     "shop": {
       "title": "Tienda",
       "kits": "Kits de Cultivo",
