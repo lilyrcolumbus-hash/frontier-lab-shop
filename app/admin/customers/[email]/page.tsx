@@ -7,7 +7,8 @@ import { CustomerProfileForm } from '@/components/admin/CustomerProfileForm'
 
 export default async function AdminCustomerDetailPage({ params }: { params: { email: string } }) {
   const admin = await requireStoreAdmin()
-  if (!admin) notFound()
+  // The public demo account never sees customer data.
+  if (!admin || admin.isDemo) notFound()
 
   const email = decodeURIComponent(params.email).toLowerCase()
 

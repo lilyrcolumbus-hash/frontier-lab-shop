@@ -13,6 +13,10 @@ panel the owner runs the whole business from — no developer in the loop for da
 
 ## Admin panel
 
+**Try it:** open [myfrontierlab.com/account](https://myfrontierlab.com/account), use the public demo account shown on
+that page, then go to `/admin`. The demo account is read-only (every write is refused by the server) and
+customer data is hidden from it.
+
 Everything a merchant needs to run the store day to day, without touching code: orders (tracking,
 partial fulfillment, printable packing slips, refunds/cancellations wired to real Stripe
 refunds), products (bulk edit, CSV import/export, SEO fields, image galleries with per-photo alt

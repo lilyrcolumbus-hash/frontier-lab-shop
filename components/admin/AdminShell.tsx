@@ -234,11 +234,13 @@ export function AdminShell({
   storeName,
   userEmail,
   role,
+  isDemo = false,
   children,
 }: {
   storeName: string
   userEmail: string
   role: 'owner' | 'staff'
+  isDemo?: boolean
   children: React.ReactNode
 }) {
   // The API enforces this too — hiding a link is a courtesy, never the security boundary.
@@ -280,6 +282,12 @@ export function AdminShell({
           </span>
           <AdminSignOutButton />
         </div>
+        {isDemo && (
+          <div className="border-b border-ds-border bg-elevated px-6 py-2.5 text-center text-xs text-cream-muted print:hidden">
+            <span className="font-semibold text-cream">Read-only demo.</span> Explore every screen: saving is switched off, and
+            customer data is hidden.
+          </div>
+        )}
         <div className="max-w-6xl mx-auto px-6 py-10">{children}</div>
       </div>
     </div>

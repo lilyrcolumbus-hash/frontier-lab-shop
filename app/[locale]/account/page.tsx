@@ -1,6 +1,7 @@
 'use client'
 
 import { Suspense, useEffect, useState } from 'react'
+import { DEMO_ADMIN_EMAIL, DEMO_ADMIN_PASSWORD } from '@/lib/demo'
 import { useTranslations, useLocale } from 'next-intl'
 import { useSearchParams } from 'next/navigation'
 import { useRouter, Link } from '@/navigation'
@@ -176,6 +177,28 @@ export default function AccountPage() {
       </div>
 
       <div className="max-w-md mx-auto px-4 py-16">
+        <div className="mb-6 border border-ds-border bg-surface p-5 text-sm text-cream-muted">
+          <p className="font-semibold text-cream">Portfolio demo: see the admin panel</p>
+          <p className="mt-1">
+            Sign in with the demo account and open <span className="text-cream">/admin</span>. It is read-only, so nothing you do is
+            saved, and customer data is hidden.
+          </p>
+          <p className="mt-2 font-mono text-xs">
+            {DEMO_ADMIN_EMAIL}
+            <br />
+            {DEMO_ADMIN_PASSWORD}
+          </p>
+          <button
+            type="button"
+            onClick={() => {
+              setEmail(DEMO_ADMIN_EMAIL)
+              setPassword(DEMO_ADMIN_PASSWORD)
+            }}
+            className="mt-3 text-xs font-medium text-cream underline underline-offset-2"
+          >
+            Fill in the demo account
+          </button>
+        </div>
         <form onSubmit={handleSignIn} className="bg-elevated rounded-none border border-ds-border p-8 space-y-5">
           <div className="space-y-4">
             <Input

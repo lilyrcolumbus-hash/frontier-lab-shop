@@ -10,7 +10,8 @@ import { OrderEmailButton } from '@/components/admin/OrderEmailButton'
 
 export default async function AdminOrderDetailPage({ params }: { params: { id: string } }) {
   const admin = await requireStoreAdmin()
-  if (!admin) notFound()
+  // The public demo account never sees customer data.
+  if (!admin || admin.isDemo) notFound()
 
   const order = await prisma.order.findUnique({
     where: { id: params.id },

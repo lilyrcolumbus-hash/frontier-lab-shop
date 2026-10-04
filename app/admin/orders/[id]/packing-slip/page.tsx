@@ -8,7 +8,8 @@ import { PrintButton } from '@/components/admin/PrintButton'
 // of the admin's own palette — it must be legible on paper, not on screen.
 export default async function PackingSlipPage({ params }: { params: { id: string } }) {
   const admin = await requireStoreAdmin()
-  if (!admin) notFound()
+  // The public demo account never sees customer data.
+  if (!admin || admin.isDemo) notFound()
 
   const order = await prisma.order.findUnique({ where: { id: params.id }, include: { items: true } })
   if (!order || order.storeId !== admin.store.id) notFound()
