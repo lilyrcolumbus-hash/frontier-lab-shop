@@ -92,7 +92,19 @@
       "headline2": "Puro.",
       "subtext": "Cultiva. Aprende. Conecta. Todo sobre los hongos.",
       "ctaPrimary": "Encuentra Tu Hongo",
-      "ctaSecondary": "Ir a la Tienda"
+      "ctaSecondary": "Ir a la Tienda",
+      "socialProof": "Genética silvestre, cultivada en nuestro propio laboratorio",
+      "videoUrl": "/video/hero-bg.mp4",
+      "featuredImage": "https://images.unsplash.com/photo-1625286535466-68a6d71e4568?w=680&h=840&q=90&auto=format&fit=crop",
+      "featuredAlt": "Hongo melena de león, blanco y peludo",
+      "featuredLabel": "Especie destacada",
+      "featuredName": "Melena de León",
+      "featuredLatin": "Hericium erinaceus",
+      "chip1Label": "Tiempo hasta la cosecha",
+      "chip1Value": "3–4 sem",
+      "chip2Label": "Beta-glucanos",
+      "chip2Value": "Altos",
+      "scroll": "desliza"
     },
     "trust": {
       "growersValue": "EN · ES",
@@ -131,6 +143,76 @@
       "success": "¡Ya eres parte! Revisa tu bandeja.",
       "privacy": "Sin spam. Date de baja cuando quieras.",
       "error": "Algo salió mal. Intenta de nuevo."
+    },
+    "journey": {
+      "eyebrow": "El Recorrido",
+      "title": "De la Espora a la Mesa",
+      "subtitle": "Toda cosecha empieza con precisión. Sigue el recorrido desde la inoculación hasta tu plato.",
+      "steps": {
+        "1": {
+          "phase": "Preparar",
+          "title": "Sustrato y Semilla",
+          "description": "Mezcla sustrato esterilizado con grano inoculado en condiciones estériles. Centeno, paja o aserrín: cada especie tiene su medio ideal.",
+          "timing": "Día 1",
+          "imageAlt": "Racimo de ostra azul sobre sustrato",
+          "image": "https://drzwclnecktguodpokir.supabase.co/storage/v1/object/public/product-images/1788523252817-blue-oyster.png"
+        },
+        "2": {
+          "phase": "Colonizar",
+          "title": "La Toma del Micelio",
+          "description": "En la oscuridad, hilos blancos se extienden por el sustrato y forman la red subterránea. No lo toques. Solo espera.",
+          "timing": "Semanas 1–3",
+          "imageAlt": "Racimo de ostra azul colonizando el sustrato",
+          "image": "https://drzwclnecktguodpokir.supabase.co/storage/v1/object/public/product-images/1788523252817-blue-oyster.png"
+        },
+        "3": {
+          "phase": "Fructificar",
+          "title": "Brotan los Primordios",
+          "description": "Baja el CO₂ y sube la humedad. Diminutos primordios atraviesan la superficie. El momento en que la vida surge de la nada: siempre es mágico.",
+          "timing": "Semana 3–4",
+          "imageAlt": "Primordios de ostra rosada emergiendo",
+          "image": "https://images.unsplash.com/photo-1773600149997-2b6af77031d7?w=520&h=620&q=85&auto=format&fit=crop"
+        },
+        "4": {
+          "phase": "Cosechar",
+          "title": "La Cosecha Pura",
+          "description": "Gira y tira justo antes de que se rompa el velo. Primera oleada: la recompensa por tu precisión y paciencia. Cocínala. Extráela. Vuelve a cultivar.",
+          "timing": "Semana 4–5",
+          "imageAlt": "Ostra dorada lista para cosechar",
+          "image": "https://images.unsplash.com/photo-1748118869505-e75f25812a70?w=520&h=620&q=85&auto=format&fit=crop"
+        }
+      }
+    },
+    "wild": {
+      "bgImage": "https://images.unsplash.com/photo-1448375240586-882707db888b?w=1200&h=900&q=85&auto=format&fit=crop",
+      "bgAlt": "Bosque oscuro encantado con rayos de luz",
+      "badgeLabel": "En la naturaleza",
+      "badgeText": "Encontrado en bosques de Ohio, en octubre — Hen of the Woods (maitake)",
+      "eyebrow": "Nacido Salvaje",
+      "titleLine1": "Cultivado en la Oscuridad,",
+      "titleLine2": "Nacido en lo Salvaje",
+      "body": "Del suelo de los bosques de Ohio a los frascos de sustrato: cultivamos lo que cultiva la naturaleza, como lo cultiva la naturaleza. Sin atajos, sin sintéticos, solo micelio haciendo lo que el micelio sabe hacer.",
+      "tag1": "100% orgánico",
+      "tag2": "Sin químicos",
+      "tag3": "Cultivado en zona 6a",
+      "tag4": "Cepas heredadas",
+      "photos": {
+        "1": {
+          "alt": "Racimo de ostra rosada",
+          "label": "Ostra Rosada",
+          "image": "https://images.unsplash.com/photo-1773600149997-2b6af77031d7?w=700&h=900&q=88&auto=format&fit=crop"
+        },
+        "2": {
+          "alt": "Racimo de ostra azul",
+          "label": "Ostra Azul",
+          "image": "https://drzwclnecktguodpokir.supabase.co/storage/v1/object/public/product-images/1788523252817-blue-oyster.png"
+        },
+        "3": {
+          "alt": "Racimo de ostra dorada",
+          "label": "Ostra Dorada",
+          "image": "https://images.unsplash.com/photo-1748118869505-e75f25812a70?w=600&h=400&q=88&auto=format&fit=crop"
+        }
+      }
     }
   },
   "shop": {
@@ -191,6 +273,79 @@
       "continueShopping": "Seguir Comprando",
       "remove": "Eliminar",
       "quantity": "Cant"
+    },
+    "browser": {
+      "categories": {
+        "culture-bank": "Banco de Cultivos",
+        "substrate": "Sustrato",
+        "kit": "Kits de Cultivo",
+        "equipment": "Equipo",
+        "wellness": "Bienestar",
+        "all": "Todos los Productos"
+      },
+      "stages": {
+        "grain": {
+          "eyebrow": "Etapa 1 — inóculo pequeño",
+          "title": "Bolsas de Grano",
+          "note": "Inyecta con una jeringa de cultivo líquido. Al colonizarse se convierte en grano inoculado, que sirve para inocular todo lo demás."
+        },
+        "bulk": {
+          "eyebrow": "Etapa 2 — sin puerto de inyección",
+          "title": "Sustrato a Granel Estéril",
+          "note": "Ábrelo y mezcla a mano el grano inoculado que ya tengas. No necesitas jeringa."
+        },
+        "fruiting": {
+          "eyebrow": "Etapa 3 — listo ahora",
+          "title": "Bloques de Fructificación",
+          "note": "Ya están colonizados. Corta, rocía y cosecha: sin esperar la colonización."
+        }
+      },
+      "speciesFilter": "Filtrado por especie",
+      "productsAcross": "{count, plural, one {# producto en nuestro catálogo} other {# productos en nuestro catálogo}}",
+      "viewAll": "← Ver el catálogo completo",
+      "cultureHero": {
+        "eyebrow": "Banco de Cultivos",
+        "title": "Micelio Vivo — Aislado en Laboratorio",
+        "body": "Ocho especies. Jeringas de 10 cc. Coloniza el grano en 5–10 días, hasta 3 veces más rápido que las esporas. Cada paquete incluye aguja 16G, toallita con alcohol y tarjeta de instrucciones.",
+        "stat1Value": "8",
+        "stat1Label": "Especies",
+        "stat2Value": "10cc",
+        "stat2Label": "Jeringa",
+        "stat3Value": "3×",
+        "stat3Label": "Más rápido que las esporas"
+      },
+      "cultureSection": {
+        "eyebrow": "Lista para inocular — sin necesidad de agar",
+        "title": "Jeringas de Cultivo Líquido",
+        "point1": "Colonización del grano en 5–10 días",
+        "point2": "Aislado en laboratorio"
+      }
+    },
+    "gallery": {
+      "slots": {
+        "1": {
+          "label": "Foto del Producto",
+          "hint": "Jeringa y empaque"
+        },
+        "2": {
+          "label": "Qué Incluye",
+          "hint": "Aguja · toallita · tarjeta"
+        },
+        "3": {
+          "label": "Resultado de la Fructificación",
+          "hint": "El hongo que cultivas"
+        },
+        "4": {
+          "label": "Detalle del Cultivo",
+          "hint": "Primer plano del micelio vivo"
+        }
+      },
+      "comingSoon": "Foto próximamente",
+      "previous": "Imagen anterior",
+      "next": "Imagen siguiente",
+      "viewImage": "Ver imagen {n}",
+      "imageAlt": "{name} - imagen {n}",
+      "thumbAlt": "{name} miniatura {n}"
     }
   },
   "encyclopedia": {
@@ -233,6 +388,26 @@
       "taxonomy": "Taxonomía",
       "naturalHabitat": "Hábitat Natural",
       "history": "Historia y Cultura"
+    },
+    "detail": {
+      "difficulty": "Dificultad",
+      "type": "Tipo",
+      "fruitingTemp": "Temperatura de fructificación",
+      "environment": "Entorno",
+      "keyBenefits": "Beneficios Clave",
+      "about": "Acerca de",
+      "science": "Ciencia",
+      "cultivation": "Cultivo",
+      "howToGrow": "Cómo Cultivarlo",
+      "safety": "Seguridad",
+      "cultivationSpecs": "Especificaciones de Cultivo",
+      "substrate": "Sustrato",
+      "colonization": "Colonización",
+      "flushes": "Oleadas",
+      "taxonomy": "Taxonomía",
+      "order": "Orden",
+      "family": "Familia",
+      "species": "Especie"
     }
   },
   "tools": {
@@ -427,5 +602,41 @@
     "copyright": "© 2025 Frontier Lab. Todos los derechos reservados.",
     "privacy": "Política de Privacidad",
     "terms": "Términos de Servicio"
+  },
+  "lab": {
+    "page": {
+      "eyebrow": "Pasa Adelante",
+      "headline": "Un vistazo de cerca a cómo se cultiva",
+      "subtext": "Recorre cada sala para seguir un hongo desde el cultivo hasta la cosecha.",
+      "videoUrl": "/video/garden-farm.mp4"
+    },
+    "tour": {
+      "organic": "Orgánico",
+      "trust1": "Orgánico",
+      "trust2": "Envío en 24h",
+      "trust3": "Garantía de 30 días",
+      "scenes": {
+        "grow-room": {
+          "name": "Sala de Cultivo",
+          "subtitle": "Donde comienza la magia",
+          "image": "https://images.unsplash.com/photo-1625286535466-68a6d71e4568?w=1920&h=1080&q=90&auto=format&fit=crop"
+        },
+        "spawn-lab": {
+          "name": "Laboratorio de Spawn",
+          "subtitle": "Inocula y coloniza",
+          "image": "https://drzwclnecktguodpokir.supabase.co/storage/v1/object/public/product-images/1788523252817-blue-oyster.png"
+        },
+        "fruiting-room": {
+          "name": "Sala de Fructificación",
+          "subtitle": "Obsérvalos crecer",
+          "image": "https://images.unsplash.com/photo-1755108906864-fdaadb8ab5f1?w=1920&h=1080&q=90&auto=format&fit=crop"
+        },
+        "reishi": {
+          "name": "Rincón del Reishi",
+          "subtitle": "Del cultivo al bloque de fructificación",
+          "image": "https://images.unsplash.com/photo-1786122622924-118eb20d8850?w=1920&h=1080&q=90&auto=format&fit=crop"
+        }
+      }
+    }
   }
 }

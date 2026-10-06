@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useTranslations } from 'next-intl'
 import { cn } from '@/lib/utils'
 
 interface ProductGalleryProps {
@@ -14,8 +15,7 @@ interface ProductGalleryProps {
 
 const SLOTS = [
   {
-    label: 'Product Shot',
-    hint: 'Syringe & packaging',
+    id: '1',
     icon: (
       <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round">
         <path d="M14.5 4l5.5 5.5-9 9-3 .5.5-3 6-6z" /><path d="M12 6.5l5 5" />
@@ -28,8 +28,7 @@ const SLOTS = [
     ),
   },
   {
-    label: "What's Included",
-    hint: 'Needle · swab · card',
+    id: '2',
     icon: (
       <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round">
         <path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z" />
@@ -43,8 +42,7 @@ const SLOTS = [
     ),
   },
   {
-    label: 'Fruiting Results',
-    hint: 'The mushroom you grow',
+    id: '3',
     icon: (
       <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round">
         <path d="M12 22V12" /><path d="M5 12a7 7 0 0114 0H5z" /><path d="M9 12v2a3 3 0 006 0v-2" />
@@ -57,8 +55,7 @@ const SLOTS = [
     ),
   },
   {
-    label: 'Culture Detail',
-    hint: 'Live mycelium close-up',
+    id: '4',
     icon: (
       <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round">
         <circle cx="11" cy="11" r="8" /><path d="M21 21l-4.35-4.35" /><path d="M11 8v6m-3-3h6" />
@@ -73,6 +70,7 @@ const SLOTS = [
 ]
 
 export function ProductGallery({ images, imageAlts, alt }: ProductGalleryProps) {
+  const t = useTranslations('shop.gallery')
   const [active, setActive] = useState(0)
 
   if (!images.length) {
@@ -93,11 +91,11 @@ export function ProductGallery({ images, imageAlts, alt }: ProductGalleryProps) 
             <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
               <div className="text-cream-muted/25">{slot.icon}</div>
               <div className="text-center space-y-1">
-                <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-accent/60">{slot.label}</p>
-                <p className="text-sm text-cream-muted/40">{slot.hint}</p>
+                <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-accent/60">{t(`slots.${slot.id}.label`)}</p>
+                <p className="text-sm text-cream-muted/40">{t(`slots.${slot.id}.hint`)}</p>
               </div>
               <div className="mt-1 px-4 py-1.5 rounded-none border border-dashed border-cream-muted/15">
-                <span className="font-mono text-[9px] uppercase tracking-[0.18em] text-cream-muted/25">Photo coming soon</span>
+                <span className="font-mono text-[9px] uppercase tracking-[0.18em] text-cream-muted/25">{t('comingSoon')}</span>
               </div>
             </div>
             {/* Slot counter */}
@@ -113,7 +111,7 @@ export function ProductGallery({ images, imageAlts, alt }: ProductGalleryProps) 
             <button
               key={i}
               onClick={() => setActive(i)}
-              aria-label={s.label}
+              aria-label={t(`slots.${s.id}.label`)}
               className={cn(
                 'flex-1 aspect-square rounded-none border-2 transition-all duration-200 flex flex-col items-center justify-center gap-1 p-1',
                 active === i
@@ -128,7 +126,7 @@ export function ProductGallery({ images, imageAlts, alt }: ProductGalleryProps) 
                 'font-mono text-[7px] uppercase tracking-wider leading-tight text-center px-0.5 transition-colors duration-200',
                 active === i ? 'text-accent/60' : 'text-cream-muted/25'
               )}>
-                {s.label}
+                {t(`slots.${s.id}.label`)}
               </span>
             </button>
           ))}
@@ -150,7 +148,7 @@ export function ProductGallery({ images, imageAlts, alt }: ProductGalleryProps) 
         >
           <img
             src={images[active]}
-            alt={imageAlts?.[active] || `${alt} - image ${active + 1}`}
+            alt={imageAlts?.[active] || t('imageAlt', { name: alt, n: active + 1 })}
             className="w-full h-full object-cover"
           />
           {images.length > 1 && (
@@ -158,14 +156,14 @@ export function ProductGallery({ images, imageAlts, alt }: ProductGalleryProps) 
               <button
                 onClick={() => setActive((a) => (a - 1 + images.length) % images.length)}
                 className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 bg-bg/80 backdrop-blur-sm rounded-full border border-ds-border text-cream flex items-center justify-center hover:bg-elevated transition-colors"
-                aria-label="Previous image"
+                aria-label={t('previous')}
               >
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M15 18l-6-6 6-6" /></svg>
               </button>
               <button
                 onClick={() => setActive((a) => (a + 1) % images.length)}
                 className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 bg-bg/80 backdrop-blur-sm rounded-full border border-ds-border text-cream flex items-center justify-center hover:bg-elevated transition-colors"
-                aria-label="Next image"
+                aria-label={t('next')}
               >
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 18l6-6-6-6" /></svg>
               </button>
@@ -184,9 +182,9 @@ export function ProductGallery({ images, imageAlts, alt }: ProductGalleryProps) 
                 'flex-shrink-0 w-16 h-16 rounded-none overflow-hidden border-2 transition-all duration-200',
                 active === i ? 'border-accent' : 'border-ds-border hover:border-accent/50'
               )}
-              aria-label={`View image ${i + 1}`}
+              aria-label={t('viewImage', { n: i + 1 })}
             >
-              <img src={src} alt={imageAlts?.[i] || `${alt} thumbnail ${i + 1}`} className="w-full h-full object-cover" />
+              <img src={src} alt={imageAlts?.[i] || t('thumbAlt', { name: alt, n: i + 1 })} className="w-full h-full object-cover" />
             </button>
           ))}
         </div>

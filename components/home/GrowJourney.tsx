@@ -2,54 +2,24 @@
 
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
+import { useTranslations } from 'next-intl'
 import { ScrollReveal } from '@/components/ui/ScrollReveal'
 
-const STEPS = [
-  {
-    step: '01',
-    phase: 'Prepare',
-    title: 'Substrate & Spawn',
-    description:
-      'Mix sterilized substrate with grain spawn under sterile conditions. Rye berries, straw, or sawdust — every species has its ideal medium.',
-    timing: 'Day 1',
-    src: 'https://drzwclnecktguodpokir.supabase.co/storage/v1/object/public/product-images/1788523252817-blue-oyster.png',
-    alt: 'Blue oyster mushroom cluster on substrate',
-  },
-  {
-    step: '02',
-    phase: 'Colonize',
-    title: 'Mycelium Takeover',
-    description:
-      "In the dark, white threads spread through the substrate, building the underground network. Don't touch it. Just wait.",
-    timing: 'Weeks 1–3',
-    src: 'https://drzwclnecktguodpokir.supabase.co/storage/v1/object/public/product-images/1788523252817-blue-oyster.png',
-    alt: 'Blue oyster mushroom cluster colonizing',
-  },
-  {
-    step: '03',
-    phase: 'Fruit',
-    title: 'Pins Break Through',
-    description:
-      'Lower CO₂, raise humidity. Tiny pins push through the surface. The moment life emerges from nothing — always magical.',
-    timing: 'Week 3–4',
-    src: 'https://images.unsplash.com/photo-1773600149997-2b6af77031d7?w=520&h=620&q=85&auto=format&fit=crop',
-    alt: 'Pink Oyster pins emerging',
-  },
-  {
-    step: '04',
-    phase: 'Harvest',
-    title: 'The Pure Harvest',
-    description:
-      "Twist and pull just before the veil breaks. First flush — pure reward for your precision and patience. Plate it. Extract it. Grow again.",
-    timing: 'Week 4–5',
-    src: 'https://images.unsplash.com/photo-1748118869505-e75f25812a70?w=520&h=620&q=85&auto=format&fit=crop',
-    alt: 'Golden Oyster ready to harvest',
-  },
-]
+const STEP_IDS = ['1', '2', '3', '4'] as const
 
 export function GrowJourney() {
   const ref = useRef<HTMLDivElement>(null)
   const isInView = useInView(ref, { once: true, margin: '-8% 0px' })
+  const t = useTranslations('home.journey')
+  const steps = STEP_IDS.map((id) => ({
+    step: `0${id}`,
+    phase: t(`steps.${id}.phase`),
+    title: t(`steps.${id}.title`),
+    description: t(`steps.${id}.description`),
+    timing: t(`steps.${id}.timing`),
+    src: t(`steps.${id}.image`),
+    alt: t(`steps.${id}.imageAlt`),
+  }))
 
   return (
     <section className="py-28 bg-surface relative overflow-hidden">
@@ -62,19 +32,19 @@ export function GrowJourney() {
         <ScrollReveal className="mb-16 text-center">
           <div className="inline-flex items-center gap-3 mb-5 text-amber/60 font-mono text-xs uppercase tracking-[0.28em]">
             <div className="w-10 h-px bg-amber/30" />
-            The Journey
+            {t('eyebrow')}
             <div className="w-10 h-px bg-amber/30" />
           </div>
           <h2 className="font-heading font-medium text-3xl sm:text-4xl text-cream tracking-tight leading-tight">
-            Spore to Table
+            {t('title')}
           </h2>
           <p className="text-cream-muted mt-4 text-lg max-w-lg mx-auto leading-relaxed">
-            Every harvest begins with precision. Follow the journey from inoculation to your plate.
+            {t('subtitle')}
           </p>
         </ScrollReveal>
 
         <div ref={ref} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-5">
-          {STEPS.map((step, i) => (
+          {steps.map((step, i) => (
             <motion.div
               key={step.step}
               initial={{ opacity: 0, y: 50 }}
@@ -83,7 +53,7 @@ export function GrowJourney() {
               className="group relative"
             >
               {/* Connector dot + line between steps (desktop) */}
-              {i < STEPS.length - 1 && (
+              {i < steps.length - 1 && (
                 <div className="hidden lg:flex absolute top-[108px] left-full z-10 items-center w-5">
                   <div className="w-full h-px bg-gradient-to-r from-amber/30 to-transparent" />
                 </div>

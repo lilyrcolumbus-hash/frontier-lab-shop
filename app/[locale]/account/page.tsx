@@ -106,6 +106,24 @@ export default function AccountPage() {
     router.refresh()
   }
 
+  // The read-only demo account: one click signs in, so nobody has to see or type a password.
+  const handleDemoSignIn = async () => {
+    setError('')
+    setFormLoading(true)
+    const supabase = createClient()
+    const { error: demoError } = await supabase.auth.signInWithPassword({
+      email: DEMO_ADMIN_EMAIL,
+      password: DEMO_ADMIN_PASSWORD,
+    })
+    setFormLoading(false)
+    if (demoError) {
+      setError(t('invalidCredentials'))
+      return
+    }
+    // /admin lives outside the locale routes, so this has to be a real navigation.
+    window.location.href = '/admin'
+  }
+
   const handleSignOut = async () => {
     const supabase = createClient()
     await supabase.auth.signOut()
@@ -180,23 +198,16 @@ export default function AccountPage() {
         <div className="mb-6 border border-ds-border bg-surface p-5 text-sm text-cream-muted">
           <p className="font-semibold text-cream">Portfolio demo: see the admin panel</p>
           <p className="mt-1">
-            Sign in with the demo account and open <span className="text-cream">/admin</span>. It is read-only, so nothing you do is
-            saved, and customer data is hidden.
-          </p>
-          <p className="mt-2 font-mono text-xs">
-            {DEMO_ADMIN_EMAIL}
-            <br />
-            {DEMO_ADMIN_PASSWORD}
+            One click and you are inside. It is read-only, so nothing you do is saved, and customer data is
+            hidden.
           </p>
           <button
             type="button"
-            onClick={() => {
-              setEmail(DEMO_ADMIN_EMAIL)
-              setPassword(DEMO_ADMIN_PASSWORD)
-            }}
-            className="mt-3 text-xs font-medium text-cream underline underline-offset-2"
+            disabled={formLoading}
+            onClick={handleDemoSignIn}
+            className="mt-3 w-full border border-cream bg-cream px-4 py-2.5 text-sm font-semibold text-bg disabled:opacity-60"
           >
-            Fill in the demo account
+            {formLoading ? 'Opening…' : 'Enter the admin demo'}
           </button>
         </div>
         <form onSubmit={handleSignIn} className="bg-elevated rounded-none border border-ds-border p-8 space-y-5">

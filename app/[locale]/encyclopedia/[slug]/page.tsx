@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation'
-import { setRequestLocale } from 'next-intl/server'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 import Link from 'next/link'
 import { Badge } from '@/components/ui/Badge'
 import { Button } from '@/components/ui/Button'
@@ -105,6 +105,7 @@ export default async function SpeciesDetailPage({
   params: { slug: string; locale: string }
 }) {
   setRequestLocale(params.locale)
+  const t = await getTranslations('encyclopedia.detail')
 
   const locale = params.locale as 'en' | 'es'
   const speciesRow = await prisma.species.findUnique({ where: { slug: params.slug } })
@@ -184,7 +185,7 @@ export default async function SpeciesDetailPage({
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
           <div className="flex flex-wrap items-center gap-4 sm:gap-6">
             <div className="flex items-center gap-2">
-              <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-cream-muted">Difficulty</span>
+              <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-cream-muted">{t('difficulty')}</span>
               <Badge
                 variant={
                   species.difficulty === 'beginner'
@@ -199,19 +200,19 @@ export default async function SpeciesDetailPage({
               </Badge>
             </div>
             <div className="flex items-center gap-2">
-              <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-cream-muted">Type</span>
+              <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-cream-muted">{t('type')}</span>
               <Badge variant={species.type === 'medicinal' ? 'accent' : 'moss'} size="sm">
                 {species.type.charAt(0).toUpperCase() + species.type.slice(1)}
               </Badge>
             </div>
             <div className="flex items-center gap-2 hidden sm:flex">
-              <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-cream-muted">Fruiting Temp</span>
+              <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-cream-muted">{t('fruitingTemp')}</span>
               <span className="text-sm text-cream">
                 {species.fruitingTempF.min}–{species.fruitingTempF.max}°F / {species.fruitingTempC.min}–{species.fruitingTempC.max}°C
               </span>
             </div>
             <div className="flex items-center gap-2 hidden sm:flex">
-              <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-cream-muted">Environment</span>
+              <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-cream-muted">{t('environment')}</span>
               <span className="text-sm text-cream capitalize">
                 {species.indoorOutdoor === 'both' ? 'Indoor & Outdoor' : species.indoorOutdoor}
               </span>
@@ -223,7 +224,7 @@ export default async function SpeciesDetailPage({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         {/* ── KEY BENEFITS — first section ───────────────────────────────── */}
         <section className="mb-14">
-          <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-accent mb-1">Key Benefits</p>
+          <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-accent mb-1">{t('keyBenefits')}</p>
           <h2 className="font-heading font-medium text-2xl sm:text-3xl tracking-tight text-cream mb-7">
             Why {species.commonName}?
           </h2>
@@ -254,7 +255,7 @@ export default async function SpeciesDetailPage({
 
             {/* About */}
             <section>
-              <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-moss mb-1">About</p>
+              <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-moss mb-1">{t('about')}</p>
               <h2 className="font-heading font-medium text-xl tracking-tight text-cream mb-4">
                 What is {species.commonName}?
               </h2>
@@ -263,7 +264,7 @@ export default async function SpeciesDetailPage({
 
             {/* Medicinal Properties */}
             <section className="bg-elevated rounded-none border border-ds-border p-6 sm:p-8">
-              <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-accent mb-1">Science</p>
+              <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-accent mb-1">{t('science')}</p>
               <h2 className="font-heading font-medium text-xl tracking-tight text-cream mb-4">
                 Medicinal Properties
               </h2>
@@ -286,8 +287,8 @@ export default async function SpeciesDetailPage({
 
             {/* Cultivation */}
             <section>
-              <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-moss mb-1">Cultivation</p>
-              <h2 className="font-heading font-medium text-xl tracking-tight text-cream mb-4">How to Grow</h2>
+              <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-moss mb-1">{t('cultivation')}</p>
+              <h2 className="font-heading font-medium text-xl tracking-tight text-cream mb-4">{t('howToGrow')}</h2>
               <p className="text-cream-muted leading-relaxed">{species.cultivationNotes[locale]}</p>
             </section>
 
@@ -305,7 +306,7 @@ export default async function SpeciesDetailPage({
             {/* Lookalikes — safety */}
             {species.lookalikes.length > 0 && (
               <section className="bg-amber/8 border border-amber/25 rounded-none p-6">
-                <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-amber mb-1">Safety</p>
+                <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-amber mb-1">{t('safety')}</p>
                 <h2 className="font-heading font-medium text-xl tracking-tight text-cream mb-3">
                   Toxic Lookalikes
                 </h2>
@@ -332,20 +333,20 @@ export default async function SpeciesDetailPage({
           <aside className="lg:w-72 flex-shrink-0 space-y-5">
             {/* Cultivation Specs */}
             <div className="bg-elevated rounded-none border border-ds-border p-6">
-              <h3 className="font-body font-semibold text-cream mb-5">Cultivation Specs</h3>
+              <h3 className="font-body font-semibold text-cream mb-5">{t('cultivationSpecs')}</h3>
               <dl className="space-y-4">
                 {[
-                  ['Substrate', species.substrate.join(', ')],
+                  [t('substrate'), species.substrate.join(', ')],
                   [
-                    'Colonization',
+                    t('colonization'),
                     `${species.colonizationWeeks.min}–${species.colonizationWeeks.max} weeks`,
                   ],
                   [
-                    'Fruiting Temp',
+                    t('fruitingTemp'),
                     `${species.fruitingTempF.min}–${species.fruitingTempF.max}°F / ${species.fruitingTempC.min}–${species.fruitingTempC.max}°C`,
                   ],
                   [
-                    'Flushes',
+                    t('flushes'),
                     species.expectedFlushes === 99
                       ? 'Perennial'
                       : species.expectedFlushes === 1
@@ -353,7 +354,7 @@ export default async function SpeciesDetailPage({
                       : `${species.expectedFlushes} flushes`,
                   ],
                   [
-                    'Environment',
+                    t('environment'),
                     species.indoorOutdoor === 'both'
                       ? 'Indoor & Outdoor'
                       : species.indoorOutdoor.charAt(0).toUpperCase() + species.indoorOutdoor.slice(1),
@@ -371,12 +372,12 @@ export default async function SpeciesDetailPage({
 
             {/* Taxonomy */}
             <div className="bg-elevated rounded-none border border-ds-border p-6">
-              <h3 className="font-body font-semibold text-cream mb-5">Taxonomy</h3>
+              <h3 className="font-body font-semibold text-cream mb-5">{t('taxonomy')}</h3>
               <dl className="space-y-4">
                 {[
-                  ['Order', species.order],
-                  ['Family', species.family],
-                  ['Species', species.scientificName],
+                  [t('order'), species.order],
+                  [t('family'), species.family],
+                  [t('species'), species.scientificName],
                 ].map(([label, val]) => (
                   <div key={label}>
                     <dt className="font-mono text-[10px] uppercase tracking-[0.2em] text-cream-muted">

@@ -2,29 +2,20 @@
 
 import { useRef } from 'react'
 import { motion, useInView, useScroll, useTransform } from 'framer-motion'
+import { useTranslations } from 'next-intl'
 
-const PHOTOS = [
-  {
-    src: 'https://images.unsplash.com/photo-1773600149997-2b6af77031d7?w=700&h=900&q=88&auto=format&fit=crop',
-    alt: 'Pink Oyster cluster',
-    label: 'Pink Oyster',
-    span: 'row-span-2',
-  },
-  {
-    src: 'https://drzwclnecktguodpokir.supabase.co/storage/v1/object/public/product-images/1788523252817-blue-oyster.png',
-    alt: 'Blue Oyster mushroom cluster',
-    label: 'Blue Oyster',
-    span: '',
-  },
-  {
-    src: 'https://images.unsplash.com/photo-1748118869505-e75f25812a70?w=600&h=400&q=88&auto=format&fit=crop',
-    alt: 'Golden Oyster golden cluster',
-    label: 'Golden Oyster',
-    span: '',
-  },
-]
+const PHOTO_IDS = ['1', '2', '3'] as const
+const PHOTO_SPANS = ['row-span-2', '', ''] as const
+const TAG_IDS = ['tag1', 'tag2', 'tag3', 'tag4'] as const
 
 export function WildSection() {
+  const t = useTranslations('home.wild')
+  const photos = PHOTO_IDS.map((id, i) => ({
+    src: t(`photos.${id}.image`),
+    alt: t(`photos.${id}.alt`),
+    label: t(`photos.${id}.label`),
+    span: PHOTO_SPANS[i],
+  }))
   const sectionRef = useRef<HTMLElement>(null)
   const textRef = useRef<HTMLDivElement>(null)
   const isInView = useInView(sectionRef, { once: true, margin: '-12% 0px' })
@@ -49,8 +40,8 @@ export function WildSection() {
             style={{ y: bgY }}
           >
             <img
-              src="https://images.unsplash.com/photo-1448375240586-882707db888b?w=1200&h=900&q=85&auto=format&fit=crop"
-              alt="Enchanted dark forest with light rays"
+              src={t('bgImage')}
+              alt={t('bgAlt')}
               className="w-full h-full object-cover scale-110"
             />
           </motion.div>
@@ -66,9 +57,9 @@ export function WildSection() {
             className="absolute bottom-10 left-8"
           >
             <div className="glass-warm rounded-none px-5 py-4 border border-amber/20 max-w-[220px]">
-              <p className="font-mono text-[10px] text-amber/60 uppercase tracking-widest mb-1">In the wild</p>
+              <p className="font-mono text-[10px] text-amber/60 uppercase tracking-widest mb-1">{t('badgeLabel')}</p>
               <p className="font-body text-cream text-sm font-medium leading-snug">
-                Found in Ohio forests, October — Hen of the Woods
+                {t('badgeText')}
               </p>
             </div>
           </motion.div>
@@ -85,24 +76,23 @@ export function WildSection() {
             >
               <div className="flex items-center gap-3 text-amber/60 font-mono text-xs uppercase tracking-[0.25em]">
                 <div className="w-8 h-px bg-amber/40" />
-                Born Wild
+                {t('eyebrow')}
               </div>
               <h2 className="font-heading font-medium text-3xl sm:text-4xl text-cream tracking-tight leading-tight">
-                Grown in the Dark,
+                {t('titleLine1')}
                 <br />
-                <span style={{ color: '#C4883A' }}>Born in the Wild</span>
+                <span style={{ color: '#C4883A' }}>{t('titleLine2')}</span>
               </h2>
               <p className="font-body text-cream-muted text-lg leading-relaxed max-w-md">
-                From Ohio forest floors to substrate jars — we grow what nature grows, the way nature grows it.
-                No shortcuts, no synthetics, just mycelium doing what mycelium does.
+                {t('body')}
               </p>
               <div className="flex flex-wrap gap-3 pt-2">
-                {['100% organic', 'No chemicals', 'Zone 6a grown', 'Heirloom strains'].map((tag) => (
+                {TAG_IDS.map((id) => (
                   <span
-                    key={tag}
+                    key={id}
                     className="text-xs font-mono px-3 py-1.5 rounded-none border border-accent/25 text-accent/80"
                   >
-                    {tag}
+                    {t(id)}
                   </span>
                 ))}
               </div>
@@ -115,7 +105,7 @@ export function WildSection() {
               transition={{ duration: 0.8, delay: 0.35 }}
               className="grid grid-cols-3 gap-3"
             >
-              {PHOTOS.map((photo, i) => (
+              {photos.map((photo, i) => (
                 <motion.div
                   key={photo.label}
                   initial={{ opacity: 0, scale: 0.9 }}

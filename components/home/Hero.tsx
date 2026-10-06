@@ -28,7 +28,7 @@ export function Hero() {
           className="absolute inset-0 w-full h-full object-cover"
           aria-hidden="true"
         >
-          <source src="/video/hero-bg.mp4" type="video/mp4" />
+          <source src={t('videoUrl')} type="video/mp4" />
         </video>
         {/* Dark overlay — lets video show through beautifully */}
         <div
@@ -95,7 +95,7 @@ export function Hero() {
 
             {/* Social proof */}
             <motion.div {...fadeUp(0.62)} className="flex items-center gap-5 pt-1">
-              <p className="text-sm text-white/38">Wild genetics, cultured in our own lab</p>
+              <p className="text-sm text-white/38">{t('socialProof')}</p>
             </motion.div>
           </div>
 
@@ -109,25 +109,25 @@ export function Hero() {
             {/* Main photo */}
             <div className="relative rounded-none overflow-hidden" style={{ height: 520 }}>
               <img
-                src="https://images.unsplash.com/photo-1625286535466-68a6d71e4568?w=680&h=840&q=90&auto=format&fit=crop"
-                alt="Lion's Mane mushroom, white and shaggy"
+                src={t('featuredImage')}
+                alt={t('featuredAlt')}
                 className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#040904]/88 via-[#040904]/18 to-transparent" />
               <div className="absolute bottom-7 left-7 right-7">
                 <p className="text-white/32 text-[10px] font-mono uppercase tracking-[0.22em] mb-1.5">
-                  Featured species
+                  {t('featuredLabel')}
                 </p>
-                <p className="text-white text-xl font-semibold tracking-tight">Lion's Mane</p>
-                <p className="text-white/32 text-sm italic mt-0.5">Hericium erinaceus</p>
+                <p className="text-white text-xl font-semibold tracking-tight">{t('featuredName')}</p>
+                <p className="text-white/32 text-sm italic mt-0.5">{t('featuredLatin')}</p>
               </div>
             </div>
 
             {/* Two mini stat chips below photo */}
             <div className="grid grid-cols-2 gap-3 mt-3">
               {[
-                { label: 'Time to harvest', value: '3–4 wks' },
-                { label: 'Beta-glucans', value: 'High' },
+                { label: t('chip1Label'), value: t('chip1Value') },
+                { label: t('chip2Label'), value: t('chip2Value') },
               ].map((stat) => (
                 <div
                   key={stat.label}
@@ -151,7 +151,7 @@ export function Hero() {
         transition={{ delay: 2.2 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2"
       >
-        <span className="text-white/22 text-[10px] font-mono tracking-[0.28em] uppercase">scroll</span>
+        <span className="text-white/22 text-[10px] font-mono tracking-[0.28em] uppercase">{t('scroll')}</span>
         <div className="w-px h-10 bg-gradient-to-b from-white/22 to-transparent" />
       </motion.div>
     </section>

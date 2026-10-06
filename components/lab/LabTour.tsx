@@ -1,11 +1,14 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
-import { useLocale } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { cn } from '@/lib/utils'
 import { formatPrice } from '@/lib/utils'
+import { useCartStore } from '@/lib/cart-store'
+import { SCENE_LAYOUT } from '@/lib/lab-tour'
+import type { Product } from '@/types/product'
 
 interface GardenProduct {
   id: string
@@ -19,6 +22,7 @@ interface GardenProduct {
   image: string
   badge?: string
   badgeEs?: string
+  variantId: string
 }
 
 interface Hotspot {
@@ -38,155 +42,6 @@ interface Scene {
   bg: string
   hotspots: Hotspot[]
 }
-
-const SCENES: Scene[] = [
-  {
-    id: 'grow-room',
-    name: 'Grow Room',
-    nameEs: 'Sala de Cultivo',
-    subtitle: 'Where the magic begins',
-    subtitleEs: 'Donde comienza la magia',
-    // Lion's Mane — the featured species of this scene (see hs-2 below).
-    bg: 'https://images.unsplash.com/photo-1625286535466-68a6d71e4568?w=1920&h=1080&q=90&auto=format&fit=crop',
-    hotspots: [
-      {
-        id: 'hs-1',
-        x: 28, y: 48,
-        label: '1',
-        product: {
-          id: '3', slug: 'beginners-grow-kit-bundle',
-          name: "Beginner's Complete Grow Kit",
-          nameEs: 'Kit de Cultivo Completo para Principiantes',
-          description: 'Everything to grow your first mushrooms: spawn, substrate, dome, mister, and step-by-step guide.',
-          descriptionEs: 'Todo lo que necesitas para tu primer cultivo: spawn, sustrato, cúpula, atomizador y guía paso a paso.',
-          price: 4999, compareAtPrice: 6999,
-          image: 'https://drzwclnecktguodpokir.supabase.co/storage/v1/object/public/product-images/1788523252817-blue-oyster.png',
-          badge: 'Best Seller', badgeEs: 'Más Vendido',
-        },
-      },
-      {
-        id: 'hs-2',
-        x: 68, y: 42,
-        label: '2',
-        product: {
-          id: '2', slug: 'lions-mane-fruiting-block',
-          name: "Lion's Mane Fruiting Block",
-          nameEs: 'Bloque Fructificante Melena de León',
-          description: "Ready-to-fruit Lion's Mane block. Fully colonized — just open and mist twice daily.",
-          descriptionEs: 'Bloque de Melena de León listo para fructificar. Completamente colonizado — abre y nebuliza dos veces al día.',
-          price: 3499,
-          image: 'https://images.unsplash.com/photo-1625286535466-68a6d71e4568?w=600&q=85&auto=format&fit=crop',
-          badge: 'Popular', badgeEs: 'Popular',
-        },
-      },
-    ],
-  },
-  {
-    id: 'spawn-lab',
-    name: 'Spawn Lab',
-    nameEs: 'Laboratorio de Spawn',
-    subtitle: 'Inoculate & colonize',
-    subtitleEs: 'Inocula y coloniza',
-    bg: 'https://drzwclnecktguodpokir.supabase.co/storage/v1/object/public/product-images/1788523252817-blue-oyster.png',
-    hotspots: [
-      {
-        id: 'hs-3',
-        x: 38, y: 52,
-        label: '1',
-        product: {
-          id: 'bs2', slug: 'blue-oyster-bulk-substrate',
-          name: 'Blue Oyster Sterile Bulk Substrate',
-          nameEs: 'Sustrato a Granel Esterilizado Ostra Azul',
-          description: 'Sterile, autoclaved hardwood substrate for growers who already have colonized grain spawn on hand — just open and mix.',
-          descriptionEs: 'Sustrato de madera dura esterilizado en autoclave para cultivadores que ya tienen grain spawn colonizado — solo abrir y mezclar.',
-          price: 2299, compareAtPrice: 2799,
-          image: 'https://drzwclnecktguodpokir.supabase.co/storage/v1/object/public/product-images/1788523252817-blue-oyster.png',
-          badge: 'Organic', badgeEs: 'Orgánico',
-        },
-      },
-      {
-        id: 'hs-4',
-        x: 68, y: 38,
-        label: '2',
-        product: {
-          id: '4', slug: 'shiitake-log-kit',
-          name: 'Shiitake Log Inoculation Kit',
-          nameEs: 'Kit de Inoculación de Tronco Shiitake',
-          description: 'Grow Shiitake on oak logs. Includes plug spawn, wax, and full guide. Produces 3–5 years.',
-          descriptionEs: 'Cultiva Shiitake en troncos de roble. Incluye spawn en tacos, cera y guía completa. Produce 3–5 años.',
-          price: 2999,
-          image: 'https://images.unsplash.com/photo-1755108906864-fdaadb8ab5f1?w=600&q=85&auto=format&fit=crop',
-          badge: 'Outdoor', badgeEs: 'Exterior',
-        },
-      },
-    ],
-  },
-  {
-    id: 'fruiting-room',
-    name: 'Fruiting Room',
-    nameEs: 'Sala de Fructificación',
-    subtitle: 'Watch them emerge',
-    subtitleEs: 'Obsérvalos crecer',
-    // Shiitake — the featured species of this scene (see hs-5 below).
-    bg: 'https://images.unsplash.com/photo-1755108906864-fdaadb8ab5f1?w=1920&h=1080&q=90&auto=format&fit=crop',
-    hotspots: [
-      {
-        id: 'hs-5',
-        x: 52, y: 44,
-        label: '1',
-        product: {
-          id: '4', slug: 'shiitake-log-kit',
-          name: 'Shiitake Log Inoculation Kit',
-          nameEs: 'Kit de Inoculación de Tronco Shiitake',
-          description: 'Grow Shiitake on oak logs. Includes plug spawn, wax, and full guide. Produces 3–5 years.',
-          descriptionEs: 'Cultiva Shiitake en troncos de roble. Incluye spawn en tacos, cera y guía completa. Produce 3–5 años.',
-          price: 2999,
-          image: 'https://images.unsplash.com/photo-1755108906864-fdaadb8ab5f1?w=600&q=85&auto=format&fit=crop',
-        },
-      },
-      {
-        id: 'hs-5b',
-        x: 30, y: 60,
-        label: '2',
-        product: {
-          id: '2', slug: 'lions-mane-fruiting-block',
-          name: "Lion's Mane Fruiting Block",
-          nameEs: 'Bloque Fructificante Melena de León',
-          description: "Ready-to-fruit Lion's Mane block. Fully colonized — just open and mist twice daily.",
-          descriptionEs: 'Bloque de Melena de León listo para fructificar. Completamente colonizado.',
-          price: 3499,
-          image: 'https://images.unsplash.com/photo-1625286535466-68a6d71e4568?w=600&q=85&auto=format&fit=crop',
-        },
-      },
-    ],
-  },
-  {
-    id: 'apothecary',
-    name: 'Apothecary',
-    nameEs: 'Apotecaria',
-    subtitle: 'Ancient remedies, modern science',
-    subtitleEs: 'Remedios ancestrales, ciencia moderna',
-    // Reishi — the featured species of this scene (see hs-6 below).
-    bg: 'https://images.unsplash.com/photo-1786122622924-118eb20d8850?w=1920&h=1080&q=90&auto=format&fit=crop',
-    hotspots: [
-      {
-        id: 'hs-6',
-        x: 48, y: 50,
-        label: '1',
-        product: {
-          id: '5', slug: 'reishi-dual-extract-tincture',
-          name: 'Reishi Dual-Extract Tincture',
-          nameEs: 'Tintura de Doble Extracción de Reishi',
-          description: '2oz dual-extract tincture. Organic Ganoderma lucidum fruiting bodies. 50:1 concentration.',
-          descriptionEs: 'Tintura de doble extracción de 60ml. Cuerpos fructificantes orgánicos de Ganoderma lucidum. Concentración 50:1.',
-          price: 3999,
-          image: 'https://images.unsplash.com/photo-1786122622924-118eb20d8850?w=600&q=85&auto=format&fit=crop',
-          badge: 'Medicinal', badgeEs: 'Medicinal',
-        },
-      },
-    ],
-  },
-]
 
 function HotspotPin({ label, isActive }: { label: string; isActive: boolean }) {
   return (
@@ -210,15 +65,56 @@ function HotspotPin({ label, isActive }: { label: string; isActive: boolean }) {
   )
 }
 
-export function LabTour() {
-  const locale = useLocale()
+export function LabTour({ products }: { products: Product[] }) {
+  const locale = useLocale() as 'en' | 'es'
   const es = locale === 'es'
+  const t = useTranslations('lab.tour')
+  const { addItem, openCart } = useCartStore()
+
+  // The pins point at real catalog products. A product that is archived or missing simply gets no
+  // pin, so a link on this page can never lead to a 404. The text fields exist in both languages
+  // because the panel below reads them that way; both hold the visitor's current language.
+  const scenes: Scene[] = useMemo(() => {
+    const bySlug = new Map(products.map((product) => [product.slug, product]))
+    return SCENE_LAYOUT.map((layout) => {
+      const name = t(`scenes.${layout.id}.name`)
+      const subtitle = t(`scenes.${layout.id}.subtitle`)
+      const hotspots: Hotspot[] = []
+      layout.hotspots.forEach((spot) => {
+        const product = bySlug.get(spot.slug)
+        const variant = product?.variants[0]
+        if (!product || !variant) return
+        const badge = product.isOrganic ? t('organic') : undefined
+        hotspots.push({
+          id: spot.id,
+          x: spot.x,
+          y: spot.y,
+          label: String(hotspots.length + 1),
+          product: {
+            id: product.id,
+            slug: product.slug,
+            name: product.name[locale],
+            nameEs: product.name[locale],
+            description: product.description[locale],
+            descriptionEs: product.description[locale],
+            price: variant.price,
+            compareAtPrice: product.compareAtPrice && product.compareAtPrice > variant.price ? product.compareAtPrice : undefined,
+            image: product.images[0] ?? '',
+            badge,
+            badgeEs: badge,
+            variantId: variant.id,
+          },
+        })
+      })
+      return { id: layout.id, name, nameEs: name, subtitle, subtitleEs: subtitle, bg: t(`scenes.${layout.id}.image`), hotspots }
+    }).filter((scene) => scene.hotspots.length > 0)
+  }, [products, locale, t])
 
   const [sceneIdx, setSceneIdx] = useState(0)
   const [direction, setDirection] = useState(1)
   const [activeHotspot, setActiveHotspot] = useState<Hotspot | null>(null)
 
-  const scene = SCENES[sceneIdx]
+  const scene = scenes[sceneIdx] ?? scenes[0]
 
   const goTo = useCallback((idx: number, dir?: number) => {
     setDirection(dir ?? (idx > sceneIdx ? 1 : -1))
@@ -226,8 +122,8 @@ export function LabTour() {
     setSceneIdx(idx)
   }, [sceneIdx])
 
-  const goNext = useCallback(() => goTo((sceneIdx + 1) % SCENES.length, 1), [goTo, sceneIdx])
-  const goPrev = useCallback(() => goTo((sceneIdx - 1 + SCENES.length) % SCENES.length, -1), [goTo, sceneIdx])
+  const goNext = useCallback(() => goTo((sceneIdx + 1) % scenes.length, 1), [goTo, sceneIdx])
+  const goPrev = useCallback(() => goTo((sceneIdx - 1 + scenes.length) % scenes.length, -1), [goTo, sceneIdx])
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -245,9 +141,7 @@ export function LabTour() {
     exit: (dir: number) => ({ opacity: 0, x: -dir * 80 }),
   }
 
-  const trust = es
-    ? ['Orgánico', 'Envío en 24h', 'Garantía 30 días']
-    : ['Organic', 'Ships in 24h', '30-day guarantee']
+  const trust = [t('trust1'), t('trust2'), t('trust3')]
 
   return (
     <div
@@ -308,7 +202,7 @@ export function LabTour() {
       {/* Scene label — top left */}
       <div className="absolute top-6 left-6 z-20 pointer-events-none">
         <p className="text-amber/60 text-[10px] uppercase tracking-[0.25em] font-mono mb-1.5">
-          {es ? 'Escena' : 'Scene'} {sceneIdx + 1} / {SCENES.length}
+          {es ? 'Escena' : 'Scene'} {sceneIdx + 1} / {scenes.length}
         </p>
         <AnimatePresence mode="wait">
           <motion.div
@@ -359,7 +253,7 @@ export function LabTour() {
         </button>
 
         <div className="flex items-center gap-2">
-          {SCENES.map((s, i) => (
+          {scenes.map((s, i) => (
             <button
               key={s.id}
               onClick={() => goTo(i)}
@@ -387,7 +281,7 @@ export function LabTour() {
 
       {/* Scene name strip at bottom — desktop */}
       <div className="hidden lg:flex absolute bottom-20 inset-x-0 z-20 items-center justify-center gap-1 pointer-events-none">
-        {SCENES.map((s, i) => (
+        {scenes.map((s, i) => (
           <span
             key={s.id}
             className={cn(
@@ -491,7 +385,21 @@ export function LabTour() {
 
               {/* CTAs */}
               <div className="px-5 pb-6 pt-3 border-t border-ds-border flex flex-col gap-2.5 flex-shrink-0">
-                <button className="w-full py-3.5 rounded-none bg-amber text-bg font-semibold text-sm hover:bg-amber-bright transition-colors shadow-[0_4px_20px_rgba(212,145,58,0.35)] active:scale-[0.98]">
+                <button
+                  type="button"
+                  onClick={() => {
+                    const { product } = activeHotspot
+                    addItem({
+                      productId: product.id,
+                      variantId: product.variantId,
+                      name: product.name,
+                      price: product.price,
+                      quantity: 1,
+                      image: product.image,
+                    })
+                    openCart()
+                  }}
+                  className="w-full py-3.5 rounded-none bg-amber text-bg font-semibold text-sm hover:bg-amber-bright transition-colors shadow-[0_4px_20px_rgba(212,145,58,0.35)] active:scale-[0.98]">
                   {es ? 'Agregar al Carrito' : 'Add to Cart'}
                 </button>
                 <Link

@@ -4,18 +4,14 @@ import { prisma } from '@/lib/prisma'
 import { getCurrentStore } from '@/lib/current-store'
 import { resolveShippingRates, cartWeightGrams } from '@/lib/shipping'
 import { resolveTaxRateIds } from '@/lib/tax'
+import { isStripeTestMode } from '@/lib/stripe-mode'
 import type { CartItem } from '@/types/product'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: '2024-06-20' })
 
-// Portfolio demo mode: this site is shown as a code sample, not a live store, while the real
-// domain is being sorted out. Checkout is disabled server-side (not just hidden in the UI) so
-// no request — scripted or otherwise — can reach the real, live-mode Stripe account. Flip this
-// off only once the site is actually reopened for real customers.
-const PORTFOLIO_DEMO_MODE = true
-
 export async function POST(req: NextRequest) {
-  if (PORTFOLIO_DEMO_MODE) {
+  // Portfolio demo: payments run only against a Stripe TEST key (see lib/stripe-mode.ts).
+  if (!isStripeTestMode()) {
     return NextResponse.json(
       { error: 'This is a portfolio demo project — checkout is disabled.' },
       { status: 403 }

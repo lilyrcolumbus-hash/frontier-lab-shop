@@ -44,6 +44,17 @@ export function withStoreAdmin<Ctx = undefined>(
     } else if (options.requireOwner && admin.role !== 'owner') {
       return NextResponse.json({ error: 'Only the store owner can do that.' }, { status: 403 })
     }
-    return handler(req, admin, ctx)
+    const response = await handler(req, admin, ctx)
+    if (admin.isDemo && req.nextUrl.pathname === '/api/admin/settings' && response.ok) {
+      // The business email and street address are not for public display.
+      const body = await response.clone().json()
+      if (body?.settings) {
+        for (const field of ['supportEmail', 'addressLine1', 'addressLine2', 'postalCode']) {
+          if (body.settings[field]) body.settings[field] = '(hidden in the demo)'
+        }
+        return NextResponse.json(body)
+      }
+    }
+    return response
   }
 }
