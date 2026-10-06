@@ -32,8 +32,8 @@ export default async function ReturnsPage({ params }: PageProps) {
           </h2>
           <p className="text-cream-muted leading-relaxed">
             {lang === 'en'
-              ? 'Because these are living, perishable biological materials, we cannot accept returns once an order has shipped. If your order arrives damaged, dead, or visibly contaminated, contact us within 48 hours of delivery with photos at lyhoffllc.info@gmail.com and we will arrange a replacement or refund at our discretion.'
-              : 'Debido a que son materiales biológicos vivos y perecederos, no podemos aceptar devoluciones una vez que el pedido ha sido enviado. Si tu pedido llega dañado, muerto o visiblemente contaminado, contáctanos dentro de las 48 horas posteriores a la entrega con fotos a lyhoffllc.info@gmail.com y coordinaremos un reemplazo o reembolso a nuestra discreción.'}
+              ? 'Because these are living, perishable biological materials, we cannot accept returns once an order has shipped. If your order arrives damaged, dead, or visibly contaminated, contact us within 48 hours of delivery with photos at codebake.SaaS@outlook.com and we will arrange a replacement or refund at our discretion.'
+              : 'Debido a que son materiales biológicos vivos y perecederos, no podemos aceptar devoluciones una vez que el pedido ha sido enviado. Si tu pedido llega dañado, muerto o visiblemente contaminado, contáctanos dentro de las 48 horas posteriores a la entrega con fotos a codebake.SaaS@outlook.com y coordinaremos un reemplazo o reembolso a nuestra discreción.'}
           </p>
         </section>
 
@@ -54,8 +54,8 @@ export default async function ReturnsPage({ params }: PageProps) {
           </h2>
           <p className="text-cream-muted leading-relaxed">
             {lang === 'en'
-              ? 'Email lyhoffllc.info@gmail.com with your order number, a description of the issue, and photos. We aim to respond within 1–2 business days.'
-              : 'Escribe a lyhoffllc.info@gmail.com con tu número de pedido, una descripción del problema y fotos. Buscamos responder dentro de 1–2 días hábiles.'}
+              ? 'Email codebake.SaaS@outlook.com with your order number, a description of the issue, and photos. We aim to respond within 1–2 business days.'
+              : 'Escribe a codebake.SaaS@outlook.com con tu número de pedido, una descripción del problema y fotos. Buscamos responder dentro de 1–2 días hábiles.'}
           </p>
         </section>
       </div>

@@ -42,8 +42,8 @@ const FAQS: { q: Record<Lang, string>; a: Record<Lang, string> }[] = [
   {
     q: { en: "My culture or spawn arrived contaminated — what do I do?", es: 'Mi cultivo o grano llegó contaminado — ¿qué hago?' },
     a: {
-      en: 'Email us at lyhoffllc.info@gmail.com within 48 hours of delivery with photos of the contamination and we\'ll arrange a replacement or refund.',
-      es: 'Escríbenos a lyhoffllc.info@gmail.com dentro de las 48 horas de la entrega con fotos de la contaminación y coordinamos un reemplazo o reembolso.',
+      en: 'Email us at codebake.SaaS@outlook.com within 48 hours of delivery with photos of the contamination and we\'ll arrange a replacement or refund.',
+      es: 'Escríbenos a codebake.SaaS@outlook.com dentro de las 48 horas de la entrega con fotos de la contaminación y coordinamos un reemplazo o reembolso.',
     },
   },
   {
@@ -63,8 +63,8 @@ const FAQS: { q: Record<Lang, string>; a: Record<Lang, string> }[] = [
   {
     q: { en: "Still have a question?", es: '¿Tienes otra pregunta?' },
     a: {
-      en: 'Reach us any time at lyhoffllc.info@gmail.com.',
-      es: 'Escríbenos cuando quieras a lyhoffllc.info@gmail.com.',
+      en: 'Reach us any time at codebake.SaaS@outlook.com.',
+      es: 'Escríbenos cuando quieras a codebake.SaaS@outlook.com.',
     },
   },
 ]

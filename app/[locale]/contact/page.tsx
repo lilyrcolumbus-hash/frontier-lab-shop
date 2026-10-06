@@ -38,10 +38,10 @@ export default async function ContactPage({ params }: PageProps) {
               {lang === 'en' ? 'Email' : 'Correo'}
             </p>
             <a
-              href="mailto:lyhoffllc.info@gmail.com"
+              href="mailto:codebake.SaaS@outlook.com"
               className="text-accent hover:underline text-lg font-body font-medium"
             >
-              lyhoffllc.info@gmail.com
+              codebake.SaaS@outlook.com
             </a>
           </div>
           <div>

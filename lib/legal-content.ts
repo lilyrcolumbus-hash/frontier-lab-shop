@@ -92,10 +92,10 @@ export const PRIVACY_SECTIONS: LegalSection[] = [
     title: { en: '7. Your Rights', es: '7. Tus Derechos' },
     body: {
       en: [
-        'You can request access to, correction of, or deletion of your personal information at any time by contacting us at lyhoffllc.info@gmail.com. You can unsubscribe from marketing emails using the link in any email we send.',
+        'You can request access to, correction of, or deletion of your personal information at any time by contacting us at codebake.SaaS@outlook.com. You can unsubscribe from marketing emails using the link in any email we send.',
       ],
       es: [
-        'Puedes solicitar acceso, corrección o eliminación de tu información personal en cualquier momento escribiéndonos a lyhoffllc.info@gmail.com. Puedes darte de baja de los correos de marketing usando el enlace en cualquier correo que te enviemos.',
+        'Puedes solicitar acceso, corrección o eliminación de tu información personal en cualquier momento escribiéndonos a codebake.SaaS@outlook.com. Puedes darte de baja de los correos de marketing usando el enlace en cualquier correo que te enviemos.',
       ],
     },
   },
@@ -124,8 +124,8 @@ export const PRIVACY_SECTIONS: LegalSection[] = [
   {
     title: { en: '10. Contact Us', es: '10. Contáctanos' },
     body: {
-      en: ['Questions about this Privacy Policy? Email us at lyhoffllc.info@gmail.com.'],
-      es: ['¿Preguntas sobre esta Política de Privacidad? Escríbenos a lyhoffllc.info@gmail.com.'],
+      en: ['Questions about this Privacy Policy? Email us at codebake.SaaS@outlook.com.'],
+      es: ['¿Preguntas sobre esta Política de Privacidad? Escríbenos a codebake.SaaS@outlook.com.'],
     },
   },
 ]
@@ -190,11 +190,11 @@ export const TERMS_SECTIONS: LegalSection[] = [
     title: { en: '6. Returns & Refunds', es: '6. Devoluciones y Reembolsos' },
     body: {
       en: [
-        'Because most of our products (liquid cultures, grain spawn, bulk substrate, and fruiting blocks) are living, perishable biological materials, we cannot accept returns once an order has shipped. If your order arrives damaged, dead, or visibly contaminated, contact us within 48 hours of delivery with photos at lyhoffllc.info@gmail.com and we will arrange a replacement or refund at our discretion.',
+        'Because most of our products (liquid cultures, grain spawn, bulk substrate, and fruiting blocks) are living, perishable biological materials, we cannot accept returns once an order has shipped. If your order arrives damaged, dead, or visibly contaminated, contact us within 48 hours of delivery with photos at codebake.SaaS@outlook.com and we will arrange a replacement or refund at our discretion.',
         'Non-biological equipment items (such as extraction lids and tools) may be returned unused, in original packaging, within 30 days of delivery; the buyer is responsible for return shipping unless the item was defective or incorrect.',
       ],
       es: [
-        'Debido a que la mayoría de nuestros productos (cultivos líquidos, grano inoculado, sustrato a granel y bloques de fructificación) son materiales biológicos vivos y perecederos, no podemos aceptar devoluciones una vez que el pedido ha sido enviado. Si tu pedido llega dañado, muerto o visiblemente contaminado, contáctanos dentro de las 48 horas posteriores a la entrega con fotos a lyhoffllc.info@gmail.com y coordinaremos un reemplazo o reembolso a nuestra discreción.',
+        'Debido a que la mayoría de nuestros productos (cultivos líquidos, grano inoculado, sustrato a granel y bloques de fructificación) son materiales biológicos vivos y perecederos, no podemos aceptar devoluciones una vez que el pedido ha sido enviado. Si tu pedido llega dañado, muerto o visiblemente contaminado, contáctanos dentro de las 48 horas posteriores a la entrega con fotos a codebake.SaaS@outlook.com y coordinaremos un reemplazo o reembolso a nuestra discreción.',
         'Los artículos de equipo no biológico (como tapas de extracción y herramientas) pueden devolverse sin usar, en su empaque original, dentro de 30 días de la entrega; el comprador es responsable del envío de devolución salvo que el artículo estuviera defectuoso o incorrecto.',
       ],
     },
@@ -268,8 +268,8 @@ export const TERMS_SECTIONS: LegalSection[] = [
   {
     title: { en: '13. Contact Us', es: '13. Contáctanos' },
     body: {
-      en: ['Questions about these Terms? Email us at lyhoffllc.info@gmail.com.'],
-      es: ['¿Preguntas sobre estos Términos? Escríbenos a lyhoffllc.info@gmail.com.'],
+      en: ['Questions about these Terms? Email us at codebake.SaaS@outlook.com.'],
+      es: ['¿Preguntas sobre estos Términos? Escríbenos a codebake.SaaS@outlook.com.'],
     },
   },
 ]

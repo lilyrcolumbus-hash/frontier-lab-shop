@@ -33,8 +33,8 @@ export default async function PressPage({ params }: PageProps) {
         </p>
         <p className="text-cream-muted leading-relaxed mt-4">
           {lang === 'en'
-            ? 'For interviews, product samples, or media inquiries, email us at lyhoffllc.info@gmail.com.'
-            : 'Para entrevistas, muestras de producto o consultas de prensa, escríbenos a lyhoffllc.info@gmail.com.'}
+            ? 'For interviews, product samples, or media inquiries, email us at codebake.SaaS@outlook.com.'
+            : 'Para entrevistas, muestras de producto o consultas de prensa, escríbenos a codebake.SaaS@outlook.com.'}
         </p>
       </div>
     </div>

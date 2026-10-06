@@ -13,3 +13,8 @@ prisma/*.db
 
 # internal operating notes — not for public visibility
 CLAUDE.md
+
+# Internal notes and tool output: never publish
+CLAUDE.md
+.claude/
+.playwright-mcp/

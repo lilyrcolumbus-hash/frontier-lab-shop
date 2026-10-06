@@ -33,8 +33,8 @@ export default async function CareersPage({ params }: PageProps) {
         </p>
         <p className="text-cream-muted leading-relaxed mt-4">
           {lang === 'en'
-            ? 'Want to reach out anyway? Email us at lyhoffllc.info@gmail.com.'
-            : '¿Quieres escribirnos de todas formas? Contáctanos a lyhoffllc.info@gmail.com.'}
+            ? 'Want to reach out anyway? Email us at codebake.SaaS@outlook.com.'
+            : '¿Quieres escribirnos de todas formas? Contáctanos a codebake.SaaS@outlook.com.'}
         </p>
       </div>
     </div>

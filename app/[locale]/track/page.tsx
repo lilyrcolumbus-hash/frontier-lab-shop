@@ -43,8 +43,8 @@ export default async function TrackPage({ params }: PageProps) {
           </h2>
           <p className="text-cream-muted leading-relaxed">
             {lang === 'en'
-              ? 'Email us at lyhoffllc.info@gmail.com with your order number (from your confirmation email) and we\'ll look it up for you.'
-              : 'Escríbenos a lyhoffllc.info@gmail.com con tu número de pedido (del correo de confirmación) y lo buscamos por ti.'}
+              ? 'Email us at codebake.SaaS@outlook.com with your order number (from your confirmation email) and we\'ll look it up for you.'
+              : 'Escríbenos a codebake.SaaS@outlook.com con tu número de pedido (del correo de confirmación) y lo buscamos por ti.'}
           </p>
         </section>
       </div>
