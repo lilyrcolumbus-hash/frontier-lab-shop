@@ -2,9 +2,9 @@
 
 **Live:** [myfrontierlab.com](https://myfrontierlab.com) (also at [shrooms-five.vercel.app](https://shrooms-five.vercel.app))
 
-> **Portfolio demo mode.** Checkout is disabled server-side: Stripe is still wired to a real,
-> live-mode account, but no orders are processed. The rest of the site, including real prices
-> and the admin panel's read path, works as built.
+> **Portfolio demo mode.** Checkout only runs against a Stripe **test** key (`sk_test_...`): with a live key it
+> stays switched off, so a real card can never be charged. In test mode, use card `4242 4242 4242 4242`.
+> The rest of the site, including real prices and the admin panel, works as built.
 
 A bilingual (EN/ES) premium mushroom cultivation e-commerce and education platform: a 28-product
 catalog (liquid culture, grain spawn, bulk substrate, fruiting blocks), an 8-species encyclopedia,
@@ -13,9 +13,9 @@ panel the owner runs the whole business from — no developer in the loop for da
 
 ## Admin panel
 
-**Try it:** open [myfrontierlab.com/account](https://myfrontierlab.com/account), use the public demo account shown on
-that page, then go to `/admin`. The demo account is read-only (every write is refused by the server) and
-customer data is hidden from it.
+**Try it:** open [myfrontierlab.com/admin](https://myfrontierlab.com/admin) and press "Enter the admin demo". It is
+read-only (every write is refused by the server), and customer data and the business email and address are
+hidden from it.
 
 Everything a merchant needs to run the store day to day, without touching code: orders (tracking,
 partial fulfillment, printable packing slips, refunds/cancellations wired to real Stripe
