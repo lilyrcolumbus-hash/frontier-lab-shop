@@ -1,4 +1,4 @@
-# Shrooms — AI Photo Prompts
+# Frontier Lab — AI Photo Prompts
 
 Usa estos prompts en **OpenArt**, **Midjourney**, **Kling**, o cualquier generador de imágenes.
 Cada prompt está listo para pegar directamente. Genera en **1:1** (cuadrado) o **4:3** para product cards.

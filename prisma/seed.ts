@@ -3,7 +3,7 @@ import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
 async function main() {
-  console.log('🍄 Seeding Shrooms database...')
+  console.log('🍄 Seeding Frontier Lab database...')
 
   // Superseded by prisma/migrate-catalog.ts, but still wired to `pnpm db:seed` for local/dev
   // resets — resolve (or create) the Frontier Lab store so every row below can be scoped.
@@ -316,8 +316,8 @@ async function main() {
       slug: 'lions-mane-liquid-culture',
       nameEn: "Lion's Mane Liquid Culture Syringe",
       nameEs: 'Jeringa de Cultivo Líquido Melena de León',
-      descriptionEn: 'shrooms Culture Bank — 10cc live Hericium erinaceus mycelium. Lab-isolated, colonizes grain in 5–10 days. Includes 16G needle and alcohol swab.',
-      descriptionEs: 'shrooms Culture Bank — 10cc de micelio vivo de Hericium erinaceus. Coloniza en 5–10 días. Incluye aguja 16G y swab de alcohol.',
+      descriptionEn: 'Culture Bank — 10cc live Hericium erinaceus mycelium. Lab-isolated, colonizes grain in 5–10 days. Includes 16G needle and alcohol swab.',
+      descriptionEs: 'Culture Bank — 10cc de micelio vivo de Hericium erinaceus. Coloniza en 5–10 días. Incluye aguja 16G y swab de alcohol.',
       category: 'spawn', subcategory: 'liquid-culture',
       speciesId: lionsMaineSpecies?.id,
       price: 1799, compareAtPrice: null,
@@ -333,8 +333,8 @@ async function main() {
       slug: 'blue-oyster-liquid-culture',
       nameEn: 'Blue Oyster Liquid Culture Syringe',
       nameEs: 'Jeringa de Cultivo Líquido Ostra Azul',
-      descriptionEn: 'shrooms Culture Bank — 10cc live Pleurotus ostreatus mycelium. Lab-isolated, colonizes grain in 5–10 days. Includes 16G needle and alcohol swab.',
-      descriptionEs: 'shrooms Culture Bank — 10cc de micelio vivo de Pleurotus ostreatus. Coloniza en 5–10 días. Incluye aguja 16G y swab de alcohol.',
+      descriptionEn: 'Culture Bank — 10cc live Pleurotus ostreatus mycelium. Lab-isolated, colonizes grain in 5–10 days. Includes 16G needle and alcohol swab.',
+      descriptionEs: 'Culture Bank — 10cc de micelio vivo de Pleurotus ostreatus. Coloniza en 5–10 días. Incluye aguja 16G y swab de alcohol.',
       category: 'spawn', subcategory: 'liquid-culture',
       speciesId: blueOysterSpecies?.id,
       price: 1799, compareAtPrice: null,
@@ -350,8 +350,8 @@ async function main() {
       slug: 'reishi-liquid-culture',
       nameEn: 'Reishi Liquid Culture Syringe',
       nameEs: 'Jeringa de Cultivo Líquido Reishi',
-      descriptionEn: 'shrooms Culture Bank — 10cc live Ganoderma lucidum mycelium. Lab-isolated, colonizes grain in 5–10 days. Includes 16G needle and alcohol swab.',
-      descriptionEs: 'shrooms Culture Bank — 10cc de micelio vivo de Ganoderma lucidum. Coloniza en 5–10 días. Incluye aguja 16G y swab de alcohol.',
+      descriptionEn: 'Culture Bank — 10cc live Ganoderma lucidum mycelium. Lab-isolated, colonizes grain in 5–10 days. Includes 16G needle and alcohol swab.',
+      descriptionEs: 'Culture Bank — 10cc de micelio vivo de Ganoderma lucidum. Coloniza en 5–10 días. Incluye aguja 16G y swab de alcohol.',
       category: 'spawn', subcategory: 'liquid-culture',
       speciesId: reishiSpecies?.id,
       price: 1799, compareAtPrice: null,
@@ -367,8 +367,8 @@ async function main() {
       slug: 'shiitake-liquid-culture',
       nameEn: 'Shiitake Liquid Culture Syringe',
       nameEs: 'Jeringa de Cultivo Líquido Shiitake',
-      descriptionEn: 'shrooms Culture Bank — 10cc live Lentinula edodes mycelium. Lab-isolated, colonizes grain in 5–10 days. Includes 16G needle and alcohol swab.',
-      descriptionEs: 'shrooms Culture Bank — 10cc de micelio vivo de Lentinula edodes. Coloniza en 5–10 días. Incluye aguja 16G y swab de alcohol.',
+      descriptionEn: 'Culture Bank — 10cc live Lentinula edodes mycelium. Lab-isolated, colonizes grain in 5–10 days. Includes 16G needle and alcohol swab.',
+      descriptionEs: 'Culture Bank — 10cc de micelio vivo de Lentinula edodes. Coloniza en 5–10 días. Incluye aguja 16G y swab de alcohol.',
       category: 'spawn', subcategory: 'liquid-culture',
       speciesId: shiitakeSpecies?.id,
       price: 1799, compareAtPrice: null,
