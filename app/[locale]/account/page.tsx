@@ -2,6 +2,7 @@
 
 import { Suspense, useEffect, useState } from 'react'
 import { DEMO_ADMIN_EMAIL, DEMO_ADMIN_PASSWORD } from '@/lib/demo'
+import { IS_DEMO } from '@/lib/site-mode'
 import { useTranslations, useLocale } from 'next-intl'
 import { useSearchParams } from 'next/navigation'
 import { useRouter, Link } from '@/navigation'
@@ -195,21 +196,23 @@ export default function AccountPage() {
       </div>
 
       <div className="max-w-md mx-auto px-4 py-16">
-        <div className="mb-6 border border-ds-border bg-surface p-5 text-sm text-cream-muted">
-          <p className="font-semibold text-cream">Portfolio demo: see the admin panel</p>
-          <p className="mt-1">
-            One click and you are inside. It is read-only, so nothing you do is saved, and customer data is
-            hidden.
-          </p>
-          <button
-            type="button"
-            disabled={formLoading}
-            onClick={handleDemoSignIn}
-            className="mt-3 w-full border border-cream bg-cream px-4 py-2.5 text-sm font-semibold text-bg disabled:opacity-60"
-          >
-            {formLoading ? 'Opening…' : 'Enter the admin demo'}
-          </button>
-        </div>
+        {IS_DEMO && (
+          <div className="mb-6 border border-ds-border bg-surface p-5 text-sm text-cream-muted">
+            <p className="font-semibold text-cream">Portfolio demo: see the admin panel</p>
+            <p className="mt-1">
+              One click and you are inside. It is read-only, so nothing you do is saved, and customer data is
+              hidden.
+            </p>
+            <button
+              type="button"
+              disabled={formLoading}
+              onClick={handleDemoSignIn}
+              className="mt-3 w-full border border-cream bg-cream px-4 py-2.5 text-sm font-semibold text-bg disabled:opacity-60"
+            >
+              {formLoading ? 'Opening…' : 'Enter the admin demo'}
+            </button>
+          </div>
+        )}
         <form onSubmit={handleSignIn} className="bg-elevated rounded-none border border-ds-border p-8 space-y-5">
           <div className="space-y-4">
             <Input

@@ -1,8 +1,11 @@
 /**
- * This site is a portfolio demo, so it never takes real payments. Checkout only runs when the
- * Stripe secret key is a TEST key (sk_test_...). With a live key (sk_live_...), or no key at all,
- * checkout stays switched off, so a wrong key in the environment can never charge a real card.
+ * Which kind of Stripe key this deployment has. Whether checkout may run is decided in
+ * lib/site-mode.ts, which compares the key type with the deployment mode (demo or real store).
  */
 export function isStripeTestMode(): boolean {
   return (process.env.STRIPE_SECRET_KEY ?? '').startsWith('sk_test_')
+}
+
+export function isStripeLiveMode(): boolean {
+  return (process.env.STRIPE_SECRET_KEY ?? '').startsWith('sk_live_')
 }
