@@ -92,7 +92,12 @@ export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const { count, items, removeItem, updateQty, isOpen, openCart, closeCart } = useCartStore()
-  const cartCount = count()
+  // The cart is persisted in localStorage, which the server cannot see. Reading it during the first
+  // render made the client disagree with the server HTML for any visitor with items saved (React
+  // hydration errors #418/#423), so the saved cart is only shown once the page has mounted.
+  const [hasMounted, setHasMounted] = useState(false)
+  useEffect(() => setHasMounted(true), [])
+  const cartCount = hasMounted ? count() : 0
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20)
@@ -241,7 +246,7 @@ export function Header() {
       <CartDrawer
         isOpen={isOpen}
         onClose={closeCart}
-        items={items}
+        items={hasMounted ? items : []}
         onRemove={removeItem}
         onUpdateQty={updateQty}
       />
