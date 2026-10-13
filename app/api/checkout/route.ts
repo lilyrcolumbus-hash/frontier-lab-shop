@@ -4,17 +4,22 @@ import { prisma } from '@/lib/prisma'
 import { getCurrentStore } from '@/lib/current-store'
 import { resolveShippingRates, cartWeightGrams } from '@/lib/shipping'
 import { resolveTaxRateIds } from '@/lib/tax'
-import { isStripeTestMode } from '@/lib/stripe-mode'
+import { IS_DEMO, checkoutAllowed } from '@/lib/site-mode'
 import type { CartItem } from '@/types/product'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: '2024-06-20' })
 
 export async function POST(req: NextRequest) {
-  // Portfolio demo: payments run only against a Stripe TEST key (see lib/stripe-mode.ts).
-  if (!isStripeTestMode()) {
+  // Checkout runs only when the Stripe key type matches the deployment (demo = TEST key, real
+  // store = LIVE key), so a demo can never charge a real card (see lib/site-mode.ts).
+  if (!checkoutAllowed()) {
     return NextResponse.json(
-      { error: 'This is a portfolio demo project — checkout is disabled.' },
-      { status: 403 }
+      {
+        error: IS_DEMO
+          ? 'This is a portfolio demo project — checkout is disabled.'
+          : 'Checkout is not available right now. Please try again later.',
+      },
+      { status: IS_DEMO ? 403 : 503 }
     )
   }
   try {

@@ -1,10 +1,13 @@
 # Frontier Lab
 
-**Live:** [myfrontierlab.com](https://myfrontierlab.com) (also at [shrooms-five.vercel.app](https://shrooms-five.vercel.app))
+**Live store:** [myfrontierlab.com](https://myfrontierlab.com)
+**Public demo (web + admin, fake data):** link added here when the demo deployment is live.
 
-> **Portfolio demo mode.** Checkout only runs against a Stripe **test** key (`sk_test_...`): with a live key it
-> stays switched off, so a real card can never be charged. In test mode, use card `4242 4242 4242 4242`.
-> The rest of the site, including real prices and the admin panel, works as built.
+> **One codebase, two deployments.** The real store and the public demo run the same code, each with its
+> own database, Stripe keys and URL. `NEXT_PUBLIC_DEMO_MODE=true` marks the demo: it shows a banner, offers
+> the one-click read-only admin, and takes **test** payments only (card `4242 4242 4242 4242`). Checkout
+> only runs when the Stripe key type matches the deployment (demo = `sk_test_...`, real store =
+> `sk_live_...`), so a demo can never charge a real card.
 
 A bilingual (EN/ES) premium mushroom cultivation e-commerce and education platform: a 28-product
 catalog (liquid culture, grain spawn, bulk substrate, fruiting blocks), an 8-species encyclopedia,
@@ -13,9 +16,9 @@ panel the owner runs the whole business from — no developer in the loop for da
 
 ## Admin panel
 
-**Try it:** open [myfrontierlab.com/admin](https://myfrontierlab.com/admin) and press "Enter the admin demo". It is
-read-only (every write is refused by the server), and customer data and the business email and address are
-hidden from it.
+**Try it:** open `/admin` on the public demo and press "Enter the admin demo". It is read-only (every write
+is refused by the server), and customer data and the business email and address are hidden from it. The
+real store has no demo account.
 
 Everything a merchant needs to run the store day to day, without touching code: orders (tracking,
 partial fulfillment, printable packing slips, refunds/cancellations wired to real Stripe

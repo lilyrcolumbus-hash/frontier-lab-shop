@@ -3,6 +3,7 @@ import { createClient } from '@/lib/supabase/server'
 import type { Store } from '@prisma/client'
 import type { User } from '@supabase/supabase-js'
 import { DEMO_ADMIN_EMAIL } from '@/lib/demo'
+import { IS_DEMO } from '@/lib/site-mode'
 
 export type StoreAdmin = {
   user: User
@@ -21,6 +22,11 @@ export async function requireStoreAdmin(): Promise<StoreAdmin | null> {
   } = await supabase.auth.getUser()
   if (!user) return null
 
+  // The public demo account only exists for the demo deployment. On the real store it never gets
+  // in, even if the account is still in the database.
+  const isDemoAccount = user.email?.toLowerCase() === DEMO_ADMIN_EMAIL
+  if (isDemoAccount && !IS_DEMO) return null
+
   const member = await prisma.storeMember.findFirst({
     where: { userId: user.id },
     include: { store: true },
@@ -31,6 +37,6 @@ export async function requireStoreAdmin(): Promise<StoreAdmin | null> {
     user,
     store: member.store,
     role: member.role as 'owner' | 'staff',
-    isDemo: user.email?.toLowerCase() === DEMO_ADMIN_EMAIL,
+    isDemo: isDemoAccount,
   }
 }
