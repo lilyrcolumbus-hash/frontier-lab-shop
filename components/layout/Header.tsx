@@ -8,7 +8,7 @@ import { LanguageSwitcher } from './LanguageSwitcher'
 import { MobileMenu } from './MobileMenu'
 import { CartDrawer } from '@/components/shop/CartDrawer'
 import { useCartStore } from '@/lib/cart-store'
-import { IS_DEMO, DEMO_BANNER_HEIGHT } from '@/lib/site-mode'
+import { SHOW_TOP_NOTICE, DEMO_BANNER_HEIGHT } from '@/lib/site-mode'
 import { cn } from '@/lib/utils'
 
 interface DropdownItem {
@@ -100,14 +100,14 @@ export function Header() {
   useEffect(() => setHasMounted(true), [])
   const cartCount = hasMounted ? count() : 0
 
-  // On the demo, a slim banner sits above the page. The header is `fixed`, so it is moved down by the
+  // When a slim notice sits above the page (the demo, or the real store while closed), The header is `fixed`, so it is moved down by the
   // banner's height and slides up to the top edge as the page scrolls the banner out of view.
-  const [bannerOffset, setBannerOffset] = useState(IS_DEMO ? DEMO_BANNER_HEIGHT : 0)
+  const [bannerOffset, setBannerOffset] = useState(SHOW_TOP_NOTICE ? DEMO_BANNER_HEIGHT : 0)
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20)
-      if (IS_DEMO) setBannerOffset(Math.max(0, DEMO_BANNER_HEIGHT - window.scrollY))
+      if (SHOW_TOP_NOTICE) setBannerOffset(Math.max(0, DEMO_BANNER_HEIGHT - window.scrollY))
     }
     handleScroll()
     window.addEventListener('scroll', handleScroll, { passive: true })

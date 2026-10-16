@@ -196,8 +196,9 @@ export default function AccountPage() {
       </div>
 
       <div className="max-w-md mx-auto px-4 py-16">
-        {IS_DEMO && (
-          <div className="mb-6 border border-ds-border bg-surface p-5 text-sm text-cream-muted">
+        {/* The demo site offers only the one-click demo; the real store offers only the normal sign-in. */}
+        {IS_DEMO ? (
+          <div className="border border-ds-border bg-surface p-5 text-sm text-cream-muted">
             <p className="font-semibold text-cream">Portfolio demo: see the admin panel</p>
             <p className="mt-1">
               One click and you are inside. Your changes show on the demo shop, a Restore button puts
@@ -211,8 +212,9 @@ export default function AccountPage() {
             >
               {formLoading ? 'Opening…' : 'Enter the admin demo'}
             </button>
+            {error && <p className="mt-3 text-sm text-error">{error}</p>}
           </div>
-        )}
+        ) : (
         <form onSubmit={handleSignIn} className="bg-elevated rounded-none border border-ds-border p-8 space-y-5">
           <div className="space-y-4">
             <Input
@@ -264,6 +266,7 @@ export default function AccountPage() {
             </Link>
           </p>
         </form>
+        )}
       </div>
     </div>
   )
