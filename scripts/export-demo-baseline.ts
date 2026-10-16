@@ -12,8 +12,6 @@ import { PrismaClient } from '@prisma/client'
 import { buildBaseline } from '../lib/demo-restore'
 
 const STORE_SLUG = 'frontier-lab'
-const PRIVATE_EMAIL = 'lyhoffllc.info@gmail.com'
-const PUBLIC_EMAIL = 'codebake.SaaS@outlook.com'
 
 async function main() {
   if (!process.env.DATABASE_URL) {
@@ -24,12 +22,10 @@ async function main() {
   try {
     const store = await db.store.findUniqueOrThrow({ where: { slug: STORE_SLUG } })
     const baseline = await buildBaseline(db, store.id)
-    // This file is committed to a public repository, whose single public contact email is the CodeBake
-    // one. The legal pages in the real database still carry the owner's Gmail, so it is swapped here,
-    // in the demo copy only (the real store is not touched).
-    const text = JSON.stringify(baseline, null, 1).split(PRIVATE_EMAIL).join(PUBLIC_EMAIL)
+    // The file is committed to a public repository: check by hand that it holds no private contact data
+    // before committing a new snapshot.
     const file = join(__dirname, '..', 'prisma', 'demo-baseline.json')
-    writeFileSync(file, text + '\n')
+    writeFileSync(file, JSON.stringify(baseline, null, 1) + '\n')
     console.log(
       `Wrote ${file}: ${baseline.products.length} products, ${baseline.variants.length} variants, ` +
         `${baseline.species.length} species, ${baseline.collections.length} collections, ${baseline.pages.length} pages, ` +
