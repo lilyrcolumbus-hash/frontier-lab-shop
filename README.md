@@ -5,9 +5,10 @@
 
 > **One codebase, two deployments.** The real store and the public demo run the same code, each with its
 > own database, Stripe keys and URL. `NEXT_PUBLIC_DEMO_MODE=true` marks the demo: it shows a banner, offers
-> the one-click read-only admin, and takes **test** payments only (card `4242 4242 4242 4242`). Checkout
-> only runs when the Stripe key type matches the deployment (demo = `sk_test_...`, real store =
-> `sk_live_...`), so a demo can never charge a real card.
+> the one-click read-only admin, and never takes real payments: checkout stays closed unless Stripe **test**
+> keys are configured (then the test card `4242 4242 4242 4242` works). Checkout only runs when the Stripe
+> key type matches the deployment (demo = `sk_test_...`, real store = `sk_live_...`), so a demo can never
+> charge a real card.
 
 A bilingual (EN/ES) premium mushroom cultivation e-commerce and education platform: a 28-product
 catalog (liquid culture, grain spawn, bulk substrate, fruiting blocks), an 8-species encyclopedia,
