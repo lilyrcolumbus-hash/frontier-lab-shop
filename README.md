@@ -1,7 +1,7 @@
 # Frontier Lab
 
 **Live store:** [myfrontierlab.com](https://myfrontierlab.com)
-**Public demo (web + admin, fake data):** link added here when the demo deployment is live.
+**Public demo (web + admin, fake data):** [demo.myfrontierlab.com](https://demo.myfrontierlab.com) · admin demo: [demo.myfrontierlab.com/admin](https://demo.myfrontierlab.com/admin) (press "Enter the admin demo": read-only, no password to type)
 
 > **One codebase, two deployments.** The real store and the public demo run the same code, each with its
 > own database, Stripe keys and URL. `NEXT_PUBLIC_DEMO_MODE=true` marks the demo: it shows a banner, offers
