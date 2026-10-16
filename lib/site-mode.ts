@@ -10,6 +10,9 @@ import { isStripeLiveMode, isStripeTestMode } from '@/lib/stripe-mode'
  */
 export const IS_DEMO = process.env.NEXT_PUBLIC_DEMO_MODE === 'true'
 
+/** Height in px of the demo banner at the top of every page. The fixed header sits just below it. */
+export const DEMO_BANNER_HEIGHT = 32
+
 /**
  * Checkout runs only when the Stripe key type matches the deployment: a demo needs a TEST key, the
  * real store needs a LIVE key. Any mismatch keeps checkout closed, so a demo can never charge a real

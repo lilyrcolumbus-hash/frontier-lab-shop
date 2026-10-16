@@ -8,6 +8,7 @@ import { LanguageSwitcher } from './LanguageSwitcher'
 import { MobileMenu } from './MobileMenu'
 import { CartDrawer } from '@/components/shop/CartDrawer'
 import { useCartStore } from '@/lib/cart-store'
+import { IS_DEMO, DEMO_BANNER_HEIGHT } from '@/lib/site-mode'
 import { cn } from '@/lib/utils'
 
 interface DropdownItem {
@@ -99,8 +100,16 @@ export function Header() {
   useEffect(() => setHasMounted(true), [])
   const cartCount = hasMounted ? count() : 0
 
+  // On the demo, a slim banner sits above the page. The header is `fixed`, so it is moved down by the
+  // banner's height and slides up to the top edge as the page scrolls the banner out of view.
+  const [bannerOffset, setBannerOffset] = useState(IS_DEMO ? DEMO_BANNER_HEIGHT : 0)
+
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20)
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20)
+      if (IS_DEMO) setBannerOffset(Math.max(0, DEMO_BANNER_HEIGHT - window.scrollY))
+    }
+    handleScroll()
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
@@ -137,8 +146,9 @@ export function Header() {
   return (
     <>
       <header
+        style={{ top: bannerOffset }}
         className={cn(
-          'fixed top-0 inset-x-0 z-30 transition-all duration-500',
+          'fixed inset-x-0 z-30 transition-[background-color,border-color,box-shadow] duration-500',
           scrolled
             ? 'bg-bg/90 backdrop-blur-xl border-b border-ds-border shadow-[0_1px_12px_rgba(0,0,0,0.06)]'
             : 'bg-gradient-to-b from-black/55 via-black/25 to-transparent'
