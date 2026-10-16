@@ -200,8 +200,8 @@ export default function AccountPage() {
           <div className="mb-6 border border-ds-border bg-surface p-5 text-sm text-cream-muted">
             <p className="font-semibold text-cream">Portfolio demo: see the admin panel</p>
             <p className="mt-1">
-              One click and you are inside. It is read-only, so nothing you do is saved, and customer data is
-              hidden.
+              One click and you are inside. Your changes show on the demo shop, a Restore button puts
+              everything back, and customer data is hidden.
             </p>
             <button
               type="button"
