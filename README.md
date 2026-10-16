@@ -16,9 +16,11 @@ panel the owner runs the whole business from — no developer in the loop for da
 
 ## Admin panel
 
-**Try it:** open `/admin` on the public demo and press "Enter the admin demo". It is read-only (every write
-is refused by the server), and customer data and the business email and address are hidden from it. The
-real store has no demo account.
+**Try it:** open `/admin` on the public demo and press "Enter the admin demo". Edit a product, a price or a
+text and the change shows on the demo shop; a **Restore demo** button puts everything back to its snapshot.
+Photo uploads, discounts, gift cards, staff and store settings are switched off in the demo (the server
+refuses them), and customer data and the business email and address are hidden. The real store has no demo
+account.
 
 Everything a merchant needs to run the store day to day, without touching code: orders (tracking,
 partial fulfillment, printable packing slips, refunds/cancellations wired to real Stripe

@@ -20,6 +20,11 @@ export async function POST(req: Request) {
   if (!admin) {
     return NextResponse.json({ error: 'Not signed in.' }, { status: 401 })
   }
+  // The public demo account is a store owner, and this is the step that would hand an AI connector the
+  // MCP write tools. Nobody gets an auth code on the demo, so the connector can never be authorized.
+  if (admin.isDemo) {
+    return NextResponse.json({ error: 'Not available in the demo.' }, { status: 404 })
+  }
 
   const body = await req.json().catch(() => null)
   const parsed = bodySchema.safeParse(body)
