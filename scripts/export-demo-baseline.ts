@@ -13,7 +13,7 @@ import { buildBaseline } from '../lib/demo-restore'
 
 const STORE_SLUG = 'frontier-lab'
 const PRIVATE_EMAIL = 'lyhoffllc.info@gmail.com'
-const PUBLIC_EMAIL = 'codebake.SaaS@outlook.com'
+const PUBLIC_EMAIL = 'smartgrowth.ly@usa.com'
 
 async function main() {
   if (!process.env.DATABASE_URL) {
