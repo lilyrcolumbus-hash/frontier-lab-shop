@@ -1,5 +1,5 @@
 import { isStripeTestMode } from '@/lib/stripe-mode'
-import { IS_DEMO, DEMO_BANNER_HEIGHT } from '@/lib/site-mode'
+import { IS_DEMO, SHOW_TOP_NOTICE, DEMO_BANNER_HEIGHT } from '@/lib/site-mode'
 import type { Metadata } from 'next'
 import { StoreTheme } from '@/components/StoreTheme'
 import { NextIntlClientProvider } from 'next-intl'
@@ -45,6 +45,23 @@ export default async function LocaleLayout({
   const messages = await getMessages()
   const testPayments = isStripeTestMode()
   const es = locale === 'es'
+  // The notice text: demo wording on the demo site, "opening soon" on the real store while it is closed.
+  const noticeShort = IS_DEMO
+    ? testPayments
+      ? es ? 'Demo · pagos de prueba' : 'Demo · test payments'
+      : es ? 'Demo · pago desactivado' : 'Demo · checkout disabled'
+    : es ? 'Próximamente · pedidos aún cerrados' : 'Opening soon · orders not open yet'
+  const noticeLong = IS_DEMO
+    ? testPayments
+      ? es
+        ? 'Proyecto de portafolio — pagos de PRUEBA, no se cobra nada · tarjeta 4242 4242 4242 4242'
+        : 'Portfolio demo project — TEST payments, nothing is charged · test card 4242 4242 4242 4242'
+      : es
+        ? 'Proyecto de portafolio — el pago está desactivado, no se procesan pedidos reales'
+        : 'Portfolio demo project — checkout is disabled, no real orders are processed'
+    : es
+      ? 'Próximamente — la tienda aún no acepta pedidos'
+      : 'Opening soon — the store is not taking orders yet'
 
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
@@ -54,7 +71,7 @@ export default async function LocaleLayout({
           <GlowCursor />
           <PageTransition />
           <div className="flex flex-col min-h-screen">
-            {IS_DEMO && (
+            {SHOW_TOP_NOTICE && (
               // One slim line in the site's paper, ink and gold style. Its height is fixed because the header
               // is `fixed` and sits just below it (see Header.tsx), so the two can never overlap.
               <div
@@ -63,20 +80,8 @@ export default async function LocaleLayout({
               >
                 <span aria-hidden="true" className="h-1.5 w-1.5 shrink-0 bg-amber" />
                 <span className="truncate">
-                  <span className="md:hidden">
-                    {testPayments
-                      ? es ? 'Demo · pagos de prueba' : 'Demo · test payments'
-                      : es ? 'Demo · pago desactivado' : 'Demo · checkout disabled'}
-                  </span>
-                  <span className="hidden md:inline">
-                    {testPayments
-                      ? es
-                        ? 'Proyecto de portafolio — pagos de PRUEBA, no se cobra nada · tarjeta 4242 4242 4242 4242'
-                        : 'Portfolio demo project — TEST payments, nothing is charged · test card 4242 4242 4242 4242'
-                      : es
-                        ? 'Proyecto de portafolio — el pago está desactivado, no se procesan pedidos reales'
-                        : 'Portfolio demo project — checkout is disabled, no real orders are processed'}
-                  </span>
+                  <span className="md:hidden">{noticeShort}</span>
+                  <span className="hidden md:inline">{noticeLong}</span>
                 </span>
               </div>
             )}
