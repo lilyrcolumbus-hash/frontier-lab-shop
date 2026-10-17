@@ -35,8 +35,8 @@ const SECTIONS: { title: Record<Lang, string>; body: Record<Lang, string> }[] = 
   {
     title: { en: 'Get in touch', es: 'Contáctanos' },
     body: {
-      en: 'Questions about a product, an order, or what we do? Email us at codebake.SaaS@outlook.com.',
-      es: '¿Preguntas sobre un producto, un pedido, o lo que hacemos? Escríbenos a codebake.SaaS@outlook.com.',
+      en: 'Questions about a product, an order, or what we do? Email us at smartgrowth.ly@usa.com.',
+      es: '¿Preguntas sobre un producto, un pedido, o lo que hacemos? Escríbenos a smartgrowth.ly@usa.com.',
     },
   },
 ]

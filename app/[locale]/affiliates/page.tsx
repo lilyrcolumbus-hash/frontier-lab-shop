@@ -40,10 +40,10 @@ export default async function AffiliatesPage({ params }: PageProps) {
             {lang === 'en' ? 'Interested? Email us' : '¿Interesado? Escríbenos'}
           </p>
           <a
-            href="mailto:codebake.SaaS@outlook.com?subject=Affiliate%20Program%20Interest"
+            href="mailto:smartgrowth.ly@usa.com?subject=Affiliate%20Program%20Interest"
             className="text-accent hover:underline text-lg font-body font-medium"
           >
-            codebake.SaaS@outlook.com
+            smartgrowth.ly@usa.com
           </a>
         </div>
       </div>
