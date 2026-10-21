@@ -3,7 +3,7 @@
 import { Suspense, useEffect, useState } from 'react'
 import { DEMO_ADMIN_EMAIL, DEMO_ADMIN_PASSWORD } from '@/lib/demo'
 import { IS_DEMO } from '@/lib/site-mode'
-import { useTranslations, useLocale } from 'next-intl'
+import { useTranslations } from 'next-intl'
 import { useSearchParams } from 'next/navigation'
 import { useRouter, Link } from '@/navigation'
 import { useSupabaseUser } from '@/components/providers/AuthProvider'
@@ -84,7 +84,6 @@ function AccountRedirect() {
 
 export default function AccountPage() {
   const t = useTranslations('account')
-  const locale = useLocale()
   const router = useRouter()
   const { user, loading } = useSupabaseUser()
 
@@ -130,14 +129,6 @@ export default function AccountPage() {
     await supabase.auth.signOut()
     router.push('/')
     router.refresh()
-  }
-
-  const handleGoogleSignIn = async () => {
-    const supabase = createClient()
-    await supabase.auth.signInWithOAuth({
-      provider: 'google',
-      options: { redirectTo: `${window.location.origin}/${locale}/account` },
-    })
   }
 
   if (loading) {
@@ -244,19 +235,6 @@ export default function AccountPage() {
 
           <Button type="submit" fullWidth size="lg" isLoading={formLoading}>
             {t('signIn')}
-          </Button>
-
-          <div className="relative">
-            <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-ds-border" />
-            </div>
-            <div className="relative flex justify-center text-sm">
-              <span className="bg-elevated px-3 text-cream-muted">or</span>
-            </div>
-          </div>
-
-          <Button type="button" fullWidth variant="outline" size="lg" onClick={handleGoogleSignIn}>
-            {t('continueWithGoogle')}
           </Button>
 
           <p className="text-center text-sm text-cream-muted">
