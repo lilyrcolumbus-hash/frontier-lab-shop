@@ -19,11 +19,27 @@ export async function GET(request: NextRequest) {
   const token_hash = searchParams.get('token_hash')
   const type = searchParams.get('type') as EmailOtpType | null
   const next = searchParams.get('next') ?? `${origin}/`
+  const code = searchParams.get('code')
+
+  // Magic link (passwordless admin sign-in): Supabase's PKCE flow comes back with `?code=`.
+  // Only same-origin destinations are followed, so a crafted link can't bounce elsewhere.
+  if (code) {
+    const supabase = await createClient()
+    const { error } = await supabase.auth.exchangeCodeForSession(code)
+    const destination = new URL(next, origin)
+    if (!error && destination.origin === origin) {
+      return NextResponse.redirect(destination.toString())
+    }
+    return NextResponse.redirect(appendParam(`${origin}/account?next=/admin`, 'verify=expired', origin))
+  }
 
   if (token_hash && type) {
     const supabase = await createClient()
     const { error } = await supabase.auth.verifyOtp({ type, token_hash })
     if (!error) {
+      if (type === 'magiclink' || type === 'email') {
+        return NextResponse.redirect(new URL(next, origin).toString())
+      }
       const successParam = type === 'signup' ? 'verify=success' : 'reset=ready'
       return NextResponse.redirect(appendParam(next, successParam, origin))
     }

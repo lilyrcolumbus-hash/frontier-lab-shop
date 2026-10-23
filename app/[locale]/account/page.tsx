@@ -3,7 +3,7 @@
 import { Suspense, useEffect, useState } from 'react'
 import { DEMO_ADMIN_EMAIL, DEMO_ADMIN_PASSWORD } from '@/lib/demo'
 import { IS_DEMO } from '@/lib/site-mode'
-import { useTranslations, useLocale } from 'next-intl'
+import { useTranslations } from 'next-intl'
 import { useSearchParams } from 'next/navigation'
 import { useRouter, Link } from '@/navigation'
 import { useSupabaseUser } from '@/components/providers/AuthProvider'
@@ -82,9 +82,72 @@ function AccountRedirect() {
   return null
 }
 
+// The store admin signs in without a password: Supabase emails a one-time link. Only accounts
+// that already exist can request one (shouldCreateUser: false), and /admin still checks that the
+// account is a StoreMember, so a link sent to anyone else opens nothing.
+function AdminLinkSignIn({ children }: { children: React.ReactNode }) {
+  const searchParams = useSearchParams()
+  const next = searchParams.get('next')
+  const [email, setEmail] = useState('')
+  const [status, setStatus] = useState<'idle' | 'sending' | 'sent'>('idle')
+  const [error, setError] = useState('')
+
+  if (!next || !next.startsWith('/admin')) return <>{children}</>
+
+  const handleSend = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setError('')
+    setStatus('sending')
+    try {
+      const supabase = createClient()
+      const { error: otpError } = await supabase.auth.signInWithOtp({
+        email,
+        options: {
+          shouldCreateUser: false,
+          emailRedirectTo: `${window.location.origin}/auth/confirm?next=${encodeURIComponent('/admin')}`,
+        },
+      })
+      if (otpError) {
+        setError('Could not send the link. Check the email and try again in a minute.')
+        setStatus('idle')
+        return
+      }
+      setStatus('sent')
+    } catch {
+      setError('Could not reach the server. Try again.')
+      setStatus('idle')
+    }
+  }
+
+  return (
+    <form onSubmit={handleSend} className="bg-elevated rounded-none border border-ds-border p-8 space-y-5">
+      <p className="text-sm text-cream-muted">
+        Admin sign-in has no password. Enter your email and we send you a one-time link.
+      </p>
+      {status === 'sent' ? (
+        <p className="text-sm text-cream">Link sent. Open the email on this device and click it.</p>
+      ) : (
+        <>
+          <Input
+            label="Email"
+            type="email"
+            placeholder="you@example.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          {error && <p className="text-sm text-error">{error}</p>}
+          <Button type="submit" fullWidth size="lg" isLoading={status === 'sending'}>
+            Email me a sign-in link
+          </Button>
+        </>
+      )}
+    </form>
+  )
+}
+
 export default function AccountPage() {
   const t = useTranslations('account')
-  const locale = useLocale()
   const router = useRouter()
   const { user, loading } = useSupabaseUser()
 
@@ -130,14 +193,6 @@ export default function AccountPage() {
     await supabase.auth.signOut()
     router.push('/')
     router.refresh()
-  }
-
-  const handleGoogleSignIn = async () => {
-    const supabase = createClient()
-    await supabase.auth.signInWithOAuth({
-      provider: 'google',
-      options: { redirectTo: `${window.location.origin}/${locale}/account` },
-    })
   }
 
   if (loading) {
@@ -215,6 +270,8 @@ export default function AccountPage() {
             {error && <p className="mt-3 text-sm text-error">{error}</p>}
           </div>
         ) : (
+        <Suspense fallback={null}>
+        <AdminLinkSignIn>
         <form onSubmit={handleSignIn} className="bg-elevated rounded-none border border-ds-border p-8 space-y-5">
           <div className="space-y-4">
             <Input
@@ -246,19 +303,6 @@ export default function AccountPage() {
             {t('signIn')}
           </Button>
 
-          <div className="relative">
-            <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-ds-border" />
-            </div>
-            <div className="relative flex justify-center text-sm">
-              <span className="bg-elevated px-3 text-cream-muted">or</span>
-            </div>
-          </div>
-
-          <Button type="button" fullWidth variant="outline" size="lg" onClick={handleGoogleSignIn}>
-            {t('continueWithGoogle')}
-          </Button>
-
           <p className="text-center text-sm text-cream-muted">
             {t('noAccount')}{' '}
             <Link href="/signup" className="text-accent hover:text-accent-hover transition-colors font-medium">
@@ -266,6 +310,8 @@ export default function AccountPage() {
             </Link>
           </p>
         </form>
+        </AdminLinkSignIn>
+        </Suspense>
         )}
       </div>
     </div>
