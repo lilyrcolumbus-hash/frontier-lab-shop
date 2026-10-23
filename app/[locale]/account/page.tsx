@@ -82,6 +82,70 @@ function AccountRedirect() {
   return null
 }
 
+// The store admin signs in without a password: Supabase emails a one-time link. Only accounts
+// that already exist can request one (shouldCreateUser: false), and /admin still checks that the
+// account is a StoreMember, so a link sent to anyone else opens nothing.
+function AdminLinkSignIn({ children }: { children: React.ReactNode }) {
+  const searchParams = useSearchParams()
+  const next = searchParams.get('next')
+  const [email, setEmail] = useState('')
+  const [status, setStatus] = useState<'idle' | 'sending' | 'sent'>('idle')
+  const [error, setError] = useState('')
+
+  if (!next || !next.startsWith('/admin')) return <>{children}</>
+
+  const handleSend = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setError('')
+    setStatus('sending')
+    try {
+      const supabase = createClient()
+      const { error: otpError } = await supabase.auth.signInWithOtp({
+        email,
+        options: {
+          shouldCreateUser: false,
+          emailRedirectTo: `${window.location.origin}/auth/confirm?next=${encodeURIComponent('/admin')}`,
+        },
+      })
+      if (otpError) {
+        setError('Could not send the link. Check the email and try again in a minute.')
+        setStatus('idle')
+        return
+      }
+      setStatus('sent')
+    } catch {
+      setError('Could not reach the server. Try again.')
+      setStatus('idle')
+    }
+  }
+
+  return (
+    <form onSubmit={handleSend} className="bg-elevated rounded-none border border-ds-border p-8 space-y-5">
+      <p className="text-sm text-cream-muted">
+        Admin sign-in has no password. Enter your email and we send you a one-time link.
+      </p>
+      {status === 'sent' ? (
+        <p className="text-sm text-cream">Link sent. Open the email on this device and click it.</p>
+      ) : (
+        <>
+          <Input
+            label="Email"
+            type="email"
+            placeholder="you@example.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          {error && <p className="text-sm text-error">{error}</p>}
+          <Button type="submit" fullWidth size="lg" isLoading={status === 'sending'}>
+            Email me a sign-in link
+          </Button>
+        </>
+      )}
+    </form>
+  )
+}
+
 export default function AccountPage() {
   const t = useTranslations('account')
   const router = useRouter()
@@ -206,6 +270,8 @@ export default function AccountPage() {
             {error && <p className="mt-3 text-sm text-error">{error}</p>}
           </div>
         ) : (
+        <Suspense fallback={null}>
+        <AdminLinkSignIn>
         <form onSubmit={handleSignIn} className="bg-elevated rounded-none border border-ds-border p-8 space-y-5">
           <div className="space-y-4">
             <Input
@@ -244,6 +310,8 @@ export default function AccountPage() {
             </Link>
           </p>
         </form>
+        </AdminLinkSignIn>
+        </Suspense>
         )}
       </div>
     </div>
