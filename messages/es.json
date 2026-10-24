@@ -298,6 +298,11 @@
           "eyebrow": "Etapa 3 — listo ahora",
           "title": "Bloques de Fructificación",
           "note": "Ya están colonizados. Corta, rocía y cosecha: sin esperar la colonización."
+        },
+        "other": {
+          "eyebrow": "Más opciones",
+          "title": "Más Sustrato",
+          "note": "Bolsas y cajas listas para usar que no encajan en las etapas anteriores."
         }
       },
       "speciesFilter": "Filtrado por especie",

@@ -59,18 +59,31 @@ export function ShopBrowser({ products: PRODUCTS }: { products: Product[] }) {
 
   const substrateStageGroups = useMemo(() => {
     if (activeCategory !== 'substrate') return []
-    return SUBSTRATE_STAGES.map((stage) => {
-      let items = PRODUCTS.filter((p) => p.subcategory === stage.subcategory)
-      if (sortBy === 'price-low') items = [...items].sort((a, b) => a.price - b.price)
-      if (sortBy === 'price-high') items = [...items].sort((a, b) => b.price - a.price)
-      return {
-        ...stage,
-        eyebrow: t(`browser.stages.${stage.id}.eyebrow`),
-        title: t(`browser.stages.${stage.id}.title`),
-        note: t(`browser.stages.${stage.id}.note`),
-        items,
-      }
-    }).filter((group) => group.items.length > 0)
+    const sorted = (list: Product[]) => {
+      if (sortBy === 'price-low') return [...list].sort((a, b) => a.price - b.price)
+      if (sortBy === 'price-high') return [...list].sort((a, b) => b.price - a.price)
+      return list
+    }
+    const stageSubcategories: readonly string[] = SUBSTRATE_STAGES.map((stage) => stage.subcategory)
+    const stages = [
+      ...SUBSTRATE_STAGES,
+      // Substrate products whose subcategory is not one of the fixed stages (e.g. a new
+      // "Single Box (3 lbs)" product) would otherwise match no group and never show.
+      { id: 'other', subcategory: '__other' },
+    ] as const
+    return stages.map((stage) => ({
+      ...stage,
+      eyebrow: t(`browser.stages.${stage.id}.eyebrow`),
+      title: t(`browser.stages.${stage.id}.title`),
+      note: t(`browser.stages.${stage.id}.note`),
+      items: sorted(
+        PRODUCTS.filter((p) =>
+          stage.id === 'other'
+            ? p.category === 'substrate' && !stageSubcategories.includes(p.subcategory ?? '')
+            : p.subcategory === stage.subcategory
+        )
+      ),
+    })).filter((group) => group.items.length > 0)
   }, [PRODUCTS, activeCategory, sortBy, t])
 
   if (speciesParam && speciesFiltered.length > 0) {
