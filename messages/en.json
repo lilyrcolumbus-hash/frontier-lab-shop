@@ -298,6 +298,11 @@
           "eyebrow": "Stage 3 — ready now",
           "title": "Fruiting Blocks",
           "note": "Already colonized. Cut, mist, and harvest — no colonizing wait."
+        },
+        "other": {
+          "eyebrow": "More options",
+          "title": "More Substrate",
+          "note": "Ready-to-use bags and boxes that do not fit the stages above."
         }
       },
       "speciesFilter": "Filtered by species",
