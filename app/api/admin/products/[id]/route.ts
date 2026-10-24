@@ -98,6 +98,14 @@ export const PATCH = withStoreAdmin<{ params: { id: string } }>(async (req, { st
         await prisma.productVariant.create({ data: { ...data, storeId: store.id, productId: params.id } })
       }
     }
+
+    // The shop shows "Out of stock" from the product's `inStock` flag, not from the counts, so
+    // the flag has to follow the counts or an inventory update never reaches the live site.
+    // Same rule as moveInventory: sold out only when every variant is at zero.
+    await prisma.product.update({
+      where: { id: params.id },
+      data: { inStock: variants.some((variant) => variant.stock > 0) },
+    })
   }
 
   // The category or tags may have just changed what an automatic collection holds.
