@@ -158,7 +158,23 @@ export function ProductForm({
     setError('')
     const uploaded: string[] = []
 
-    for (const file of Array.from(files)) {
+    for (const original of Array.from(files)) {
+      // iPhone photos are HEIC, which browsers cannot show and the server rejects. Convert them
+      // to JPEG here, in the browser, before uploading. Chrome reports an empty type for HEIC,
+      // so the file name is checked too.
+      let file = original
+      if (/\.(heic|heif)$/i.test(original.name) || /image\/hei[cf]/i.test(original.type)) {
+        try {
+          const { default: heic2any } = await import('heic2any')
+          const converted = await heic2any({ blob: original, toType: 'image/jpeg', quality: 0.9 })
+          const blob = Array.isArray(converted) ? converted[0] : converted
+          file = new File([blob], original.name.replace(/\.(heic|heif)$/i, '.jpg'), { type: 'image/jpeg' })
+        } catch {
+          setError(`Could not convert ${original.name} to JPEG. Export it as JPEG and try again.`)
+          break
+        }
+      }
+
       const formData = new FormData()
       formData.append('file', file)
       const res = await fetch('/api/admin/upload', { method: 'POST', body: formData })
@@ -486,7 +502,7 @@ export function ProductForm({
         <input
           ref={fileInputRef}
           type="file"
-          accept="image/*"
+          accept="image/*,.heic,.heif"
           multiple
           className="hidden"
           onChange={(e) => {
