@@ -186,6 +186,21 @@ export function ProductForm({
       uploaded.push(data.url)
     }
 
+    // For an existing product, attach the photos right away instead of waiting for "Save
+    // changes", so closing or reloading the page cannot lose them.
+    if (uploaded.length && productId) {
+      try {
+        const attach = await fetch(`/api/admin/products/${productId}/images`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ urls: uploaded }),
+        })
+        if (!attach.ok) throw new Error('attach failed')
+      } catch {
+        setError('Photos uploaded but not saved to the product yet. Press "Save changes" to keep them.')
+      }
+    }
+
     setUploading(false)
     if (uploaded.length) {
       setValues((v) => ({
