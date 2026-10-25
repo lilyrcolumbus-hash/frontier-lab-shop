@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { z } from 'zod'
+import { contentUpdate, productContentFields } from '@/lib/product-content'
 import { prisma } from '@/lib/prisma'
 import { withStoreAdmin } from '@/lib/with-store-admin'
 import { syncAutomaticCollectionsForStore } from '@/lib/collection-rules'
@@ -31,6 +32,7 @@ const updateProductSchema = z.object({
   status: z.enum(['draft', 'active', 'archived']).default('draft'),
   collectionIds: z.array(z.string()).default([]),
   relatedProducts: z.array(z.string()).default([]),
+  ...productContentFields,
   metaTitle: z.string().trim().max(70).optional().nullable(),
   metaDescription: z.string().trim().max(160).optional().nullable(),
   taxable: z.coerce.boolean().default(true),
@@ -56,7 +58,7 @@ export const PATCH = withStoreAdmin<{ params: { id: string } }>(async (req, { st
   const existing = await prisma.product.findUnique({ where: { id: params.id } })
   if (!existing || existing.storeId !== store.id) return NextResponse.json({ error: 'Not found' }, { status: 404 })
 
-  const { collectionIds, variants, ...updateData } = parsed.data
+  const { collectionIds, variants, howToUse, science, faqs, keyBenefits, growing, bag, ...updateData } = parsed.data
   const ownedCollections = collectionIds.length
     ? await prisma.collection.findMany({ where: { id: { in: collectionIds }, storeId: store.id }, select: { id: true } })
     : []
@@ -65,6 +67,7 @@ export const PATCH = withStoreAdmin<{ params: { id: string } }>(async (req, { st
     where: { id: params.id },
     data: {
       ...updateData,
+      ...contentUpdate({ howToUse, science, faqs, keyBenefits, growing, bag }, { scienceContent: existing.scienceContent, faqs: existing.faqs }),
       collections: { set: ownedCollections.map((c) => ({ id: c.id })) },
     },
     include: { variants: true, collections: true },

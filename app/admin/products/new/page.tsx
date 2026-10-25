@@ -25,6 +25,12 @@ export default function NewProductPage() {
           collectionIds: [],
           taxable: true,
           relatedProducts: [],
+          howToUse: [],
+          science: '',
+          faqs: [],
+          keyBenefits: [],
+          growing: { difficulty: '', colonizationTime: '', fruitingTempF: '', fruitingTempC: '', idealSubstrate: '', expectedYield: '', indoorOutdoor: '' },
+          bag: { bagSize: '', sterilization: '', moisture: '', colonizationEstimate: '', recommendedInoculation: '', shelfLife: '' },
           metaTitle: '',
           metaDescription: '',
         }}

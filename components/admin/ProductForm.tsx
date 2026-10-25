@@ -26,6 +26,33 @@ export interface ProductFormValues {
   taxable: boolean
   /** Slugs of other products shown as "You'll Also Need" on the storefront. */
   relatedProducts: string[]
+  /** Short selling points shown as cards above the tabs. */
+  keyBenefits: { icon: 'brain' | 'shield' | 'heart' | 'leaf' | 'activity' | 'zap' | 'sun' | 'droplet'; label: string; detail: string }[]
+  /** "Growing details" block. Leave every box empty to hide it. */
+  growing: {
+    difficulty: string
+    colonizationTime: string
+    fruitingTempF: string
+    fruitingTempC: string
+    idealSubstrate: string
+    expectedYield: string
+    indoorOutdoor: string
+  }
+  /** "Bag details" block for substrate and grain products. Leave every box empty to hide it. */
+  bag: {
+    bagSize: string
+    sterilization: string
+    moisture: string
+    colonizationEstimate: string
+    recommendedInoculation: string
+    shelfLife: string
+  }
+  /** One step per line. Empty means the product page has no "How to use" tab. */
+  howToUse: string[]
+  /** Science text for the "Science" tab. Empty hides the tab. */
+  science: string
+  /** Question and answer pairs for the "FAQ" tab. None hides the tab. */
+  faqs: { question: string; answer: string }[]
   /** Search-engine overrides. Empty means the product name and description are used. */
   metaTitle: string
   metaDescription: string
@@ -62,6 +89,31 @@ function marginLabel(priceCents: number, cost: string): string {
   if (priceCents <= 0) return '—'
   const profit = priceCents - costCents
   return `$${(profit / 100).toFixed(2)} · ${Math.round((profit / priceCents) * 100)}%`
+}
+
+const HOW_TO_USE_POINTS = [
+  { label: 'Prepare', hint: 'What to prepare or check before starting (equipment, cleaning, what the customer needs on hand).' },
+  { label: 'Start / inoculate', hint: 'The first action: how to open it, inoculate it, or mix it in. Quantities and ratios if they matter.' },
+  { label: 'Incubate', hint: 'Where to keep it, the temperature range, and how many days or weeks it takes.' },
+  { label: 'Fruit', hint: 'What changes to make for fruiting: humidity, fresh air, light, temperature.' },
+  { label: 'Harvest', hint: 'How to tell it is ready and how to pick it.' },
+  { label: 'Store / next steps', hint: 'How to store what is left, shelf life, and what to do next.' },
+]
+
+const FAQ_SUGGESTIONS = [
+  'What is included?',
+  'How long does it last?',
+  'How should I store it?',
+  'What if it arrives damaged or contaminated?',
+  'How do I know it is working?',
+]
+
+function moveItem<T>(list: T[], index: number, direction: -1 | 1): T[] {
+  const target = index + direction
+  if (target < 0 || target >= list.length) return list
+  const copy = [...list]
+  ;[copy[index], copy[target]] = [copy[target], copy[index]]
+  return copy
 }
 
 const CATEGORIES = ['kit', 'spawn', 'substrate', 'equipment', 'wellness', 'bundle']
@@ -327,6 +379,10 @@ export function ProductForm({
 
       <div>
         <label className="block text-sm font-medium text-cream-muted mb-1.5">Description</label>
+        <p className="text-xs text-cream-muted/70 mb-2">
+          Cover: what it is, what is inside, who it is for, the result the customer gets, and anything they must know before buying.
+          Leave a blank line between paragraphs.
+        </p>
         <textarea
           className="w-full bg-surface border border-ds-border rounded-none px-4 py-3 text-cream text-sm min-h-32"
           value={values.descriptionEn}
@@ -570,6 +626,209 @@ export function ProductForm({
             ))}
           </div>
         )}
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium text-cream-muted mb-1.5">Key benefits</label>
+        <p className="text-xs text-cream-muted/70 mb-2">
+          Up to four short selling points shown as cards on the product page. A label (2 to 4 words) and one sentence that is true for this product.
+        </p>
+        <div className="space-y-3">
+          {values.keyBenefits.map((benefit, index) => (
+            <div key={index} className="grid gap-2 border border-ds-border bg-surface p-3 sm:grid-cols-[120px_1fr]">
+              <select
+                className="bg-bg border border-ds-border rounded-none px-3 py-2 text-cream text-sm"
+                value={benefit.icon}
+                onChange={(e) =>
+                  update('keyBenefits', values.keyBenefits.map((item, i) => (i === index ? { ...item, icon: e.target.value as typeof benefit.icon } : item)))
+                }
+              >
+                {['brain', 'shield', 'heart', 'leaf', 'activity', 'zap', 'sun', 'droplet'].map((icon) => (
+                  <option key={icon} value={icon}>{icon}</option>
+                ))}
+              </select>
+              <div className="space-y-2">
+                <input
+                  className="w-full bg-bg border border-ds-border rounded-none px-3 py-2 text-cream text-sm"
+                  placeholder="Label"
+                  value={benefit.label}
+                  onChange={(e) => update('keyBenefits', values.keyBenefits.map((item, i) => (i === index ? { ...item, label: e.target.value } : item)))}
+                />
+                <textarea
+                  className="w-full bg-bg border border-ds-border rounded-none px-3 py-2 text-cream text-sm min-h-16"
+                  placeholder="One sentence"
+                  value={benefit.detail}
+                  onChange={(e) => update('keyBenefits', values.keyBenefits.map((item, i) => (i === index ? { ...item, detail: e.target.value } : item)))}
+                />
+                <button type="button" className="text-xs text-error" onClick={() => update('keyBenefits', values.keyBenefits.filter((_, i) => i !== index))}>
+                  Remove
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+        {values.keyBenefits.length < 8 && (
+          <Button type="button" variant="outline" size="sm" className="mt-3" onClick={() => update('keyBenefits', [...values.keyBenefits, { icon: 'leaf', label: '', detail: '' }])}>
+            Add benefit
+          </Button>
+        )}
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium text-cream-muted mb-1.5">Growing details</label>
+        <p className="text-xs text-cream-muted/70 mb-2">
+          The &quot;at a glance&quot; block for products that are grown. Leave every box empty and the block does not appear.
+        </p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <label className="text-xs text-cream-muted">Difficulty
+            <select className="mt-1 w-full bg-surface border border-ds-border rounded-none px-3 py-2 text-cream text-sm" value={values.growing.difficulty} onChange={(e) => update('growing', { ...values.growing, difficulty: e.target.value })}>
+              <option value="">Not set</option><option value="beginner">Beginner</option><option value="intermediate">Intermediate</option><option value="advanced">Advanced</option>
+            </select>
+          </label>
+          <label className="text-xs text-cream-muted">Indoor or outdoor
+            <select className="mt-1 w-full bg-surface border border-ds-border rounded-none px-3 py-2 text-cream text-sm" value={values.growing.indoorOutdoor} onChange={(e) => update('growing', { ...values.growing, indoorOutdoor: e.target.value })}>
+              <option value="">Not set</option><option value="indoor">Indoor</option><option value="outdoor">Outdoor</option><option value="both">Both</option>
+            </select>
+          </label>
+          <Input label="Colonization time" placeholder="e.g. 2 to 3 weeks" value={values.growing.colonizationTime} onChange={(e) => update('growing', { ...values.growing, colonizationTime: e.target.value })} />
+          <Input label="Expected yield" placeholder="Only what you have measured" value={values.growing.expectedYield} onChange={(e) => update('growing', { ...values.growing, expectedYield: e.target.value })} />
+          <Input label="Fruiting temperature (°F)" placeholder="e.g. 60 to 75" value={values.growing.fruitingTempF} onChange={(e) => update('growing', { ...values.growing, fruitingTempF: e.target.value })} />
+          <Input label="Fruiting temperature (°C)" placeholder="e.g. 15 to 24" value={values.growing.fruitingTempC} onChange={(e) => update('growing', { ...values.growing, fruitingTempC: e.target.value })} />
+          <Input label="Ideal substrate" placeholder="What it grows on" value={values.growing.idealSubstrate} onChange={(e) => update('growing', { ...values.growing, idealSubstrate: e.target.value })} />
+        </div>
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium text-cream-muted mb-1.5">Bag details</label>
+        <p className="text-xs text-cream-muted/70 mb-2">
+          For bags of grain or substrate. Leave every box empty and the block does not appear.
+        </p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <Input label="Bag size" placeholder="e.g. 3 lb" value={values.bag.bagSize} onChange={(e) => update('bag', { ...values.bag, bagSize: e.target.value })} />
+          <Input label="Sterilization" placeholder="How it is sterilized" value={values.bag.sterilization} onChange={(e) => update('bag', { ...values.bag, sterilization: e.target.value })} />
+          <Input label="Moisture" value={values.bag.moisture} onChange={(e) => update('bag', { ...values.bag, moisture: e.target.value })} />
+          <Input label="Colonization estimate" value={values.bag.colonizationEstimate} onChange={(e) => update('bag', { ...values.bag, colonizationEstimate: e.target.value })} />
+          <Input label="Recommended inoculation" value={values.bag.recommendedInoculation} onChange={(e) => update('bag', { ...values.bag, recommendedInoculation: e.target.value })} />
+          <Input label="Shelf life" value={values.bag.shelfLife} onChange={(e) => update('bag', { ...values.bag, shelfLife: e.target.value })} />
+        </div>
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium text-cream-muted mb-1.5">How to use</label>
+        <p className="text-xs text-cream-muted/70 mb-3">
+          Shown in the &quot;How To Use&quot; tab, step by step. Write only what is true for this product. With no steps the tab does not appear.
+          Add a step from the points below, or write your own.
+        </p>
+        <div className="flex flex-wrap gap-2 mb-3">
+          {HOW_TO_USE_POINTS.map((point) => (
+            <button
+              key={point.label}
+              type="button"
+              className="border border-ds-border bg-surface px-3 py-1.5 text-xs text-cream-muted hover:text-cream"
+              onClick={() => update('howToUse', [...values.howToUse, ''])}
+              title={point.hint}
+            >
+              + {point.label}
+            </button>
+          ))}
+        </div>
+        <ol className="space-y-3">
+          {values.howToUse.map((step, index) => (
+            <li key={index} className="flex gap-3 items-start border border-ds-border bg-surface p-3">
+              <span className="mt-1 flex h-6 w-6 flex-shrink-0 items-center justify-center border border-ds-border font-mono text-[11px] text-cream-muted">
+                {index + 1}
+              </span>
+              <textarea
+                className="w-full bg-bg border border-ds-border rounded-none px-3 py-2 text-cream text-sm min-h-16"
+                placeholder={HOW_TO_USE_POINTS[index]?.hint ?? 'Describe this step'}
+                value={step}
+                onChange={(e) => update('howToUse', values.howToUse.map((item, i) => (i === index ? e.target.value : item)))}
+              />
+              <div className="flex flex-col gap-1 text-xs">
+                <button
+                  type="button"
+                  disabled={index === 0}
+                  className="text-cream-muted disabled:opacity-30"
+                  onClick={() => update('howToUse', moveItem(values.howToUse, index, -1))}
+                >
+                  Up
+                </button>
+                <button
+                  type="button"
+                  disabled={index === values.howToUse.length - 1}
+                  className="text-cream-muted disabled:opacity-30"
+                  onClick={() => update('howToUse', moveItem(values.howToUse, index, 1))}
+                >
+                  Down
+                </button>
+                <button type="button" className="text-error" onClick={() => update('howToUse', values.howToUse.filter((_, i) => i !== index))}>
+                  Remove
+                </button>
+              </div>
+            </li>
+          ))}
+        </ol>
+        <Button type="button" variant="outline" size="sm" className="mt-3" onClick={() => update('howToUse', [...values.howToUse, ''])}>
+          Add step
+        </Button>
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium text-cream-muted mb-1.5">Science</label>
+        <p className="text-xs text-cream-muted/70 mb-2">
+          Shown in the &quot;Science&quot; tab. Say what the research shows: the compound or process, the effect, and where it comes
+          from. Only claims you can back up. Leave a blank line between paragraphs. Empty means the tab does not appear.
+        </p>
+        <textarea
+          className="w-full bg-surface border border-ds-border rounded-none px-4 py-3 text-cream text-sm min-h-32"
+          value={values.science}
+          onChange={(e) => update('science', e.target.value)}
+        />
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium text-cream-muted mb-1.5">FAQ</label>
+        <p className="text-xs text-cream-muted/70 mb-2">Shown in the &quot;FAQ&quot; tab. No questions means the tab does not appear.</p>
+        <div className="flex flex-wrap gap-2 mb-3">
+          {FAQ_SUGGESTIONS.map((question) => (
+            <button
+              key={question}
+              type="button"
+              className="border border-ds-border bg-surface px-3 py-1.5 text-xs text-cream-muted hover:text-cream"
+              onClick={() => update('faqs', [...values.faqs, { question, answer: '' }])}
+            >
+              + {question}
+            </button>
+          ))}
+        </div>
+        <div className="space-y-3">
+          {values.faqs.map((faq, index) => (
+            <div key={index} className="border border-ds-border bg-surface p-3 space-y-2">
+              <input
+                className="w-full bg-bg border border-ds-border rounded-none px-3 py-2 text-cream text-sm"
+                placeholder="Question"
+                value={faq.question}
+                onChange={(e) => update('faqs', values.faqs.map((item, i) => (i === index ? { ...item, question: e.target.value } : item)))}
+              />
+              <textarea
+                className="w-full bg-bg border border-ds-border rounded-none px-3 py-2 text-cream text-sm min-h-20"
+                placeholder="Answer"
+                value={faq.answer}
+                onChange={(e) => update('faqs', values.faqs.map((item, i) => (i === index ? { ...item, answer: e.target.value } : item)))}
+              />
+              <button
+                type="button"
+                className="text-xs text-error"
+                onClick={() => update('faqs', values.faqs.filter((_, i) => i !== index))}
+              >
+                Remove question
+              </button>
+            </div>
+          ))}
+        </div>
+        <Button type="button" variant="outline" size="sm" className="mt-3" onClick={() => update('faqs', [...values.faqs, { question: '', answer: '' }])}>
+          Add question
+        </Button>
       </div>
 
       <div>
