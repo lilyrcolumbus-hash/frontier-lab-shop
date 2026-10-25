@@ -23,6 +23,15 @@ export function ProductDetailClient({ product }: { product: Product }) {
   const [selectedVariant, setSelectedVariant] = useState(product.variants[0])
   const [quantity, setQuantity] = useState(1)
   const [activeTab, setActiveTab] = useState<typeof TABS[number]>('description')
+  // A tab only exists when the admin filled it in. Reviews has no source yet, so it stays hidden
+  // rather than promising reviews that are not there.
+  const availableTabs = TABS.filter((tab) => {
+    if (tab === 'howToUse') return (product.howToUseSteps?.length ?? 0) > 0
+    if (tab === 'science') return Boolean(product.scienceContent?.en || product.scienceContent?.es)
+    if (tab === 'faq') return (product.faqs?.length ?? 0) > 0
+    if (tab === 'reviews') return false
+    return true
+  })
   const [showSticky, setShowSticky] = useState(false)
   const [ripples, setRipples] = useState<{ id: number; x: number; y: number }[]>([])
   const ctaRef = useRef<HTMLDivElement>(null)
@@ -527,7 +536,7 @@ export function ProductDetailClient({ product }: { product: Product }) {
         <div className="mt-16">
           <div className="border-b border-ds-border mb-8">
             <div className="flex gap-1 overflow-x-auto">
-              {TABS.map((tab) => (
+              {availableTabs.map((tab) => (
                 <button
                   key={tab}
                   onClick={() => setActiveTab(tab)}
@@ -561,14 +570,7 @@ export function ProductDetailClient({ product }: { product: Product }) {
                 )}
                 {activeTab === 'howToUse' && (
                   <div className="space-y-3">
-                    {(product.howToUseSteps ?? [
-                      'Sterilize your substrate (hardwood sawdust bags work best).',
-                      'Allow substrate to cool to room temperature before inoculating.',
-                      'In a sterile environment, mix grain spawn into substrate at 10–20% rate.',
-                      'Seal bag and colonize at 70–75°F for 2–3 weeks until fully white.',
-                      'Introduce fruiting conditions: fresh air exchange + 85–95% humidity.',
-                      'Harvest mushrooms just as the veil begins to separate from the cap edges.',
-                    ]).map((step, i) => (
+                    {(product.howToUseSteps ?? []).map((step, i) => (
                       <div key={i} className="flex gap-4 items-start">
                         <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent/10 border border-accent/20 text-accent font-mono text-[10px] flex items-center justify-center mt-0.5">{i + 1}</span>
                         <p className="text-cream-muted leading-relaxed">{step}</p>
@@ -578,27 +580,19 @@ export function ProductDetailClient({ product }: { product: Product }) {
                 )}
                 {activeTab === 'science' && (
                   <div className="space-y-4 text-cream-muted">
-                    {product.scienceContent ? (
-                      product.scienceContent[locale].split('\n\n').map((para, i) => (
-                        <p key={i} className="leading-relaxed">{para}</p>
-                      ))
-                    ) : (
-                      <p>Detailed scientific research available soon.</p>
-                    )}
+                    {product.scienceContent?.[locale]?.split('\n\n').map((para, i) => (
+                      <p key={i} className="leading-relaxed">{para}</p>
+                    ))}
                   </div>
                 )}
                 {activeTab === 'faq' && (
                   <div className="space-y-6">
-                    {product.faqs && product.faqs.length > 0 ? (
-                      product.faqs.map((faq, i) => (
-                        <div key={i} className="border-b border-ds-border pb-5 last:border-b-0 last:pb-0">
-                          <p className="text-cream font-medium mb-2">{faq.q[locale]}</p>
-                          <p className="text-cream-muted leading-relaxed text-sm">{faq.a[locale]}</p>
-                        </div>
-                      ))
-                    ) : (
-                      <p className="text-cream-muted">{locale === 'es' ? 'Preguntas frecuentes próximamente.' : 'FAQ coming soon.'}</p>
-                    )}
+                    {(product.faqs ?? []).map((faq, i) => (
+                      <div key={i} className="border-b border-ds-border pb-5 last:border-b-0 last:pb-0">
+                        <p className="text-cream font-medium mb-2">{faq.q[locale]}</p>
+                        <p className="text-cream-muted leading-relaxed text-sm">{faq.a[locale]}</p>
+                      </div>
+                    ))}
                   </div>
                 )}
                 {activeTab === 'reviews' && (
