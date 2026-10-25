@@ -15,7 +15,7 @@ const variantSchema = z.object({
 })
 
 const createProductSchema = z.object({
-  slug: z.string().trim().min(1).max(200),
+  slug: z.string().trim().min(1).max(200).regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, 'Slug must be lowercase letters, numbers and hyphens'),
   nameEn: z.string().trim().min(1).max(200),
   nameEs: z.string().trim().min(1).max(200),
   descriptionEn: z.string().trim().min(1),

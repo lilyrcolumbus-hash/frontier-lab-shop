@@ -8,6 +8,16 @@ import { toProduct } from '@/lib/product-mappers'
 import { SITE_URL, localizedPath } from '@/lib/site-url'
 
 // Reads live from the DB, editable via /admin — must not be frozen at build time.
+// A slug with a space or capital letter arrives percent-encoded ("All-In-One%20Bag"), so it has
+// to be decoded before the lookup or the product 404s.
+function decodeSlug(slug: string): string {
+  try {
+    return decodeURIComponent(slug)
+  } catch {
+    return slug
+  }
+}
+
 export const dynamic = 'force-dynamic'
 
 /** Trims to a length search engines actually display, cutting on a word boundary. */
@@ -24,7 +34,7 @@ export async function generateMetadata({
   params: { slug: string; locale: string }
 }): Promise<Metadata> {
   const product = await prisma.product.findUnique({
-    where: { slug: params.slug },
+    where: { slug: decodeSlug(params.slug) },
     select: {
       nameEn: true, nameEs: true, descriptionEn: true, descriptionEs: true,
       images: true, imageAlts: true, status: true, metaTitle: true, metaDescription: true,
@@ -39,7 +49,7 @@ export async function generateMetadata({
   // The admin's override wins; otherwise the product's own copy is the honest default.
   const title = product.metaTitle?.trim() || name
   const summary = product.metaDescription?.trim() || truncate(description, 160)
-  const path = localizedPath(params.locale, `/shop/${params.slug}`)
+  const path = localizedPath(params.locale, `/shop/${encodeURIComponent(decodeSlug(params.slug))}`)
 
   return {
     title,
@@ -47,8 +57,8 @@ export async function generateMetadata({
     alternates: {
       canonical: path,
       languages: {
-        en: `/shop/${params.slug}`,
-        es: `/es/shop/${params.slug}`,
+        en: `/shop/${encodeURIComponent(decodeSlug(params.slug))}`,
+        es: `/es/shop/${encodeURIComponent(decodeSlug(params.slug))}`,
       },
     },
     openGraph: {
@@ -65,7 +75,7 @@ export default async function ProductPage({ params }: { params: { slug: string; 
   setRequestLocale(params.locale)
 
   const row = await prisma.product.findUnique({
-    where: { slug: params.slug },
+    where: { slug: decodeSlug(params.slug) },
     include: { variants: true, species: true },
   })
   if (!row || row.status !== 'active') notFound()
