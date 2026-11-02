@@ -96,15 +96,6 @@ function marginLabel(priceCents: number, cost: string): string {
   return `$${(profit / 100).toFixed(2)} · ${Math.round((profit / priceCents) * 100)}%`
 }
 
-const HOW_TO_USE_POINTS = [
-  { label: 'Prepare', hint: 'What to prepare or check before starting (equipment, cleaning, what the customer needs on hand).' },
-  { label: 'Start / inoculate', hint: 'The first action: how to open it, inoculate it, or mix it in. Quantities and ratios if they matter.' },
-  { label: 'Incubate', hint: 'Where to keep it, the temperature range, and how many days or weeks it takes.' },
-  { label: 'Fruit', hint: 'What changes to make for fruiting: humidity, fresh air, light, temperature.' },
-  { label: 'Harvest', hint: 'How to tell it is ready and how to pick it.' },
-  { label: 'Store / next steps', hint: 'How to store what is left, shelf life, and what to do next.' },
-]
-
 const FAQ_SUGGESTIONS = [
   'What is included?',
   'How long does it last?',
@@ -719,63 +710,20 @@ export function ProductForm({
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-cream-muted mb-1.5">How to use</label>
+        <label className="block text-sm font-medium text-cream-muted mb-1.5">How to use: instructions guide</label>
         <p className="text-xs text-cream-muted/70 mb-3">
-          Shown in the &quot;How To Use&quot; tab, step by step. Write only what is true for this product. With no steps the tab does not appear.
-          Add a step from the points below, or write your own.
+          Step-by-step instructions with photos and videos. They show in the &quot;How To Use&quot; tab and on the guide page that the QR code on the label opens.
+          Write only what is true for this product. With no guide, the tab does not appear.
         </p>
-        <div className="flex flex-wrap gap-2 mb-3">
-          {HOW_TO_USE_POINTS.map((point) => (
-            <button
-              key={point.label}
-              type="button"
-              className="border border-ds-border bg-surface px-3 py-1.5 text-xs text-cream-muted hover:text-cream"
-              onClick={() => update('howToUse', [...values.howToUse, ''])}
-              title={point.hint}
-            >
-              + {point.label}
-            </button>
-          ))}
-        </div>
-        <ol className="space-y-3">
-          {values.howToUse.map((step, index) => (
-            <li key={index} className="flex gap-3 items-start border border-ds-border bg-surface p-3">
-              <span className="mt-1 flex h-6 w-6 flex-shrink-0 items-center justify-center border border-ds-border font-mono text-[11px] text-cream-muted">
-                {index + 1}
-              </span>
-              <textarea
-                className="w-full bg-bg border border-ds-border rounded-none px-3 py-2 text-cream text-sm min-h-16"
-                placeholder={HOW_TO_USE_POINTS[index]?.hint ?? 'Describe this step'}
-                value={step}
-                onChange={(e) => update('howToUse', values.howToUse.map((item, i) => (i === index ? e.target.value : item)))}
-              />
-              <div className="flex flex-col gap-1 text-xs">
-                <button
-                  type="button"
-                  disabled={index === 0}
-                  className="text-cream-muted disabled:opacity-30"
-                  onClick={() => update('howToUse', moveItem(values.howToUse, index, -1))}
-                >
-                  Up
-                </button>
-                <button
-                  type="button"
-                  disabled={index === values.howToUse.length - 1}
-                  className="text-cream-muted disabled:opacity-30"
-                  onClick={() => update('howToUse', moveItem(values.howToUse, index, 1))}
-                >
-                  Down
-                </button>
-                <button type="button" className="text-error" onClick={() => update('howToUse', values.howToUse.filter((_, i) => i !== index))}>
-                  Remove
-                </button>
-              </div>
-            </li>
-          ))}
-        </ol>
-        <Button type="button" variant="outline" size="sm" className="mt-3" onClick={() => update('howToUse', [...values.howToUse, ''])}>
-          Add step
-        </Button>
+        <GuideEditor
+          guide={values.guide}
+          onChange={(guide) => update('guide', guide)}
+          suggestedSlug={values.slug || values.nameEn}
+          products={availableProducts}
+          productId={productId}
+          legacySteps={values.howToUse}
+          onConvertLegacy={(guide) => setValues((current) => ({ ...current, guide, howToUse: [] }))}
+        />
       </div>
 
       <div>
@@ -834,20 +782,6 @@ export function ProductForm({
         <Button type="button" variant="outline" size="sm" className="mt-3" onClick={() => update('faqs', [...values.faqs, { question: '', answer: '' }])}>
           Add question
         </Button>
-      </div>
-
-      <div>
-        <label className="block text-sm font-medium text-cream-muted mb-1.5">Instructions guide</label>
-        <p className="text-xs text-cream-muted/70 mb-3">
-          A step-by-step page with photos and videos for this product. The QR code on the label opens it. If a guide exists, the &quot;How To Use&quot; tab shows its steps and links to it.
-        </p>
-        <GuideEditor
-          guide={values.guide}
-          onChange={(guide) => update('guide', guide)}
-          suggestedSlug={values.slug || values.nameEn}
-          products={availableProducts}
-          productId={productId}
-        />
       </div>
 
       <div>
