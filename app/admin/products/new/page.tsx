@@ -26,6 +26,7 @@ export default function NewProductPage() {
           taxable: true,
           relatedProducts: [],
           howToUse: [],
+          guide: null,
           science: '',
           faqs: [],
           keyBenefits: [],

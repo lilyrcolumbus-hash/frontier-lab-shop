@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Input } from '@/components/ui/Input'
+import { GuideEditor } from '@/components/admin/GuideEditor'
+import type { Guide } from '@/lib/guide'
 import { Button } from '@/components/ui/Button'
 import { SITE_URL } from '@/lib/site-url'
 
@@ -49,6 +51,8 @@ export interface ProductFormValues {
   }
   /** One step per line. Empty means the product page has no "How to use" tab. */
   howToUse: string[]
+  /** The step-by-step guide behind the QR code on the label. Null means the product has none. */
+  guide: Guide | null
   /** Science text for the "Science" tab. Empty hides the tab. */
   science: string
   /** Question and answer pairs for the "FAQ" tab. None hides the tab. */
@@ -80,6 +84,7 @@ interface AvailableProduct {
   id: string
   slug: string
   nameEn: string
+  guide?: Guide | null
 }
 
 /** Profit and margin for one variant. Cost is per unit and never shown to shoppers. */
@@ -829,6 +834,20 @@ export function ProductForm({
         <Button type="button" variant="outline" size="sm" className="mt-3" onClick={() => update('faqs', [...values.faqs, { question: '', answer: '' }])}>
           Add question
         </Button>
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium text-cream-muted mb-1.5">Instructions guide</label>
+        <p className="text-xs text-cream-muted/70 mb-3">
+          A step-by-step page with photos and videos for this product. The QR code on the label opens it. If a guide exists, the &quot;How To Use&quot; tab shows its steps and links to it.
+        </p>
+        <GuideEditor
+          guide={values.guide}
+          onChange={(guide) => update('guide', guide)}
+          suggestedSlug={values.slug || values.nameEn}
+          products={availableProducts}
+          productId={productId}
+        />
       </div>
 
       <div>

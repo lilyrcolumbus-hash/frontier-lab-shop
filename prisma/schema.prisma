@@ -428,6 +428,8 @@ model Product {
   scienceContent Json?
   keyBenefits    Json?
   grainBagSpecs  Json?
+  // Instructions guide shown at /guide/<slug> (see lib/guide.ts). Null means the product has none.
+  guide          Json?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

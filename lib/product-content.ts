@@ -1,5 +1,6 @@
 import { Prisma } from '@prisma/client'
 import { z } from 'zod'
+import { guideSchema, type Guide } from '@/lib/guide'
 
 // The product page text (how to use, science, FAQ) is edited in the admin in English. The shop
 // is bilingual, so older products still carry real Spanish text: it is kept when the English
@@ -27,6 +28,7 @@ const bagSchema = z.object({
 })
 
 export const productContentFields = {
+  guide: guideSchema.nullable().optional(),
   keyBenefits: z
     .array(z.object({ icon: z.enum(BENEFIT_ICONS), label: z.string().trim().min(1).max(80), detail: z.string().trim().min(1).max(400) }))
     .max(8)
@@ -42,6 +44,7 @@ export const productContentFields = {
 }
 
 interface ContentInput {
+  guide?: Guide | null
   keyBenefits?: { icon: (typeof BENEFIT_ICONS)[number]; label: string; detail: string }[]
   growing?: z.infer<typeof growingSchema>
   bag?: z.infer<typeof bagSchema>
@@ -63,6 +66,7 @@ export function contentUpdate(input: ContentInput, existing?: ExistingContent) {
     scienceContent?: Prisma.InputJsonValue | typeof Prisma.DbNull
     faqs?: Prisma.InputJsonValue | typeof Prisma.DbNull
     keyBenefits?: Prisma.InputJsonValue | typeof Prisma.DbNull
+    guide?: Prisma.InputJsonValue | typeof Prisma.DbNull
     grainBagSpecs?: Prisma.InputJsonValue | typeof Prisma.DbNull
     specsDifficulty?: string | null
     specsColonizationTime?: string | null
@@ -100,6 +104,10 @@ export function contentUpdate(input: ContentInput, existing?: ExistingContent) {
 
   if (input.keyBenefits !== undefined) {
     data.keyBenefits = input.keyBenefits.length ? input.keyBenefits : Prisma.DbNull
+  }
+
+  if (input.guide !== undefined) {
+    data.guide = input.guide === null ? Prisma.DbNull : (input.guide as unknown as Prisma.InputJsonValue)
   }
 
   // An empty box means "not filled in", stored as null so the page hides that block.

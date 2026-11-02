@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { z } from 'zod'
 import { contentUpdate, productContentFields } from '@/lib/product-content'
+import { guideSlugTaken } from '@/lib/guide-server'
 import { prisma } from '@/lib/prisma'
 import { withStoreAdmin } from '@/lib/with-store-admin'
 import { syncAutomaticCollectionsForStore } from '@/lib/collection-rules'
@@ -58,7 +59,11 @@ export const PATCH = withStoreAdmin<{ params: { id: string } }>(async (req, { st
   const existing = await prisma.product.findUnique({ where: { id: params.id } })
   if (!existing || existing.storeId !== store.id) return NextResponse.json({ error: 'Not found' }, { status: 404 })
 
-  const { collectionIds, variants, howToUse, science, faqs, keyBenefits, growing, bag, ...updateData } = parsed.data
+  if (parsed.data.guide && (await guideSlugTaken(parsed.data.guide.slug, params.id))) {
+    return NextResponse.json({ error: 'Another product already uses this guide address' }, { status: 409 })
+  }
+
+  const { collectionIds, variants, howToUse, science, faqs, keyBenefits, growing, bag, guide, ...updateData } = parsed.data
   const ownedCollections = collectionIds.length
     ? await prisma.collection.findMany({ where: { id: { in: collectionIds }, storeId: store.id }, select: { id: true } })
     : []
@@ -67,7 +72,7 @@ export const PATCH = withStoreAdmin<{ params: { id: string } }>(async (req, { st
     where: { id: params.id },
     data: {
       ...updateData,
-      ...contentUpdate({ howToUse, science, faqs, keyBenefits, growing, bag }, { scienceContent: existing.scienceContent, faqs: existing.faqs }),
+      ...contentUpdate({ howToUse, science, faqs, keyBenefits, growing, bag, guide }, { scienceContent: existing.scienceContent, faqs: existing.faqs }),
       collections: { set: ownedCollections.map((c) => ({ id: c.id })) },
     },
     include: { variants: true, collections: true },
