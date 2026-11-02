@@ -20,6 +20,9 @@ interface Props {
   /** Every product, for "What you need" links and for copying another product's guide. */
   products: GuideProduct[]
   productId?: string
+  /** Steps from the old plain "How to use" list. They can be turned into a guide in one click. */
+  legacySteps?: string[]
+  onConvertLegacy?: (guide: Guide) => void
 }
 
 const inputClass = 'w-full bg-bg border border-ds-border rounded-none px-3 py-2 text-cream text-sm'
@@ -74,7 +77,7 @@ function checklist(guide: Guide) {
   ]
 }
 
-export function GuideEditor({ guide, onChange, suggestedSlug, products, productId }: Props) {
+export function GuideEditor({ guide, onChange, suggestedSlug, products, productId, legacySteps = [], onConvertLegacy }: Props) {
   const [busy, setBusy] = useState('')
   const [error, setError] = useState('')
   const [confirmRemove, setConfirmRemove] = useState(false)
@@ -87,6 +90,27 @@ export function GuideEditor({ guide, onChange, suggestedSlug, products, productI
   if (!guide) {
     return (
       <div className="border border-ds-border bg-surface p-4 space-y-3">
+        {legacySteps.length > 0 && onConvertLegacy && (
+          <div className="border border-amber bg-accent/5 p-3 space-y-2">
+            <p className="text-sm text-cream">
+              This product has {legacySteps.length} steps from the old &quot;How to use&quot; list. Turn them into a guide to add titles, photos and videos.
+              Give each step a title afterwards. Check the numbers and times in them too, they are shown to customers.
+            </p>
+            <Button
+              type="button"
+              variant="primary"
+              size="sm"
+              onClick={() =>
+                onConvertLegacy({
+                  ...emptyGuide(guideSlugFrom(suggestedSlug) || 'guide'),
+                  steps: legacySteps.map((text) => ({ title: '', text, important: '', media: [] })),
+                })
+              }
+            >
+              Convert these steps into a guide
+            </Button>
+          </div>
+        )}
         <p className="text-sm text-cream-muted">
           This product has no instructions guide yet. A guide is a step-by-step page with photos and videos. The QR code on the label opens it.
         </p>
