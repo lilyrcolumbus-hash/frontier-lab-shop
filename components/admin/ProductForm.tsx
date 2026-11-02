@@ -96,6 +96,20 @@ function marginLabel(priceCents: number, cost: string): string {
   return `$${(profit / 100).toFixed(2)} · ${Math.round((profit / priceCents) * 100)}%`
 }
 
+/**
+ * What gets sent to the server. A guide nobody filled in is sent as null, so the product has no guide.
+ * A guide with steps replaces the old plain "How to use" list, so that list is cleared and the two never disagree.
+ */
+function prepareValues(values: ProductFormValues): ProductFormValues {
+  const guide = values.guide
+  const hasContent = Boolean(guide && (guide.steps.length > 0 || guide.needs.length > 0 || guide.intro.trim()))
+  return {
+    ...values,
+    guide: hasContent ? guide : null,
+    howToUse: guide && guide.steps.length > 0 ? [] : values.howToUse,
+  }
+}
+
 const FAQ_SUGGESTIONS = [
   'What is included?',
   'How long does it last?',
@@ -183,7 +197,7 @@ export function ProductForm({
       const res = await fetch(url, {
         method,
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...values, status: 'active' }),
+        body: JSON.stringify({ ...prepareValues(values), status: 'active' }),
       })
       // A gateway timeout answers with HTML, not JSON — parsing it unguarded used to throw and
       // leave the button stuck on "Saving…" with nothing said.
@@ -316,7 +330,7 @@ export function ProductForm({
         method,
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          ...values,
+          ...prepareValues(values),
           nameEs: values.nameEs || values.nameEn,
           descriptionEs: values.descriptionEs || values.descriptionEn,
           variants: values.variants.map((v) => ({
@@ -713,7 +727,7 @@ export function ProductForm({
         <label className="block text-sm font-medium text-cream-muted mb-1.5">How to use: instructions guide</label>
         <p className="text-xs text-cream-muted/70 mb-3">
           Step-by-step instructions with photos and videos. They show in the &quot;How To Use&quot; tab and on the guide page that the QR code on the label opens.
-          Write only what is true for this product. With no guide, the tab does not appear.
+          Write only what is true for this product. Leave it empty and the tab does not appear.
         </p>
         <GuideEditor
           guide={values.guide}
@@ -721,8 +735,6 @@ export function ProductForm({
           suggestedSlug={values.slug || values.nameEn}
           products={availableProducts}
           productId={productId}
-          legacySteps={values.howToUse}
-          onConvertLegacy={(guide) => setValues((current) => ({ ...current, guide, howToUse: [] }))}
         />
       </div>
 

@@ -20,9 +20,6 @@ interface Props {
   /** Every product, for "What you need" links and for copying another product's guide. */
   products: GuideProduct[]
   productId?: string
-  /** Steps from the old plain "How to use" list. They can be turned into a guide in one click. */
-  legacySteps?: string[]
-  onConvertLegacy?: (guide: Guide) => void
 }
 
 const inputClass = 'w-full bg-bg border border-ds-border rounded-none px-3 py-2 text-cream text-sm'
@@ -77,7 +74,7 @@ function checklist(guide: Guide) {
   ]
 }
 
-export function GuideEditor({ guide, onChange, suggestedSlug, products, productId, legacySteps = [], onConvertLegacy }: Props) {
+export function GuideEditor({ guide: guideValue, onChange, suggestedSlug, products, productId }: Props) {
   const [busy, setBusy] = useState('')
   const [error, setError] = useState('')
   const [confirmRemove, setConfirmRemove] = useState(false)
@@ -87,63 +84,9 @@ export function GuideEditor({ guide, onChange, suggestedSlug, products, productI
 
   const guideProducts = products.filter((product) => product.guide && product.id !== productId)
 
-  if (!guide) {
-    return (
-      <div className="border border-ds-border bg-surface p-4 space-y-3">
-        {legacySteps.length > 0 && onConvertLegacy && (
-          <div className="border border-amber bg-accent/5 p-3 space-y-2">
-            <p className="text-sm text-cream">
-              This product has {legacySteps.length} steps from the old &quot;How to use&quot; list. Turn them into a guide to add titles, photos and videos.
-              Give each step a title afterwards. Check the numbers and times in them too, they are shown to customers.
-            </p>
-            <Button
-              type="button"
-              variant="primary"
-              size="sm"
-              onClick={() =>
-                onConvertLegacy({
-                  ...emptyGuide(guideSlugFrom(suggestedSlug) || 'guide'),
-                  steps: legacySteps.map((text) => ({ title: '', text, important: '', media: [] })),
-                })
-              }
-            >
-              Convert these steps into a guide
-            </Button>
-          </div>
-        )}
-        <p className="text-sm text-cream-muted">
-          This product has no instructions guide yet. A guide is a step-by-step page with photos and videos. The QR code on the label opens it.
-        </p>
-        <div className="flex flex-wrap gap-2 items-center">
-          <Button type="button" variant="outline" size="sm" onClick={() => onChange(emptyGuide(guideSlugFrom(suggestedSlug) || 'guide'))}>
-            Create guide
-          </Button>
-          {guideProducts.length > 0 && (
-            <>
-              <select className={`${inputClass} w-auto`} value={copyFrom} onChange={(e) => setCopyFrom(e.target.value)} aria-label="Copy a guide from another product">
-                <option value="">Or copy a guide from…</option>
-                {guideProducts.map((product) => (
-                  <option key={product.id} value={product.id}>{product.nameEn}</option>
-                ))}
-              </select>
-              <Button
-                type="button"
-                variant="outline"
-                size="sm"
-                disabled={!copyFrom}
-                onClick={() => {
-                  const source = guideProducts.find((product) => product.id === copyFrom)?.guide
-                  if (source) onChange({ ...source, slug: guideSlugFrom(suggestedSlug) || 'guide' })
-                }}
-              >
-                Copy
-              </Button>
-            </>
-          )}
-        </div>
-      </div>
-    )
-  }
+  // The full model is always shown. A product that has not been filled in yet simply starts from an empty guide.
+  const guide = guideValue ?? emptyGuide(guideSlugFrom(suggestedSlug) || 'guide')
+  const isBlank = guide.steps.length === 0 && guide.needs.length === 0 && !guide.intro.trim()
 
   const update = (partial: Partial<Guide>) => onChange({ ...guide, ...partial })
   const setStep = (index: number, partial: Partial<GuideStep>) =>
@@ -188,6 +131,30 @@ export function GuideEditor({ guide, onChange, suggestedSlug, products, productI
 
   return (
     <div className="space-y-5 border border-ds-border bg-surface p-4">
+      {isBlank && guideProducts.length > 0 && (
+        <div className="flex flex-wrap items-center gap-2 border border-ds-border bg-bg p-3">
+          <span className="text-xs text-cream-muted">Start from another product&apos;s guide:</span>
+          <select className={`${inputClass} w-auto`} value={copyFrom} onChange={(e) => setCopyFrom(e.target.value)} aria-label="Copy a guide from another product">
+            <option value="">Choose a product…</option>
+            {guideProducts.map((product) => (
+              <option key={product.id} value={product.id}>{product.nameEn}</option>
+            ))}
+          </select>
+          <Button
+            type="button"
+            variant="outline"
+            size="sm"
+            disabled={!copyFrom}
+            onClick={() => {
+              const source = guideProducts.find((product) => product.id === copyFrom)?.guide
+              if (source) onChange({ ...source, slug: guideSlugFrom(suggestedSlug) || 'guide' })
+            }}
+          >
+            Copy
+          </Button>
+        </div>
+      )}
+
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div className="min-w-0">
           <p className="text-xs text-cream-muted mb-1">Guide address (the QR on the label points here)</p>
@@ -203,12 +170,12 @@ export function GuideEditor({ guide, onChange, suggestedSlug, products, productI
         </div>
         {confirmRemove ? (
           <div className="flex items-center gap-2 text-xs">
-            <span className="text-cream-muted">Delete this guide?</span>
-            <button type="button" className="text-error" onClick={() => { onChange(null); setConfirmRemove(false) }}>Yes, delete</button>
+            <span className="text-cream-muted">Clear everything in this guide?</span>
+            <button type="button" className="text-error" onClick={() => { onChange(null); setConfirmRemove(false) }}>Yes, clear</button>
             <button type="button" className="text-cream-muted" onClick={() => setConfirmRemove(false)}>Keep</button>
           </div>
         ) : (
-          <button type="button" className="text-xs text-error" onClick={() => setConfirmRemove(true)}>Delete guide</button>
+          <button type="button" className="text-xs text-error" onClick={() => setConfirmRemove(true)}>Clear guide</button>
         )}
       </div>
 
