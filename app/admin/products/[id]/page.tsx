@@ -1,3 +1,4 @@
+import type { Guide } from '@/lib/guide'
 import { notFound } from 'next/navigation'
 import { ProductForm } from '@/components/admin/ProductForm'
 import { prisma } from '@/lib/prisma'
@@ -31,6 +32,7 @@ export default async function EditProductPage({ params }: { params: { id: string
           taxable: product.taxable,
           relatedProducts: product.relatedProducts ?? [],
           howToUse: (product.howToUseSteps as string[] | null) ?? [],
+          guide: (product.guide as unknown as Guide | null) ?? null,
           science: (product.scienceContent as { en?: string } | null)?.en ?? '',
           keyBenefits: (product.keyBenefits as { icon: 'brain' | 'shield' | 'heart' | 'leaf' | 'activity' | 'zap' | 'sun' | 'droplet'; label: string; detail: string }[] | null) ?? [],
           growing: {

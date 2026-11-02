@@ -19,6 +19,10 @@ const nextConfig = {
     return [
       { source: '/garden', destination: '/lab', permanent: true },
       { source: '/es/garden', destination: '/es/lab', permanent: true },
+      // Short address printed as a QR code on product labels. Temporary on purpose: a label already
+      // on a bag keeps working if the guide moves later.
+      { source: '/g/:slug', destination: '/guide/:slug', permanent: false },
+      { source: '/es/g/:slug', destination: '/es/guide/:slug', permanent: false },
     ]
   },
 }

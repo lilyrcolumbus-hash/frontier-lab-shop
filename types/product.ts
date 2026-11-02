@@ -1,3 +1,5 @@
+import type { Guide } from '@/lib/guide'
+
 export interface ProductVariant {
   id: string
   name: string
@@ -48,6 +50,7 @@ export interface Product {
     recommendedInoculation: string
     shelfLife: string
   }
+  guide?: Guide
 }
 
 export interface CartItem {

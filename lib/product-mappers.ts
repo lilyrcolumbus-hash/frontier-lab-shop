@@ -50,5 +50,6 @@ export function toProduct(row: ProductWithVariants): Product {
     scienceContent: (row.scienceContent as unknown as Product['scienceContent']) ?? undefined,
     keyBenefits: (row.keyBenefits as unknown as Product['keyBenefits']) ?? undefined,
     grainBagSpecs: (row.grainBagSpecs as unknown as Product['grainBagSpecs']) ?? undefined,
+    guide: (row.guide as unknown as Product['guide']) ?? undefined,
   }
 }

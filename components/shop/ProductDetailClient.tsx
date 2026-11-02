@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react'
 import Link from 'next/link'
+import { Link as LocaleLink } from '@/navigation'
 import { motion, AnimatePresence, useMotionValue, useSpring } from 'framer-motion'
 import { useLocale, useTranslations } from 'next-intl'
 import { useCartStore } from '@/lib/cart-store'
@@ -26,7 +27,7 @@ export function ProductDetailClient({ product }: { product: Product }) {
   // A tab only exists when the admin filled it in. Reviews has no source yet, so it stays hidden
   // rather than promising reviews that are not there.
   const availableTabs = TABS.filter((tab) => {
-    if (tab === 'howToUse') return (product.howToUseSteps?.length ?? 0) > 0
+    if (tab === 'howToUse') return (product.guide?.steps.length ?? 0) > 0 || (product.howToUseSteps?.length ?? 0) > 0
     if (tab === 'science') return Boolean(product.scienceContent?.en || product.scienceContent?.es)
     if (tab === 'faq') return (product.faqs?.length ?? 0) > 0
     if (tab === 'reviews') return false
@@ -570,12 +571,27 @@ export function ProductDetailClient({ product }: { product: Product }) {
                 )}
                 {activeTab === 'howToUse' && (
                   <div className="space-y-3">
-                    {(product.howToUseSteps ?? []).map((step, i) => (
-                      <div key={i} className="flex gap-4 items-start">
-                        <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent/10 border border-accent/20 text-accent font-mono text-[10px] flex items-center justify-center mt-0.5">{i + 1}</span>
-                        <p className="text-cream-muted leading-relaxed">{step}</p>
-                      </div>
-                    ))}
+                    {/* A guide, when the product has one, replaces the plain list and links to the full page. */}
+                    {product.guide && product.guide.steps.length > 0
+                      ? (
+                        <>
+                          {product.guide.steps.map((step, i) => (
+                            <div key={i} className="flex gap-4 items-start">
+                              <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent/10 border border-accent/20 text-accent font-mono text-[10px] flex items-center justify-center mt-0.5">{i + 1}</span>
+                              <p className="text-cream-muted leading-relaxed"><span className="font-semibold text-cream">{step.title}</span>{step.text ? `. ${step.text}` : ''}</p>
+                            </div>
+                          ))}
+                          <LocaleLink href={`/guide/${product.guide.slug}`} className="inline-block pt-2 font-semibold text-accent underline">
+                            View the full guide with photos and videos
+                          </LocaleLink>
+                        </>
+                      )
+                      : (product.howToUseSteps ?? []).map((step, i) => (
+                        <div key={i} className="flex gap-4 items-start">
+                          <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent/10 border border-accent/20 text-accent font-mono text-[10px] flex items-center justify-center mt-0.5">{i + 1}</span>
+                          <p className="text-cream-muted leading-relaxed">{step}</p>
+                        </div>
+                      ))}
                   </div>
                 )}
                 {activeTab === 'science' && (

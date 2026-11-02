@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { z } from 'zod'
 import { contentUpdate, productContentFields } from '@/lib/product-content'
+import { guideSlugTaken } from '@/lib/guide-server'
 import { prisma } from '@/lib/prisma'
 import { withStoreAdmin } from '@/lib/with-store-admin'
 import { syncAutomaticCollectionsForStore } from '@/lib/collection-rules'
@@ -61,7 +62,11 @@ export const POST = withStoreAdmin(async (req, { store }) => {
     return NextResponse.json({ error: 'A product with this slug already exists' }, { status: 409 })
   }
 
-  const { variants, collectionIds, howToUse, science, faqs, keyBenefits, growing, bag, ...productData } = parsed.data
+  if (parsed.data.guide && (await guideSlugTaken(parsed.data.guide.slug))) {
+    return NextResponse.json({ error: 'Another product already uses this guide address' }, { status: 409 })
+  }
+
+  const { variants, collectionIds, howToUse, science, faqs, keyBenefits, growing, bag, guide, ...productData } = parsed.data
 
   // Only connect collections that actually belong to this store — an id from another tenant
   // must silently not link, not error, so a guessed id can't leak a cross-tenant association.
@@ -72,7 +77,7 @@ export const POST = withStoreAdmin(async (req, { store }) => {
   const product = await prisma.product.create({
     data: {
       ...productData,
-      ...contentUpdate({ howToUse, science, faqs, keyBenefits, growing, bag }),
+      ...contentUpdate({ howToUse, science, faqs, keyBenefits, growing, bag, guide }),
       storeId: store.id,
       price: parsed.data.price,
       variants: {
