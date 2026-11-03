@@ -14,10 +14,10 @@ interface Props {
 function MediaItem({ item, large }: { item: GuideMedia; large?: boolean }) {
   const frame = large ? 'aspect-[4/3] w-full' : 'aspect-square w-full'
   if (item.kind === 'video') {
-    return <video src={item.url} className={`${frame} bg-black object-cover`} autoPlay muted loop playsInline controls />
+    return <video src={item.url} className={`${frame} bg-bg object-contain`} autoPlay muted loop playsInline controls />
   }
   // eslint-disable-next-line @next/next/no-img-element
-  return <img src={item.url} alt={item.caption} className={`${frame} object-cover`} loading="lazy" />
+  return <img src={item.url} alt={item.caption} className={`${frame} bg-bg object-contain`} loading="lazy" />
 }
 
 function Badge({ text }: { text: string }) {
