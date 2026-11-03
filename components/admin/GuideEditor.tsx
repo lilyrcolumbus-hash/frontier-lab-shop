@@ -112,6 +112,21 @@ export function GuideEditor({ guide: guideValue, onChange, suggestedSlug, produc
     }
   }
 
+  const replaceMedia = async (stepIndex: number, mediaIndex: number, files: FileList) => {
+    setError('')
+    const current = guide.steps[stepIndex].media[mediaIndex]
+    try {
+      setBusy(`Uploading ${files[0].name}…`)
+      const uploaded = await uploadGuideFile(files[0])
+      if (uploaded.kind !== current.kind) throw new Error(current.kind === 'photo' ? 'Replace a photo with a photo.' : 'Replace a video with a video.')
+      setMedia(stepIndex, mediaIndex, { url: uploaded.url })
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'The upload failed')
+    } finally {
+      setBusy('')
+    }
+  }
+
   const uploadExample = async (which: 'normal' | 'problem', files: FileList) => {
     setError('')
     try {
@@ -279,6 +294,12 @@ export function GuideEditor({ guide: guideValue, onChange, suggestedSlug, produc
                               onClick={() => setStep(index, { media: moveItem(step.media, mediaIndex, -1) })}>←</button>
                             <button type="button" className={smallButton} disabled={mediaIndex === step.media.length - 1} aria-label="Move later"
                               onClick={() => setStep(index, { media: moveItem(step.media, mediaIndex, 1) })}>→</button>
+                            <label className={`${smallButton} cursor-pointer`}>
+                              Replace
+                              <input type="file" className="hidden" disabled={Boolean(busy)}
+                                accept={item.kind === 'video' ? 'video/mp4,video/quicktime,video/webm,.mov,.mp4' : 'image/*,.heic,.heif'}
+                                onChange={(e) => { if (e.target.files?.length) replaceMedia(index, mediaIndex, e.target.files); e.target.value = '' }} />
+                            </label>
                             <button type="button" className={`${smallButton} text-error`}
                               onClick={() => setStep(index, { media: step.media.filter((_, i) => i !== mediaIndex) })}>Remove</button>
                           </div>
