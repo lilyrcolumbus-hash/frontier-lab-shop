@@ -138,6 +138,8 @@ export function ProductForm({
 }) {
   const router = useRouter()
   const fileInputRef = useRef<HTMLInputElement>(null)
+  const replaceInputRef = useRef<HTMLInputElement>(null)
+  const replaceIndexRef = useRef<number | null>(null)
 
   const [values, setValues] = useState<ProductFormValues>(initial)
   const [error, setError] = useState('')
@@ -215,7 +217,7 @@ export function ProductForm({
     }
   }
 
-  const handleUpload = async (files: FileList) => {
+  const handleUpload = async (files: FileList, replaceIndex?: number) => {
     setUploading(true)
     setError('')
     const uploaded: string[] = []
@@ -264,7 +266,10 @@ export function ProductForm({
     }
 
     setUploading(false)
-    if (uploaded.length) {
+    if (uploaded.length && replaceIndex !== undefined) {
+      // Replace keeps the photo's place in the order and its alt text. The old file is simply no longer listed.
+      setValues((v) => ({ ...v, images: v.images.map((img, i) => (i === replaceIndex ? uploaded[0] : img)) }))
+    } else if (uploaded.length) {
       setValues((v) => ({
         ...v,
         images: [...v.images, ...uploaded],
@@ -570,10 +575,19 @@ export function ProductForm({
                 </button>
                 <button
                   type="button"
+                  disabled={uploading}
+                  onClick={() => { replaceIndexRef.current = i; replaceInputRef.current?.click() }}
+                  className="px-2 py-1 rounded-none border border-ds-border text-xs text-cream hover:bg-surface disabled:opacity-30"
+                >
+                  Replace
+                </button>
+                <button
+                  type="button"
                   onClick={() => removeImage(i)}
+                  aria-label="Remove image"
                   className="px-2 py-1 rounded-none border border-ds-border text-xs text-error hover:bg-error/10"
                 >
-                  ✕
+                  Remove
                 </button>
               </div>
             </div>
@@ -588,6 +602,18 @@ export function ProductForm({
           className="hidden"
           onChange={(e) => {
             if (e.target.files?.length) handleUpload(e.target.files)
+            e.target.value = ''
+          }}
+        />
+        <input
+          ref={replaceInputRef}
+          type="file"
+          accept="image/*,.heic,.heif"
+          className="hidden"
+          onChange={(e) => {
+            const index = replaceIndexRef.current
+            if (e.target.files?.length && index !== null) handleUpload(e.target.files, index)
+            replaceIndexRef.current = null
             e.target.value = ''
           }}
         />
