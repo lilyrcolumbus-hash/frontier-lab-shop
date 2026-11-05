@@ -12,6 +12,7 @@ import { Footer } from '@/components/layout/Footer'
 import { GlowCursor } from '@/components/ui/GlowCursor'
 import { PageTransition } from '@/components/ui/PageTransition'
 import { SmoothScroll } from '@/components/ui/SmoothScroll'
+import { getShopCategoryTree, shopMenuFrom } from '@/lib/shop-categories'
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }))
@@ -45,6 +46,8 @@ export default async function LocaleLayout({
   const messages = await getMessages()
   const testPayments = isStripeTestMode()
   const es = locale === 'es'
+  // The shop menu comes from the categories managed in /admin/categories.
+  const shopMenu = shopMenuFrom(await getShopCategoryTree(), es ? 'es' : 'en')
   // The notice text: demo wording on the demo site, "opening soon" on the real store while it is closed.
   const noticeShort = IS_DEMO
     ? testPayments
@@ -85,9 +88,9 @@ export default async function LocaleLayout({
                 </span>
               </div>
             )}
-            <Header />
+            <Header shopMenu={shopMenu} />
             <main className="flex-1">{children}</main>
-            <Footer />
+            <Footer shopMenu={shopMenu} />
           </div>
         </SmoothScroll>
       </AuthProvider>

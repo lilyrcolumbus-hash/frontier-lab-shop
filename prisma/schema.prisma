@@ -19,26 +19,26 @@ model Store {
 
   // Details that appear to customers on packing slips and order emails. Kept here rather than
   // hardcoded so a rename or a new support address never needs a code change.
-  supportEmail  String  @default("")
-  addressLine1  String  @default("")
-  addressLine2  String  @default("")
-  city          String  @default("")
-  state         String  @default("")
-  postalCode    String  @default("")
-  country       String  @default("US")
+  supportEmail      String @default("")
+  addressLine1      String @default("")
+  addressLine2      String @default("")
+  city              String @default("")
+  state             String @default("")
+  postalCode        String @default("")
+  country           String @default("US")
   // Low stock warning threshold: variants at or below this are flagged in the admin. 0 disables.
-  lowStockThreshold Int @default(0)
+  lowStockThreshold Int    @default(0)
 
   // Brand colours as hex, each empty by default meaning "use the palette the site ships with".
   // Applied as CSS variables at render time — see lib/theme.ts.
-  themeAccent    String @default("")
-  themeAmber     String @default("")
-  themeInk       String @default("")
-  themeInkMuted  String @default("")
-  themeBg        String @default("")
-  themeSurface   String @default("")
-  themeElevated  String @default("")
-  themeBorder    String @default("")
+  themeAccent   String @default("")
+  themeAmber    String @default("")
+  themeInk      String @default("")
+  themeInkMuted String @default("")
+  themeBg       String @default("")
+  themeSurface  String @default("")
+  themeElevated String @default("")
+  themeBorder   String @default("")
 
   // ISO 4217, lower case, as Stripe expects it. Changing this does not convert existing prices.
   currency String @default("usd")
@@ -47,18 +47,19 @@ model Store {
 
   // Shipping, in cents. A discount code can never cover shipping — Stripe applies discounts to
   // the subtotal only — so free shipping is granted here, at the moment the session is built.
-  shippingRate           Int  @default(999)
+  shippingRate          Int @default(999)
   // freeShippingThreshold: order subtotal at or above which shipping is free; 0 disables it.
-  freeShippingThreshold  Int  @default(0)
+  freeShippingThreshold Int @default(0)
 
-  members        StoreMember[]
-  species        Species[]
-  products       Product[]
-  collections    Collection[]
-  variants       ProductVariant[]
-  orders         Order[]
-  orderItems     OrderItem[]
-  orderEvents    OrderEvent[]
+  members          StoreMember[]
+  species          Species[]
+  products         Product[]
+  collections      Collection[]
+  shopCategories   ShopCategory[]
+  variants         ProductVariant[]
+  orders           Order[]
+  orderItems       OrderItem[]
+  orderEvents      OrderEvent[]
   customerProfiles CustomerProfile[]
   siteContent      SiteContent[]
   pages            Page[]
@@ -71,10 +72,10 @@ model Store {
   locations        Location[]
   inventoryLevels  InventoryLevel[]
   emailTemplates   EmailTemplate[]
-  journalEntries GrowJournalEntry[]
-  wishlistItems  WishlistItem[]
-  subscribers    NewsletterSubscriber[]
-  reviews        Review[]
+  journalEntries   GrowJournalEntry[]
+  wishlistItems    WishlistItem[]
+  subscribers      NewsletterSubscriber[]
+  reviews          Review[]
 
   @@map("stores")
 }
@@ -117,7 +118,6 @@ model SiteContent {
   @@index([storeId])
   @@map("site_content")
 }
-
 
 // ── Content ───────────────────────────────────────────────────────────────────
 
@@ -223,7 +223,7 @@ model ShippingZone {
 // A rate inside a zone. The bounds are optional and inclusive-exclusive: a rate applies when the
 // order's subtotal and weight both fall inside whatever bounds are set.
 model ShippingRate {
-  id             String  @id @default(cuid())
+  id             String @id @default(cuid())
   storeId        String
   zoneId         String
   name           String
@@ -232,9 +232,9 @@ model ShippingRate {
   maxSubtotal    Int?
   minWeightGrams Int?
   maxWeightGrams Int?
-  minDays        Int     @default(3)
-  maxDays        Int     @default(5)
-  sortOrder      Int     @default(0)
+  minDays        Int    @default(3)
+  maxDays        Int    @default(5)
+  sortOrder      Int    @default(0)
 
   store Store        @relation(fields: [storeId], references: [id])
   zone  ShippingZone @relation(fields: [zoneId], references: [id], onDelete: Cascade)
@@ -372,7 +372,7 @@ model Species {
   createdAt            DateTime @default(now())
   updatedAt            DateTime @updatedAt
 
-  store    Store    @relation(fields: [storeId], references: [id])
+  store    Store     @relation(fields: [storeId], references: [id])
   products Product[]
 
   @@index([storeId])
@@ -380,27 +380,32 @@ model Species {
 }
 
 model Product {
-  id             String   @id @default(cuid())
-  storeId        String
-  slug           String   @unique
-  nameEn         String
-  nameEs         String
-  descriptionEn  String   @db.Text
-  descriptionEs  String   @db.Text
-  category       String
-  subcategory    String
-  status         String   @default("draft") // 'draft' | 'active' | 'archived' — controls visibility on the live site, separate from `inStock` (purchasability)
-  speciesId      String?
-  scientificName String?
-  price          Int
-  compareAtPrice Int?
-  images         String[]
+  id              String   @id @default(cuid())
+  storeId         String
+  slug            String   @unique
+  nameEn          String
+  nameEs          String
+  descriptionEn   String   @db.Text
+  descriptionEs   String   @db.Text
+  category        String
+  subcategory     String
+  // Links to the category tree managed in /admin/categories. Optional: the legacy `category` and
+  // `subcategory` strings above are kept in sync with them so MCP, CSV and collection rules still work,
+  // and a product without these links falls back to the strings.
+  categoryId      String?
+  subcategoryId   String?
+  status          String   @default("draft") // 'draft' | 'active' | 'archived' — controls visibility on the live site, separate from `inStock` (purchasability)
+  speciesId       String?
+  scientificName  String?
+  price           Int
+  compareAtPrice  Int?
+  images          String[]
   // Alt text, index-aligned with `images` (imageAlts[i] describes images[i]). The admin form
   // keeps both arrays in sync on add/remove/reorder; a missing entry falls back to the product name.
-  imageAlts      String[] @default([])
-  isOrganic      Boolean  @default(false)
-  inStock        Boolean  @default(true)
-  tags           String[]
+  imageAlts       String[] @default([])
+  isOrganic       Boolean  @default(false)
+  inStock         Boolean  @default(true)
+  tags            String[]
   relatedProducts String[]
 
   // Search-engine overrides. Both are optional and locale-agnostic: the admin is English-only,
@@ -412,13 +417,13 @@ model Product {
   // gift card would not be. Nothing calculates tax yet — this records the fact for when it does.
   taxable Boolean @default(true)
 
-  specsDifficulty      String?
+  specsDifficulty       String?
   specsColonizationTime String?
-  specsFruitingTempF   String?
-  specsFruitingTempC   String?
-  specsIdealSubstrate  String?
-  specsExpectedYield   String?
-  specsIndoorOutdoor   String?
+  specsFruitingTempF    String?
+  specsFruitingTempC    String?
+  specsIdealSubstrate   String?
+  specsExpectedYield    String?
+  specsIndoorOutdoor    String?
 
   // Rich per-product content carried over from the hardcoded catalog as-is — nested/bilingual
   // shape doesn't map cleanly to relational columns, and the admin UI doesn't edit these yet
@@ -434,13 +439,17 @@ model Product {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  store          Store           @relation(fields: [storeId], references: [id])
-  species        Species?         @relation(fields: [speciesId], references: [id])
-  variants       ProductVariant[]
-  wishlistItems  WishlistItem[]
-  collections    Collection[]
+  store           Store            @relation(fields: [storeId], references: [id])
+  species         Species?         @relation(fields: [speciesId], references: [id])
+  shopCategory    ShopCategory?    @relation("ProductCategory", fields: [categoryId], references: [id])
+  shopSubcategory ShopCategory?    @relation("ProductSubcategory", fields: [subcategoryId], references: [id])
+  variants        ProductVariant[]
+  wishlistItems   WishlistItem[]
+  collections     Collection[]
 
   @@index([storeId])
+  @@index([categoryId])
+  @@index([subcategoryId])
   @@map("products")
 }
 
@@ -460,7 +469,7 @@ model Collection {
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 
-  store    Store    @relation(fields: [storeId], references: [id])
+  store    Store     @relation(fields: [storeId], references: [id])
   products Product[]
 
   @@index([storeId])
@@ -468,20 +477,20 @@ model Collection {
 }
 
 model ProductVariant {
-  id        String  @id @default(cuid())
-  storeId   String
-  productId String
-  name      String
-  price     Int
-  stock     Int     @default(0)
-  sku       String  @unique
+  id          String @id @default(cuid())
+  storeId     String
+  productId   String
+  name        String
+  price       Int
+  stock       Int    @default(0)
+  sku         String @unique
   // What this unit costs you, in cents. Never shown to customers — it exists so the admin can
   // report margin. Null means it has not been entered yet, which is not the same as zero cost.
   cost        Int?
   // Shipping weight in grams. Whole grams are enough for a carrier rate and avoid float drift.
   weightGrams Int?
 
-  store   Store  @relation(fields: [storeId], references: [id])
+  store   Store   @relation(fields: [storeId], references: [id])
   product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
 
   @@index([storeId])
@@ -540,21 +549,21 @@ model OrderEvent {
 }
 
 model OrderItem {
-  id        String  @id @default(cuid())
-  storeId   String // denormalized from Order — lets analytics scope OrderItem without joining through Order
-  orderId   String
-  productId String
-  variantId String
-  name      String
-  price     Int
-  quantity  Int
-  image     String
+  id                String @id @default(cuid())
+  storeId           String // denormalized from Order — lets analytics scope OrderItem without joining through Order
+  orderId           String
+  productId         String
+  variantId         String
+  name              String
+  price             Int
+  quantity          Int
+  image             String
   // Units already shipped. Partial fulfilment is normal when one line is out of stock: the
   // order stays open until every line has caught up with its quantity.
-  fulfilledQuantity Int @default(0)
+  fulfilledQuantity Int    @default(0)
 
   store Store @relation(fields: [storeId], references: [id])
-  order Order  @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
 
   @@index([storeId])
   @@map("order_items")
@@ -588,7 +597,7 @@ model WishlistItem {
   productId String
   createdAt DateTime @default(now())
 
-  store   Store  @relation(fields: [storeId], references: [id])
+  store   Store   @relation(fields: [storeId], references: [id])
   product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
 
   @@unique([userId, productId])
@@ -653,7 +662,7 @@ model McpAuthCode {
   clientId            String
   storeMemberId       String
   redirectUri         String
-  codeChallenge        String
+  codeChallenge       String
   codeChallengeMethod String   @default("S256")
   expiresAt           DateTime
   createdAt           DateTime @default(now())
@@ -676,4 +685,41 @@ model McpToken {
 
   @@index([storeMemberId])
   @@map("mcp_tokens")
+}
+
+// A two-level category tree managed in /admin/categories: a top-level category (Culture Bank, Grow
+// Kits...) and its subcategories. It drives the shop menu, the shop tabs and which blocks a product
+// page shows. A top-level category has parentId = null.
+model ShopCategory {
+  id                     String   @id @default(cuid())
+  storeId                String
+  // Stable URL key, e.g. "substrate" in /shop?category=substrate. The slugs the site already used
+  // are kept so no existing link breaks.
+  slug                   String
+  nameEn                 String
+  nameEs                 String
+  descriptionEn          String   @default("")
+  descriptionEs          String   @default("")
+  parentId               String?
+  sortOrder              Int      @default(0)
+  // Top-level only: whether the category appears in the header, mobile menu and footer.
+  showInMenu             Boolean  @default(true)
+  // Product-page blocks. Null on a subcategory means "same as its category"; null on a category
+  // means off. They replace checks on the category text that used to be hardcoded in the page.
+  showPacketContents     Boolean? // "What's in the packet" (syringe, needle, swab, card)
+  showViabilityGuarantee Boolean? // "Viable culture guaranteed"
+  showFreshnessBlock     Boolean? // "How we guarantee it arrives fresh"
+  createdAt              DateTime @default(now())
+  updatedAt              DateTime @updatedAt
+
+  store       Store          @relation(fields: [storeId], references: [id])
+  parent      ShopCategory?  @relation("CategoryTree", fields: [parentId], references: [id])
+  children    ShopCategory[] @relation("CategoryTree")
+  products    Product[]      @relation("ProductCategory")
+  subProducts Product[]      @relation("ProductSubcategory")
+
+  @@unique([storeId, parentId, slug])
+  @@index([storeId])
+  @@index([parentId])
+  @@map("shop_categories")
 }

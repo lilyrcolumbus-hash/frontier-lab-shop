@@ -76,7 +76,7 @@ export default async function ProductPage({ params }: { params: { slug: string; 
 
   const row = await prisma.product.findUnique({
     where: { slug: decodeSlug(params.slug) },
-    include: { variants: true, species: true },
+    include: { variants: true, species: true, shopCategory: true, shopSubcategory: true },
   })
   if (!row || row.status !== 'active') notFound()
 
@@ -85,7 +85,7 @@ export default async function ProductPage({ params }: { params: { slug: string; 
   const relatedRows = row.relatedProducts.length
     ? await prisma.product.findMany({
         where: { slug: { in: row.relatedProducts }, storeId: row.storeId, status: 'active' },
-        include: { variants: true, species: true },
+        include: { variants: true, species: true, shopCategory: true, shopSubcategory: true },
       })
     : []
   const related = row.relatedProducts

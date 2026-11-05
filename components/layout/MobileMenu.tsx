@@ -6,13 +6,15 @@ import { useTranslations } from 'next-intl'
 import { Logo } from '@/components/ui/Logo'
 import { LanguageSwitcher } from './LanguageSwitcher'
 import { cn } from '@/lib/utils'
+import type { ShopMenuItem } from '@/lib/shop-categories'
 
 interface MobileMenuProps {
   isOpen: boolean
   onClose: () => void
+  shopMenu: ShopMenuItem[]
 }
 
-export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
+export function MobileMenu({ isOpen, onClose, shopMenu }: MobileMenuProps) {
   const t = useTranslations()
 
   useEffect(() => {
@@ -27,14 +29,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
     return () => document.removeEventListener('keydown', handleKey)
   }, [onClose])
 
-  const shopLinks = [
-    { label: 'Culture Bank', href: '/shop' },
-    { label: t('nav.shopDropdown.substrates'), href: '/shop?category=substrate' },
-    { label: t('nav.shopDropdown.kits'), href: '/shop?category=kit' },
-    { label: t('nav.shopDropdown.equipment'), href: '/shop?category=equipment' },
-    { label: t('nav.shopDropdown.wellness'), href: '/shop?category=wellness' },
-    { label: t('nav.shopDropdown.bundles'), href: '/shop?category=bundle' },
-  ]
+  const shopLinks = shopMenu.map((c) => ({ label: c.label, href: c.href }))
 
   const learnLinks = [
     { label: t('nav.learnDropdown.beginners'), href: '/learn?category=beginners' },

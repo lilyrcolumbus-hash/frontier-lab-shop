@@ -275,6 +275,7 @@
       "quantity": "Qty"
     },
     "browser": {
+      "comingSoon": "Coming soon.",
       "categories": {
         "culture-bank": "Culture Bank",
         "substrate": "Substrate",

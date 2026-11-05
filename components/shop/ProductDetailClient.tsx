@@ -82,6 +82,11 @@ export function ProductDetailClient({ product }: { product: Product }) {
 
   const name = product.name[locale]
   const description = product.description[locale]
+  // Switched on or off per category in /admin/categories. The fallbacks are the old rules, for a product
+  // that arrives without them.
+  const showPacketContents = product.blocks?.packetContents ?? product.subcategory === 'Liquid Culture'
+  const showViabilityGuarantee = product.blocks?.viabilityGuarantee ?? product.category !== 'equipment'
+  const showFreshnessBlock = product.blocks?.freshness ?? product.category === 'spawn'
   const hasDiscount = product.compareAtPrice && product.compareAtPrice > selectedVariant.price
 
   return (
@@ -203,7 +208,7 @@ export function ProductDetailClient({ product }: { product: Product }) {
             </div>
 
             {/* LC packet contents */}
-            {product.subcategory === 'Liquid Culture' && (
+            {showPacketContents && (
               <div className="rounded-none border border-ds-border overflow-hidden">
                 <div className="px-4 py-2.5 bg-elevated border-b border-ds-border">
                   <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-cream-muted">What&apos;s in the packet</p>
@@ -382,7 +387,7 @@ export function ProductDetailClient({ product }: { product: Product }) {
             </div>
 
             {/* Viability guarantee — living/biological products only, matches /terms exactly */}
-            {product.category !== 'equipment' && (
+            {showViabilityGuarantee && (
               <div className="flex items-start gap-3 rounded-none border border-accent/25 bg-accent/5 px-4 py-3.5">
                 <span className="text-accent flex-shrink-0 mt-0.5">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
@@ -399,7 +404,7 @@ export function ProductDetailClient({ product }: { product: Product }) {
             )}
 
             {/* How we guarantee freshness — genetics/process, no fabricated dates or lot numbers */}
-            {product.category === 'spawn' && (
+            {showFreshnessBlock && (
               <div className="rounded-none border border-ds-border overflow-hidden">
                 <div className="px-4 py-3 bg-elevated border-b border-ds-border">
                   <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-cream-muted">

@@ -2,6 +2,7 @@ import { Suspense } from 'react'
 import { setRequestLocale } from 'next-intl/server'
 import { ShopBrowser } from '@/components/shop/ShopBrowser'
 import { prisma } from '@/lib/prisma'
+import { getShopCategoryTree } from '@/lib/shop-categories'
 import { toProduct } from '@/lib/product-mappers'
 
 // Reads live from the DB, editable via /admin — must not be frozen at build time.
@@ -18,14 +19,15 @@ export default async function ShopPage({ params }: { params: { locale: string } 
   // them instead is a separate, later change, not bundled in here to avoid regressing that UX.
   const rows = await prisma.product.findMany({
     where: { status: 'active' },
-    include: { variants: true, species: true },
+    include: { variants: true, species: true, shopCategory: true, shopSubcategory: true },
     orderBy: { createdAt: 'asc' },
   })
   const products = rows.map(toProduct)
+  const categories = await getShopCategoryTree()
 
   return (
     <Suspense fallback={null}>
-      <ShopBrowser products={products} />
+      <ShopBrowser products={products} categories={categories} />
     </Suspense>
   )
 }

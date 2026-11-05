@@ -23,8 +23,16 @@ export interface Product {
   slug: string
   name: Record<'en' | 'es', string>
   description: Record<'en' | 'es', string>
-  category: 'kit' | 'spawn' | 'substrate' | 'equipment' | 'wellness' | 'bundle'
+  /** Slug of the category in the tree managed in /admin/categories, e.g. 'substrate'. */
+  category: string
   subcategory: string
+  /** Slug of the subcategory in the tree (for the sub-filter pills). */
+  subcategorySlug?: string
+  /** Display names from the category tree, when the product is linked to it. */
+  categoryName?: Record<'en' | 'es', string>
+  subcategoryName?: Record<'en' | 'es', string>
+  /** Product-page blocks, already resolved from the category tree (subcategory first, then its category). */
+  blocks?: { packetContents: boolean; viabilityGuarantee: boolean; freshness: boolean }
   species?: string
   scientificName?: string
   price: number

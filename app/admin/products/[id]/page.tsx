@@ -20,6 +20,8 @@ export default async function EditProductPage({ params }: { params: { id: string
           descriptionEs: product.descriptionEs,
           category: product.category,
           subcategory: product.subcategory,
+          categoryId: product.categoryId ?? null,
+          subcategoryId: product.subcategoryId ?? null,
           price: product.price,
           compareAtPrice: product.compareAtPrice,
           images: product.images,

@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { useTranslations } from 'next-intl'
 import { Logo } from '@/components/ui/Logo'
 import { LanguageSwitcher } from './LanguageSwitcher'
+import type { ShopMenuItem } from '@/lib/shop-categories'
 
 const socials = [
   {
@@ -44,7 +45,7 @@ const socials = [
   },
 ]
 
-export function Footer() {
+export function Footer({ shopMenu }: { shopMenu: ShopMenuItem[] }) {
   const t = useTranslations()
 
   return (
@@ -72,12 +73,7 @@ export function Footer() {
 
           {/* Col 2 — Shop */}
           <FooterCol title={t('footer.shop.title')}>
-            <FooterLink href="/shop?category=kit">{t('footer.shop.kits')}</FooterLink>
-            <FooterLink href="/shop?category=spawn">{t('footer.shop.spawn')}</FooterLink>
-            <FooterLink href="/shop?category=substrate">{t('footer.shop.substrates')}</FooterLink>
-            <FooterLink href="/shop?category=equipment">{t('footer.shop.equipment')}</FooterLink>
-            <FooterLink href="/shop?category=wellness">{t('footer.shop.wellness')}</FooterLink>
-            <FooterLink href="/shop?category=bundle">{t('footer.shop.bundles')}</FooterLink>
+            {shopMenu.map((c) => <FooterLink key={c.slug} href={c.href}>{c.label}</FooterLink>)}
           </FooterCol>
 
           {/* Col 3 — Learn */}
