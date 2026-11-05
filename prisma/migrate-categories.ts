@@ -48,7 +48,8 @@ async function main() {
         })
       }
     }
-    if (row) idBySlug.set(top.slug, row.id)
+    // In a dry run nothing was created, so a placeholder id stands in and the linking below can be simulated.
+    idBySlug.set(top.slug, row ? row.id : `dry:${top.slug}`)
     for (const sub of top.children) {
       let subRow = row ? await prisma.shopCategory.findFirst({ where: { storeId: store.id, parentId: row.id, slug: sub.slug } }) : null
       if (!subRow) {
@@ -64,7 +65,7 @@ async function main() {
           })
         }
       }
-      if (subRow) subIdBy.set(`${top.slug}/${sub.slug}`, subRow.id)
+      subIdBy.set(`${top.slug}/${sub.slug}`, subRow ? subRow.id : `dry:${top.slug}/${sub.slug}`)
     }
   }
   console.log(`${created} categories ${APPLY ? 'created' : 'to create'}.`)
@@ -83,6 +84,7 @@ async function main() {
     }
     const subSlug = slugFromName(p.subcategory)
     let subId = subIdBy.get(`${topSlug}/${subSlug}`)
+    if (!subId && !APPLY) console.log(`  + subcategory ${topSlug}/${subSlug} (would be created from product ${p.slug})`)
     if (!subId && APPLY) {                          // a subcategory text nobody had a row for: create it, off the menu
       const row = await prisma.shopCategory.create({
         data: { storeId: store.id, parentId: topId, slug: subSlug, nameEn: p.subcategory, nameEs: p.subcategory, sortOrder: 99, showInMenu: false },
@@ -93,7 +95,10 @@ async function main() {
     linked++
     console.log(`  ~ ${p.slug}: ${p.category}/${p.subcategory} -> ${topSlug}/${subSlug}`)
     if (APPLY) {
-      await prisma.product.update({ where: { id: p.id }, data: { categoryId: topId, subcategoryId: subId ?? null, category: topSlug } })
+      // Only the links are added. The old `category` text is left alone on purpose: the storefront that is live
+      // while this runs still reads it (`spawn` shows the freshness block). It is brought in line the next time
+      // the product is saved, and until then `spawn` is understood as Culture Bank (lib/category-links.ts).
+      await prisma.product.update({ where: { id: p.id }, data: { categoryId: topId, subcategoryId: subId ?? null } })
     }
   }
   console.log(`Products: ${linked} ${APPLY ? 'linked' : 'to link'}, ${already} already linked, ${unmatched} without a match (left untouched).`)
