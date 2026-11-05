@@ -5,6 +5,7 @@ import { guideSlugTaken } from '@/lib/guide-server'
 import { prisma } from '@/lib/prisma'
 import { withStoreAdmin } from '@/lib/with-store-admin'
 import { syncAutomaticCollectionsForStore } from '@/lib/collection-rules'
+import { CategoryError, resolveProductCategory } from '@/lib/category-links'
 
 const variantSchema = z.object({
   id: z.string().optional(),
@@ -21,8 +22,10 @@ const updateProductSchema = z.object({
   nameEs: z.string().trim().min(1).max(200),
   descriptionEn: z.string().trim().min(1),
   descriptionEs: z.string().trim().min(1),
-  category: z.enum(['kit', 'spawn', 'substrate', 'equipment', 'wellness', 'bundle']),
-  subcategory: z.string().trim().min(1).max(100),
+  categoryId: z.string().optional().nullable(),
+  subcategoryId: z.string().optional().nullable(),
+  category: z.string().trim().max(100).optional(),
+  subcategory: z.string().trim().max(100).optional(),
   price: z.coerce.number().int().min(0),
   compareAtPrice: z.coerce.number().int().min(0).optional().nullable(),
   images: z.array(z.string()).default([]),
@@ -63,7 +66,18 @@ export const PATCH = withStoreAdmin<{ params: { id: string } }>(async (req, { st
     return NextResponse.json({ error: 'Another product already uses this guide address' }, { status: 409 })
   }
 
-  const { collectionIds, variants, howToUse, science, faqs, keyBenefits, growing, bag, guide, ...updateData } = parsed.data
+  // The category only changes when the caller sent one; a partial update leaves it alone.
+  let links = {}
+  if (parsed.data.categoryId || parsed.data.category) {
+    try {
+      links = await resolveProductCategory(store.id, parsed.data)
+    } catch (error) {
+      if (error instanceof CategoryError) return NextResponse.json({ error: error.message }, { status: 400 })
+      throw error
+    }
+  }
+
+  const { collectionIds, variants, howToUse, science, faqs, keyBenefits, growing, bag, guide, categoryId: _categoryId, subcategoryId: _subcategoryId, category: _category, subcategory: _subcategory, ...updateData } = parsed.data
   const ownedCollections = collectionIds.length
     ? await prisma.collection.findMany({ where: { id: { in: collectionIds }, storeId: store.id }, select: { id: true } })
     : []
@@ -72,6 +86,7 @@ export const PATCH = withStoreAdmin<{ params: { id: string } }>(async (req, { st
     where: { id: params.id },
     data: {
       ...updateData,
+      ...links,
       ...contentUpdate({ howToUse, science, faqs, keyBenefits, growing, bag, guide }, { scienceContent: existing.scienceContent, faqs: existing.faqs }),
       collections: { set: ownedCollections.map((c) => ({ id: c.id })) },
     },

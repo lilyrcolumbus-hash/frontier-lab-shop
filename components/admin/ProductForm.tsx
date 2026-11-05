@@ -16,6 +16,9 @@ export interface ProductFormValues {
   descriptionEs: string
   category: string
   subcategory: string
+  /** The ids picked in the Category and Subcategory lists (managed in /admin/categories). */
+  categoryId?: string | null
+  subcategoryId?: string | null
   price: number
   compareAtPrice?: number | null
   images: string[]
@@ -126,7 +129,13 @@ function moveItem<T>(list: T[], index: number, direction: -1 | 1): T[] {
   return copy
 }
 
-const CATEGORIES = ['kit', 'spawn', 'substrate', 'equipment', 'wellness', 'bundle']
+interface AdminCategoryOption {
+  id: string
+  slug: string
+  nameEn: string
+  parentId: string | null
+}
+
 const STATUSES = ['draft', 'active', 'archived'] as const
 
 export function ProductForm({
@@ -147,6 +156,7 @@ export function ProductForm({
   const [uploading, setUploading] = useState(false)
   const [deleting, setDeleting] = useState(false)
   const [availableCollections, setAvailableCollections] = useState<AvailableCollection[]>([])
+  const [categoryOptions, setCategoryOptions] = useState<AdminCategoryOption[]>([])
   const [availableProducts, setAvailableProducts] = useState<AvailableProduct[]>([])
   const [relatedQuery, setRelatedQuery] = useState('')
 
@@ -168,11 +178,26 @@ export function ProductForm({
       .then((data) => setAvailableCollections(data.collections ?? []))
       .catch(() => setAvailableCollections([]))
 
+    fetch('/api/admin/categories')
+      .then((r) => r.json())
+      .then((data) => setCategoryOptions(data.categories ?? []))
+      .catch(() => setCategoryOptions([]))
+
     fetch('/api/admin/products')
       .then((r) => r.json())
       .then((data) => setAvailableProducts(data.products ?? []))
       .catch(() => setAvailableProducts([]))
   }, [])
+
+  const topCategories = categoryOptions.filter((c) => c.parentId === null)
+  // A product saved before categories were editable has only the old text; match it by slug.
+  const selectedCategory =
+    topCategories.find((c) => c.id === values.categoryId) ??
+    topCategories.find((c) => c.slug === (values.category === 'spawn' ? 'culture-bank' : values.category))
+  const subcategoryOptions = selectedCategory ? categoryOptions.filter((c) => c.parentId === selectedCategory.id) : []
+  const selectedSubcategory =
+    subcategoryOptions.find((c) => c.id === values.subcategoryId) ??
+    subcategoryOptions.find((c) => c.nameEn.toLowerCase() === values.subcategory.toLowerCase())
 
   const toggleRelated = (slug: string) => {
     update(
@@ -406,22 +431,47 @@ export function ProductForm({
         />
       </div>
 
-      <div className="grid grid-cols-2 gap-4">
-        <div>
-          <label className="block text-sm font-medium text-cream-muted mb-1.5">Category</label>
-          <select
-            className="w-full bg-surface border border-ds-border rounded-none px-4 py-3 text-cream text-sm"
-            value={values.category}
-            onChange={(e) => update('category', e.target.value)}
-          >
-            {CATEGORIES.map((c) => (
-              <option key={c} value={c}>
-                {c}
-              </option>
-            ))}
-          </select>
+      <div>
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <label className="block text-sm font-medium text-cream-muted mb-1.5">Category</label>
+            <select
+              className="w-full bg-surface border border-ds-border rounded-none px-4 py-3 text-cream text-sm"
+              value={selectedCategory?.id ?? ''}
+              onChange={(e) => {
+                const top = topCategories.find((c) => c.id === e.target.value)
+                // Changing the category clears the subcategory: it belonged to the previous one.
+                setValues((v) => ({ ...v, categoryId: top?.id ?? null, category: top?.slug ?? '', subcategoryId: null, subcategory: '' }))
+              }}
+              required
+            >
+              <option value="">Choose a category…</option>
+              {topCategories.map((c) => (
+                <option key={c.id} value={c.id}>{c.nameEn}</option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-cream-muted mb-1.5">Subcategory</label>
+            <select
+              className="w-full bg-surface border border-ds-border rounded-none px-4 py-3 text-cream text-sm disabled:opacity-50"
+              value={selectedSubcategory?.id ?? ''}
+              disabled={!selectedCategory || subcategoryOptions.length === 0}
+              onChange={(e) => {
+                const sub = subcategoryOptions.find((c) => c.id === e.target.value)
+                setValues((v) => ({ ...v, subcategoryId: sub?.id ?? null, subcategory: sub?.nameEn ?? '' }))
+              }}
+            >
+              <option value="">{!selectedCategory ? 'Choose a category first' : subcategoryOptions.length === 0 ? 'No subcategories' : 'None'}</option>
+              {subcategoryOptions.map((c) => (
+                <option key={c.id} value={c.id}>{c.nameEn}</option>
+              ))}
+            </select>
+          </div>
         </div>
-        <Input label="Subcategory" value={values.subcategory} onChange={(e) => update('subcategory', e.target.value)} required />
+        <p className="text-xs text-cream-muted mt-2">
+          These lists come from <a href="/admin/categories" className="underline hover:text-cream">Categories</a>, where you create new ones. The shop menu and tabs use them.
+        </p>
       </div>
 
       <div className="grid grid-cols-2 gap-4">

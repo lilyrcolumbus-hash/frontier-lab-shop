@@ -275,6 +275,7 @@
       "quantity": "Cant"
     },
     "browser": {
+      "comingSoon": "Próximamente.",
       "categories": {
         "culture-bank": "Banco de Cultivos",
         "substrate": "Sustrato",

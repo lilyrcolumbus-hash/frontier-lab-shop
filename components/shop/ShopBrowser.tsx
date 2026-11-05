@@ -2,22 +2,13 @@
 
 import { useState, useMemo, useEffect } from 'react'
 import { useSearchParams } from 'next/navigation'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { ProductCard } from '@/components/shop/ProductCard'
 import { cn } from '@/lib/utils'
 import type { Product } from '@/types/product'
+// type-only: the tree is read on the server and handed in as a prop
+import type { ShopCategoryNode } from '@/lib/shop-categories'
 
-const CATEGORIES = [
-  { key: 'culture-bank' },
-  { key: 'substrate' },
-  { key: 'kit' },
-  { key: 'equipment' },
-  { key: 'wellness' },
-  { key: 'all' },
-] as const
-
-type CategoryKey = typeof CATEGORIES[number]['key']
-const CATEGORY_KEYS: readonly string[] = CATEGORIES.map((c) => c.key)
 
 const SUBSTRATE_STAGES = [
   { id: 'grain', subcategory: 'Grain Bags' },
@@ -25,20 +16,28 @@ const SUBSTRATE_STAGES = [
   { id: 'fruiting', subcategory: 'Fruiting Blocks' },
 ] as const
 
-export function ShopBrowser({ products: PRODUCTS }: { products: Product[] }) {
+export function ShopBrowser({ products: PRODUCTS, categories }: { products: Product[]; categories: ShopCategoryNode[] }) {
   const t = useTranslations('shop')
+  const locale = useLocale() as 'en' | 'es'
+  // Tabs come from the categories managed in /admin/categories; every category can be opened by its URL.
+  const CATEGORY_KEYS: readonly string[] = [...categories.map((c) => c.slug), 'all']
+  const tabs = [...categories.filter((c) => c.showInMenu).map((c) => ({ key: c.slug, label: c.name[locale] })), { key: 'all', label: t('browser.categories.all') }]
   const searchParams = useSearchParams()
   const categoryParam = searchParams.get('category')
   const speciesParam = searchParams.get('species')
-  const [activeCategory, setActiveCategory] = useState<CategoryKey>(
-    categoryParam && CATEGORY_KEYS.includes(categoryParam) ? (categoryParam as CategoryKey) : 'culture-bank'
+  const [activeCategory, setActiveCategory] = useState<string>(
+    categoryParam && CATEGORY_KEYS.includes(categoryParam) ? categoryParam : categories[0]?.slug ?? 'all'
   )
+  const [subFilter, setSubFilter] = useState<string>('all')
   const [sortBy, setSortBy] = useState('featured')
   const [substrateSubFilter, setSubstrateSubFilter] = useState<string>(SUBSTRATE_STAGES[0].subcategory)
 
   useEffect(() => {
-    if (categoryParam && CATEGORY_KEYS.includes(categoryParam)) setActiveCategory(categoryParam as CategoryKey)
+    if (categoryParam && CATEGORY_KEYS.includes(categoryParam)) setActiveCategory(categoryParam)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [categoryParam])
+
+  useEffect(() => { setSubFilter('all') }, [activeCategory])
 
   const speciesFiltered = useMemo(() => {
     if (!speciesParam) return []
@@ -50,12 +49,22 @@ export function ShopBrowser({ products: PRODUCTS }: { products: Product[] }) {
   const filtered = useMemo(() => {
     let items = PRODUCTS
     if (activeCategory === 'all') items = PRODUCTS
-    else if (activeCategory === 'culture-bank') items = PRODUCTS.filter((p) => p.subcategory === 'Liquid Culture')
     else items = PRODUCTS.filter((p) => p.category === activeCategory)
+    if (subFilter !== 'all') items = items.filter((p) => p.subcategorySlug === subFilter)
     if (sortBy === 'price-low') items = [...items].sort((a, b) => a.price - b.price)
     if (sortBy === 'price-high') items = [...items].sort((a, b) => b.price - a.price)
     return items
-  }, [PRODUCTS, activeCategory, sortBy])
+  }, [PRODUCTS, activeCategory, sortBy, subFilter])
+
+  // Sub-filter pills for any category (except the substrate pipeline, which has its own stage view):
+  // shown when two or more of its subcategories have products.
+  const activeNode = categories.find((c) => c.slug === activeCategory)
+  const subPills = activeCategory === 'substrate' || !activeNode
+    ? []
+    : activeNode.children
+        .map((c) => ({ slug: c.slug, label: c.name[locale], count: PRODUCTS.filter((p) => p.category === activeCategory && p.subcategorySlug === c.slug).length }))
+        .filter((c) => c.count > 0)
+  const showSubPills = subPills.length >= 2
 
   const substrateStageGroups = useMemo(() => {
     if (activeCategory !== 'substrate') return []
@@ -110,6 +119,28 @@ export function ShopBrowser({ products: PRODUCTS }: { products: Product[] }) {
     )
   }
 
+  const subPillsEl = showSubPills ? (
+    <div className="flex gap-2 overflow-x-auto pb-1 mb-8">
+      {[{ slug: 'all', label: t('browser.categories.all'), count: 0 }, ...subPills].map((pill) => (
+        <button
+          key={pill.slug}
+          onClick={() => setSubFilter(pill.slug)}
+          className={cn(
+            'px-4 py-2 rounded-none text-sm font-medium whitespace-nowrap transition-colors border',
+            subFilter === pill.slug ? 'bg-cream text-bg border-cream' : 'bg-surface text-cream-muted hover:text-cream border-ds-border'
+          )}
+        >
+          {pill.label}
+        </button>
+      ))}
+    </div>
+  ) : null
+
+  // A category with no products yet (for example "Bundles & Deals") says so instead of showing a blank page.
+  const emptyEl = filtered.length === 0 && activeCategory !== 'substrate' ? (
+    <p className="py-16 text-center text-cream-muted">{t('browser.comingSoon')}</p>
+  ) : null
+
   return (
     <div className="pt-20 min-h-screen">
       {/* Culture Bank hero banner */}
@@ -147,7 +178,7 @@ export function ShopBrowser({ products: PRODUCTS }: { products: Product[] }) {
         {/* Filter bar */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
           <div className="flex gap-2 overflow-x-auto pb-1">
-            {CATEGORIES.map(({ key }) => (
+            {tabs.map(({ key, label }) => (
               <button
                 key={key}
                 onClick={() => setActiveCategory(key)}
@@ -158,7 +189,7 @@ export function ShopBrowser({ products: PRODUCTS }: { products: Product[] }) {
                     : 'bg-elevated text-cream-muted hover:text-cream border border-ds-border'
                 )}
               >
-                {t(`browser.categories.${key}`)}
+                {label}
               </button>
             ))}
           </div>
@@ -176,7 +207,10 @@ export function ShopBrowser({ products: PRODUCTS }: { products: Product[] }) {
         {/* Grid */}
         {activeCategory === 'culture-bank' ? (
           <div>
-            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-8">
+            {showSubPills && subFilter !== 'liquid-culture' && (
+              <h2 className="font-heading font-medium text-2xl text-cream tracking-tight mb-6">{activeNode?.name[locale]}</h2>
+            )}
+            <div className={cn('flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-8', showSubPills && subFilter !== 'liquid-culture' && 'hidden')}>
               <div>
                 <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-accent mb-1">{t('browser.cultureSection.eyebrow')}</p>
                 <h2 className="font-heading font-medium text-2xl text-cream tracking-tight">{t('browser.cultureSection.title')}</h2>
@@ -192,11 +226,13 @@ export function ShopBrowser({ products: PRODUCTS }: { products: Product[] }) {
                 </span>
               </div>
             </div>
+            {subPillsEl}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {filtered.map((product) => (
                 <ProductCard key={product.id} product={product} />
               ))}
             </div>
+            {emptyEl}
           </div>
         ) : activeCategory === 'substrate' ? (
           <div>
@@ -238,10 +274,14 @@ export function ShopBrowser({ products: PRODUCTS }: { products: Product[] }) {
             })()}
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {filtered.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
+          <div>
+            {subPillsEl}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {filtered.map((product) => (
+                <ProductCard key={product.id} product={product} />
+              ))}
+            </div>
+            {emptyEl}
           </div>
         )}
       </div>

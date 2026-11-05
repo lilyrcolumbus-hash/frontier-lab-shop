@@ -5,6 +5,7 @@ import { stripe } from '@/lib/stripe'
 import { moveInventory } from '@/lib/inventory'
 import { recordOrderEvent } from '@/lib/order-events'
 import { syncAutomaticCollectionsForStore } from '@/lib/collection-rules'
+import { CategoryError, resolveProductCategory } from '@/lib/category-links'
 import { resolveRange, percentChange } from '@/lib/analytics-range'
 import { createAdminClient } from '@/lib/supabase/admin'
 import type { McpAdminContext } from '@/lib/mcp/tokens'
@@ -31,7 +32,6 @@ function requireAdmin(extra: unknown): McpAdminContext {
   return extra as McpAdminContext
 }
 
-const CATEGORIES = ['kit', 'spawn', 'substrate', 'equipment', 'wellness', 'bundle'] as const
 const PRODUCT_STATUSES = ['draft', 'active', 'archived'] as const
 const ORDER_STATUSES = ['pending', 'paid', 'fulfilled'] as const
 
@@ -124,8 +124,8 @@ export function registerTools(server: McpServer) {
         nameEs: z.string().trim().min(1).max(200),
         descriptionEn: z.string().trim().min(1),
         descriptionEs: z.string().trim().min(1),
-        category: z.enum(CATEGORIES),
-        subcategory: z.string().trim().min(1).max(100),
+        category: z.string().trim().min(1).max(100).describe('Slug of a category created in the admin Categories screen, e.g. "substrate" or "culture-bank".'),
+        subcategory: z.string().trim().min(1).max(100).describe('Subcategory name, e.g. "Grain Bags". A new name is added under the category.'),
         price: z.number().min(0),
         compareAtPrice: z.number().min(0).optional(),
         isOrganic: z.boolean().default(false),
@@ -142,6 +142,14 @@ export function registerTools(server: McpServer) {
       const existing = await prisma.product.findUnique({ where: { slug: input.slug } })
       if (existing) return fail(`A product with the slug "${input.slug}" already exists.`)
 
+      let links
+      try {
+        links = await resolveProductCategory(admin.storeId, { category: input.category, subcategory: input.subcategory })
+      } catch (error) {
+        if (error instanceof CategoryError) return fail(error.message)
+        throw error
+      }
+
       const priceCents = toCents(input.price)
       const product = await prisma.product.create({
         data: {
@@ -151,8 +159,7 @@ export function registerTools(server: McpServer) {
           nameEs: input.nameEs,
           descriptionEn: input.descriptionEn,
           descriptionEs: input.descriptionEs,
-          category: input.category,
-          subcategory: input.subcategory,
+          ...links,
           price: priceCents,
           compareAtPrice: input.compareAtPrice != null ? toCents(input.compareAtPrice) : null,
           isOrganic: input.isOrganic,
@@ -193,7 +200,7 @@ export function registerTools(server: McpServer) {
         nameEs: z.string().trim().min(1).max(200).optional(),
         descriptionEn: z.string().trim().min(1).optional(),
         descriptionEs: z.string().trim().min(1).optional(),
-        category: z.enum(CATEGORIES).optional(),
+        category: z.string().trim().min(1).max(100).optional(),
         subcategory: z.string().trim().min(1).max(100).optional(),
         price: z.number().min(0).optional(),
         compareAtPrice: z.number().min(0).nullable().optional(),
@@ -217,8 +224,18 @@ export function registerTools(server: McpServer) {
       if (input.nameEs !== undefined) data.nameEs = input.nameEs
       if (input.descriptionEn !== undefined) data.descriptionEn = input.descriptionEn
       if (input.descriptionEs !== undefined) data.descriptionEs = input.descriptionEs
-      if (input.category !== undefined) data.category = input.category
-      if (input.subcategory !== undefined) data.subcategory = input.subcategory
+      if (input.category !== undefined || input.subcategory !== undefined) {
+        try {
+          // A subcategory alone stays inside the product's current category.
+          Object.assign(data, await resolveProductCategory(admin.storeId, {
+            category: input.category ?? existing.category,
+            subcategory: input.subcategory ?? (input.category === undefined ? existing.subcategory : undefined),
+          }))
+        } catch (error) {
+          if (error instanceof CategoryError) return fail(error.message)
+          throw error
+        }
+      }
       if (input.price !== undefined) data.price = toCents(input.price)
       if (input.compareAtPrice !== undefined) {
         data.compareAtPrice = input.compareAtPrice != null ? toCents(input.compareAtPrice) : null

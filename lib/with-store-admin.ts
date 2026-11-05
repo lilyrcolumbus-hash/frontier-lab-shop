@@ -24,6 +24,7 @@ const DEMO_WRITABLE_PREFIXES = [
   '/api/admin/products',
   '/api/admin/species',
   '/api/admin/collections',
+  '/api/admin/categories',
   '/api/admin/pages',
   '/api/admin/posts',
   '/api/admin/content',
@@ -35,6 +36,7 @@ const DEMO_DELETABLE_PREFIXES = [
   '/api/admin/products',
   '/api/admin/species',
   '/api/admin/collections',
+  '/api/admin/categories',
   '/api/admin/pages',
   '/api/admin/posts',
 ]

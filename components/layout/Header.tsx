@@ -6,6 +6,7 @@ import { useTranslations } from 'next-intl'
 import { Logo } from '@/components/ui/Logo'
 import { LanguageSwitcher } from './LanguageSwitcher'
 import { MobileMenu } from './MobileMenu'
+import type { ShopMenuItem } from '@/lib/shop-categories'
 import { CartDrawer } from '@/components/shop/CartDrawer'
 import { useCartStore } from '@/lib/cart-store'
 import { SHOW_TOP_NOTICE, DEMO_BANNER_HEIGHT } from '@/lib/site-mode'
@@ -88,7 +89,7 @@ function NavDropdown({ label, items, footer, scrolled = false }: NavDropdownProp
   )
 }
 
-export function Header() {
+export function Header({ shopMenu }: { shopMenu: ShopMenuItem[] }) {
   const t = useTranslations()
   const [mobileOpen, setMobileOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
@@ -114,14 +115,7 @@ export function Header() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const shopItems: DropdownItem[] = [
-    { label: 'Culture Bank', href: '/shop', description: 'Live liquid cultures — 8 species, lab isolated' },
-    { label: t('nav.shopDropdown.substrates'), href: '/shop?category=substrate', description: t('nav.shopDropdown.substratesDesc') },
-    { label: t('nav.shopDropdown.kits'), href: '/shop?category=kit', description: t('nav.shopDropdown.kitsDesc') },
-    { label: t('nav.shopDropdown.equipment'), href: '/shop?category=equipment', description: t('nav.shopDropdown.equipmentDesc') },
-    { label: t('nav.shopDropdown.wellness'), href: '/shop?category=wellness', description: t('nav.shopDropdown.wellnessDesc') },
-    { label: t('nav.shopDropdown.bundles'), href: '/shop?category=bundle' },
-  ]
+  const shopItems: DropdownItem[] = shopMenu.map((c) => ({ label: c.label, href: c.href, description: c.description || undefined }))
 
   const learnItems: DropdownItem[] = [
     { label: t('nav.learnDropdown.beginners'), href: '/learn?category=beginners' },
@@ -252,7 +246,7 @@ export function Header() {
         </div>
       </header>
 
-      <MobileMenu isOpen={mobileOpen} onClose={() => setMobileOpen(false)} />
+      <MobileMenu isOpen={mobileOpen} onClose={() => setMobileOpen(false)} shopMenu={shopMenu} />
       <CartDrawer
         isOpen={isOpen}
         onClose={closeCart}

@@ -5,6 +5,7 @@ import { guideSlugTaken } from '@/lib/guide-server'
 import { prisma } from '@/lib/prisma'
 import { withStoreAdmin } from '@/lib/with-store-admin'
 import { syncAutomaticCollectionsForStore } from '@/lib/collection-rules'
+import { CategoryError, resolveProductCategory } from '@/lib/category-links'
 
 const variantSchema = z.object({
   id: z.string().optional(),
@@ -22,8 +23,11 @@ const createProductSchema = z.object({
   nameEs: z.string().trim().min(1).max(200),
   descriptionEn: z.string().trim().min(1),
   descriptionEs: z.string().trim().min(1),
-  category: z.enum(['kit', 'spawn', 'substrate', 'equipment', 'wellness', 'bundle']),
-  subcategory: z.string().trim().min(1).max(100),
+  // The admin form sends the ids it picked; MCP and the CSV import still send plain text. See lib/category-links.ts.
+  categoryId: z.string().optional().nullable(),
+  subcategoryId: z.string().optional().nullable(),
+  category: z.string().trim().max(100).optional(),
+  subcategory: z.string().trim().max(100).optional(),
   price: z.coerce.number().int().min(0),
   compareAtPrice: z.coerce.number().int().min(0).optional().nullable(),
   images: z.array(z.string()).default([]),
@@ -66,7 +70,15 @@ export const POST = withStoreAdmin(async (req, { store }) => {
     return NextResponse.json({ error: 'Another product already uses this guide address' }, { status: 409 })
   }
 
-  const { variants, collectionIds, howToUse, science, faqs, keyBenefits, growing, bag, guide, ...productData } = parsed.data
+  let links
+  try {
+    links = await resolveProductCategory(store.id, parsed.data)
+  } catch (error) {
+    if (error instanceof CategoryError) return NextResponse.json({ error: error.message }, { status: 400 })
+    throw error
+  }
+
+  const { variants, collectionIds, howToUse, science, faqs, keyBenefits, growing, bag, guide, categoryId: _categoryId, subcategoryId: _subcategoryId, category: _category, subcategory: _subcategory, ...productData } = parsed.data
 
   // Only connect collections that actually belong to this store — an id from another tenant
   // must silently not link, not error, so a guessed id can't leak a cross-tenant association.
@@ -77,6 +89,7 @@ export const POST = withStoreAdmin(async (req, { store }) => {
   const product = await prisma.product.create({
     data: {
       ...productData,
+      ...links,
       ...contentUpdate({ howToUse, science, faqs, keyBenefits, growing, bag, guide }),
       storeId: store.id,
       price: parsed.data.price,
