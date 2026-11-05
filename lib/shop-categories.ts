@@ -58,7 +58,12 @@ const child = (slug: string, en: string, es: string, sortOrder: number, blocks: 
 export const LEGACY_TREE: ShopCategoryNode[] = [
   node('culture-bank', 'Culture Bank', 'Banco de Cultivos', 'Live liquid cultures — 8 species, lab isolated', 'Cultivos líquidos vivos — 8 especies, aislados en laboratorio', 0,
     { packetContents: null, viabilityGuarantee: true, freshness: true },
-    [child('liquid-culture', 'Liquid Culture', 'Cultivo Líquido', 0, { packetContents: true, viabilityGuarantee: null, freshness: null })]),
+    [
+      child('liquid-culture', 'Liquid Culture', 'Cultivo Líquido', 0, { packetContents: true, viabilityGuarantee: null, freshness: null }),
+      // A powder and a lid are not live cultures: no syringe packet, no viability promise, no freshness claim.
+      child('premix-powder', 'Premix Powder', 'Premezcla en Polvo', 1, { packetContents: false, viabilityGuarantee: false, freshness: false }),
+      child('jar-lids', 'Jar Lids', 'Tapas para Frascos', 2, { packetContents: false, viabilityGuarantee: false, freshness: false }),
+    ]),
   node('substrate', 'Substrates', 'Sustratos', 'Sterilized bags, straw, custom mixes', 'Bolsas esterilizadas, paja, mezclas personalizadas', 1,
     { packetContents: null, viabilityGuarantee: true, freshness: null },
     [child('grain-bags', 'Grain Bags', 'Bolsas de Grano', 0), child('bulk-substrate', 'Bulk Substrate', 'Sustrato a Granel', 1)]),
@@ -66,8 +71,7 @@ export const LEGACY_TREE: ShopCategoryNode[] = [
     { packetContents: null, viabilityGuarantee: true, freshness: null },
     [child('fruiting-blocks', 'Fruiting Blocks', 'Bloques Fructificantes', 0), child('all-in-one', 'All-in-One', 'Todo en Uno', 1)]),
   node('equipment', 'Lab Equipment', 'Equipo de Laboratorio', 'Monotubs, Martha tents, tools', 'Monotubs, tiendas Martha, herramientas', 3,
-    { packetContents: null, viabilityGuarantee: false, freshness: null },
-    [child('jar-lids', 'Jar Lids', 'Tapas para Frascos', 0)]),
+    { packetContents: null, viabilityGuarantee: false, freshness: null }),
   node('wellness', 'Wellness', 'Bienestar', 'Tinctures, capsules, coffee, dried', 'Tinturas, cápsulas, café, deshidratados', 4, { packetContents: null, viabilityGuarantee: true, freshness: null }),
   node('bundle', 'Bundles & Deals', 'Packs y Ofertas', '', '', 5, { packetContents: null, viabilityGuarantee: true, freshness: null }),
 ]
