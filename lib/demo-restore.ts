@@ -15,6 +15,8 @@ export interface DemoBaseline {
   version: 1
   exportedAt: string
   species: Row[]
+  /** The category tree. Optional: a snapshot taken before categories were editable has none. */
+  categories?: Row[]
   collections: (Row & { productIds: string[] })[]
   products: Row[]
   variants: Row[]
@@ -58,9 +60,10 @@ function withoutStore(row: Row): Row {
 /** Reads the public catalog and site content of one store into a snapshot. Read-only. */
 export async function buildBaseline(source: PrismaClient, storeId: string): Promise<DemoBaseline> {
   const where = { storeId }
-  const [species, collections, products, variants, pages, posts, homeSections, siteContent, emailTemplates, zones, rates] =
+  const [species, categories, collections, products, variants, pages, posts, homeSections, siteContent, emailTemplates, zones, rates] =
     await Promise.all([
       source.species.findMany({ where }),
+      source.shopCategory.findMany({ where }),
       source.collection.findMany({ where, include: { products: { select: { id: true } } } }),
       source.product.findMany({ where }),
       source.productVariant.findMany({ where }),
@@ -77,6 +80,7 @@ export async function buildBaseline(source: PrismaClient, storeId: string): Prom
     version: 1,
     exportedAt: new Date().toISOString(),
     species: species.map((row) => withoutStore(row)),
+    categories: categories.map((row) => withoutStore(row)),
     collections: collections.map(({ products: linked, ...row }) => ({
       ...withoutStore(row),
       productIds: linked.map((product) => product.id),
@@ -113,12 +117,20 @@ export async function restoreDemoCatalog(
       await tx.post.deleteMany({ where: { storeId } })
       await tx.page.deleteMany({ where: { storeId } })
       await tx.product.deleteMany({ where: { storeId } })
+      await tx.shopCategory.deleteMany({ where: { storeId } })
       await tx.collection.deleteMany({ where: { storeId } })
       await tx.species.deleteMany({ where: { storeId } })
 
       await tx.species.createMany({
         data: baseline.species.map((row) => forStore<Prisma.SpeciesCreateManyInput>('Species', row, storeId)),
       })
+      // Categories before products, because products point at them. With none in the snapshot the demo
+      // falls back to the built-in list (see lib/shop-categories.ts).
+      if (baseline.categories?.length) {
+        await tx.shopCategory.createMany({
+          data: baseline.categories.map((row) => forStore<Prisma.ShopCategoryCreateManyInput>('ShopCategory', row, storeId)),
+        })
+      }
       await tx.collection.createMany({
         data: baseline.collections.map(({ productIds: _productIds, ...row }) =>
           forStore<Prisma.CollectionCreateManyInput>('Collection', row, storeId)
