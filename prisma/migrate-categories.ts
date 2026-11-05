@@ -74,8 +74,7 @@ async function main() {
   let linked = 0, already = 0, unmatched = 0
   for (const p of products) {
     if (p.categoryId && p.subcategoryId) { already++; continue }
-    // Culture Bank holds everything about liquid culture, and the extraction lid is part of it.
-    const topSlug = p.category === 'equipment' && p.subcategory === 'Jar Lids' ? 'culture-bank' : LEGACY_CATEGORY_TO_SLUG[p.category]
+    const topSlug = LEGACY_CATEGORY_TO_SLUG[p.category]
     const topId = topSlug ? idBySlug.get(topSlug) : undefined
     if (!topSlug || !topId) {
       unmatched++

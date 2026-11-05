@@ -60,9 +60,8 @@ export const LEGACY_TREE: ShopCategoryNode[] = [
     { packetContents: null, viabilityGuarantee: true, freshness: true },
     [
       child('liquid-culture', 'Liquid Culture', 'Cultivo Líquido', 0, { packetContents: true, viabilityGuarantee: null, freshness: null }),
-      // A powder and a lid are not live cultures: no syringe packet, no viability promise, no freshness claim.
+      // A powder is not a live culture: no syringe packet, no viability promise, no freshness claim.
       child('premix-powder', 'Premix Powder', 'Premezcla en Polvo', 1, { packetContents: false, viabilityGuarantee: false, freshness: false }),
-      child('jar-lids', 'Jar Lids', 'Tapas para Frascos', 2, { packetContents: false, viabilityGuarantee: false, freshness: false }),
     ]),
   node('substrate', 'Substrates', 'Sustratos', 'Sterilized bags, straw, custom mixes', 'Bolsas esterilizadas, paja, mezclas personalizadas', 1,
     { packetContents: null, viabilityGuarantee: true, freshness: null },
@@ -71,7 +70,8 @@ export const LEGACY_TREE: ShopCategoryNode[] = [
     { packetContents: null, viabilityGuarantee: true, freshness: null },
     [child('fruiting-blocks', 'Fruiting Blocks', 'Bloques Fructificantes', 0), child('all-in-one', 'All-in-One', 'Todo en Uno', 1)]),
   node('equipment', 'Lab Equipment', 'Equipo de Laboratorio', 'Monotubs, Martha tents, tools', 'Monotubs, tiendas Martha, herramientas', 3,
-    { packetContents: null, viabilityGuarantee: false, freshness: null }),
+    { packetContents: null, viabilityGuarantee: false, freshness: null },
+    [child('jar-lids', 'Jar Lids', 'Tapas para Frascos', 0)]),
   node('wellness', 'Wellness', 'Bienestar', 'Tinctures, capsules, coffee, dried', 'Tinturas, cápsulas, café, deshidratados', 4, { packetContents: null, viabilityGuarantee: true, freshness: null }),
   node('bundle', 'Bundles & Deals', 'Packs y Ofertas', '', '', 5, { packetContents: null, viabilityGuarantee: true, freshness: null }),
 ]
