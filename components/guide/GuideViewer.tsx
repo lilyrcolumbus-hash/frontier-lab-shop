@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link } from '@/navigation'
 import type { Guide, GuideMedia } from '@/lib/guide'
 
@@ -11,13 +11,40 @@ interface Props {
   linkNames: Record<string, string>
 }
 
-function MediaItem({ item, large }: { item: GuideMedia; large?: boolean }) {
+/**
+ * Browsers only let a video play with sound after the visitor has touched the page, so videos start
+ * silent. The first tap anywhere (for example "Next") turns sound on for every video after it, and
+ * each video has its own button to turn it off again.
+ */
+function MediaItem({ item, large, sound, onToggleSound }: { item: GuideMedia; large?: boolean; sound: boolean; onToggleSound: () => void }) {
   const frame = large ? 'aspect-[4/3] w-full' : 'aspect-square w-full'
+  const videoRef = useRef<HTMLVideoElement>(null)
+
+  useEffect(() => {
+    const video = videoRef.current
+    if (!video) return
+    video.muted = !sound
+    if (sound && video.paused) video.play().catch(() => {})
+  }, [sound])
+
   if (item.kind === 'video') {
-    return <video src={item.url} className={`${frame} bg-black object-cover`} autoPlay muted loop playsInline controls />
+    return (
+      <div className="relative">
+        <video ref={videoRef} src={item.url} className={`${frame} bg-bg object-contain`} autoPlay muted loop playsInline controls />
+        <button
+          type="button"
+          data-sound-toggle
+          onClick={onToggleSound}
+          aria-label={sound ? 'Turn sound off' : 'Turn sound on'}
+          className="absolute right-2 top-2 border border-cream bg-bg px-2.5 py-1 font-mono text-[10px] uppercase tracking-wider text-cream"
+        >
+          {sound ? 'Sound on' : 'Sound off'}
+        </button>
+      </div>
+    )
   }
   // eslint-disable-next-line @next/next/no-img-element
-  return <img src={item.url} alt={item.caption} className={`${frame} object-cover`} loading="lazy" />
+  return <img src={item.url} alt={item.caption} className={`${frame} bg-bg object-contain`} loading="lazy" />
 }
 
 function Badge({ text }: { text: string }) {
@@ -32,6 +59,16 @@ export function GuideViewer({ productName, guide, linkNames }: Props) {
   const hasHelp = Boolean(guide.normal.text || guide.problem.text || guide.helpEmail)
   const lastScreen = total + (hasHelp ? 1 : 0)
   const [screen, setScreen] = useState(0)
+  const [sound, setSound] = useState(false)
+
+  useEffect(() => {
+    const unlock = (event: PointerEvent) => {
+      if (event.target instanceof Element && event.target.closest('[data-sound-toggle]')) return
+      setSound(true)
+    }
+    window.addEventListener('pointerdown', unlock, { once: true })
+    return () => window.removeEventListener('pointerdown', unlock)
+  }, [])
 
   const go = (next: number) => {
     setScreen(next)
@@ -94,7 +131,7 @@ export function GuideViewer({ productName, guide, linkNames }: Props) {
             <div className={single ? 'grid gap-6 md:grid-cols-2 md:items-start' : ''}>
               {single && (
                 <div>
-                  <MediaItem item={single} large />
+                  <MediaItem item={single} large sound={sound} onToggleSound={() => setSound((on) => !on)} />
                   {single.caption && <p className="mt-2 text-sm text-cream-muted">{single.caption}</p>}
                 </div>
               )}
@@ -117,7 +154,7 @@ export function GuideViewer({ productName, guide, linkNames }: Props) {
               <div className="-mx-4 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-2 sm:mx-0 sm:px-0" tabIndex={0} aria-label="Photos and videos, swipe sideways">
                 {step.media.map((item, index) => (
                   <div key={item.url} className="w-56 flex-none snap-start border border-ds-border bg-surface sm:w-60">
-                    <MediaItem item={item} />
+                    <MediaItem item={item} sound={sound} onToggleSound={() => setSound((on) => !on)} />
                     <div className="flex flex-col gap-1.5 p-3 text-sm text-cream">
                       <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-cream-muted">{index + 1} of {step.media.length}</span>
                       {item.badge && <Badge text={item.badge} />}
