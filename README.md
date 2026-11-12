@@ -1,3 +1,5 @@
+<p align="center"><img src="docs/card.png" alt="Frontier Lab"></p>
+
 # Frontier Lab
 
 **Live store:** [myfrontierlab.com](https://myfrontierlab.com)
