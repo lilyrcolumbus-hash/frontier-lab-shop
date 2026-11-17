@@ -1,15 +1,19 @@
-import { redirect } from 'next/navigation'
 import { requireStoreAdmin } from '@/lib/require-store-admin'
+import { createClient } from '@/lib/supabase/server'
 import { AdminShell } from '@/components/admin/AdminShell'
+import { AdminLogin } from '@/components/admin/AdminLogin'
 import { StoreTheme } from '@/components/StoreTheme'
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
   const admin = await requireStoreAdmin()
 
   if (!admin) {
-    // Without ?next, /account has no idea she was trying to reach /admin — she'd sign in
-    // successfully and land on the plain customer account page instead of the panel.
-    redirect('/account?next=/admin')
+    // The admin has its own sign-in, separate from the customer account pages.
+    const supabase = await createClient()
+    const {
+      data: { user },
+    } = await supabase.auth.getUser()
+    return <AdminLogin signedInEmail={user?.email ?? null} />
   }
 
   return (
