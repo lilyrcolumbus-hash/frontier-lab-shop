@@ -3,6 +3,7 @@
 import { Suspense, useEffect, useState } from 'react'
 import { DEMO_ADMIN_EMAIL, DEMO_ADMIN_PASSWORD } from '@/lib/demo'
 import { IS_DEMO } from '@/lib/site-mode'
+import { ADMIN_LOGIN_EMAIL } from '@/lib/admin-login'
 import { useTranslations } from 'next-intl'
 import { useSearchParams } from 'next/navigation'
 import { useRouter, Link } from '@/navigation'
@@ -88,7 +89,7 @@ function AccountRedirect() {
 function AdminLinkSignIn({ children }: { children: React.ReactNode }) {
   const searchParams = useSearchParams()
   const next = searchParams.get('next')
-  const [email, setEmail] = useState('')
+  const email = ADMIN_LOGIN_EMAIL
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent'>('idle')
   const [error, setError] = useState('')
 
@@ -122,23 +123,16 @@ function AdminLinkSignIn({ children }: { children: React.ReactNode }) {
   return (
     <form onSubmit={handleSend} className="bg-elevated rounded-none border border-ds-border p-8 space-y-5">
       <p className="text-sm text-cream-muted">
-        Admin sign-in has no password. Enter your email and we send you a one-time link.
+        Admin sign-in has no password. We send a one-time link to the store email.
       </p>
       {status === 'sent' ? (
         <p className="text-sm text-cream">Link sent. Open the email on this device and click it.</p>
       ) : (
         <>
-          <Input
-            label="Email"
-            type="email"
-            placeholder="you@example.com"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
+          <p className="text-sm text-cream">Sign in as <strong>{email}</strong></p>
           {error && <p className="text-sm text-error">{error}</p>}
           <Button type="submit" fullWidth size="lg" isLoading={status === 'sending'}>
-            Email me a sign-in link
+            Email me the sign-in link
           </Button>
         </>
       )}
